@@ -1,8 +1,10 @@
 # Liss Works · 工程展厅
 
-当前工程库包含 20 个作品条目。新增的 Qt Labs、Text Lab、Systems Lab 三个合集与 NEX、Liss Blocks，覆盖 12 项早期桌面程序；新增作品配有精简技术说明、原生窗口截图与自动跟随 GitHub 最新正式版的 Windows 下载。当前验收记录位于工作区 `verification/site/legacy-round/`。
+当前工程库包含 20 个作品条目。首页优先呈现 SSFramework、DubForge，再连接游戏实机、实用工具与交互实验；工程库使用统一优先级，搜索与分类保留该顺序。Qt Labs、Text Lab、Systems Lab、NEX 与 Liss Blocks 覆盖 12 项早期桌面程序，配有技术短介绍、原生截图与自动跟随最新正式版的 Windows 下载。
 
-2026-10-24 内容补充：Liss Community 详情新增“从访客到可找回的账号”图文主题，说明身份延续、可选邮箱、Brevo HTTPS 事务邮件、限时令牌与发信限流；同步更新工程亮点、技术构成和使用说明。复用原有访客入口截图，图库保持七张且不重复展示，中文字库按新文案重新生成。实际邮件送达与账户验收见工作区 `verification/site/mail-enable-20261024/final-acceptance.json`，本次作品页验收见 `verification/site/community-mail-story-20261024/`。
+Liss Community 详情以九张配图连接写作、可选邮箱与管理后台，说明内容恢复、变更确认和持久化设置。管理概览为线上实拍，设置图来自独立本地验证环境；不展示真实用户邮箱或私有配置。真实邮件送达与账户验收保留在工作区 `verification/site/mail-enable-20261024/`，后台验收在 `verification/community-admin/`。
+
+AoE4 Flow · 帝国时代 4 自动化助手由原 AOE4 Flow Editor 更名。默认流程与识别素材面向帝国时代 4，可自定义图像识别、判断与键鼠节点；新仓库为 `heroliss/aoe4-flow`，旧作品地址继续重定向，下载跟随新仓库正式版。
 
 所有提供 Windows 下载的工程均自动读取 GitHub 最新正式 Release 的匹配附件，同步版本和大小，不保留历史版本入口。早期下载组件验收见 `../verification/site/releases-20261024/acceptance.json`。
 
@@ -25,12 +27,12 @@ npm run dev -- --port 4321
 
 ## 页面
 
-- `/`：手动切换精选作品、工具与数据项目、轻量算法交互。
+- `/`：两项并列重点工程、游戏与实用工具分区、轻量算法交互。
 - `/projects/`：20 项工程，支持搜索、分类与技术标签，筛选保存在 URL。
 - `/projects/<slug>/`：每项独立详情、项目缘起、功能、技术机制、使用示例、图库与关联作品；SSFramework / DubForge 有更完整的流程与设计说明。
 - `/lab/`：Floyd 路径、可修改边权与矩阵、可复现种子的 GA 排序。
 - `/about/`：简短介绍与 GitHub；`/404.html`：未找到页面。
-- `/projects/lihou-web/`：兼容旧本地链接，重定向至 `/projects/liss-web/`。共 25 个内容页与 1 个重定向页。
+- `/projects/lihou-web/`、`/projects/aoe4-autovillager-tool/`：兼容旧链接，分别重定向至 `/projects/liss-web/`、`/projects/aoe4-flow/`。
 
 主导航与页脚的“交流”连接 Liss Community（记录与交流）；各项工程末尾的“交流想法”进入对应 `/projects/<slug>/talk/`，可分享心得、问题和后续想法。讨论功能由 Flask 站点提供，不在静态作品站复制账户或评论系统。社区源码为 `heroliss/liss-community`；作品详情、素材目录和讨论关联仍保留 `liss-web` key 与 slug，兼容原有链接。
 
@@ -73,7 +75,7 @@ npm run preview -- --port 4322
 
 ## 自动下载入口
 
-`src/components/ProjectDownload.astro` 复用于首页和详情。`src/lib/github-release.ts` 匿名查询 GitHub `/releases/latest`，只接受正式 Release 中唯一匹配的 Windows ZIP / EXE，同时更新下载地址、tag 和附件字节数。缓存 10 分钟；查询最长 8 秒。无脚本、超时、限流或附件缺失时保留 `/releases/latest` 链接，不显示过期版本数据。页面用法不再写死安装包大小或 Release 版本。
+`src/components/ProjectDownload.astro` 为项目详情提供统一下载入口。`src/lib/github-release.ts` 匿名查询 GitHub `/releases/latest`，只接受正式 Release 中唯一匹配的 Windows ZIP / EXE，同时更新下载地址、tag 和附件字节数。缓存 10 分钟；查询最长 8 秒。无脚本、超时、限流或附件缺失时保留 `/releases/latest` 链接，不显示过期版本数据。页面用法不再写死安装包大小或 Release 版本。
 
 新增项目或更改发布附件命名时，更新相应数据模块的 `download.repository` 与 `download.assetPattern`，运行 `npm run test:releases`；若有多个匹配附件，页面会转向最新发布页供访客选择。规则兼容稳定名称和带数字版本的 Windows 文件名。
 

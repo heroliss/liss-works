@@ -3,6 +3,8 @@ import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
 import { projects, groups } from '../../data/projects';
+import { prioritizeProjects } from '../../data/project-priority';
+const orderedProjects = prioritizeProjects(projects);
 const tags = ['Unity','C#','C++','AI','Python','Web','Qt','.NET','OpenGL','算法'];
 ---
 <Base title="全部工程" active="projects" description={`浏览 Liss 的${projects.length}个独立开发工程：游戏与Unity工具、AI与数据应用、图形与算法实验。`}>
@@ -10,7 +12,7 @@ const tags = ['Unity','C#','C++','AI','Python','Web','Qt','.NET','OpenGL','算�
  <div class="filters" data-filters><div class="filters-top"><label class="search-box"><span>查找工程</span><Icon name="search" size={19}/><input type="search" id="project-search" placeholder="搜索名称、用途或技术" autocomplete="off"/></label><p class="results-count" aria-live="polite" data-result-count>共 {projects.length} 个工程</p></div>
  <div class="filter-buttons" role="group" aria-label="工程分类"><button type="button" data-group-filter="all" aria-pressed="true">全部工程</button>{groups.map(group=><button type="button" data-group-filter={group.id} aria-pressed="false">{group.label}</button>)}</div>
  <div class="filter-bottom"><label>技术标签<select id="tag-filter"><option value="">全部技术</option>{tags.map(tag=><option value={tag}>{tag}</option>)}</select></label><button class="reset-filter" type="button" data-reset-filters>重置筛选</button></div></div>
- <div class="project-grid">{projects.map(project=><ProjectCard project={project}/>)}</div>
+ <div class="project-grid">{orderedProjects.map(project=><ProjectCard project={project}/>)}</div>
  <div class="empty-state" data-empty hidden><h2>没有匹配的工程</h2><p>试试其他名称或技术，也可以清除筛选查看全部。</p><button class="button secondary" type="button" data-reset-filters>清除筛选</button></div>
  </div><script>import '../../scripts/project-filter';</script>
 </Base>

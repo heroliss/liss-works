@@ -1,8 +1,8 @@
 {
   "schema": "showcase.website-media.v1",
-  "generated_at_utc": "2026-10-24T11:01:14.226496+00:00",
+  "generated_at_utc": "2026-10-24T13:25:07.724355+00:00",
   "source_manifest": "captures/selected-manifest.json",
-  "source_manifest_sha256": "f5fdf97225e134ebe0bd01be1890ac3e40837446137d7d805d85b26c2d5a285e",
+  "source_manifest_sha256": "aacfdfb33e86945dcba3330db9298459eb978d1c84fce8995119f02a0f1f8baa",
   "originals_modified": false,
   "transform": "Full-image WebP encoding and Lanczos proportional downscaling only; no crop, no AI alterations, no upscaling.",
   "images": [
@@ -2324,210 +2324,6 @@
           "sha256": "b7e4a81d25145c0af435ddfaa49cfda53da53863003d1884730790e312c9fdc4",
           "width": 960,
           "height": 540,
-          "codec": "webp",
-          "quality": 92,
-          "lossless": false
-        }
-      ]
-    },
-    {
-      "repo": "AOE4-AutoVillager-Tool",
-      "source": "captures/AOE4-AutoVillager-Tool/raw/editor-overview-safe-preview.jpg",
-      "source_sha256": "2ebea367f297ec2ce55efcc235194df3055bb04d862a0c6656b0971aa0178f4c",
-      "source_bytes": 181214,
-      "source_width": 3160,
-      "source_height": 1500,
-      "source_authenticity": "原前端与仓库数据的安全离线预览",
-      "crop": false,
-      "upscaled": false,
-      "full": {
-        "path": "site/public/media/aoe4-autovillager-tool/editor-overview-safe-preview.webp",
-        "url": "/media/aoe4-autovillager-tool/editor-overview-safe-preview.webp",
-        "bytes": 616568,
-        "sha256": "55e59c742b01e74f8967f5f53dffc983b01a5d52668415289b5cacbe199897ab",
-        "width": 3160,
-        "height": 1500,
-        "codec": "webp",
-        "quality": 92,
-        "lossless": true
-      },
-      "variants": [
-        {
-          "path": "site/public/media/aoe4-autovillager-tool/editor-overview-safe-preview-320.webp",
-          "url": "/media/aoe4-autovillager-tool/editor-overview-safe-preview-320.webp",
-          "bytes": 4006,
-          "sha256": "2a0a129514419dbeb49f56e68c6ea0699c304a90ab2a792cfbec2211d5d989f7",
-          "width": 320,
-          "height": 152,
-          "codec": "webp",
-          "quality": 92,
-          "lossless": false
-        },
-        {
-          "path": "site/public/media/aoe4-autovillager-tool/editor-overview-safe-preview-640.webp",
-          "url": "/media/aoe4-autovillager-tool/editor-overview-safe-preview-640.webp",
-          "bytes": 12426,
-          "sha256": "b50805fdbc0f61e7705bd723c2812d099e9716b75fd4f449d9ff622f497f078a",
-          "width": 640,
-          "height": 304,
-          "codec": "webp",
-          "quality": 92,
-          "lossless": false
-        },
-        {
-          "path": "site/public/media/aoe4-autovillager-tool/editor-overview-safe-preview-960.webp",
-          "url": "/media/aoe4-autovillager-tool/editor-overview-safe-preview-960.webp",
-          "bytes": 24168,
-          "sha256": "8e6a26dbf02e2dbaf5f9617141f5569705b2caa5600c0e8dcd3e077ec5aaee28",
-          "width": 960,
-          "height": 456,
-          "codec": "webp",
-          "quality": 92,
-          "lossless": false
-        },
-        {
-          "path": "site/public/media/aoe4-autovillager-tool/editor-overview-safe-preview-1600.webp",
-          "url": "/media/aoe4-autovillager-tool/editor-overview-safe-preview-1600.webp",
-          "bytes": 53820,
-          "sha256": "401aeed40d7dfa45ae202ec2d471dcb0a0bf49852cf79ca4f41cbd520d9ab184",
-          "width": 1600,
-          "height": 759,
-          "codec": "webp",
-          "quality": 92,
-          "lossless": false
-        }
-      ]
-    },
-    {
-      "repo": "AOE4-AutoVillager-Tool",
-      "source": "captures/AOE4-AutoVillager-Tool/raw/editor-search-safe-preview.jpg",
-      "source_sha256": "60b30e37e158f5fa0f652a8039887e3591e007a032b644bd6e6e180298fb1093",
-      "source_bytes": 214134,
-      "source_width": 3160,
-      "source_height": 1500,
-      "source_authenticity": "原前端与仓库数据的安全离线预览",
-      "crop": false,
-      "upscaled": false,
-      "full": {
-        "path": "site/public/media/aoe4-autovillager-tool/editor-search-safe-preview.webp",
-        "url": "/media/aoe4-autovillager-tool/editor-search-safe-preview.webp",
-        "bytes": 662452,
-        "sha256": "11b099278e821f12e4624993c87b135f77b21cd20240232635654b11b76fbd8d",
-        "width": 3160,
-        "height": 1500,
-        "codec": "webp",
-        "quality": 92,
-        "lossless": true
-      },
-      "variants": [
-        {
-          "path": "site/public/media/aoe4-autovillager-tool/editor-search-safe-preview-320.webp",
-          "url": "/media/aoe4-autovillager-tool/editor-search-safe-preview-320.webp",
-          "bytes": 4650,
-          "sha256": "31476d634766586815523ca47f5c84adb932ce9d00d1342b92658d6af7727a81",
-          "width": 320,
-          "height": 152,
-          "codec": "webp",
-          "quality": 92,
-          "lossless": false
-        },
-        {
-          "path": "site/public/media/aoe4-autovillager-tool/editor-search-safe-preview-640.webp",
-          "url": "/media/aoe4-autovillager-tool/editor-search-safe-preview-640.webp",
-          "bytes": 14022,
-          "sha256": "14546a511eddb6beab7c4904e65f0fff9002a17204ada6bee133982a32907104",
-          "width": 640,
-          "height": 304,
-          "codec": "webp",
-          "quality": 92,
-          "lossless": false
-        },
-        {
-          "path": "site/public/media/aoe4-autovillager-tool/editor-search-safe-preview-960.webp",
-          "url": "/media/aoe4-autovillager-tool/editor-search-safe-preview-960.webp",
-          "bytes": 28714,
-          "sha256": "a9e61c5004cb595dd623514264c14447a3dde76b77207bc41f0f3f52f900542b",
-          "width": 960,
-          "height": 456,
-          "codec": "webp",
-          "quality": 92,
-          "lossless": false
-        },
-        {
-          "path": "site/public/media/aoe4-autovillager-tool/editor-search-safe-preview-1600.webp",
-          "url": "/media/aoe4-autovillager-tool/editor-search-safe-preview-1600.webp",
-          "bytes": 65152,
-          "sha256": "8feb82dc8291b8d92f6e6617338140c54c47d1a5b06154c22c87234d08ec9ff0",
-          "width": 1600,
-          "height": 759,
-          "codec": "webp",
-          "quality": 92,
-          "lossless": false
-        }
-      ]
-    },
-    {
-      "repo": "AOE4-AutoVillager-Tool",
-      "source": "captures/AOE4-AutoVillager-Tool/raw/editor-help-safe-preview.jpg",
-      "source_sha256": "7ea0c87dbae261f20fa5d58e9673433312e5a8c9f94de77531113bf247cb285c",
-      "source_bytes": 314590,
-      "source_width": 3160,
-      "source_height": 1500,
-      "source_authenticity": "原前端与仓库数据的安全离线预览",
-      "crop": false,
-      "upscaled": false,
-      "full": {
-        "path": "site/public/media/aoe4-autovillager-tool/editor-help-safe-preview.webp",
-        "url": "/media/aoe4-autovillager-tool/editor-help-safe-preview.webp",
-        "bytes": 1013410,
-        "sha256": "068a8e7c2c989d39c471caca62b4cf65df9c40b93fba21b7fb0cc20e5bef74b9",
-        "width": 3160,
-        "height": 1500,
-        "codec": "webp",
-        "quality": 92,
-        "lossless": true
-      },
-      "variants": [
-        {
-          "path": "site/public/media/aoe4-autovillager-tool/editor-help-safe-preview-320.webp",
-          "url": "/media/aoe4-autovillager-tool/editor-help-safe-preview-320.webp",
-          "bytes": 5858,
-          "sha256": "f08834bbdbd3c857ae90f467d97f0fdcb4dfbeb0a7e67fd84ff62372c72f9f5e",
-          "width": 320,
-          "height": 152,
-          "codec": "webp",
-          "quality": 92,
-          "lossless": false
-        },
-        {
-          "path": "site/public/media/aoe4-autovillager-tool/editor-help-safe-preview-640.webp",
-          "url": "/media/aoe4-autovillager-tool/editor-help-safe-preview-640.webp",
-          "bytes": 18432,
-          "sha256": "d05187990b7fee6bfca68f32de7158765794d9f5d2a7db536049b6238c30bd79",
-          "width": 640,
-          "height": 304,
-          "codec": "webp",
-          "quality": 92,
-          "lossless": false
-        },
-        {
-          "path": "site/public/media/aoe4-autovillager-tool/editor-help-safe-preview-960.webp",
-          "url": "/media/aoe4-autovillager-tool/editor-help-safe-preview-960.webp",
-          "bytes": 37420,
-          "sha256": "26037bab8cb47f41aed5c4f8d3fae54334756cc767b3982c0c6e3e371653bed7",
-          "width": 960,
-          "height": 456,
-          "codec": "webp",
-          "quality": 92,
-          "lossless": false
-        },
-        {
-          "path": "site/public/media/aoe4-autovillager-tool/editor-help-safe-preview-1600.webp",
-          "url": "/media/aoe4-autovillager-tool/editor-help-safe-preview-1600.webp",
-          "bytes": 92968,
-          "sha256": "c81507aafa97a469a41d598d634bc1de19ea283b3176fd98ff4606478e7647bb",
-          "width": 1600,
-          "height": 759,
           "codec": "webp",
           "quality": 92,
           "lossless": false
@@ -6614,6 +6410,269 @@
           "lossless": false
         }
       ]
+    },
+    {
+      "repo": "liss-web",
+      "source": "captures/liss-web/08-admin-overview-dark-1440.png",
+      "source_sha256": "b779dc2a47bab5b5b3d5f8b696e2e296261ee4589640232b3c7da0645a05f69a",
+      "source_bytes": 58190,
+      "source_width": 1440,
+      "source_height": 1000,
+      "source_authenticity": "真实线上后台浏览器截图；原图无像素编辑。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/liss-web/08-admin-overview-dark-1440.webp",
+        "url": "/media/liss-web/08-admin-overview-dark-1440.webp",
+        "bytes": 143828,
+        "sha256": "34a081bb94fab222d9d555615ee79b8e47c5fa589a4ac64f86501347424d4e3d",
+        "width": 1440,
+        "height": 1000,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/liss-web/08-admin-overview-dark-1440-320.webp",
+          "url": "/media/liss-web/08-admin-overview-dark-1440-320.webp",
+          "bytes": 4020,
+          "sha256": "5207c29336bc447b84ad69845a8f2e157b1c65c3dbd14840e4b11aeb46a5801d",
+          "width": 320,
+          "height": 222,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/liss-web/08-admin-overview-dark-1440-640.webp",
+          "url": "/media/liss-web/08-admin-overview-dark-1440-640.webp",
+          "bytes": 11686,
+          "sha256": "5f8771bd685a07a7fdff603202134cf724a89ccc975f70e3f6e89807bc4db35b",
+          "width": 640,
+          "height": 444,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/liss-web/08-admin-overview-dark-1440-960.webp",
+          "url": "/media/liss-web/08-admin-overview-dark-1440-960.webp",
+          "bytes": 23548,
+          "sha256": "6645622e6623201ab3130b0af8ac7f96fc2f4ac175b42dadcbb900ed3cb7a822",
+          "width": 960,
+          "height": 667,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "liss-web",
+      "source": "captures/liss-web/10-admin-settings-dark-1280.png",
+      "source_sha256": "1d3b2c30b483ea20b98fcd464756ace497cb86c720c5b87942985a76f34216e8",
+      "source_bytes": 71038,
+      "source_width": 1280,
+      "source_height": 1434,
+      "source_authenticity": "本地独立验证环境中的真实后台截图；使用合成身份，不包含真实用户邮箱。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/liss-web/10-admin-settings-dark-1280.webp",
+        "url": "/media/liss-web/10-admin-settings-dark-1280.webp",
+        "bytes": 23918,
+        "sha256": "ba5145b0dbcb5d17465b05ef6e0659cd8d7c993cfc4133866dd79702e3dd72fb",
+        "width": 1280,
+        "height": 1434,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/liss-web/10-admin-settings-dark-1280-320.webp",
+          "url": "/media/liss-web/10-admin-settings-dark-1280-320.webp",
+          "bytes": 6070,
+          "sha256": "1bb9bf62791a9b955b1028951bafb3009291c9c55612b6a6ad2f66f433612fcd",
+          "width": 320,
+          "height": 358,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/liss-web/10-admin-settings-dark-1280-640.webp",
+          "url": "/media/liss-web/10-admin-settings-dark-1280-640.webp",
+          "bytes": 18840,
+          "sha256": "5cfceddbb61085427acab00715392f918f84800c2e936e03dc9e6620012ae212",
+          "width": 640,
+          "height": 717,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/liss-web/10-admin-settings-dark-1280-960.webp",
+          "url": "/media/liss-web/10-admin-settings-dark-1280-960.webp",
+          "bytes": 37822,
+          "sha256": "e95dd156332ade677976a3a749dfd3ac1306cf79b8ced1b7b9393649fde9c1d3",
+          "width": 960,
+          "height": 1076,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "aoe4-flow",
+      "source": "captures/aoe4-flow/raw/editor-overview-native.jpg",
+      "source_sha256": "48b4dd125eeff09bceb23f08a699bdf7436b631b7b7876ef13b31211d81f7d5b",
+      "source_bytes": 149232,
+      "source_width": 1306,
+      "source_height": 813,
+      "source_authenticity": "真实 Windows 打包程序窗口截图；原图未裁剪或像素编辑。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/aoe4-flow/editor-overview-native.webp",
+        "url": "/media/aoe4-flow/editor-overview-native.webp",
+        "bytes": 438320,
+        "sha256": "588cf08e5f1f873b227c55d6456e4f5bf440777a753f274943d58a1284832905",
+        "width": 1306,
+        "height": 813,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/aoe4-flow/editor-overview-native-320.webp",
+          "url": "/media/aoe4-flow/editor-overview-native-320.webp",
+          "bytes": 13234,
+          "sha256": "95808da930bc58c7ff810d18fb4af1a3ae65f51f3ea9585b1719699f1a67bb94",
+          "width": 320,
+          "height": 199,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/aoe4-flow/editor-overview-native-640.webp",
+          "url": "/media/aoe4-flow/editor-overview-native-640.webp",
+          "bytes": 41866,
+          "sha256": "cc99521d6208fc3aa12193b640520483ac265ac059f8b0d32fcb7338aca73623",
+          "width": 640,
+          "height": 398,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/aoe4-flow/editor-overview-native-960.webp",
+          "url": "/media/aoe4-flow/editor-overview-native-960.webp",
+          "bytes": 80090,
+          "sha256": "b3357a5b4257198b72f4dd589fb498ddce7b67da4e74eee5f731bdffac184aa1",
+          "width": 960,
+          "height": 598,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "aoe4-flow",
+      "source": "captures/aoe4-flow/raw/editor-node-parameters-native.jpg",
+      "source_sha256": "cb0e3138ebeef77690bcafa0dcaa354e4485267fa7205e27d76e9d9dfe7ba2af",
+      "source_bytes": 166380,
+      "source_width": 1306,
+      "source_height": 813,
+      "source_authenticity": "真实 Windows 打包程序窗口截图；原图未裁剪或像素编辑。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/aoe4-flow/editor-node-parameters-native.webp",
+        "url": "/media/aoe4-flow/editor-node-parameters-native.webp",
+        "bytes": 425134,
+        "sha256": "4c337d3b547d96e557a9eeec5db3e6b7b3f9905765f09c3bf06f758f9ef0102c",
+        "width": 1306,
+        "height": 813,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/aoe4-flow/editor-node-parameters-native-320.webp",
+          "url": "/media/aoe4-flow/editor-node-parameters-native-320.webp",
+          "bytes": 14310,
+          "sha256": "ad6bd660e0708bf1c611a1d7cae2a6cc6a032f7ef6b8cd8d28b1fba48113a5a1",
+          "width": 320,
+          "height": 199,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/aoe4-flow/editor-node-parameters-native-640.webp",
+          "url": "/media/aoe4-flow/editor-node-parameters-native-640.webp",
+          "bytes": 45192,
+          "sha256": "0364299e22e4dc3f39d1e8f4bbb3d66ba6418a73a10068280d03de7f2ef5943d",
+          "width": 640,
+          "height": 398,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/aoe4-flow/editor-node-parameters-native-960.webp",
+          "url": "/media/aoe4-flow/editor-node-parameters-native-960.webp",
+          "bytes": 88466,
+          "sha256": "6f885e42b314b1e5111991c30fe5801431f6fe3b166f5d32e8a6c93673cf3313",
+          "width": 960,
+          "height": 598,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "aoe4-flow",
+      "source": "captures/aoe4-flow/raw/topbar-native.jpg",
+      "source_sha256": "574465cedd16ae250258244b077bb1a1fc62ef8ee4d4c43a7540b319dc1637e6",
+      "source_bytes": 5734,
+      "source_width": 443,
+      "source_height": 30,
+      "source_authenticity": "最终 Windows 打包程序的全新用户配置，真实深色工具条截图；原图未裁剪或像素编辑。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/aoe4-flow/topbar-native.webp",
+        "url": "/media/aoe4-flow/topbar-native.webp",
+        "bytes": 18520,
+        "sha256": "b084fd824db5fbc58994bb4f913f5de3b89d6b0648c7c4e37b50b00ec2ec6607",
+        "width": 443,
+        "height": 30,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/aoe4-flow/topbar-native-320.webp",
+          "url": "/media/aoe4-flow/topbar-native-320.webp",
+          "bytes": 3504,
+          "sha256": "b027d84f8188b35f867bc413a02301a2bec8e415b483ac4bc9b379123c194cdb",
+          "width": 320,
+          "height": 22,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
     }
   ],
   "video": {
@@ -6629,16 +6688,16 @@
     "note": "Real map UI capture, 19.133 s, encoded 30 CFR with frame duplication; not a rendering performance claim."
   },
   "totals": {
-    "original_image_count": 115,
-    "exported_image_count": 465,
-    "source_image_bytes": 40485782,
-    "exported_image_bytes": 37537824,
+    "original_image_count": 117,
+    "exported_image_count": 468,
+    "source_image_bytes": 40226418,
+    "exported_image_bytes": 36322126,
     "video_bytes": 1363373,
-    "font_bytes": 346900,
-    "font_license_and_provenance_bytes": 13082,
-    "published_media_bytes": 39248097,
-    "total_public_asset_count": 471,
-    "total_public_asset_bytes": 39261179
+    "font_bytes": 346480,
+    "font_license_and_provenance_bytes": 13166,
+    "published_media_bytes": 38031979,
+    "total_public_asset_count": 474,
+    "total_public_asset_bytes": 38045145
   },
   "fonts": {
     "codec": "fontTools WOFF2 with Node native zlib Brotli (quality 11 / font mode), invoked by fontTools",
@@ -6654,6 +6713,7 @@
       "site/src/components/ProjectEngineering.astro",
       "site/src/components/ProjectSignature.astro",
       "site/src/data/project-image.ts",
+      "site/src/data/project-priority.ts",
       "site/src/data/project-signatures.ts",
       "site/src/data/project-stories.ts",
       "site/src/data/projects.ts",
@@ -6680,7 +6740,8 @@
       "site/src/scripts/downloads.ts",
       "site/src/scripts/project-filter.ts",
       "site/src/scripts/site.ts",
-      "site/src/styles/global.css"
+      "site/src/styles/global.css",
+      "site/src/styles/home-projects.css"
     ],
     "noto_original_metadata": {
       "0": [
@@ -6721,8 +6782,8 @@
       {
         "path": "site/public/fonts/noto-sans-sc-subset.woff2",
         "url": "/fonts/noto-sans-sc-subset.woff2",
-        "bytes": 332324,
-        "sha256": "8da3ed141a69d04ee09a8fae15e16117d6fb46e03c84c470bf72c91cf0e7ef13",
+        "bytes": 331904,
+        "sha256": "d9665c7a0a72ee854e7f8b95af445651ce2da91a5c0c97feb8d632764d5228d0",
         "family": "Noto Sans SC",
         "source": "C:\\Windows\\Fonts\\NotoSansSC-VF.ttf",
         "source_sha256": "763146584cf0710223441356b4395e279021b0806c196614377a7a0174ae074a",

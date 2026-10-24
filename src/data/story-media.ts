@@ -10,10 +10,10 @@ const topicMedia: Record<string, (string | null)[]> = {
   'intelligence-index-cost-linear': ['08-provider-highlight-dark-live'],
   'china-house-price-map': ['06-dark-shenzhen-detail-after-fix'],
   learnopengl: ['cube-inspector'],
-  'aoe4-autovillager-tool': ['editor-search-safe-preview'],
+  'aoe4-flow': ['editor-node-parameters-native'],
   'ga-sort': ['05-final-equation-convergence'],
   floydshortestpath: ['regression-checks-report'],
-  'liss-web': ['02-markdown-writing-dark-1280', '05-welcome-dark-1280'],
+  'liss-web': ['02-markdown-writing-dark-1280', '05-welcome-dark-1280', '08-admin-overview-dark-1440'],
   gomoku: ['06-independent-black-settings-1280', '11-live-network-v32-1280'],
   'route-lab': ['02-random-compare-1440'],
   'sort-lab': ['11-core-code-editor'],
@@ -35,6 +35,7 @@ export function getStoryMedia(project: Project): StoryMedia[] {
   };
   return (topicMedia[project.slug] ?? []).map((name, index) => ({
     image: resolve(name),
-    inset: project.slug === 'ssframework' && index === 3 ? resolve('13-node-component-popup') : undefined,
+    inset: project.slug === 'ssframework' && index === 3 ? resolve('13-node-component-popup')
+      : project.slug === 'aoe4-flow' && index === 0 ? resolve('topbar-native') : undefined,
   }));
 }

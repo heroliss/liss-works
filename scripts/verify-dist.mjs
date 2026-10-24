@@ -10,10 +10,11 @@ const has=async p=>{try{return(await stat(p)).isFile()}catch{return false}};
 let urls=0,images=0,anchors=0,redirects=0,canonicalPages=0,notFoundPages=0;
 const cache=new Map();
 async function htmlFor(p){if(!cache.has(p))cache.set(p,await readFile(p,'utf8'));return cache.get(p);}
+const redirectTarget=html=>html.match(/<meta\s+http-equiv="refresh"\s+content="0;url=([^"]+)"/i)?.[1];
 for(const file of pages){
  const html=await htmlFor(file), ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
  if(new Set(ids).size!==ids.length)failures.push(`${file}: duplicate IDs`);
- const refresh=html.match(/<meta\s+http-equiv="refresh"\s+content="0;url=([^"]+)"/i)?.[1];
+ const refresh=redirectTarget(html);
  if(refresh){
   redirects++;
   const canonical=site?new URL(refresh,site).href:refresh;
@@ -49,8 +50,9 @@ for(const file of files.filter(p=>p.endsWith('.css'))){
   if(!raw.startsWith(base)||!(await has(path.resolve(root,'.'+'/'+raw.slice(base.length)))))failures.push(`${path.relative(root,file)}: invalid CSS asset ${raw}`);
  }
 }
-for(const file of pages.filter(p=>path.relative(root,p).replaceAll(path.sep,'/').match(/^projects\/[^/]+\/index\.html$/)&&!p.includes('lihou-web'))){
+for(const file of pages.filter(p=>path.relative(root,p).replaceAll(path.sep,'/').match(/^projects\/[^/]+\/index\.html$/))){
  const html=await htmlFor(file),slug=path.basename(path.dirname(file));
+ if(redirectTarget(html))continue;
  const talkUrl=`https://liss.pythonanywhere.com/projects/${slug}/talk/`;
  if(!html.includes(`href="${talkUrl}"`))failures.push(`${path.relative(root,file)}: missing project discussion link`);else projectTalkLinks++;
 }

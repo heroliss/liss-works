@@ -120,10 +120,10 @@ export const otherStories: Record<string, ProjectStory> = {
       ],
     }],
   },
-  'aoe4-autovillager-tool': {
+  'aoe4-flow': {
     origin: {
-      title: '少分心，多打游戏',
-      paragraphs: ['和朋友玩《帝国时代 4》时，为减轻持续出农的操作压力做了这个工具。经过多轮实际使用与优化，效果不错；后来把固定逻辑发展成节点引擎，方便组合识别、判断与生产操作。'],
+      title: '为帝国时代 4 少分一些心',
+      paragraphs: ['从和朋友游戏时的自动出农需求开始，经过多轮实际使用逐渐发展成节点引擎。帝国时代 4 是默认流程与素材的中心，识别、判断和键鼠节点也支持自行扩展。'],
     },
     stack: [
       { name: 'Python', role: '执行节点图并管理输入操作上下文。' },
@@ -135,8 +135,8 @@ export const otherStories: Record<string, ProjectStory> = {
       id: 'automation-engine', title: '从识别到可靠操作',
       items: [
         { title: '两种流分工', body: ['执行流决定顺序，数据流传递识别结果；按帧缓存让多个节点复用一次截图。'] },
-        { title: '共享生产预算', body: ['村民、乡骑与商人逐段扣减资源和人口预算，避免同一余额被重复使用。'] },
-        { title: '现场可调试', body: ['预览、断点和单步暴露识别与分支；上下文兜底释放输入屏蔽和编组锁。'] },
+        { title: '共享生产预算', body: ['按生产段依次扣减资源和人口预算，避免同一余额被多个分支重复使用。'] },
+        { title: '调试与控制各就其位', body: ['在图里搜索节点、查看参数说明，用预览和断点观察分支；悬浮工具条保留生产开关与快速入口。'] },
       ],
     }],
   },
@@ -190,7 +190,7 @@ export const otherStories: Record<string, ProjectStory> = {
     sections: [{
       id: 'connected-web-app', title: '让内容与用户连接',
       items: [
-        { title: '关系驱动内容', body: ['角色权限、关注、文章与评论共用数据库模型，页面和 REST API 从同一数据提供入口。'] },
+        { title: '关系驱动内容', body: ['账户、角色权限、关注、文章与评论共用数据库模型，作品讨论与日常文章在同一社区连接。'] },
         { title: '写作真正落库', body: ['EasyMDE 提供 Markdown 编辑与预览，输出 HTML 经过清理；文章和评论持久保存在 SQLite，配合一致性备份与恢复。'] },
       ],
     }, {
@@ -199,6 +199,13 @@ export const otherStories: Record<string, ProjectStory> = {
         { title: '身份延续，邮箱可选', body: ['访客升级账号沿用同一个用户 ID，文章、评论与关注关系无需搬迁。邮箱可以留空，之后也能绑定或更换。'] },
         { title: '验证、绑定与密码找回', body: ['通过 Brevo HTTPS API 发送验证、绑定与找回邮件；更换邮箱需确认后生效，发信失败也保留账号与内容。'] },
         { title: '限时令牌与发送限流', body: ['确认与找回链接使用 1 小时有效、按用途隔离的签名令牌，配合 CSRF 校验与发送限流。邮件密钥独立保存在服务器私有配置中。'] },
+      ],
+    }, {
+      id: 'community-administration', title: '管理有入口，操作可追溯',
+      items: [
+        { title: '内容可以恢复', body: ['搜索并预览文章与评论，按上下文隐藏或恢复；公开页面与计数同步更新。'] },
+        { title: '更改先确认', body: ['重要操作先展示变更，再校验 CSRF 与限时单次凭证；操作记录保留时间、对象和结果。'] },
+        { title: '规则持久保存', body: ['站点介绍、注册与访客发文规则随数据库保存；增量升级与一致性备份保留既有内容。'] },
       ],
     }],
   },

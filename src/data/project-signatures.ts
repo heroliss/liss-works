@@ -45,9 +45,9 @@ const signatures: Record<string, ProjectSignature> = {
     principle: '让公式、参数与眼前的画面互相印证。',
     highlights: ['视差与自阴影', '离屏后处理', '同屏参数调试'],
   },
-  'aoe4-autovillager-tool': {
-    direction: '视觉识别 / 流程自动化',
-    principle: '把重复操作拆成可观察、可组合的流程。',
+  'aoe4-flow': {
+    direction: '帝国时代 4 / 视觉自动化',
+    principle: '围绕实际游戏，把重复操作编排成可观察的流程。',
     highlights: ['双流节点图', '跨段资源预算', '逐帧识别复用'],
   },
   'ga-sort': {
@@ -63,7 +63,7 @@ const signatures: Record<string, ProjectSignature> = {
   'liss-web': {
     direction: 'Web 后端 / 全栈实践',
     principle: '低门槛参与，让身份与内容长期留存。',
-    highlights: ['访客身份延续', 'Markdown 预览', '可选邮箱与找回'],
+    highlights: ['访客与可选邮箱', 'Markdown 写作', '可恢复内容管理'],
   },
   gomoku: {
     direction: '博弈搜索 / Windows 游戏',

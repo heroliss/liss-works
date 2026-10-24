@@ -12,7 +12,7 @@ function projectDownload(repository) {
 }
 const outpost = projectDownload('heroliss/Outpost');
 const opengl = projectDownload('heroliss/LearnOpengl');
-const aoe = projectDownload('heroliss/AOE4-AutoVillager-Tool');
+const aoe = projectDownload('heroliss/aoe4-flow');
 
 function asset(config = outpost, name = 'Outpost-Windows-x64.zip', size = 80_438_371, version = 'v2026.10.24', extra = {}) {
   return { name, state: 'uploaded', size, browser_download_url: `https://github.com/${config.repository}/releases/download/${encodeURIComponent(version)}/${encodeURIComponent(name)}`, ...extra };
@@ -45,7 +45,7 @@ test('project patterns support both stable and versioned Windows filenames', () 
   for (const [config, names] of [
     [outpost, ['Outpost-Windows-x64.zip', 'Outpost-2027.1-Windows-x64.zip', 'Outpost-v2027.1-win-x64.zip']],
     [opengl, ['LearnOpenGL-win-x64.zip', 'LearnOpenGL-2026.10.24-win-x64.zip', 'LearnOpenGL-v2027.1-windows-x64.zip']],
-    [aoe, ['AOE4-FlowEditor.exe', 'AOE4-FlowEditor-3.3.0.exe', 'AOE4-FlowEditor-v3.3.0.exe']],
+    [aoe, ['AoE4-Flow-v3.3.0-Windows-x64.zip', 'AoE4-Flow-v4.0.0-Windows-x64.zip']],
   ]) for (const name of names) assert.ok(parseLatestRelease(payload([asset(config, name)]), config), name);
 });
 

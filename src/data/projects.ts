@@ -100,12 +100,14 @@ const blog = [
   image('liss-web', '05-welcome-dark-1280.png', 1280, 720, '以访客身份加入，也可创建账号或登录，继续写作与交流。', '访客与账号'),
   image('liss-web', '06-article-dark-mobile-390.png', 390, 720, '390px 手机视口中的线上文章阅读与页面导航。', '移动端阅读'),
   image('liss-web', '07-discussion-dark-1280.png', 1280, 720, '文章下方的评论表单与已保存讨论。', '评论与讨论'),
+  image('liss-web', '08-admin-overview-dark-1440.png', 1440, 1000, '正式站点的管理概览，汇总文章、评论、用户状态与最近操作。', '线上管理后台'),
+  image('liss-web', '10-admin-settings-dark-1280.png', 1280, 1434, '站点名称、欢迎语、注册与访客发文规则集中配置；画面来自独立本地验证环境。', '网站设置'),
 ];
 
 const aoe = [
-  image('AOE4-AutoVillager-Tool', 'editor-overview-safe-preview.jpg', 3160, 1500, '原节点编辑器与统一生产流程图的离线预览。', '离线编辑器预览'),
-  image('AOE4-AutoVillager-Tool', 'editor-search-safe-preview.jpg', 3160, 1500, '在真实节点图中搜索“村民”，查看匹配节点和参数。', '离线编辑器预览'),
-  image('AOE4-AutoVillager-Tool', 'editor-help-safe-preview.jpg', 3160, 1500, '帮助面板解释执行流、数据流、节点类型与编辑操作。', '离线编辑器预览'),
+  image('aoe4-flow', 'editor-overview-native.jpg', 1306, 813, 'Windows 程序中的帝国时代 4 统一生产流程，折叠分组与共享参数同屏。', '真实 Windows 程序'),
+  image('aoe4-flow', 'editor-node-parameters-native.jpg', 1306, 813, '搜索并选中游戏窗口检测节点，同屏查看 SDR / HDR 坐标、颜色、标题条件与参数说明。', '节点参数与说明'),
+  image('aoe4-flow', 'topbar-native.jpg', 443, 30, '紧凑悬浮工具条，将启动、村民、商人和渔船开关与设置入口放在手边。', '紧凑工具条'),
 ];
 
 const routeLab = [
@@ -211,7 +213,7 @@ export const projects: Project[] = [
     ],
     note: '截图使用真实工作台与自建短片示例，展示编辑和配置用法；本组素材未执行实际模型译制或生成配音。',
     source: 'https://github.com/heroliss/dubforge', docs: 'https://github.com/heroliss/dubforge/tree/main/docs/tutorials',
-    cover: dubforge[0], gallery: dubforge, related: ['intelligence-index-cost-linear', 'aoe4-autovillager-tool'],
+    cover: dubforge[0], gallery: dubforge, related: ['intelligence-index-cost-linear', 'aoe4-flow'],
   },
   {
     slug: 'ssframework', repo: 'SSFramework', name: 'SSFramework', category: 'Unity 模块化框架', group: 'games',
@@ -307,23 +309,23 @@ export const projects: Project[] = [
     cover: opengl[0], gallery: opengl, related: ['outpost', 'ga-sort'],
   },
   {
-    slug: 'aoe4-autovillager-tool', repo: 'AOE4-AutoVillager-Tool', name: 'AOE4 Flow Editor', category: '可视化自动化编辑器', group: 'ai-data',
-    summary: '从和朋友打帝国时代四时的自动出农需求，迭代成节点式自动化工具。',
-    intro: '为了和朋友玩《帝国时代 4》时减轻持续出农的操作压力而开发，经过多轮实际使用与优化。从固定辅助工具逐渐发展为节点式引擎，以执行流和数据流连接截图识别、资源判断与输入操作。',
+    slug: 'aoe4-flow', repo: 'aoe4-flow', name: 'AoE4 Flow · 帝国时代 4 自动化助手', category: '图像识别与游戏自动化', group: 'ai-data',
+    summary: '为帝国时代 4 减少重复操作，用节点连接图像识别、判断与按键。',
+    intro: '和朋友玩《帝国时代 4》时，为减轻持续出农的操作压力而开发，经过多轮实际使用与优化。默认流程与识别素材围绕这款游戏准备，也可为商人、渔船等生产场景编排操作，或组合自定义图像识别与键鼠流程。',
     status: 'Windows 版已发布', tags: ['Python', 'LiteGraph.js', 'OpenCV', 'OCR'],
     features: [
       { title: '执行流与数据流', body: '白线决定动作顺序，彩线传递识别与计算结果；感知、逻辑、操作、游戏和控制节点可组合。' },
       { title: '在图里调试', body: '节点内编辑参数，搜索并定位节点，借助运行预览、耗时监控与断点查看过程。' },
-      { title: '流程作为数据', body: '流程保存为 JSON，内置统一生产图演示共享判断、资源预算与多个生产段的编排。' },
+      { title: '从游戏配置开始', body: '默认流程与识别素材面向帝国时代 4；JSON 保存节点和连接，自定义识别与键鼠节点可扩展其他流程。' },
     ],
     usage: [
-      { title: '使用 Windows 发行版', body: '下载 EXE 打开编辑器；游戏内自动化需要按实际窗口配置识别区域与模板。' },
+      { title: '使用 Windows 发行版', body: '下载 Windows ZIP，完整解压后运行 AoE4-Flow.exe；按实际游戏窗口配置识别区域与模板。' },
       { title: '打开内置节点图', body: '安装仓库依赖后，启动编辑器并载入统一生产流程。', code: 'pip install -r requirements.txt\npython run_editor.py flows/combined.flow.json', language: 'shell' },
       { title: '先观察执行计划', body: '无界面入口提供 dry-run，可先查看日志，再按实际窗口、分辨率和模板调整节点。', code: 'python run_headless.py --dry-run', language: 'shell' },
     ],
-    note: '截图为原编辑器与流程的离线预览。实际运行需按游戏窗口配置识别区域与模板。',
-    source: 'https://github.com/heroliss/AOE4-AutoVillager-Tool', docs: 'https://github.com/heroliss/AOE4-AutoVillager-Tool/tree/main/docs',
-    download: { repository: 'heroliss/AOE4-AutoVillager-Tool', assetPattern: '^AOE4-FlowEditor(?:-v?\\d+(?:\\.\\d+)*)?\\.exe$' },
+    note: '截图来自 Windows 版实际界面，采集时未启动自动操作。使用前需按游戏窗口、分辨率与 HDR 设置校准识别区域和模板。',
+    source: 'https://github.com/heroliss/aoe4-flow', docs: 'https://github.com/heroliss/aoe4-flow/tree/main/docs',
+    download: { repository: 'heroliss/aoe4-flow', assetPattern: '^AoE4-Flow-v\\d+(?:\\.\\d+)*-Windows-x64\\.zip$' },
     cover: aoe[0], gallery: aoe, related: ['dubforge', 'ssframework'],
   },
   {
@@ -406,11 +408,11 @@ export const projects: Project[] = [
   {
     slug: 'liss-web', repo: 'liss-community', name: 'Liss Community · 记录与交流', category: 'Flask 写作与交流', group: 'graphics',
     summary: '自学 Flask 与前端 Web 技术的完整实践，把账户、文字和互动串起来。',
-    intro: '自学 Flask 后端与前端 Web 技术时独立完成的社交博客，最初部署于 Heroku。如今升级为默认深色的写作与交流小站：保留完整的内容与关系模型，让访客可以直接加入，也能把现有身份升级为账号。',
-    status: '在线可体验', tags: ['Python', 'Flask', 'SQLAlchemy', 'Bootstrap'],
+    intro: '自学 Flask 后端与前端 Web 技术时独立完成的社交博客，最初部署于 Heroku。如今以深色界面连接 Markdown 写作、可选邮箱、真实互动与管理后台，让身份与内容长期保留。',
+    status: '在线可体验', tags: ['Python', 'Flask', 'SQLAlchemy', 'EasyMDE'],
     features: [
       { title: '写作与互动', body: 'Markdown 源文与预览同屏，文章支持评论，用户资料与关注关系连接内容。' },
-      { title: '完整的博客后端', body: '账户、角色权限、数据库迁移、管理入口和 REST API 在同一 Flask 工程中实现。' },
+      { title: '内容与站点管理', body: '管理文章、评论与用户，调整站点介绍和写作规则；隐藏可恢复，变更经确认并留有操作记录。' },
       { title: '先写作，再设置账号', body: '访客可以发文、编辑、评论与关注；升级账号保留同一个身份与已有内容，支持跨浏览器登录，绑定并验证邮箱后可找回密码。' },
     ],
     usage: [

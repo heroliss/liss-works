@@ -11,7 +11,7 @@ const { story, media, group } = Astro.props;
   <div class="engineering-grid">{story.sections?.map((section, index) => {
     const { image, inset } = media[index] ?? {};
     return <section class:list={['engineering-topic', {'engineering-topic--media': Boolean(image || section.diagram)}]} id={section.id} aria-labelledby={`heading-${section.id}`}>
-      {section.diagram === 'framework-architecture' ? <FrameworkDiagram/> : image && <div class="engineering-media"><figure><MediaImage image={image} zoom group={group} sizes="(max-width: 900px) 100vw, 58vw"/><figcaption>{image.caption}</figcaption></figure>{inset && <figure class="engineering-inset"><MediaImage image={inset} zoom group={group} sizes="300px"/><figcaption>{inset.caption}</figcaption></figure>}</div>}
+      {section.diagram === 'framework-architecture' ? <FrameworkDiagram/> : image && <div class="engineering-media"><figure><MediaImage image={image} zoom group={group} sizes="(max-width: 900px) 100vw, 58vw"/><figcaption>{image.caption}</figcaption></figure>{inset && <figure class:list={['engineering-inset', {'engineering-inset--strip': inset.width > inset.height * 5}]} style={`--inset-width:${inset.width}px`}><MediaImage image={inset} zoom group={group} sizes={`${inset.width}px`}/><figcaption>{inset.caption}</figcaption></figure>}</div>}
       <div class="engineering-copy">
         <h3 id={`heading-${section.id}`}>{section.title}</h3>
         {section.intro && <p class="engineering-intro">{section.intro}</p>}

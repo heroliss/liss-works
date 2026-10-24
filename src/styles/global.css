@@ -201,6 +201,9 @@ p:last-child{margin-bottom:0}
 .engineering-media .engineering-inset{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:16px;align-items:center;margin-top:20px;padding:16px;background:var(--surface);border:1px solid var(--line);border-radius:12px}
 .engineering-inset .media-link{width:100%;max-width:300px;justify-self:center}
 .engineering-media .engineering-inset figcaption{margin:0}
+.engineering-media .engineering-inset--strip{display:block}
+.engineering-inset--strip .media-link{max-width:var(--inset-width);margin-inline:auto}
+.engineering-media .engineering-inset--strip figcaption{margin-top:12px}
 .engineering-media .media-link{overflow:hidden;border-radius:12px;background:var(--surface)}
 .engineering-media img{display:block;width:100%;max-height:500px;object-fit:contain}
 .engineering-media figcaption{font-size:12px;line-height:1.8;color:var(--muted);margin-top:12px}
