@@ -83,7 +83,7 @@ npm run preview -- --port 4321
 
 源截图原件仍在上级 `captures/`，本网站未改动它们。工具全尺寸截图无损，游戏画面使用 WebP quality 92，保持完整构图。素材数据与离线预览在工程详情简短注明。
 
-最新字体已随下载文案重新生成；发布媒体 18,288,663 bytes，含许可证 / 来源 sidecar 共 267 份资源、18,301,536 bytes，均不是首屏下载量。字体 326,028 bytes，所需中文全覆盖并通过 WOFF2 解码检查，具体码点与来源见 `media-provenance.json`。旧博客原图 / selected 保留归档，旧发布 WebP 已移至上级 `artifacts/site-retired-media-20261024/lihou-web/`，当前页面没有旧媒体引用。
+最新字体已随下载文案重新生成；发布媒体 18,289,691 bytes，含许可证 / 来源 sidecar 共 267 份资源、18,302,598 bytes，均不是首屏下载量。字体 327,056 bytes，所需中文全覆盖并通过 WOFF2 解码检查，具体码点与来源见 `media-provenance.json`。旧博客原图 / selected 保留归档，旧发布 WebP 已移至上级 `artifacts/site-retired-media-20261024/lihou-web/`，当前页面没有旧媒体引用。
 
 作品入口已接入 Outpost / LearnOpenGL 正式 Windows Release 与 [Liss Community 正式站](https://liss.pythonanywhere.com/)。Liss Community 新版 `ca080ff` + 最终模板 `ceee363` 已在 PythonAnywhere 上线，内容持久保留；免费服务需每月控制台续期，当前续期日期为 2026-11-23。工程展厅与社区现在准备通过同站 `/works/` 部署互通，实际线上验收以工作区最新交接记录为准。
 
@@ -93,3 +93,5 @@ npm run preview -- --port 4321
 
 第三方字体按各自 OFL 使用。工程素材来自各个仓库；未额外添加统一源码授权。
 
+
+源码仓库：[heroliss/liss-works](https://github.com/heroliss/liss-works)；社区源码：[heroliss/liss-community](https://github.com/heroliss/liss-community)。两部分分别维护，同域互通。
