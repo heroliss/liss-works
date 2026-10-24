@@ -140,9 +140,10 @@ const gomoku = [
 ];
 
 const sortLab = [
-  image('sort-lab', '01-random-comparison.png', 1386, 923, '固定种子生成随机输入，9 种排序在三个规模下实际比较，27 组结果通过逐项校验。', '实际算法比较'),
-  image('sort-lab', '02-implementation-and-results.png', 1386, 923, '只读源码窗口与真实比较结果同屏，直接查看本版参与编译的算法实现。', '源码与运行结果'),
-  image('sort-lab', '03-few-unique-comparison.png', 1386, 923, '大量重复值输入下运行三个规模的实际比较；耗时、操作计数与逐项校验一起呈现。', '另一种输入分布'),
+  image('sort-lab', '04-single-size-bars.png', 1386, 923, '单一规模使用横向柱图比较实际耗时，表格同时呈现操作计数、分配与逐项校验。', '单规模横柱比较'),
+  image('sort-lab', '05-five-stage-comparison.png', 1386, 923, '五档规模的耗时曲线与结果表同屏，使用对数坐标比较不同增长趋势。', '五阶段增长趋势'),
+  image('sort-lab', '06-core-algorithm-editor.png', 1386, 923, '算法代码页聚焦当前 Sort 入口与必要助手，支持独立草稿、编译诊断、应用并比较和只读包装。', '核心算法编辑'),
+  image('sort-lab', '07-manual-skip-and-stop.png', 1386, 923, '可手动跳过当前算法与规模，或停止全部；已完成的验证结果保留，慢任务由使用者掌握。', '手动跳过与停止'),
 ];
 
 export const projects: Project[] = [
@@ -357,21 +358,22 @@ export const projects: Project[] = [
     cover: routeLab[0], gallery: routeLab, related: ['sort-lab', 'ga-sort', 'floydshortestpath'],
   },
   {
-    slug: 'sort-lab', repo: 'sort-lab', name: 'Sort Lab · 排序实验台', category: '算法比较与性能测量', group: 'graphics',
-    summary: '相同输入、真实计时、逐项校验，让排序性能的差异有据可看。',
-    intro: '从 2016 年的个人排序算法工具继续整理而来。新版以 8 种内置排序和 .NET Array.Sort 对照，比较四种输入分布与多个规模，把正确性、耗时、操作计数和分配放在同一个可复现实验中。',
-    status: 'Windows 版已发布', tags: ['C#', '.NET 10', '排序算法', '性能测量', 'WinForms'],
+    slug: 'sort-lab', repo: 'sort-lab', name: 'Sort Lab · 排序实验台 V3', category: '算法比较与性能测量', group: 'graphics',
+    summary: '改写算法核心，真实重跑比较；单规模看柱图，多阶段看增长。',
+    intro: '从 2016 年的个人排序算法工具继续开发。V3 以八种排序和 Array.Sort 对照，支持核心代码编辑与独立进程执行，把正确性、耗时、操作计数和分配放进同一个可复现实验。',
+    status: 'Windows 版已发布', tags: ['C#', '.NET 10', 'Roslyn 5.9', '排序算法', 'WinForms'],
     features: [
-      { title: '9 种实现，4 种分布', body: '快速、归并、堆、希尔、基数、插入、选择、冒泡与运行时基准，使用同源随机、近序、逆序或重复输入。' },
-      { title: '计时与计数分离', body: '预热后重复取耗时中位数，另跑操作计数；分配使用线程累计读数，未公开的运行时计数明确留空。' },
-      { title: '比较之前先校验', body: '每次输出逐项对照 Array.Sort；支持后台取消、边界限制、JSON 导出与只读查看真实源码。' },
+      { title: '核心可以直接改', body: '九种真实模板只展示 Sort 入口与必要助手；编译成功后应用并重新比较，错误保留旧生效版。' },
+      { title: '计时与计数分离', body: '同源输入预热后取耗时中位数，计数另跑；每轮逐项校验，编译不混入算法耗时。' },
+      { title: '慢任务由你掌握', body: '独立进程支持跳过当前算法/规模或停止全部，保留已完成结果；不按规模自动跳过。' },
     ],
     usage: [
-      { title: '下载并运行', body: '完整解压 Windows x64 ZIP，运行 Liss.SortLab.exe；自带运行时，默认深色界面。' },
-      { title: '调整一组实验', body: '选择输入分布、最大规模、种子、重复次数和算法，再点击“开始比较”。选中结果查看算法思路，悬停耗时查看最小/最大值。' },
-      { title: '固定种子重跑', body: 'showcase 打开界面并实际运行默认比较；benchmark 不开窗口，导出 JSON。', code: '.\\Liss.SortLab.exe --showcase\n.\\Liss.SortLab.exe --benchmark --output result.json', language: 'powershell' },
+      { title: '解压后离线使用', body: '完整解压 Windows x64 ZIP，运行 Liss.SortLab.exe；运行时与编译依赖已包含，无需另装 SDK。' },
+      { title: '调整一组实验', body: '选择四种输入分布、最大规模、种子与算法，以 1/3/5 阶段开始比较；慢任务可手动跳过或停止。' },
+      { title: '改写后重新比较', body: '代码页选择算法，修改核心后按 Ctrl+Enter；编译错误可定位，未应用草稿与本轮生效代码分开保留。' },
+      { title: '固定种子重跑', body: '--stages 控制 GUI 阶段数；benchmark 使用独立固定场景导出 JSON。', code: '.\\Liss.SortLab.exe --size 4096 --stages 1 --showcase\n.\\Liss.SortLab.exe --benchmark --output result.json', language: 'powershell' },
     ],
-    note: '截图为实际运行结果。历史脚本以安全 NRBF 记录读取方式提取存档，正式程序不使用 BinaryFormatter，也不执行外部 C# 脚本。',
+    note: '一亿项为参数上限，目前实测百万项场景。修改版计数仅覆盖 SortContext API；独立进程具有当前用户权限，不是权限沙箱。',
     source: 'https://github.com/heroliss/sort-lab', docs: 'https://github.com/heroliss/sort-lab#readme',
     download: { repository: 'heroliss/sort-lab', assetPattern: '^Liss-SortLab(?:-v?\\d+(?:\\.\\d+)*)?-(?:Windows|win)-x64\\.zip$' },
     cover: sortLab[0], gallery: sortLab, related: ['route-lab', 'ga-sort', 'gomoku'],

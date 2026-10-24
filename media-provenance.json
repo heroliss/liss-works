@@ -1,8 +1,8 @@
 {
   "schema": "showcase.website-media.v1",
-  "generated_at_utc": "2026-10-24T05:23:37.116221+00:00",
+  "generated_at_utc": "2026-10-24T06:54:26.908912+00:00",
   "source_manifest": "captures/selected-manifest.json",
-  "source_manifest_sha256": "9c33417dac211472f2ff0ed7d6987dff78c60b2d638c2fafb4c4f6c3af915efc",
+  "source_manifest_sha256": "e59ef9541a33cdf642727d38d6432e23c1853edeabd908e30feffa1a09a47e7d",
   "originals_modified": false,
   "transform": "Full-image WebP encoding and Lanczos proportional downscaling only; no crop, no AI alterations, no upscaling.",
   "images": [
@@ -4676,6 +4676,234 @@
           "lossless": false
         }
       ]
+    },
+    {
+      "repo": "sort-lab",
+      "source": "captures/sort-lab/04-single-size-bars.png",
+      "source_sha256": "a0b8173c7fa77d9da0735acbf1b8b60471523e25a78450d0def145b5a9ec7daf",
+      "source_bytes": 652311,
+      "source_width": 1386,
+      "source_height": 923,
+      "source_authenticity": "实际 Windows 应用窗口截图；算法样例真实计算，自建房间联机使用真实 Photon 服务。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/sort-lab/04-single-size-bars.webp",
+        "url": "/media/sort-lab/04-single-size-bars.webp",
+        "bytes": 444022,
+        "sha256": "dc4ca1e440a325229bb8856105db3604a4980fa1da3732faab1df5351461d78b",
+        "width": 1386,
+        "height": 923,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/sort-lab/04-single-size-bars-320.webp",
+          "url": "/media/sort-lab/04-single-size-bars-320.webp",
+          "bytes": 13382,
+          "sha256": "bc01b304e10e6419d68c21689d9d7985e91b51cefb4f6c4d960c49f5803fdb21",
+          "width": 320,
+          "height": 213,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/sort-lab/04-single-size-bars-640.webp",
+          "url": "/media/sort-lab/04-single-size-bars-640.webp",
+          "bytes": 37582,
+          "sha256": "fc549f54e71fd98801d62c3ec63dd35203f923b07c98d14a9026f09273886b99",
+          "width": 640,
+          "height": 426,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/sort-lab/04-single-size-bars-960.webp",
+          "url": "/media/sort-lab/04-single-size-bars-960.webp",
+          "bytes": 70870,
+          "sha256": "cfa0a7ff9bcdec177e3afb8604a5592d56b18332d52e563d69b7a99d885a0c4e",
+          "width": 960,
+          "height": 639,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "sort-lab",
+      "source": "captures/sort-lab/05-five-stage-comparison.png",
+      "source_sha256": "5945d287947ccbe6cece90be70a329e39880587ff937ad7b0285dc8d83d7cb36",
+      "source_bytes": 698038,
+      "source_width": 1386,
+      "source_height": 923,
+      "source_authenticity": "实际 Windows 应用窗口截图；算法样例真实计算，自建房间联机使用真实 Photon 服务。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/sort-lab/05-five-stage-comparison.webp",
+        "url": "/media/sort-lab/05-five-stage-comparison.webp",
+        "bytes": 479510,
+        "sha256": "ada88c38c92e0499abd5d557768e589b8eb18a1a78781468f5f4045c151a9478",
+        "width": 1386,
+        "height": 923,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/sort-lab/05-five-stage-comparison-320.webp",
+          "url": "/media/sort-lab/05-five-stage-comparison-320.webp",
+          "bytes": 13986,
+          "sha256": "7eb20e18b3ed349d03e9dd3167694e153330e3e4ce2e840125c89a9e42ce8e52",
+          "width": 320,
+          "height": 213,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/sort-lab/05-five-stage-comparison-640.webp",
+          "url": "/media/sort-lab/05-five-stage-comparison-640.webp",
+          "bytes": 40910,
+          "sha256": "384fbd1eb38d3e4a5a20f4382e40b9e158d2730c70a10cf0cecf877d4af3bea5",
+          "width": 640,
+          "height": 426,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/sort-lab/05-five-stage-comparison-960.webp",
+          "url": "/media/sort-lab/05-five-stage-comparison-960.webp",
+          "bytes": 76726,
+          "sha256": "8ea065ae39b2731a781dcdd92bda92f534305dae95e22b642d96651b38e69888",
+          "width": 960,
+          "height": 639,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "sort-lab",
+      "source": "captures/sort-lab/06-core-algorithm-editor.png",
+      "source_sha256": "48a0623273c84cb7b2aef726d7014e9c4ed6d2cf45540821b36cce994f0795fc",
+      "source_bytes": 465283,
+      "source_width": 1386,
+      "source_height": 923,
+      "source_authenticity": "实际 Windows 应用窗口截图；算法样例真实计算，自建房间联机使用真实 Photon 服务。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/sort-lab/06-core-algorithm-editor.webp",
+        "url": "/media/sort-lab/06-core-algorithm-editor.webp",
+        "bytes": 307928,
+        "sha256": "0c3875e5dd9985801f3632094b3cc4313f1fc943272207f029ff2f2dd837f5bd",
+        "width": 1386,
+        "height": 923,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/sort-lab/06-core-algorithm-editor-320.webp",
+          "url": "/media/sort-lab/06-core-algorithm-editor-320.webp",
+          "bytes": 9000,
+          "sha256": "80a12cc4ecd3b44c25d6f57d9e3786d44bd1b1ee9e14e8696d4c4ef040f293a0",
+          "width": 320,
+          "height": 213,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/sort-lab/06-core-algorithm-editor-640.webp",
+          "url": "/media/sort-lab/06-core-algorithm-editor-640.webp",
+          "bytes": 26086,
+          "sha256": "1946f3eaafe9b0e6a8be398c2b5cbef94a0fb0f13f050acc8e4eb99df4654e53",
+          "width": 640,
+          "height": 426,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/sort-lab/06-core-algorithm-editor-960.webp",
+          "url": "/media/sort-lab/06-core-algorithm-editor-960.webp",
+          "bytes": 48636,
+          "sha256": "623d9823a5dd1e325b7654832c02ba901dbaaa35c2e2ab190e80349d564ff856",
+          "width": 960,
+          "height": 639,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "sort-lab",
+      "source": "captures/sort-lab/07-manual-skip-and-stop.png",
+      "source_sha256": "e74be4c39d98d87b0991d66df8272b99e502e738cb1b3732832870327e2c9ae8",
+      "source_bytes": 625058,
+      "source_width": 1386,
+      "source_height": 923,
+      "source_authenticity": "实际 Windows 应用窗口截图；算法样例真实计算，自建房间联机使用真实 Photon 服务。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/sort-lab/07-manual-skip-and-stop.webp",
+        "url": "/media/sort-lab/07-manual-skip-and-stop.webp",
+        "bytes": 421106,
+        "sha256": "d4e4bb6ec66c71ab1e52c4844860337373b1cdd86d42fe56240192cb25c585d3",
+        "width": 1386,
+        "height": 923,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/sort-lab/07-manual-skip-and-stop-320.webp",
+          "url": "/media/sort-lab/07-manual-skip-and-stop-320.webp",
+          "bytes": 12830,
+          "sha256": "70e30ce89c3f7044ae5373cce64481a0096529ecf598dbc3d25b7eb5e9736fe5",
+          "width": 320,
+          "height": 213,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/sort-lab/07-manual-skip-and-stop-640.webp",
+          "url": "/media/sort-lab/07-manual-skip-and-stop-640.webp",
+          "bytes": 36716,
+          "sha256": "db24ba463e0ad222c24ad84025c10578828eab8c3458a5826b09dcb288404b88",
+          "width": 640,
+          "height": 426,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/sort-lab/07-manual-skip-and-stop-960.webp",
+          "url": "/media/sort-lab/07-manual-skip-and-stop-960.webp",
+          "bytes": 69316,
+          "sha256": "141f6e9d2d3facb5fb1cc8333ed6b7067be43dfa542d178fb7f54220cd9356b3",
+          "width": 960,
+          "height": 639,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
     }
   ],
   "video": {
@@ -4691,16 +4919,16 @@
     "note": "Real map UI capture, 19.133 s, encoded 30 CFR with frame duplication; not a rendering performance claim."
   },
   "totals": {
-    "original_image_count": 81,
-    "exported_image_count": 329,
-    "source_image_bytes": 31912396,
-    "exported_image_bytes": 23392562,
+    "original_image_count": 85,
+    "exported_image_count": 345,
+    "source_image_bytes": 34353086,
+    "exported_image_bytes": 25501168,
     "video_bytes": 1363373,
-    "font_bytes": 336328,
+    "font_bytes": 336656,
     "font_license_and_provenance_bytes": 12907,
-    "published_media_bytes": 25092263,
-    "total_public_asset_count": 335,
-    "total_public_asset_bytes": 25105170
+    "published_media_bytes": 27201197,
+    "total_public_asset_count": 351,
+    "total_public_asset_bytes": 27214104
   },
   "fonts": {
     "codec": "fontTools WOFF2 with Node native zlib Brotli (quality 11 / font mode), invoked by fontTools",
@@ -4779,14 +5007,14 @@
       {
         "path": "site/public/fonts/noto-sans-sc-subset.woff2",
         "url": "/fonts/noto-sans-sc-subset.woff2",
-        "bytes": 321752,
-        "sha256": "46235e659b12181e0e9925539786b7593cb03d46cbd2fae81cade3c0adfa89ba",
+        "bytes": 322080,
+        "sha256": "9112357ae22baef571b028d5551e423bc3fd28ba362fca8d3690170ace6e685b",
         "family": "Noto Sans SC",
         "source": "C:\\Windows\\Fonts\\NotoSansSC-VF.ttf",
         "source_sha256": "763146584cf0710223441356b4395e279021b0806c196614377a7a0174ae074a",
         "source_bytes": 17773244,
-        "requested_codepoints": 1128,
-        "included_codepoints": 1128,
+        "requested_codepoints": 1130,
+        "included_codepoints": 1130,
         "missing_cjk": [],
         "roundtrip_decode_verified": true
       }

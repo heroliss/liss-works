@@ -76,9 +76,9 @@ const signatures: Record<string, ProjectSignature> = {
     highlights: ['遗传与退火对照', '真实收敛曲线', '固定种子复现'],
   },
   'sort-lab': {
-    direction: '算法实验 / 性能测量',
-    principle: '用相同输入与正确性校验，让比较有依据。',
-    highlights: ['9 种排序实现', '计时与计数分离', '4 种输入分布'],
+    direction: '算法实验 / 运行时编译',
+    principle: '改动只落在算法核心，让每次比较都有依据。',
+    highlights: ['核心源码可编辑', '计时与计数分离', '独立进程可终止'],
   },
 };
 
