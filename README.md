@@ -4,7 +4,7 @@
 
 2026-10-24 后续更新：Intelligence × Cost 默认暗色已上线，封面、供应商高亮与点阵三图均改为线上暗色实拍；旧浅色素材保留归档。最新定向验收和媒体统计见 `../verification/intelligence-dark-20261024/final-site-checks.json`，早先 `../verification/site/highlights-20261024/final-acceptance.json` 保留为前一轮快照。
 
-Liss Works 由 Liss 独立开发，使用 Astro + TypeScript 展示 12 个独立工程。正式站源码与发布资源集中在此目录；支持本地根路径预览与 Liss 同站 `/works/` 子路径部署。
+Liss Works 由 Liss 独立开发，使用 Astro + TypeScript 展示 12 个独立工程。正式站源码与发布资源集中在此目录；支持本地根路径预览，正式作品站部署在 [GitHub Pages](https://heroliss.github.io/liss-works/)，Liss Community 继续运行于 PythonAnywhere。
 
 ## 本地预览
 
@@ -30,18 +30,24 @@ npm run dev -- --port 4321
 
 主导航与页脚的“交流”连接 Liss Community（记录与交流）；十二项工程末尾的“交流想法”进入对应 `/projects/<slug>/talk/`，可分享心得、问题和后续想法。讨论功能由 Flask 站点提供，不在静态作品站复制账户或评论系统。社区源码为 `heroliss/liss-community`；作品详情、素材目录和讨论关联仍保留 `liss-web` key 与 slug，兼容原有链接。
 
-## 同站子路径部署
+## GitHub Pages 持续部署
 
-默认 `SITE_BASE=/`，本地开发地址不变。部署在 `https://liss.pythonanywhere.com/works/` 时，在本目录执行：
+`.github/workflows/deploy-pages.yml` 在 `main` 推送和手动运行时发布。使用 Node.js 24、锁定依赖和按 commit SHA 固定的 GitHub 官方 Actions；安装、Astro 检查、路径与下载测试、构建、静态资源校验全部成功后，才上传并部署 Pages 产物。部署任务单独持有 `pages: write` 和 `id-token: write` 权限，不需要另存部署密钥。GitHub 仓库的 Pages 发布源设为 GitHub Actions。
+
+生产构建使用 `SITE_BASE=/liss-works/`、`SITE_URL=https://heroliss.github.io`；导航、媒体、旧项目重定向与 404 返回链接均包含站点前缀，canonical 和 Open Graph URL 指向正式作品域名。社区及十二项项目讨论链接保持 PythonAnywhere 地址，两站各自独立部署。
+
+在本地复现正式产物：
 
 ```powershell
-$env:SITE_BASE='/works/'
+$env:SITE_BASE='/liss-works/'
+$env:SITE_URL='https://heroliss.github.io'
 npm run build
 npm run verify:dist
 Remove-Item Env:SITE_BASE
+Remove-Item Env:SITE_URL
 ```
 
-把 `dist/` 的内容映射到服务端 `/works/`，不要再套一层 `works` 目录。`src/lib/site-path.ts` 为站内导航、图片 / srcset、灯箱大图、视频与实验入口添加 base；外部网站、GitHub 和讨论链接保持原目标。Vite 自动处理 CSS 字体与脚本资源。旧博客项目链接的重定向目标也随 base 更新。
+Pages Action 上传 `dist/` 本身，不要再套一层 `liss-works` 目录。默认本地开发仍为 `SITE_BASE=/`，地址不变；无需为本地预览配置环境变量。`src/lib/site-path.ts` 为站内导航、图片 / srcset、灯箱大图、视频与实验入口添加 base；外部网站、GitHub 和讨论链接保持原目标。Vite 自动处理 CSS 字体与脚本资源。旧博客项目链接的重定向目标也随 base 更新。
 
 `verify:dist` 使用相同 `SITE_BASE` 检查所有生成页面的本地引用、片段锚点、CSS 字体及十二个项目讨论入口，防止子路径部署后误跳到社区根路径。`npm run test:paths` 验证 base、查询参数、锚点、外部 URL 和讨论地址。
 
@@ -85,7 +91,7 @@ npm run preview -- --port 4321
 
 最新字体已随下载文案重新生成；发布媒体 18,289,691 bytes，含许可证 / 来源 sidecar 共 267 份资源、18,302,598 bytes，均不是首屏下载量。字体 327,056 bytes，所需中文全覆盖并通过 WOFF2 解码检查，具体码点与来源见 `media-provenance.json`。旧博客原图 / selected 保留归档，旧发布 WebP 已移至上级 `artifacts/site-retired-media-20261024/lihou-web/`，当前页面没有旧媒体引用。
 
-作品入口已接入 Outpost / LearnOpenGL 正式 Windows Release 与 [Liss Community 正式站](https://liss.pythonanywhere.com/)。Liss Community 新版 `ca080ff` + 最终模板 `ceee363` 已在 PythonAnywhere 上线，内容持久保留；免费服务需每月控制台续期，当前续期日期为 2026-11-23。工程展厅与社区现在准备通过同站 `/works/` 部署互通，实际线上验收以工作区最新交接记录为准。
+作品入口已接入 Outpost / LearnOpenGL 正式 Windows Release 与 [Liss Community 正式站](https://liss.pythonanywhere.com/)。社区的内容和账户数据继续保存在 PythonAnywhere，免费服务需每月控制台续期，当前续期日期为 2026-11-23。作品站使用 GitHub Pages，静态发布不复制或迁移社区数据库；实际线上验收以工作区最新交接记录为准。
 
 修改中文文案后，在工作区根目录执行 `python site/scripts/prepare-media.py --fonts-only` 更新字库，然后重新构建。完整重导出可用同脚本（需要当前机器已有的 Pillow/fontTools、Node，原始素材路径以工作区为准）。站点本身只需要 Node.js 与 npm。
 
@@ -94,4 +100,4 @@ npm run preview -- --port 4321
 第三方字体按各自 OFL 使用。工程素材来自各个仓库；未额外添加统一源码授权。
 
 
-源码仓库：[heroliss/liss-works](https://github.com/heroliss/liss-works)；社区源码：[heroliss/liss-community](https://github.com/heroliss/liss-community)。两部分分别维护，同域互通。
+源码仓库：[heroliss/liss-works](https://github.com/heroliss/liss-works)；社区源码：[heroliss/liss-community](https://github.com/heroliss/liss-community)。两部分分别维护，通过导航和项目讨论入口互通。

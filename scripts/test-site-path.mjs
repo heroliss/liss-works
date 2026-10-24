@@ -14,6 +14,11 @@ const cases=[
  ['//example.com/media.webp', '/works/', '//example.com/media.webp'],
  ['mailto:liss@example.com', '/works/', 'mailto:liss@example.com'],
  ['/projects/', '/portfolio/works/', '/portfolio/works/projects/'],
+ ['/', '/liss-works/', '/liss-works/'],
+ ['/projects/', '/liss-works/', '/liss-works/projects/'],
+ ['/projects/ssframework/#engineering', '/liss-works/', '/liss-works/projects/ssframework/#engineering'],
+ ['/media/ssframework/one.webp', '/liss-works/', '/liss-works/media/ssframework/one.webp'],
+ ['/liss-works/projects/', '/liss-works/', '/liss-works/projects/'],
 ];
 for(const [value,base,expected] of cases)assert.equal(applyBase(value,base),expected);
 assert.equal(projectTalkUrl('ssframework'),'https://liss.pythonanywhere.com/projects/ssframework/talk/');
