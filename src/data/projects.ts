@@ -132,6 +132,9 @@ const gomoku = [
   image('gomoku', '03-engine-catalog-1280.png', 1282, 872, '展开真实引擎选择菜单，在 V3 威胁搜索与保留的经典搜索路径之间切换。', '引擎与参数'),
   image('gomoku', '04-replay-history-1280.png', 1282, 872, '逐手回看第 17 手时的棋盘与棋谱选中位置，历史状态和当前主线保持区分。', '棋谱回看'),
   image('gomoku', '05-live-network-match-1280.png', 1282, 872, '最终 Windows 发行版与独立自测客户端通过 Photon Asia 真实对局：十手棋、双方身份与联机面板同屏。', '自建房间真实联调'),
+  image('gomoku', '06-independent-black-settings-1280.png', 1282, 872, '黑方设置页与棋盘同屏，独立选择黑方引擎、搜索深度、时间预算与评估函数。', '黑方独立设置'),
+  image('gomoku', '07-independent-white-settings-1280.png', 1282, 872, '白方设置使用另一份参数，在保留黑方配置的同时选择自己的引擎、深度、预算与评估。', '白方独立设置'),
+  image('gomoku', '08-ai-search-statistics-1280.png', 1282, 872, '按黑白展示实际 AI 落子次数、最近/平均/累计耗时、累计节点与缓存命中，统计只覆盖当前棋谱。', '双方思考统计'),
 ];
 
 const sortLab = [
@@ -180,24 +183,25 @@ export const projects: Project[] = [
     cover: outpost[2], gallery: outpost, related: ['ssframework', 'nomadworkshop'],
   },
   {
-    slug: 'gomoku', repo: 'gomoku', name: 'Liss Gomoku · 五子棋 V3', category: '五子棋与博弈搜索', group: 'games',
-    summary: '把早期五子棋继续做成 V3，让经典搜索、人机对弈、联机与棋谱一起可用。',
-    intro: '基于找回的 v2.3 工程继续开发的 Windows 五子棋。保留经典搜索的独立实现，加入可选 V3 威胁搜索，并重新整理棋盘规则、深色交互、后台思考、棋谱保存与在线双人。',
+    slug: 'gomoku', repo: 'gomoku', name: 'Liss Gomoku · 五子棋 V3.1', category: '五子棋与博弈搜索', group: 'games',
+    summary: '保留 11 种引擎，为黑白分别配置搜索，把思考耗时与棋谱一起查看。',
+    intro: '基于找回的 v2.3 工程继续开发的 Windows 五子棋。V3.1 让双方独立选择引擎、深度、时间预算与评估，并按黑白查看实际落子的搜索统计，配合本地、在线双人和棋谱回看。',
     status: 'Windows 版已发布', tags: ['C#', '.NET 10', 'Alpha–Beta', 'Photon', 'WinForms'],
     features: [
-      { title: '保留 11 种引擎', body: '经典负极大值、Alpha–Beta、PVS 与五元组等可分别选择；V3 威胁搜索加入迭代加深、排序和置换表。' },
-      { title: '把思考与棋谱变得可见', body: '人机、本地双人或引擎对弈共用棋盘，支持提示、限时取消、逐手回看与 JSON / SGF 棋谱。' },
+      { title: '11 种引擎，双方各自配置', body: '经典搜索保留独立路径，另有 V3 威胁搜索；黑白可分别选择引擎、深度、时间预算和评估函数。' },
+      { title: '思考成本随棋谱可读', body: '按黑白记录 AI 落子次数、最近/平均/累计耗时及累计节点、缓存命中；回看随手数更新，提示与取消不计入。' },
       { title: '保留真实联机路线', body: '沿用 Photon Asia 大厅，使用独立 V3 协议协商对局；悔棋、重开经对手确认，接收数据逐层校验。' },
     ],
     usage: [
       { title: '解压后直接对弈', body: '完整解压 Windows x64 ZIP，运行 Liss.Gomoku.exe；自带 .NET 桌面运行时。新建对局选择执黑、执白、本地双人或引擎对弈。' },
-      { title: '尝试搜索与回看', body: '在引擎页调整搜索方法、深度与时间；提示可观察建议落点，方向键与回看控件逐手检查棋谱，Ctrl+S 保存。' },
+      { title: '分别设置黑白', body: '打开引擎页，在“黑方设置”和“白方设置”子页分别选择算法、深度、预算与评估；提示可查看当前方的建议落点。' },
+      { title: '查看统计与回放', body: '单独的统计页展示双方思考数据；回看棋谱时只统计当前手数以内的 AI 落子，Ctrl+S 可保存棋谱。' },
       { title: '邀请一位对手', body: '双方使用 V3，打开联机页，填写昵称后进入大厅，创建或加入同一房间。房主执黑，离开房间会结束当前联机会话。' },
     ],
-    note: '截图来自本机实际运行。V3 基于 v2.3 源码升级，未声称恢复缺失的 v2.5 源码；Photon 在线功能依赖网络、服务与应用账户配额。',
+    note: '截图来自本机实际运行。V3.1 延续 v2.3 源码，未声称恢复缺失的 v2.5 源码；单次搜索在一个后台线程展开，Photon 在线功能依赖网络、服务与账户配额。',
     source: 'https://github.com/heroliss/gomoku', docs: 'https://github.com/heroliss/gomoku#readme',
     download: { repository: 'heroliss/gomoku', assetPattern: '^liss-gomoku(?:-v?\\d+(?:\\.\\d+)*)?-(?:Windows|win)-x64\\.zip$' },
-    cover: gomoku[0], gallery: gomoku, related: ['sort-lab', 'route-lab', 'outpost'],
+    cover: gomoku[7], gallery: gomoku, related: ['sort-lab', 'route-lab', 'outpost'],
   },
   {
     slug: 'dubforge', repo: 'dubforge', name: 'DubForge', category: '本地视频译制工作台', group: 'ai-data',
