@@ -157,6 +157,8 @@ p:last-child{margin-bottom:0}
 .back-link:hover{color:var(--text)}
 .project-intro{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px;align-items:end;margin:32px 0}
 .project-intro h1{font-size:clamp(42px,5vw,72px);line-height:1.04;overflow-wrap:anywhere;margin:13px 0 20px}
+.project-title-main{display:block}
+.project-title-subtitle{display:block;margin-top:10px;font-size:clamp(23px,2.8vw,36px);font-family:'Noto Sans SC',sans-serif;font-weight:500;line-height:1.45;letter-spacing:0}
 .project-intro .category{font-size:13px;color:var(--cyan)}
 .project-intro .summary{font-size:18px;max-width:66ch;color:var(--muted);margin:0}
 .project-intro .button-row{margin-bottom:4px}
