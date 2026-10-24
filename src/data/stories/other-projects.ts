@@ -185,6 +185,7 @@ export const otherStories: Record<string, ProjectStory> = {
     },
     stack: [
       { name: 'Jinja2 / HTML', role: '复用服务端模板，生成文章、资料与管理页面。' },
+      { name: 'Bootstrap 3 / Flask-Bootstrap', role: '提供基础页面模板，接入 CSS、jQuery 与组件脚本。' },
       { name: 'CSS / 原生 JavaScript', role: '用 Grid、Flex 与 CSS 变量组织响应式布局、主题和页面交互。' },
       { name: 'EasyMDE / DOMPurify', role: '提供 Markdown 编辑、分屏预览与浏览器端 HTML 清理。' },
       { name: 'Flask / SQLAlchemy', role: '处理请求、账号权限与内容之间的关系模型。' },
