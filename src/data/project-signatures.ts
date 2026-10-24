@@ -61,7 +61,7 @@ const signatures: Record<string, ProjectSignature> = {
     highlights: ['全点对最短路', '前驱路径还原', '无引擎依赖'],
   },
   'liss-web': {
-    direction: 'Web 后端 / 全栈实践',
+    direction: 'Web 全栈 / 内容社区',
     principle: '低门槛参与，让身份与内容长期留存。',
     highlights: ['访客与可选邮箱', 'Markdown 写作', '可恢复内容管理'],
   },

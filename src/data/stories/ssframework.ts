@@ -13,7 +13,7 @@ export default {
     { name: 'UniTask', role: '异步任务、取消传递与主线程协作' },
     { name: 'YooAsset', role: '资源包加载、下载与缓存维护适配' },
     { name: 'UGUI · UI Toolkit', role: '统一窗口调度与纹理内容嵌入桥' },
-    { name: 'HybridCLR', role: '热更新构建与启动程序集装配' },
+    { name: 'HybridCLR', role: '热更构建、AOT 元数据与程序集装配' },
     { name: 'Luban · Protobuf', role: '配置表生成与协议序列化集成' },
   ],
   sections: [
@@ -105,6 +105,10 @@ export default {
         {
           title: '生成过程有发布边界',
           body: ['Luban 先写暂存目录，校验后发布代码、数据与清单，处理可观察进程异常下的回滚。'],
+        },
+        {
+          title: '构建与启动衔接',
+          body: ['热更构建先核对生成环境，再打包 DLL 与加载清单；启动时补充 AOT 元数据，按依赖顺序装配程序集。'],
         },
       ],
     },

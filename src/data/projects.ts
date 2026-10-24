@@ -409,7 +409,7 @@ export const projects: Project[] = [
     slug: 'liss-web', repo: 'liss-community', name: 'Liss Community · 记录与交流', category: 'Flask 写作与交流', group: 'graphics',
     summary: '自学 Flask 与前端 Web 技术的完整实践，把账户、文字和互动串起来。',
     intro: '自学 Flask 后端与前端 Web 技术时独立完成的社交博客，最初部署于 Heroku。如今以深色界面连接 Markdown 写作、可选邮箱、真实互动与管理后台，让身份与内容长期保留。',
-    status: '在线可体验', tags: ['Python', 'Flask', 'SQLAlchemy', 'EasyMDE'],
+    status: '在线可体验', tags: ['Flask', 'Jinja2', 'JavaScript', 'SQLAlchemy', 'EasyMDE'],
     features: [
       { title: '写作与互动', body: 'Markdown 源文与预览同屏，文章支持评论，用户资料与关注关系连接内容。' },
       { title: '内容与站点管理', body: '管理文章、评论与用户，调整站点介绍和写作规则；隐藏可恢复，变更经确认并留有操作记录。' },

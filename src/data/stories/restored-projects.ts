@@ -37,7 +37,7 @@ export const restoredStories: Record<string, ProjectStory> = {
       { name: 'C# / .NET 10 / WinForms', role: '三个互通工作区与可取消的后台任务。' },
       { name: 'Jieba / JiebaNet', role: '第三方中文分词实现，应用侧组织词频、位置与批处理。' },
       { name: 'word2vec / 余弦相似度', role: '导入自备模型，探索近邻与双侧上下文。' },
-      { name: '流式匹配 / 编码处理', role: '在真实目录中搜索并保留有限的匹配上下文。' },
+      { name: 'KMP / 多编码流式检索', role: '跨读取块保留匹配状态，以有限上下文定位文件与行号。' },
     ],
     sections: [
       { id: 'text-segmentation', title: '分词 · 从一句话看到词的分布', items: [

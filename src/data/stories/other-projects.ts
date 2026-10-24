@@ -15,7 +15,7 @@ export const otherStories: Record<string, ProjectStory> = {
     sections: [{
       id: 'living-simulation', title: '让世界持续运转',
       items: [
-        { title: '完整行动决策', body: ['将取罐、装水、路程与交付作为完整方案，结合需求、风险和偏好选择行动。'] },
+        { title: '完整行动决策', body: ['将取罐、装水、路程与交付作为完整方案；先过滤不可行行动、比较风险，再用效用评分与 Softmax 采样选择。'] },
         { title: '有所有权的资源', body: ['账本统一预留水量、容器与工作位；多人争用或行动取消时，资源仍有明确归属。'] },
         { title: '可恢复的模拟', body: ['固定步长与隔离随机流支持重现；版本化存档保存业务状态，加载时重建导航缓存。'] },
       ],
@@ -29,6 +29,7 @@ export const otherStories: Record<string, ProjectStory> = {
     stack: [
       { name: '纯 C#', role: '推进敌人、弹丸、伤害与波次。' },
       { name: 'Unity 6 / URP', role: '呈现炮台、弹流、冲击与灯光。' },
+      { name: 'Burst / Jobs / Entities', role: '并行推进敌人移动，顺序处理依赖先后关系的战斗步骤。' },
       { name: 'SSFramework', role: '连接状态、命令与资源生命周期。' },
       { name: 'UI Toolkit / uGUI', role: '构建菜单、战斗 HUD 与强化卡片。' },
     ],
@@ -36,7 +37,7 @@ export const otherStories: Record<string, ProjectStory> = {
       id: 'battle-architecture', title: '规则与表现分层',
       items: [
         { title: '模拟负责命中', body: ['内核推进真实弹丸，以扫掠检测结算移动中的命中；特效不决定伤害。'] },
-        { title: '事件驱动画面', body: ['击发、命中与击杀分别触发表现，对象池和每帧预算控制特效开销。'] },
+        { title: '事件驱动画面', body: ['GPU 实例化批量绘制敌人、弹丸与残骸；模拟事件触发独立特效，对象池与每帧预算控制开销。'] },
         { title: '统一后端入口', body: ['OOP 与 DOTS / ECS 实现共用战斗接口，界面可切换并观察当前后端。'] },
       ],
     }],
@@ -55,9 +56,9 @@ export const otherStories: Record<string, ProjectStory> = {
     sections: [{
       id: 'asset-workflow', title: '把重复流程变成工具',
       items: [
-        { title: '标签驱动规则', body: ['按标签表达式选择资源，再批量配置平台尺寸、压缩格式与质量。'] },
+        { title: '标签驱动规则', body: ['用与、或、非及括号组合资源标签，批量配置平台尺寸、压缩格式与质量。'] },
         { title: '引用关系可检查', body: ['反向依赖树回答“谁在使用它”，结合依赖根和 Bundle 清单辅助定位无用资源。'] },
-        { title: '阶段可以组合', body: ['总控串联预处理、Bundle、分包与 Player 构建，统一管理宏定义和平台参数。'] },
+        { title: '阶段可以组合', body: ['窗口与命令行共享模块配置，按需串联预处理、Bundle、分包与 Player 构建。'] },
       ],
     }],
   },
@@ -74,7 +75,7 @@ export const otherStories: Record<string, ProjectStory> = {
     sections: [{
       id: 'readable-comparison', title: '让密集数据可比较',
       items: [
-        { title: '按需聚焦', body: ['横纵轴独立缩放，结合平移、供应商高亮与标签避让，在全局和细节间切换。'] },
+        { title: '按需聚焦', body: ['横纵轴独立缩放，平移与供应商高亮聚焦局部；标签比较多个候选位置，尽量避开文字和模型点。'] },
         { title: '保留比较依据', body: ['Pareto 边界呈现能力与成本取舍；更新器兼容成本字段变化，防止异常空数据覆盖。'] },
       ],
     }],
@@ -87,13 +88,13 @@ export const otherStories: Record<string, ProjectStory> = {
     stack: [
       { name: 'JavaScript / SVG', role: '绘制价格色阶、边界与交互标注。' },
       { name: 'GeoJSON', role: '组织城市、区县与镇街行政边界。' },
-      { name: 'Node.js', role: '合并价格数据并生成分省图层。' },
+      { name: 'Node.js / Mercator', role: '投影并简化 GeoJSON，生成含 SVG 路径的分省 JSON。' },
       { name: 'GitHub Pages / Actions', role: '托管静态地图并尝试定期更新。' },
     ],
     sections: [{
       id: 'progressive-map', title: '从概览进入细节',
       items: [
-        { title: '渐进加载', body: ['全国先显示城市信息，放大后按省加载区县细节，部分城市继续细化到镇街。'] },
+        { title: '渐进加载', body: ['按视口和缩放级别加载区县图层，缓存已加载省份；部分城市进一步细化到镇街。'] },
         { title: '联动阅读', body: ['搜索、地图和列表共用选中状态，配合标注避让、明暗主题与图层透明度探索。'] },
         { title: '口径随数据保留', body: ['独立区县价、沿用城市均价和补充估算分别说明，避免将同一色阶误读为同一来源。'] },
       ],
@@ -106,7 +107,7 @@ export const otherStories: Record<string, ProjectStory> = {
     },
     stack: [
       { name: 'C++ / OpenGL 4.5', role: '管理 GPU 资源、绘制与帧缓冲。' },
-      { name: 'GLSL', role: '实现光照、贴图、阴影与后处理。' },
+      { name: 'GLSL / UBO', role: '共享相机与光源参数，计算光照、阴影和后处理。' },
       { name: 'GLFW / GLM', role: '提供窗口输入和向量矩阵运算。' },
       { name: 'Assimp / stb', role: '读取模型、纹理并导出实际帧。' },
       { name: 'ImGui', role: '同屏调整材质参数与调试显示。' },
@@ -115,6 +116,7 @@ export const otherStories: Record<string, ProjectStory> = {
       id: 'rendering-experiments', title: '拆开一帧画面',
       items: [
         { title: '材质效果对照', body: ['同一木盒切换法线、视差遮蔽与自阴影，观察采样和光照怎样共同表达表面深度。'] },
+        { title: '多光源与阴影', body: ['平行光与聚光灯使用深度图，点光源使用六面深度立方体；PCF 采样柔化阴影边缘。'] },
         { title: '离屏与后处理', body: ['场景先进入 framebuffer，再应用灰度、卷积等效果；调试面板保持独立绘制。'] },
         { title: '让数据可见', body: ['法线与深度显示辅助检查，固定预设配合真实 GPU 帧导出，便于同视角比较。'] },
       ],
@@ -126,9 +128,9 @@ export const otherStories: Record<string, ProjectStory> = {
       paragraphs: ['从和朋友游戏时的自动出农需求开始，经过多轮实际使用逐渐发展成节点引擎。帝国时代 4 是默认流程与素材的中心，识别、判断和键鼠节点也支持自行扩展。'],
     },
     stack: [
-      { name: 'Python', role: '执行节点图并管理输入操作上下文。' },
+      { name: 'Python / mss / pydirectinput', role: '执行节点图，连接屏幕采集与键鼠操作。' },
       { name: 'LiteGraph.js / pywebview', role: '提供节点编辑、预览与断点调试。' },
-      { name: 'OpenCV / OCR', role: '识别截图中的队列、人口与资源。' },
+      { name: 'OpenCV / EasyOCR', role: '用模板匹配与文字识别读取队列、人口和资源。' },
       { name: 'JSON 流程', role: '保存节点参数与两种流的连接。' },
     ],
     sections: [{
@@ -154,7 +156,7 @@ export const otherStories: Record<string, ProjectStory> = {
       id: 'program-evolution', title: '编码决定搜索空间',
       items: [
         { title: '两种基因表达', body: ['交换序列实际操作数组，函数序列读取变量并运算；通用引擎与问题评估分离。'] },
-        { title: '让实验可重看', body: ['固定种子复现演化，全零适应度仍维持种群；样例收敛不等于对所有输入正确。'] },
+        { title: '评分与复现', body: ['排序按正确位置计分，算式按多组随机输入评估；固定种子复现演化，样例收敛不等于普遍正确。'] },
       ],
     }],
   },
@@ -182,16 +184,19 @@ export const otherStories: Record<string, ProjectStory> = {
       paragraphs: ['Liss Community 起于自学 Flask 后端与前端 Web 技术时的实操练习。用社交博客把账户、权限和内容交互接成完整流程，曾部署于 Heroku；如今适配现代环境，以新的深色界面承载记录与交流。'],
     },
     stack: [
-      { name: 'Flask / Jinja2', role: '组织路由、接口与服务端页面模板。' },
-      { name: 'SQLAlchemy / Alembic', role: '维护关系模型与数据库迁移历史。' },
-      { name: 'CSS / Markdown', role: '组织深浅主题、响应式阅读与实时写作预览。' },
+      { name: 'Jinja2 / HTML', role: '复用服务端模板，生成文章、资料与管理页面。' },
+      { name: 'CSS / 原生 JavaScript', role: '用 Grid、Flex 与 CSS 变量组织响应式布局、主题和页面交互。' },
+      { name: 'EasyMDE / DOMPurify', role: '提供 Markdown 编辑、分屏预览与浏览器端 HTML 清理。' },
+      { name: 'Flask / SQLAlchemy', role: '处理请求、账号权限与内容之间的关系模型。' },
+      { name: 'SQLite / Alembic', role: '持久保存内容，配合增量迁移与一致性备份。' },
       { name: 'Brevo / HTTPS API', role: '发送邮箱验证、绑定与密码找回邮件。' },
     ],
     sections: [{
       id: 'connected-web-app', title: '让内容与用户连接',
       items: [
+        { title: '完整页面，按需增强', body: ['Jinja2 输出服务端页面，原生表单承担提交；写作时加载 EasyMDE，编辑器脚本不可用时仍保留文本框。'] },
         { title: '关系驱动内容', body: ['账户、角色权限、关注、文章与评论共用数据库模型，作品讨论与日常文章在同一社区连接。'] },
-        { title: '写作真正落库', body: ['EasyMDE 提供 Markdown 编辑与预览，输出 HTML 经过清理；文章和评论持久保存在 SQLite，配合一致性备份与恢复。'] },
+        { title: '预览与保存分别校验', body: ['浏览器用 DOMPurify 清理预览；服务端用 Python Markdown 与 Bleach 处理最终正文，保存为 SQLite 中的文章和评论。'] },
       ],
     }, {
       id: 'durable-accounts', title: '从访客到可找回的账号',
@@ -217,7 +222,7 @@ export const otherStories: Record<string, ProjectStory> = {
     stack: [
       { name: 'C# / .NET 10', role: '分开棋盘规则、搜索、双方配置与统计。' },
       { name: 'WinForms / GDI+', role: '绘制棋盘、棋子与独立设置、统计页面。' },
-      { name: 'Alpha–Beta / PVS', role: '保留经典引擎，加入迭代加深与威胁排序。' },
+      { name: 'Alpha–Beta / PVS', role: 'V3 搜索结合迭代加深、Zobrist 置换表与杀手走法、历史启发。' },
       { name: 'Photon / JSON / SGF', role: '管理联机状态与双方协商，保留棋谱和回看。' },
     ],
     sections: [{
@@ -252,7 +257,7 @@ export const otherStories: Record<string, ProjectStory> = {
       id: 'compare-searches', title: '让搜索过程和结果一起可见',
       items: [
         { title: '同题对照', body: ['两种算法使用同一组城市，分别显示实际耗时、评估数与最佳路线；不把一代遗传和一轮退火当成相同计算预算。'] },
-        { title: '保留真正的最佳解', body: ['退火只在接受后修改当前路线，拒绝不会污染状态；全程最佳另行保存，停止也保留已经找到的路线。'] },
+        { title: '保留真正的最佳解', body: ['用四条边的变化评估 2-opt 候选，只在接受后反转并重算路线；当前解与全程最佳分别保存。'] },
         { title: '可以改，也可以重现', body: ['画布支持添加、拖动与删除城市；固定场景、参数与种子复现实验，后台进度快照和取消令牌保持交互响应。'] },
       ],
     }],
@@ -267,14 +272,14 @@ export const otherStories: Record<string, ProjectStory> = {
       { name: 'C# / .NET 10', role: '实现 8 种排序，并以 Array.Sort 作运行时对照。' },
       { name: 'Roslyn 5.9', role: '编译核心模板，按行列反馈错误，不混入计时。' },
       { name: 'Windows Job / Worker', role: '管理独立进程，可终止不响应取消的算法。' },
-      { name: 'Stopwatch / GDI+', role: '分开计时与计数，用横柱、双对数曲线与状态矩阵呈现。' },
+      { name: 'WinForms / GDI+', role: '用横柱、双对数曲线与状态矩阵呈现实验。' },
     ],
     sections: [{
       id: 'measured-comparison', title: '改写核心，结果有据可查',
       items: [
         { title: '改动留在算法核心', body: ['模板来自真实 Sorting.cs，只露入口与必要助手；草稿和生效版分开保存，编译失败保留生效代码，包装可只读查看。'] },
         { title: '执行状态有明确来源', body: ['顶部状态跟随独立进程的实际执行；跳过绑定当前算法与规模，停止后保留已完成结果，不根据规模自动跳过。'] },
-        { title: '增长与状态一起看', body: ['约 ×4 分档按真实规模定位，矩阵保留跳过与未完成状态；计数另测，输出逐项校验。'] },
+        { title: '增长与状态一起看', body: ['约 ×4 分档配合状态矩阵；预热后重复取中位数，计数另测，输出逐项对照 Array.Sort。'] },
       ],
     }],
     footnote: '参数上限一亿项，当前实测百万项场景。修改版只统计 SortContext API 操作，不能沿用内置复杂度或稳定性；独立进程具有当前用户权限。',
