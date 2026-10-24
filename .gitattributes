@@ -1,0 +1,2 @@
+# Vendored exports are verified byte-for-byte by tools-provenance.json.
+public/tools/** -text whitespace=cr-at-eol
