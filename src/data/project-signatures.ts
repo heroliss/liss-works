@@ -62,8 +62,8 @@ const signatures: Record<string, ProjectSignature> = {
   },
   'liss-web': {
     direction: 'Web 后端 / 全栈实践',
-    principle: '用关系模型，串起账户、内容与互动。',
-    highlights: ['Flask 蓝图', 'Markdown 预览', '权限与关系建模'],
+    principle: '低门槛参与，让身份与内容长期留存。',
+    highlights: ['访客身份延续', 'Markdown 预览', '可选邮箱与找回'],
   },
 };
 

@@ -75,14 +75,14 @@
     {
       "path": "site/public/fonts/noto-sans-sc-subset.woff2",
       "url": "/fonts/noto-sans-sc-subset.woff2",
-      "bytes": 312480,
-      "sha256": "f0fa8f00c5718d763637e2dcf01032118c8ebb03e93d4cf8d504681cd5caf320",
+      "bytes": 313032,
+      "sha256": "c1035be6020640cb7d41495161e93523eb913472bbdbaea553b99ea4a75cc276",
       "family": "Noto Sans SC",
       "source": "C:\\Windows\\Fonts\\NotoSansSC-VF.ttf",
       "source_sha256": "763146584cf0710223441356b4395e279021b0806c196614377a7a0174ae074a",
       "source_bytes": 17773244,
-      "requested_codepoints": 1094,
-      "included_codepoints": 1094,
+      "requested_codepoints": 1098,
+      "included_codepoints": 1098,
       "missing_cjk": [],
       "roundtrip_decode_verified": true
     }

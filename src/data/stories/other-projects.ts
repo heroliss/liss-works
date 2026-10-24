@@ -185,13 +185,20 @@ export const otherStories: Record<string, ProjectStory> = {
       { name: 'Flask / Jinja2', role: '组织路由、接口与服务端页面模板。' },
       { name: 'SQLAlchemy / Alembic', role: '维护关系模型与数据库迁移历史。' },
       { name: 'CSS / Markdown', role: '组织深浅主题、响应式阅读与实时写作预览。' },
+      { name: 'Brevo / HTTPS API', role: '发送邮箱验证、绑定与密码找回邮件。' },
     ],
     sections: [{
       id: 'connected-web-app', title: '让内容与用户连接',
       items: [
         { title: '关系驱动内容', body: ['角色权限、关注、文章与评论共用数据库模型，页面和 REST API 从同一数据提供入口。'] },
-        { title: '写作真正落库', body: ['Markdown 转换后清理 HTML，结合登录检查、表单验证与显式事务保存文章和评论。'] },
-        { title: '身份延续，内容保留', body: ['访客升级账号沿用同一个用户 ID，文章、评论与关注关系无需搬迁；SQLite 持久存储，配合一致性备份与恢复。'] },
+        { title: '写作真正落库', body: ['EasyMDE 提供 Markdown 编辑与预览，输出 HTML 经过清理；文章和评论持久保存在 SQLite，配合一致性备份与恢复。'] },
+      ],
+    }, {
+      id: 'durable-accounts', title: '从访客到可找回的账号',
+      items: [
+        { title: '身份延续，邮箱可选', body: ['访客升级账号沿用同一个用户 ID，文章、评论与关注关系无需搬迁。邮箱可以留空，之后也能绑定或更换。'] },
+        { title: '验证、绑定与密码找回', body: ['通过 Brevo HTTPS API 发送验证、绑定与找回邮件；更换邮箱需确认后生效，发信失败也保留账号与内容。'] },
+        { title: '限时令牌与发送限流', body: ['确认与找回链接使用 1 小时有效、按用途隔离的签名令牌，配合 CSRF 校验与发送限流。邮件密钥独立保存在服务器私有配置中。'] },
       ],
     }],
   },

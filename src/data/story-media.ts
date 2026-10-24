@@ -13,7 +13,7 @@ const topicMedia: Record<string, (string | null)[]> = {
   'aoe4-autovillager-tool': ['editor-search-safe-preview'],
   'ga-sort': ['05-final-equation-convergence'],
   floydshortestpath: ['regression-checks-report'],
-  'liss-web': ['02-markdown-writing-dark-1280'],
+  'liss-web': ['02-markdown-writing-dark-1280', '05-welcome-dark-1280'],
 };
 
 export interface StoryMedia { image?: GalleryImage; inset?: GalleryImage; }

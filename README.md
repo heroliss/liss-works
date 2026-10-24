@@ -1,5 +1,7 @@
 # Liss Works · 工程展厅
 
+2026-10-24 内容补充：Liss Community 详情新增“从访客到可找回的账号”图文主题，说明身份延续、可选邮箱、Brevo HTTPS 事务邮件、限时令牌与发信限流；同步更新工程亮点、技术构成和使用说明。复用原有访客入口截图，图库保持七张且不重复展示，中文字库按新文案重新生成。实际邮件送达与账户验收见工作区 `verification/site/mail-enable-20261024/final-acceptance.json`，本次作品页验收见 `verification/site/community-mail-story-20261024/`。
+
 2026-10-24 下载更新：Outpost、LearnOpenGL、AOE4 Flow Editor 及首页入口自动读取 GitHub 最新正式 Release 的 Windows 附件，同步版本和大小；按用户最新意见不保留历史版本入口。最新验收为 `../verification/site/releases-20261024/acceptance.json`。
 
 2026-10-24 后续更新：Intelligence × Cost 默认暗色已上线，封面、供应商高亮与点阵三图均改为线上暗色实拍；旧浅色素材保留归档。最新定向验收和媒体统计见 `../verification/intelligence-dark-20261024/final-site-checks.json`，早先 `../verification/site/highlights-20261024/final-acceptance.json` 保留为前一轮快照。
