@@ -16,7 +16,7 @@ const topicMedia: Record<string, (string | null)[]> = {
   'liss-web': ['02-markdown-writing-dark-1280', '05-welcome-dark-1280'],
   gomoku: ['06-independent-black-settings-1280', '11-live-network-v32-1280'],
   'route-lab': ['02-random-compare-1440'],
-  'sort-lab': ['06-core-algorithm-editor'],
+  'sort-lab': ['11-core-code-editor'],
 };
 
 export interface StoryMedia { image?: GalleryImage; inset?: GalleryImage; }

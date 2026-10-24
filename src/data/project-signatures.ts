@@ -77,8 +77,8 @@ const signatures: Record<string, ProjectSignature> = {
   },
   'sort-lab': {
     direction: '算法实验 / 运行时编译',
-    principle: '改动只落在算法核心，让每次比较都有依据。',
-    highlights: ['核心源码可编辑', '计时与计数分离', '独立进程可终止'],
+    principle: '先看清正在做什么，再比较算法表现。',
+    highlights: ['明确任务与跳过目标', '算法阶段状态矩阵', '核心源码可编辑'],
   },
 };
 
