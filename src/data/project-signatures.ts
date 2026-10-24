@@ -80,6 +80,31 @@ const signatures: Record<string, ProjectSignature> = {
     principle: '先看清正在做什么，再比较算法表现。',
     highlights: ['明确任务与跳过目标', '算法阶段状态矩阵', '核心源码可编辑'],
   },
+  'qt-labs': {
+    direction: 'C++ 桌面 / 可视算法',
+    principle: '把输入、内部状态与结果放在同一个窗口。',
+    highlights: ['调度与内存同屏', '流式压缩与校验', '表达式求值轨迹'],
+  },
+  'text-lab': {
+    direction: '中文处理 / 本地工具',
+    principle: '建议说明依据，文本始终在本机处理。',
+    highlights: ['分词与词频联动', '词向量语义探索', '带编码的文件检索'],
+  },
+  'systems-lab': {
+    direction: '系统模拟 / C++ 互操作',
+    principle: '逐步观察状态，再用结果检验理解。',
+    highlights: ['三策略分页对照', '安全分配与排队', '可取消质数实验'],
+  },
+  nex: {
+    direction: '桌面效率 / 本机持久化',
+    principle: '用清晰的计划，让当下只专注一件事。',
+    highlights: ['权重与紧急度排序', '单一专注事务', '离线数据与导出'],
+  },
+  'liss-blocks': {
+    direction: '桌面游戏 / 状态驱动',
+    principle: '规则独立于画面，每次操作都有反馈。',
+    highlights: ['7-bag 与五块预告', '暂存与落点预览', '完整消行计分循环'],
+  },
 };
 
 export function getProjectSignature(slug: string): ProjectSignature {

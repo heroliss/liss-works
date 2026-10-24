@@ -17,6 +17,11 @@ const topicMedia: Record<string, (string | null)[]> = {
   gomoku: ['06-independent-black-settings-1280', '11-live-network-v32-1280'],
   'route-lab': ['02-random-compare-1440'],
   'sort-lab': ['11-core-code-editor'],
+  nex: ['03-single-focus-and-filter'],
+  'liss-blocks': ['02-four-line-clear-and-hold'],
+  'text-lab': [null, '04-local-imported-word2vec', '03-mixed-encoding-search'],
+  'systems-lab': [null, '02-device-resource-chain', '06-banker-granted-request', '04-prime-density-and-results'],
+  'qt-labs': ['03-os-queues-and-events', '05-huffman-roundtrip', '10-calculator-expression'],
 };
 
 export interface StoryMedia { image?: GalleryImage; inset?: GalleryImage; }

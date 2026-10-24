@@ -1,8 +1,8 @@
 {
   "schema": "showcase.website-media.v1",
-  "generated_at_utc": "2026-10-24T09:52:34.095390+00:00",
+  "generated_at_utc": "2026-10-24T11:01:14.226496+00:00",
   "source_manifest": "captures/selected-manifest.json",
-  "source_manifest_sha256": "08c4d55b4e9f897fd831d4bab9e4fa8c344c48efcf37dc6fff5cf3bf90023667",
+  "source_manifest_sha256": "f5fdf97225e134ebe0bd01be1890ac3e40837446137d7d805d85b26c2d5a285e",
   "originals_modified": false,
   "transform": "Full-image WebP encoding and Lanczos proportional downscaling only; no crop, no AI alterations, no upscaling.",
   "images": [
@@ -5189,6 +5189,1431 @@
           "lossless": false
         }
       ]
+    },
+    {
+      "repo": "nex",
+      "source": "captures/nex/02-completed-and-persistence.jpg",
+      "source_sha256": "2b767846f2fc0fe4abe57ff87d52c6d7843fbb1cc1d0a8c7f328db57f714fa71",
+      "source_bytes": 110427,
+      "source_width": 1442,
+      "source_height": 932,
+      "source_authenticity": "Actual visible Windows application captured by @oai/sky Windows.Graphics.Capture",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/nex/02-completed-and-persistence.webp",
+        "url": "/media/nex/02-completed-and-persistence.webp",
+        "bytes": 227334,
+        "sha256": "955eeaabab6c2a91d8d530f6cfa0191e66a88e24fe4ed797355d4bdf449f740b",
+        "width": 1442,
+        "height": 932,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/nex/02-completed-and-persistence-320.webp",
+          "url": "/media/nex/02-completed-and-persistence-320.webp",
+          "bytes": 7194,
+          "sha256": "4057fdc9433de43a6fc4c3e72d9203eb1ca2260a78bbc80876357cb26a3c780b",
+          "width": 320,
+          "height": 207,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/nex/02-completed-and-persistence-640.webp",
+          "url": "/media/nex/02-completed-and-persistence-640.webp",
+          "bytes": 18468,
+          "sha256": "17eae35822b4b88893115cb5b075172402350dcf01615b4338759d7e3b057dca",
+          "width": 640,
+          "height": 414,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/nex/02-completed-and-persistence-960.webp",
+          "url": "/media/nex/02-completed-and-persistence-960.webp",
+          "bytes": 35910,
+          "sha256": "ae9543e94850ad83426c4002f66707fcdd6f064f644b28789ad531443632ca9a",
+          "width": 960,
+          "height": 620,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "nex",
+      "source": "captures/nex/01-workspace-and-priority.jpg",
+      "source_sha256": "5ae58471c99dd08951151766eaca89f428bf2dd7268a650a7dd79564902ae0ac",
+      "source_bytes": 132493,
+      "source_width": 1442,
+      "source_height": 932,
+      "source_authenticity": "Actual visible Windows application captured by @oai/sky Windows.Graphics.Capture",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/nex/01-workspace-and-priority.webp",
+        "url": "/media/nex/01-workspace-and-priority.webp",
+        "bytes": 282834,
+        "sha256": "b163bafbfcbda3e4ba3442c2ff3926b104a40de1f7239aefd70e909a1b737704",
+        "width": 1442,
+        "height": 932,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/nex/01-workspace-and-priority-320.webp",
+          "url": "/media/nex/01-workspace-and-priority-320.webp",
+          "bytes": 8708,
+          "sha256": "1a06404dfa721d24bafbd2d12458f2339061584a0b27c0ddbbc3cc0e2aece093",
+          "width": 320,
+          "height": 207,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/nex/01-workspace-and-priority-640.webp",
+          "url": "/media/nex/01-workspace-and-priority-640.webp",
+          "bytes": 23210,
+          "sha256": "acc9dfa92f143e3d51241ff2848c0386b44f6e9631258fa5105c02f329c8fe56",
+          "width": 640,
+          "height": 414,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/nex/01-workspace-and-priority-960.webp",
+          "url": "/media/nex/01-workspace-and-priority-960.webp",
+          "bytes": 44470,
+          "sha256": "2f48ab6147cd0063e04aaccd5e9f3719064264b6bc4c1193568c1904cc01320e",
+          "width": 960,
+          "height": 620,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "nex",
+      "source": "captures/nex/03-single-focus-and-filter.jpg",
+      "source_sha256": "a0aa56a3ad044360de63947b9cc5ef11149a6c375569fe92db87209a2e56cbb2",
+      "source_bytes": 107758,
+      "source_width": 1442,
+      "source_height": 932,
+      "source_authenticity": "Actual visible Windows application captured by @oai/sky Windows.Graphics.Capture",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/nex/03-single-focus-and-filter.webp",
+        "url": "/media/nex/03-single-focus-and-filter.webp",
+        "bytes": 222578,
+        "sha256": "0da6bd59089ec67d9cda36df1fdf69eacd4e53c3992a08456b10c7d531f3ceea",
+        "width": 1442,
+        "height": 932,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/nex/03-single-focus-and-filter-320.webp",
+          "url": "/media/nex/03-single-focus-and-filter-320.webp",
+          "bytes": 6820,
+          "sha256": "a59cb474cadf36252fd98733d3c6d8c8627eed66175e0da8fe559a382a430075",
+          "width": 320,
+          "height": 207,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/nex/03-single-focus-and-filter-640.webp",
+          "url": "/media/nex/03-single-focus-and-filter-640.webp",
+          "bytes": 18134,
+          "sha256": "5a09083c236a5bfd953c20889c9f7a78d78688fa78749b6f75bc5e9ac1982a6c",
+          "width": 640,
+          "height": 414,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/nex/03-single-focus-and-filter-960.webp",
+          "url": "/media/nex/03-single-focus-and-filter-960.webp",
+          "bytes": 34954,
+          "sha256": "07d06a5b49e915fdbaec07efed006cd8028a0530c753b82c212903217aa66c7b",
+          "width": 960,
+          "height": 620,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "liss-blocks",
+      "source": "captures/tetris/02-four-line-clear-and-hold.jpg",
+      "source_sha256": "e364f3b94c123ad75f7092f0c4e0dd4ae5f18abc08e0aa0c2130c94eab651623",
+      "source_bytes": 84021,
+      "source_width": 1242,
+      "source_height": 912,
+      "source_authenticity": "Actual visible Windows application captured by @oai/sky Windows.Graphics.Capture",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/liss-blocks/02-four-line-clear-and-hold.webp",
+        "url": "/media/liss-blocks/02-four-line-clear-and-hold.webp",
+        "bytes": 172786,
+        "sha256": "cee503f782b1833e0bb764133c8ee72f06af97e617b16fe649c5be29212720ac",
+        "width": 1242,
+        "height": 912,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/liss-blocks/02-four-line-clear-and-hold-320.webp",
+          "url": "/media/liss-blocks/02-four-line-clear-and-hold-320.webp",
+          "bytes": 7426,
+          "sha256": "476c767c5688d3fbbbc7032d1b679156ddafeec7564dc372104a3c94273371d9",
+          "width": 320,
+          "height": 235,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/liss-blocks/02-four-line-clear-and-hold-640.webp",
+          "url": "/media/liss-blocks/02-four-line-clear-and-hold-640.webp",
+          "bytes": 19100,
+          "sha256": "775c1110f36a51d44f3c110982d274e8a0d944ee2110e0ea161062b33e86b8bf",
+          "width": 640,
+          "height": 470,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/liss-blocks/02-four-line-clear-and-hold-960.webp",
+          "url": "/media/liss-blocks/02-four-line-clear-and-hold-960.webp",
+          "bytes": 35310,
+          "sha256": "0fedd61472f7ce242b7a09e2f9aaa0ec7d519b347ecc4af38f5f1564b1c826d7",
+          "width": 960,
+          "height": 705,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "liss-blocks",
+      "source": "captures/tetris/03-counterclockwise-and-hold.jpg",
+      "source_sha256": "2031641eee34a9f12e5966a0b4b0adbff6070759b222141fc77ee0bb32b51fd2",
+      "source_bytes": 84272,
+      "source_width": 1242,
+      "source_height": 912,
+      "source_authenticity": "Actual visible Windows application captured by @oai/sky Windows.Graphics.Capture",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/liss-blocks/03-counterclockwise-and-hold.webp",
+        "url": "/media/liss-blocks/03-counterclockwise-and-hold.webp",
+        "bytes": 174586,
+        "sha256": "fe8c1d3ea3a434792605740c0c90ff903fca97347483a555c61e52d494d28389",
+        "width": 1242,
+        "height": 912,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/liss-blocks/03-counterclockwise-and-hold-320.webp",
+          "url": "/media/liss-blocks/03-counterclockwise-and-hold-320.webp",
+          "bytes": 7704,
+          "sha256": "f32610ded3bba1619d25a51727d9a1b8e3038c1f62ef6990e1cfe740b122b58f",
+          "width": 320,
+          "height": 235,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/liss-blocks/03-counterclockwise-and-hold-640.webp",
+          "url": "/media/liss-blocks/03-counterclockwise-and-hold-640.webp",
+          "bytes": 19346,
+          "sha256": "12784964270b6a0edf80ca28a8e9d8c9cbded48cee8d35a3d27034c27bbe4e89",
+          "width": 640,
+          "height": 470,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/liss-blocks/03-counterclockwise-and-hold-960.webp",
+          "url": "/media/liss-blocks/03-counterclockwise-and-hold-960.webp",
+          "bytes": 35724,
+          "sha256": "a92fdbc17c857857248195a0da72e40c19924c8648b7044f8345f17ed5956685",
+          "width": 960,
+          "height": 705,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "liss-blocks",
+      "source": "captures/tetris/04-pause-and-controls.jpg",
+      "source_sha256": "f70cd7776e3ffac5d4688783bef6ec295870f6664a8d1e1d655962def5c5c758",
+      "source_bytes": 75444,
+      "source_width": 1242,
+      "source_height": 912,
+      "source_authenticity": "Actual visible Windows application captured by @oai/sky Windows.Graphics.Capture",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/liss-blocks/04-pause-and-controls.webp",
+        "url": "/media/liss-blocks/04-pause-and-controls.webp",
+        "bytes": 178068,
+        "sha256": "d6e8d54b8c77e39ba984c88fe75c8ee808a8b65fc7208546e1c45b23efc6f339",
+        "width": 1242,
+        "height": 912,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/liss-blocks/04-pause-and-controls-320.webp",
+          "url": "/media/liss-blocks/04-pause-and-controls-320.webp",
+          "bytes": 7168,
+          "sha256": "35d394e5cceffdbdaba65557a13d793aa983ff093c57a765091b3ca180abeeeb",
+          "width": 320,
+          "height": 235,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/liss-blocks/04-pause-and-controls-640.webp",
+          "url": "/media/liss-blocks/04-pause-and-controls-640.webp",
+          "bytes": 18492,
+          "sha256": "68d583e122bf86c862a4d643f914de50c983833eb1895fa534b55d569cff022c",
+          "width": 640,
+          "height": 470,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/liss-blocks/04-pause-and-controls-960.webp",
+          "url": "/media/liss-blocks/04-pause-and-controls-960.webp",
+          "bytes": 33722,
+          "sha256": "be6f4a1aa193e7076b6e7f1f3220654f894f2e29c71bbf94b63cd0301dd3a019",
+          "width": 960,
+          "height": 705,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "liss-blocks",
+      "source": "captures/tetris/01-practice-board-and-preview.jpg",
+      "source_sha256": "7889b387beb92ccaedb4c588338ff678be1e92a667aebcbc9012e4c8e4a3144d",
+      "source_bytes": 87585,
+      "source_width": 1242,
+      "source_height": 912,
+      "source_authenticity": "Actual visible Windows application captured by @oai/sky Windows.Graphics.Capture",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/liss-blocks/01-practice-board-and-preview.webp",
+        "url": "/media/liss-blocks/01-practice-board-and-preview.webp",
+        "bytes": 175904,
+        "sha256": "a1e5da759f349f94b4409a659850365347d9d92a896c900d59983ac87c500f03",
+        "width": 1242,
+        "height": 912,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/liss-blocks/01-practice-board-and-preview-320.webp",
+          "url": "/media/liss-blocks/01-practice-board-and-preview-320.webp",
+          "bytes": 8972,
+          "sha256": "9019f1001aa2c2b8168b507582827cae3e319b5f20b4609be9464646dbd96d1f",
+          "width": 320,
+          "height": 235,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/liss-blocks/01-practice-board-and-preview-640.webp",
+          "url": "/media/liss-blocks/01-practice-board-and-preview-640.webp",
+          "bytes": 21564,
+          "sha256": "55d8130332421bb87d7f292224a721fa92b4dd6433d1d343d2a1fcc5cba25a22",
+          "width": 640,
+          "height": 470,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/liss-blocks/01-practice-board-and-preview-960.webp",
+          "url": "/media/liss-blocks/01-practice-board-and-preview-960.webp",
+          "bytes": 38840,
+          "sha256": "bf28b5402823e43d049eb4d92858e5b682a5f1350968e77ac1a8a25cdb36e0cd",
+          "width": 960,
+          "height": 705,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "text-lab",
+      "source": "captures/text-lab/01-segmentation-overview.jpg",
+      "source_sha256": "2333b614948e19565e1b80de1263718583747a6713bf7e4f93dd0f98d4b9f311",
+      "source_bytes": 146098,
+      "source_width": 1382,
+      "source_height": 952,
+      "source_authenticity": "Actual visible Windows application captured by @oai/sky Windows.Graphics.Capture",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/text-lab/01-segmentation-overview.webp",
+        "url": "/media/text-lab/01-segmentation-overview.webp",
+        "bytes": 416462,
+        "sha256": "ce48ffbf07c6134470f0432bf6c866605dd0ef5af66a878718b22f00f2da8db3",
+        "width": 1382,
+        "height": 952,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/text-lab/01-segmentation-overview-320.webp",
+          "url": "/media/text-lab/01-segmentation-overview-320.webp",
+          "bytes": 11970,
+          "sha256": "1d4615977996d3729b7c27fedd5b437f74d69ddc86a4dfff79cd76d6f64dc8f6",
+          "width": 320,
+          "height": 220,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/text-lab/01-segmentation-overview-640.webp",
+          "url": "/media/text-lab/01-segmentation-overview-640.webp",
+          "bytes": 35094,
+          "sha256": "50b113f48d9a9cb7d7097f22d1c12a06543a0d417007b3d595dd4aa182909031",
+          "width": 640,
+          "height": 441,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/text-lab/01-segmentation-overview-960.webp",
+          "url": "/media/text-lab/01-segmentation-overview-960.webp",
+          "bytes": 66924,
+          "sha256": "05b027dfcdb12aea3c50d368653f41d2b70d51480d85a3ac8b04436f147f8baf",
+          "width": 960,
+          "height": 661,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "text-lab",
+      "source": "captures/text-lab/02-proofreading-and-rules.jpg",
+      "source_sha256": "939c5e3feed38e253b3480150671abdb3cce009367c9bb064a36d0d5b356006e",
+      "source_bytes": 127871,
+      "source_width": 1382,
+      "source_height": 952,
+      "source_authenticity": "Actual visible Windows application captured by @oai/sky Windows.Graphics.Capture",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/text-lab/02-proofreading-and-rules.webp",
+        "url": "/media/text-lab/02-proofreading-and-rules.webp",
+        "bytes": 342886,
+        "sha256": "a99dd973dc49a8d2c7f4d6507fdace3f320d34393a837788fdd3929384963e92",
+        "width": 1382,
+        "height": 952,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/text-lab/02-proofreading-and-rules-320.webp",
+          "url": "/media/text-lab/02-proofreading-and-rules-320.webp",
+          "bytes": 9688,
+          "sha256": "394ee2e9c7dad2be8d6a9b2f5610e8c06f273306cad9fa79afba597a5c302532",
+          "width": 320,
+          "height": 220,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/text-lab/02-proofreading-and-rules-640.webp",
+          "url": "/media/text-lab/02-proofreading-and-rules-640.webp",
+          "bytes": 29396,
+          "sha256": "cda41d55cc474ae8e22ac1b2493e05ec68bed76f5b2d00cd0bb28d63b39d60fc",
+          "width": 640,
+          "height": 441,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/text-lab/02-proofreading-and-rules-960.webp",
+          "url": "/media/text-lab/02-proofreading-and-rules-960.webp",
+          "bytes": 56156,
+          "sha256": "e69beabacafd337342ff25f72608c14d8d25fe68c715479d5ed0b52896e67dea",
+          "width": 960,
+          "height": 661,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "text-lab",
+      "source": "captures/text-lab/03-mixed-encoding-search.jpg",
+      "source_sha256": "488e158d80a4d74ef49d79497a0ae4c0050fc127e5cc964e85e7e8aaa7628b36",
+      "source_bytes": 126246,
+      "source_width": 1382,
+      "source_height": 952,
+      "source_authenticity": "Actual visible Windows application captured by @oai/sky Windows.Graphics.Capture",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/text-lab/03-mixed-encoding-search.webp",
+        "url": "/media/text-lab/03-mixed-encoding-search.webp",
+        "bytes": 305274,
+        "sha256": "1e435c63d579a7a3b5addc501cbdabaa28cd5ffd1cc2feb376100ad190ebd551",
+        "width": 1382,
+        "height": 952,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/text-lab/03-mixed-encoding-search-320.webp",
+          "url": "/media/text-lab/03-mixed-encoding-search-320.webp",
+          "bytes": 8900,
+          "sha256": "7daa13dcbdcf7820e2526a8e6ba7756e6e623e880add3816ae850b5a586a83a0",
+          "width": 320,
+          "height": 220,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/text-lab/03-mixed-encoding-search-640.webp",
+          "url": "/media/text-lab/03-mixed-encoding-search-640.webp",
+          "bytes": 26700,
+          "sha256": "91fd58d924dbcf357aa26b81508c81692a13eb1a2f85e61a2fb6c6b03402a4f0",
+          "width": 640,
+          "height": 441,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/text-lab/03-mixed-encoding-search-960.webp",
+          "url": "/media/text-lab/03-mixed-encoding-search-960.webp",
+          "bytes": 49622,
+          "sha256": "802ebae52d1d54c1f8c6d67008d92cf95cc59ee182494f7ecbde56e646c456b0",
+          "width": 960,
+          "height": 661,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "text-lab",
+      "source": "captures/text-lab/04-local-imported-word2vec.jpg",
+      "source_sha256": "63ee16c32dd676b0c288b56cbe6f3be9d6a4094c229b49a3329d71e0ccb1f510",
+      "source_bytes": 132868,
+      "source_width": 1382,
+      "source_height": 952,
+      "source_authenticity": "Actual visible Windows application captured by @oai/sky Windows.Graphics.Capture",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/text-lab/04-local-imported-word2vec.webp",
+        "url": "/media/text-lab/04-local-imported-word2vec.webp",
+        "bytes": 359964,
+        "sha256": "8833a0802b2bac574f8cb49f66620ef7612582b992079bb7f1f91914989795bf",
+        "width": 1382,
+        "height": 952,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/text-lab/04-local-imported-word2vec-320.webp",
+          "url": "/media/text-lab/04-local-imported-word2vec-320.webp",
+          "bytes": 10212,
+          "sha256": "482b337cb5b5273f74277b0f9bf94773a9b440fa9b0fe13786bf8b32e1012045",
+          "width": 320,
+          "height": 220,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/text-lab/04-local-imported-word2vec-640.webp",
+          "url": "/media/text-lab/04-local-imported-word2vec-640.webp",
+          "bytes": 30952,
+          "sha256": "d9aeeb23e5e46aef7f6eb36386a1545f71441f6e763bf41414d2f5237f47c0e5",
+          "width": 640,
+          "height": 441,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/text-lab/04-local-imported-word2vec-960.webp",
+          "url": "/media/text-lab/04-local-imported-word2vec-960.webp",
+          "bytes": 58372,
+          "sha256": "57ab3d20ae116cc4cced409a8a08181aded99a8f9036e26a3d0a510c11a1d18a",
+          "width": 960,
+          "height": 661,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "text-lab",
+      "source": "captures/text-lab/05-context-window-scoring.jpg",
+      "source_sha256": "d9606c1486d8d30ae63aed9d2969ddd29ccb94fb0328402b991f620bb8601079",
+      "source_bytes": 134074,
+      "source_width": 1382,
+      "source_height": 952,
+      "source_authenticity": "Actual visible Windows application captured by @oai/sky Windows.Graphics.Capture",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/text-lab/05-context-window-scoring.webp",
+        "url": "/media/text-lab/05-context-window-scoring.webp",
+        "bytes": 364860,
+        "sha256": "3caa9a4c08f3411d651052db2915d0d429aaf1ed647e4f37dc91d8f71beeb9a8",
+        "width": 1382,
+        "height": 952,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/text-lab/05-context-window-scoring-320.webp",
+          "url": "/media/text-lab/05-context-window-scoring-320.webp",
+          "bytes": 10282,
+          "sha256": "22a75015d43a5d4de72abd7b0dc1a5d16caf3ec1d2bf464c4740e2cd61d3881b",
+          "width": 320,
+          "height": 220,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/text-lab/05-context-window-scoring-640.webp",
+          "url": "/media/text-lab/05-context-window-scoring-640.webp",
+          "bytes": 31538,
+          "sha256": "17ffa301f9bff386f60bbb6663ed44634daa7a6f95f1f82ea14b6c1c64c52f0b",
+          "width": 640,
+          "height": 441,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/text-lab/05-context-window-scoring-960.webp",
+          "url": "/media/text-lab/05-context-window-scoring-960.webp",
+          "bytes": 59368,
+          "sha256": "b1cb3edef43f4dc21d611ce83772f954be3847621a9a83ba7ff2e54af4d4d285",
+          "width": 960,
+          "height": 661,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "systems-lab",
+      "source": "captures/system-lab/01-paging-comparison.jpg",
+      "source_sha256": "1e088fe357540a808f3ca40a0ba26d3e9aa50f9ea2c2bd6decae0ee8f444fd30",
+      "source_bytes": 102200,
+      "source_width": 1382,
+      "source_height": 932,
+      "source_authenticity": "Actual visible Windows application captured by @oai/sky Windows.Graphics.Capture",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/systems-lab/01-paging-comparison.webp",
+        "url": "/media/systems-lab/01-paging-comparison.webp",
+        "bytes": 217606,
+        "sha256": "c5460d467ae46d8a80f3d92ca513b3f48955a4393d12981d5013869e6fad1d05",
+        "width": 1382,
+        "height": 932,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/systems-lab/01-paging-comparison-320.webp",
+          "url": "/media/systems-lab/01-paging-comparison-320.webp",
+          "bytes": 7610,
+          "sha256": "e1d4b3f1ce88dc7b3e5243f8152db94562a325e6d438aca0b017a300c346194e",
+          "width": 320,
+          "height": 216,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/systems-lab/01-paging-comparison-640.webp",
+          "url": "/media/systems-lab/01-paging-comparison-640.webp",
+          "bytes": 19442,
+          "sha256": "860a48e889d8bf594278896d23fd45fb458d816a29585585cf4caafd5bbbb40e",
+          "width": 640,
+          "height": 432,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/systems-lab/01-paging-comparison-960.webp",
+          "url": "/media/systems-lab/01-paging-comparison-960.webp",
+          "bytes": 35632,
+          "sha256": "3112fa27146cb559fb057608f394411646f251e2dcaba7f81aa1938f1da182a4",
+          "width": 960,
+          "height": 647,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "systems-lab",
+      "source": "captures/system-lab/02-device-resource-chain.jpg",
+      "source_sha256": "d3c86cb65655628b7df5f058a0aa616da2382a4a80c5d7b37afd8e64ecbc3bf2",
+      "source_bytes": 104743,
+      "source_width": 1382,
+      "source_height": 932,
+      "source_authenticity": "Actual visible Windows application captured by @oai/sky Windows.Graphics.Capture",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/systems-lab/02-device-resource-chain.webp",
+        "url": "/media/systems-lab/02-device-resource-chain.webp",
+        "bytes": 244708,
+        "sha256": "7d1aabd62e577b3bdd1b865461117f96602e4e7f19dbdc4df6d11c89a7c68f67",
+        "width": 1382,
+        "height": 932,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/systems-lab/02-device-resource-chain-320.webp",
+          "url": "/media/systems-lab/02-device-resource-chain-320.webp",
+          "bytes": 7296,
+          "sha256": "ca73c44f37760ad9c7a60f620b5f26895dc4aa52cfcd528f49fc61be05d91d72",
+          "width": 320,
+          "height": 216,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/systems-lab/02-device-resource-chain-640.webp",
+          "url": "/media/systems-lab/02-device-resource-chain-640.webp",
+          "bytes": 21822,
+          "sha256": "52c2ffacc610539e34b06de4677ef6ca5cb9e0df83d46f8efa5b6c9f0ee4980f",
+          "width": 640,
+          "height": 432,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/systems-lab/02-device-resource-chain-960.webp",
+          "url": "/media/systems-lab/02-device-resource-chain-960.webp",
+          "bytes": 40452,
+          "sha256": "9f7b61aaac972d107546539d0f604c499cb9cdbeda0c938734a11ace192cf8cd",
+          "width": 960,
+          "height": 647,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "systems-lab",
+      "source": "captures/system-lab/03-banker-safe-sequence.jpg",
+      "source_sha256": "f4a8766eea012e4942d3148fec66ab1cba48a0c61bec29a07605545c2da9311d",
+      "source_bytes": 101885,
+      "source_width": 1382,
+      "source_height": 932,
+      "source_authenticity": "Actual visible Windows application captured by @oai/sky Windows.Graphics.Capture",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/systems-lab/03-banker-safe-sequence.webp",
+        "url": "/media/systems-lab/03-banker-safe-sequence.webp",
+        "bytes": 215606,
+        "sha256": "90581b2c8a91d86eef59328a928bd9d4b275c8a08af7e580d533bae00728ae98",
+        "width": 1382,
+        "height": 932,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/systems-lab/03-banker-safe-sequence-320.webp",
+          "url": "/media/systems-lab/03-banker-safe-sequence-320.webp",
+          "bytes": 6794,
+          "sha256": "29b93988f324bc7c9bfa4b3b9c30466a58e701abe3ce49069f1b83ff27c80603",
+          "width": 320,
+          "height": 216,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/systems-lab/03-banker-safe-sequence-640.webp",
+          "url": "/media/systems-lab/03-banker-safe-sequence-640.webp",
+          "bytes": 19834,
+          "sha256": "a9b4baf62793fe5a162025ba4e657979a6dd499428d345524f5143564f21603c",
+          "width": 640,
+          "height": 432,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/systems-lab/03-banker-safe-sequence-960.webp",
+          "url": "/media/systems-lab/03-banker-safe-sequence-960.webp",
+          "bytes": 36748,
+          "sha256": "115721e73bdabeb9decc9742fc314d4f40d96ed00dc98e41a52317c766e0d6ad",
+          "width": 960,
+          "height": 647,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "systems-lab",
+      "source": "captures/system-lab/04-prime-density-and-results.jpg",
+      "source_sha256": "7aad13a0a4385e8d98e79f8e19694996b3818cef329082530ff41b08f3243dd9",
+      "source_bytes": 132973,
+      "source_width": 1382,
+      "source_height": 932,
+      "source_authenticity": "Actual visible Windows application captured by @oai/sky Windows.Graphics.Capture",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/systems-lab/04-prime-density-and-results.webp",
+        "url": "/media/systems-lab/04-prime-density-and-results.webp",
+        "bytes": 312456,
+        "sha256": "2f5e58413fe4d39be7302edcbd59ef828ce49fe8884ad1778d76112f586795f3",
+        "width": 1382,
+        "height": 932,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/systems-lab/04-prime-density-and-results-320.webp",
+          "url": "/media/systems-lab/04-prime-density-and-results-320.webp",
+          "bytes": 9116,
+          "sha256": "bd92a37afadeea0d43e927670414d7ba6bbd3a056ba30f23164cbc7a72838768",
+          "width": 320,
+          "height": 216,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/systems-lab/04-prime-density-and-results-640.webp",
+          "url": "/media/systems-lab/04-prime-density-and-results-640.webp",
+          "bytes": 26786,
+          "sha256": "c682b9842c9e731a271b92ef4b6a3671c10baf5d8002671fd6ee1c762e02fc11",
+          "width": 640,
+          "height": 432,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/systems-lab/04-prime-density-and-results-960.webp",
+          "url": "/media/systems-lab/04-prime-density-and-results-960.webp",
+          "bytes": 52070,
+          "sha256": "81fe9dcc2aed71e8cfde4690283d4e0612769a060e09ccd5cfa0d838fbc9f157",
+          "width": 960,
+          "height": 647,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "systems-lab",
+      "source": "captures/system-lab/05-device-queue-advance.jpg",
+      "source_sha256": "29184c9850716dcd23749e92f4e917026866263aea9ba508774fad11e53d6713",
+      "source_bytes": 101405,
+      "source_width": 1382,
+      "source_height": 932,
+      "source_authenticity": "Actual visible Windows application captured by @oai/sky Windows.Graphics.Capture",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/systems-lab/05-device-queue-advance.webp",
+        "url": "/media/systems-lab/05-device-queue-advance.webp",
+        "bytes": 232240,
+        "sha256": "e78ffe5a72ee9cf8ca1e2db076e6897103296a8c9d9db5dd19953c88229bb103",
+        "width": 1382,
+        "height": 932,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/systems-lab/05-device-queue-advance-320.webp",
+          "url": "/media/systems-lab/05-device-queue-advance-320.webp",
+          "bytes": 7084,
+          "sha256": "83e050281ac1efe34c5d5c69aae37c17a6091a733060139229fc6072029d7d5e",
+          "width": 320,
+          "height": 216,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/systems-lab/05-device-queue-advance-640.webp",
+          "url": "/media/systems-lab/05-device-queue-advance-640.webp",
+          "bytes": 20880,
+          "sha256": "e39cd8bdda811cbaa98adb41eb21548bdbdbf53ac012eaec903707eef5671edb",
+          "width": 640,
+          "height": 432,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/systems-lab/05-device-queue-advance-960.webp",
+          "url": "/media/systems-lab/05-device-queue-advance-960.webp",
+          "bytes": 38626,
+          "sha256": "946f12163dd366d5cbc5f276853e9e9084a24c6ad92471b3bedeea396b6c158a",
+          "width": 960,
+          "height": 647,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "systems-lab",
+      "source": "captures/system-lab/06-banker-granted-request.jpg",
+      "source_sha256": "c60feeac9ec36453d5dca864d100804d5885f1f77d7e8f25ad28092989895671",
+      "source_bytes": 101142,
+      "source_width": 1382,
+      "source_height": 932,
+      "source_authenticity": "Actual visible Windows application captured by @oai/sky Windows.Graphics.Capture",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/systems-lab/06-banker-granted-request.webp",
+        "url": "/media/systems-lab/06-banker-granted-request.webp",
+        "bytes": 214212,
+        "sha256": "517a1a2c9c507bee86118a6e950723e9104f82b33744d55616ec08f0c48bc2fc",
+        "width": 1382,
+        "height": 932,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/systems-lab/06-banker-granted-request-320.webp",
+          "url": "/media/systems-lab/06-banker-granted-request-320.webp",
+          "bytes": 6708,
+          "sha256": "fe44f5021dcebc94bdefc053461cb24f118c7984bd564ee657bbbd69c9ce8135",
+          "width": 320,
+          "height": 216,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/systems-lab/06-banker-granted-request-640.webp",
+          "url": "/media/systems-lab/06-banker-granted-request-640.webp",
+          "bytes": 19594,
+          "sha256": "1ec230bb55cf09d0de228e28b507f31408a25b2f50381f29d92a7b3857d8f726",
+          "width": 640,
+          "height": 432,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/systems-lab/06-banker-granted-request-960.webp",
+          "url": "/media/systems-lab/06-banker-granted-request-960.webp",
+          "bytes": 36570,
+          "sha256": "8efbcb58db16f8643418bc9ee88a7e8ee9ad07ee0c123ae23e1fde1c2d63bcd1",
+          "width": 960,
+          "height": 647,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "systems-lab",
+      "source": "captures/system-lab/08-prime-canceled-partial.jpg",
+      "source_sha256": "e7430e8dd9c5d883b6b671ce438cb5d8a4d06e3e286a38b3f86cb9c540056dc6",
+      "source_bytes": 141956,
+      "source_width": 1382,
+      "source_height": 932,
+      "source_authenticity": "Actual visible Windows application captured by @oai/sky Windows.Graphics.Capture",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/systems-lab/08-prime-canceled-partial.webp",
+        "url": "/media/systems-lab/08-prime-canceled-partial.webp",
+        "bytes": 360580,
+        "sha256": "b14ebcababc6f9fb2caee517ead770d423babb4cb7f205744d3c7785adc8c2de",
+        "width": 1382,
+        "height": 932,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/systems-lab/08-prime-canceled-partial-320.webp",
+          "url": "/media/systems-lab/08-prime-canceled-partial-320.webp",
+          "bytes": 9774,
+          "sha256": "c4fb17452c1a232cd1649b68b652d9f3e6d4e534effe3cb28c89cf5fae637614",
+          "width": 320,
+          "height": 216,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/systems-lab/08-prime-canceled-partial-640.webp",
+          "url": "/media/systems-lab/08-prime-canceled-partial-640.webp",
+          "bytes": 30408,
+          "sha256": "86e4e1ed36583c2aaf19ed71b5e3bad5679d8f0adcdc400b49407d86e5c47a89",
+          "width": 640,
+          "height": 432,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/systems-lab/08-prime-canceled-partial-960.webp",
+          "url": "/media/systems-lab/08-prime-canceled-partial-960.webp",
+          "bytes": 58318,
+          "sha256": "67008e3aeba18c15959811a1e2d27dbbca4f4ce4f7b85d7d8ac44a6f02b5ad4e",
+          "width": 960,
+          "height": 647,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "qt-labs",
+      "source": "captures/qt-labs/01-os-fragmented.jpg",
+      "source_sha256": "84b69c6fa54945374ff451ced155357d8845bf773cee2cccfd46eac9a2e92b46",
+      "source_bytes": 173121,
+      "source_width": 1402,
+      "source_height": 1032,
+      "source_authenticity": "Actual visible Windows application captured by @oai/sky Windows.Graphics.Capture",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/qt-labs/01-os-fragmented.webp",
+        "url": "/media/qt-labs/01-os-fragmented.webp",
+        "bytes": 438916,
+        "sha256": "ba74d069c8cf1bb3b227e6a85764b6b471c46e0db4c9bfebe724b8fee2bc5200",
+        "width": 1402,
+        "height": 1032,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/qt-labs/01-os-fragmented-320.webp",
+          "url": "/media/qt-labs/01-os-fragmented-320.webp",
+          "bytes": 13034,
+          "sha256": "6c6941a79df40a7a7adea8235d0c908acaafb40c3f57d89536298474301c9e23",
+          "width": 320,
+          "height": 236,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/qt-labs/01-os-fragmented-640.webp",
+          "url": "/media/qt-labs/01-os-fragmented-640.webp",
+          "bytes": 38150,
+          "sha256": "93fa4dcc4ad872c10782020e2a67516318ee7b687666a10934d229d728f27d67",
+          "width": 640,
+          "height": 471,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/qt-labs/01-os-fragmented-960.webp",
+          "url": "/media/qt-labs/01-os-fragmented-960.webp",
+          "bytes": 74190,
+          "sha256": "6680861f6ec5fdfbeabc7ebc883bd4a3d5624ac0707b9f240f8a2591c8b55a6d",
+          "width": 960,
+          "height": 707,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "qt-labs",
+      "source": "captures/qt-labs/02-os-compacted.jpg",
+      "source_sha256": "57d99e60d2ee68f16762a803993736c618cff5ea8845142eb48c943bfc8ca55f",
+      "source_bytes": 173209,
+      "source_width": 1402,
+      "source_height": 1032,
+      "source_authenticity": "Actual visible Windows application captured by @oai/sky Windows.Graphics.Capture",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/qt-labs/02-os-compacted.webp",
+        "url": "/media/qt-labs/02-os-compacted.webp",
+        "bytes": 438282,
+        "sha256": "c548477e769aac94133bed505d06d3870369ebc9d9960fa8b2b77a0fe63ccfbc",
+        "width": 1402,
+        "height": 1032,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/qt-labs/02-os-compacted-320.webp",
+          "url": "/media/qt-labs/02-os-compacted-320.webp",
+          "bytes": 12690,
+          "sha256": "d0ee8500fd3b4d9c33ba96b61ebb81eb6ccf68f5bc1849c8f54bb9637d5de5f8",
+          "width": 320,
+          "height": 236,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/qt-labs/02-os-compacted-640.webp",
+          "url": "/media/qt-labs/02-os-compacted-640.webp",
+          "bytes": 38204,
+          "sha256": "e6f2454366a723bfaf378c049a612e118b9d24d9eb431aa73418ed073b122236",
+          "width": 640,
+          "height": 471,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/qt-labs/02-os-compacted-960.webp",
+          "url": "/media/qt-labs/02-os-compacted-960.webp",
+          "bytes": 72300,
+          "sha256": "fff1e52e2a83b4a02c6035510bd4668bd419be8aece6b56c1c20e19c8dd999e7",
+          "width": 960,
+          "height": 707,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "qt-labs",
+      "source": "captures/qt-labs/03-os-queues-and-events.jpg",
+      "source_sha256": "5a9c30454a9594fd2d85fed37a1a5a71b133c6c13fc9a4c33c7637d55b90e2ce",
+      "source_bytes": 174798,
+      "source_width": 1402,
+      "source_height": 1032,
+      "source_authenticity": "Actual visible Windows application captured by @oai/sky Windows.Graphics.Capture",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/qt-labs/03-os-queues-and-events.webp",
+        "url": "/media/qt-labs/03-os-queues-and-events.webp",
+        "bytes": 440716,
+        "sha256": "f1177dd57afb3dc4f8f1d7589e5fd80d143413e4e5248b9e07498123de58ca36",
+        "width": 1402,
+        "height": 1032,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/qt-labs/03-os-queues-and-events-320.webp",
+          "url": "/media/qt-labs/03-os-queues-and-events-320.webp",
+          "bytes": 12928,
+          "sha256": "5f437277fbf9a1837a4f98b29a96f7d17b840b34c3428f4527ff5af53b61c7d3",
+          "width": 320,
+          "height": 236,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/qt-labs/03-os-queues-and-events-640.webp",
+          "url": "/media/qt-labs/03-os-queues-and-events-640.webp",
+          "bytes": 37996,
+          "sha256": "5b13a7d41008c3d5a6f98338b10f6d0e98d1bd431d979fc8492d7cc87c2b76f2",
+          "width": 640,
+          "height": 471,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/qt-labs/03-os-queues-and-events-960.webp",
+          "url": "/media/qt-labs/03-os-queues-and-events-960.webp",
+          "bytes": 72758,
+          "sha256": "ce9c919fda99bbb46e499e4f33cf28b93baa8e9894d54ead091eadc1d164b3ad",
+          "width": 960,
+          "height": 707,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "qt-labs",
+      "source": "captures/qt-labs/05-huffman-roundtrip.jpg",
+      "source_sha256": "4970314bba565f176433322eaa80ba56b2d3a769fb1664519a843e37d4042fab",
+      "source_bytes": 155963,
+      "source_width": 1402,
+      "source_height": 1032,
+      "source_authenticity": "Actual visible Windows application captured by @oai/sky Windows.Graphics.Capture",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/qt-labs/05-huffman-roundtrip.webp",
+        "url": "/media/qt-labs/05-huffman-roundtrip.webp",
+        "bytes": 344400,
+        "sha256": "93466d7ee0f8540ca2da89a60d30d5216d285c27dd802fc5d6323e0f158e36c5",
+        "width": 1402,
+        "height": 1032,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/qt-labs/05-huffman-roundtrip-320.webp",
+          "url": "/media/qt-labs/05-huffman-roundtrip-320.webp",
+          "bytes": 10580,
+          "sha256": "67485b613caf10957404176a25e574c829a59aae23df8a2289da80873b953c0d",
+          "width": 320,
+          "height": 236,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/qt-labs/05-huffman-roundtrip-640.webp",
+          "url": "/media/qt-labs/05-huffman-roundtrip-640.webp",
+          "bytes": 30660,
+          "sha256": "c7f3d825b31d42889ae9daf6f9382702bdf4264e4215f1f30cbf9348d6d3d70b",
+          "width": 640,
+          "height": 471,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/qt-labs/05-huffman-roundtrip-960.webp",
+          "url": "/media/qt-labs/05-huffman-roundtrip-960.webp",
+          "bytes": 56028,
+          "sha256": "d6062c159b3509ed569da4f25daac3a22aa3056328f3465b5f35d90f5a33f932",
+          "width": 960,
+          "height": 707,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "qt-labs",
+      "source": "captures/qt-labs/06-huffman-process-log.jpg",
+      "source_sha256": "16ebc1d1c57ab6f01ecf5e2f0dac0ff618b12a112918b8c803c0930e0a2bb3a5",
+      "source_bytes": 157488,
+      "source_width": 1402,
+      "source_height": 1032,
+      "source_authenticity": "Actual visible Windows application captured by @oai/sky Windows.Graphics.Capture",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/qt-labs/06-huffman-process-log.webp",
+        "url": "/media/qt-labs/06-huffman-process-log.webp",
+        "bytes": 337924,
+        "sha256": "215c23a193c311fe6c2f975d1d01cba5dc40c93bfc33f8e7b67d96ad28da4d0a",
+        "width": 1402,
+        "height": 1032,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/qt-labs/06-huffman-process-log-320.webp",
+          "url": "/media/qt-labs/06-huffman-process-log-320.webp",
+          "bytes": 10386,
+          "sha256": "2c422d131bc02105b9f079fa41a25c1ff0e00fa4c809898e5d41a609cc3cfe23",
+          "width": 320,
+          "height": 236,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/qt-labs/06-huffman-process-log-640.webp",
+          "url": "/media/qt-labs/06-huffman-process-log-640.webp",
+          "bytes": 30016,
+          "sha256": "032c88c603049dc663e155f260546a089396a3c3d27b33b497224eb4276c1607",
+          "width": 640,
+          "height": 471,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/qt-labs/06-huffman-process-log-960.webp",
+          "url": "/media/qt-labs/06-huffman-process-log-960.webp",
+          "bytes": 55664,
+          "sha256": "30477f9f7b5946a9715a45bfba3529bb3fa1e1d5fdac9b3be5b2ce8126b825f1",
+          "width": 960,
+          "height": 707,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "qt-labs",
+      "source": "captures/qt-labs/10-calculator-expression.jpg",
+      "source_sha256": "4cc7d85c4bdbf963b382519a254e9df97cbd44fe42eaf2844c5726fb09362dd6",
+      "source_bytes": 142531,
+      "source_width": 1402,
+      "source_height": 1032,
+      "source_authenticity": "Actual visible Windows application captured by @oai/sky Windows.Graphics.Capture",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/qt-labs/10-calculator-expression.webp",
+        "url": "/media/qt-labs/10-calculator-expression.webp",
+        "bytes": 297096,
+        "sha256": "bd7d37d4acf1576e7b91d74d153b0786bdcc74dfb37da9716142da7d7e348b7b",
+        "width": 1402,
+        "height": 1032,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/qt-labs/10-calculator-expression-320.webp",
+          "url": "/media/qt-labs/10-calculator-expression-320.webp",
+          "bytes": 9742,
+          "sha256": "6d4b7286c31f7f6d8eb25c930d80fa9a4313313185e8b1bf4766734e3fdd1e59",
+          "width": 320,
+          "height": 236,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/qt-labs/10-calculator-expression-640.webp",
+          "url": "/media/qt-labs/10-calculator-expression-640.webp",
+          "bytes": 26878,
+          "sha256": "33df142767135d575d1930721543926b8b6d77bde2d959e575a60e75b400bb3d",
+          "width": 640,
+          "height": 471,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/qt-labs/10-calculator-expression-960.webp",
+          "url": "/media/qt-labs/10-calculator-expression-960.webp",
+          "bytes": 49482,
+          "sha256": "224b510ed275dbc52ac97fce47f29add8e24287b2824810eecfb769481d0e58f",
+          "width": 960,
+          "height": 707,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
     }
   ],
   "video": {
@@ -5204,16 +6629,16 @@
     "note": "Real map UI capture, 19.133 s, encoded 30 CFR with frame duplication; not a rendering performance claim."
   },
   "totals": {
-    "original_image_count": 90,
-    "exported_image_count": 365,
-    "source_image_bytes": 37373211,
-    "exported_image_bytes": 28109886,
+    "original_image_count": 115,
+    "exported_image_count": 465,
+    "source_image_bytes": 40485782,
+    "exported_image_bytes": 37537824,
     "video_bytes": 1363373,
-    "font_bytes": 335416,
-    "font_license_and_provenance_bytes": 12907,
-    "published_media_bytes": 29808675,
-    "total_public_asset_count": 371,
-    "total_public_asset_bytes": 29821582
+    "font_bytes": 346900,
+    "font_license_and_provenance_bytes": 13082,
+    "published_media_bytes": 39248097,
+    "total_public_asset_count": 471,
+    "total_public_asset_bytes": 39261179
   },
   "fonts": {
     "codec": "fontTools WOFF2 with Node native zlib Brotli (quality 11 / font mode), invoked by fontTools",
@@ -5228,11 +6653,15 @@
       "site/src/components/ProjectDownload.astro",
       "site/src/components/ProjectEngineering.astro",
       "site/src/components/ProjectSignature.astro",
+      "site/src/data/project-image.ts",
       "site/src/data/project-signatures.ts",
       "site/src/data/project-stories.ts",
       "site/src/data/projects.ts",
+      "site/src/data/restored-bundles.ts",
+      "site/src/data/restored-projects.ts",
       "site/src/data/stories/dubforge.ts",
       "site/src/data/stories/other-projects.ts",
+      "site/src/data/stories/restored-projects.ts",
       "site/src/data/stories/ssframework.ts",
       "site/src/data/story-media.ts",
       "site/src/data/story-types.ts",
@@ -5292,14 +6721,14 @@
       {
         "path": "site/public/fonts/noto-sans-sc-subset.woff2",
         "url": "/fonts/noto-sans-sc-subset.woff2",
-        "bytes": 320840,
-        "sha256": "2cfcc215e07328c5d4afdb6021575d85aade2e1cfe4d239293d2a9719df2e00a",
+        "bytes": 332324,
+        "sha256": "8da3ed141a69d04ee09a8fae15e16117d6fb46e03c84c470bf72c91cf0e7ef13",
         "family": "Noto Sans SC",
         "source": "C:\\Windows\\Fonts\\NotoSansSC-VF.ttf",
         "source_sha256": "763146584cf0710223441356b4395e279021b0806c196614377a7a0174ae074a",
         "source_bytes": 17773244,
-        "requested_codepoints": 1127,
-        "included_codepoints": 1127,
+        "requested_codepoints": 1171,
+        "included_codepoints": 1171,
         "missing_cjk": [],
         "roundtrip_decode_verified": true
       }

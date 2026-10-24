@@ -49,6 +49,29 @@ test('project patterns support both stable and versioned Windows filenames', () 
   ]) for (const name of names) assert.ok(parseLatestRelease(payload([asset(config, name)]), config), name);
 });
 
+test('restored desktop projects follow versioned formal packages with version and size together', () => {
+  for (const [repository, stem] of [
+    ['heroliss/qt-labs', 'Liss-QtLabs'],
+    ['heroliss/text-lab', 'Liss-TextLab'],
+    ['heroliss/systems-lab', 'SystemsLab'],
+    ['heroliss/nex', 'Liss-NEX'],
+    ['heroliss/liss-blocks', 'Liss-Blocks'],
+  ]) {
+    const config = projectDownload(repository);
+    for (const [version, size] of [['v1.0.0', 52_000_001], ['v2.4.0', 61_000_003]]) {
+      const name = `${stem}-${version.slice(1)}-win-x64.zip`;
+      const release = parseLatestRelease(payload([asset(config, name, size, version)], { tag_name: version }), config);
+      assert.ok(release, name);
+      assert.equal(release.version, version);
+      assert.equal(release.size, size);
+      assert.equal(release.url, asset(config, name, size, version).browser_download_url);
+      for (const invalid of [`${name}.sha256`, `${stem}-2.4.0-linux-x64.zip`, `${stem}-2.4.0-win-arm64.zip`]) {
+        assert.equal(parseLatestRelease(payload([asset(config, invalid, size, version)], { tag_name: version }), config), null, invalid);
+      }
+    }
+  }
+});
+
 test('drafts, prereleases and incomplete release metadata are rejected', () => {
   for (const extra of [{ draft: true }, { prerelease: true }, { draft: undefined }, { prerelease: undefined }, { tag_name: '' }, { tag_name: '\nmalformed' }]) {
     assert.equal(parseLatestRelease(payload(undefined, extra), outpost), null);

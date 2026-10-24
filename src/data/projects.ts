@@ -1,24 +1,12 @@
-import type { GalleryImage, Project, ProjectGroup } from './types';
+import type { Project, ProjectGroup } from './types';
+import { projectImage as image } from './project-image.ts';
+import { restoredProjects } from './restored-projects.ts';
 
 export const groups: { id: ProjectGroup; label: string; description: string }[] = [
-  { id: 'games', label: '游戏与工具', description: '可玩的世界，以及支撑它们的框架和编辑器。' },
-  { id: 'ai-data', label: 'AI 与数据', description: '从视频译制、自动化到数据地图，让复杂流程变得可操作。' },
-  { id: 'graphics', label: '图形与代码实验', description: '材质、算法与早期 Web 工程，记录代码带来的不同可能。' },
+  { id: 'games', label: '游戏与工具', description: '游戏、桌面工具，以及背后的框架和编辑器。' },
+  { id: 'ai-data', label: 'AI 与数据', description: '视频译制、文字处理、自动化与数据探索。' },
+  { id: 'graphics', label: '图形与代码实验', description: '渲染、系统模拟与算法实验，记录代码带来的不同可能。' },
 ];
-
-function image(repo: string, filename: string, width: number, height: number, caption: string, kind: string): GalleryImage {
-  const base = `/media/${repo.toLowerCase()}/${filename.replace(/\.[^.]+$/, '')}`;
-  const variants = [320, 640, 960].filter(size => size < width);
-  return {
-    src: `${base}.webp`,
-    srcset: [...variants.map(size => `${base}-${size}.webp ${size}w`), `${base}.webp ${width}w`].join(', '),
-    width,
-    height,
-    alt: caption,
-    caption,
-    kind,
-  };
-}
 
 const nomad = [
   image('NomadWorkshop', '02-reference-vehicle-final-1080.png', 1920, 1080, '车辆甲板、三名居民与生活设施，资源状态常驻在 HUD 中。', '游戏实机'),
@@ -434,6 +422,7 @@ export const projects: Project[] = [
     source: 'https://github.com/heroliss/liss-community', docs: 'https://github.com/heroliss/liss-community/blob/main/docs/public-demo.md', demo: 'https://liss.pythonanywhere.com/',
     cover: blog[0], gallery: blog, related: ['dubforge', 'china-house-price-map'],
   },
+  ...restoredProjects,
 ];
 
 export function getProject(slug: string): Project | undefined {

@@ -31,7 +31,7 @@ const notes = [project.note, story.footnote].filter(Boolean);
       <div class="button-row">{project.demo && <a class="button" href={project.demo} target="_blank" rel="noreferrer">在线体验 <Icon name="play" size={17}/></a>}{hasLab && <a class="button" href={sitePath(project.slug === 'ga-sort' ? '/lab/#evolution' : '/lab/')}>打开交互实验 <Icon name="play" size={17}/></a>}{project.download && <ProjectDownload download={project.download}/>}<a class:list={['button', {secondary: Boolean(project.demo || project.download || hasLab)}]} href={project.source} target="_blank" rel="noreferrer">查看源码 <Icon name="code" size={18}/></a></div>
     </header>
     <ProjectSignature signature={getProjectSignature(project.slug)}/>
-    <div class="project-hero"><MediaImage image={project.cover} eager zoom group={project.slug}/></div>
+    <div class="project-hero"><MediaImage image={project.cover} eager zoom group={project.slug} sizes="(max-width: 760px) calc(100vw - 36px), (max-width: 1100px) calc(100vw - 64px), (max-width: 1456px) calc(100vw - 96px), 1360px"/></div>
     <p class="project-caption">{project.cover.caption}</p>
     <nav class="project-contents" aria-label="详情页导航"><a href="#project-origin">项目概览</a><a href="#engineering">设计与实现</a>{gallery.length > 0 && <a href="#gallery">更多画面</a>}<a href="#usage">快速开始</a>{project.docs && <a href={project.docs} target="_blank" rel="noreferrer">完整文档 <Icon size={13}/></a>}</nav>
     <div class="project-overview" id="project-origin">

@@ -10,9 +10,11 @@ const signature = getProjectSignature(project.slug);
 const filterTags = new Set(project.tags);
 if (project.tags.some(tag => tag.toLowerCase().includes('unity'))) filterTags.add('Unity');
 if (project.tags.some(tag => tag.toLowerCase().includes('opengl'))) filterTags.add('OpenGL');
-if (project.tags.some(tag => /ai|llm/i.test(tag)) || project.slug === 'intelligence-index-cost-linear') filterTags.add('AI');
+if (project.tags.some(tag => /ai|llm|nlp|word2vec/i.test(tag)) || project.slug === 'intelligence-index-cost-linear') filterTags.add('AI');
 if (project.tags.some(tag => /javascript|typescript|vue|flask|litegraph/i.test(tag))) filterTags.add('Web');
 if (project.tags.some(tag => tag.includes('算法'))) filterTags.add('算法');
+if (project.tags.some(tag => /^qt(?:\s|\d|$)/i.test(tag))) filterTags.add('Qt');
+if (project.tags.some(tag => tag.startsWith('.NET'))) filterTags.add('.NET');
 ---
 <article class:list={['project-card', className]} data-project-card data-group={project.group} data-tags={Array.from(filterTags).join('|')} data-search={`${project.name} ${project.repo} ${project.summary} ${project.category} ${project.tags.join(' ')} ${signature.direction} ${signature.principle} ${signature.highlights.join(' ')}`}>
  <a class="project-card__image" href={sitePath(`/projects/${project.slug}/`)} tabindex="-1" aria-hidden="true"><MediaImage image={project.cover} sizes="(max-width: 700px) 100vw, (max-width: 1080px) 50vw, 33vw" /></a>
