@@ -1,8 +1,8 @@
 {
   "schema": "showcase.website-media.v1",
-  "generated_at_utc": "2026-10-24T16:08:37.569588+00:00",
+  "generated_at_utc": "2026-10-24T18:21:14.803562+00:00",
   "source_manifest": "captures/selected-manifest.json",
-  "source_manifest_sha256": "aacfdfb33e86945dcba3330db9298459eb978d1c84fce8995119f02a0f1f8baa",
+  "source_manifest_sha256": "2c1802696f789defdfcc69f2f1f64badcce99c0ed4d9fdb33c6a59104e4fe9e3",
   "originals_modified": false,
   "transform": "Full-image WebP encoding and Lanczos proportional downscaling only; no crop, no AI alterations, no upscaling.",
   "images": [
@@ -1955,63 +1955,6 @@
     },
     {
       "repo": "liss-web",
-      "source": "captures/liss-web/raw/01-home-dark-1280.png",
-      "source_sha256": "84039b78f8f7ea5d7b20e19612f0e8980a6388a492454185922da9e33b221702",
-      "source_bytes": 75668,
-      "source_width": 1280,
-      "source_height": 720,
-      "source_authenticity": "真实线上 liss.pythonanywhere.com 浏览器截图；原图无像素编辑。",
-      "crop": false,
-      "upscaled": false,
-      "full": {
-        "path": "site/public/media/liss-web/01-home-dark-1280.webp",
-        "url": "/media/liss-web/01-home-dark-1280.webp",
-        "bytes": 28292,
-        "sha256": "55ee5524c9675240b98d8001117a1cf7cd6afbea86709cfde398dfc536b4ee5b",
-        "width": 1280,
-        "height": 720,
-        "codec": "webp",
-        "quality": 92,
-        "lossless": true
-      },
-      "variants": [
-        {
-          "path": "site/public/media/liss-web/01-home-dark-1280-320.webp",
-          "url": "/media/liss-web/01-home-dark-1280-320.webp",
-          "bytes": 7782,
-          "sha256": "5a91e242d7507cff9418e98d7859d9eea83c3c1837d0087f06b1c9e337cef12f",
-          "width": 320,
-          "height": 180,
-          "codec": "webp",
-          "quality": 92,
-          "lossless": false
-        },
-        {
-          "path": "site/public/media/liss-web/01-home-dark-1280-640.webp",
-          "url": "/media/liss-web/01-home-dark-1280-640.webp",
-          "bytes": 23476,
-          "sha256": "f2f5ac6392e4343e3b4d4fa7b03d46995a02eb7723db035288458e29769d86ae",
-          "width": 640,
-          "height": 360,
-          "codec": "webp",
-          "quality": 92,
-          "lossless": false
-        },
-        {
-          "path": "site/public/media/liss-web/01-home-dark-1280-960.webp",
-          "url": "/media/liss-web/01-home-dark-1280-960.webp",
-          "bytes": 46758,
-          "sha256": "550ba5ec76d6e513a05c2437c90e93cf99a62c3814e85b434d3739ddfd12356d",
-          "width": 960,
-          "height": 540,
-          "codec": "webp",
-          "quality": 92,
-          "lossless": false
-        }
-      ]
-    },
-    {
-      "repo": "liss-web",
       "source": "captures/liss-web/raw/02-markdown-writing-dark-1280.png",
       "source_sha256": "1e8b59ff5c7e58d5df09d1709921925cfc32914a84ac4a23ba6252bd11aa2f05",
       "source_bytes": 60851,
@@ -2069,120 +2012,6 @@
     },
     {
       "repo": "liss-web",
-      "source": "captures/liss-web/raw/03-article-dark-1280.png",
-      "source_sha256": "297e8d0cc12d2ca2c36b2520a1be451fc2487c88822ce76a8f0a1fa9ee233ec5",
-      "source_bytes": 42800,
-      "source_width": 1280,
-      "source_height": 720,
-      "source_authenticity": "真实线上 liss.pythonanywhere.com 浏览器截图；原图无像素编辑。",
-      "crop": false,
-      "upscaled": false,
-      "full": {
-        "path": "site/public/media/liss-web/03-article-dark-1280.webp",
-        "url": "/media/liss-web/03-article-dark-1280.webp",
-        "bytes": 15774,
-        "sha256": "d4944493ffa23d240823f649aec396133b7205ab4944e1b237901fc555b70abc",
-        "width": 1280,
-        "height": 720,
-        "codec": "webp",
-        "quality": 92,
-        "lossless": true
-      },
-      "variants": [
-        {
-          "path": "site/public/media/liss-web/03-article-dark-1280-320.webp",
-          "url": "/media/liss-web/03-article-dark-1280-320.webp",
-          "bytes": 4414,
-          "sha256": "35dda4b58c18c218f8ceb1658ed7313c2bcdded2df05b20d17697ea1d11c0e30",
-          "width": 320,
-          "height": 180,
-          "codec": "webp",
-          "quality": 92,
-          "lossless": false
-        },
-        {
-          "path": "site/public/media/liss-web/03-article-dark-1280-640.webp",
-          "url": "/media/liss-web/03-article-dark-1280-640.webp",
-          "bytes": 14436,
-          "sha256": "a28b3c9f7331d0535bd9415fa0ce5b0394b97bb7d2499dbb04351b90dd8d6637",
-          "width": 640,
-          "height": 360,
-          "codec": "webp",
-          "quality": 92,
-          "lossless": false
-        },
-        {
-          "path": "site/public/media/liss-web/03-article-dark-1280-960.webp",
-          "url": "/media/liss-web/03-article-dark-1280-960.webp",
-          "bytes": 27648,
-          "sha256": "e7f849fb2f4db81491a2045563080cf2fa61f85d50434ca31a1caa0774a93bb1",
-          "width": 960,
-          "height": 540,
-          "codec": "webp",
-          "quality": 92,
-          "lossless": false
-        }
-      ]
-    },
-    {
-      "repo": "liss-web",
-      "source": "captures/liss-web/raw/04-profile-dark-1280.png",
-      "source_sha256": "43df29f5fc66648619e6c5c096d94e279b40495623882605ebfa3bf3415d63cb",
-      "source_bytes": 54763,
-      "source_width": 1280,
-      "source_height": 720,
-      "source_authenticity": "真实线上 liss.pythonanywhere.com 浏览器截图；原图无像素编辑。",
-      "crop": false,
-      "upscaled": false,
-      "full": {
-        "path": "site/public/media/liss-web/04-profile-dark-1280.webp",
-        "url": "/media/liss-web/04-profile-dark-1280.webp",
-        "bytes": 23384,
-        "sha256": "1812b0c3eba645162622c9ae8fdeb6ed4cc444b889e364a7e81b8eca14b3372d",
-        "width": 1280,
-        "height": 720,
-        "codec": "webp",
-        "quality": 92,
-        "lossless": true
-      },
-      "variants": [
-        {
-          "path": "site/public/media/liss-web/04-profile-dark-1280-320.webp",
-          "url": "/media/liss-web/04-profile-dark-1280-320.webp",
-          "bytes": 4956,
-          "sha256": "0ba3838e54014a289ed738fddbc80b4bb6ac5422c70c9591230faa8ebc064c6d",
-          "width": 320,
-          "height": 180,
-          "codec": "webp",
-          "quality": 92,
-          "lossless": false
-        },
-        {
-          "path": "site/public/media/liss-web/04-profile-dark-1280-640.webp",
-          "url": "/media/liss-web/04-profile-dark-1280-640.webp",
-          "bytes": 15196,
-          "sha256": "f4569e930e828fb97ff0200d27672b6535d648d6a040b2f716a964d789e51fba",
-          "width": 640,
-          "height": 360,
-          "codec": "webp",
-          "quality": 92,
-          "lossless": false
-        },
-        {
-          "path": "site/public/media/liss-web/04-profile-dark-1280-960.webp",
-          "url": "/media/liss-web/04-profile-dark-1280-960.webp",
-          "bytes": 30948,
-          "sha256": "43d01f8916e6de845016ba11c095da5369622c7f1b72174e209c870422932116",
-          "width": 960,
-          "height": 540,
-          "codec": "webp",
-          "quality": 92,
-          "lossless": false
-        }
-      ]
-    },
-    {
-      "repo": "liss-web",
       "source": "captures/liss-web/raw/05-welcome-dark-1280.png",
       "source_sha256": "c531bb415f8a71c24a4878f4baaf32bde7dc42304d4d25df330ceb4ce3c0dbbe",
       "source_bytes": 48384,
@@ -2230,98 +2059,6 @@
           "url": "/media/liss-web/05-welcome-dark-1280-960.webp",
           "bytes": 26852,
           "sha256": "8297ae5b017310351e833f5df4d5c49cbebc55c2cb80383e394d5877a7c82fcb",
-          "width": 960,
-          "height": 540,
-          "codec": "webp",
-          "quality": 92,
-          "lossless": false
-        }
-      ]
-    },
-    {
-      "repo": "liss-web",
-      "source": "captures/liss-web/raw/06-article-dark-mobile-390.png",
-      "source_sha256": "82a01f9af360a7fa1fe80323432d5c36623c29aec26a1f2dd66e5c7ac9f4e36a",
-      "source_bytes": 30325,
-      "source_width": 390,
-      "source_height": 720,
-      "source_authenticity": "真实线上 liss.pythonanywhere.com 浏览器截图；原图无像素编辑。",
-      "crop": false,
-      "upscaled": false,
-      "full": {
-        "path": "site/public/media/liss-web/06-article-dark-mobile-390.webp",
-        "url": "/media/liss-web/06-article-dark-mobile-390.webp",
-        "bytes": 11932,
-        "sha256": "62101f90d576fe30feb6e4255d5b2fe7adc706cab97818cb1e8a51ec01436a94",
-        "width": 390,
-        "height": 720,
-        "codec": "webp",
-        "quality": 92,
-        "lossless": true
-      },
-      "variants": [
-        {
-          "path": "site/public/media/liss-web/06-article-dark-mobile-390-320.webp",
-          "url": "/media/liss-web/06-article-dark-mobile-390-320.webp",
-          "bytes": 19964,
-          "sha256": "ac5388bf79f8115c55484b9c7eaf4eb03ff31a28d071b5118190c23076a0d463",
-          "width": 320,
-          "height": 591,
-          "codec": "webp",
-          "quality": 92,
-          "lossless": false
-        }
-      ]
-    },
-    {
-      "repo": "liss-web",
-      "source": "captures/liss-web/raw/07-discussion-dark-1280.png",
-      "source_sha256": "d5f375a1c8e0a60d12453a525d999d3a9f6cc11f3a32a841d9e5d068423a22ec",
-      "source_bytes": 32981,
-      "source_width": 1280,
-      "source_height": 720,
-      "source_authenticity": "真实线上 liss.pythonanywhere.com 浏览器截图；原图无像素编辑。",
-      "crop": false,
-      "upscaled": false,
-      "full": {
-        "path": "site/public/media/liss-web/07-discussion-dark-1280.webp",
-        "url": "/media/liss-web/07-discussion-dark-1280.webp",
-        "bytes": 11690,
-        "sha256": "dceddb2c592c7c1be28d9cba6959637730dc3dafe75fe18d053dec3d9cb5492b",
-        "width": 1280,
-        "height": 720,
-        "codec": "webp",
-        "quality": 92,
-        "lossless": true
-      },
-      "variants": [
-        {
-          "path": "site/public/media/liss-web/07-discussion-dark-1280-320.webp",
-          "url": "/media/liss-web/07-discussion-dark-1280-320.webp",
-          "bytes": 2942,
-          "sha256": "041affe8d63110048893be90d1a4b9e0e37af2a674cc32c9b97f936a5d16531a",
-          "width": 320,
-          "height": 180,
-          "codec": "webp",
-          "quality": 92,
-          "lossless": false
-        },
-        {
-          "path": "site/public/media/liss-web/07-discussion-dark-1280-640.webp",
-          "url": "/media/liss-web/07-discussion-dark-1280-640.webp",
-          "bytes": 9482,
-          "sha256": "1b41ee84801f0029e9809521d8a4832ec11f2d0ffa37e8d7f2f96d08969f6e3c",
-          "width": 640,
-          "height": 360,
-          "codec": "webp",
-          "quality": 92,
-          "lossless": false
-        },
-        {
-          "path": "site/public/media/liss-web/07-discussion-dark-1280-960.webp",
-          "url": "/media/liss-web/07-discussion-dark-1280-960.webp",
-          "bytes": 19690,
-          "sha256": "b7e4a81d25145c0af435ddfaa49cfda53da53863003d1884730790e312c9fdc4",
           "width": 960,
           "height": 540,
           "codec": "webp",
@@ -4987,177 +4724,6 @@
       ]
     },
     {
-      "repo": "nex",
-      "source": "captures/nex/02-completed-and-persistence.jpg",
-      "source_sha256": "2b767846f2fc0fe4abe57ff87d52c6d7843fbb1cc1d0a8c7f328db57f714fa71",
-      "source_bytes": 110427,
-      "source_width": 1442,
-      "source_height": 932,
-      "source_authenticity": "Actual visible Windows application captured by @oai/sky Windows.Graphics.Capture",
-      "crop": false,
-      "upscaled": false,
-      "full": {
-        "path": "site/public/media/nex/02-completed-and-persistence.webp",
-        "url": "/media/nex/02-completed-and-persistence.webp",
-        "bytes": 227334,
-        "sha256": "955eeaabab6c2a91d8d530f6cfa0191e66a88e24fe4ed797355d4bdf449f740b",
-        "width": 1442,
-        "height": 932,
-        "codec": "webp",
-        "quality": 92,
-        "lossless": true
-      },
-      "variants": [
-        {
-          "path": "site/public/media/nex/02-completed-and-persistence-320.webp",
-          "url": "/media/nex/02-completed-and-persistence-320.webp",
-          "bytes": 7194,
-          "sha256": "4057fdc9433de43a6fc4c3e72d9203eb1ca2260a78bbc80876357cb26a3c780b",
-          "width": 320,
-          "height": 207,
-          "codec": "webp",
-          "quality": 92,
-          "lossless": false
-        },
-        {
-          "path": "site/public/media/nex/02-completed-and-persistence-640.webp",
-          "url": "/media/nex/02-completed-and-persistence-640.webp",
-          "bytes": 18468,
-          "sha256": "17eae35822b4b88893115cb5b075172402350dcf01615b4338759d7e3b057dca",
-          "width": 640,
-          "height": 414,
-          "codec": "webp",
-          "quality": 92,
-          "lossless": false
-        },
-        {
-          "path": "site/public/media/nex/02-completed-and-persistence-960.webp",
-          "url": "/media/nex/02-completed-and-persistence-960.webp",
-          "bytes": 35910,
-          "sha256": "ae9543e94850ad83426c4002f66707fcdd6f064f644b28789ad531443632ca9a",
-          "width": 960,
-          "height": 620,
-          "codec": "webp",
-          "quality": 92,
-          "lossless": false
-        }
-      ]
-    },
-    {
-      "repo": "nex",
-      "source": "captures/nex/01-workspace-and-priority.jpg",
-      "source_sha256": "5ae58471c99dd08951151766eaca89f428bf2dd7268a650a7dd79564902ae0ac",
-      "source_bytes": 132493,
-      "source_width": 1442,
-      "source_height": 932,
-      "source_authenticity": "Actual visible Windows application captured by @oai/sky Windows.Graphics.Capture",
-      "crop": false,
-      "upscaled": false,
-      "full": {
-        "path": "site/public/media/nex/01-workspace-and-priority.webp",
-        "url": "/media/nex/01-workspace-and-priority.webp",
-        "bytes": 282834,
-        "sha256": "b163bafbfcbda3e4ba3442c2ff3926b104a40de1f7239aefd70e909a1b737704",
-        "width": 1442,
-        "height": 932,
-        "codec": "webp",
-        "quality": 92,
-        "lossless": true
-      },
-      "variants": [
-        {
-          "path": "site/public/media/nex/01-workspace-and-priority-320.webp",
-          "url": "/media/nex/01-workspace-and-priority-320.webp",
-          "bytes": 8708,
-          "sha256": "1a06404dfa721d24bafbd2d12458f2339061584a0b27c0ddbbc3cc0e2aece093",
-          "width": 320,
-          "height": 207,
-          "codec": "webp",
-          "quality": 92,
-          "lossless": false
-        },
-        {
-          "path": "site/public/media/nex/01-workspace-and-priority-640.webp",
-          "url": "/media/nex/01-workspace-and-priority-640.webp",
-          "bytes": 23210,
-          "sha256": "acc9dfa92f143e3d51241ff2848c0386b44f6e9631258fa5105c02f329c8fe56",
-          "width": 640,
-          "height": 414,
-          "codec": "webp",
-          "quality": 92,
-          "lossless": false
-        },
-        {
-          "path": "site/public/media/nex/01-workspace-and-priority-960.webp",
-          "url": "/media/nex/01-workspace-and-priority-960.webp",
-          "bytes": 44470,
-          "sha256": "2f48ab6147cd0063e04aaccd5e9f3719064264b6bc4c1193568c1904cc01320e",
-          "width": 960,
-          "height": 620,
-          "codec": "webp",
-          "quality": 92,
-          "lossless": false
-        }
-      ]
-    },
-    {
-      "repo": "nex",
-      "source": "captures/nex/03-single-focus-and-filter.jpg",
-      "source_sha256": "a0aa56a3ad044360de63947b9cc5ef11149a6c375569fe92db87209a2e56cbb2",
-      "source_bytes": 107758,
-      "source_width": 1442,
-      "source_height": 932,
-      "source_authenticity": "Actual visible Windows application captured by @oai/sky Windows.Graphics.Capture",
-      "crop": false,
-      "upscaled": false,
-      "full": {
-        "path": "site/public/media/nex/03-single-focus-and-filter.webp",
-        "url": "/media/nex/03-single-focus-and-filter.webp",
-        "bytes": 222578,
-        "sha256": "0da6bd59089ec67d9cda36df1fdf69eacd4e53c3992a08456b10c7d531f3ceea",
-        "width": 1442,
-        "height": 932,
-        "codec": "webp",
-        "quality": 92,
-        "lossless": true
-      },
-      "variants": [
-        {
-          "path": "site/public/media/nex/03-single-focus-and-filter-320.webp",
-          "url": "/media/nex/03-single-focus-and-filter-320.webp",
-          "bytes": 6820,
-          "sha256": "a59cb474cadf36252fd98733d3c6d8c8627eed66175e0da8fe559a382a430075",
-          "width": 320,
-          "height": 207,
-          "codec": "webp",
-          "quality": 92,
-          "lossless": false
-        },
-        {
-          "path": "site/public/media/nex/03-single-focus-and-filter-640.webp",
-          "url": "/media/nex/03-single-focus-and-filter-640.webp",
-          "bytes": 18134,
-          "sha256": "5a09083c236a5bfd953c20889c9f7a78d78688fa78749b6f75bc5e9ac1982a6c",
-          "width": 640,
-          "height": 414,
-          "codec": "webp",
-          "quality": 92,
-          "lossless": false
-        },
-        {
-          "path": "site/public/media/nex/03-single-focus-and-filter-960.webp",
-          "url": "/media/nex/03-single-focus-and-filter-960.webp",
-          "bytes": 34954,
-          "sha256": "07d06a5b49e915fdbaec07efed006cd8028a0530c753b82c212903217aa66c7b",
-          "width": 960,
-          "height": 620,
-          "codec": "webp",
-          "quality": 92,
-          "lossless": false
-        }
-      ]
-    },
-    {
       "repo": "liss-blocks",
       "source": "captures/tetris/02-four-line-clear-and-hold.jpg",
       "source_sha256": "e364f3b94c123ad75f7092f0c4e0dd4ae5f18abc08e0aa0c2130c94eab651623",
@@ -6413,63 +5979,6 @@
     },
     {
       "repo": "liss-web",
-      "source": "captures/liss-web/08-admin-overview-dark-1440.png",
-      "source_sha256": "b779dc2a47bab5b5b3d5f8b696e2e296261ee4589640232b3c7da0645a05f69a",
-      "source_bytes": 58190,
-      "source_width": 1440,
-      "source_height": 1000,
-      "source_authenticity": "真实线上后台浏览器截图；原图无像素编辑。",
-      "crop": false,
-      "upscaled": false,
-      "full": {
-        "path": "site/public/media/liss-web/08-admin-overview-dark-1440.webp",
-        "url": "/media/liss-web/08-admin-overview-dark-1440.webp",
-        "bytes": 143828,
-        "sha256": "34a081bb94fab222d9d555615ee79b8e47c5fa589a4ac64f86501347424d4e3d",
-        "width": 1440,
-        "height": 1000,
-        "codec": "webp",
-        "quality": 92,
-        "lossless": true
-      },
-      "variants": [
-        {
-          "path": "site/public/media/liss-web/08-admin-overview-dark-1440-320.webp",
-          "url": "/media/liss-web/08-admin-overview-dark-1440-320.webp",
-          "bytes": 4020,
-          "sha256": "5207c29336bc447b84ad69845a8f2e157b1c65c3dbd14840e4b11aeb46a5801d",
-          "width": 320,
-          "height": 222,
-          "codec": "webp",
-          "quality": 92,
-          "lossless": false
-        },
-        {
-          "path": "site/public/media/liss-web/08-admin-overview-dark-1440-640.webp",
-          "url": "/media/liss-web/08-admin-overview-dark-1440-640.webp",
-          "bytes": 11686,
-          "sha256": "5f8771bd685a07a7fdff603202134cf724a89ccc975f70e3f6e89807bc4db35b",
-          "width": 640,
-          "height": 444,
-          "codec": "webp",
-          "quality": 92,
-          "lossless": false
-        },
-        {
-          "path": "site/public/media/liss-web/08-admin-overview-dark-1440-960.webp",
-          "url": "/media/liss-web/08-admin-overview-dark-1440-960.webp",
-          "bytes": 23548,
-          "sha256": "6645622e6623201ab3130b0af8ac7f96fc2f4ac175b42dadcbb900ed3cb7a822",
-          "width": 960,
-          "height": 667,
-          "codec": "webp",
-          "quality": 92,
-          "lossless": false
-        }
-      ]
-    },
-    {
-      "repo": "liss-web",
       "source": "captures/liss-web/10-admin-settings-dark-1280.png",
       "source_sha256": "1d3b2c30b483ea20b98fcd464756ace497cb86c720c5b87942985a76f34216e8",
       "source_bytes": 71038,
@@ -6673,6 +6182,1010 @@
           "lossless": false
         }
       ]
+    },
+    {
+      "repo": "mkfun",
+      "source": "captures/mkfun/raw/01-profile-mapping-1440.png",
+      "source_sha256": "1964f39f0ede4dc6bb24279feaafc62818f5eb6cde63ef5ed84a1f7f29e6cc12",
+      "source_bytes": 75049,
+      "source_width": 1440,
+      "source_height": 900,
+      "source_authenticity": "真实浏览器或 Windows 应用截图，原件未裁切、拼接或修改像素。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/mkfun/01-profile-mapping-1440.webp",
+        "url": "/media/mkfun/01-profile-mapping-1440.webp",
+        "bytes": 26476,
+        "sha256": "a84ed0d09f88e7f676509654e40863b06eb5b82e0830f4b2efcb8e8acca9c721",
+        "width": 1440,
+        "height": 900,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/mkfun/01-profile-mapping-1440-320.webp",
+          "url": "/media/mkfun/01-profile-mapping-1440-320.webp",
+          "bytes": 6222,
+          "sha256": "a3ac916175d2f70764d96a5d5af9d8386669d5ff817c20b9b54dc0111813f1da",
+          "width": 320,
+          "height": 200,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/mkfun/01-profile-mapping-1440-640.webp",
+          "url": "/media/mkfun/01-profile-mapping-1440-640.webp",
+          "bytes": 17312,
+          "sha256": "38bb45d1bff3f6d1e62d2bdfba7010cf8b50f529a946a0bb94726b68493b0393",
+          "width": 640,
+          "height": 400,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/mkfun/01-profile-mapping-1440-960.webp",
+          "url": "/media/mkfun/01-profile-mapping-1440-960.webp",
+          "bytes": 32074,
+          "sha256": "8c071271699f4077b80aa8f23b8578869526dc20313ba792ac57e8c7de3f0b90",
+          "width": 960,
+          "height": 600,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "mkfun",
+      "source": "captures/mkfun/raw/02-matrix-transpose-1440.png",
+      "source_sha256": "c85041048860720c6f7a04aeae5f281b042fe3fdc5b89302a6e2408565f21515",
+      "source_bytes": 64511,
+      "source_width": 1440,
+      "source_height": 900,
+      "source_authenticity": "真实浏览器或 Windows 应用截图，原件未裁切、拼接或修改像素。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/mkfun/02-matrix-transpose-1440.webp",
+        "url": "/media/mkfun/02-matrix-transpose-1440.webp",
+        "bytes": 23322,
+        "sha256": "0b46f3aae86a8c09f11f67f9cb6ffb96f6d28b9be8f941023c973e0a66606c81",
+        "width": 1440,
+        "height": 900,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/mkfun/02-matrix-transpose-1440-320.webp",
+          "url": "/media/mkfun/02-matrix-transpose-1440-320.webp",
+          "bytes": 5748,
+          "sha256": "449c2351c3f700de0141889718eed66ebbdb0335e02c1988bd89b31e2f26b36e",
+          "width": 320,
+          "height": 200,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/mkfun/02-matrix-transpose-1440-640.webp",
+          "url": "/media/mkfun/02-matrix-transpose-1440-640.webp",
+          "bytes": 15026,
+          "sha256": "71301863e60db3ef9d40ae72dde5d6463352cdb571e5167f5d216b5db0af9a84",
+          "width": 640,
+          "height": 400,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/mkfun/02-matrix-transpose-1440-960.webp",
+          "url": "/media/mkfun/02-matrix-transpose-1440-960.webp",
+          "bytes": 27878,
+          "sha256": "37a358106c47bdfa1532416b90a1601cf00f057a210847bdbb10734d2e44f5c7",
+          "width": 960,
+          "height": 600,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "mkfun",
+      "source": "captures/mkfun/raw/04-key-value-mapping-1440.png",
+      "source_sha256": "48d69cf0dae293df6eade9c6f819b948209a3214a0b2c501f9c901a20b5483ba",
+      "source_bytes": 64920,
+      "source_width": 1440,
+      "source_height": 900,
+      "source_authenticity": "真实浏览器或 Windows 应用截图，原件未裁切、拼接或修改像素。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/mkfun/04-key-value-mapping-1440.webp",
+        "url": "/media/mkfun/04-key-value-mapping-1440.webp",
+        "bytes": 23944,
+        "sha256": "a936513742307065996bed7eee31f3b1074b90a15fb19110b27c1865f87b5a42",
+        "width": 1440,
+        "height": 900,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/mkfun/04-key-value-mapping-1440-320.webp",
+          "url": "/media/mkfun/04-key-value-mapping-1440-320.webp",
+          "bytes": 5358,
+          "sha256": "97e94dd587b22891a17f10aa46c21a2498613596f0388bd17edb689eb78bc9c4",
+          "width": 320,
+          "height": 200,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/mkfun/04-key-value-mapping-1440-640.webp",
+          "url": "/media/mkfun/04-key-value-mapping-1440-640.webp",
+          "bytes": 15650,
+          "sha256": "a90ea52eca6f9a950d752ed69562cfad3bce5314285aed50b0719369b0040d3e",
+          "width": 640,
+          "height": 400,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/mkfun/04-key-value-mapping-1440-960.webp",
+          "url": "/media/mkfun/04-key-value-mapping-1440-960.webp",
+          "bytes": 29470,
+          "sha256": "017c3ecf70a864f0d0d98f3520eba648f5328f3ba6234a8fb7959a1236e08fba",
+          "width": 960,
+          "height": 600,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "mkfun",
+      "source": "captures/mkfun/raw/03-roundtrip-validation-1440.png",
+      "source_sha256": "07e7150258810e2b63771b04b8f35f4f7deef735dab6c0ea679edbfde3eb1f15",
+      "source_bytes": 58624,
+      "source_width": 1440,
+      "source_height": 900,
+      "source_authenticity": "真实浏览器或 Windows 应用截图，原件未裁切、拼接或修改像素。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/mkfun/03-roundtrip-validation-1440.webp",
+        "url": "/media/mkfun/03-roundtrip-validation-1440.webp",
+        "bytes": 22388,
+        "sha256": "670b32225e9c87b8bee4540e19f7d7e5d24685fa877d2568dce7e228117fd316",
+        "width": 1440,
+        "height": 900,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/mkfun/03-roundtrip-validation-1440-320.webp",
+          "url": "/media/mkfun/03-roundtrip-validation-1440-320.webp",
+          "bytes": 4848,
+          "sha256": "a62b88a393a5a30408b9dc2d068f96143d323f87367f838d3bb87bb36ccd66f3",
+          "width": 320,
+          "height": 200,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/mkfun/03-roundtrip-validation-1440-640.webp",
+          "url": "/media/mkfun/03-roundtrip-validation-1440-640.webp",
+          "bytes": 13966,
+          "sha256": "6c42cdedf8bde36251071a61e823bb1c92a7ba7154e4510a84ad253bbc29dc55",
+          "width": 640,
+          "height": 400,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/mkfun/03-roundtrip-validation-1440-960.webp",
+          "url": "/media/mkfun/03-roundtrip-validation-1440-960.webp",
+          "bytes": 26268,
+          "sha256": "54033c81ef70bfdad2bb495957aa4c3866a590b23ec6339d4193e1a1ee836051",
+          "width": 960,
+          "height": 600,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "utility-lab",
+      "source": "captures/utility-lab/raw/01-unicode-grid.jpg",
+      "source_sha256": "02baa06603085d1f9e5c3272026d69355eab1025c2524b0db010b9460259edc8",
+      "source_bytes": 89012,
+      "source_width": 1581,
+      "source_height": 1000,
+      "source_authenticity": "真实浏览器或 Windows 应用截图，原件未裁切、拼接或修改像素。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/utility-lab/01-unicode-grid.webp",
+        "url": "/media/utility-lab/01-unicode-grid.webp",
+        "bytes": 248480,
+        "sha256": "881ab58c87d66e0c1b20d08fb2772726967805b6d5b65a20cb27019f027f2fea",
+        "width": 1581,
+        "height": 1000,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/utility-lab/01-unicode-grid-320.webp",
+          "url": "/media/utility-lab/01-unicode-grid-320.webp",
+          "bytes": 7234,
+          "sha256": "899bb6175da3c84bd6f4df9393448d5fa69184ebe850df1547d784e18c172c16",
+          "width": 320,
+          "height": 202,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/utility-lab/01-unicode-grid-640.webp",
+          "url": "/media/utility-lab/01-unicode-grid-640.webp",
+          "bytes": 18856,
+          "sha256": "59b2ae56d0e7097f6732510ba213124b824d20dedb11357ca6f09980576f56b1",
+          "width": 640,
+          "height": 405,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/utility-lab/01-unicode-grid-960.webp",
+          "url": "/media/utility-lab/01-unicode-grid-960.webp",
+          "bytes": 34064,
+          "sha256": "1d104aeebfca6fbe25b93ae781486272f00d1d01f60475516ec54e8e13fa99d8",
+          "width": 960,
+          "height": 607,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "utility-lab",
+      "source": "captures/utility-lab/raw/02-unicode-supplementary.jpg",
+      "source_sha256": "80a99d12b0dde942c99b3ffc170dff8041fbf2980feecab8f8b1462ac3774878",
+      "source_bytes": 69440,
+      "source_width": 1581,
+      "source_height": 1000,
+      "source_authenticity": "真实浏览器或 Windows 应用截图，原件未裁切、拼接或修改像素。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/utility-lab/02-unicode-supplementary.webp",
+        "url": "/media/utility-lab/02-unicode-supplementary.webp",
+        "bytes": 147326,
+        "sha256": "2faa876efeb06728daac3c40c945b9118f590165590e939dad517c61bd236170",
+        "width": 1581,
+        "height": 1000,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/utility-lab/02-unicode-supplementary-320.webp",
+          "url": "/media/utility-lab/02-unicode-supplementary-320.webp",
+          "bytes": 4306,
+          "sha256": "cef5f9eaf102975dd44fd365586c07edc41a6f321a1de043cd2787dfa5b83ed3",
+          "width": 320,
+          "height": 202,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/utility-lab/02-unicode-supplementary-640.webp",
+          "url": "/media/utility-lab/02-unicode-supplementary-640.webp",
+          "bytes": 12238,
+          "sha256": "8dcd8b8c9277b46d25d3d03ef1c4acde411a56149b74ea8d9ce6ec0c5a83b7c5",
+          "width": 640,
+          "height": 405,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/utility-lab/02-unicode-supplementary-960.webp",
+          "url": "/media/utility-lab/02-unicode-supplementary-960.webp",
+          "bytes": 22980,
+          "sha256": "1ea9537b290eabd4ea615262dbdd20c6bd4a8f2eaad497b950ec66bd2307f705",
+          "width": 960,
+          "height": 607,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "utility-lab",
+      "source": "captures/utility-lab/raw/03-rename-preview.jpg",
+      "source_sha256": "e9a5b9baac030e1b8c836f33aa2326de54f15e0b6f4fd0488ec6d583c47c0f6f",
+      "source_bytes": 115601,
+      "source_width": 1581,
+      "source_height": 1204,
+      "source_authenticity": "真实浏览器或 Windows 应用截图，原件未裁切、拼接或修改像素。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/utility-lab/03-rename-preview.webp",
+        "url": "/media/utility-lab/03-rename-preview.webp",
+        "bytes": 337620,
+        "sha256": "327e058ff21c98bfa792eee5f7a62dfbfa30460f856368d13367a11bd0af3156",
+        "width": 1581,
+        "height": 1204,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/utility-lab/03-rename-preview-320.webp",
+          "url": "/media/utility-lab/03-rename-preview-320.webp",
+          "bytes": 7906,
+          "sha256": "b876f9e31d77d3abaad7a7100f9f132da826681fe309c9ea72ce0c361510cf80",
+          "width": 320,
+          "height": 244,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/utility-lab/03-rename-preview-640.webp",
+          "url": "/media/utility-lab/03-rename-preview-640.webp",
+          "bytes": 22592,
+          "sha256": "b623dcdba0dc3d1cf6040f49a774d8a616bb8c9f81e1caf8368407531a8cc455",
+          "width": 640,
+          "height": 487,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/utility-lab/03-rename-preview-960.webp",
+          "url": "/media/utility-lab/03-rename-preview-960.webp",
+          "bytes": 42234,
+          "sha256": "0f2a9e4078649101bac7cd0985543d72a292e1cc24df6408d0670f29386bbb4c",
+          "width": 960,
+          "height": 731,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "utility-lab",
+      "source": "captures/utility-lab/raw/05-rename-conflict.jpg",
+      "source_sha256": "69bd39d858e6703d9350268e513089f521394123a4612a375b15b42d3b4d9fee",
+      "source_bytes": 95750,
+      "source_width": 1581,
+      "source_height": 1052,
+      "source_authenticity": "真实浏览器或 Windows 应用截图，原件未裁切、拼接或修改像素。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/utility-lab/05-rename-conflict.webp",
+        "url": "/media/utility-lab/05-rename-conflict.webp",
+        "bytes": 278818,
+        "sha256": "500c78643ca7f8c409b32b40a891f8e2d68540f1deaf18b908f5f06e0a7b65b2",
+        "width": 1581,
+        "height": 1052,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/utility-lab/05-rename-conflict-320.webp",
+          "url": "/media/utility-lab/05-rename-conflict-320.webp",
+          "bytes": 6680,
+          "sha256": "6697cfd58c0aeb8fe46c40bbfde151341617f44ff7ac7a616f7a8081c7f20b48",
+          "width": 320,
+          "height": 213,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/utility-lab/05-rename-conflict-640.webp",
+          "url": "/media/utility-lab/05-rename-conflict-640.webp",
+          "bytes": 19160,
+          "sha256": "04a2151d286dec43dde50900fe138eb7d4102262b82e2b00227dce50e9ed059a",
+          "width": 640,
+          "height": 426,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/utility-lab/05-rename-conflict-960.webp",
+          "url": "/media/utility-lab/05-rename-conflict-960.webp",
+          "bytes": 36222,
+          "sha256": "f1e42ea0d55bf2786fc17e33cdae705b42edb0531926ea693d101184b6b572bc",
+          "width": 960,
+          "height": 639,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "nex",
+      "source": "captures/nex/raw/04-next-task-overview.jpg",
+      "source_sha256": "866ee1eaa3398ae5713e3cf20e52f8edcd7aff74d25f710dcda3e28140b9e785",
+      "source_bytes": 138829,
+      "source_width": 1442,
+      "source_height": 932,
+      "source_authenticity": "真实浏览器或 Windows 应用截图，原件未裁切、拼接或修改像素。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/nex/04-next-task-overview.webp",
+        "url": "/media/nex/04-next-task-overview.webp",
+        "bytes": 308222,
+        "sha256": "3e272b27b52ba12304a1823e1f446c34c714fb10d227c952bc19f9ca59dfcb00",
+        "width": 1442,
+        "height": 932,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/nex/04-next-task-overview-320.webp",
+          "url": "/media/nex/04-next-task-overview-320.webp",
+          "bytes": 9356,
+          "sha256": "d5cfb0d48113c702b917bb53386a00b31039b1c8772a34c2a851c1154175df0d",
+          "width": 320,
+          "height": 207,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/nex/04-next-task-overview-640.webp",
+          "url": "/media/nex/04-next-task-overview-640.webp",
+          "bytes": 25734,
+          "sha256": "39bde465b99c615825626a2c4426b6e48644e63fdcbff2ab6ff8f29e415a16ea",
+          "width": 640,
+          "height": 414,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/nex/04-next-task-overview-960.webp",
+          "url": "/media/nex/04-next-task-overview-960.webp",
+          "bytes": 49148,
+          "sha256": "9c6a5fff20485a0b00cc009e8007cd8ad81bfde4c2f60d9fe9794c33c312fb7a",
+          "width": 960,
+          "height": 620,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "nex",
+      "source": "captures/nex/raw/05-recommendation-breakdown.jpg",
+      "source_sha256": "a3f53aad9b6d9ce75759dc7ac1092d70294bf9f3f06e660dd920f9f3fab703f9",
+      "source_bytes": 137437,
+      "source_width": 1442,
+      "source_height": 932,
+      "source_authenticity": "真实浏览器或 Windows 应用截图，原件未裁切、拼接或修改像素。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/nex/05-recommendation-breakdown.webp",
+        "url": "/media/nex/05-recommendation-breakdown.webp",
+        "bytes": 298018,
+        "sha256": "26c493bbacf5b5f7af04a79eb29f393e913f53a8b9aadf3e4f6da5122d991d2f",
+        "width": 1442,
+        "height": 932,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/nex/05-recommendation-breakdown-320.webp",
+          "url": "/media/nex/05-recommendation-breakdown-320.webp",
+          "bytes": 9110,
+          "sha256": "e7f46b06d3a15664f445db9595b8ac97e7fde929f409701b0b8229c7e2f99ff7",
+          "width": 320,
+          "height": 207,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/nex/05-recommendation-breakdown-640.webp",
+          "url": "/media/nex/05-recommendation-breakdown-640.webp",
+          "bytes": 26184,
+          "sha256": "917f769849f76a7f33fc890cc71812500a1e5b01b2a488a103f16621ba3ae2b2",
+          "width": 640,
+          "height": 414,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/nex/05-recommendation-breakdown-960.webp",
+          "url": "/media/nex/05-recommendation-breakdown-960.webp",
+          "bytes": 47354,
+          "sha256": "0332b9f76dabe746516b4dd433390ab0d8f54ab231e8ff6dd7cedd73b5d2001d",
+          "width": 960,
+          "height": 620,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "nex",
+      "source": "captures/nex/raw/06-thirty-minute-budget.jpg",
+      "source_sha256": "f46d2317d891602cf245f043e1f084d245a87f5dea18a7e13bb810c4c7eb7e65",
+      "source_bytes": 138717,
+      "source_width": 1442,
+      "source_height": 932,
+      "source_authenticity": "真实浏览器或 Windows 应用截图，原件未裁切、拼接或修改像素。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/nex/06-thirty-minute-budget.webp",
+        "url": "/media/nex/06-thirty-minute-budget.webp",
+        "bytes": 314860,
+        "sha256": "19e0f56f2492f54db92e0b16e01d44e6229944564bee6afdd4f549ce8662895d",
+        "width": 1442,
+        "height": 932,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/nex/06-thirty-minute-budget-320.webp",
+          "url": "/media/nex/06-thirty-minute-budget-320.webp",
+          "bytes": 9410,
+          "sha256": "e33e0e3a725011c31eb5329614c3e540d7b2dbf262385819f26e2eb2b36b9edb",
+          "width": 320,
+          "height": 207,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/nex/06-thirty-minute-budget-640.webp",
+          "url": "/media/nex/06-thirty-minute-budget-640.webp",
+          "bytes": 25988,
+          "sha256": "58cfe05d043ec0cf2cfd348dee6980aa89fa8ff69c1ab3acdc3b36992175449f",
+          "width": 640,
+          "height": 414,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/nex/06-thirty-minute-budget-960.webp",
+          "url": "/media/nex/06-thirty-minute-budget-960.webp",
+          "bytes": 49280,
+          "sha256": "003b88b03c51862c7cce1911e1ca07e5ab6a6ccff1f41367847edb4655a543de",
+          "width": 960,
+          "height": 620,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "nex",
+      "source": "captures/nex/raw/07-original-priority.jpg",
+      "source_sha256": "380ff8122d98d1c4684ab46be7fd5f217ad31807b046a3fef7a7d9b91edd6374",
+      "source_bytes": 142198,
+      "source_width": 1442,
+      "source_height": 932,
+      "source_authenticity": "真实浏览器或 Windows 应用截图，原件未裁切、拼接或修改像素。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/nex/07-original-priority.webp",
+        "url": "/media/nex/07-original-priority.webp",
+        "bytes": 317602,
+        "sha256": "49604b469f401d49a8ceabf7881357560bd39858eddf6d0f990d547ba3f4ef28",
+        "width": 1442,
+        "height": 932,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/nex/07-original-priority-320.webp",
+          "url": "/media/nex/07-original-priority-320.webp",
+          "bytes": 9532,
+          "sha256": "cdffff4cd8d1dcc40cb16ff9cd68d5649e65044c9bfb009b94b89fc4b9fa4107",
+          "width": 320,
+          "height": 207,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/nex/07-original-priority-640.webp",
+          "url": "/media/nex/07-original-priority-640.webp",
+          "bytes": 26132,
+          "sha256": "8f462f17011f393669b1e161ea5935d5003a602002942949ea21246b42b68859",
+          "width": 640,
+          "height": 414,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/nex/07-original-priority-960.webp",
+          "url": "/media/nex/07-original-priority-960.webp",
+          "bytes": 48852,
+          "sha256": "b1516584d28b1d54b63b618490474c4bdd38f671a4c282991cc12c05701ce33b",
+          "width": 960,
+          "height": 620,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "liss-web",
+      "source": "captures/liss-web/raw/13-concise-home-1440.jpg",
+      "source_sha256": "0afece2d858722f992bb1a6cb40af6a42dcd01528e902f0c3207115ab826f391",
+      "source_bytes": 87857,
+      "source_width": 1425,
+      "source_height": 990,
+      "source_authenticity": "真实浏览器或 Windows 应用截图，原件未裁切、拼接或修改像素。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/liss-web/13-concise-home-1440.webp",
+        "url": "/media/liss-web/13-concise-home-1440.webp",
+        "bytes": 261992,
+        "sha256": "08e7dd97cb8dd2f3c7f255809618f79b8e8cc9e95c47be2177a4825cd134c30d",
+        "width": 1425,
+        "height": 990,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/liss-web/13-concise-home-1440-320.webp",
+          "url": "/media/liss-web/13-concise-home-1440-320.webp",
+          "bytes": 7928,
+          "sha256": "0c5f71419b7e38568d466d037db8bf8bcbecad14f77eaa6d9953ee45df753a80",
+          "width": 320,
+          "height": 222,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/liss-web/13-concise-home-1440-640.webp",
+          "url": "/media/liss-web/13-concise-home-1440-640.webp",
+          "bytes": 22186,
+          "sha256": "e3f52dd5df5b5f6713dd0a00d1f182c5191d818f03d79a247e2b1e0d64c09897",
+          "width": 640,
+          "height": 445,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/liss-web/13-concise-home-1440-960.webp",
+          "url": "/media/liss-web/13-concise-home-1440-960.webp",
+          "bytes": 41714,
+          "sha256": "41cb9524997cac0fbfec5a6a18a1fa3952cf0953af42e56884d2e04e8068f8c5",
+          "width": 960,
+          "height": 667,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "liss-web",
+      "source": "captures/liss-web/raw/14-welcome-article-1440.jpg",
+      "source_sha256": "bf6f4dd9bebfdedc603a8b51a3f8952abe5c7557e0943d3ac4effa29a0ee400a",
+      "source_bytes": 52908,
+      "source_width": 1425,
+      "source_height": 990,
+      "source_authenticity": "真实浏览器或 Windows 应用截图，原件未裁切、拼接或修改像素。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/liss-web/14-welcome-article-1440.webp",
+        "url": "/media/liss-web/14-welcome-article-1440.webp",
+        "bytes": 139408,
+        "sha256": "f759534b5fcbcdb1d64364187e290f1215c009d8a9bcda5b5f7002b4edf649ee",
+        "width": 1425,
+        "height": 990,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/liss-web/14-welcome-article-1440-320.webp",
+          "url": "/media/liss-web/14-welcome-article-1440-320.webp",
+          "bytes": 4462,
+          "sha256": "eb72b57eb4cf575e67fe96b5bad7c136814f812a8de90e341c5187f3c06328f0",
+          "width": 320,
+          "height": 222,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/liss-web/14-welcome-article-1440-640.webp",
+          "url": "/media/liss-web/14-welcome-article-1440-640.webp",
+          "bytes": 12880,
+          "sha256": "bd8821ff02d039bcabf640bed7a8a4c087ae37732391919e2bcebf074633bcd1",
+          "width": 640,
+          "height": 445,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/liss-web/14-welcome-article-1440-960.webp",
+          "url": "/media/liss-web/14-welcome-article-1440-960.webp",
+          "bytes": 23390,
+          "sha256": "7d48dd570ade401b21cf5182a499575c2e4dc81c4906bf95fd36518ac50958e7",
+          "width": 960,
+          "height": 667,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "liss-web",
+      "source": "captures/liss-web/raw/15-owner-profile-1440.jpg",
+      "source_sha256": "2a91b3b3cf741c2032bb54dce0b124986bda547b40d35ec8591724063eac11d8",
+      "source_bytes": 64734,
+      "source_width": 1425,
+      "source_height": 990,
+      "source_authenticity": "真实浏览器或 Windows 应用截图，原件未裁切、拼接或修改像素。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/liss-web/15-owner-profile-1440.webp",
+        "url": "/media/liss-web/15-owner-profile-1440.webp",
+        "bytes": 188366,
+        "sha256": "7f21bf12fcbd984a533f47bf142094d2c220630beae4bdb59edb656a7beb958b",
+        "width": 1425,
+        "height": 990,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/liss-web/15-owner-profile-1440-320.webp",
+          "url": "/media/liss-web/15-owner-profile-1440-320.webp",
+          "bytes": 5654,
+          "sha256": "c6677596b5e32ee3e5d65e3408a1e5efb8c52225bc69e02d07eb2c8a82d3fcfc",
+          "width": 320,
+          "height": 222,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/liss-web/15-owner-profile-1440-640.webp",
+          "url": "/media/liss-web/15-owner-profile-1440-640.webp",
+          "bytes": 16442,
+          "sha256": "3378edbe67b7f1e4ea89fad53fe7cd1e11cbccf50599ab6957901174cf504c59",
+          "width": 640,
+          "height": 445,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/liss-web/15-owner-profile-1440-960.webp",
+          "url": "/media/liss-web/15-owner-profile-1440-960.webp",
+          "bytes": 30630,
+          "sha256": "595f1391a9d3c3f7dcd684f24c8022dadf75b7e80376c61bf1faf0cc5832dcd0",
+          "width": 960,
+          "height": 667,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "liss-web",
+      "source": "captures/liss-web/raw/16-community-mobile-390.jpg",
+      "source_sha256": "4844ab7b9892e90dd66278f970071b2abab2eafaaac604ee33f0af4bdf044509",
+      "source_bytes": 77542,
+      "source_width": 375,
+      "source_height": 1542,
+      "source_authenticity": "真实浏览器或 Windows 应用截图，原件未裁切、拼接或修改像素。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/liss-web/16-community-mobile-390.webp",
+        "url": "/media/liss-web/16-community-mobile-390.webp",
+        "bytes": 242580,
+        "sha256": "e9164423de0fb4cf1c18bd0228c60a548af68741a4061187d1443edfe6a275c5",
+        "width": 375,
+        "height": 1542,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/liss-web/16-community-mobile-390-320.webp",
+          "url": "/media/liss-web/16-community-mobile-390-320.webp",
+          "bytes": 58352,
+          "sha256": "ba621c40bcb1fa658ebe5b49946246b9cb0b4a386b0b15510035749d8d9639cf",
+          "width": 320,
+          "height": 1316,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "liss-web",
+      "source": "captures/liss-web/raw/17-discussion-1440.jpg",
+      "source_sha256": "dc8d9400b3a5ef4534dee34f4b97510df19ce880bbc83c0f1633cc1d7deb06fe",
+      "source_bytes": 55149,
+      "source_width": 1425,
+      "source_height": 990,
+      "source_authenticity": "真实浏览器或 Windows 应用截图，原件未裁切、拼接或修改像素。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/liss-web/17-discussion-1440.webp",
+        "url": "/media/liss-web/17-discussion-1440.webp",
+        "bytes": 147408,
+        "sha256": "fc27789208d67e683b05afdb4733c91b9a5f6cbdaf241354f2614ec035d9a91a",
+        "width": 1425,
+        "height": 990,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/liss-web/17-discussion-1440-320.webp",
+          "url": "/media/liss-web/17-discussion-1440-320.webp",
+          "bytes": 4182,
+          "sha256": "cf54674d8837b9abea6a00f9f781e88d2b7a80223308589ac39a4e09043adc22",
+          "width": 320,
+          "height": 222,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/liss-web/17-discussion-1440-640.webp",
+          "url": "/media/liss-web/17-discussion-1440-640.webp",
+          "bytes": 12184,
+          "sha256": "d946402f86ccc91f7edea3600bd08d0754efcac8eee9c1d68d47528a4effbc6d",
+          "width": 640,
+          "height": 445,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/liss-web/17-discussion-1440-960.webp",
+          "url": "/media/liss-web/17-discussion-1440-960.webp",
+          "bytes": 23534,
+          "sha256": "9e6d842ee2912c0e2dba60b194f8c3791bd7f31c4327dddf0801c841b9a5d2e1",
+          "width": 960,
+          "height": 667,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "liss-web",
+      "source": "captures/liss-web/raw/18-admin-overview-1440.jpg",
+      "source_sha256": "006a2029d1f3f8ce900ab1b4a01b7a87f87ef73ce7dd0253f93b42eb68a37f06",
+      "source_bytes": 56594,
+      "source_width": 1425,
+      "source_height": 990,
+      "source_authenticity": "真实浏览器或 Windows 应用截图，原件未裁切、拼接或修改像素。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/liss-web/18-admin-overview-1440.webp",
+        "url": "/media/liss-web/18-admin-overview-1440.webp",
+        "bytes": 134460,
+        "sha256": "9a42d8cec449066cc1897b2c445368537c16e66b32be6085243356ea42c35073",
+        "width": 1425,
+        "height": 990,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/liss-web/18-admin-overview-1440-320.webp",
+          "url": "/media/liss-web/18-admin-overview-1440-320.webp",
+          "bytes": 4376,
+          "sha256": "030340859099ad9b5695e9ea294d441e2bc153acc741340dce2030af7567d5c4",
+          "width": 320,
+          "height": 222,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/liss-web/18-admin-overview-1440-640.webp",
+          "url": "/media/liss-web/18-admin-overview-1440-640.webp",
+          "bytes": 12050,
+          "sha256": "281e46b44e2ad43e652d1a55cf908ae54b7d3ddb9bb9bb00ff4c176091ef5919",
+          "width": 640,
+          "height": 445,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/liss-web/18-admin-overview-1440-960.webp",
+          "url": "/media/liss-web/18-admin-overview-1440-960.webp",
+          "bytes": 22634,
+          "sha256": "9e1fa56f4215bdc6a384ae10076abf82e7e354bfad349df3f304c69e577174cb",
+          "width": 960,
+          "height": 667,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
     }
   ],
   "video": {
@@ -6688,16 +7201,16 @@
     "note": "Real map UI capture, 19.133 s, encoded 30 CFR with frame duplication; not a rendering performance claim."
   },
   "totals": {
-    "original_image_count": 117,
-    "exported_image_count": 468,
-    "source_image_bytes": 40226418,
-    "exported_image_bytes": 36322126,
+    "original_image_count": 126,
+    "exported_image_count": 504,
+    "source_image_bytes": 41165885,
+    "exported_image_bytes": 39423926,
     "video_bytes": 1363373,
-    "font_bytes": 350268,
-    "font_license_and_provenance_bytes": 13166,
-    "published_media_bytes": 38035767,
-    "total_public_asset_count": 474,
-    "total_public_asset_bytes": 38048933
+    "font_bytes": 353216,
+    "font_license_and_provenance_bytes": 13250,
+    "published_media_bytes": 41140515,
+    "total_public_asset_count": 510,
+    "total_public_asset_bytes": 41153765
   },
   "fonts": {
     "codec": "fontTools WOFF2 with Node native zlib Brotli (quality 11 / font mode), invoked by fontTools",
@@ -6723,9 +7236,11 @@
       "site/src/data/stories/other-projects.ts",
       "site/src/data/stories/restored-projects.ts",
       "site/src/data/stories/ssframework.ts",
+      "site/src/data/stories/web-projects.ts",
       "site/src/data/story-media.ts",
       "site/src/data/story-types.ts",
       "site/src/data/types.ts",
+      "site/src/data/web-projects.ts",
       "site/src/layouts/Base.astro",
       "site/src/lib/evolution.ts",
       "site/src/lib/floyd.ts",
@@ -6782,14 +7297,14 @@
       {
         "path": "site/public/fonts/noto-sans-sc-subset.woff2",
         "url": "/fonts/noto-sans-sc-subset.woff2",
-        "bytes": 335692,
-        "sha256": "982bf3d0d3b5269847333c3ce2c59e4c02fbb896e9145931588e45e21a3665da",
+        "bytes": 338640,
+        "sha256": "afd2317652a411a0149c5026ebb59e9b6e9f7d186d6048e0f9f70a9cc9bb9732",
         "family": "Noto Sans SC",
         "source": "C:\\Windows\\Fonts\\NotoSansSC-VF.ttf",
         "source_sha256": "763146584cf0710223441356b4395e279021b0806c196614377a7a0174ae074a",
         "source_bytes": 17773244,
-        "requested_codepoints": 1181,
-        "included_codepoints": 1181,
+        "requested_codepoints": 1193,
+        "included_codepoints": 1193,
         "missing_cjk": [],
         "roundtrip_decode_verified": true
       }

@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="dark"><title>mkfun · 结构映射实验台</title><link rel="icon" href="./icon.svg" type="image/svg+xml"><link rel="stylesheet" href="./style.css"></head>
+<body>
+  <header class="topbar"><a class="brand" href="./index.html"><span class="brand-symbol" aria-hidden="true">{↔}</span><span>mkfun <small>结构映射实验台</small></span></a><a class="source-link" href="https://github.com/heroliss/mkfun" target="_blank" rel="noreferrer">查看源码 <span aria-hidden="true">↗</span></a></header>
+  <main>
+    <section class="intro"><div><h1>给出样例，重组数据。</h1><p>用相同的值连接源与目标，再把规则应用到新数据。没有对应的值会保留为常量。</p></div><span class="version">Python 工具 / 浏览器实验</span></section>
+    <section class="toolbar" aria-label="映射选项"><div class="preset-control"><label for="preset">试一个规则</label><select id="preset"><option value="profile">数组变档案</option><option value="matrix">矩阵转置</option><option value="keys">字典键值交换</option><option value="loss">观察信息丢失</option></select></div><label class="check"><input id="validate" type="checkbox">反向校验</label><button class="primary" id="run" type="button">执行映射 <kbd>Ctrl ↵</kbd></button></section>
+    <section class="editors" aria-label="样例与数据">
+      <div class="editor-panel source-panel"><div class="panel-heading"><h2><span class="dot"></span>源样例</h2><span>描述原始布局</span></div><label for="source" class="sr-only">源样例 JSON</label><textarea id="source" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea><p class="panel-foot">每个叶值标记一个输入位置</p></div>
+      <div class="editor-panel target-panel"><div class="panel-heading"><h2><span class="dot"></span>目标样例</h2><span>描述你想要的布局</span></div><label for="target" class="sr-only">目标样例 JSON</label><textarea id="target" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea><p class="panel-foot">相同叶值取来源，其余值成为常量</p></div>
+      <div class="editor-panel data-panel"><div class="panel-heading"><h2><span class="dot"></span>新数据</h2><span>替换样例内容</span></div><label for="input" class="sr-only">新数据 JSON</label><textarea id="input" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea><p class="panel-foot">保持源样例的容器层次与长度</p></div>
+    </section>
+    <div id="status" class="status" role="status" aria-live="polite"></div>
+    <section class="results" aria-label="转换结果与规则">
+      <div class="output-panel"><div class="panel-heading"><h2>转换结果</h2><button id="copy" type="button" class="quiet" disabled>复制 JSON</button></div><pre id="output" tabindex="0"></pre></div>
+      <div class="rules-panel"><div class="panel-heading"><h2>规则从哪里来</h2><span id="rule-count"></span></div><div class="legend"><span><i class="from-mark"></i>引用输入位置</span><span><i class="constant-mark"></i>固定常量</span></div><div class="rule-list" id="rules"></div></div>
+    </section>
+    <details class="help"><summary>怎样读规则，以及哪些内容受到支持</summary><div><p><code>$[0]</code> 表示第一个位置；对象按键、值成对遍历，<code>&lt;key:0&gt;</code> 与 <code>&lt;value:0&gt;</code> 是首对键值。键也会参与映射，命名占位符时请避免和固定字段名重复。</p><p>新数据的标量可以更换类型。重复的源样例值取首个位置，并显示提示；反向校验检查本次输入能否完整还原，不会自动补回丢失的数据。</p><p>此实验台支持 JSON。Python 库另支持 tuple、set、bytes 和可哈希字典键。浏览器对象键必须是字符串，数字字符串键按 JavaScript 属性顺序；有序数据推荐用数组。每份文档最多 200,000 字符、10,000 节点、64 层；输出预算 2,000,000 字符，整数需在浏览器精确范围内。</p><p>输入只在当前页面处理。刷新会重置示例；没有上传、账户或后端服务。</p></div></details>
+  </main><footer>mkfun · 从 2016 年的 Python 结构实验，到可解释的规则树。<a href="https://github.com/heroliss/mkfun#readme" target="_blank" rel="noreferrer">Python 用法</a></footer>
+  <script type="module" src="./app.mjs"></script>
+</body></html>

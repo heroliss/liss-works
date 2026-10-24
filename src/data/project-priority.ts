@@ -7,7 +7,7 @@ export const projectPriority = [
   'aoe4-flow', 'eazybuildpipeline', 'liss-web',
   'intelligence-index-cost-linear', 'learnopengl', 'china-house-price-map',
   'sort-lab', 'route-lab', 'qt-labs', 'systems-lab', 'text-lab', 'nex',
-  'liss-blocks', 'floydshortestpath', 'ga-sort',
+  'utility-lab', 'mkfun', 'liss-blocks', 'floydshortestpath', 'ga-sort',
 ] as const;
 
 export function prioritizeProjects(items: readonly Project[]): Project[] {

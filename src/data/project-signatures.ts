@@ -5,6 +5,16 @@ export interface ProjectSignature {
 }
 
 const signatures: Record<string, ProjectSignature> = {
+  mkfun: {
+    direction: 'Python 工具 / 结构映射',
+    principle: '用样例表达位置，让规则与结果都可解释。',
+    highlights: ['样例编译规则', '逐项来源路径', '本次往返校验'],
+  },
+  'utility-lab': {
+    direction: '浏览器工具 / 本地数据',
+    principle: '先看清表示与变化，再决定如何使用。',
+    highlights: ['Unicode 编码对照', '改名前预览冲突', '本机处理与撤销'],
+  },
   nomadworkshop: {
     direction: '生活模拟 / 游戏 AI',
     principle: '先让规则成立，再让世界动起来。',
@@ -97,8 +107,8 @@ const signatures: Record<string, ProjectSignature> = {
   },
   nex: {
     direction: '桌面效率 / 本机持久化',
-    principle: '用清晰的计划，让当下只专注一件事。',
-    highlights: ['权重与紧急度排序', '单一专注事务', '离线数据与导出'],
+    principle: '推荐说明依据，下一步由自己决定。',
+    highlights: ['可解释时效推荐', '可选时间预算', '单一专注事务'],
   },
   'liss-blocks': {
     direction: '桌面游戏 / 状态驱动',

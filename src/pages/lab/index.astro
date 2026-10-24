@@ -1,6 +1,10 @@
 ---
 import Base from '../../layouts/Base.astro';
 import LabWorkbench from '../../components/LabWorkbench.astro';
+import Icon from '../../components/Icon.astro';
+import { sitePath } from '../../lib/site-path';
+import { webProjects } from '../../data/web-projects';
 ---
-<Base title="交互实验" active="lab" description="亲手探索 Floyd 最短路径与遗传算法排序，修改输入，观察代码如何得到不同结果。"><div class="shell lab-page"><div class="page-intro lab-intro"><h1>交互实验</h1><p>让输入改变结果，让代码变得直观。这里放一些可以直接在浏览器里玩的算法。</p></div><LabWorkbench/></div></Base>
+<Base title="交互实验" active="lab" description="亲手探索算法、结构映射与本地实用工具，修改输入，观察不同结果。"><div class="shell lab-page"><div class="page-intro lab-intro"><h1>交互实验</h1><p>让输入改变结果，让代码变得直观。算法和小工具，都可以直接打开试试。</p></div><LabWorkbench/><section class="section" aria-labelledby="web-tools-title"><div class="section-heading"><h2 id="web-tools-title">浏览器里的小工具</h2><p>打开即用，数据在本机处理。</p></div><div class="web-tool-grid">{webProjects.map(project => <a class="web-tool" href={sitePath(project.demo!)}><div><span class="category">{project.category}</span><h3>{project.name}</h3><p>{project.summary}</p></div><Icon name="arrow" size={22}/></a>)}</div></section></div></Base>
+<style>.web-tool-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}.web-tool{display:flex;align-items:center;gap:24px;padding:28px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);transition:border-color .18s}.web-tool:hover{border-color:var(--cyan)}.web-tool h3{margin:10px 0;font-size:1.15rem}.web-tool p{color:var(--muted);font-size:.9rem}.web-tool>svg{margin-left:auto}@media(max-width:760px){.web-tool-grid{grid-template-columns:1fr}.web-tool{padding:22px}}</style>
 

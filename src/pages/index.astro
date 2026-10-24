@@ -38,7 +38,7 @@ const experiments = ['learnopengl', 'sort-lab', 'route-lab'].map(slug => getProj
    <div class="section-heading"><div><h2 id="applications-title">从实际需要开始</h2><p>减少重复操作、留下想法，或看清 AI 的能力与费用。</p></div></div>
    <div class="home-project-row">{applications.map(project => <article class="home-project" data-home-project={project.slug}>
     <a class="home-project__media" href={sitePath(`/projects/${project.slug}/`)} tabindex="-1" aria-hidden="true"><MediaImage image={project.cover} sizes="(max-width: 760px) 100vw, 33vw"/></a>
-    <div class="home-project__body"><p class="home-direction">{getProjectSignature(project.slug).direction}</p><h3 class="project-name"><a href={sitePath(`/projects/${project.slug}/`)}>{project.name}</a></h3><p class="home-summary">{project.summary}</p><div class="home-project__footer"><a class="text-link" href={sitePath(`/projects/${project.slug}/`)}>查看工程 <Icon size={16}/></a>{project.demo && <a class="text-link" href={project.demo} target="_blank" rel="noreferrer">在线体验 <Icon size={16}/></a>}</div></div>
+    <div class="home-project__body"><p class="home-direction">{getProjectSignature(project.slug).direction}</p><h3 class="project-name"><a href={sitePath(`/projects/${project.slug}/`)}>{project.name}</a></h3><p class="home-summary">{project.summary}</p><div class="home-project__footer"><a class="text-link" href={sitePath(`/projects/${project.slug}/`)}>查看工程 <Icon size={16}/></a>{project.demo && <a class="text-link" href={sitePath(project.demo)} target="_blank" rel="noreferrer">在线体验 <Icon size={16}/></a>}</div></div>
    </article>)}</div>
   </section>
 

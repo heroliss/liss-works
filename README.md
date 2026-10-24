@@ -71,7 +71,7 @@ npm run preview -- --port 4322
 
 最后一条在独立端口预览 `dist/`，无需停止已有 4321 开发服务；使用前请确认 4322 未被占用。静态产物不依赖服务器端业务或数据库。所有导航均为普通链接，主要内容可在无 JavaScript 时阅读；实验操作、灯箱与筛选需要脚本。
 
-当前检查与正式 base 构建记录见 `../verification/site/legacy-round/`，包含现有测试、静态路径和资源验证、新增页面与媒体保留校验。旧下载组件、灯箱和路由快照继续保留在 `../verification/site/releases-20261024/` 与 `../verification/site/highlights-20261024/`。浏览器验收范围是桌面 Chromium 和响应式视口模拟。
+最新工具接入与正式 base 构建记录见 `../verification/site/web-tools-20261025/`；NEX 推荐与社区初始帖分别见 `../verification/nex-next5/`、`../verification/community-starter-posts/`。旧下载组件、灯箱和路由快照继续保留。浏览器验收范围是桌面 Chromium 和响应式视口模拟。
 
 ## 自动下载入口
 
@@ -83,6 +83,7 @@ npm run preview -- --port 4322
 
 - `src/data/projects.ts`：工程库与原有 15 项的内容和图片顺序；导入新增桌面作品。
 - `src/data/restored-projects.ts`、`restored-bundles.ts`：5 项桌面作品、合集介绍与原生截图顺序。
+- `src/data/web-projects.ts`：mkfun 与 Liss Utilities 的作品介绍、技术主题和浏览器体验入口；当前共展示 22 项工程。
 - `src/data/project-image.ts`：统一的全幅图片与响应式变体路径。
 - `src/data/stories/`：项目缘起、技术职责、流程和实现介绍；`story-types.ts` 定义内容结构。
 - `src/components/ProjectEngineering.astro`：截图与精简技术要点；详情页使用简短导航、技术职责与流程。
@@ -104,6 +105,12 @@ npm run preview -- --port 4322
 修改中文文案后，在工作区根目录执行 `python site/scripts/prepare-media.py --fonts-only` 更新字库，然后重新构建。完整重导出可用同脚本（需要当前机器已有的 Pillow/fontTools、Node，原始素材路径以工作区为准）。站点本身只需要 Node.js 与 npm。
 
 补充某个工程的选图后，可执行 `python site/scripts/prepare-media.py --media-only --repo SSFramework`；其余工程的原件及已有导出会逐一核对 SHA-256，再保留复用。
+
+## 独立网页工具
+
+`public/tools/mkfun/` 与 `public/tools/utilities/` 保存两个源仓库的静态导出，全部资源使用相对路径，可在 Pages 子路径运行。后者含随包 Unicode 数据与第三方许可；文件处理均在浏览器中完成，不上传到社区。
+
+`tools-provenance.json` 记录源码仓库、提交、发行版和逐文件 SHA-256。`npm run build` 先验证导出未变，再由 `finalize-tools.mjs` 只为 `dist/` 的入口添加宿主 canonical / Open Graph 与无脚本提示。TypeScript 检查不重复扫描压缩后的外部工具包；这两份实现的核心测试、构建和浏览器验收由各自源仓库负责，主站另验收实际部署路径与交互。
 
 第三方字体按各自 OFL 使用。工程素材来自各个仓库；未额外添加统一源码授权。
 

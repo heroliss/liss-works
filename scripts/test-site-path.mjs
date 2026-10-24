@@ -19,6 +19,8 @@ const cases=[
  ['/projects/ssframework/#engineering', '/liss-works/', '/liss-works/projects/ssframework/#engineering'],
  ['/media/ssframework/one.webp', '/liss-works/', '/liss-works/media/ssframework/one.webp'],
  ['/liss-works/projects/', '/liss-works/', '/liss-works/projects/'],
+ ['/tools/mkfun/index.html', '/liss-works/', '/liss-works/tools/mkfun/index.html'],
+ ['/tools/utilities/index.html#rename', '/liss-works/', '/liss-works/tools/utilities/index.html#rename'],
 ];
 for(const [value,base,expected] of cases)assert.equal(applyBase(value,base),expected);
 assert.equal(projectTalkUrl('ssframework'),'https://liss.pythonanywhere.com/projects/ssframework/talk/');

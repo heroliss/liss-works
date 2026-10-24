@@ -1,6 +1,7 @@
 import type { Project, ProjectGroup } from './types';
 import { projectImage as image } from './project-image.ts';
 import { restoredProjects } from './restored-projects.ts';
+import { webProjects } from './web-projects.ts';
 
 export const groups: { id: ProjectGroup; label: string; description: string }[] = [
   { id: 'games', label: '游戏与工具', description: '游戏、桌面工具，以及背后的框架和编辑器。' },
@@ -93,14 +94,14 @@ const floyd = [
 ];
 
 const blog = [
-  image('liss-web', '01-home-dark-1280.png', 1280, 720, '线上首页的深色文章卡片、站点导航与写作入口。', '线上实拍'),
+  image('liss-web', '13-concise-home-1440.jpg', 1425, 990, '三篇简短初始帖、图文摘要与写作入口组成线上首页。', '线上实拍'),
   image('liss-web', '02-markdown-writing-dark-1280.png', 1280, 720, '未提交的 Markdown 草稿与实时预览同屏，包含列表、代码块和发布入口。', '写作与预览'),
-  image('liss-web', '03-article-dark-1280.png', 1280, 720, '线上文章的正文排版、作者信息与评论入口。', '文章阅读'),
-  image('liss-web', '04-profile-dark-1280.png', 1280, 720, '站点作者 Liss 的主页，集中呈现简介、文章与关注入口。', '作者主页'),
+  image('liss-web', '14-welcome-article-1440.jpg', 1425, 990, '简短欢迎文章以插图、重点句与行动入口组织阅读。', '文章阅读'),
+  image('liss-web', '15-owner-profile-1440.jpg', 1425, 990, '站点作者 Liss 的主页，集中呈现简介、三篇公开文章与关注入口。', '作者主页'),
   image('liss-web', '05-welcome-dark-1280.png', 1280, 720, '以访客身份加入，也可创建账号或登录，继续写作与交流。', '访客与账号'),
-  image('liss-web', '06-article-dark-mobile-390.png', 390, 720, '390px 手机视口中的线上文章阅读与页面导航。', '移动端阅读'),
-  image('liss-web', '07-discussion-dark-1280.png', 1280, 720, '文章下方的评论表单与已保存讨论。', '评论与讨论'),
-  image('liss-web', '08-admin-overview-dark-1440.png', 1440, 1000, '正式站点的管理概览，汇总文章、评论、用户状态与最近操作。', '线上管理后台'),
+  image('liss-web', '16-community-mobile-390.jpg', 375, 1542, '390px 手机视口中的图文列表，文章、图片与互动入口依次排列。', '移动端阅读'),
+  image('liss-web', '17-discussion-1440.jpg', 1425, 990, '作品交流文章下方的真实评论表单与空讨论邀请。', '评论与讨论'),
+  image('liss-web', '18-admin-overview-1440.jpg', 1425, 990, '线上管理概览，汇总公开与隐藏内容、用户状态及最近操作。', '线上管理后台'),
   image('liss-web', '10-admin-settings-dark-1280.png', 1280, 1434, '站点名称、欢迎语、注册与访客发文规则集中配置；画面来自独立本地验证环境。', '网站设置'),
 ];
 
@@ -425,6 +426,7 @@ export const projects: Project[] = [
     cover: blog[0], gallery: blog, related: ['dubforge', 'china-house-price-map'],
   },
   ...restoredProjects,
+  ...webProjects,
 ];
 
 export function getProject(slug: string): Project | undefined {

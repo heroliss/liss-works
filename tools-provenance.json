@@ -1,0 +1,84 @@
+{
+  "scope": "Unmodified upstream static exports; build-time host metadata is added only to dist/index.html.",
+  "sources": [
+    {
+      "source": "https://github.com/heroliss/mkfun",
+      "commit": "6b1ec29958a37cfdd0370ecc2ae4b3f0a6200ada",
+      "release": "v5.0.0",
+      "files": [
+        {
+          "path": "public/tools/mkfun/app.mjs",
+          "bytes": 3428,
+          "sha256": "eb8f4232f3b747b7d3ff04fca21689a1bb9e456ec75b9e69778d24bce29cdedd"
+        },
+        {
+          "path": "public/tools/mkfun/engine.mjs",
+          "bytes": 6324,
+          "sha256": "20262d489b5191fa05de359cd9636af1d9fc9ab9e5d023019b74d9184952ec4b"
+        },
+        {
+          "path": "public/tools/mkfun/icon.svg",
+          "bytes": 337,
+          "sha256": "60c07314ae763d545de88d902152ea7a3b07c723f1874da61decce6c39b36e61"
+        },
+        {
+          "path": "public/tools/mkfun/index.html",
+          "bytes": 4596,
+          "sha256": "96321d15e5f770532d4fabe9d1da99f1b9945012217c26200d941423fd1d0bc4"
+        },
+        {
+          "path": "public/tools/mkfun/style.css",
+          "bytes": 8000,
+          "sha256": "db02e2f71a5d076c8398e4c147b31992b2ffd5c2c4d3baf7e3600a2c2df8d459"
+        }
+      ]
+    },
+    {
+      "source": "https://github.com/heroliss/utility-lab",
+      "commit": "f0e34db5e73d303a7be4103267a0650c2844bb2a",
+      "release": "v1.0.0",
+      "files": [
+        {
+          "path": "public/tools/utilities/assets/index-CIpARPYI.js",
+          "bytes": 37653,
+          "sha256": "06d5f27610df4344eed306ba8123049f5611269bd6dc00e41ebac60214af3f90"
+        },
+        {
+          "path": "public/tools/utilities/assets/index-Dqx1C6lH.css",
+          "bytes": 10993,
+          "sha256": "f5523f6a404903683007bf449f9dbf16c10fa291be97edee8946c369b14d1da4"
+        },
+        {
+          "path": "public/tools/utilities/assets/unicode-worker-C2mu0JKA.js",
+          "bytes": 2229,
+          "sha256": "657250012950295e86961c0e817cc0dc032d227f9675e518f6663e03fd048ef5"
+        },
+        {
+          "path": "public/tools/utilities/data/unicode.json",
+          "bytes": 1708203,
+          "sha256": "95877e8be4b5fadf63a0ba742e28d499147a530e0c197785437a688f2c113799"
+        },
+        {
+          "path": "public/tools/utilities/index.html",
+          "bytes": 651,
+          "sha256": "a745da395a7a9ebd258af9e295b6dbb5639fbf68b7ce055579aafa402a821817"
+        },
+        {
+          "path": "public/tools/utilities/third-party/FFLATE-LICENSE.txt",
+          "bytes": 1069,
+          "sha256": "0a1df3a083d0c010560aa342e87959c8c1070e6fd54545741f083f22d0c8b551"
+        },
+        {
+          "path": "public/tools/utilities/third-party/NOBLE-HASHES-LICENSE.txt",
+          "bytes": 1109,
+          "sha256": "4f221aee6e072336700c408c68ab3b96a3fc09f6aebe6f48f1bd99e5ef13faec"
+        },
+        {
+          "path": "public/tools/utilities/third-party/UNICODE-LICENSE.txt",
+          "bytes": 1995,
+          "sha256": "e7a93b009565cfce55919a381437ac4db883e9da2126fa28b91d12732bc53d96"
+        }
+      ]
+    }
+  ]
+}

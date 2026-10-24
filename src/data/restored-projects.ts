@@ -30,9 +30,10 @@ const text = [
 ];
 
 const nex = [
-  image('nex', '01-workspace-and-priority.jpg', 1442, 932, '计划清单、当前专注、优先级与事项详情组成三栏工作空间。', '桌面工作空间'),
-  image('nex', '02-completed-and-persistence.jpg', 1442, 932, '已完成事项的分类、备注与预计用时，配合状态筛选查看。', '完成状态与详情'),
-  image('nex', '03-single-focus-and-filter.jpg', 1442, 932, '筛选当前专注事项，清单、详情与本机保存的单一进行中状态相互对应。', '单一专注与状态筛选'),
+  image('nex', '04-next-task-overview.jpg', 1442, 932, '当前专注与下一件事同屏，推荐分数、预计用时和截止状态连接清单与行动。', '当前专注与下一件事'),
+  image('nex', '05-recommendation-breakdown.jpg', 1442, 932, '选择推荐事项后，查看原优先级、截止余量、等待时间与时间匹配的分项依据。', '推荐的分项依据'),
+  image('nex', '06-thirty-minute-budget.jpg', 1442, 932, '设置 30 分钟可用时间后重新评分，超出预算的事项仍保留在清单中。', '可用时间与推荐'),
+  image('nex', '07-original-priority.jpg', 1442, 932, '切回原优先级排序，列表显示手动重要程度与五级紧急度形成的原始分值。', '原优先级排序'),
 ];
 const blocks = [
   image('liss-blocks', '01-practice-board-and-preview.jpg', 1242, 912, '固定练习局中的活动方块、落点预览、五块预告与键盘操作说明。', '练习局与落点预览'),
@@ -47,20 +48,20 @@ export const restoredProjects: Project[] = [
   { ...systemsLab, cover: systems[0], gallery: systems },
   {
     slug: 'nex', repo: 'nex', name: 'NEX · 下一件值得做的事', category: '离线计划与专注工具', group: 'games',
-    summary: '把计划排出轻重缓急，让当前只专注于一件值得做的事。',
-    intro: '来自早期自写计划管理工具的本机工作空间。分类、重要程度、紧急程度与预计用时帮助整理行动，单一专注状态连接计划与执行，SQLite 自动保留事项和编辑结果。',
+    summary: '把轻重缓急、截止时间与可用分钟，变成下一件事的选择依据。',
+    intro: '将早期 Python NEXT5 的时效推荐思路融入 C# NEX。手动优先级、截止余量与等待时间共同辅助选择，单一专注状态连接计划与执行，SQLite 自动保留本机事项。',
     status: 'Windows 版已发布', tags: ['C#', '.NET 10', 'SQLite', 'WinForms'],
     features: [
-      { title: '有依据的优先级', body: '重要程度与五级紧急度形成明确分值，列表同时保留事项状态和预计用时。' },
+      { title: '可解释推荐', body: '原优先级叠加截止、等待与时间匹配分量；输入可用分钟，也可随时切回原优先级排序。' },
       { title: '单一专注', body: '开始新事项时原专注事项回到待处理，事务与唯一索引共同维护状态。' },
       { title: '离线记录', body: '增删改、筛选与搜索全部在本机完成，JSON 导出提供可阅读备份。' },
     ],
     usage: [
       { title: '解压后直接使用', body: '完整解压 Windows x64 ZIP，运行 Liss.Nex.exe，无需安装 .NET。首次工作空间为空白，可按需添加示例事项。' },
-      { title: '整理下一件事', body: 'Ctrl+N 新建，设置分类、重要程度、紧急程度和预计用时；Ctrl+S 保存，选择“开始专注”进入进行中状态。' },
+      { title: '选择下一件事', body: 'Ctrl+N 新建、Ctrl+S 保存。设置预计用时与可选截止，输入可用分钟（0 表示不限）；点击推荐查看依据，再选择“开始专注”。' },
       { title: '保留自己的数据', body: '数据位于 %LOCALAPPDATA%\\Liss\\Nex，不随程序更新覆盖。可导出 JSON；完整数据库备份前请先关闭应用，再复制该目录。' },
     ],
-    note: '截止日期在同分时辅助排序，不会自动提高过期任务分数。数据保存在本机，不提供云同步。',
+    note: '推荐只影响显示与选择，不自动开工或移走逾期事项。预算和排序模式仅当前会话有效，数据保存在本机。',
     source: 'https://github.com/heroliss/nex', docs: 'https://github.com/heroliss/nex#readme',
     download: { repository: 'heroliss/nex', assetPattern: '^Liss-NEX(?:-v?\\d+(?:\\.\\d+)*)?-win-x64\\.zip$' },
     cover: nex[0], gallery: nex, related: ['sort-lab', 'text-lab', 'liss-web'],

@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev --host 127.0.0.1",
-    "build": "astro build",
+    "build": "astro build && node scripts/finalize-tools.mjs",
     "preview": "astro preview --host 127.0.0.1",
     "check": "astro check",
     "test": "node --experimental-strip-types scripts/test-lab.mjs",
