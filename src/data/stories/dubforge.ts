@@ -8,9 +8,9 @@ export default {
     ],
   },
   stack: [
-    { name: 'Vue 3 · TypeScript', role: '组织逐句编辑、项目空间与成片工作区。' },
+    { name: 'Vue 3 · TypeScript · Vite', role: 'Vue Router 连接逐句编辑、项目空间与成片页面。' },
     { name: 'Naive UI · Pinia', role: '组合编辑面板，共享项目、导航与执行状态。' },
-    { name: 'Python · FastAPI', role: '分离接口与制作逻辑，编排后台任务。' },
+    { name: 'Python · FastAPI', role: 'Uvicorn 承载 ASGI 服务，Pydantic 校验请求，后台编排制作任务。' },
     { name: 'SQLModel · SQLite', role: '持久保存步骤、产物与交付回执。' },
     { name: 'FFmpeg · yt-dlp', role: '获取媒体，处理音轨、字幕与编码。' },
     { name: 'ASR · LLM · TTS', role: '接入识别、翻译与独立配音服务。' },

@@ -12,9 +12,10 @@ export default {
     { name: 'R3 · ObservableCollections', role: '响应式状态、类型事件与集合通知' },
     { name: 'UniTask', role: '异步任务、取消传递与主线程协作' },
     { name: 'YooAsset', role: '资源包加载、下载与缓存维护适配' },
-    { name: 'UGUI · UI Toolkit', role: '统一窗口调度与纹理内容嵌入桥' },
+    { name: 'UGUI · UI Toolkit · IMGUI', role: '运行时双 UI 窗口调度与编辑器面板' },
     { name: 'HybridCLR', role: '热更构建、AOT 元数据与程序集装配' },
     { name: 'Luban · Protobuf', role: '配置表生成与协议序列化集成' },
+    { name: 'HTTP · WebSocket · JSON', role: 'UnityWebRequest、ClientWebSocket 与 JsonUtility 文件存档' },
   ],
   sections: [
     {
@@ -60,7 +61,7 @@ export default {
       items: [
         {
           title: '双 UI 后端',
-          body: ['UGUI 与 UI Toolkit 共用窗口层级、模态、返回与过渡规则；全局 Loading 用可释放句柄协调多方占用。'],
+          body: ['UGUI 与 UI Toolkit 共用层级、模态、返回与过渡规则；字体模块管理 TMP / TextCore 字体链，Loading 句柄协调多方占用。'],
         },
         {
           title: '增量列表绑定',

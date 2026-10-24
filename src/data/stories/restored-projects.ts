@@ -7,7 +7,7 @@ export const restoredStories: Record<string, ProjectStory> = {
       paragraphs: ['把早期 C++ / Qt 实践中的操作系统模拟、Huffman 压缩和计算器放在同一组桌面实验里。输入、内部状态和输出同时可见，既能直接使用，也能沿着画面理解背后的模型。'],
     },
     stack: [
-      { name: 'C++20 / Qt 6 Widgets', role: '三个原生桌面应用与共享的界面语言。' },
+      { name: 'C++20 / Qt 6 Widgets', role: 'Widgets 组织窗口，QPainter 自绘图表，QSS 统一深色样式。' },
       { name: '调度 / 连续内存模型', role: '连接 PCB、状态队列和可视内存布局。' },
       { name: 'Huffman / 位流', role: '从频率统计生成前缀码，流式编码并验证恢复结果。' },
       { name: '双栈 / 逆波兰式', role: '解析科学表达式，并保留可阅读的求值轨迹。' },
@@ -19,7 +19,7 @@ export const restoredStories: Record<string, ProjectStory> = {
       ] },
       { id: 'qt-huffman', title: 'Huffman Lab · 让压缩结果可以核对', items: [
         { title: '从字节频率到前缀码', body: ['使用最小堆构建 Huffman 树，自写编码表与比特打包；频率、平均码长、信息熵和头部开销一起解释压缩率。'] },
-        { title: '完整的文件往返', body: ['工作线程分块处理并支持取消；原子保存和 SHA-256 校验让编码、解码与文件完整性形成闭环。'] },
+        { title: '完整的文件往返', body: ['Qt Concurrent 在后台分块处理并支持取消；原子保存与 SHA-256 校验让文件往返形成闭环。'] },
       ] },
       { id: 'qt-expressions', title: 'Calculator · 看得见的表达式求值', items: [
         { title: '手写解析与求值', body: ['运算符栈生成逆波兰式，再由数值栈计算；优先级、右结合幂、一元符号和错误位置都有明确约定。'] },
@@ -34,7 +34,7 @@ export const restoredStories: Record<string, ProjectStory> = {
       paragraphs: ['从自写的改错字、分词工具与 FindText 延伸出的本地文字实验室。分词观察结构，校对给出可确认的建议，文件检索把线索定位到具体路径和行号。'],
     },
     stack: [
-      { name: 'C# / .NET 10 / WinForms', role: '三个互通工作区与可取消的后台任务。' },
+      { name: 'C# / .NET 10 / WinForms', role: '原生控件与 GDI+ 词频图，配合可取消的后台任务。' },
       { name: 'Jieba / JiebaNet', role: '第三方中文分词实现，应用侧组织词频、位置与批处理。' },
       { name: 'word2vec / 余弦相似度', role: '导入自备模型，探索近邻与双侧上下文。' },
       { name: 'KMP / 多编码流式检索', role: '跨读取块保留匹配状态，以有限上下文定位文件与行号。' },
@@ -62,7 +62,7 @@ export const restoredStories: Record<string, ProjectStory> = {
     },
     stack: [
       { name: 'C++20 核心', role: '独立计算算法状态与快照，不依赖界面。' },
-      { name: '.NET 10 / WinForms', role: '组织输入、状态播放、矩阵与分布图。' },
+      { name: 'C# / .NET 10 / WinForms', role: '原生控件与 GDI+ 绘制时间线、资源图和分布。' },
       { name: 'P/Invoke / JSON', role: '用经过校验的数组跨边界，复制为独立结果。' },
       { name: '后台任务 / 协作取消', role: '质数计算可停止，并明确保留部分区间结果。' },
     ],

@@ -9,8 +9,9 @@ export const otherStories: Record<string, ProjectStory> = {
     stack: [
       { name: 'Unity 6 / URP', role: '场景、画面与居民动作表现。' },
       { name: '纯 C# / Utility AI', role: '承载需求模拟与完整行动决策。' },
+      { name: 'IMGUI / Input System', role: '构建 HUD、居民与建造面板，连接鼠标和键盘交互。' },
       { name: 'AI Navigation', role: '连接甲板通行与设施交互位置。' },
-      { name: 'SSFramework', role: '组织状态、命令与游戏生命周期。' },
+      { name: 'SSFramework / R3 / UniTask', role: '组织响应式状态、异步任务与游戏生命周期。' },
     ],
     sections: [{
       id: 'living-simulation', title: '让世界持续运转',
@@ -30,8 +31,8 @@ export const otherStories: Record<string, ProjectStory> = {
       { name: '纯 C#', role: '推进敌人、弹丸、伤害与波次。' },
       { name: 'Unity 6 / URP', role: '呈现炮台、弹流、冲击与灯光。' },
       { name: 'Burst / Jobs / Entities', role: '并行推进敌人移动，顺序处理依赖先后关系的战斗步骤。' },
-      { name: 'SSFramework', role: '连接状态、命令与资源生命周期。' },
-      { name: 'UI Toolkit / uGUI', role: '构建菜单、战斗 HUD 与强化卡片。' },
+      { name: 'SSFramework / R3 / UniTask', role: '连接状态订阅、异步流程与资源生命周期。' },
+      { name: 'UI Toolkit / uGUI / TMP', role: '构建菜单、HUD 与强化卡片，TMP 绘制场景文字。' },
     ],
     sections: [{
       id: 'battle-architecture', title: '规则与表现分层',
@@ -50,7 +51,7 @@ export const otherStories: Record<string, ProjectStory> = {
     stack: [
       { name: 'Unity Editor / IMGUI', role: '构建总控、配置面板与依赖树。' },
       { name: 'AssetDatabase', role: '读取资产引用、标签与资源清单。' },
-      { name: 'C# / JSON', role: '保存规则、版本与各平台参数。' },
+      { name: 'Newtonsoft.Json / SharpZipLib', role: '持久化流水线配置，压缩分包输出。' },
       { name: 'BuildPipeline', role: '连接 Bundle 与 Player 构建阶段。' },
     ],
     sections: [{
@@ -87,7 +88,7 @@ export const otherStories: Record<string, ProjectStory> = {
     },
     stack: [
       { name: 'JavaScript / SVG', role: '绘制价格色阶、边界与交互标注。' },
-      { name: 'GeoJSON', role: '组织城市、区县与镇街行政边界。' },
+      { name: 'GeoJSON / 高德瓦片', role: '组织行政边界，可选底图补充道路与地理参照。' },
       { name: 'Node.js / Mercator', role: '投影并简化 GeoJSON，生成含 SVG 路径的分省 JSON。' },
       { name: 'GitHub Pages / Actions', role: '托管静态地图并尝试定期更新。' },
     ],
@@ -108,7 +109,7 @@ export const otherStories: Record<string, ProjectStory> = {
     stack: [
       { name: 'C++ / OpenGL 4.5', role: '管理 GPU 资源、绘制与帧缓冲。' },
       { name: 'GLSL / UBO', role: '共享相机与光源参数，计算光照、阴影和后处理。' },
-      { name: 'GLFW / GLM', role: '提供窗口输入和向量矩阵运算。' },
+      { name: 'GLAD / GLFW / GLM', role: '加载 OpenGL 函数，提供窗口输入与向量矩阵运算。' },
       { name: 'Assimp / stb', role: '读取模型、纹理并导出实际帧。' },
       { name: 'ImGui', role: '同屏调整材质参数与调试显示。' },
     ],
@@ -129,8 +130,9 @@ export const otherStories: Record<string, ProjectStory> = {
     },
     stack: [
       { name: 'Python / mss / pydirectinput', role: '执行节点图，连接屏幕采集与键鼠操作。' },
-      { name: 'LiteGraph.js / pywebview', role: '提供节点编辑、预览与断点调试。' },
-      { name: 'OpenCV / EasyOCR', role: '用模板匹配与文字识别读取队列、人口和资源。' },
+      { name: 'LiteGraph.js / HTML / CSS', role: 'Canvas 节点图配合原生 JavaScript，组织参数面板与调试交互。' },
+      { name: 'pywebview / WebView2', role: '将网页编辑器嵌入 Windows 窗口，桥接 Python 执行引擎。' },
+      { name: 'OpenCV / EasyOCR / NumPy', role: '匹配模板、识别文字，并用图像数组连接屏幕采集与判断。' },
       { name: 'JSON 流程', role: '保存节点参数与两种流的连接。' },
     ],
     sections: [{
@@ -150,7 +152,7 @@ export const otherStories: Record<string, ProjectStory> = {
     stack: [
       { name: 'Python', role: '实现基因表达、评估与种群迭代。' },
       { name: '自定义 GA 算子', role: '通过配置替换选择、交叉与变异。' },
-      { name: 'DEAP', role: '接入现成算子复用同一演化入口。' },
+      { name: 'DEAP', role: '提供适应度类型与工具箱，排序示例组合内置交叉和自定义算子。' },
     ],
     sections: [{
       id: 'program-evolution', title: '编码决定搜索空间',
@@ -168,7 +170,7 @@ export const otherStories: Record<string, ProjectStory> = {
     stack: [
       { name: 'C#', role: '计算邻接矩阵对应的距离和前驱。' },
       { name: '.NET Standard 2.1', role: '保持无引擎依赖，方便接入 Unity。' },
-      { name: '.NET Console', role: '输出路径矩阵与可运行边界检查。' },
+      { name: '.NET 10 Console', role: '输出路径矩阵与可运行边界检查。' },
     ],
     sections: [{
       id: 'precomputed-paths', title: '用预处理换反复查询',
@@ -186,9 +188,10 @@ export const otherStories: Record<string, ProjectStory> = {
     stack: [
       { name: 'Jinja2 / HTML', role: '复用服务端模板，生成文章、资料与管理页面。' },
       { name: 'Bootstrap 3 / Flask-Bootstrap', role: '提供基础页面模板，接入 CSS、jQuery 与组件脚本。' },
-      { name: 'CSS / 原生 JavaScript', role: '用 Grid、Flex 与 CSS 变量组织响应式布局、主题和页面交互。' },
-      { name: 'EasyMDE / DOMPurify', role: '提供 Markdown 编辑、分屏预览与浏览器端 HTML 清理。' },
+      { name: 'CSS / 原生 JS / Moment.js', role: 'Grid、Flex 与变量主题，原生交互及相对时间显示。' },
+      { name: 'EasyMDE / DOMPurify', role: '基于 CodeMirror 编辑 Markdown，提供分屏预览与 HTML 清理。' },
       { name: 'Flask / SQLAlchemy', role: '处理请求、账号权限与内容之间的关系模型。' },
+      { name: 'Flask-Login / Flask-WTF', role: '提供登录会话、表单验证与 CSRF 校验。' },
       { name: 'SQLite / Alembic', role: '持久保存内容，配合增量迁移与一致性备份。' },
       { name: 'Brevo / HTTPS API', role: '发送邮箱验证、绑定与密码找回邮件。' },
     ],
@@ -204,7 +207,7 @@ export const otherStories: Record<string, ProjectStory> = {
       items: [
         { title: '身份延续，邮箱可选', body: ['访客升级账号沿用同一个用户 ID，文章、评论与关注关系无需搬迁。邮箱可以留空，之后也能绑定或更换。'] },
         { title: '验证、绑定与密码找回', body: ['通过 Brevo HTTPS API 发送验证、绑定与找回邮件；更换邮箱需确认后生效，发信失败也保留账号与内容。'] },
-        { title: '限时令牌与发送限流', body: ['确认与找回链接使用 1 小时有效、按用途隔离的签名令牌，配合 CSRF 校验与发送限流。邮件密钥独立保存在服务器私有配置中。'] },
+        { title: '限时令牌与发送限流', body: ['ItsDangerous 为确认与找回链接生成 1 小时有效、按用途隔离的签名令牌，配合 CSRF 与发送限流；密钥保存在服务器私有配置中。'] },
       ],
     }, {
       id: 'community-administration', title: '管理有入口，操作可追溯',
@@ -278,7 +281,7 @@ export const otherStories: Record<string, ProjectStory> = {
     sections: [{
       id: 'measured-comparison', title: '改写核心，结果有据可查',
       items: [
-        { title: '改动留在算法核心', body: ['模板来自真实 Sorting.cs，只露入口与必要助手；草稿和生效版分开保存，编译失败保留生效代码，包装可只读查看。'] },
+        { title: '改动留在算法核心', body: ['模板来自真实 Sorting.cs，只露入口与必要助手；草稿和生效版分别存入本机 JSON，编译失败保留生效代码，包装可只读查看。'] },
         { title: '执行状态有明确来源', body: ['顶部状态跟随独立进程的实际执行；跳过绑定当前算法与规模，停止后保留已完成结果，不根据规模自动跳过。'] },
         { title: '增长与状态一起看', body: ['约 ×4 分档配合状态矩阵；预热后重复取中位数，计数另测，输出逐项对照 Array.Sort。'] },
       ],
