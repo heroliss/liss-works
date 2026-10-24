@@ -1,0 +1,18 @@
+---
+import type { GalleryImage } from '../data/types';
+import Icon from './Icon.astro';
+import { sitePath } from '../lib/site-path';
+interface Props { image: GalleryImage; eager?: boolean; zoom?: boolean; group?: string; sizes?: string; class?: string; }
+const { image, eager = false, zoom = false, group = 'project', sizes = '(max-width: 760px) 100vw, 75vw', class: className = '' } = Astro.props;
+const rawSrcset = image.srcset ?? [...[320,640,960,1600].filter(w => w < image.width).map(w => `${image.src.replace(/\.webp$/, `-${w}.webp`)} ${w}w`),`${image.src} ${image.width}w`].join(', ');
+const src = sitePath(image.src);
+const srcset = rawSrcset.split(',').map(candidate => {
+  const [url, ...descriptor] = candidate.trim().split(/\s+/);
+  return [sitePath(url), ...descriptor].join(' ');
+}).join(', ');
+---
+{zoom ? <a href={src} class:list={['media-link', className]} data-lightbox data-gallery={group} data-title={image.alt} data-caption={image.caption} aria-label={`放大查看：${image.alt}`}>
+ <img src={src} srcset={srcset} sizes={sizes} width={image.width} height={image.height} alt={image.alt} loading={eager ? 'eager' : 'lazy'} decoding="async" fetchpriority={eager ? 'high' : 'auto'}/>
+ <span class="zoom-affordance"><Icon name="expand" size={16}/> 放大查看</span>
+</a> : <img class={className} src={src} srcset={srcset} sizes={sizes} width={image.width} height={image.height} alt={image.alt} loading={eager ? 'eager' : 'lazy'} decoding="async" fetchpriority={eager ? 'high' : 'auto'}/>}
+

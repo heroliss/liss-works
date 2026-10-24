@@ -1,0 +1,3841 @@
+{
+  "schema": "showcase.website-media.v1",
+  "generated_at_utc": "2026-10-24T00:02:35.785677+00:00",
+  "source_manifest": "captures/selected-manifest.json",
+  "source_manifest_sha256": "629c35d3baa11f64b2c6b6dd2d148ee1ca4963cbf14d7e9e5e08028286156f90",
+  "originals_modified": false,
+  "transform": "Full-image WebP encoding and Lanczos proportional downscaling only; no crop, no AI alterations, no upscaling.",
+  "images": [
+    {
+      "repo": "Outpost",
+      "source": "captures/Outpost/raw/15-title-stage-1080p.png",
+      "source_sha256": "e044ebc5b0eb90c3ba10c19fb014a3701e8f86a42589ee106e61aad27ed7cf63",
+      "source_bytes": 80899,
+      "source_width": 1920,
+      "source_height": 1080,
+      "source_authenticity": "真实 Unity Editor Game View",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/outpost/15-title-stage-1080p.webp",
+        "url": "/media/outpost/15-title-stage-1080p.webp",
+        "bytes": 24214,
+        "sha256": "d309ab107a774fe9296c3cd1cb805ba1be2e9a23db9dd1f74125abd1933cb6b0",
+        "width": 1920,
+        "height": 1080,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": false
+      },
+      "variants": [
+        {
+          "path": "site/public/media/outpost/15-title-stage-1080p-320.webp",
+          "url": "/media/outpost/15-title-stage-1080p-320.webp",
+          "bytes": 2378,
+          "sha256": "7c1fd61ea29ab7fb3ba0a624364a728fb46275c08d733379d7712833d436f3a2",
+          "width": 320,
+          "height": 180,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/outpost/15-title-stage-1080p-640.webp",
+          "url": "/media/outpost/15-title-stage-1080p-640.webp",
+          "bytes": 5536,
+          "sha256": "54b845e0ec1876e7b6672228a5324c9e828b5d7c0dcf3db1077af31fae57f3e1",
+          "width": 640,
+          "height": 360,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/outpost/15-title-stage-1080p-960.webp",
+          "url": "/media/outpost/15-title-stage-1080p-960.webp",
+          "bytes": 9810,
+          "sha256": "164bcce9f6eb737f59492e71e653daf5b383ee074378ed02128f42baccd7c6aa",
+          "width": 960,
+          "height": 540,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/outpost/15-title-stage-1080p-1600.webp",
+          "url": "/media/outpost/15-title-stage-1080p-1600.webp",
+          "bytes": 19064,
+          "sha256": "5eaf36c54fb700782ef7c47dfe9c3a00403a395fc29a1e72065d1775e3aecbf5",
+          "width": 1600,
+          "height": 900,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "Outpost",
+      "source": "captures/Outpost/raw/17-about-720p.png",
+      "source_sha256": "0c218c352d2857707806bf66ea754af199df69e7ed55cf1f9d2a32edef216645",
+      "source_bytes": 128179,
+      "source_width": 1280,
+      "source_height": 720,
+      "source_authenticity": "真实 Unity Editor Game View",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/outpost/17-about-720p.webp",
+        "url": "/media/outpost/17-about-720p.webp",
+        "bytes": 50392,
+        "sha256": "7b64be47cf1d36c7f7b55b30fb36231b9e280646e183370a56428b159120ff7f",
+        "width": 1280,
+        "height": 720,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": false
+      },
+      "variants": [
+        {
+          "path": "site/public/media/outpost/17-about-720p-320.webp",
+          "url": "/media/outpost/17-about-720p-320.webp",
+          "bytes": 6410,
+          "sha256": "d53ef0b8c8a464cb1cfb64d39e827aabc43027e3ecfe37d6112d83de85a98cd6",
+          "width": 320,
+          "height": 180,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/outpost/17-about-720p-640.webp",
+          "url": "/media/outpost/17-about-720p-640.webp",
+          "bytes": 18630,
+          "sha256": "2cbdbfbc70dbb644aab80e7148d4beef2703a46eadbc79289593697dd6fc7cc8",
+          "width": 640,
+          "height": 360,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/outpost/17-about-720p-960.webp",
+          "url": "/media/outpost/17-about-720p-960.webp",
+          "bytes": 34688,
+          "sha256": "58794bdf909ae8cbcb11af4674452e7316ae70349c1e5e895a57ef78484be1de",
+          "width": 960,
+          "height": 540,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "Outpost",
+      "source": "captures/Outpost/raw/22-battle-seamless-floor-preview.png",
+      "source_sha256": "a14a08b818073466610d4b1548adc72d7feecbaead3c0b7f9ed89533414c6a03",
+      "source_bytes": 1660107,
+      "source_width": 1920,
+      "source_height": 1080,
+      "source_authenticity": "真实 Unity Editor Game View",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/outpost/22-battle-seamless-floor-preview.webp",
+        "url": "/media/outpost/22-battle-seamless-floor-preview.webp",
+        "bytes": 96032,
+        "sha256": "e40082e0bdb4f2332cfe0edf320406def3f2a9c6f5d2e3c5cff04b5dd245722c",
+        "width": 1920,
+        "height": 1080,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": false
+      },
+      "variants": [
+        {
+          "path": "site/public/media/outpost/22-battle-seamless-floor-preview-320.webp",
+          "url": "/media/outpost/22-battle-seamless-floor-preview-320.webp",
+          "bytes": 8422,
+          "sha256": "740cf69a48028beaa8e058e5d118774f0b0ecb09f8073b8df0cf8f4354fb1f2a",
+          "width": 320,
+          "height": 180,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/outpost/22-battle-seamless-floor-preview-640.webp",
+          "url": "/media/outpost/22-battle-seamless-floor-preview-640.webp",
+          "bytes": 22682,
+          "sha256": "daf14537fffde2456904970f039a44fff921da89a9009919ba1a16069948aeb6",
+          "width": 640,
+          "height": 360,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/outpost/22-battle-seamless-floor-preview-960.webp",
+          "url": "/media/outpost/22-battle-seamless-floor-preview-960.webp",
+          "bytes": 39248,
+          "sha256": "cb526fe78208a37a34019fcec87a45bd3f337c3a9a30bb28a386849e187d23b1",
+          "width": 960,
+          "height": 540,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/outpost/22-battle-seamless-floor-preview-1600.webp",
+          "url": "/media/outpost/22-battle-seamless-floor-preview-1600.webp",
+          "bytes": 75972,
+          "sha256": "b897ee4af03417e57bf91e12ca2b7a8d42758d884bdb04b2a81a0e972c89b8e5",
+          "width": 1600,
+          "height": 900,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "Outpost",
+      "source": "captures/Outpost/raw/23-modern-battle-settings.png",
+      "source_sha256": "43a537de91aadacfd4ef9ac81733c022863a6e1be7d10c0f371fce13b5ec0ae1",
+      "source_bytes": 817326,
+      "source_width": 1920,
+      "source_height": 1080,
+      "source_authenticity": "真实 Unity Editor Game View",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/outpost/23-modern-battle-settings.webp",
+        "url": "/media/outpost/23-modern-battle-settings.webp",
+        "bytes": 61732,
+        "sha256": "c3002becfcf3bcce51ff62b194ec5513c774d078d16106dd3adc3418c99b44bd",
+        "width": 1920,
+        "height": 1080,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": false
+      },
+      "variants": [
+        {
+          "path": "site/public/media/outpost/23-modern-battle-settings-320.webp",
+          "url": "/media/outpost/23-modern-battle-settings-320.webp",
+          "bytes": 5376,
+          "sha256": "e3b100629dd2af0025870a88530ed42983648899474b3654bd27db0b71082906",
+          "width": 320,
+          "height": 180,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/outpost/23-modern-battle-settings-640.webp",
+          "url": "/media/outpost/23-modern-battle-settings-640.webp",
+          "bytes": 14514,
+          "sha256": "c549a9baf03339253ad701aedb6e42e9c8880b1da98ab29059cf7cc0500d82f8",
+          "width": 640,
+          "height": 360,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/outpost/23-modern-battle-settings-960.webp",
+          "url": "/media/outpost/23-modern-battle-settings-960.webp",
+          "bytes": 25174,
+          "sha256": "a652c6a0a827cecb29dc11ce8c2374bf326fd369f4c8299db0c322f736225629",
+          "width": 960,
+          "height": 540,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/outpost/23-modern-battle-settings-1600.webp",
+          "url": "/media/outpost/23-modern-battle-settings-1600.webp",
+          "bytes": 49748,
+          "sha256": "a36baca930923435dfb098e10dc52cb668777c16e2ad9d66fb7232796f3e96d9",
+          "width": 1600,
+          "height": 900,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "Outpost",
+      "source": "captures/Outpost/raw/26-English-settings-4x3.png",
+      "source_sha256": "12cc8b721bdb8423478abfe1123594300a0bcfc68e49d35e439b146d210e849a",
+      "source_bytes": 106776,
+      "source_width": 1600,
+      "source_height": 1200,
+      "source_authenticity": "真实 Unity Editor Game View",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/outpost/26-English-settings-4x3.webp",
+        "url": "/media/outpost/26-English-settings-4x3.webp",
+        "bytes": 33744,
+        "sha256": "8d9a2d77823b9e8c860c7a133772d0b90befcc6bbcf813a8a555d87aa71dd3aa",
+        "width": 1600,
+        "height": 1200,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": false
+      },
+      "variants": [
+        {
+          "path": "site/public/media/outpost/26-English-settings-4x3-320.webp",
+          "url": "/media/outpost/26-English-settings-4x3-320.webp",
+          "bytes": 3786,
+          "sha256": "6e90198ec783206c35b2b16cd7c6b068fdd16b52652b113e66623b87d925491b",
+          "width": 320,
+          "height": 240,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/outpost/26-English-settings-4x3-640.webp",
+          "url": "/media/outpost/26-English-settings-4x3-640.webp",
+          "bytes": 10114,
+          "sha256": "072e137a061d12689054dad061257b70934a880bf7853e9c4b72baa9c1afb841",
+          "width": 640,
+          "height": 480,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/outpost/26-English-settings-4x3-960.webp",
+          "url": "/media/outpost/26-English-settings-4x3-960.webp",
+          "bytes": 17336,
+          "sha256": "6408786ee05a5502ee9f45101fe7ec03977f44c08497660b2c2c707b5ba4c512",
+          "width": 960,
+          "height": 720,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "Outpost",
+      "source": "captures/Outpost/raw/28-English-upgrades-4x3.png",
+      "source_sha256": "1ca5ab510a0e97a17c3883900784727377a0b3769f4856ee90886e782f4c7a64",
+      "source_bytes": 503790,
+      "source_width": 1600,
+      "source_height": 1200,
+      "source_authenticity": "真实 Unity Editor Game View",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/outpost/28-English-upgrades-4x3.webp",
+        "url": "/media/outpost/28-English-upgrades-4x3.webp",
+        "bytes": 52564,
+        "sha256": "706a17c3a722ba3a65e5603fa20551f345cc58e18dbea6484ef4fa6df6c5dd48",
+        "width": 1600,
+        "height": 1200,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": false
+      },
+      "variants": [
+        {
+          "path": "site/public/media/outpost/28-English-upgrades-4x3-320.webp",
+          "url": "/media/outpost/28-English-upgrades-4x3-320.webp",
+          "bytes": 5582,
+          "sha256": "5a45a36d572bcd34d4b70fea6f07d718ee7f926bdf394eab4a592480b4b0dd31",
+          "width": 320,
+          "height": 240,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/outpost/28-English-upgrades-4x3-640.webp",
+          "url": "/media/outpost/28-English-upgrades-4x3-640.webp",
+          "bytes": 15796,
+          "sha256": "a42b3e651566f7809ab6f35293a1341b336573d08273d9c1ee0c28fe022eb59e",
+          "width": 640,
+          "height": 480,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/outpost/28-English-upgrades-4x3-960.webp",
+          "url": "/media/outpost/28-English-upgrades-4x3-960.webp",
+          "bytes": 28174,
+          "sha256": "e1a682b7b1ec222c492abc3e411a51db6699bc16ad41916d742929096b11fe3d",
+          "width": 960,
+          "height": 720,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "Outpost",
+      "source": "captures/Outpost/raw/29-English-result-4x3.png",
+      "source_sha256": "99c5ae3beb4e503218891522a06b1920c7e82fdb6f7e846a1186bd9f5bd0419c",
+      "source_bytes": 48957,
+      "source_width": 1600,
+      "source_height": 1200,
+      "source_authenticity": "真实 Unity Editor Game View",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/outpost/29-English-result-4x3.webp",
+        "url": "/media/outpost/29-English-result-4x3.webp",
+        "bytes": 13548,
+        "sha256": "d6f29afa6dd3fb52b20f536801e49f912dbce2b3154e4c1595774d52558853ad",
+        "width": 1600,
+        "height": 1200,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": false
+      },
+      "variants": [
+        {
+          "path": "site/public/media/outpost/29-English-result-4x3-320.webp",
+          "url": "/media/outpost/29-English-result-4x3-320.webp",
+          "bytes": 1414,
+          "sha256": "7842f1d56795c4b7605384b9448b2a722753a92d9d3d7099a6cb543a23fc1c89",
+          "width": 320,
+          "height": 240,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/outpost/29-English-result-4x3-640.webp",
+          "url": "/media/outpost/29-English-result-4x3-640.webp",
+          "bytes": 3782,
+          "sha256": "9e6145ea35ba9688b2839e15698dfeb398498ae8b36484aebf5fd3035e4f5cfb",
+          "width": 640,
+          "height": 480,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/outpost/29-English-result-4x3-960.webp",
+          "url": "/media/outpost/29-English-result-4x3-960.webp",
+          "bytes": 6756,
+          "sha256": "6ad9b716265d07dbbdf61248fea7a204fe357d955772416901075f6e248190d4",
+          "width": 960,
+          "height": 720,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "SSFramework",
+      "source": "captures/SSFramework/raw/03-live-services-command-trace.png",
+      "source_sha256": "ac35a3d4ea549a6488801a5282186173edfd42fd387e2c019b94b2a6bfb7894f",
+      "source_bytes": 130609,
+      "source_width": 1116,
+      "source_height": 889,
+      "source_authenticity": "真实 Unity Editor 工具窗口 / Outpost 消费方",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/ssframework/03-live-services-command-trace.webp",
+        "url": "/media/ssframework/03-live-services-command-trace.webp",
+        "bytes": 35870,
+        "sha256": "3716dd8d9e701ffb01bd4831df07ee4d68419e719650ccc7c9c8980f54a47158",
+        "width": 1116,
+        "height": 889,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/ssframework/03-live-services-command-trace-320.webp",
+          "url": "/media/ssframework/03-live-services-command-trace-320.webp",
+          "bytes": 5552,
+          "sha256": "0b99f514125e61a25ce0df8f5c07d6e13bd9ced14c2c1c6fb617466a95c0a2cb",
+          "width": 320,
+          "height": 255,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/ssframework/03-live-services-command-trace-640.webp",
+          "url": "/media/ssframework/03-live-services-command-trace-640.webp",
+          "bytes": 19188,
+          "sha256": "bc5292943a6ae86918571d4432d9187b6228e34600394ce8bd1742078fb0dfc7",
+          "width": 640,
+          "height": 510,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/ssframework/03-live-services-command-trace-960.webp",
+          "url": "/media/ssframework/03-live-services-command-trace-960.webp",
+          "bytes": 36220,
+          "sha256": "26f652ee6f89fce08bd430fb242e4f33827c250d5583c68a612fd017e68425b3",
+          "width": 960,
+          "height": 765,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "SSFramework",
+      "source": "captures/SSFramework/raw/04-project-configuration-assets.png",
+      "source_sha256": "08b49b87ab4533b6a89a6cc7f11398691ec34faa7a70112f8d700830acf1adc7",
+      "source_bytes": 144076,
+      "source_width": 1116,
+      "source_height": 889,
+      "source_authenticity": "真实 Unity Editor 工具窗口 / Outpost 消费方",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/ssframework/04-project-configuration-assets.webp",
+        "url": "/media/ssframework/04-project-configuration-assets.webp",
+        "bytes": 44706,
+        "sha256": "eb18787d1c460474746de377cd3673164fa5894004912d3202d339fa6f3e1ba9",
+        "width": 1116,
+        "height": 889,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/ssframework/04-project-configuration-assets-320.webp",
+          "url": "/media/ssframework/04-project-configuration-assets-320.webp",
+          "bytes": 6964,
+          "sha256": "86c53d02782623d6dc37640af6ceadcc32cc406cf05dea157405e05f387dcf83",
+          "width": 320,
+          "height": 255,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/ssframework/04-project-configuration-assets-640.webp",
+          "url": "/media/ssframework/04-project-configuration-assets-640.webp",
+          "bytes": 20288,
+          "sha256": "77457ef8bf2e16632043effbced5047aecfbed876a86aa1939bcf352713da8ba",
+          "width": 640,
+          "height": 510,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/ssframework/04-project-configuration-assets-960.webp",
+          "url": "/media/ssframework/04-project-configuration-assets-960.webp",
+          "bytes": 38118,
+          "sha256": "a2c49eac4e0bde094bc22b34f1821206f5ccf6bbfbd4ef9ce0a7d7596c6cc73e",
+          "width": 960,
+          "height": 765,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "dubforge",
+      "source": "captures/dubforge/raw/05-editor-detail.jpg",
+      "source_sha256": "78cc860ebe006c6006832fd223e2ea8e06498881e44540f5cb6254dff35446c4",
+      "source_bytes": 142488,
+      "source_width": 1440,
+      "source_height": 1000,
+      "source_authenticity": "真实 Vue 工作台 / 隔离新建示例项目",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/dubforge/05-editor-detail.webp",
+        "url": "/media/dubforge/05-editor-detail.webp",
+        "bytes": 392792,
+        "sha256": "a589b8e54bd5c7dad87e15236a47f7a8de187681421c00264123a542e404b62e",
+        "width": 1440,
+        "height": 1000,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/dubforge/05-editor-detail-320.webp",
+          "url": "/media/dubforge/05-editor-detail-320.webp",
+          "bytes": 11564,
+          "sha256": "5567a988c379d931a5ea7aacd9a4dda8c36d687cad51b97048d180ed9e00660f",
+          "width": 320,
+          "height": 222,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/dubforge/05-editor-detail-640.webp",
+          "url": "/media/dubforge/05-editor-detail-640.webp",
+          "bytes": 32386,
+          "sha256": "2a045d6b92a26bb65f418251f3c658256f176b78f990a9bd9f9178bafd15456a",
+          "width": 640,
+          "height": 444,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/dubforge/05-editor-detail-960.webp",
+          "url": "/media/dubforge/05-editor-detail-960.webp",
+          "bytes": 61726,
+          "sha256": "2062b2e73e201daea5e2d9d9437b4feba608ab9e2972a66b1f5dfb7d284a15ba",
+          "width": 960,
+          "height": 667,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "dubforge",
+      "source": "captures/dubforge/raw/06-project-overview.jpg",
+      "source_sha256": "a7019bb2f655bfa062f2eddfc00d4812c0f5f2628246b6512eac4153f4875f34",
+      "source_bytes": 93931,
+      "source_width": 1440,
+      "source_height": 1000,
+      "source_authenticity": "真实 Vue 工作台 / 隔离新建示例项目",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/dubforge/06-project-overview.webp",
+        "url": "/media/dubforge/06-project-overview.webp",
+        "bytes": 211870,
+        "sha256": "251e58d4bd0132218f209772c635bc3763195e2c3077aa6d260a4a7519df4bcf",
+        "width": 1440,
+        "height": 1000,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/dubforge/06-project-overview-320.webp",
+          "url": "/media/dubforge/06-project-overview-320.webp",
+          "bytes": 7004,
+          "sha256": "3250747b9dde0c0b627a5616e5e65b9f9e5fe6880dc6676ae1cc3b221f8e581f",
+          "width": 320,
+          "height": 222,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/dubforge/06-project-overview-640.webp",
+          "url": "/media/dubforge/06-project-overview-640.webp",
+          "bytes": 19938,
+          "sha256": "2a5ce39ba3aff8a1dd51b285df7aea427494419b5e95738af580da07b2d77539",
+          "width": 640,
+          "height": 444,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/dubforge/06-project-overview-960.webp",
+          "url": "/media/dubforge/06-project-overview-960.webp",
+          "bytes": 37988,
+          "sha256": "589a9d6478376737ef67968a77a7da31966f680b0f00014e3bb9776b715444a6",
+          "width": 960,
+          "height": 667,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "dubforge",
+      "source": "captures/dubforge/raw/07-assembly-versions.jpg",
+      "source_sha256": "4883ec81602b088749381169dab699213c283609deabd4923c59407a4434236c",
+      "source_bytes": 104041,
+      "source_width": 1440,
+      "source_height": 1000,
+      "source_authenticity": "真实 Vue 工作台 / 隔离新建示例项目",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/dubforge/07-assembly-versions.webp",
+        "url": "/media/dubforge/07-assembly-versions.webp",
+        "bytes": 286690,
+        "sha256": "4971f493f320e155f08f263313b187f9b37c4175c65813c67027b4ee7a57bc84",
+        "width": 1440,
+        "height": 1000,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/dubforge/07-assembly-versions-320.webp",
+          "url": "/media/dubforge/07-assembly-versions-320.webp",
+          "bytes": 7792,
+          "sha256": "4e65c6e0a9aec256ab5277938b228df0c44e2d9985e708322c5880f46465ce74",
+          "width": 320,
+          "height": 222,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/dubforge/07-assembly-versions-640.webp",
+          "url": "/media/dubforge/07-assembly-versions-640.webp",
+          "bytes": 23100,
+          "sha256": "49860e7576e62a4df5073a49570a8aec2c1ee021445411f8d58d7141d416e95c",
+          "width": 640,
+          "height": 444,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/dubforge/07-assembly-versions-960.webp",
+          "url": "/media/dubforge/07-assembly-versions-960.webp",
+          "bytes": 44542,
+          "sha256": "9b6f86639288a9622dd65b458f75888f69355a2f09d8aca5675eb4c39a2ec06b",
+          "width": 960,
+          "height": 667,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "dubforge",
+      "source": "captures/dubforge/raw/08-production-settings.jpg",
+      "source_sha256": "baace84b326279a27a549d6584ff1cdb4604a56308abb59e223d86c680d872fd",
+      "source_bytes": 82820,
+      "source_width": 1440,
+      "source_height": 1000,
+      "source_authenticity": "真实 Vue 工作台 / 隔离新建示例项目",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/dubforge/08-production-settings.webp",
+        "url": "/media/dubforge/08-production-settings.webp",
+        "bytes": 232532,
+        "sha256": "d977014c749bb1612ebe8a52bb2a12984c5caee225f16621ba6dfdac9378a080",
+        "width": 1440,
+        "height": 1000,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/dubforge/08-production-settings-320.webp",
+          "url": "/media/dubforge/08-production-settings-320.webp",
+          "bytes": 6794,
+          "sha256": "6335dc4c08ba9ddbdb966df5ceb758dcb14ac495304cdaeebe89e5f73d1edd01",
+          "width": 320,
+          "height": 222,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/dubforge/08-production-settings-640.webp",
+          "url": "/media/dubforge/08-production-settings-640.webp",
+          "bytes": 17968,
+          "sha256": "539ffe138b1e9dd7e4517057b586bf43d571d761805dcee5b2e3274e3f41902b",
+          "width": 640,
+          "height": 444,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/dubforge/08-production-settings-960.webp",
+          "url": "/media/dubforge/08-production-settings-960.webp",
+          "bytes": 36604,
+          "sha256": "0170ed1260cd2ada82f9c15e7ae52090582584d90e9f9721f74d73fc1a7e75b6",
+          "width": 960,
+          "height": 667,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "dubforge",
+      "source": "captures/dubforge/raw/09-project-space-large.jpg",
+      "source_sha256": "b899de3f95ab4586031f607e806f3f0d83cffd617d736710214e88cd31fedb8f",
+      "source_bytes": 107939,
+      "source_width": 1440,
+      "source_height": 1000,
+      "source_authenticity": "真实 Vue 工作台 / 隔离新建示例项目",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/dubforge/09-project-space-large.webp",
+        "url": "/media/dubforge/09-project-space-large.webp",
+        "bytes": 300540,
+        "sha256": "244c2bce612c1205ae17114127932ea97bd244cdf819c1ba6ae5da323391a53c",
+        "width": 1440,
+        "height": 1000,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/dubforge/09-project-space-large-320.webp",
+          "url": "/media/dubforge/09-project-space-large-320.webp",
+          "bytes": 8540,
+          "sha256": "48a92a722fd5722564dfdf6857d90c63f5abbcb1777ea7e2a0656dcb356d2f05",
+          "width": 320,
+          "height": 222,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/dubforge/09-project-space-large-640.webp",
+          "url": "/media/dubforge/09-project-space-large-640.webp",
+          "bytes": 25280,
+          "sha256": "12f7f05e68ef7c50ab70c1335d21d85a9d560af78578056d03eff33c47f04828",
+          "width": 640,
+          "height": 444,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/dubforge/09-project-space-large-960.webp",
+          "url": "/media/dubforge/09-project-space-large-960.webp",
+          "bytes": 48572,
+          "sha256": "37ed9263304ee127d4633bca151a0cb799fbbb2a327f6ce201cd84a53a8222bc",
+          "width": 960,
+          "height": 667,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "intelligence-index-cost-linear",
+      "source": "captures/intelligence-index-cost-linear/raw/07-default-dark-live.png",
+      "source_sha256": "dc9497ce50b2644afbe7385f27fd09c923472ca8e36c30b39be4eced70033f3c",
+      "source_bytes": 168369,
+      "source_width": 1280,
+      "source_height": 720,
+      "source_authenticity": "真实线上 GitHub Pages 浏览器截图；原图无像素编辑。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/intelligence-index-cost-linear/07-default-dark-live.webp",
+        "url": "/media/intelligence-index-cost-linear/07-default-dark-live.webp",
+        "bytes": 94104,
+        "sha256": "1b7ddc62ed84778af619f9ac4c670d8d0f4dd9abbdee424960f37dc213a4b401",
+        "width": 1280,
+        "height": 720,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/07-default-dark-live-320.webp",
+          "url": "/media/intelligence-index-cost-linear/07-default-dark-live-320.webp",
+          "bytes": 10750,
+          "sha256": "539e2452c3d4baaa684f24a583d85c25fbd6510d91ab72fb924c908dea7c7d85",
+          "width": 320,
+          "height": 180,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/07-default-dark-live-640.webp",
+          "url": "/media/intelligence-index-cost-linear/07-default-dark-live-640.webp",
+          "bytes": 33892,
+          "sha256": "85ca9a7e3947de8edf0b868d7ec414727451dfc50e68759b21d96848072564af",
+          "width": 640,
+          "height": 360,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/07-default-dark-live-960.webp",
+          "url": "/media/intelligence-index-cost-linear/07-default-dark-live-960.webp",
+          "bytes": 63410,
+          "sha256": "6fb4699fb31bc9cc2ae1716ed380551743acaeca15254782bcf4970f96c8928a",
+          "width": 960,
+          "height": 540,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "intelligence-index-cost-linear",
+      "source": "captures/intelligence-index-cost-linear/raw/08-provider-highlight-dark-live.png",
+      "source_sha256": "1b45adcb72e7c8d2fa33ce92225e5cffb6ba70da4c7eef62f6fd4901b783c7ff",
+      "source_bytes": 148106,
+      "source_width": 1280,
+      "source_height": 720,
+      "source_authenticity": "真实线上 GitHub Pages 浏览器截图；原图无像素编辑。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/intelligence-index-cost-linear/08-provider-highlight-dark-live.webp",
+        "url": "/media/intelligence-index-cost-linear/08-provider-highlight-dark-live.webp",
+        "bytes": 79134,
+        "sha256": "965150cf3f91c665e0640043a7c12d805abcd57c333ba778e30fd83ac1f320e3",
+        "width": 1280,
+        "height": 720,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/08-provider-highlight-dark-live-320.webp",
+          "url": "/media/intelligence-index-cost-linear/08-provider-highlight-dark-live-320.webp",
+          "bytes": 8730,
+          "sha256": "492ecae937220888d76afad8c34733dc74098ce32e61a689bf8e058094bfbe23",
+          "width": 320,
+          "height": 180,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/08-provider-highlight-dark-live-640.webp",
+          "url": "/media/intelligence-index-cost-linear/08-provider-highlight-dark-live-640.webp",
+          "bytes": 27338,
+          "sha256": "98d8cd648d30c04f035f0dcb5c6859b46f86d7e7be20ddc718189cc199b763be",
+          "width": 640,
+          "height": 360,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/08-provider-highlight-dark-live-960.webp",
+          "url": "/media/intelligence-index-cost-linear/08-provider-highlight-dark-live-960.webp",
+          "bytes": 49752,
+          "sha256": "0d8dd834eea03ba0819da1f785cac56b3ee1fcff3dfaa4e521626a6f7f078302",
+          "width": 960,
+          "height": 540,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "intelligence-index-cost-linear",
+      "source": "captures/intelligence-index-cost-linear/raw/09-clean-dots-dark-live.png",
+      "source_sha256": "b29d3938ca07c3002ada4d0c3a23d3a7f7c0234787a1620d0c9ef4522859e48b",
+      "source_bytes": 79910,
+      "source_width": 1280,
+      "source_height": 720,
+      "source_authenticity": "真实线上 GitHub Pages 浏览器截图；原图无像素编辑。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/intelligence-index-cost-linear/09-clean-dots-dark-live.webp",
+        "url": "/media/intelligence-index-cost-linear/09-clean-dots-dark-live.webp",
+        "bytes": 37454,
+        "sha256": "589264c7b445530ab6dbbbbaa857dd4213a124cab1b77048cae497abadd79842",
+        "width": 1280,
+        "height": 720,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/09-clean-dots-dark-live-320.webp",
+          "url": "/media/intelligence-index-cost-linear/09-clean-dots-dark-live-320.webp",
+          "bytes": 7658,
+          "sha256": "34487e703dac4b1a3b1f79e6486bff0cfcd71201f48039b4040ac0fdeb047281",
+          "width": 320,
+          "height": 180,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/09-clean-dots-dark-live-640.webp",
+          "url": "/media/intelligence-index-cost-linear/09-clean-dots-dark-live-640.webp",
+          "bytes": 23474,
+          "sha256": "c5679286030ca1b0217c7168f30a52fa8180a232cfd60daba64bc344e9ef0442",
+          "width": 640,
+          "height": 360,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/09-clean-dots-dark-live-960.webp",
+          "url": "/media/intelligence-index-cost-linear/09-clean-dots-dark-live-960.webp",
+          "bytes": 42172,
+          "sha256": "2ea5440271e2e29aa00e53a547af2355fc7cc58ef89909bf0ac070a0d7e037bd",
+          "width": 960,
+          "height": 540,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "china-house-price-map",
+      "source": "captures/china-house-price-map/raw/04-dark-national.jpg",
+      "source_sha256": "bc464a96057779e569a30eb5c7d11f8f99e5c345c142e7188d2b04e6e9b7bd50",
+      "source_bytes": 147899,
+      "source_width": 1425,
+      "source_height": 1002,
+      "source_authenticity": "真实网页 / 公开价格快照",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/china-house-price-map/04-dark-national.webp",
+        "url": "/media/china-house-price-map/04-dark-national.webp",
+        "bytes": 533954,
+        "sha256": "95ee18b3c2ec72c3a801d42ca24c3c990163442b7af59506cfa6099862ffa6d5",
+        "width": 1425,
+        "height": 1002,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/china-house-price-map/04-dark-national-320.webp",
+          "url": "/media/china-house-price-map/04-dark-national-320.webp",
+          "bytes": 15120,
+          "sha256": "03a3f9cb75bb006d1c98ee0e8efdd74b9429d2d6cd919aad5b0facb4a82f3c30",
+          "width": 320,
+          "height": 225,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/china-house-price-map/04-dark-national-640.webp",
+          "url": "/media/china-house-price-map/04-dark-national-640.webp",
+          "bytes": 44484,
+          "sha256": "1f122a4c3f48d2c2685ac4cbdbbddcda657efe9ba0509aabfe1255c70dc1ba9c",
+          "width": 640,
+          "height": 450,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/china-house-price-map/04-dark-national-960.webp",
+          "url": "/media/china-house-price-map/04-dark-national-960.webp",
+          "bytes": 81950,
+          "sha256": "2877e48207cd76121ebc27f7a47138c866a834a6ea35a5d7eefc43b412255e76",
+          "width": 960,
+          "height": 675,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "china-house-price-map",
+      "source": "captures/china-house-price-map/raw/06-dark-shenzhen-detail-after-fix.jpg",
+      "source_sha256": "d63b0a84e6265aef1c0570c447a88f192fc3e3f14ebb541b6c1588e18fc0b03e",
+      "source_bytes": 190417,
+      "source_width": 1425,
+      "source_height": 1002,
+      "source_authenticity": "真实网页 / 公开价格快照",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/china-house-price-map/06-dark-shenzhen-detail-after-fix.webp",
+        "url": "/media/china-house-price-map/06-dark-shenzhen-detail-after-fix.webp",
+        "bytes": 640912,
+        "sha256": "88f8ff121d74dc6e8c11425f0730f8b8c65af7dca39ff0a988ff2a6d9a6cd859",
+        "width": 1425,
+        "height": 1002,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/china-house-price-map/06-dark-shenzhen-detail-after-fix-320.webp",
+          "url": "/media/china-house-price-map/06-dark-shenzhen-detail-after-fix-320.webp",
+          "bytes": 18960,
+          "sha256": "0e7f8430a15e762af2681c0bce1f517b1e5c5aba3c6d154c65b645a4266f6ff2",
+          "width": 320,
+          "height": 225,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/china-house-price-map/06-dark-shenzhen-detail-after-fix-640.webp",
+          "url": "/media/china-house-price-map/06-dark-shenzhen-detail-after-fix-640.webp",
+          "bytes": 55818,
+          "sha256": "9fdf3cd4e23a9c323a08133bc8cacc2ebabd35f82aa308fec23a3ce1b587afaf",
+          "width": 640,
+          "height": 450,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/china-house-price-map/06-dark-shenzhen-detail-after-fix-960.webp",
+          "url": "/media/china-house-price-map/06-dark-shenzhen-detail-after-fix-960.webp",
+          "bytes": 103178,
+          "sha256": "c393ec5ea1f42cee648d96fa8ec94f421afb6ed0f1fa0c44831efb2eaf7596e2",
+          "width": 960,
+          "height": 675,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "china-house-price-map",
+      "source": "captures/china-house-price-map/raw/07-dark-jingjinji.jpg",
+      "source_sha256": "d99ce641c2386b2047ceddb1d703e04a38b9d8bc875e67b581ff7ed71364a76b",
+      "source_bytes": 193394,
+      "source_width": 1425,
+      "source_height": 1002,
+      "source_authenticity": "真实网页 / 公开价格快照",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/china-house-price-map/07-dark-jingjinji.webp",
+        "url": "/media/china-house-price-map/07-dark-jingjinji.webp",
+        "bytes": 802956,
+        "sha256": "33ee106110da64049ed8c42fdca2135607491b20e7d2776a72601b08b3cd7dd2",
+        "width": 1425,
+        "height": 1002,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/china-house-price-map/07-dark-jingjinji-320.webp",
+          "url": "/media/china-house-price-map/07-dark-jingjinji-320.webp",
+          "bytes": 20326,
+          "sha256": "c6178cf971a3157a35d8a0d47100576cac05e6513b7a6ff45ecbd8b646f469ed",
+          "width": 320,
+          "height": 225,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/china-house-price-map/07-dark-jingjinji-640.webp",
+          "url": "/media/china-house-price-map/07-dark-jingjinji-640.webp",
+          "bytes": 60198,
+          "sha256": "fc3fd11106f5e8f79a00bc7219b8e862090d5a6f53cbbec78c9015993c1e537f",
+          "width": 640,
+          "height": 450,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/china-house-price-map/07-dark-jingjinji-960.webp",
+          "url": "/media/china-house-price-map/07-dark-jingjinji-960.webp",
+          "bytes": 110730,
+          "sha256": "578cd4ff2149577093d64613514cceeee8a6de53a33eab3ce3ce3d918cfd293a",
+          "width": 960,
+          "height": 675,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "china-house-price-map",
+      "source": "captures/china-house-price-map/raw/08-light-jingjinji.jpg",
+      "source_sha256": "d8e15daa4642a3d55f071aa01d474a439151e8c334bebce54fa43eb56719d707",
+      "source_bytes": 212529,
+      "source_width": 1425,
+      "source_height": 1002,
+      "source_authenticity": "真实网页 / 公开价格快照",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/china-house-price-map/08-light-jingjinji.webp",
+        "url": "/media/china-house-price-map/08-light-jingjinji.webp",
+        "bytes": 856878,
+        "sha256": "cceb614b5e610860e70923ec2400f92101f551a770f5ac8de95ac80b113ce0d2",
+        "width": 1425,
+        "height": 1002,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/china-house-price-map/08-light-jingjinji-320.webp",
+          "url": "/media/china-house-price-map/08-light-jingjinji-320.webp",
+          "bytes": 21974,
+          "sha256": "42fee424ab4968be68e30cf5077a4867038fdf084f40ab285d9d78e0ca1c949e",
+          "width": 320,
+          "height": 225,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/china-house-price-map/08-light-jingjinji-640.webp",
+          "url": "/media/china-house-price-map/08-light-jingjinji-640.webp",
+          "bytes": 62252,
+          "sha256": "c1b2a7cd307495540236cd49ca2d0be291c5235351bcc5c1ae3093d3494447d8",
+          "width": 640,
+          "height": 450,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/china-house-price-map/08-light-jingjinji-960.webp",
+          "url": "/media/china-house-price-map/08-light-jingjinji-960.webp",
+          "bytes": 116792,
+          "sha256": "2751d5a9aae26c0d6c969fa106f36c65a22486d13f01ecc53acb259d90f2df68",
+          "width": 960,
+          "height": 675,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "china-house-price-map",
+      "source": "captures/china-house-price-map/raw/12-dark-shenzhen-ui720.jpg",
+      "source_sha256": "6febfaa0328fc2b79b9dff6ccaf2095c7c380b57bc394cbbc4aba8941250b12a",
+      "source_bytes": 124298,
+      "source_width": 1265,
+      "source_height": 720,
+      "source_authenticity": "真实网页 / 公开价格快照",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/china-house-price-map/12-dark-shenzhen-ui720.webp",
+        "url": "/media/china-house-price-map/12-dark-shenzhen-ui720.webp",
+        "bytes": 432532,
+        "sha256": "988144d4c475d1da8be2663ac98579090790290933a54614abe77dcd7c19e3a2",
+        "width": 1265,
+        "height": 720,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/china-house-price-map/12-dark-shenzhen-ui720-320.webp",
+          "url": "/media/china-house-price-map/12-dark-shenzhen-ui720-320.webp",
+          "bytes": 15874,
+          "sha256": "deac7662c107e43a7a8a7e84432a3ac812cea23675cb2caba51b35080c1e1c7b",
+          "width": 320,
+          "height": 182,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/china-house-price-map/12-dark-shenzhen-ui720-640.webp",
+          "url": "/media/china-house-price-map/12-dark-shenzhen-ui720-640.webp",
+          "bytes": 45146,
+          "sha256": "9b5063111623b4392a8108f520df167d3b41250061412796547246b3d3543430",
+          "width": 640,
+          "height": 364,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/china-house-price-map/12-dark-shenzhen-ui720-960.webp",
+          "url": "/media/china-house-price-map/12-dark-shenzhen-ui720-960.webp",
+          "bytes": 83158,
+          "sha256": "5ca8330245f3436f5d7fe281ebff4f7a8755082fb65c80fa9466fbb0b2ad44ec",
+          "width": 960,
+          "height": 546,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "LearnOpengl",
+      "source": "captures/LearnOpengl/raw/cube-parallax.png",
+      "source_sha256": "19777faa548ac64b512efe418c920b5f13a25496fa07f1a4fe182d86b5e03709",
+      "source_bytes": 2076509,
+      "source_width": 1600,
+      "source_height": 900,
+      "source_authenticity": "原程序真实 GPU OpenGL framebuffer / 部分含 ImGui",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/learnopengl/cube-parallax.webp",
+        "url": "/media/learnopengl/cube-parallax.webp",
+        "bytes": 174432,
+        "sha256": "800f8d063d8ed63eb136ddd1ed667215cc5ba60d344394f15ee025ca3d5fa513",
+        "width": 1600,
+        "height": 900,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": false
+      },
+      "variants": [
+        {
+          "path": "site/public/media/learnopengl/cube-parallax-320.webp",
+          "url": "/media/learnopengl/cube-parallax-320.webp",
+          "bytes": 10918,
+          "sha256": "c490eb9a904a0de6576b6de218feb4c1c5f8da5449f76e1553ee547c1947e8cb",
+          "width": 320,
+          "height": 180,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/learnopengl/cube-parallax-640.webp",
+          "url": "/media/learnopengl/cube-parallax-640.webp",
+          "bytes": 39270,
+          "sha256": "295e79f5d10c77dae486001915ca5508ec38cf6efb399280835a6672d541e386",
+          "width": 640,
+          "height": 360,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/learnopengl/cube-parallax-960.webp",
+          "url": "/media/learnopengl/cube-parallax-960.webp",
+          "bytes": 79190,
+          "sha256": "a60a2ab77072a14e6ef844fee242ebbd8f020e680db9c83412bb17c612c19a52",
+          "width": 960,
+          "height": 540,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "LearnOpengl",
+      "source": "captures/LearnOpengl/raw/cube-flat-inspector.png",
+      "source_sha256": "3a9e80a03f5c0c3e1523a8afb0a7d9018007779c5aa1b0f5dce75bd0eff86139",
+      "source_bytes": 1762539,
+      "source_width": 1600,
+      "source_height": 900,
+      "source_authenticity": "原程序真实 GPU OpenGL framebuffer / 部分含 ImGui",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/learnopengl/cube-flat-inspector.webp",
+        "url": "/media/learnopengl/cube-flat-inspector.webp",
+        "bytes": 171272,
+        "sha256": "8a5b814aa6138cf615d4e83e1dc14cc0e3d0bbc4e903a0ba047917ceea87848c",
+        "width": 1600,
+        "height": 900,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": false
+      },
+      "variants": [
+        {
+          "path": "site/public/media/learnopengl/cube-flat-inspector-320.webp",
+          "url": "/media/learnopengl/cube-flat-inspector-320.webp",
+          "bytes": 13706,
+          "sha256": "7f1960f4a2fdd8800748e98038ffd87d78a9daac92453d8af322251d31f179c3",
+          "width": 320,
+          "height": 180,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/learnopengl/cube-flat-inspector-640.webp",
+          "url": "/media/learnopengl/cube-flat-inspector-640.webp",
+          "bytes": 41476,
+          "sha256": "cc67079305f92b0548c38353f2a730b6fbdb95cb8ae7a0fc45239261528017d3",
+          "width": 640,
+          "height": 360,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/learnopengl/cube-flat-inspector-960.webp",
+          "url": "/media/learnopengl/cube-flat-inspector-960.webp",
+          "bytes": 80150,
+          "sha256": "21e780688ae3f0ae09479a8b0c2e75f67e236a7653b97b2ffa14f393e1d17b8d",
+          "width": 960,
+          "height": 540,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "LearnOpengl",
+      "source": "captures/LearnOpengl/raw/cube-normal-inspector.png",
+      "source_sha256": "5e678b2e843f841dd1b614d6d8b325bdd4dff5b8062a602dd02fe9b20560ebe7",
+      "source_bytes": 1813346,
+      "source_width": 1600,
+      "source_height": 900,
+      "source_authenticity": "原程序真实 GPU OpenGL framebuffer / 部分含 ImGui",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/learnopengl/cube-normal-inspector.webp",
+        "url": "/media/learnopengl/cube-normal-inspector.webp",
+        "bytes": 183418,
+        "sha256": "bb91cf68d0d3f4e6c41ab4df7cc2ec91dcc86e1e8c6ee441818e71a091e5fabd",
+        "width": 1600,
+        "height": 900,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": false
+      },
+      "variants": [
+        {
+          "path": "site/public/media/learnopengl/cube-normal-inspector-320.webp",
+          "url": "/media/learnopengl/cube-normal-inspector-320.webp",
+          "bytes": 14984,
+          "sha256": "9a47c0e390a1c5f2b8ad657065e8075881ade1cd6cccb234de41031c9a45afc8",
+          "width": 320,
+          "height": 180,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/learnopengl/cube-normal-inspector-640.webp",
+          "url": "/media/learnopengl/cube-normal-inspector-640.webp",
+          "bytes": 45284,
+          "sha256": "02614bd1ca49380b9cfc8961b888100a61b401d2ae095ab20a8a6290d6378dfb",
+          "width": 640,
+          "height": 360,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/learnopengl/cube-normal-inspector-960.webp",
+          "url": "/media/learnopengl/cube-normal-inspector-960.webp",
+          "bytes": 93686,
+          "sha256": "2ed883bcbbebb9a3b8903afd4aa64cd4e2c89a4cd6cdd27c085944b52c87e114",
+          "width": 960,
+          "height": 540,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "LearnOpengl",
+      "source": "captures/LearnOpengl/raw/cube-inspector.png",
+      "source_sha256": "2db031b94680b7a5b649f5332f31c436dad4f86424507671ffa116db6f6f0308",
+      "source_bytes": 1801392,
+      "source_width": 1600,
+      "source_height": 900,
+      "source_authenticity": "原程序真实 GPU OpenGL framebuffer / 部分含 ImGui",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/learnopengl/cube-inspector.webp",
+        "url": "/media/learnopengl/cube-inspector.webp",
+        "bytes": 178428,
+        "sha256": "206e87d3adf7b01e90b298e66db21c5b4616cdc679e4872bee8b4a9b3dd5bb03",
+        "width": 1600,
+        "height": 900,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": false
+      },
+      "variants": [
+        {
+          "path": "site/public/media/learnopengl/cube-inspector-320.webp",
+          "url": "/media/learnopengl/cube-inspector-320.webp",
+          "bytes": 14736,
+          "sha256": "9bc91748c134a530e6310e8a6ec2eca6e717a1cb7f0ecbbc339fbd7ea57a697c",
+          "width": 320,
+          "height": 180,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/learnopengl/cube-inspector-640.webp",
+          "url": "/media/learnopengl/cube-inspector-640.webp",
+          "bytes": 43950,
+          "sha256": "07fc0ba3281121d86efe0f3bab9f598101cffcb9f1fae534e700096bb491b156",
+          "width": 640,
+          "height": 360,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/learnopengl/cube-inspector-960.webp",
+          "url": "/media/learnopengl/cube-inspector-960.webp",
+          "bytes": 84868,
+          "sha256": "0f6cb996d38981ee074b654403a623181f3599f3466e32458ad1094366b1ae37",
+          "width": 960,
+          "height": 540,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "LearnOpengl",
+      "source": "captures/LearnOpengl/raw/normals-inspector.png",
+      "source_sha256": "311912e9d290b6dd3d0b271d152ee43622a3975ef65eaf54ccdb4b3c42092655",
+      "source_bytes": 1910503,
+      "source_width": 1600,
+      "source_height": 900,
+      "source_authenticity": "原程序真实 GPU OpenGL framebuffer / 部分含 ImGui",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/learnopengl/normals-inspector.webp",
+        "url": "/media/learnopengl/normals-inspector.webp",
+        "bytes": 214016,
+        "sha256": "d4ecbfc067220443000ab8fd77859f065bc5a2f7e18fd91e881b2180d09126ce",
+        "width": 1600,
+        "height": 900,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": false
+      },
+      "variants": [
+        {
+          "path": "site/public/media/learnopengl/normals-inspector-320.webp",
+          "url": "/media/learnopengl/normals-inspector-320.webp",
+          "bytes": 14104,
+          "sha256": "53d8c470a78cf9741b66d9979a17d4360d0bbb89d905b6baf86ba0c36a061810",
+          "width": 320,
+          "height": 180,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/learnopengl/normals-inspector-640.webp",
+          "url": "/media/learnopengl/normals-inspector-640.webp",
+          "bytes": 42524,
+          "sha256": "39effd676bf316149040fe3b1072c76885b90cb947f4681ac82567c46c365acd",
+          "width": 640,
+          "height": 360,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/learnopengl/normals-inspector-960.webp",
+          "url": "/media/learnopengl/normals-inspector-960.webp",
+          "bytes": 91060,
+          "sha256": "956ffb0739dd01b31e5f7c83b6c14cb008706175646c1413174b7cc6fff421e0",
+          "width": 960,
+          "height": 540,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "LearnOpengl",
+      "source": "captures/LearnOpengl/raw/grayscale-inspector.png",
+      "source_sha256": "3e752846ff9245c56cee872ae164d220c107447b7fab825b11010412aa4e5705",
+      "source_bytes": 1097764,
+      "source_width": 1600,
+      "source_height": 900,
+      "source_authenticity": "原程序真实 GPU OpenGL framebuffer / 部分含 ImGui",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/learnopengl/grayscale-inspector.webp",
+        "url": "/media/learnopengl/grayscale-inspector.webp",
+        "bytes": 154288,
+        "sha256": "4bcba3798636829eb2cdf52cb177a7e5d3858126b0d10ea5b7330981a181c61b",
+        "width": 1600,
+        "height": 900,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": false
+      },
+      "variants": [
+        {
+          "path": "site/public/media/learnopengl/grayscale-inspector-320.webp",
+          "url": "/media/learnopengl/grayscale-inspector-320.webp",
+          "bytes": 12788,
+          "sha256": "c61cb6a978adc72cdfb183dc5e02c1ee56be4a5e5402a678b1a42047bb1e1113",
+          "width": 320,
+          "height": 180,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/learnopengl/grayscale-inspector-640.webp",
+          "url": "/media/learnopengl/grayscale-inspector-640.webp",
+          "bytes": 39022,
+          "sha256": "024e0509754694116c96d6a7bbfa43be4ac293f379feddd65ab9bedf45bfaeb2",
+          "width": 640,
+          "height": 360,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/learnopengl/grayscale-inspector-960.webp",
+          "url": "/media/learnopengl/grayscale-inspector-960.webp",
+          "bytes": 74140,
+          "sha256": "a48cce40132e8e77902b9102bc16b9c02dda6c491c435c7b74926e6993cb35f5",
+          "width": 960,
+          "height": 540,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "GA-sort",
+      "source": "captures/GA-sort/raw/04-final-sort-convergence.jpg",
+      "source_sha256": "92fb8aea3b01a30d43afa23f9da603b27eff20d6ecfb62709aa462d42514a101",
+      "source_bytes": 67451,
+      "source_width": 1265,
+      "source_height": 995,
+      "source_authenticity": "真实控制台 stdout 的新制阅读报告",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/ga-sort/04-final-sort-convergence.webp",
+        "url": "/media/ga-sort/04-final-sort-convergence.webp",
+        "bytes": 180352,
+        "sha256": "8da058ecf66b293f9d0f7b6662dfc7a67244a236d73bc878f7d209602dde77fb",
+        "width": 1265,
+        "height": 995,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/ga-sort/04-final-sort-convergence-320.webp",
+          "url": "/media/ga-sort/04-final-sort-convergence-320.webp",
+          "bytes": 6300,
+          "sha256": "63137defd814b111ab0d9bb2d9b4cf324a5013d10273408b4a596ef97fe59301",
+          "width": 320,
+          "height": 252,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/ga-sort/04-final-sort-convergence-640.webp",
+          "url": "/media/ga-sort/04-final-sort-convergence-640.webp",
+          "bytes": 18430,
+          "sha256": "5c5001ee751082cf70e6b72014f740086649c8a5815ec6cf892a479e1d8ebf95",
+          "width": 640,
+          "height": 503,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/ga-sort/04-final-sort-convergence-960.webp",
+          "url": "/media/ga-sort/04-final-sort-convergence-960.webp",
+          "bytes": 35566,
+          "sha256": "4f9cf005018bb931bf6eafc668d348319a21735f7dab43096f502f0cbf55b6e5",
+          "width": 960,
+          "height": 755,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "GA-sort",
+      "source": "captures/GA-sort/raw/05-final-equation-convergence.jpg",
+      "source_sha256": "c55d96988b4e98d77dcf0d7dd26a0a91da369068f2dcae00800fe6b0b3e32e4e",
+      "source_bytes": 65934,
+      "source_width": 1265,
+      "source_height": 1022,
+      "source_authenticity": "真实控制台 stdout 的新制阅读报告",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/ga-sort/05-final-equation-convergence.webp",
+        "url": "/media/ga-sort/05-final-equation-convergence.webp",
+        "bytes": 172840,
+        "sha256": "5a78642eda7640432a944b51253dd4d7e8d4dcc7c489c100711d431143d3ed27",
+        "width": 1265,
+        "height": 1022,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/ga-sort/05-final-equation-convergence-320.webp",
+          "url": "/media/ga-sort/05-final-equation-convergence-320.webp",
+          "bytes": 5968,
+          "sha256": "cf20672cc327199b7755f9d5a3b3040ffc7b854f8273fabfcda432ee8321bb10",
+          "width": 320,
+          "height": 259,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/ga-sort/05-final-equation-convergence-640.webp",
+          "url": "/media/ga-sort/05-final-equation-convergence-640.webp",
+          "bytes": 17890,
+          "sha256": "49897ab6d4931c9af6b1d05db8ef8672722f388a6a3a95da3db3b8516691b80d",
+          "width": 640,
+          "height": 517,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/ga-sort/05-final-equation-convergence-960.webp",
+          "url": "/media/ga-sort/05-final-equation-convergence-960.webp",
+          "bytes": 35142,
+          "sha256": "1ef85b96c3d79c06ec94c7d667acaa653949eecb0c53814015653c3ee2fbee0f",
+          "width": 960,
+          "height": 776,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "GA-sort",
+      "source": "captures/GA-sort/raw/regression-checks-report.jpg",
+      "source_sha256": "4bb51b62b5bcecadca736b0b8d6a1528fcb993f0cad6f43b8af182736301ddfa",
+      "source_bytes": 109310,
+      "source_width": 3160,
+      "source_height": 1500,
+      "source_authenticity": "真实控制台 stdout 的新制阅读报告",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/ga-sort/regression-checks-report.webp",
+        "url": "/media/ga-sort/regression-checks-report.webp",
+        "bytes": 276600,
+        "sha256": "1f2d8c6bc49fa8e657878351d72cae4d8fe96ff581deec936a68ca20a5564280",
+        "width": 3160,
+        "height": 1500,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/ga-sort/regression-checks-report-320.webp",
+          "url": "/media/ga-sort/regression-checks-report-320.webp",
+          "bytes": 1552,
+          "sha256": "85d6a9c7a9d2f5284b9f1c7384b6a35841abba906bb7de294d6d50c7ac55c929",
+          "width": 320,
+          "height": 152,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/ga-sort/regression-checks-report-640.webp",
+          "url": "/media/ga-sort/regression-checks-report-640.webp",
+          "bytes": 5178,
+          "sha256": "3b3ae11341bfebfeab2b6987b56b0f032da51c333e0cb61391f1c769596e4a84",
+          "width": 640,
+          "height": 304,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/ga-sort/regression-checks-report-960.webp",
+          "url": "/media/ga-sort/regression-checks-report-960.webp",
+          "bytes": 10492,
+          "sha256": "4ff400cb9b5f37c1629b31f41ceeef6deecd34df625de2fa6d0400409170e946",
+          "width": 960,
+          "height": 456,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/ga-sort/regression-checks-report-1600.webp",
+          "url": "/media/ga-sort/regression-checks-report-1600.webp",
+          "bytes": 26232,
+          "sha256": "e4d2548f7ef16ad02ad930a8cad70ae339d2aa4966092d8e848191d5f0282586",
+          "width": 1600,
+          "height": 759,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "FloydShortestPath",
+      "source": "captures/FloydShortestPath/raw/distance-matrix-report.jpg",
+      "source_sha256": "9b012de32cc15eb9035ab2e77e449473dae21503e54b4bdf8848b83789b54c3a",
+      "source_bytes": 85773,
+      "source_width": 3160,
+      "source_height": 1500,
+      "source_authenticity": "真实 C# 控制台输出的新制阅读报告",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/floydshortestpath/distance-matrix-report.webp",
+        "url": "/media/floydshortestpath/distance-matrix-report.webp",
+        "bytes": 201218,
+        "sha256": "803bb7176efe9a01ae0c036ed4f4aae64efb24d0f9e98d17abd790a0d469ee10",
+        "width": 3160,
+        "height": 1500,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/floydshortestpath/distance-matrix-report-320.webp",
+          "url": "/media/floydshortestpath/distance-matrix-report-320.webp",
+          "bytes": 1546,
+          "sha256": "36545b8dcfe23b75e381035b32ee270a0b31c3161fb9ce0c58d4a8fc207b4721",
+          "width": 320,
+          "height": 152,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/floydshortestpath/distance-matrix-report-640.webp",
+          "url": "/media/floydshortestpath/distance-matrix-report-640.webp",
+          "bytes": 4526,
+          "sha256": "77c4f9099277b4bd83b431116c8c74bbff057c8fc5c70453254a53fbd0f365e7",
+          "width": 640,
+          "height": 304,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/floydshortestpath/distance-matrix-report-960.webp",
+          "url": "/media/floydshortestpath/distance-matrix-report-960.webp",
+          "bytes": 8278,
+          "sha256": "309a21d6776f7f1102902bc4602d44ffa4af5c84d73cf364149ac165fd77fb0b",
+          "width": 960,
+          "height": 456,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/floydshortestpath/distance-matrix-report-1600.webp",
+          "url": "/media/floydshortestpath/distance-matrix-report-1600.webp",
+          "bytes": 19794,
+          "sha256": "1059d3af364f400a1ca31670c2b5f240191b9e541a34d5fb2986fc10bc327f18",
+          "width": 1600,
+          "height": 759,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "FloydShortestPath",
+      "source": "captures/FloydShortestPath/raw/regression-checks-report.jpg",
+      "source_sha256": "8b4e3843c5eeaa0be920b6e9b647a042d9fb70e9400808ddda4a796d4d2ee573",
+      "source_bytes": 81343,
+      "source_width": 3160,
+      "source_height": 1500,
+      "source_authenticity": "真实 C# 控制台输出的新制阅读报告",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/floydshortestpath/regression-checks-report.webp",
+        "url": "/media/floydshortestpath/regression-checks-report.webp",
+        "bytes": 179418,
+        "sha256": "53e2e585cec214396b414c2517b3918383e3bb146b4708b89527cb5e2703cfe5",
+        "width": 3160,
+        "height": 1500,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/floydshortestpath/regression-checks-report-320.webp",
+          "url": "/media/floydshortestpath/regression-checks-report-320.webp",
+          "bytes": 1258,
+          "sha256": "a3452694c57a0d591b5315106a5f5efbc5301ec8ef4c1d4fbe3eb0e00b40cebd",
+          "width": 320,
+          "height": 152,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/floydshortestpath/regression-checks-report-640.webp",
+          "url": "/media/floydshortestpath/regression-checks-report-640.webp",
+          "bytes": 4032,
+          "sha256": "c5af1f954f40057b6881d54e4a9b57c3a30348e269fc30c36e8404c902808c7f",
+          "width": 640,
+          "height": 304,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/floydshortestpath/regression-checks-report-960.webp",
+          "url": "/media/floydshortestpath/regression-checks-report-960.webp",
+          "bytes": 7420,
+          "sha256": "0161c1cb06c8dcd055de1dcdb5b599b39eb7e2457be3e2cadbcdd0d878b9555d",
+          "width": 960,
+          "height": 456,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/floydshortestpath/regression-checks-report-1600.webp",
+          "url": "/media/floydshortestpath/regression-checks-report-1600.webp",
+          "bytes": 17794,
+          "sha256": "9938b74dc5997bf3939af5f7b7b948de8b26a5780f79830c62bf57cd7a3bf3b1",
+          "width": 1600,
+          "height": 759,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "liss-web",
+      "source": "captures/liss-web/raw/01-home-dark-1280.png",
+      "source_sha256": "84039b78f8f7ea5d7b20e19612f0e8980a6388a492454185922da9e33b221702",
+      "source_bytes": 75668,
+      "source_width": 1280,
+      "source_height": 720,
+      "source_authenticity": "真实线上 liss.pythonanywhere.com 浏览器截图；原图无像素编辑。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/liss-web/01-home-dark-1280.webp",
+        "url": "/media/liss-web/01-home-dark-1280.webp",
+        "bytes": 28292,
+        "sha256": "55ee5524c9675240b98d8001117a1cf7cd6afbea86709cfde398dfc536b4ee5b",
+        "width": 1280,
+        "height": 720,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/liss-web/01-home-dark-1280-320.webp",
+          "url": "/media/liss-web/01-home-dark-1280-320.webp",
+          "bytes": 7782,
+          "sha256": "5a91e242d7507cff9418e98d7859d9eea83c3c1837d0087f06b1c9e337cef12f",
+          "width": 320,
+          "height": 180,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/liss-web/01-home-dark-1280-640.webp",
+          "url": "/media/liss-web/01-home-dark-1280-640.webp",
+          "bytes": 23476,
+          "sha256": "f2f5ac6392e4343e3b4d4fa7b03d46995a02eb7723db035288458e29769d86ae",
+          "width": 640,
+          "height": 360,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/liss-web/01-home-dark-1280-960.webp",
+          "url": "/media/liss-web/01-home-dark-1280-960.webp",
+          "bytes": 46758,
+          "sha256": "550ba5ec76d6e513a05c2437c90e93cf99a62c3814e85b434d3739ddfd12356d",
+          "width": 960,
+          "height": 540,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "liss-web",
+      "source": "captures/liss-web/raw/02-markdown-writing-dark-1280.png",
+      "source_sha256": "1e8b59ff5c7e58d5df09d1709921925cfc32914a84ac4a23ba6252bd11aa2f05",
+      "source_bytes": 60851,
+      "source_width": 1280,
+      "source_height": 720,
+      "source_authenticity": "真实线上 liss.pythonanywhere.com 浏览器截图；原图无像素编辑。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/liss-web/02-markdown-writing-dark-1280.webp",
+        "url": "/media/liss-web/02-markdown-writing-dark-1280.webp",
+        "bytes": 21610,
+        "sha256": "0b0b8bbc514d3a330821b68d202ef93c192ff3a5b3c9c19c1edc9b1300f0b38b",
+        "width": 1280,
+        "height": 720,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/liss-web/02-markdown-writing-dark-1280-320.webp",
+          "url": "/media/liss-web/02-markdown-writing-dark-1280-320.webp",
+          "bytes": 5620,
+          "sha256": "b4b339e7ce08eb418231e2711b09a8a62db7a3826261d1e828ac6bb55c25ef37",
+          "width": 320,
+          "height": 180,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/liss-web/02-markdown-writing-dark-1280-640.webp",
+          "url": "/media/liss-web/02-markdown-writing-dark-1280-640.webp",
+          "bytes": 17152,
+          "sha256": "eca11d8bfd25be20ef2f9f5cdf786f3ff44d8b324328b9340d23881a9543ae5d",
+          "width": 640,
+          "height": 360,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/liss-web/02-markdown-writing-dark-1280-960.webp",
+          "url": "/media/liss-web/02-markdown-writing-dark-1280-960.webp",
+          "bytes": 33968,
+          "sha256": "3975bf9b708ccc11a38a03e2a71278dece304b2eddd03c6e0099501709a8bfd2",
+          "width": 960,
+          "height": 540,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "liss-web",
+      "source": "captures/liss-web/raw/03-article-dark-1280.png",
+      "source_sha256": "297e8d0cc12d2ca2c36b2520a1be451fc2487c88822ce76a8f0a1fa9ee233ec5",
+      "source_bytes": 42800,
+      "source_width": 1280,
+      "source_height": 720,
+      "source_authenticity": "真实线上 liss.pythonanywhere.com 浏览器截图；原图无像素编辑。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/liss-web/03-article-dark-1280.webp",
+        "url": "/media/liss-web/03-article-dark-1280.webp",
+        "bytes": 15774,
+        "sha256": "d4944493ffa23d240823f649aec396133b7205ab4944e1b237901fc555b70abc",
+        "width": 1280,
+        "height": 720,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/liss-web/03-article-dark-1280-320.webp",
+          "url": "/media/liss-web/03-article-dark-1280-320.webp",
+          "bytes": 4414,
+          "sha256": "35dda4b58c18c218f8ceb1658ed7313c2bcdded2df05b20d17697ea1d11c0e30",
+          "width": 320,
+          "height": 180,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/liss-web/03-article-dark-1280-640.webp",
+          "url": "/media/liss-web/03-article-dark-1280-640.webp",
+          "bytes": 14436,
+          "sha256": "a28b3c9f7331d0535bd9415fa0ce5b0394b97bb7d2499dbb04351b90dd8d6637",
+          "width": 640,
+          "height": 360,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/liss-web/03-article-dark-1280-960.webp",
+          "url": "/media/liss-web/03-article-dark-1280-960.webp",
+          "bytes": 27648,
+          "sha256": "e7f849fb2f4db81491a2045563080cf2fa61f85d50434ca31a1caa0774a93bb1",
+          "width": 960,
+          "height": 540,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "liss-web",
+      "source": "captures/liss-web/raw/04-profile-dark-1280.png",
+      "source_sha256": "43df29f5fc66648619e6c5c096d94e279b40495623882605ebfa3bf3415d63cb",
+      "source_bytes": 54763,
+      "source_width": 1280,
+      "source_height": 720,
+      "source_authenticity": "真实线上 liss.pythonanywhere.com 浏览器截图；原图无像素编辑。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/liss-web/04-profile-dark-1280.webp",
+        "url": "/media/liss-web/04-profile-dark-1280.webp",
+        "bytes": 23384,
+        "sha256": "1812b0c3eba645162622c9ae8fdeb6ed4cc444b889e364a7e81b8eca14b3372d",
+        "width": 1280,
+        "height": 720,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/liss-web/04-profile-dark-1280-320.webp",
+          "url": "/media/liss-web/04-profile-dark-1280-320.webp",
+          "bytes": 4956,
+          "sha256": "0ba3838e54014a289ed738fddbc80b4bb6ac5422c70c9591230faa8ebc064c6d",
+          "width": 320,
+          "height": 180,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/liss-web/04-profile-dark-1280-640.webp",
+          "url": "/media/liss-web/04-profile-dark-1280-640.webp",
+          "bytes": 15196,
+          "sha256": "f4569e930e828fb97ff0200d27672b6535d648d6a040b2f716a964d789e51fba",
+          "width": 640,
+          "height": 360,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/liss-web/04-profile-dark-1280-960.webp",
+          "url": "/media/liss-web/04-profile-dark-1280-960.webp",
+          "bytes": 30948,
+          "sha256": "43d01f8916e6de845016ba11c095da5369622c7f1b72174e209c870422932116",
+          "width": 960,
+          "height": 540,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "liss-web",
+      "source": "captures/liss-web/raw/05-welcome-dark-1280.png",
+      "source_sha256": "c531bb415f8a71c24a4878f4baaf32bde7dc42304d4d25df330ceb4ce3c0dbbe",
+      "source_bytes": 48384,
+      "source_width": 1280,
+      "source_height": 720,
+      "source_authenticity": "真实线上 liss.pythonanywhere.com 浏览器截图；原图无像素编辑。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/liss-web/05-welcome-dark-1280.webp",
+        "url": "/media/liss-web/05-welcome-dark-1280.webp",
+        "bytes": 17884,
+        "sha256": "29b2cb837e3124cfd96cdb92003fbd4d85e7cd6bec0ea3ad8e92e8bb993be6d4",
+        "width": 1280,
+        "height": 720,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/liss-web/05-welcome-dark-1280-320.webp",
+          "url": "/media/liss-web/05-welcome-dark-1280-320.webp",
+          "bytes": 4320,
+          "sha256": "c58151a4ed32a6361b4977d9e80b0b4f086ad4185057b2e101e3fd4454a1396e",
+          "width": 320,
+          "height": 180,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/liss-web/05-welcome-dark-1280-640.webp",
+          "url": "/media/liss-web/05-welcome-dark-1280-640.webp",
+          "bytes": 13636,
+          "sha256": "8de761d5b53bf6f7a5801b6e7ddde67e2041b8a90cca2b2378fde02255418ee4",
+          "width": 640,
+          "height": 360,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/liss-web/05-welcome-dark-1280-960.webp",
+          "url": "/media/liss-web/05-welcome-dark-1280-960.webp",
+          "bytes": 26852,
+          "sha256": "8297ae5b017310351e833f5df4d5c49cbebc55c2cb80383e394d5877a7c82fcb",
+          "width": 960,
+          "height": 540,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "liss-web",
+      "source": "captures/liss-web/raw/06-article-dark-mobile-390.png",
+      "source_sha256": "82a01f9af360a7fa1fe80323432d5c36623c29aec26a1f2dd66e5c7ac9f4e36a",
+      "source_bytes": 30325,
+      "source_width": 390,
+      "source_height": 720,
+      "source_authenticity": "真实线上 liss.pythonanywhere.com 浏览器截图；原图无像素编辑。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/liss-web/06-article-dark-mobile-390.webp",
+        "url": "/media/liss-web/06-article-dark-mobile-390.webp",
+        "bytes": 11932,
+        "sha256": "62101f90d576fe30feb6e4255d5b2fe7adc706cab97818cb1e8a51ec01436a94",
+        "width": 390,
+        "height": 720,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/liss-web/06-article-dark-mobile-390-320.webp",
+          "url": "/media/liss-web/06-article-dark-mobile-390-320.webp",
+          "bytes": 19964,
+          "sha256": "ac5388bf79f8115c55484b9c7eaf4eb03ff31a28d071b5118190c23076a0d463",
+          "width": 320,
+          "height": 591,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "liss-web",
+      "source": "captures/liss-web/raw/07-discussion-dark-1280.png",
+      "source_sha256": "d5f375a1c8e0a60d12453a525d999d3a9f6cc11f3a32a841d9e5d068423a22ec",
+      "source_bytes": 32981,
+      "source_width": 1280,
+      "source_height": 720,
+      "source_authenticity": "真实线上 liss.pythonanywhere.com 浏览器截图；原图无像素编辑。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/liss-web/07-discussion-dark-1280.webp",
+        "url": "/media/liss-web/07-discussion-dark-1280.webp",
+        "bytes": 11690,
+        "sha256": "dceddb2c592c7c1be28d9cba6959637730dc3dafe75fe18d053dec3d9cb5492b",
+        "width": 1280,
+        "height": 720,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/liss-web/07-discussion-dark-1280-320.webp",
+          "url": "/media/liss-web/07-discussion-dark-1280-320.webp",
+          "bytes": 2942,
+          "sha256": "041affe8d63110048893be90d1a4b9e0e37af2a674cc32c9b97f936a5d16531a",
+          "width": 320,
+          "height": 180,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/liss-web/07-discussion-dark-1280-640.webp",
+          "url": "/media/liss-web/07-discussion-dark-1280-640.webp",
+          "bytes": 9482,
+          "sha256": "1b41ee84801f0029e9809521d8a4832ec11f2d0ffa37e8d7f2f96d08969f6e3c",
+          "width": 640,
+          "height": 360,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/liss-web/07-discussion-dark-1280-960.webp",
+          "url": "/media/liss-web/07-discussion-dark-1280-960.webp",
+          "bytes": 19690,
+          "sha256": "b7e4a81d25145c0af435ddfaa49cfda53da53863003d1884730790e312c9fdc4",
+          "width": 960,
+          "height": 540,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "AOE4-AutoVillager-Tool",
+      "source": "captures/AOE4-AutoVillager-Tool/raw/editor-overview-safe-preview.jpg",
+      "source_sha256": "2ebea367f297ec2ce55efcc235194df3055bb04d862a0c6656b0971aa0178f4c",
+      "source_bytes": 181214,
+      "source_width": 3160,
+      "source_height": 1500,
+      "source_authenticity": "原前端与仓库数据的安全离线预览",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/aoe4-autovillager-tool/editor-overview-safe-preview.webp",
+        "url": "/media/aoe4-autovillager-tool/editor-overview-safe-preview.webp",
+        "bytes": 616568,
+        "sha256": "55e59c742b01e74f8967f5f53dffc983b01a5d52668415289b5cacbe199897ab",
+        "width": 3160,
+        "height": 1500,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/aoe4-autovillager-tool/editor-overview-safe-preview-320.webp",
+          "url": "/media/aoe4-autovillager-tool/editor-overview-safe-preview-320.webp",
+          "bytes": 4006,
+          "sha256": "2a0a129514419dbeb49f56e68c6ea0699c304a90ab2a792cfbec2211d5d989f7",
+          "width": 320,
+          "height": 152,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/aoe4-autovillager-tool/editor-overview-safe-preview-640.webp",
+          "url": "/media/aoe4-autovillager-tool/editor-overview-safe-preview-640.webp",
+          "bytes": 12426,
+          "sha256": "b50805fdbc0f61e7705bd723c2812d099e9716b75fd4f449d9ff622f497f078a",
+          "width": 640,
+          "height": 304,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/aoe4-autovillager-tool/editor-overview-safe-preview-960.webp",
+          "url": "/media/aoe4-autovillager-tool/editor-overview-safe-preview-960.webp",
+          "bytes": 24168,
+          "sha256": "8e6a26dbf02e2dbaf5f9617141f5569705b2caa5600c0e8dcd3e077ec5aaee28",
+          "width": 960,
+          "height": 456,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/aoe4-autovillager-tool/editor-overview-safe-preview-1600.webp",
+          "url": "/media/aoe4-autovillager-tool/editor-overview-safe-preview-1600.webp",
+          "bytes": 53820,
+          "sha256": "401aeed40d7dfa45ae202ec2d471dcb0a0bf49852cf79ca4f41cbd520d9ab184",
+          "width": 1600,
+          "height": 759,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "AOE4-AutoVillager-Tool",
+      "source": "captures/AOE4-AutoVillager-Tool/raw/editor-search-safe-preview.jpg",
+      "source_sha256": "60b30e37e158f5fa0f652a8039887e3591e007a032b644bd6e6e180298fb1093",
+      "source_bytes": 214134,
+      "source_width": 3160,
+      "source_height": 1500,
+      "source_authenticity": "原前端与仓库数据的安全离线预览",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/aoe4-autovillager-tool/editor-search-safe-preview.webp",
+        "url": "/media/aoe4-autovillager-tool/editor-search-safe-preview.webp",
+        "bytes": 662452,
+        "sha256": "11b099278e821f12e4624993c87b135f77b21cd20240232635654b11b76fbd8d",
+        "width": 3160,
+        "height": 1500,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/aoe4-autovillager-tool/editor-search-safe-preview-320.webp",
+          "url": "/media/aoe4-autovillager-tool/editor-search-safe-preview-320.webp",
+          "bytes": 4650,
+          "sha256": "31476d634766586815523ca47f5c84adb932ce9d00d1342b92658d6af7727a81",
+          "width": 320,
+          "height": 152,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/aoe4-autovillager-tool/editor-search-safe-preview-640.webp",
+          "url": "/media/aoe4-autovillager-tool/editor-search-safe-preview-640.webp",
+          "bytes": 14022,
+          "sha256": "14546a511eddb6beab7c4904e65f0fff9002a17204ada6bee133982a32907104",
+          "width": 640,
+          "height": 304,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/aoe4-autovillager-tool/editor-search-safe-preview-960.webp",
+          "url": "/media/aoe4-autovillager-tool/editor-search-safe-preview-960.webp",
+          "bytes": 28714,
+          "sha256": "a9e61c5004cb595dd623514264c14447a3dde76b77207bc41f0f3f52f900542b",
+          "width": 960,
+          "height": 456,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/aoe4-autovillager-tool/editor-search-safe-preview-1600.webp",
+          "url": "/media/aoe4-autovillager-tool/editor-search-safe-preview-1600.webp",
+          "bytes": 65152,
+          "sha256": "8feb82dc8291b8d92f6e6617338140c54c47d1a5b06154c22c87234d08ec9ff0",
+          "width": 1600,
+          "height": 759,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "AOE4-AutoVillager-Tool",
+      "source": "captures/AOE4-AutoVillager-Tool/raw/editor-help-safe-preview.jpg",
+      "source_sha256": "7ea0c87dbae261f20fa5d58e9673433312e5a8c9f94de77531113bf247cb285c",
+      "source_bytes": 314590,
+      "source_width": 3160,
+      "source_height": 1500,
+      "source_authenticity": "原前端与仓库数据的安全离线预览",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/aoe4-autovillager-tool/editor-help-safe-preview.webp",
+        "url": "/media/aoe4-autovillager-tool/editor-help-safe-preview.webp",
+        "bytes": 1013410,
+        "sha256": "068a8e7c2c989d39c471caca62b4cf65df9c40b93fba21b7fb0cc20e5bef74b9",
+        "width": 3160,
+        "height": 1500,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/aoe4-autovillager-tool/editor-help-safe-preview-320.webp",
+          "url": "/media/aoe4-autovillager-tool/editor-help-safe-preview-320.webp",
+          "bytes": 5858,
+          "sha256": "f08834bbdbd3c857ae90f467d97f0fdcb4dfbeb0a7e67fd84ff62372c72f9f5e",
+          "width": 320,
+          "height": 152,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/aoe4-autovillager-tool/editor-help-safe-preview-640.webp",
+          "url": "/media/aoe4-autovillager-tool/editor-help-safe-preview-640.webp",
+          "bytes": 18432,
+          "sha256": "d05187990b7fee6bfca68f32de7158765794d9f5d2a7db536049b6238c30bd79",
+          "width": 640,
+          "height": 304,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/aoe4-autovillager-tool/editor-help-safe-preview-960.webp",
+          "url": "/media/aoe4-autovillager-tool/editor-help-safe-preview-960.webp",
+          "bytes": 37420,
+          "sha256": "26037bab8cb47f41aed5c4f8d3fae54334756cc767b3982c0c6e3e371653bed7",
+          "width": 960,
+          "height": 456,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/aoe4-autovillager-tool/editor-help-safe-preview-1600.webp",
+          "url": "/media/aoe4-autovillager-tool/editor-help-safe-preview-1600.webp",
+          "bytes": 92968,
+          "sha256": "c81507aafa97a469a41d598d634bc1de19ea283b3176fd98ff4606478e7647bb",
+          "width": 1600,
+          "height": 759,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "NomadWorkshop",
+      "source": "captures/NomadWorkshop/raw/02-reference-vehicle-final-1080.png",
+      "source_sha256": "075b2364f7b13742e49d1e553f5c85f90a046a589a2fec6d19b25df54fe62855",
+      "source_bytes": 2272293,
+      "source_width": 1920,
+      "source_height": 1080,
+      "source_authenticity": "真实 Unity Editor Game View",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/nomadworkshop/02-reference-vehicle-final-1080.webp",
+        "url": "/media/nomadworkshop/02-reference-vehicle-final-1080.webp",
+        "bytes": 155858,
+        "sha256": "0614426226f096e392ac98d5a862364da668a3fecbfe63cf87c61e02b5910fcf",
+        "width": 1920,
+        "height": 1080,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": false
+      },
+      "variants": [
+        {
+          "path": "site/public/media/nomadworkshop/02-reference-vehicle-final-1080-320.webp",
+          "url": "/media/nomadworkshop/02-reference-vehicle-final-1080-320.webp",
+          "bytes": 12330,
+          "sha256": "2898171b7369aa62ab07e121f126fb1611961a8707bcfac1a443cee8d44d60d3",
+          "width": 320,
+          "height": 180,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/nomadworkshop/02-reference-vehicle-final-1080-640.webp",
+          "url": "/media/nomadworkshop/02-reference-vehicle-final-1080-640.webp",
+          "bytes": 32636,
+          "sha256": "e06106e0269bcecfb98208b1d0edb1562248b360790909cc40289359c89a52c8",
+          "width": 640,
+          "height": 360,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/nomadworkshop/02-reference-vehicle-final-1080-960.webp",
+          "url": "/media/nomadworkshop/02-reference-vehicle-final-1080-960.webp",
+          "bytes": 60296,
+          "sha256": "c78a39c298946ae6d2a50d70987527b1ca4053fe2019bc554f466f1918d55294",
+          "width": 960,
+          "height": 540,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/nomadworkshop/02-reference-vehicle-final-1080-1600.webp",
+          "url": "/media/nomadworkshop/02-reference-vehicle-final-1080-1600.webp",
+          "bytes": 121100,
+          "sha256": "7ee41caedb1d500b847d92a2f1303ba5061b1671616651c202acccb6cd23f2ab",
+          "width": 1600,
+          "height": 900,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "NomadWorkshop",
+      "source": "captures/NomadWorkshop/raw/04-build-and-world-1080.png",
+      "source_sha256": "7a1024618e1af4e335d99573ed403d776a488a590fdcb04b742dd600570b04ab",
+      "source_bytes": 2212277,
+      "source_width": 1920,
+      "source_height": 1080,
+      "source_authenticity": "真实 Unity Editor Game View",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/nomadworkshop/04-build-and-world-1080.webp",
+        "url": "/media/nomadworkshop/04-build-and-world-1080.webp",
+        "bytes": 219990,
+        "sha256": "5aa8f7dde409aba9c9089b7623b2b88e25957aa52fff233a18ce81ba1e3eb5d9",
+        "width": 1920,
+        "height": 1080,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": false
+      },
+      "variants": [
+        {
+          "path": "site/public/media/nomadworkshop/04-build-and-world-1080-320.webp",
+          "url": "/media/nomadworkshop/04-build-and-world-1080-320.webp",
+          "bytes": 13960,
+          "sha256": "d9d898e7039dc6ed5a65e77cdae52de89dad0734375bf1da8cdfb0114cfdd0ca",
+          "width": 320,
+          "height": 180,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/nomadworkshop/04-build-and-world-1080-640.webp",
+          "url": "/media/nomadworkshop/04-build-and-world-1080-640.webp",
+          "bytes": 42008,
+          "sha256": "883c69071b32946725af834626c52ed5886802b51ba9f95b9af1fd7e07f8a7af",
+          "width": 640,
+          "height": 360,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/nomadworkshop/04-build-and-world-1080-960.webp",
+          "url": "/media/nomadworkshop/04-build-and-world-1080-960.webp",
+          "bytes": 75140,
+          "sha256": "9a1f87bfa8218255284e68b912d5887ed646e5cc6ee76d3d67b4069e91c10754",
+          "width": 960,
+          "height": 540,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/nomadworkshop/04-build-and-world-1080-1600.webp",
+          "url": "/media/nomadworkshop/04-build-and-world-1080-1600.webp",
+          "bytes": 165480,
+          "sha256": "dd7dc5d3236f494a42a3fa595629b8afb00635d6dc565f8babe9469a929830e4",
+          "width": 1600,
+          "height": 900,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "NomadWorkshop",
+      "source": "captures/NomadWorkshop/raw/05-resident-and-world-1080.png",
+      "source_sha256": "a4055f2c4c12dff30ecf1558a19c3dca9b9af66e737d385a37416fb58485f34d",
+      "source_bytes": 2107980,
+      "source_width": 1920,
+      "source_height": 1080,
+      "source_authenticity": "真实 Unity Editor Game View",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/nomadworkshop/05-resident-and-world-1080.webp",
+        "url": "/media/nomadworkshop/05-resident-and-world-1080.webp",
+        "bytes": 180746,
+        "sha256": "6494dc07cf473f54ec026f3c52ab52af426c90687d1e5c6ae101f314d8b4a240",
+        "width": 1920,
+        "height": 1080,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": false
+      },
+      "variants": [
+        {
+          "path": "site/public/media/nomadworkshop/05-resident-and-world-1080-320.webp",
+          "url": "/media/nomadworkshop/05-resident-and-world-1080-320.webp",
+          "bytes": 14170,
+          "sha256": "5b9654d1226ed4a03712254ba499b0b355e68cbb4872b75cf3c6af2bc2f5089c",
+          "width": 320,
+          "height": 180,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/nomadworkshop/05-resident-and-world-1080-640.webp",
+          "url": "/media/nomadworkshop/05-resident-and-world-1080-640.webp",
+          "bytes": 38030,
+          "sha256": "4a653995a60ab1883be5ea3200163270f7b3c1c21133854120e33ae2ba6ff01d",
+          "width": 640,
+          "height": 360,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/nomadworkshop/05-resident-and-world-1080-960.webp",
+          "url": "/media/nomadworkshop/05-resident-and-world-1080-960.webp",
+          "bytes": 68014,
+          "sha256": "e8b59abb23adc009d26a6d77f98f611ac9ef0c8935a23c34e5ac6468621d14e0",
+          "width": 960,
+          "height": 540,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/nomadworkshop/05-resident-and-world-1080-1600.webp",
+          "url": "/media/nomadworkshop/05-resident-and-world-1080-1600.webp",
+          "bytes": 139254,
+          "sha256": "ba843794e4e2a441ee4428f57c076ab453d130c917dbb704687faf7ba5d54dce",
+          "width": 1600,
+          "height": 900,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "NomadWorkshop",
+      "source": "captures/NomadWorkshop/raw/09-dialogue-corrected-1080.png",
+      "source_sha256": "509cb9aa2c1c767de52b15f476ec7d07e9131df5c26ae15b148ac20691e92bab",
+      "source_bytes": 2315298,
+      "source_width": 1920,
+      "source_height": 1080,
+      "source_authenticity": "真实 Unity Editor Game View",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/nomadworkshop/09-dialogue-corrected-1080.webp",
+        "url": "/media/nomadworkshop/09-dialogue-corrected-1080.webp",
+        "bytes": 158486,
+        "sha256": "aaad73a0ded2030038902ba5961a9a6fbfeb36172a851877c83e9b5914338802",
+        "width": 1920,
+        "height": 1080,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": false
+      },
+      "variants": [
+        {
+          "path": "site/public/media/nomadworkshop/09-dialogue-corrected-1080-320.webp",
+          "url": "/media/nomadworkshop/09-dialogue-corrected-1080-320.webp",
+          "bytes": 12918,
+          "sha256": "07e368dc878bcf88d70e9c243c11552892549312bcccc085cd3e19c430ce45da",
+          "width": 320,
+          "height": 180,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/nomadworkshop/09-dialogue-corrected-1080-640.webp",
+          "url": "/media/nomadworkshop/09-dialogue-corrected-1080-640.webp",
+          "bytes": 33656,
+          "sha256": "39fe1dc2adbc37819174c10e4476d33af7952d222337e3ce645d88a69793f9c3",
+          "width": 640,
+          "height": 360,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/nomadworkshop/09-dialogue-corrected-1080-960.webp",
+          "url": "/media/nomadworkshop/09-dialogue-corrected-1080-960.webp",
+          "bytes": 59156,
+          "sha256": "7b3eb62c8f40af80722ba4d11e86c2d972fd154fde090a674d22a018258c37cd",
+          "width": 960,
+          "height": 540,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/nomadworkshop/09-dialogue-corrected-1080-1600.webp",
+          "url": "/media/nomadworkshop/09-dialogue-corrected-1080-1600.webp",
+          "bytes": 121006,
+          "sha256": "740e09f307dc33f3976818473b0415962b8e00ddf95f38793d140e702359b162",
+          "width": 1600,
+          "height": 900,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "NomadWorkshop",
+      "source": "captures/NomadWorkshop/raw/12-facility-interaction-settings.png",
+      "source_sha256": "59a1f6894e81f233dbe9da99d55fd1266ceaad0a4b45f848ea7d03a683fbc189",
+      "source_bytes": 89112,
+      "source_width": 993,
+      "source_height": 993,
+      "source_authenticity": "真实 Unity Editor Inspector · 现有 ScriptableObject",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/nomadworkshop/12-facility-interaction-settings.webp",
+        "url": "/media/nomadworkshop/12-facility-interaction-settings.webp",
+        "bytes": 28856,
+        "sha256": "2b4196a2c1217483c486511ed4d48811dc3ba5f2f499286145da2e344f042d64",
+        "width": 993,
+        "height": 993,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": false
+      },
+      "variants": [
+        {
+          "path": "site/public/media/nomadworkshop/12-facility-interaction-settings-320.webp",
+          "url": "/media/nomadworkshop/12-facility-interaction-settings-320.webp",
+          "bytes": 4880,
+          "sha256": "215f39b9bcdcab3dfd1f84b9648ebb31b29e2ca1c6f46fbbb0f50dcd170d9082",
+          "width": 320,
+          "height": 320,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/nomadworkshop/12-facility-interaction-settings-640.webp",
+          "url": "/media/nomadworkshop/12-facility-interaction-settings-640.webp",
+          "bytes": 15094,
+          "sha256": "98f784a91afe8a2b9473d79f052730932faee59ff5a32da6da0227f7db65fd21",
+          "width": 640,
+          "height": 640,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/nomadworkshop/12-facility-interaction-settings-960.webp",
+          "url": "/media/nomadworkshop/12-facility-interaction-settings-960.webp",
+          "bytes": 28982,
+          "sha256": "44da3797cbee9354fd388856b7319fa2fbc3efd446037fb99319732300fd9ea4",
+          "width": 960,
+          "height": 960,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "NomadWorkshop",
+      "source": "captures/NomadWorkshop/raw/11-deck-layout-definition.png",
+      "source_sha256": "88872d49bd0e3910930f5aecdf710351a1e52dc10140ea499d8fd7357a3964ed",
+      "source_bytes": 64449,
+      "source_width": 993,
+      "source_height": 993,
+      "source_authenticity": "真实 Unity Editor Inspector · 现有 ScriptableObject",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/nomadworkshop/11-deck-layout-definition.webp",
+        "url": "/media/nomadworkshop/11-deck-layout-definition.webp",
+        "bytes": 18494,
+        "sha256": "899cbcbfe9d945f6a289c0e29f1f7f3347ef3b12c7f664d3c2508a3da9d3b7fa",
+        "width": 993,
+        "height": 993,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": false
+      },
+      "variants": [
+        {
+          "path": "site/public/media/nomadworkshop/11-deck-layout-definition-320.webp",
+          "url": "/media/nomadworkshop/11-deck-layout-definition-320.webp",
+          "bytes": 3092,
+          "sha256": "6763650a875bbc6ccd372ba134da925b70046254af1e3c5193deebf031cad2e9",
+          "width": 320,
+          "height": 320,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/nomadworkshop/11-deck-layout-definition-640.webp",
+          "url": "/media/nomadworkshop/11-deck-layout-definition-640.webp",
+          "bytes": 9794,
+          "sha256": "6bc55d9f11e0ba20ce19fa875e8581c49a4a0bbe57a8c0f0be318b51d6430678",
+          "width": 640,
+          "height": 640,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/nomadworkshop/11-deck-layout-definition-960.webp",
+          "url": "/media/nomadworkshop/11-deck-layout-definition-960.webp",
+          "bytes": 17698,
+          "sha256": "fb744f3e48bcf53ab5ff5718fbed35eb9d15124a8b2e6820b6630cd35922ecc1",
+          "width": 960,
+          "height": 960,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "EazyBuildPipeline",
+      "source": "captures/EazyBuildPipeline/raw/13-preprocessor-compact-self-made.png",
+      "source_sha256": "28fd3ad5f572b8a991eff0b1fd3c5677149850382057146f69cc81139f639a28",
+      "source_bytes": 52157,
+      "source_width": 1216,
+      "source_height": 479,
+      "source_authenticity": "真实 Unity 6000.6 Editor 工具窗口 · 自制验证样例",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/eazybuildpipeline/13-preprocessor-compact-self-made.webp",
+        "url": "/media/eazybuildpipeline/13-preprocessor-compact-self-made.webp",
+        "bytes": 15642,
+        "sha256": "cfee37031a473324dfd0020bf97ffd4bbd6adc8a5820e196ae4e980600829cc4",
+        "width": 1216,
+        "height": 479,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/eazybuildpipeline/13-preprocessor-compact-self-made-320.webp",
+          "url": "/media/eazybuildpipeline/13-preprocessor-compact-self-made-320.webp",
+          "bytes": 3054,
+          "sha256": "91497cccd52cbe6cde763a2fe0f5804150c61bdb05bd5857eaefd0740749b9fb",
+          "width": 320,
+          "height": 126,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/eazybuildpipeline/13-preprocessor-compact-self-made-640.webp",
+          "url": "/media/eazybuildpipeline/13-preprocessor-compact-self-made-640.webp",
+          "bytes": 8528,
+          "sha256": "b7ef668ff207b6abe63eae38152e405d63101421a76de8a2f2cc9add81fa9919",
+          "width": 640,
+          "height": 252,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/eazybuildpipeline/13-preprocessor-compact-self-made-960.webp",
+          "url": "/media/eazybuildpipeline/13-preprocessor-compact-self-made-960.webp",
+          "bytes": 15248,
+          "sha256": "86dc65282608214ed7eba97cd39bb84d46a7b7d5813f5fe133ab88990fca5707",
+          "width": 960,
+          "height": 378,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "EazyBuildPipeline",
+      "source": "captures/EazyBuildPipeline/raw/14-bundle-map-compact-self-made.png",
+      "source_sha256": "784cc318fa4104c7bccf5994417d9cfd6f994bcb30a3d38f8c2a7594b2c1ea47",
+      "source_bytes": 55187,
+      "source_width": 1216,
+      "source_height": 479,
+      "source_authenticity": "真实 Unity 6000.6 Editor 工具窗口 · 自制验证样例",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/eazybuildpipeline/14-bundle-map-compact-self-made.webp",
+        "url": "/media/eazybuildpipeline/14-bundle-map-compact-self-made.webp",
+        "bytes": 15620,
+        "sha256": "d1cbe57f323fc9239f1e0230847ccd8f1dccafca11f6de7a408292e6a614e321",
+        "width": 1216,
+        "height": 479,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/eazybuildpipeline/14-bundle-map-compact-self-made-320.webp",
+          "url": "/media/eazybuildpipeline/14-bundle-map-compact-self-made-320.webp",
+          "bytes": 2404,
+          "sha256": "e9182bcb73f2e0a902e68d85b7d5b9f90fbbea5f981a6535cc5f4c6b09c1d980",
+          "width": 320,
+          "height": 126,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/eazybuildpipeline/14-bundle-map-compact-self-made-640.webp",
+          "url": "/media/eazybuildpipeline/14-bundle-map-compact-self-made-640.webp",
+          "bytes": 8320,
+          "sha256": "20f5d21e4b98e4758cbc07269cd0d16181a2b00293405bb2a43b0ad64f545340",
+          "width": 640,
+          "height": 252,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/eazybuildpipeline/14-bundle-map-compact-self-made-960.webp",
+          "url": "/media/eazybuildpipeline/14-bundle-map-compact-self-made-960.webp",
+          "bytes": 14244,
+          "sha256": "a37b3088ef466483156149ba4a9f71d0ad577b3641eb5d1165c46fe137459d46",
+          "width": 960,
+          "height": 378,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "EazyBuildPipeline",
+      "source": "captures/EazyBuildPipeline/raw/04-reverse-dependencies-three-assets.png",
+      "source_sha256": "0c877a6fd20199d8197d6371ca6ee53261364e97bf076f2e3c6fd8c12b550162",
+      "source_bytes": 41998,
+      "source_width": 1216,
+      "source_height": 539,
+      "source_authenticity": "真实 Unity 6000.6 Editor 工具窗口 · 自制验证样例",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/eazybuildpipeline/04-reverse-dependencies-three-assets.webp",
+        "url": "/media/eazybuildpipeline/04-reverse-dependencies-three-assets.webp",
+        "bytes": 12864,
+        "sha256": "9487099e36640c6fd5f6390966cce30645531ace66e5d27115ed9fda80cb3189",
+        "width": 1216,
+        "height": 539,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/eazybuildpipeline/04-reverse-dependencies-three-assets-320.webp",
+          "url": "/media/eazybuildpipeline/04-reverse-dependencies-three-assets-320.webp",
+          "bytes": 1828,
+          "sha256": "dde15061702b9756c1914022e69dcce2dc5280e1e94ffc9357b11e501b9b6a24",
+          "width": 320,
+          "height": 142,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/eazybuildpipeline/04-reverse-dependencies-three-assets-640.webp",
+          "url": "/media/eazybuildpipeline/04-reverse-dependencies-three-assets-640.webp",
+          "bytes": 5458,
+          "sha256": "8c2087f61e4b223551712545b3095ba70dc56370c8ca70b9c6f13ea12d9fc65d",
+          "width": 640,
+          "height": 284,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/eazybuildpipeline/04-reverse-dependencies-three-assets-960.webp",
+          "url": "/media/eazybuildpipeline/04-reverse-dependencies-three-assets-960.webp",
+          "bytes": 10190,
+          "sha256": "d583c1f166a426b4420d05d72ddd6cb82ce93ffdd30bdbb51af2ba9a9a38684a",
+          "width": 960,
+          "height": 426,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "EazyBuildPipeline",
+      "source": "captures/EazyBuildPipeline/raw/15-unused-assets-compact-self-made.png",
+      "source_sha256": "5ef6e9472bc7ad82cf7d8efab7855299c464c314b9b6d6582b0988004e96eb5f",
+      "source_bytes": 55558,
+      "source_width": 1216,
+      "source_height": 509,
+      "source_authenticity": "真实 Unity 6000.6 Editor 工具窗口 · 自制验证样例",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/eazybuildpipeline/15-unused-assets-compact-self-made.webp",
+        "url": "/media/eazybuildpipeline/15-unused-assets-compact-self-made.webp",
+        "bytes": 16058,
+        "sha256": "3646208a4d1d0ae1ed0fd8e0221b3ba132f58e0bc93c3dd34383c686e006000e",
+        "width": 1216,
+        "height": 509,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/eazybuildpipeline/15-unused-assets-compact-self-made-320.webp",
+          "url": "/media/eazybuildpipeline/15-unused-assets-compact-self-made-320.webp",
+          "bytes": 2608,
+          "sha256": "2a5e24563464a833b57076b7662b3365a8cc86183ff2e644bb48354daec3176c",
+          "width": 320,
+          "height": 134,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/eazybuildpipeline/15-unused-assets-compact-self-made-640.webp",
+          "url": "/media/eazybuildpipeline/15-unused-assets-compact-self-made-640.webp",
+          "bytes": 7790,
+          "sha256": "54d46ced1c1b4d873d4b3ca76ec86fc63f4d7e2ab6a9aeb027cfd421eada4f85",
+          "width": 640,
+          "height": 268,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/eazybuildpipeline/15-unused-assets-compact-self-made-960.webp",
+          "url": "/media/eazybuildpipeline/15-unused-assets-compact-self-made-960.webp",
+          "bytes": 14656,
+          "sha256": "3a3344cae4afda24c4e0359ab5de97acabfa7fe7175db3350a1f8e18212074e5",
+          "width": 960,
+          "height": 402,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "EazyBuildPipeline",
+      "source": "captures/EazyBuildPipeline/raw/18-script-defines-clear-empty-state.png",
+      "source_sha256": "7da0c13e3e4d60ae95d7f2a6775007d5dced433b75b6ba0b633636a3ded04fac",
+      "source_bytes": 71762,
+      "source_width": 1216,
+      "source_height": 509,
+      "source_authenticity": "真实 Unity 6000.6 Editor 工具窗口 · 自制验证样例",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/eazybuildpipeline/18-script-defines-clear-empty-state.webp",
+        "url": "/media/eazybuildpipeline/18-script-defines-clear-empty-state.webp",
+        "bytes": 24500,
+        "sha256": "2c7af60ea4b89021b9ed8bdeaea672463619859f2ddac4590795a9b214327390",
+        "width": 1216,
+        "height": 509,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/eazybuildpipeline/18-script-defines-clear-empty-state-320.webp",
+          "url": "/media/eazybuildpipeline/18-script-defines-clear-empty-state-320.webp",
+          "bytes": 3948,
+          "sha256": "a949824d90216e906cd9f665644a71990703c2cead6af96341e05f87ba7563d2",
+          "width": 320,
+          "height": 134,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/eazybuildpipeline/18-script-defines-clear-empty-state-640.webp",
+          "url": "/media/eazybuildpipeline/18-script-defines-clear-empty-state-640.webp",
+          "bytes": 11510,
+          "sha256": "1ca06e105ffdb9b40cd7963be6d2feda6b2e410513b7d7009cfd05e4eb59d320",
+          "width": 640,
+          "height": 268,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/eazybuildpipeline/18-script-defines-clear-empty-state-960.webp",
+          "url": "/media/eazybuildpipeline/18-script-defines-clear-empty-state-960.webp",
+          "bytes": 20696,
+          "sha256": "0081f82186518cbf3d3a3fac7c4ed13c74c995f705b7a1fd3f01025cf4b36bcb",
+          "width": 960,
+          "height": 402,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "EazyBuildPipeline",
+      "source": "captures/EazyBuildPipeline/raw/17-master-general-clear-empty-state.png",
+      "source_sha256": "3238babbec99cb7d078a2bce8c321457433889f86d35db369ee069c7d79de432",
+      "source_bytes": 91674,
+      "source_width": 1216,
+      "source_height": 689,
+      "source_authenticity": "真实 Unity 6000.6 Editor 工具窗口 · 自制验证样例",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/eazybuildpipeline/17-master-general-clear-empty-state.webp",
+        "url": "/media/eazybuildpipeline/17-master-general-clear-empty-state.webp",
+        "bytes": 28138,
+        "sha256": "4e8d6198b433108f0c1fd0905f0a9c2dacf065d12495c603102383783fd2eab7",
+        "width": 1216,
+        "height": 689,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/eazybuildpipeline/17-master-general-clear-empty-state-320.webp",
+          "url": "/media/eazybuildpipeline/17-master-general-clear-empty-state-320.webp",
+          "bytes": 4360,
+          "sha256": "85da322e2546c4b72ac549bec49caec34768c84efe1dbe7075fffc5815ad5c32",
+          "width": 320,
+          "height": 181,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/eazybuildpipeline/17-master-general-clear-empty-state-640.webp",
+          "url": "/media/eazybuildpipeline/17-master-general-clear-empty-state-640.webp",
+          "bytes": 12686,
+          "sha256": "fcc6ee67c107d4ca9c16a206960e561b4dc91e784ee0621e374849f111f63cb0",
+          "width": 640,
+          "height": 363,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/eazybuildpipeline/17-master-general-clear-empty-state-960.webp",
+          "url": "/media/eazybuildpipeline/17-master-general-clear-empty-state-960.webp",
+          "bytes": 22862,
+          "sha256": "8e0a45d9a08d9074143494e8f2ad01e3e0425cfbb085c5a4a52724b746b74119",
+          "width": 960,
+          "height": 544,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "EazyBuildPipeline",
+      "source": "captures/EazyBuildPipeline/raw/19-android-clear-empty-state.png",
+      "source_sha256": "35682b12871d5857ffa95c08ad6c3791fc1a99ddf85c5f1f9fc656a995fd01be",
+      "source_bytes": 122419,
+      "source_width": 1216,
+      "source_height": 939,
+      "source_authenticity": "真实 Unity 6000.6 Editor 工具窗口 · 自制验证样例",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/eazybuildpipeline/19-android-clear-empty-state.webp",
+        "url": "/media/eazybuildpipeline/19-android-clear-empty-state.webp",
+        "bytes": 35284,
+        "sha256": "e3c52ba24ca4908bb6b2e3cea41e5a7205814b9c96e8621e8c64e69ce72fda31",
+        "width": 1216,
+        "height": 939,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/eazybuildpipeline/19-android-clear-empty-state-320.webp",
+          "url": "/media/eazybuildpipeline/19-android-clear-empty-state-320.webp",
+          "bytes": 5704,
+          "sha256": "04b454f84842205b9a48757a7fc43b665d66abd48ca531df7dd20eea649ec411",
+          "width": 320,
+          "height": 247,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/eazybuildpipeline/19-android-clear-empty-state-640.webp",
+          "url": "/media/eazybuildpipeline/19-android-clear-empty-state-640.webp",
+          "bytes": 16532,
+          "sha256": "b46fdd796eb23886d852f54c2db77f1bb596dfb3530e079a8f8e48786914ef7a",
+          "width": 640,
+          "height": 494,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/eazybuildpipeline/19-android-clear-empty-state-960.webp",
+          "url": "/media/eazybuildpipeline/19-android-clear-empty-state-960.webp",
+          "bytes": 29984,
+          "sha256": "c45f8d9969611e0e8dce7d7d6d393ccc392e397a5582a1023d37f9fe88bf4246",
+          "width": 960,
+          "height": 741,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "EazyBuildPipeline",
+      "source": "captures/EazyBuildPipeline/raw/20-ios-clear-empty-state.png",
+      "source_sha256": "a18f7991a0801fffb7e5327cc76f32d36a5fe271674b0b229b570932b390ed69",
+      "source_bytes": 120715,
+      "source_width": 1216,
+      "source_height": 939,
+      "source_authenticity": "真实 Unity 6000.6 Editor 工具窗口 · 自制验证样例",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/eazybuildpipeline/20-ios-clear-empty-state.webp",
+        "url": "/media/eazybuildpipeline/20-ios-clear-empty-state.webp",
+        "bytes": 35518,
+        "sha256": "f5cbf06e0b2c51e94b26a69a53a2cc5b8d86c89d9a7726471d4553760e76df52",
+        "width": 1216,
+        "height": 939,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/eazybuildpipeline/20-ios-clear-empty-state-320.webp",
+          "url": "/media/eazybuildpipeline/20-ios-clear-empty-state-320.webp",
+          "bytes": 5424,
+          "sha256": "6f5f7561a7497175343d8f0ea51619c17b2e250ec610abcb29af86b750422e0f",
+          "width": 320,
+          "height": 247,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/eazybuildpipeline/20-ios-clear-empty-state-640.webp",
+          "url": "/media/eazybuildpipeline/20-ios-clear-empty-state-640.webp",
+          "bytes": 16288,
+          "sha256": "874925c06726fb59504423a4cc9d71de31ba7f372d25f5b95886ef0e5e79bf4e",
+          "width": 640,
+          "height": 494,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/eazybuildpipeline/20-ios-clear-empty-state-960.webp",
+          "url": "/media/eazybuildpipeline/20-ios-clear-empty-state-960.webp",
+          "bytes": 29638,
+          "sha256": "0f6ad777e8f743989d10c19c5d555a36fdefd0b21dbbeb39be735d78878ef93a",
+          "width": 960,
+          "height": 741,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "SSFramework",
+      "source": "captures/SSFramework/raw/05-module-tools-center.png",
+      "source_sha256": "065223740f0c06333cc09ffa2714d1384fd2c9ce33c460bf0f08a03fbbd5e12b",
+      "source_bytes": 160977,
+      "source_width": 1196,
+      "source_height": 889,
+      "source_authenticity": "真实 Unity Editor 工具窗口或弹窗；原图未作像素编辑。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/ssframework/05-module-tools-center.webp",
+        "url": "/media/ssframework/05-module-tools-center.webp",
+        "bytes": 54648,
+        "sha256": "6b02836dcbb423774319e5b2d6153df26688624f7919b240a272258ce8fdefb7",
+        "width": 1196,
+        "height": 889,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/ssframework/05-module-tools-center-320.webp",
+          "url": "/media/ssframework/05-module-tools-center-320.webp",
+          "bytes": 6762,
+          "sha256": "c5ac02c38d0de9cb954d7bfd9118cab65dd5b2fc4139c8fefe00cb1dbf0cc27f",
+          "width": 320,
+          "height": 238,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/ssframework/05-module-tools-center-640.webp",
+          "url": "/media/ssframework/05-module-tools-center-640.webp",
+          "bytes": 18878,
+          "sha256": "1cdfb5f1cd23c17561a461e46739ca31738b423ccf86becae5c06454af24c7e1",
+          "width": 640,
+          "height": 476,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/ssframework/05-module-tools-center-960.webp",
+          "url": "/media/ssframework/05-module-tools-center-960.webp",
+          "bytes": 36126,
+          "sha256": "bcf257d4d9317bb42061fe5bf7e2c497b66246b0c96b72d2c7a905b7cb5bd16a",
+          "width": 960,
+          "height": 714,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "SSFramework",
+      "source": "captures/SSFramework/raw/08-module-dependency-audit.png",
+      "source_sha256": "a8b57a926475e27f092a92d615a264e47a6749d071648bc48552a5d7db06cffa",
+      "source_bytes": 244782,
+      "source_width": 1196,
+      "source_height": 889,
+      "source_authenticity": "真实 Unity Editor 工具窗口或弹窗；原图未作像素编辑。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/ssframework/08-module-dependency-audit.webp",
+        "url": "/media/ssframework/08-module-dependency-audit.webp",
+        "bytes": 84044,
+        "sha256": "1b2b6feaff4a78e46bef00a99ad797251a0c7fda8015ac0c447afba68511c69d",
+        "width": 1196,
+        "height": 889,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/ssframework/08-module-dependency-audit-320.webp",
+          "url": "/media/ssframework/08-module-dependency-audit-320.webp",
+          "bytes": 11016,
+          "sha256": "c67e93769b8a548f41a483d2f9a76bd36a32278833cbc754e2ee107c5e29659c",
+          "width": 320,
+          "height": 238,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/ssframework/08-module-dependency-audit-640.webp",
+          "url": "/media/ssframework/08-module-dependency-audit-640.webp",
+          "bytes": 35336,
+          "sha256": "0378371a24bc89223415f411f077e314b327ffeddf09037ed45e23205d184332",
+          "width": 640,
+          "height": 476,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/ssframework/08-module-dependency-audit-960.webp",
+          "url": "/media/ssframework/08-module-dependency-audit-960.webp",
+          "bytes": 70336,
+          "sha256": "ed122a2b4deede738cb8195990782588c8ce24517182064485e59868f85cb430",
+          "width": 960,
+          "height": 714,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "SSFramework",
+      "source": "captures/SSFramework/raw/15-hierarchy-binding-compact.png",
+      "source_sha256": "090fa489371437a4b65e69ad06164199907a0f156ed7c388fd9da6a1c1a0e4fc",
+      "source_bytes": 44443,
+      "source_width": 856,
+      "source_height": 369,
+      "source_authenticity": "真实 Unity Editor 工具窗口或弹窗；原图未作像素编辑。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/ssframework/15-hierarchy-binding-compact.webp",
+        "url": "/media/ssframework/15-hierarchy-binding-compact.webp",
+        "bytes": 13090,
+        "sha256": "5d8fc3004100714b28a1cf0c7b16263466888caaad807d6344cfe57b52af9a9c",
+        "width": 856,
+        "height": 369,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/ssframework/15-hierarchy-binding-compact-320.webp",
+          "url": "/media/ssframework/15-hierarchy-binding-compact-320.webp",
+          "bytes": 3342,
+          "sha256": "b15621104f6245f1368d3887799dbb22772d91cedf7ed016572e9bcc9d5a1a86",
+          "width": 320,
+          "height": 138,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/ssframework/15-hierarchy-binding-compact-640.webp",
+          "url": "/media/ssframework/15-hierarchy-binding-compact-640.webp",
+          "bytes": 10576,
+          "sha256": "71f9b613f1c14ab24944d1a9ad28780ef795cec98c2f315995af5871760f577c",
+          "width": 640,
+          "height": 276,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "SSFramework",
+      "source": "captures/SSFramework/raw/16-binding-generated-script-links.png",
+      "source_sha256": "febbee5206d7d2ab0fb230429af569bb84c66dc3fbf29288e5947cc027b5f4f2",
+      "source_bytes": 69019,
+      "source_width": 436,
+      "source_height": 496,
+      "source_authenticity": "真实 Unity Editor 工具窗口或弹窗；原图未作像素编辑。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/ssframework/16-binding-generated-script-links.webp",
+        "url": "/media/ssframework/16-binding-generated-script-links.webp",
+        "bytes": 27472,
+        "sha256": "caca5991f561e23aa146662b54df41fc372f8b53f5cda45301ec3039c634788c",
+        "width": 436,
+        "height": 496,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/ssframework/16-binding-generated-script-links-320.webp",
+          "url": "/media/ssframework/16-binding-generated-script-links-320.webp",
+          "bytes": 19940,
+          "sha256": "21b10bf30d20309345c946fef556904e4079d301a6ce980f1a4f738faa70cb98",
+          "width": 320,
+          "height": 364,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "SSFramework",
+      "source": "captures/SSFramework/raw/17-actual-generated-binding-source.png",
+      "source_sha256": "a7ed343bb495629b91531b899c5f22df058ed5b6fb35ca93487b38883176b2a8",
+      "source_bytes": 142433,
+      "source_width": 1196,
+      "source_height": 689,
+      "source_authenticity": "真实 Unity Editor 工具窗口或弹窗；原图未作像素编辑。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/ssframework/17-actual-generated-binding-source.webp",
+        "url": "/media/ssframework/17-actual-generated-binding-source.webp",
+        "bytes": 57466,
+        "sha256": "ddc6ee0bae51ed5b4b0796bef4f472250a1b02518b406a385f35e110783099ad",
+        "width": 1196,
+        "height": 689,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/ssframework/17-actual-generated-binding-source-320.webp",
+          "url": "/media/ssframework/17-actual-generated-binding-source-320.webp",
+          "bytes": 5864,
+          "sha256": "09d660cd52146a1692ff6e888f59f91afb4a32151b7d069e683bd60ba78c83d3",
+          "width": 320,
+          "height": 184,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/ssframework/17-actual-generated-binding-source-640.webp",
+          "url": "/media/ssframework/17-actual-generated-binding-source-640.webp",
+          "bytes": 24614,
+          "sha256": "281ca6c431d470491ae0309dabbe9d1ef87b191e8edbacbd83b5ec30a05a9d3a",
+          "width": 640,
+          "height": 369,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/ssframework/17-actual-generated-binding-source-960.webp",
+          "url": "/media/ssframework/17-actual-generated-binding-source-960.webp",
+          "bytes": 47400,
+          "sha256": "d13a76ce4d98971beba45600ca31c6a3fc61c1c9dec5a84ea4d41c76906efb51",
+          "width": 960,
+          "height": 553,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "SSFramework",
+      "source": "captures/SSFramework/raw/18-binding-directory-resolution.png",
+      "source_sha256": "6bc075611d812e54e3d808a6811d9db6483ae6c65033a404aff02cc197c855ea",
+      "source_bytes": 147775,
+      "source_width": 1196,
+      "source_height": 889,
+      "source_authenticity": "真实 Unity Editor 工具窗口或弹窗；原图未作像素编辑。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/ssframework/18-binding-directory-resolution.webp",
+        "url": "/media/ssframework/18-binding-directory-resolution.webp",
+        "bytes": 43506,
+        "sha256": "c8ace632618599feb489801c6bc5064d59f845f2fbfcd4744f0d5f43ce6ac35c",
+        "width": 1196,
+        "height": 889,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/ssframework/18-binding-directory-resolution-320.webp",
+          "url": "/media/ssframework/18-binding-directory-resolution-320.webp",
+          "bytes": 7230,
+          "sha256": "5fe2210b639d9c160e0cdf4e23742203ce18baaae0b3e80bc5119ec1a4d0ffba",
+          "width": 320,
+          "height": 238,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/ssframework/18-binding-directory-resolution-640.webp",
+          "url": "/media/ssframework/18-binding-directory-resolution-640.webp",
+          "bytes": 20712,
+          "sha256": "bcec34bc65cb17738a58a9b8c27c469fee1dafd31649703c848dc8b6fa1e60df",
+          "width": 640,
+          "height": 476,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/ssframework/18-binding-directory-resolution-960.webp",
+          "url": "/media/ssframework/18-binding-directory-resolution-960.webp",
+          "bytes": 38918,
+          "sha256": "5e5ec1984e8a538d23c7522b527f56fc96012bdfd30fad2b1292cc6524c50a96",
+          "width": 960,
+          "height": 714,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "SSFramework",
+      "source": "captures/SSFramework/raw/13-node-component-popup.png",
+      "source_sha256": "314b7a02ef4c0838be93c5ce23dace7df6120b355b453f8ea7807d4523628e74",
+      "source_bytes": 13806,
+      "source_width": 300,
+      "source_height": 214,
+      "source_authenticity": "真实 Unity Editor 工具窗口或弹窗；原图未作像素编辑。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/ssframework/13-node-component-popup.webp",
+        "url": "/media/ssframework/13-node-component-popup.webp",
+        "bytes": 5064,
+        "sha256": "1b1d60fec66ea928ce02032d8ae3af13d8e23701d5ec0901d7908a2c6498f031",
+        "width": 300,
+        "height": 214,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": []
+    }
+  ],
+  "video": {
+    "path": "site/public/media/china-house-price-map/demo.mp4",
+    "url": "/media/china-house-price-map/demo.mp4",
+    "bytes": 1363373,
+    "sha256": "3e63812f8d103c794dfe814e07c69770720191ce7fd3b3bf42b3643a1eda3a98",
+    "source": "captures/china-house-price-map/video/map-ui-native720.mp4",
+    "source_sha256": "3e63812f8d103c794dfe814e07c69770720191ce7fd3b3bf42b3643a1eda3a98",
+    "exact_copy": true,
+    "width": 1280,
+    "height": 720,
+    "note": "Real map UI capture, 19.133 s, encoded 30 CFR with frame duplication; not a rendering performance claim."
+  },
+  "totals": {
+    "original_image_count": 64,
+    "exported_image_count": 261,
+    "source_image_bytes": 27840548,
+    "exported_image_bytes": 16599262,
+    "video_bytes": 1363373,
+    "font_bytes": 327056,
+    "font_license_and_provenance_bytes": 12907,
+    "published_media_bytes": 18289691,
+    "total_public_asset_count": 267,
+    "total_public_asset_bytes": 18302598
+  },
+  "fonts": {
+    "codec": "fontTools WOFF2 with Node native zlib Brotli (quality 11 / font mode), invoked by fontTools",
+    "content_sources": [
+      "captures/selected-manifest.json",
+      "design/v3/index.html",
+      "site/src/components/FrameworkDiagram.astro",
+      "site/src/components/Icon.astro",
+      "site/src/components/LabWorkbench.astro",
+      "site/src/components/MediaImage.astro",
+      "site/src/components/ProjectCard.astro",
+      "site/src/components/ProjectDownload.astro",
+      "site/src/components/ProjectEngineering.astro",
+      "site/src/components/ProjectSignature.astro",
+      "site/src/data/project-signatures.ts",
+      "site/src/data/project-stories.ts",
+      "site/src/data/projects.ts",
+      "site/src/data/stories/dubforge.ts",
+      "site/src/data/stories/other-projects.ts",
+      "site/src/data/stories/ssframework.ts",
+      "site/src/data/story-media.ts",
+      "site/src/data/story-types.ts",
+      "site/src/data/types.ts",
+      "site/src/layouts/Base.astro",
+      "site/src/lib/evolution.ts",
+      "site/src/lib/floyd.ts",
+      "site/src/lib/github-release.ts",
+      "site/src/lib/site-path.ts",
+      "site/src/pages/404.astro",
+      "site/src/pages/about/index.astro",
+      "site/src/pages/index.astro",
+      "site/src/pages/lab/index.astro",
+      "site/src/pages/projects/[slug].astro",
+      "site/src/pages/projects/index.astro",
+      "site/src/scripts/downloads.ts",
+      "site/src/scripts/project-filter.ts",
+      "site/src/scripts/site.ts",
+      "site/src/styles/global.css"
+    ],
+    "noto_original_metadata": {
+      "0": [
+        "© 2014-2021 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'."
+      ],
+      "1": [
+        "Noto Sans SC"
+      ],
+      "2": [
+        "Regular"
+      ],
+      "5": [
+        "Version 2.04;241114210130;non-release"
+      ],
+      "13": [
+        "This Font Software is licensed under the SIL Open Font License, Version 1.1. This Font Software is distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the SIL Open Font License for the specific language, permissions and limitations governing your use of this Font Software."
+      ],
+      "14": [
+        "http://scripts.sil.org/OFL"
+      ]
+    },
+    "noto_license_source": "https://raw.githubusercontent.com/google/fonts/main/ofl/notosanssc/OFL.txt",
+    "font_files": [
+      {
+        "path": "site/public/fonts/rajdhani-semibold.woff2",
+        "url": "/fonts/rajdhani-semibold.woff2",
+        "bytes": 14576,
+        "sha256": "f0bf4b2494c776fa2cf25394b48b0f27ab8b9d5e12344529cdbd00528d3ca1ea",
+        "family": "Rajdhani",
+        "source": "E:\\GPT-Projects\\个人网站\\design\\v3\\assets\\Rajdhani-SemiBold.ttf",
+        "source_sha256": "94bbd25a18ca665999feb05a537de9fd2b860dcfb78bbe9ca00270825bf235da",
+        "source_bytes": 390340,
+        "requested_codepoints": 224,
+        "included_codepoints": 179,
+        "missing_cjk": [],
+        "roundtrip_decode_verified": true
+      },
+      {
+        "path": "site/public/fonts/noto-sans-sc-subset.woff2",
+        "url": "/fonts/noto-sans-sc-subset.woff2",
+        "bytes": 312480,
+        "sha256": "f0fa8f00c5718d763637e2dcf01032118c8ebb03e93d4cf8d504681cd5caf320",
+        "family": "Noto Sans SC",
+        "source": "C:\\Windows\\Fonts\\NotoSansSC-VF.ttf",
+        "source_sha256": "763146584cf0710223441356b4395e279021b0806c196614377a7a0174ae074a",
+        "source_bytes": 17773244,
+        "requested_codepoints": 1094,
+        "included_codepoints": 1094,
+        "missing_cjk": [],
+        "roundtrip_decode_verified": true
+      }
+    ],
+    "license_files": [
+      {
+        "path": "site/public/fonts/Rajdhani-OFL.txt",
+        "url": "/fonts/Rajdhani-OFL.txt",
+        "bytes": 4373,
+        "sha256": "f62ef357d3a1c3d27edd35a6e1ba350e8a8d13499797964eeadefbf0b3b15d1f"
+      },
+      {
+        "path": "site/public/fonts/NotoSansSC-OFL.txt",
+        "url": "/fonts/NotoSansSC-OFL.txt",
+        "bytes": 4388,
+        "sha256": "1c05c68c34f9708415aada51f17e1b0092d2cea709bf4a94cd38114f9e73d7d9"
+      }
+    ],
+    "refresh_rule": "Re-run prepare-media.py --fonts-only after adding website copy; only supported current glyphs are included."
+  }
+}

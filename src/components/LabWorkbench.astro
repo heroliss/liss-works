@@ -1,0 +1,350 @@
+---
+import { sitePath } from '../lib/site-path';
+import { adjacencyMatrix, computeFloyd, graphNodes, presetEdges, reconstructPath, routeEdges } from '../lib/floyd';
+import { createEvolution, perfectScore } from '../lib/evolution';
+interface Props { compact?: boolean }
+const { compact = false } = Astro.props;
+const nodes = graphNodes;
+const edges = presetEdges('network');
+const initial = computeFloyd(adjacencyMatrix(nodes, edges));
+const path = reconstructPath(initial.predecessors, 0, 5);
+const highlighted = routeEdges(path, nodes);
+const ga = createEvolution(42);
+---
+
+<lab-workbench class:list={['workbench', { compact }]} data-compact={String(compact)}>
+  {!compact && <header class="lab-intro">
+    <h2>让路径自己算出来</h2>
+    <p>修改连接、选择节点，观察最短路径怎样变化。这里是 <a href="https://github.com/heroliss/FloydShortestPath" target="_blank" rel="noreferrer">FloydShortestPath</a> 的网页算法移植；原 C# 仓库已独立验证，以下是可操作的说明实验，并非原程序截图。</p>
+  </header>}
+  <div class="floyd-layout">
+    <div class="graph-pane">
+      <div class="graph-toolbar">
+        <span class="graph-kind">无向带权图</span>
+        <div class="pick-control" role="group" aria-label="点击图中节点时设置">
+          <button type="button" data-pick="start" aria-pressed="false">选起点</button>
+          <button type="button" data-pick="end" aria-pressed="true">选终点</button>
+        </div>
+      </div>
+      <svg class="graph" viewBox="0 0 600 360" role="group" aria-label="六节点路径图。可聚焦节点，按回车或空格选择。青色线表示当前最短路径。">
+        <g data-edges>
+          {edges.map((edge) => {
+            const from = nodes.find((node) => node.id === edge.from)!;
+            const to = nodes.find((node) => node.id === edge.to)!;
+            return <g class:list={['graph-edge', { active: highlighted.has([edge.from, edge.to].sort().join('-')) }]}>
+              <line x1={from.x} y1={from.y} x2={to.x} y2={to.y} />
+              <text x={(from.x + to.x) / 2} y={(from.y + to.y) / 2 - 9}>{edge.weight}</text>
+            </g>;
+          })}
+        </g>
+        <g>
+          {nodes.map((node, index) => <g class:list={['graph-node', { endpoint: index === 0 || index === 5, 'on-path': path.includes(index) }]} role="button" tabindex="0" data-node={node.id} aria-label={`${node.id}，选择为终点`} aria-pressed={index === 5}>
+            <circle class="node-hit" cx={node.x} cy={node.y} r="41" />
+            <circle cx={node.x} cy={node.y} r="26" />
+            <text x={node.x} y={node.y + 1}>{node.id}</text>
+            <text class="endpoint-label" data-node-role x={node.x} y={node.y + 47}>{index === 0 ? '起点' : index === 5 ? '终点' : ''}</text>
+          </g>)}
+        </g>
+      </svg>
+      <p class="graph-hint">点选节点，也可使用起点与终点菜单。</p>
+    </div>
+    <div class="route-pane">
+      <div class="route-inputs">
+        <label>起点<select name="start" aria-label="起点">{nodes.map((node) => <option value={node.id} selected={node.id === 'A'}>{node.id}</option>)}</select></label>
+        <label>终点<select name="end" aria-label="终点">{nodes.map((node) => <option value={node.id} selected={node.id === 'F'}>{node.id}</option>)}</select></label>
+      </div>
+      <div class="route-result" role="status" aria-live="polite" aria-atomic="true">
+        <span class="result-label" data-result-label>最短路径</span>
+        <p class="route-sequence" data-route>{path.map((index) => nodes[index].id).join(' → ')}</p>
+        <p class="distance">总距离 <strong data-distance>{initial.distances[0][5]}</strong></p>
+      </div>
+      {!compact && <div class="graph-settings">
+        <label>连接方案<select name="preset" aria-label="连接方案">
+          <option value="network">基础网络</option><option value="shortcut">近路：C — E 权重降为 2</option><option value="disconnected">F 节点断开</option>
+        </select></label>
+        <form data-edge-form>
+          <label>修改边<select name="edge" aria-label="选择要修改的边">{edges.map((edge) => <option value={`${edge.from}-${edge.to}`}>{edge.from} — {edge.to}</option>)}</select></label>
+          <label>权重<input name="weight" type="number" min="0" max="99" step="1" value="4" inputmode="numeric" required aria-label="边的权重，0 到 99 的整数" /></label>
+          <button class="wb-button" type="submit">应用边权</button>
+        </form>
+        <p class="input-note" data-input-note aria-live="polite">权重为 0–99 的整数；路径会即时重新计算。</p>
+        <button class="wb-button secondary" type="button" data-reset>重置网络</button>
+      </div>}
+      {compact && <a class="lab-link" href={sitePath('/lab/')}>修改边权，展开矩阵</a>}
+    </div>
+  </div>
+  {!compact && <div class="matrix-section">
+    <div class="matrix-heading"><h3>把结果放进矩阵</h3><label>查看<select name="matrix" aria-label="矩阵类型"><option value="shortest">最短距离矩阵</option><option value="adjacency">原始邻接矩阵</option></select></label></div>
+    <p class="matrix-note">行是起点，列是终点。∞ 表示不可达；青色单元格对应当前查询。</p>
+    <div class="matrix-scroll" tabindex="0" role="region" aria-label="路径距离矩阵，可横向滚动">
+      <table class="distance-matrix">
+        <caption data-matrix-caption>最短距离矩阵</caption>
+        <thead><tr><th scope="col"><span class="sr-only">起点 / 终点</span></th>{nodes.map((node) => <th scope="col">{node.id}</th>)}</tr></thead>
+        <tbody>{nodes.map((node, i) => <tr><th scope="row">{node.id}</th>{nodes.map((_, j) => <td data-row={i} data-col={j} class:list={{ 'queried-cell': i === 0 && j === 5 }}>{Number.isFinite(initial.distances[i][j]) ? initial.distances[i][j] : '∞'}</td>)}</tr>)}</tbody>
+      </table>
+    </div>
+  </div>}
+
+  {!compact && <section id="evolution" class="evolution-section" aria-label="遗传算法排序实验">
+    <div class="evolution-copy"><h2>看一组排列慢慢有序</h2><p>基于 <a href="https://github.com/heroliss/GA-sort" target="_blank" rel="noreferrer">GA-sort</a> 思路的网页说明实验，非原 Python 程序。48 个候选排列通过选择、交叉与变异演化，柱形展示最佳个体，适应度按顺序正确的数对计分。</p></div>
+    <div class="evolution-display">
+      <div class="ga-bars" role="img" aria-label={`当前最佳排列：${ga.best.join('、')}`} data-ga-bars>{ga.best.map((value) => <div class="ga-bar" style={`--bar-height: ${value / 8 * 100}%`} data-bar><span>{value}</span></div>)}</div>
+      <p class="ga-status" aria-live="polite" aria-atomic="true" data-ga-status>第 0 代 · 最佳适应度 {ga.bestScore} / {perfectScore}</p>
+      <div class="ga-controls"><label>随机种子<input type="number" name="seed" value="42" min="1" max="4294967295" step="1" inputmode="numeric" /></label><button class="wb-button" type="button" data-ga-step>演化一代</button><button class="wb-button secondary" type="button" data-ga-play aria-pressed="false">连续演化</button><button class="wb-button secondary" type="button" data-ga-reset>重新开始</button></div>
+      <p class="input-note" data-ga-note>相同种子可复现。达到 28 / 28 时已完全有序；演化最多运行 500 代。</p>
+    </div>
+  </section>}
+  <noscript><p class="noscript-note">当前展示默认计算结果。启用 JavaScript 后可以选择节点、调整边权和运行演化。</p></noscript>
+</lab-workbench>
+
+<script>
+  import { adjacencyMatrix, computeFloyd, graphNodes, presetEdges, reconstructPath, routeEdges, type GraphEdge, type GraphPreset } from '../lib/floyd';
+  import { createEvolution, stepEvolution, perfectScore } from '../lib/evolution';
+
+  class LabWorkbench extends HTMLElement {
+    connectedCallback() {
+      if (this.dataset.ready) return;
+      this.dataset.ready = 'true';
+      const root = this;
+      const query = <T extends Element>(selector: string) => root.querySelector<T>(selector)!;
+      const start = query<HTMLSelectElement>('select[name="start"]');
+      const end = query<HTMLSelectElement>('select[name="end"]');
+      const preset = root.querySelector<HTMLSelectElement>('select[name="preset"]');
+      const matrixMode = root.querySelector<HTMLSelectElement>('select[name="matrix"]');
+      const edgeSelect = root.querySelector<HTMLSelectElement>('select[name="edge"]');
+      const weight = root.querySelector<HTMLInputElement>('input[name="weight"]');
+      let edges = presetEdges('network');
+      let pick: 'start' | 'end' = 'end';
+      const svgNamespace = 'http://www.w3.org/2000/svg';
+
+      function drawEdges(selected: Set<string>) {
+        const fragment = document.createDocumentFragment();
+        edges.forEach((edge) => {
+          const from = graphNodes.find((node) => node.id === edge.from)!;
+          const to = graphNodes.find((node) => node.id === edge.to)!;
+          const group = document.createElementNS(svgNamespace, 'g');
+          group.classList.add('graph-edge');
+          if (selected.has([edge.from, edge.to].sort().join('-'))) group.classList.add('active');
+          const line = document.createElementNS(svgNamespace, 'line');
+          for (const [key, value] of Object.entries({ x1: from.x, y1: from.y, x2: to.x, y2: to.y })) line.setAttribute(key, String(value));
+          const label = document.createElementNS(svgNamespace, 'text');
+          label.setAttribute('x', String((from.x + to.x) / 2));
+          label.setAttribute('y', String((from.y + to.y) / 2 - 9));
+          label.textContent = String(edge.weight);
+          group.append(line, label); fragment.append(group);
+        });
+        query<SVGGElement>('[data-edges]').replaceChildren(fragment);
+      }
+
+      function update() {
+        const adjacency = adjacencyMatrix(graphNodes, edges);
+        const result = computeFloyd(adjacency);
+        const from = graphNodes.findIndex((node) => node.id === start.value);
+        const to = graphNodes.findIndex((node) => node.id === end.value);
+        const path = reconstructPath(result.predecessors, from, to);
+        const unreachable = path.length === 0;
+        query('[data-result-label]').textContent = unreachable ? '当前不可达' : from === to ? '起点与终点相同' : '最短路径';
+        query('[data-route]').textContent = unreachable ? `${start.value} 与 ${end.value} 没有连接路径` : path.map((index) => graphNodes[index].id).join(' → ');
+        query('[data-distance]').textContent = unreachable ? '∞' : String(result.distances[from][to]);
+        query('.route-result').classList.toggle('unreachable', unreachable);
+        drawEdges(routeEdges(path, graphNodes));
+        root.querySelectorAll<SVGGElement>('[data-node]').forEach((node) => {
+          const id = node.dataset.node!;
+          const index = graphNodes.findIndex((item) => item.id === id);
+          node.classList.toggle('endpoint', id === start.value || id === end.value);
+          node.classList.toggle('on-path', path.includes(index));
+          node.setAttribute('aria-pressed', String(id === (pick === 'start' ? start.value : end.value)));
+          node.setAttribute('aria-label', `${id}，选择为${pick === 'start' ? '起点' : '终点'}`);
+          node.querySelector('[data-node-role]')!.textContent = id === start.value && id === end.value ? '起点 / 终点' : id === start.value ? '起点' : id === end.value ? '终点' : '';
+        });
+        const shown = matrixMode?.value === 'adjacency' ? adjacency : result.distances;
+        root.querySelectorAll<HTMLElement>('td[data-row]').forEach((cell) => {
+          const i = Number(cell.dataset.row), j = Number(cell.dataset.col);
+          cell.textContent = Number.isFinite(shown[i][j]) ? String(shown[i][j]) : '∞';
+          cell.classList.toggle('queried-cell', i === from && j === to);
+        });
+        const caption = root.querySelector('[data-matrix-caption]');
+        if (caption) caption.textContent = matrixMode?.value === 'adjacency' ? '原始邻接矩阵' : '最短距离矩阵';
+      }
+
+      function syncEdgeOptions() {
+        if (!edgeSelect || !weight) return;
+        const previous = edgeSelect.value;
+        const options = edges.map((edge) => new Option(`${edge.from} — ${edge.to}`, `${edge.from}-${edge.to}`));
+        edgeSelect.replaceChildren(...options);
+        if (options.some((option) => option.value === previous)) edgeSelect.value = previous;
+        weight.value = String(edges.find((edge) => `${edge.from}-${edge.to}` === edgeSelect.value)!.weight);
+      }
+      start.addEventListener('change', update); end.addEventListener('change', update);
+      matrixMode?.addEventListener('change', update);
+      root.querySelectorAll<HTMLButtonElement>('[data-pick]').forEach((button) => button.addEventListener('click', () => {
+        pick = button.dataset.pick as 'start' | 'end';
+        root.querySelectorAll<HTMLButtonElement>('[data-pick]').forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+        update();
+      }));
+      root.querySelectorAll<SVGGElement>('[data-node]').forEach((node) => {
+        const selectNode = () => { (pick === 'start' ? start : end).value = node.dataset.node!; update(); };
+        node.addEventListener('click', selectNode);
+        node.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); selectNode(); }
+        });
+      });
+      preset?.addEventListener('change', () => {
+        edges = presetEdges(preset.value as GraphPreset); syncEdgeOptions();
+        query('[data-input-note]').textContent = '已切换连接方案，边权修改已清除。'; update();
+      });
+      edgeSelect?.addEventListener('change', () => { weight!.value = String(edges.find((edge) => `${edge.from}-${edge.to}` === edgeSelect.value)!.weight); });
+      root.querySelector<HTMLFormElement>('[data-edge-form]')?.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const value = Number(weight!.value);
+        if (!weight!.value.trim() || !Number.isInteger(value) || value < 0 || value > 99) {
+          query('[data-input-note]').textContent = '请输入 0–99 的整数，然后应用边权。'; weight!.focus(); return;
+        }
+        edges = edges.map((edge): GraphEdge => `${edge.from}-${edge.to}` === edgeSelect!.value ? { ...edge, weight: value } : edge);
+        query('[data-input-note]').textContent = `${edgeSelect!.value.replace('-', ' — ')} 的权重已设为 ${value}。`; update();
+      });
+      root.querySelector('[data-reset]')?.addEventListener('click', () => {
+        edges = presetEdges('network'); start.value = 'A'; end.value = 'F'; preset!.value = 'network';
+        syncEdgeOptions(); query('[data-input-note]').textContent = '已恢复基础网络与默认查询。'; update();
+      });
+      update();
+
+      const gaDisplay = root.querySelector<HTMLElement>('[data-ga-bars]');
+      if (gaDisplay) {
+        let state = createEvolution(42);
+        let timer: ReturnType<typeof setInterval> | undefined;
+        const play = query<HTMLButtonElement>('[data-ga-play]');
+        const step = query<HTMLButtonElement>('[data-ga-step]');
+        const seed = query<HTMLInputElement>('input[name="seed"]');
+        const stop = () => { clearInterval(timer); timer = undefined; play.textContent = '连续演化'; play.setAttribute('aria-pressed', 'false'); };
+        const render = () => {
+          gaDisplay.querySelectorAll<HTMLElement>('[data-bar]').forEach((bar, index) => { bar.style.setProperty('--bar-height', `${state.best[index] / 8 * 100}%`); bar.querySelector('span')!.textContent = String(state.best[index]); });
+          gaDisplay.setAttribute('aria-label', `当前最佳排列：${state.best.join('、')}`);
+          const complete = state.bestScore === perfectScore, limit = state.generation >= 500;
+          query('[data-ga-status]').textContent = `第 ${state.generation} 代 · 最佳适应度 ${state.bestScore} / ${perfectScore}${complete ? ' · 已完全有序' : limit ? ' · 已达演示代数上限' : ''}`;
+          step.disabled = complete || limit; play.disabled = complete || limit;
+          if (complete || limit) stop();
+        };
+        const tick = () => { state = stepEvolution(state); render(); };
+        step.addEventListener('click', () => { stop(); tick(); });
+        play.addEventListener('click', () => {
+          if (timer) { stop(); return; }
+          play.textContent = '暂停演化'; play.setAttribute('aria-pressed', 'true'); timer = setInterval(tick, 220);
+        });
+        query('[data-ga-reset]').addEventListener('click', () => {
+          const value = Number(seed.value);
+          if (!seed.value.trim() || !Number.isInteger(value) || value < 1 || value > 4294967295) { query('[data-ga-note]').textContent = '随机种子请输入 1–4294967295 的整数。'; seed.focus(); return; }
+          stop(); state = createEvolution(value); query('[data-ga-note]').textContent = '相同种子可复现。达到 28 / 28 时已完全有序；演化最多运行 500 代。'; render();
+        });
+        document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); }, { signal: this.controller.signal });
+        this.addEventListener('workbench-disconnect', stop, { once: true });
+        render();
+      }
+    }
+    private controller = new AbortController();
+    disconnectedCallback() { this.dispatchEvent(new Event('workbench-disconnect')); this.controller.abort(); }
+  }
+  if (!customElements.get('lab-workbench')) customElements.define('lab-workbench', LabWorkbench);
+</script>
+
+<style>
+  .workbench { display: block; color: var(--text, #eaf1fc); }
+  .lab-intro { max-width: 72ch; margin-bottom: 2rem; }
+  h2 { margin: 0 0 .75rem; font-size: clamp(1.5rem, 3vw, 2.3rem); line-height: 1.2; letter-spacing: -.025em; }
+  h3 { margin: 0; font-size: 1.15rem; }
+  p { line-height: 1.75; }
+  .lab-intro p, .evolution-copy p { color: var(--muted, #a1b1c8); margin: 0; }
+  a { color: var(--cyan, #69dff4); text-underline-offset: .25em; }
+  a:hover { text-decoration-thickness: 2px; }
+  .floyd-layout { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(250px, .8fr); border: 1px solid var(--line, #293b53); border-radius: 14px; overflow: hidden; background: var(--surface, #101825); }
+  .graph-pane { min-width: 0; padding: 1.2rem 1.2rem .5rem; }
+  .graph-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+  .graph-kind { color: var(--muted, #a1b1c8); font-size: .88rem; }
+  .pick-control { display: flex; gap: .3rem; }
+  button, select, input { font: inherit; }
+  button, select, input { min-height: 44px; color: var(--text, #eaf1fc); border: 1px solid var(--line, #293b53); background: var(--raised, #162336); border-radius: 6px; }
+  button { cursor: pointer; padding: .55rem .85rem; font-size: .88rem; }
+  button:hover { border-color: var(--cyan, #69dff4); }
+  button[aria-pressed="true"] { color: var(--cyan, #69dff4); border-color: var(--cyan, #69dff4); }
+  button:disabled { cursor: default; opacity: .5; }
+  button:disabled:hover { border-color: var(--line, #293b53); }
+  :is(button, select, input, a, .matrix-scroll):focus-visible { outline: 2px solid var(--cyan, #69dff4); outline-offset: 4px; }
+  .graph { display: block; width: 100%; max-height: 365px; overflow: visible; }
+  .graph :global(.graph-edge line) { stroke: #38506e; stroke-width: 2; }
+  .graph :global(.graph-edge text) { font: 600 16px / 1 monospace; fill: var(--muted, #a1b1c8); text-anchor: middle; paint-order: stroke; stroke: var(--surface, #101825); stroke-width: 7px; stroke-linejoin: round; }
+  .graph :global(.graph-edge.active line) { stroke: var(--cyan, #69dff4); stroke-width: 4; }
+  .graph :global(.graph-edge.active text) { fill: var(--cyan, #69dff4); }
+  .graph :global(.graph-node) { cursor: pointer; outline: none; }
+  .graph :global(.graph-node circle) { fill: var(--raised, #162336); stroke: #547294; stroke-width: 1.5; }
+  .graph :global(.graph-node.on-path circle) { stroke: var(--cyan, #69dff4); }
+  .graph :global(.graph-node.endpoint circle) { fill: var(--cyan, #69dff4); stroke: var(--cyan, #69dff4); }
+  .graph :global(.graph-node .node-hit) { fill: transparent !important; stroke: transparent !important; }
+  .graph :global(.graph-node text) { fill: var(--text, #eaf1fc); text-anchor: middle; dominant-baseline: middle; font-size: 18px; font-weight: 650; pointer-events: none; }
+  .graph :global(.graph-node.endpoint > text:not(.endpoint-label)) { fill: #080c14; }
+  .graph :global(.graph-node .endpoint-label) { font-size: 12px; fill: var(--muted, #a1b1c8); font-weight: 400; }
+  .graph :global(.graph-node:hover circle), .graph :global(.graph-node:focus-visible circle) { stroke: var(--violet, #b7a6ff); stroke-width: 5; }
+  .graph-hint { font-size: .8rem; color: var(--muted, #a1b1c8); margin: .25rem 0 .5rem; text-align: center; }
+  .route-pane { padding: 1.4rem; border-left: 1px solid var(--line, #293b53); }
+  .route-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
+  label { display: grid; gap: .4rem; font-size: .85rem; color: var(--muted, #a1b1c8); min-width: 0; }
+  input, select { padding: .45rem .65rem; width: 100%; box-sizing: border-box; color-scheme: dark; }
+  input { caret-color: var(--cyan, #69dff4); font-variant-numeric: tabular-nums; }
+  .route-result { padding: 1.5rem 0; }
+  .result-label { font-size: .85rem; color: var(--muted, #a1b1c8); }
+  .route-sequence { font-weight: 600; font-size: 1.3rem; line-height: 1.55; color: var(--cyan, #69dff4); margin: .5rem 0; overflow-wrap: anywhere; }
+  .distance { margin: .4rem 0 0; font-size: .9rem; color: var(--muted, #a1b1c8); }
+  .distance strong { font-size: 1.8rem; line-height: 1; color: var(--text, #eaf1fc); margin-left: .5rem; font-variant-numeric: tabular-nums; }
+  .unreachable .route-sequence { color: var(--violet, #b7a6ff); font-size: 1.05rem; }
+  .graph-settings { padding-top: 1.1rem; border-top: 1px solid var(--line, #293b53); }
+  form { margin-top: 1rem; display: grid; grid-template-columns: 1fr .75fr; gap: .75rem; }
+  form button { grid-column: 1 / -1; }
+  .wb-button { color: #080c14; background: var(--cyan, #69dff4); border-color: var(--cyan, #69dff4); font-weight: 600; }
+  .wb-button.secondary { color: var(--text, #eaf1fc); background: transparent; border-color: var(--line, #293b53); }
+  .input-note { color: var(--muted, #a1b1c8); font-size: .8rem; margin: .75rem 0; }
+  .lab-link { display: inline-block; font-size: .88rem; padding-block: .5rem; }
+  .matrix-section { margin-top: 2.3rem; }
+  .matrix-heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .matrix-heading label { grid-template-columns: auto minmax(140px, 1fr); align-items: center; gap: .75rem; }
+  .matrix-note { margin: .7rem 0 1rem; color: var(--muted, #a1b1c8); font-size: .85rem; }
+  .matrix-scroll { overflow-x: auto; border: 1px solid var(--line, #293b53); border-radius: 10px; }
+  table { width: 100%; min-width: 340px; border-collapse: collapse; font-variant-numeric: tabular-nums; text-align: center; }
+  caption { padding: .8rem 1rem; text-align: left; color: var(--muted, #a1b1c8); font-size: .85rem; background: var(--surface, #101825); }
+  th, td { padding: .75rem .5rem; border-top: 1px solid var(--line, #293b53); }
+  th { color: var(--muted, #a1b1c8); font-weight: 500; background: var(--surface, #101825); }
+  td { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
+  .queried-cell { background: #17323f; color: var(--cyan, #69dff4); font-weight: 700; }
+  .evolution-section { margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--line, #293b53); display: grid; grid-template-columns: minmax(220px, .85fr) minmax(0, 1.6fr); gap: 3rem; }
+  .evolution-copy { max-width: 43ch; }
+  .ga-bars { height: 200px; display: flex; align-items: end; gap: clamp(5px, 1.1vw, 14px); padding: 1.7rem .8rem .8rem; border-bottom: 1px solid var(--line, #293b53); }
+  .ga-bar { flex: 1; height: var(--bar-height); background: var(--violet, #b7a6ff); border-radius: 4px 4px 0 0; position: relative; min-width: 0; transition: height 180ms ease-out; }
+  .ga-bar span { position: absolute; width: 100%; text-align: center; top: -1.5rem; font-size: .85rem; font-variant-numeric: tabular-nums; }
+  .ga-status { margin: 1rem 0; color: var(--text, #eaf1fc); font-size: .9rem; font-variant-numeric: tabular-nums; }
+  .ga-controls { display: flex; flex-wrap: wrap; gap: .65rem; align-items: end; }
+  .ga-controls label { max-width: 150px; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+  .noscript-note { color: var(--muted, #a1b1c8); }
+  .compact .floyd-layout { grid-template-columns: minmax(0, 1.5fr) minmax(210px, .8fr); }
+  .compact .graph { max-height: 300px; }
+  .compact .graph-hint { display: none; }
+  .compact .route-pane { align-self: stretch; display: flex; flex-direction: column; justify-content: center; }
+  .compact .graph-kind { font-size: .78rem; }
+  @media (max-width: 760px) {
+    .floyd-layout, .compact .floyd-layout { grid-template-columns: 1fr; }
+    .route-pane { border-left: 0; border-top: 1px solid var(--line, #293b53); }
+    .route-result { padding-block: 1rem; }
+    .compact .route-pane { display: grid; grid-template-columns: 1fr 1.15fr; gap: 1rem; padding: 1rem; }
+    .compact .route-result { padding: 0; }
+    .compact .lab-link { grid-column: 1 / -1; padding: 0; }
+    .evolution-section { grid-template-columns: 1fr; gap: 1.5rem; }
+    .evolution-copy { max-width: 65ch; }
+    .matrix-heading { align-items: flex-start; flex-direction: column; }
+  }
+  @media (max-width: 430px) {
+    .graph-pane { padding: .8rem .5rem .5rem; }
+    .graph-toolbar { padding-inline: .4rem; gap: .5rem; }
+    .pick-control button { padding-inline: .6rem; }
+    .compact .route-pane { grid-template-columns: 1fr; }
+    .route-sequence { font-size: 1.15rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { .ga-bar { transition: none; } }
+</style>

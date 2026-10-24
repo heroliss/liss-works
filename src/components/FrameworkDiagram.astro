@@ -1,0 +1,21 @@
+<figure class="engineering-media framework-diagram">
+  <svg viewBox="0 0 600 310" role="img" aria-labelledby="framework-map-title framework-map-description">
+    <title id="framework-map-title">SSFramework 核心交互示意</title>
+    <desc id="framework-map-description">Context 组织作用域和依赖。View 通过 Command 进入 System 规则，由 Model 保存状态，再以只读状态和事件反馈到 View。</desc>
+    <defs><marker id="framework-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0 7 3.5 0 7" fill="var(--cyan)"/></marker></defs>
+    <rect class="map-scope" x="12" y="12" width="576" height="286" rx="14"/>
+    <text class="map-context" x="32" y="43">Context</text><text class="map-caption" x="32" y="68">作用域 / 依赖装配 / 生命周期</text>
+    <g class="map-node"><rect x="32" y="96" width="142" height="72" rx="9"/><text x="103" y="124">View</text><text class="map-caption" x="103" y="147">交互与表现</text></g>
+    <g class="map-node"><rect x="229" y="96" width="142" height="72" rx="9"/><text x="300" y="124">Command</text><text class="map-caption" x="300" y="147">查询 / 操作意图</text></g>
+    <g class="map-node"><rect x="426" y="96" width="142" height="72" rx="9"/><text x="497" y="124">System</text><text class="map-caption" x="497" y="147">业务规则</text></g>
+    <g class="map-node"><rect x="426" y="214" width="142" height="58" rx="9"/><text x="497" y="238">Model</text><text class="map-caption" x="497" y="259">持续状态</text></g>
+    <g class="map-connections" marker-end="url(#framework-arrow)"><path d="M174 132H220"/><path d="M371 132H417"/><path d="M497 168V205"/><path d="M426 243H103V177"/></g>
+    <text class="map-feedback" x="257" y="231">只读状态 / 瞬时事件</text>
+  </svg>
+  <div class="framework-mobile-flow">
+    <p><strong>Context</strong><span>依赖 / 作用域 / 生命周期</span></p>
+    <ol><li><strong>View</strong><span>接收交互意图</span></li><li><strong>Command</strong><span>查询或发起操作</span></li><li><strong>System</strong><span>执行业务规则</span></li><li><strong>Model</strong><span>保留持续状态</span></li></ol>
+    <p class="map-mobile-feedback">只读状态与事件反馈画面</p>
+  </div>
+  <figcaption>核心交互示意：意图进入规则，状态反馈画面。Context 统一组织依赖与生命周期。</figcaption>
+</figure>

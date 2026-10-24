@@ -1,0 +1,14 @@
+---
+import type { Project } from '../data/types';
+import Icon from './Icon.astro';
+import { latestReleaseUrl } from '../lib/github-release';
+interface Props { download: NonNullable<Project['download']>; compact?: boolean; }
+const { download, compact = false } = Astro.props;
+---
+<div class:list={['release-download', { 'release-download--compact': compact }]} data-release-download data-repository={download.repository} data-asset-pattern={download.assetPattern} data-compact={compact ? 'true' : 'false'} data-state="initial">
+  <a class:list={['button', {secondary: compact}]} href={latestReleaseUrl(download)} target="_blank" rel="noreferrer" data-release-link aria-label="查看最新 Windows 版">
+    <span data-release-label>{compact ? 'Windows 版' : '查看最新版本'}</span><Icon name="download" size={compact ? 17 : 18}/>
+  </a>
+  <span class="release-meta" data-release-meta role="status" aria-live="polite">Windows · 最新正式版</span>
+</div>
+<script>import '../scripts/downloads';</script>

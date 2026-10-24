@@ -1,0 +1,23 @@
+---
+import { sitePath } from '../lib/site-path';
+import type { Project } from '../data/types';
+import MediaImage from './MediaImage.astro';
+import Icon from './Icon.astro';
+import { getProjectSignature } from '../data/project-signatures';
+interface Props { project: Project; class?: string; }
+const { project, class: className = '' } = Astro.props;
+const signature = getProjectSignature(project.slug);
+const filterTags = new Set(project.tags);
+if (project.tags.some(tag => tag.toLowerCase().includes('unity'))) filterTags.add('Unity');
+if (project.tags.some(tag => tag.toLowerCase().includes('opengl'))) filterTags.add('OpenGL');
+if (project.tags.some(tag => /ai|llm/i.test(tag)) || project.slug === 'intelligence-index-cost-linear') filterTags.add('AI');
+if (project.tags.some(tag => /javascript|typescript|vue|flask|litegraph/i.test(tag))) filterTags.add('Web');
+if (project.tags.some(tag => tag.includes('算法'))) filterTags.add('算法');
+---
+<article class:list={['project-card', className]} data-project-card data-group={project.group} data-tags={Array.from(filterTags).join('|')} data-search={`${project.name} ${project.repo} ${project.summary} ${project.category} ${project.tags.join(' ')} ${signature.direction} ${signature.principle} ${signature.highlights.join(' ')}`}>
+ <a class="project-card__image" href={sitePath(`/projects/${project.slug}/`)} tabindex="-1" aria-hidden="true"><MediaImage image={project.cover} sizes="(max-width: 700px) 100vw, (max-width: 1080px) 50vw, 33vw" /></a>
+ <div class="project-card__body"><div class="project-card__meta"><span>{project.category}</span><span>{project.status}</span></div>
+ <h2><a href={sitePath(`/projects/${project.slug}/`)}>{project.name}<Icon size={20}/></a></h2>
+ <p>{project.summary}</p><p class="card-design"><span>设计</span>{signature.principle}</p><div class="tag-list">{project.tags.slice(0,3).map(tag=><span>{tag}</span>)}</div></div>
+</article>
+

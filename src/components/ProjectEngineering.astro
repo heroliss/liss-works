@@ -1,0 +1,26 @@
+---
+import type { ProjectStory } from '../data/story-types';
+import type { StoryMedia } from '../data/story-media';
+import MediaImage from './MediaImage.astro';
+import FrameworkDiagram from './FrameworkDiagram.astro';
+interface Props { story: ProjectStory; media: StoryMedia[]; group: string; }
+const { story, media, group } = Astro.props;
+---
+<section class="project-engineering" id="engineering" aria-labelledby="engineering-title">
+  <div class="section-heading"><h2 id="engineering-title">设计与实现</h2></div>
+  <div class="engineering-grid">{story.sections?.map((section, index) => {
+    const { image, inset } = media[index] ?? {};
+    return <section class:list={['engineering-topic', {'engineering-topic--media': Boolean(image || section.diagram)}]} id={section.id} aria-labelledby={`heading-${section.id}`}>
+      {section.diagram === 'framework-architecture' ? <FrameworkDiagram/> : image && <div class="engineering-media"><figure><MediaImage image={image} zoom group={group} sizes="(max-width: 900px) 100vw, 58vw"/><figcaption>{image.caption}</figcaption></figure>{inset && <figure class="engineering-inset"><MediaImage image={inset} zoom group={group} sizes="300px"/><figcaption>{inset.caption}</figcaption></figure>}</div>}
+      <div class="engineering-copy">
+        <h3 id={`heading-${section.id}`}>{section.title}</h3>
+        {section.intro && <p class="engineering-intro">{section.intro}</p>}
+        {section.paragraphs?.map(paragraph => <p>{paragraph}</p>)}
+        {section.items && <dl class="engineering-points">{section.items.map(item => <div><dt>{item.title}</dt><dd>{item.body.map(paragraph => <p>{paragraph}</p>)}</dd></div>)}</dl>}
+        {section.code && <div class="code-block"><div class="code-toolbar"><span>{section.code.language}</span><span role="status" aria-live="polite"></span><button class="copy-button" type="button" data-copy={`story-code-${section.id}`} aria-label={`复制：${section.title}`}>复制</button></div><pre><code id={`story-code-${section.id}`}>{section.code.source}</code></pre></div>}
+        {section.code?.caption && <p class="project-caption">{section.code.caption}</p>}
+      </div>
+    </section>;
+  })}</div>
+</section>
+

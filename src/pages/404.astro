@@ -1,0 +1,6 @@
+---
+import { sitePath } from '../lib/site-path';
+import Base from '../layouts/Base.astro';
+---
+<Base title="没有找到页面"><div class="shell not-found"><h1 class="display">404</h1><p>这个地址还没有工程。可以从工程库继续探索。</p><div class="button-row"><a class="button" href={sitePath('/projects/')}>打开工程库</a><a class="button secondary" href={sitePath('/')}>回到首页</a></div></div></Base>
+
