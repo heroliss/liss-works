@@ -6,7 +6,7 @@
 
 2026-10-24 后续更新：Intelligence × Cost 默认暗色已上线，封面、供应商高亮与点阵三图均改为线上暗色实拍；旧浅色素材保留归档。最新定向验收和媒体统计见 `../verification/intelligence-dark-20261024/final-site-checks.json`，早先 `../verification/site/highlights-20261024/final-acceptance.json` 保留为前一轮快照。
 
-Liss Works 由 Liss 独立开发，使用 Astro + TypeScript 展示 12 个独立工程。正式站源码与发布资源集中在此目录；支持本地根路径预览，正式作品站部署在 [GitHub Pages](https://heroliss.github.io/liss-works/)，Liss Community 继续运行于 PythonAnywhere。
+Liss Works 由 Liss 独立开发，使用 Astro + TypeScript 展示独立工程。正式站源码与发布资源集中在此目录；支持本地根路径预览，正式作品站部署在 [GitHub Pages](https://heroliss.github.io/liss-works/)，Liss Community 继续运行于 PythonAnywhere。
 
 ## 本地预览
 
@@ -30,13 +30,13 @@ npm run dev -- --port 4321
 - `/about/`：简短介绍与 GitHub；`/404.html`：未找到页面。
 - `/projects/lihou-web/`：兼容旧本地链接，重定向至 `/projects/liss-web/`。构建为 17 个内容页 + 1 个重定向，共 18 HTML。
 
-主导航与页脚的“交流”连接 Liss Community（记录与交流）；十二项工程末尾的“交流想法”进入对应 `/projects/<slug>/talk/`，可分享心得、问题和后续想法。讨论功能由 Flask 站点提供，不在静态作品站复制账户或评论系统。社区源码为 `heroliss/liss-community`；作品详情、素材目录和讨论关联仍保留 `liss-web` key 与 slug，兼容原有链接。
+主导航与页脚的“交流”连接 Liss Community（记录与交流）；各项工程末尾的“交流想法”进入对应 `/projects/<slug>/talk/`，可分享心得、问题和后续想法。讨论功能由 Flask 站点提供，不在静态作品站复制账户或评论系统。社区源码为 `heroliss/liss-community`；作品详情、素材目录和讨论关联仍保留 `liss-web` key 与 slug，兼容原有链接。
 
 ## GitHub Pages 持续部署
 
 `.github/workflows/deploy-pages.yml` 在 `main` 推送和手动运行时发布。使用 Node.js 24、锁定依赖和按 commit SHA 固定的 GitHub 官方 Actions；安装、Astro 检查、路径与下载测试、构建、静态资源校验全部成功后，才上传并部署 Pages 产物。部署任务单独持有 `pages: write` 和 `id-token: write` 权限，不需要另存部署密钥。GitHub 仓库的 Pages 发布源设为 GitHub Actions。
 
-生产构建使用 `SITE_BASE=/liss-works/`、`SITE_URL=https://heroliss.github.io`；导航、媒体、旧项目重定向与 404 返回链接均包含站点前缀，canonical 和 Open Graph URL 指向正式作品域名。社区及十二项项目讨论链接保持 PythonAnywhere 地址，两站各自独立部署。
+生产构建使用 `SITE_BASE=/liss-works/`、`SITE_URL=https://heroliss.github.io`；导航、媒体、旧项目重定向与 404 返回链接均包含站点前缀，canonical 和 Open Graph URL 指向正式作品域名。社区及各项目讨论链接保持 PythonAnywhere 地址，两站各自独立部署。
 
 在本地复现正式产物：
 
@@ -51,7 +51,7 @@ Remove-Item Env:SITE_URL
 
 Pages Action 上传 `dist/` 本身，不要再套一层 `liss-works` 目录。默认本地开发仍为 `SITE_BASE=/`，地址不变；无需为本地预览配置环境变量。`src/lib/site-path.ts` 为站内导航、图片 / srcset、灯箱大图、视频与实验入口添加 base；外部网站、GitHub 和讨论链接保持原目标。Vite 自动处理 CSS 字体与脚本资源。旧博客项目链接的重定向目标也随 base 更新。
 
-`verify:dist` 使用相同 `SITE_BASE` 检查所有生成页面的本地引用、片段锚点、CSS 字体及十二个项目讨论入口，防止子路径部署后误跳到社区根路径。`npm run test:paths` 验证 base、查询参数、锚点、外部 URL 和讨论地址。
+`verify:dist` 使用相同 `SITE_BASE` 检查所有生成页面的本地引用、片段锚点、CSS 字体及各项目讨论入口，防止子路径部署后误跳到社区根路径。`npm run test:paths` 验证 base、查询参数、锚点、外部 URL 和讨论地址。
 
 ## 检查和构建
 
@@ -81,7 +81,7 @@ npm run preview -- --port 4321
 - `src/data/stories/`：项目缘起、技术职责、流程和实现介绍；`story-types.ts` 定义内容结构。
 - `src/components/ProjectEngineering.astro`：截图与精简技术要点；详情页使用简短导航、技术职责与流程。
 - `src/data/story-media.ts`：技术主题配图，已用于正文的图不再重复放入图库。
-- `src/data/project-signatures.ts`：十二项工程的技术方向、设计主张与三项关键能力；同一份数据用于详情、首页与搜索。
+- `src/data/project-signatures.ts`：各项工程的技术方向、设计主张与三项关键能力；同一份数据用于详情、首页与搜索。
 - `src/components/FrameworkDiagram.astro`：SSFramework 架构示意，小屏与平板切换为可读的文字流程。
 - `src/styles/global.css`：配色、布局与响应式样式。
 - `src/components/LabWorkbench.astro`：网页算法说明移植；算法源在 `src/lib/`。
