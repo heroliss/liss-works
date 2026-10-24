@@ -67,8 +67,8 @@ const signatures: Record<string, ProjectSignature> = {
   },
   gomoku: {
     direction: '博弈搜索 / Windows 游戏',
-    principle: '各自设置参数，按真实落子观察思考成本。',
-    highlights: ['11 种搜索引擎', '黑白独立配置', '随棋谱查看统计'],
+    principle: '搜索参数各自设置，对局状态始终清楚。',
+    highlights: ['黑白独立配置', '随棋谱查看统计', '明确的联机状态'],
   },
   'route-lab': {
     direction: '组合优化 / 算法可视化',

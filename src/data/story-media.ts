@@ -14,7 +14,7 @@ const topicMedia: Record<string, (string | null)[]> = {
   'ga-sort': ['05-final-equation-convergence'],
   floydshortestpath: ['regression-checks-report'],
   'liss-web': ['02-markdown-writing-dark-1280', '05-welcome-dark-1280'],
-  gomoku: ['06-independent-black-settings-1280', '04-replay-history-1280'],
+  gomoku: ['06-independent-black-settings-1280', '11-live-network-v32-1280'],
   'route-lab': ['02-random-compare-1440'],
   'sort-lab': ['02-implementation-and-results'],
 };
