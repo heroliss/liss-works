@@ -1,8 +1,8 @@
 {
   "schema": "showcase.website-media.v1",
-  "generated_at_utc": "2026-10-24T02:52:53.766976+00:00",
+  "generated_at_utc": "2026-10-24T03:59:43.736647+00:00",
   "source_manifest": "captures/selected-manifest.json",
-  "source_manifest_sha256": "629c35d3baa11f64b2c6b6dd2d148ee1ca4963cbf14d7e9e5e08028286156f90",
+  "source_manifest_sha256": "6be188e03b663ed1121591bd817ee50be7e5bde667ddab29675bd0a44497266b",
   "originals_modified": false,
   "transform": "Full-image WebP encoding and Lanczos proportional downscaling only; no crop, no AI alterations, no upscaling.",
   "images": [
@@ -3707,6 +3707,633 @@
         "lossless": true
       },
       "variants": []
+    },
+    {
+      "repo": "gomoku",
+      "source": "captures/gomoku/01-board-history-1280.png",
+      "source_sha256": "1e6d3137dd852f6734b47ac227518d0d17a7d13071c9c93d66083a86ab88808a",
+      "source_bytes": 116761,
+      "source_width": 1282,
+      "source_height": 872,
+      "source_authenticity": "实际 Windows 应用窗口截图；算法样例真实计算，自建房间联机使用真实 Photon 服务。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/gomoku/01-board-history-1280.webp",
+        "url": "/media/gomoku/01-board-history-1280.webp",
+        "bytes": 261266,
+        "sha256": "b58f4ad566608605df9ac1919e095d471c804e3f57e5bcb0cf39c483f8ed089f",
+        "width": 1282,
+        "height": 872,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/gomoku/01-board-history-1280-320.webp",
+          "url": "/media/gomoku/01-board-history-1280-320.webp",
+          "bytes": 8860,
+          "sha256": "c74339712669bdabdb72767b537eec67663718a2a05606d0d1b775646e5e43a4",
+          "width": 320,
+          "height": 218,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/gomoku/01-board-history-1280-640.webp",
+          "url": "/media/gomoku/01-board-history-1280-640.webp",
+          "bytes": 23948,
+          "sha256": "1ea33d29bf631b865896179c039d96bb1e07a76196e11d42080d92f13218dc56",
+          "width": 640,
+          "height": 435,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/gomoku/01-board-history-1280-960.webp",
+          "url": "/media/gomoku/01-board-history-1280-960.webp",
+          "bytes": 44914,
+          "sha256": "5d23d70bc962bdeb86afbe8cf9b59137c5d9b88cc8a05bb696487902e5f5359d",
+          "width": 960,
+          "height": 653,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "gomoku",
+      "source": "captures/gomoku/02-engine-hint-1280.png",
+      "source_sha256": "bbecd9d90d9f0571598c9df43aa0e11a5345f2bc3060087ebcac4cdee1f4aeeb",
+      "source_bytes": 118159,
+      "source_width": 1282,
+      "source_height": 872,
+      "source_authenticity": "实际 Windows 应用窗口截图；算法样例真实计算，自建房间联机使用真实 Photon 服务。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/gomoku/02-engine-hint-1280.webp",
+        "url": "/media/gomoku/02-engine-hint-1280.webp",
+        "bytes": 267084,
+        "sha256": "72d3243ee914339eca93db59eea650e3cb8bca0294435e23eea8ddd892096615",
+        "width": 1282,
+        "height": 872,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/gomoku/02-engine-hint-1280-320.webp",
+          "url": "/media/gomoku/02-engine-hint-1280-320.webp",
+          "bytes": 9046,
+          "sha256": "704b20bd42f13d362e1e3db0d8bd7e9447b1f87cb1b840396a79af2d6b8994d2",
+          "width": 320,
+          "height": 218,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/gomoku/02-engine-hint-1280-640.webp",
+          "url": "/media/gomoku/02-engine-hint-1280-640.webp",
+          "bytes": 24550,
+          "sha256": "3dd983582f9c68d4f0d629b8770af835cfeee64839fbd40f9fe74b54aff642fd",
+          "width": 640,
+          "height": 435,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/gomoku/02-engine-hint-1280-960.webp",
+          "url": "/media/gomoku/02-engine-hint-1280-960.webp",
+          "bytes": 47238,
+          "sha256": "7ea8b71967bd49c1859610e83d3b749e968c29eef462b2e48166bc658c349141",
+          "width": 960,
+          "height": 653,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "gomoku",
+      "source": "captures/gomoku/03-engine-catalog-1280.png",
+      "source_sha256": "2f5e330c9ad24992c5ebb64f7456d4b60e95ffc73009b82393b406a3befc9fcd",
+      "source_bytes": 120669,
+      "source_width": 1282,
+      "source_height": 872,
+      "source_authenticity": "实际 Windows 应用窗口截图；算法样例真实计算，自建房间联机使用真实 Photon 服务。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/gomoku/03-engine-catalog-1280.webp",
+        "url": "/media/gomoku/03-engine-catalog-1280.webp",
+        "bytes": 283150,
+        "sha256": "9f7d9a938e460bebcf29168f6cc5ff6e0b4c08101ed6c9dbf3058911f10b991a",
+        "width": 1282,
+        "height": 872,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/gomoku/03-engine-catalog-1280-320.webp",
+          "url": "/media/gomoku/03-engine-catalog-1280-320.webp",
+          "bytes": 9044,
+          "sha256": "cd1db49bf1c3002c23ece8741167443eb624f163b55f7d52282eeaf3c044f416",
+          "width": 320,
+          "height": 218,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/gomoku/03-engine-catalog-1280-640.webp",
+          "url": "/media/gomoku/03-engine-catalog-1280-640.webp",
+          "bytes": 25640,
+          "sha256": "95b726a8848c79f56909d739dbe8c99a1139d30165ef62ff0e9940e4cf406bde",
+          "width": 640,
+          "height": 435,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/gomoku/03-engine-catalog-1280-960.webp",
+          "url": "/media/gomoku/03-engine-catalog-1280-960.webp",
+          "bytes": 49232,
+          "sha256": "a0ddcc53748fb1d55542835c92c9e85e5d85e4fd586c196c954b477f3446100f",
+          "width": 960,
+          "height": 653,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "gomoku",
+      "source": "captures/gomoku/04-replay-history-1280.png",
+      "source_sha256": "f24b44159abe2c4cce5a14c9244abb91cecba726bf1dfd6b65001e939dbe08cd",
+      "source_bytes": 115721,
+      "source_width": 1282,
+      "source_height": 872,
+      "source_authenticity": "实际 Windows 应用窗口截图；算法样例真实计算，自建房间联机使用真实 Photon 服务。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/gomoku/04-replay-history-1280.webp",
+        "url": "/media/gomoku/04-replay-history-1280.webp",
+        "bytes": 254808,
+        "sha256": "b9f7e18423f7b52010f6759c4a89f8461471eb6b5269da0dea524ef1970ea0d9",
+        "width": 1282,
+        "height": 872,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/gomoku/04-replay-history-1280-320.webp",
+          "url": "/media/gomoku/04-replay-history-1280-320.webp",
+          "bytes": 8682,
+          "sha256": "44af47416f46a1e065c34ff1085acc03c85cab6db98ed84644e677a9d3a7cdca",
+          "width": 320,
+          "height": 218,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/gomoku/04-replay-history-1280-640.webp",
+          "url": "/media/gomoku/04-replay-history-1280-640.webp",
+          "bytes": 23628,
+          "sha256": "f13ff8d2f92de8157c376889afacb3542f30d1a4f26a2b7c0d2f8b3fa08340a1",
+          "width": 640,
+          "height": 435,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/gomoku/04-replay-history-1280-960.webp",
+          "url": "/media/gomoku/04-replay-history-1280-960.webp",
+          "bytes": 44200,
+          "sha256": "06b30b1fe214e1c0c419875773dca6a9ee2d7a022e8522eb900af9a302999351",
+          "width": 960,
+          "height": 653,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "gomoku",
+      "source": "captures/gomoku/05-live-network-match-1280.png",
+      "source_sha256": "84ed2de453f56e943fc00c2de817fe9d3ecd8a7f680227962f03f0b9926caaa7",
+      "source_bytes": 118163,
+      "source_width": 1282,
+      "source_height": 872,
+      "source_authenticity": "实际 Windows 应用窗口截图；算法样例真实计算，自建房间联机使用真实 Photon 服务。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/gomoku/05-live-network-match-1280.webp",
+        "url": "/media/gomoku/05-live-network-match-1280.webp",
+        "bytes": 228958,
+        "sha256": "86893bfe2d7ecf09d9a4d42124f0929437feb1aa51c60f18915ba122db1db174",
+        "width": 1282,
+        "height": 872,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/gomoku/05-live-network-match-1280-320.webp",
+          "url": "/media/gomoku/05-live-network-match-1280-320.webp",
+          "bytes": 7376,
+          "sha256": "7be41081ab32d85a3e3ecad9d499c96eeb086fe0a1ee896ba1bf3565906db9fa",
+          "width": 320,
+          "height": 218,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/gomoku/05-live-network-match-1280-640.webp",
+          "url": "/media/gomoku/05-live-network-match-1280-640.webp",
+          "bytes": 21058,
+          "sha256": "71059d18bb409ee80b28340160eb4f3501c4921772b879545bc10026b770d336",
+          "width": 640,
+          "height": 435,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/gomoku/05-live-network-match-1280-960.webp",
+          "url": "/media/gomoku/05-live-network-match-1280-960.webp",
+          "bytes": 41550,
+          "sha256": "62c370fa49558a1dc97f6bd657e20044f61678965cc29d83474a77214c22c93c",
+          "width": 960,
+          "height": 653,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "route-lab",
+      "source": "captures/route-lab/01-archipelago-compare-1440.png",
+      "source_sha256": "a0f5f6df313f54b8a5e4ee47858e13ccccfca8e854fcd86a7af7f478ef148fda",
+      "source_bytes": 132011,
+      "source_width": 1442,
+      "source_height": 1032,
+      "source_authenticity": "实际 Windows 应用窗口截图；算法样例真实计算，自建房间联机使用真实 Photon 服务。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/route-lab/01-archipelago-compare-1440.webp",
+        "url": "/media/route-lab/01-archipelago-compare-1440.webp",
+        "bytes": 325176,
+        "sha256": "4e613a8c5f01b0203f11ddfca7c307673a596c05a0263b440f1fe7e40ec5804c",
+        "width": 1442,
+        "height": 1032,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/route-lab/01-archipelago-compare-1440-320.webp",
+          "url": "/media/route-lab/01-archipelago-compare-1440-320.webp",
+          "bytes": 9654,
+          "sha256": "a5602a3d080df3c03b37c887883314ab7d6686d9177168df59b085a4f913e70e",
+          "width": 320,
+          "height": 229,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/route-lab/01-archipelago-compare-1440-640.webp",
+          "url": "/media/route-lab/01-archipelago-compare-1440-640.webp",
+          "bytes": 25718,
+          "sha256": "f34f0abbcbe0f4f28e212ab36ff5630915289931b0c1ad37e278c1459a5d0cb7",
+          "width": 640,
+          "height": 458,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/route-lab/01-archipelago-compare-1440-960.webp",
+          "url": "/media/route-lab/01-archipelago-compare-1440-960.webp",
+          "bytes": 48830,
+          "sha256": "641137dc6ad5521bb8543f6bf8fd5d867261ccec68d444ffd41f5b805dd36706",
+          "width": 960,
+          "height": 687,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "route-lab",
+      "source": "captures/route-lab/02-random-compare-1440.png",
+      "source_sha256": "6cab82f3768137b2e9d049c72f573ea68326376db870e8006011b7a4b07cf54e",
+      "source_bytes": 134752,
+      "source_width": 1442,
+      "source_height": 1032,
+      "source_authenticity": "实际 Windows 应用窗口截图；算法样例真实计算，自建房间联机使用真实 Photon 服务。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/route-lab/02-random-compare-1440.webp",
+        "url": "/media/route-lab/02-random-compare-1440.webp",
+        "bytes": 348836,
+        "sha256": "675572f0ae2e9b3761e0d8a7ea05498b43c5a4247d926eacfdb01f0256ec0772",
+        "width": 1442,
+        "height": 1032,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/route-lab/02-random-compare-1440-320.webp",
+          "url": "/media/route-lab/02-random-compare-1440-320.webp",
+          "bytes": 10300,
+          "sha256": "c037c712966c49462c825f4f646b71ab63715e856c0f16caf9b597da08dd0e7a",
+          "width": 320,
+          "height": 229,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/route-lab/02-random-compare-1440-640.webp",
+          "url": "/media/route-lab/02-random-compare-1440-640.webp",
+          "bytes": 27448,
+          "sha256": "23a7573adbed8aad7b39a24abcd030e2fceb8869e313a93eb69191d5bff3b4da",
+          "width": 640,
+          "height": 458,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/route-lab/02-random-compare-1440-960.webp",
+          "url": "/media/route-lab/02-random-compare-1440-960.webp",
+          "bytes": 51452,
+          "sha256": "930e222aa0b4a76f0d6850ce29304c2157b70f90fb9bea4068e26de47ab4d4a7",
+          "width": 960,
+          "height": 687,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "route-lab",
+      "source": "captures/route-lab/03-ring-sa-1440.png",
+      "source_sha256": "6bf8f78a4f03d8e0181440531ed5584f13d7ea1f56210c8c185d51f005ae3693",
+      "source_bytes": 120495,
+      "source_width": 1442,
+      "source_height": 1032,
+      "source_authenticity": "实际 Windows 应用窗口截图；算法样例真实计算，自建房间联机使用真实 Photon 服务。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/route-lab/03-ring-sa-1440.webp",
+        "url": "/media/route-lab/03-ring-sa-1440.webp",
+        "bytes": 270680,
+        "sha256": "6c2cac815f58315cd33551ca20c5e1aef56b04ff3fc304fb51f28182bcc8643a",
+        "width": 1442,
+        "height": 1032,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/route-lab/03-ring-sa-1440-320.webp",
+          "url": "/media/route-lab/03-ring-sa-1440-320.webp",
+          "bytes": 8434,
+          "sha256": "446fbfe6b59c9b37a8b282c0d8c092ee973cc0aee8a0ae15ae8e48bf66fb87c3",
+          "width": 320,
+          "height": 229,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/route-lab/03-ring-sa-1440-640.webp",
+          "url": "/media/route-lab/03-ring-sa-1440-640.webp",
+          "bytes": 22078,
+          "sha256": "d18344b21e996599934b1d410250fc7e8bfb8697cfaa2621df801a00bdb0e067",
+          "width": 640,
+          "height": 458,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/route-lab/03-ring-sa-1440-960.webp",
+          "url": "/media/route-lab/03-ring-sa-1440-960.webp",
+          "bytes": 42344,
+          "sha256": "60221d7ffa7967f38f6c1897f90e2fc881fbe4151c8f858fde8398a0271e0012",
+          "width": 960,
+          "height": 687,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "sort-lab",
+      "source": "captures/sort-lab/01-random-comparison.png",
+      "source_sha256": "be008e3dcac157e2817a82b603ce3c57a396d060afd931ad6670c101bc2d3200",
+      "source_bytes": 166672,
+      "source_width": 1386,
+      "source_height": 923,
+      "source_authenticity": "实际 Windows 应用窗口截图；算法样例真实计算，自建房间联机使用真实 Photon 服务。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/sort-lab/01-random-comparison.webp",
+        "url": "/media/sort-lab/01-random-comparison.webp",
+        "bytes": 441660,
+        "sha256": "bbc58400cd3db5101a5e49eb22d30f62eafae9ccc5017c1f6733c7b93aba912a",
+        "width": 1386,
+        "height": 923,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/sort-lab/01-random-comparison-320.webp",
+          "url": "/media/sort-lab/01-random-comparison-320.webp",
+          "bytes": 13340,
+          "sha256": "5ba624b25adda7fab41466134b211f3aca03d9fff3e17dce5271ed0b2978d19e",
+          "width": 320,
+          "height": 213,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/sort-lab/01-random-comparison-640.webp",
+          "url": "/media/sort-lab/01-random-comparison-640.webp",
+          "bytes": 39190,
+          "sha256": "f20b679f15e5fe53df824dc73eca189aeb84c87e7f0bdc7969d875ba29bb8405",
+          "width": 640,
+          "height": 426,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/sort-lab/01-random-comparison-960.webp",
+          "url": "/media/sort-lab/01-random-comparison-960.webp",
+          "bytes": 73900,
+          "sha256": "2b05ca44de62fb3e7afec0008a99e75bd0abe22232ffbc0e6297d926f45e3658",
+          "width": 960,
+          "height": 639,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "sort-lab",
+      "source": "captures/sort-lab/02-implementation-and-results.png",
+      "source_sha256": "9e50499bd314a96e8340e3216c30dc70bd155795f1594215abd77939adf730b3",
+      "source_bytes": 231866,
+      "source_width": 1386,
+      "source_height": 923,
+      "source_authenticity": "实际 Windows 应用窗口截图；算法样例真实计算，自建房间联机使用真实 Photon 服务。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/sort-lab/02-implementation-and-results.webp",
+        "url": "/media/sort-lab/02-implementation-and-results.webp",
+        "bytes": 679568,
+        "sha256": "dc2058de33eeac1a094da1c2207373d0394965097f47980ff3f2598754dbe489",
+        "width": 1386,
+        "height": 923,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/sort-lab/02-implementation-and-results-320.webp",
+          "url": "/media/sort-lab/02-implementation-and-results-320.webp",
+          "bytes": 16284,
+          "sha256": "a913e3a26c13f3940c9bf59c3af904b177a8f63728b32d1a5ff82538eb1a4254",
+          "width": 320,
+          "height": 213,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/sort-lab/02-implementation-and-results-640.webp",
+          "url": "/media/sort-lab/02-implementation-and-results-640.webp",
+          "bytes": 58348,
+          "sha256": "784dc2eb81f3e885404e4630044163bfcc894384eb262005c507515ae7df352f",
+          "width": 640,
+          "height": 426,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/sort-lab/02-implementation-and-results-960.webp",
+          "url": "/media/sort-lab/02-implementation-and-results-960.webp",
+          "bytes": 114564,
+          "sha256": "49b8d108c0c2fcc4cbdc7008b9fe9ab34cde0943f9f09de3aaf517180044a96e",
+          "width": 960,
+          "height": 639,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "sort-lab",
+      "source": "captures/sort-lab/03-few-unique-comparison.png",
+      "source_sha256": "bea23214b1ed4df77700744bda2c2e8a482e68bfdda4d12f0c56e989538d35d5",
+      "source_bytes": 168658,
+      "source_width": 1386,
+      "source_height": 923,
+      "source_authenticity": "实际 Windows 应用窗口截图；算法样例真实计算，自建房间联机使用真实 Photon 服务。",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/sort-lab/03-few-unique-comparison.webp",
+        "url": "/media/sort-lab/03-few-unique-comparison.webp",
+        "bytes": 451692,
+        "sha256": "2e757f5fdd8f3baf64c86682115f4497c664fd7c132e486778baf6c01a868d91",
+        "width": 1386,
+        "height": 923,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/sort-lab/03-few-unique-comparison-320.webp",
+          "url": "/media/sort-lab/03-few-unique-comparison-320.webp",
+          "bytes": 13184,
+          "sha256": "9c7dcdd788aae80c3d9012ea1011f18d49105cd55881768c7f07ccfa7f205410",
+          "width": 320,
+          "height": 213,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/sort-lab/03-few-unique-comparison-640.webp",
+          "url": "/media/sort-lab/03-few-unique-comparison-640.webp",
+          "bytes": 39548,
+          "sha256": "e75a617863fa2589eea7110c13ac2cad57b8becbff7daba2ae6216783f28fb5c",
+          "width": 640,
+          "height": 426,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/sort-lab/03-few-unique-comparison-960.webp",
+          "url": "/media/sort-lab/03-few-unique-comparison-960.webp",
+          "bytes": 74368,
+          "sha256": "37464bf439ea9283d172f093f3c7f5831adc4381ab267ad34afeec17a7f14e04",
+          "width": 960,
+          "height": 639,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
     }
   ],
   "video": {
@@ -3722,16 +4349,16 @@
     "note": "Real map UI capture, 19.133 s, encoded 30 CFR with frame duplication; not a rendering performance claim."
   },
   "totals": {
-    "original_image_count": 64,
-    "exported_image_count": 261,
-    "source_image_bytes": 27840548,
-    "exported_image_bytes": 16599262,
+    "original_image_count": 75,
+    "exported_image_count": 305,
+    "source_image_bytes": 29384475,
+    "exported_image_bytes": 21490090,
     "video_bytes": 1363373,
-    "font_bytes": 327608,
+    "font_bytes": 336268,
     "font_license_and_provenance_bytes": 12907,
-    "published_media_bytes": 18290243,
-    "total_public_asset_count": 267,
-    "total_public_asset_bytes": 18303150
+    "published_media_bytes": 23189731,
+    "total_public_asset_count": 311,
+    "total_public_asset_bytes": 23202638
   },
   "fonts": {
     "codec": "fontTools WOFF2 with Node native zlib Brotli (quality 11 / font mode), invoked by fontTools",
@@ -3810,14 +4437,14 @@
       {
         "path": "site/public/fonts/noto-sans-sc-subset.woff2",
         "url": "/fonts/noto-sans-sc-subset.woff2",
-        "bytes": 313032,
-        "sha256": "c1035be6020640cb7d41495161e93523eb913472bbdbaea553b99ea4a75cc276",
+        "bytes": 321692,
+        "sha256": "9cad9056ab9b3f600eb78064383470a37bec87c7f23909122c12a57222e44c2a",
         "family": "Noto Sans SC",
         "source": "C:\\Windows\\Fonts\\NotoSansSC-VF.ttf",
         "source_sha256": "763146584cf0710223441356b4395e279021b0806c196614377a7a0174ae074a",
         "source_bytes": 17773244,
-        "requested_codepoints": 1098,
-        "included_codepoints": 1098,
+        "requested_codepoints": 1129,
+        "included_codepoints": 1129,
         "missing_cjk": [],
         "roundtrip_decode_verified": true
       }

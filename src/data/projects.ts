@@ -120,6 +120,26 @@ const aoe = [
   image('AOE4-AutoVillager-Tool', 'editor-help-safe-preview.jpg', 3160, 1500, '帮助面板解释执行流、数据流、节点类型与编辑操作。', '离线编辑器预览'),
 ];
 
+const routeLab = [
+  image('route-lab', '01-archipelago-compare-1440.png', 1442, 1032, '三岛城市群的遗传算法与模拟退火对照：闭环路线、参数、实际耗时和收敛曲线同屏。', '实际算法运行'),
+  image('route-lab', '02-random-compare-1440.png', 1442, 1032, '随机城市布局中的实际双算法运行，路线与收敛趋势随输入一同变化。', '输入与搜索过程'),
+  image('route-lab', '03-ring-sa-1440.png', 1442, 1032, '环形城市使用模拟退火独立搜索，路线、降温参数与最佳解曲线同屏。', '退火参数与效果'),
+];
+
+const gomoku = [
+  image('gomoku', '01-board-history-1280.png', 1282, 872, '木纹棋盘、真实棋子手数与主线棋谱同屏，本地双人和棋谱操作共用同一对局。', '实际对局与棋谱'),
+  image('gomoku', '02-engine-hint-1280.png', 1282, 872, 'V3 威胁搜索与真实棋盘同屏：提示落点、搜索深度、节点、耗时和缓存命中可直接观察。', '实际对局与搜索'),
+  image('gomoku', '03-engine-catalog-1280.png', 1282, 872, '展开真实引擎选择菜单，在 V3 威胁搜索与保留的经典搜索路径之间切换。', '引擎与参数'),
+  image('gomoku', '04-replay-history-1280.png', 1282, 872, '逐手回看第 17 手时的棋盘与棋谱选中位置，历史状态和当前主线保持区分。', '棋谱回看'),
+  image('gomoku', '05-live-network-match-1280.png', 1282, 872, '最终 Windows 发行版与独立自测客户端通过 Photon Asia 真实对局：十手棋、双方身份与联机面板同屏。', '自建房间真实联调'),
+];
+
+const sortLab = [
+  image('sort-lab', '01-random-comparison.png', 1386, 923, '固定种子生成随机输入，9 种排序在三个规模下实际比较，27 组结果通过逐项校验。', '实际算法比较'),
+  image('sort-lab', '02-implementation-and-results.png', 1386, 923, '只读源码窗口与真实比较结果同屏，直接查看本版参与编译的算法实现。', '源码与运行结果'),
+  image('sort-lab', '03-few-unique-comparison.png', 1386, 923, '大量重复值输入下运行三个规模的实际比较；耗时、操作计数与逐项校验一起呈现。', '另一种输入分布'),
+];
+
 export const projects: Project[] = [
   {
     slug: 'nomadworkshop', repo: 'NomadWorkshop', name: 'NomadWorkshop', category: '移动生存游戏', group: 'games',
@@ -158,6 +178,26 @@ export const projects: Project[] = [
     source: 'https://github.com/heroliss/Outpost', docs: 'https://github.com/heroliss/Outpost/tree/main/Assets/Game/Outpost/Documentation~',
     download: { repository: 'heroliss/Outpost', assetPattern: '^Outpost(?:-v?\\d+(?:\\.\\d+)*)?-(?:Windows|win)-x64\\.zip$' },
     cover: outpost[2], gallery: outpost, related: ['ssframework', 'nomadworkshop'],
+  },
+  {
+    slug: 'gomoku', repo: 'gomoku', name: 'Liss Gomoku · 五子棋 V3', category: '五子棋与博弈搜索', group: 'games',
+    summary: '把早期五子棋继续做成 V3，让经典搜索、人机对弈、联机与棋谱一起可用。',
+    intro: '基于找回的 v2.3 工程继续开发的 Windows 五子棋。保留经典搜索的独立实现，加入可选 V3 威胁搜索，并重新整理棋盘规则、深色交互、后台思考、棋谱保存与在线双人。',
+    status: 'Windows 版已发布', tags: ['C#', '.NET 10', 'Alpha–Beta', 'Photon', 'WinForms'],
+    features: [
+      { title: '保留 11 种引擎', body: '经典负极大值、Alpha–Beta、PVS 与五元组等可分别选择；V3 威胁搜索加入迭代加深、排序和置换表。' },
+      { title: '把思考与棋谱变得可见', body: '人机、本地双人或引擎对弈共用棋盘，支持提示、限时取消、逐手回看与 JSON / SGF 棋谱。' },
+      { title: '保留真实联机路线', body: '沿用 Photon Asia 大厅，使用独立 V3 协议协商对局；悔棋、重开经对手确认，接收数据逐层校验。' },
+    ],
+    usage: [
+      { title: '解压后直接对弈', body: '完整解压 Windows x64 ZIP，运行 Liss.Gomoku.exe；自带 .NET 桌面运行时。新建对局选择执黑、执白、本地双人或引擎对弈。' },
+      { title: '尝试搜索与回看', body: '在引擎页调整搜索方法、深度与时间；提示可观察建议落点，方向键与回看控件逐手检查棋谱，Ctrl+S 保存。' },
+      { title: '邀请一位对手', body: '双方使用 V3，打开联机页，填写昵称后进入大厅，创建或加入同一房间。房主执黑，离开房间会结束当前联机会话。' },
+    ],
+    note: '截图来自本机实际运行。V3 基于 v2.3 源码升级，未声称恢复缺失的 v2.5 源码；Photon 在线功能依赖网络、服务与应用账户配额。',
+    source: 'https://github.com/heroliss/gomoku', docs: 'https://github.com/heroliss/gomoku#readme',
+    download: { repository: 'heroliss/gomoku', assetPattern: '^liss-gomoku(?:-v?\\d+(?:\\.\\d+)*)?-(?:Windows|win)-x64\\.zip$' },
+    cover: gomoku[0], gallery: gomoku, related: ['sort-lab', 'route-lab', 'outpost'],
   },
   {
     slug: 'dubforge', repo: 'dubforge', name: 'DubForge', category: '本地视频译制工作台', group: 'ai-data',
@@ -289,6 +329,46 @@ export const projects: Project[] = [
     source: 'https://github.com/heroliss/AOE4-AutoVillager-Tool', docs: 'https://github.com/heroliss/AOE4-AutoVillager-Tool/tree/main/docs',
     download: { repository: 'heroliss/AOE4-AutoVillager-Tool', assetPattern: '^AOE4-FlowEditor(?:-v?\\d+(?:\\.\\d+)*)?\\.exe$' },
     cover: aoe[0], gallery: aoe, related: ['dubforge', 'ssframework'],
+  },
+  {
+    slug: 'route-lab', repo: 'route-lab', name: 'Route Lab · 旅行商实验室', category: '组合优化实验工具', group: 'graphics',
+    summary: '同一组城市，两种搜索方法，把路线、收敛与计算代价放在一起观察。',
+    intro: '由 2016 年个人旅行商程序恢复并现代化的桌面实验工具。遗传算法与模拟退火在同一组城市上寻找更短闭环，画布编辑、固定种子和真实曲线连接起问题、参数与搜索结果。',
+    status: 'Windows 版已发布', tags: ['C#', '.NET 10', '遗传算法', '模拟退火', 'WinForms'],
+    features: [
+      { title: '遗传与退火对照', body: '用实线、虚线区分实际路线，分别记录最佳长度、耗时和评估次数，不把迭代轮数误当同等预算。' },
+      { title: '城市可以直接编辑', body: '生成三岛、环形或随机城市，点击添加、拖动移动、右键删除；更改城市后清除旧实验结果。' },
+      { title: '过程可以重看', body: '固定参数与种子复现实验，真实进度快照驱动收敛曲线；停止保留已找到的最佳路线。' },
+    ],
+    usage: [
+      { title: '下载并运行', body: '完整解压 Windows x64 ZIP，运行 RouteLab.exe；包内带运行时，无需安装 SDK。' },
+      { title: '做一次同题对照', body: '生成城市或直接编辑画布，设置参数后点击“对照运行”；可随时停止，也可导出路线画布。' },
+      { title: '复现实验场景', body: '从程序目录执行命令，生成固定三岛城市并实际运行两种算法。', code: '.\\RouteLab.exe --sample archipelago --seed 2026 --cities 48 --compare', language: 'powershell' },
+    ],
+    note: '截图来自实际算法运行；固定种子保留路线可复现性，耗时随运行环境变化。历史源码与本轮现代化实现分别保留。',
+    source: 'https://github.com/heroliss/route-lab', docs: 'https://github.com/heroliss/route-lab#readme',
+    download: { repository: 'heroliss/route-lab', assetPattern: '^RouteLab(?:-v?\\d+(?:\\.\\d+)*)?-(?:Windows|win)-x64\\.zip$' },
+    cover: routeLab[0], gallery: routeLab, related: ['sort-lab', 'ga-sort', 'floydshortestpath'],
+  },
+  {
+    slug: 'sort-lab', repo: 'sort-lab', name: 'Sort Lab · 排序实验台', category: '算法比较与性能测量', group: 'graphics',
+    summary: '相同输入、真实计时、逐项校验，让排序性能的差异有据可看。',
+    intro: '从 2016 年的个人排序算法工具继续整理而来。新版以 8 种内置排序和 .NET Array.Sort 对照，比较四种输入分布与多个规模，把正确性、耗时、操作计数和分配放在同一个可复现实验中。',
+    status: 'Windows 版已发布', tags: ['C#', '.NET 10', '排序算法', '性能测量', 'WinForms'],
+    features: [
+      { title: '9 种实现，4 种分布', body: '快速、归并、堆、希尔、基数、插入、选择、冒泡与运行时基准，使用同源随机、近序、逆序或重复输入。' },
+      { title: '计时与计数分离', body: '预热后重复取耗时中位数，另跑操作计数；分配使用线程累计读数，未公开的运行时计数明确留空。' },
+      { title: '比较之前先校验', body: '每次输出逐项对照 Array.Sort；支持后台取消、边界限制、JSON 导出与只读查看真实源码。' },
+    ],
+    usage: [
+      { title: '下载并运行', body: '完整解压 Windows x64 ZIP，运行 Liss.SortLab.exe；自带运行时，默认深色界面。' },
+      { title: '调整一组实验', body: '选择输入分布、最大规模、种子、重复次数和算法，再点击“开始比较”。选中结果查看算法思路，悬停耗时查看最小/最大值。' },
+      { title: '固定种子重跑', body: 'showcase 打开界面并实际运行默认比较；benchmark 不开窗口，导出 JSON。', code: '.\\Liss.SortLab.exe --showcase\n.\\Liss.SortLab.exe --benchmark --output result.json', language: 'powershell' },
+    ],
+    note: '截图为实际运行结果。历史脚本以安全 NRBF 记录读取方式提取存档，正式程序不使用 BinaryFormatter，也不执行外部 C# 脚本。',
+    source: 'https://github.com/heroliss/sort-lab', docs: 'https://github.com/heroliss/sort-lab#readme',
+    download: { repository: 'heroliss/sort-lab', assetPattern: '^Liss-SortLab(?:-v?\\d+(?:\\.\\d+)*)?-(?:Windows|win)-x64\\.zip$' },
+    cover: sortLab[0], gallery: sortLab, related: ['route-lab', 'ga-sort', 'gomoku'],
   },
   {
     slug: 'ga-sort', repo: 'GA-sort', name: 'GA-sort', category: '遗传算法与程序演化', group: 'graphics',

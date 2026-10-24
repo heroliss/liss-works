@@ -65,6 +65,21 @@ const signatures: Record<string, ProjectSignature> = {
     principle: '低门槛参与，让身份与内容长期留存。',
     highlights: ['访客身份延续', 'Markdown 预览', '可选邮箱与找回'],
   },
+  gomoku: {
+    direction: '博弈搜索 / Windows 游戏',
+    principle: '保留算法差异，让思考、回看与联机都可操作。',
+    highlights: ['11 种搜索引擎', 'V3 Photon 双人', '棋谱保存与回看'],
+  },
+  'route-lab': {
+    direction: '组合优化 / 算法可视化',
+    principle: '同一组城市，看清不同搜索过程。',
+    highlights: ['遗传与退火对照', '真实收敛曲线', '固定种子复现'],
+  },
+  'sort-lab': {
+    direction: '算法实验 / 性能测量',
+    principle: '用相同输入与正确性校验，让比较有依据。',
+    highlights: ['9 种排序实现', '计时与计数分离', '4 种输入分布'],
+  },
 };
 
 export function getProjectSignature(slug: string): ProjectSignature {
