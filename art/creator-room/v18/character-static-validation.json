@@ -1,0 +1,116 @@
+{
+  "asset": "E:\\GPT-Projects\\个人网站\\site-next\\public\\media\\creator-room\\creator-character-v18.glb",
+  "bytes": 2798192,
+  "assetOnly": true,
+  "checks": [
+    {
+      "name": "triangle-budget",
+      "passed": true,
+      "detail": {
+        "triangles": 88624,
+        "limit": 90000
+      }
+    },
+    {
+      "name": "self-contained-original-asset",
+      "passed": true,
+      "detail": {
+        "images": 0,
+        "buffers": 1
+      }
+    },
+    {
+      "name": "attached-once",
+      "passed": true,
+      "detail": 1
+    },
+    {
+      "name": "real-skinned-rig",
+      "passed": true,
+      "detail": {
+        "bones": 41,
+        "meshes": 45,
+        "morphs": 17
+      }
+    },
+    {
+      "name": "finite-human-bounds",
+      "passed": true,
+      "detail": {
+        "min": [
+          -0.38198297620807853,
+          0.026999983952933994,
+          -0.1300001517164776
+        ],
+        "max": [
+          0.38197560977565637,
+          1.578510085776962,
+          0.6520255627997049
+        ]
+      }
+    },
+    {
+      "name": "two-cycles-finite",
+      "passed": true,
+      "detail": {
+        "samples": 1440,
+        "seconds": 48
+      }
+    },
+    {
+      "name": "fixed-arm-lengths",
+      "passed": true,
+      "detail": {
+        "maximumLengthError": 8.59825070587128e-8,
+        "lengths": [
+          0.26857771523457286,
+          0.23845749598824473,
+          0.26857771523457286,
+          0.23845749598824473
+        ]
+      }
+    },
+    {
+      "name": "typing-wrist-contact",
+      "passed": true,
+      "detail": {
+        "maximumKeyboardError": 0.0017995295177079269,
+        "maximumLeftTypingError": 0.0018000425098467175
+      }
+    },
+    {
+      "name": "bone-textures-released",
+      "passed": true,
+      "detail": {
+        "releasedBoneTextures": 1,
+        "skeletons": 1
+      }
+    },
+    {
+      "name": "idempotent-abort-dispose",
+      "passed": true,
+      "detail": 0
+    },
+    {
+      "name": "pre-aborted-load",
+      "passed": true,
+      "detail": true
+    }
+  ],
+  "passed": true,
+  "motionCorrection": {
+    "leftWristTarget": [
+      -0.183,
+      0.848,
+      0.105
+    ],
+    "maximumLeftPalmAngle": 0,
+    "maximumLeftWristTargetError": 0.0018000425098467175,
+    "maximumLeftWristReachProjection": 1.0200055990452863e-7,
+    "maximumLeftShoulderDistance": 0.49777515002988,
+    "leftArmReachLimit": 0.5030352112228176,
+    "minimumLeftReachMargin": 0.005260061192937593,
+    "maximumLeftTypingError": 0.0018000425098467175,
+    "passed": true
+  }
+}

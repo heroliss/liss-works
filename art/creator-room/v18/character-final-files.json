@@ -1,0 +1,22 @@
+[
+  {
+    "path": "art/creator-room/v18/build_character.py",
+    "bytes": 27027,
+    "sha256": "312178f8b72d0dc36a16c32985ce53b15503bf87b6a89c4b465547dec51aee36"
+  },
+  {
+    "path": "art/creator-room/v18/creator-character-v18.blend",
+    "bytes": 1972087,
+    "sha256": "3e4a9b37b61f2cb57699fc3da0716f6b459dc331537d9b8d8ba5692c40f9d63a"
+  },
+  {
+    "path": "public/media/creator-room/creator-character-v18.glb",
+    "bytes": 2798192,
+    "sha256": "2c5489a0b9bd0d047d74bc46e97d32a90a3f50e7fa8f6a8b6fccae3a3c125842"
+  },
+  {
+    "path": "src/scripts/creator-character.ts",
+    "bytes": 11858,
+    "sha256": "d180f248a889ce0834490e36fbc9e9e0c462c3100b8eee8ef276094acd791cc1"
+  }
+]

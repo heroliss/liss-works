@@ -1,5 +1,5 @@
 /* The creator's animated working room carries the page; copy stays outside it. */
-.about-creator { --creator-accent:#c8dfcf; position:relative; z-index:1; isolation:isolate; width:min(1280px,calc(100% - var(--margin,24px) * 2)); margin-inline:auto; color:var(--ink,#eeefeb); }
+.about-creator { --creator-accent:#ead4b7; position:relative; z-index:1; isolation:isolate; width:min(1280px,calc(100% - var(--margin,24px) * 2)); margin-inline:auto; color:var(--ink,#eeefeb); }
 .creator-about__opening { position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr); align-items:center; gap:clamp(32px,4vw,64px); padding:22px 0 16px; }
 .creator-about__opening h1 { display:flex; align-items:baseline; flex-wrap:wrap; gap:15px; min-width:0; margin:0; font-weight:500; letter-spacing:-.035em; line-height:1.1; }
 .creator-about__opening h1 > span { font-size:clamp(25px,2.1vw,30px); white-space:nowrap; }
@@ -14,9 +14,9 @@
 .creator-about__practice > p { max-width:38em; margin:0 0 22px; font-size:18px; line-height:1.95; color:#cbd5cc; }
 .creator-about__practice > .creator-about__scope { margin:0 0 18px; font-size:17px; line-height:1.85; color:#acbdb2; }
 .creator-about__contact { display:flex; align-items:center; flex-wrap:wrap; gap:22px 28px; margin-top:32px; }
-.creator-about__talk { display:inline-flex; align-items:center; justify-content:center; gap:14px; min-height:54px; padding:14px 21px; border-radius:4px 16px 4px 4px; background:var(--creator-accent); color:#13251b; font-size:18px; line-height:1.5; font-weight:500; text-decoration:none; }
+.creator-about__talk { display:inline-flex; align-items:center; justify-content:center; gap:14px; min-height:54px; padding:14px 21px; border-radius:4px 16px 4px 4px; background:var(--creator-accent); color:#30241e; font-size:18px; line-height:1.5; font-weight:500; text-decoration:none; }
 .creator-about__talk > svg:last-child { margin-left:8px; transition:transform .2s var(--ease-out); }
-.creator-about__talk:is(:hover,:focus-visible) { background:#e2ecdf; color:#13251b; }
+.creator-about__talk:is(:hover,:focus-visible) { background:#f5e7d4; color:#30241e; }
 .creator-about__talk:is(:hover,:focus-visible) > svg:last-child { transform:translateX(3px); }
 .creator-about__destinations { min-width:0; }
 .creator-about__destinations > p { margin:0 0 6px; font-size:15px; line-height:1.8; color:#d0d9ce; }

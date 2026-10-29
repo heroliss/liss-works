@@ -3,11 +3,11 @@ import Icon from './Icon.astro';
 import { sitePath } from '../lib/site-path';
 import '../styles/creator-room.css';
 ---
-<figure class="creator-room" data-creator-room data-room-state="waiting" aria-label="夜间居家工作室：一位戴薄框眼镜的成年创作者，在环绕桌面的三块屏幕前阅读、编程与思考。">
+<figure class="creator-room" data-creator-room data-creator-character={sitePath('/media/creator-room/creator-character-v18.glb')} data-room-state="waiting" aria-label="夜间微缩创作工作室：一位戴眼镜的卡通成年创作者，在环绕桌面的三块屏幕前阅读、编程与思考。移动指针，观察空间与人物的回应。">
   <div class="creator-room__stage" data-creator-stage>
     <canvas class="creator-room__canvas" data-creator-canvas aria-hidden="true" hidden></canvas>
     <div class="creator-room__fallback" data-creator-fallback>
-      <picture class="creator-room__poster" data-creator-poster-slot aria-hidden="true"><source media="(max-width:700px)" srcset={sitePath('/media/creator-room-poster-mobile.webp')}/><img src={sitePath('/media/creator-room-poster.webp')} width="1180" height="603" alt="" decoding="async"/></picture>
+      <picture class="creator-room__poster" data-creator-poster-slot aria-hidden="true"><source media="(max-width:700px)" srcset={sitePath('/media/creator-room-poster-mobile.webp')}/><img src={sitePath('/media/creator-room-poster.webp')} width="1180" height="710" alt="" decoding="async"/></picture>
       <div class="creator-room__fallback-copy"><p data-creator-status>创作空间的静帧。</p></div>
     </div>
   </div>

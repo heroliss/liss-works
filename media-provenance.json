@@ -1,6 +1,6 @@
 {
   "schema": "showcase.website-media.v1",
-  "generated_at_utc": "2026-10-29T19:29:07.813654+00:00",
+  "generated_at_utc": "2026-10-29T20:34:49.170586+00:00",
   "source_manifest": "captures/selected-manifest.json",
   "source_manifest_sha256": "2c1802696f789defdfcc69f2f1f64badcce99c0ed4d9fdb33c6a59104e4fe9e3",
   "originals_modified": false,
@@ -7776,11 +7776,11 @@
     "source_image_bytes": 43741297,
     "exported_image_bytes": 44054260,
     "video_bytes": 1363373,
-    "font_bytes": 356572,
-    "font_license_and_provenance_bytes": 16731,
-    "published_media_bytes": 45774205,
+    "font_bytes": 356364,
+    "font_license_and_provenance_bytes": 16987,
+    "published_media_bytes": 45773997,
     "total_public_asset_count": 550,
-    "total_public_asset_bytes": 45790936
+    "total_public_asset_bytes": 45790984
   },
   "fonts": {
     "codec": "fontTools WOFF2 with Node native zlib Brotli (quality 11 / font mode), invoked by fontTools",
@@ -7842,7 +7842,12 @@
       "site-next/src/pages/projects/index.astro",
       "site-next/src/scripts/about-studio-motion.ts",
       "site-next/src/scripts/archive-atlas.ts",
+      "site-next/src/scripts/creator-character.ts",
+      "site-next/src/scripts/creator-engine.ts",
+      "site-next/src/scripts/creator-performance-types.ts",
+      "site-next/src/scripts/creator-performance.ts",
       "site-next/src/scripts/creator-room.ts",
+      "site-next/src/scripts/creator-set.ts",
       "site-next/src/scripts/detail-world-motion.ts",
       "site-next/src/scripts/downloads.ts",
       "site-next/src/scripts/exploration-invitation.ts",
@@ -7930,14 +7935,14 @@
       {
         "path": "site-next/public/fonts/noto-sans-sc-subset.woff2",
         "url": "/fonts/noto-sans-sc-subset.woff2",
-        "bytes": 341996,
-        "sha256": "aa4a8942dad6aef2221ea5bfacd88ed71b1e38d653847ae0b8e7295bf2393203",
+        "bytes": 341788,
+        "sha256": "3b4d4e217595237436bf7a0f3d10c1f02f3db12007c8fb0bbc24cd848bbdda94",
         "family": "Noto Sans SC",
         "source": "C:\\Windows\\Fonts\\NotoSansSC-VF.ttf",
         "source_sha256": "763146584cf0710223441356b4395e279021b0806c196614377a7a0174ae074a",
         "source_bytes": 17773244,
-        "requested_codepoints": 1206,
-        "included_codepoints": 1206,
+        "requested_codepoints": 1205,
+        "included_codepoints": 1205,
         "missing_cjk": [],
         "roundtrip_decode_verified": true
       }

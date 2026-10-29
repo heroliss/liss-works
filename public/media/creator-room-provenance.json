@@ -2,7 +2,9 @@
   "kind": "Responsive still frames of the original real-time creator room",
   "artwork": "Stylized creative avatar; screen dialogue and code are illustrative, not a real session",
   "source": "src/scripts/creator-room.ts",
-  "capture_controller_sha256": "d25fffbc744c186a4b8edc2cc5f86bd7d29b096e5b70cc4cb72b7e3612379f42",
+  "model": "/media/creator-room/creator-character-v18.glb",
+  "model_sha256": "2c5489a0b9bd0d047d74bc46e97d32a90a3f50e7fa8f6a8b6fccae3a3c125842",
+  "capture_controller_sha256": "9070d069e7eed03089815283dd65313c8387e514c6302bed60d6311c672a36a2",
   "renderer": {
     "name": "Three.js",
     "version": "0.186.1",
@@ -12,14 +14,14 @@
   "assets": [
     {
       "public_asset": "public/media/creator-room-poster.webp",
-      "asset_sha256": "dc0499d77373e416d6d4f0ee2f21fd9f26279e3f5fd047741a7f3509ec0f865b",
+      "asset_sha256": "b7f46442a9f0107ded5127f600f1384efbbd0b69c9dd90cb71e5d2286588b845",
       "width": 1180,
-      "height": 603,
+      "height": 710,
       "conversion": "RGBA WebP quality 94; no crop, resize or semantic edit"
     },
     {
       "public_asset": "public/media/creator-room-poster-mobile.webp",
-      "asset_sha256": "c4e4119e44f582dcf5e0ed55a059ba4769ca264074cffc69fc6862a94a4467ec",
+      "asset_sha256": "a71ac3412377c9aab79a7865881c477471e8e48d45d7219ed77a4f4f6f47b5c4",
       "width": 339,
       "height": 491,
       "conversion": "RGBA WebP quality 94; no crop, resize or semantic edit"

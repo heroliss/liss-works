@@ -1,0 +1,7 @@
+# Original v18 art direction
+
+`studio-concept-v18.png` was generated with the built-in image generation tool as an original **concept reference**, not the interactive deliverable or the fallback poster. The actual page remains modeled, lit and animated in real-time 3D.
+
+Use the warm face / cool studio light separation, expressive adult eyes, continuous clothing, a clear three-quarter face, shaped hair masses and purposeful material families. The reference over-specifies fine hair, realistic fabric and room decoration: the realtime clay interpretation should simplify those rather than imitate expensive photoreal detail or add unrelated props. Keep the site dark and the text separate from the scene.
+
+Prompt: Create an original high-end stylized 3D adult creator with glasses, 4.5–5-head proportions, expressive volumetric eyes and brows, sculpted hair, continuous navy cardigan over a cream shirt and shaped hands. Seat him at a walnut desk with three adjoining widescreen monitors wrapping inward at 30-degree side yaw. Show his face clearly in three-quarter view over a low blue chair. The screens suggest a chat, code and a creative prototype without readable text. A midnight navy/cobalt miniature studio has warm amber light on the face/hands, cool cyan/lavender fill, a restrained terracotta mug, sparse books and a plant. Use soft bevels, tactile clay material families, contact shadows and restrained glasses reflections. No existing character, logos, typography or watermark. Avoid uncanny realism, baby chibi proportions and primitive ball joints.
