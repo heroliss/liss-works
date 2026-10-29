@@ -102,12 +102,14 @@
 
 .home-atmosphere__wash {
   background:
-    radial-gradient(ellipse 62% 620px at 92% 2%, color-mix(in srgb, var(--atmosphere-tone) 8%, transparent), transparent 76%),
-    radial-gradient(ellipse 44% 800px at -8% 23%, #9eba6810, transparent 76%),
-    radial-gradient(ellipse 54% 780px at 105% 43%, #6dcbe810, transparent 78%),
-    radial-gradient(ellipse 50% 1000px at -9% 64%, #d18e5812, transparent 76%),
-    radial-gradient(ellipse 38% 720px at 109% 84%, #af9fe011, transparent 76%),
-    radial-gradient(ellipse 60% 440px at 42% 101%, #b6cd6d0b, transparent 78%);
+    radial-gradient(ellipse 62% max(680px, 11%) at 92% 2%, color-mix(in srgb, var(--atmosphere-tone) 11%, transparent), transparent 76%),
+    radial-gradient(ellipse 57% 19% at 4% 24%, #a4b78c26, transparent 77%),
+    radial-gradient(ellipse 59% 21% at 101% 43%, #85b9c921, transparent 78%),
+    radial-gradient(ellipse 57% 22% at -2% 65%, #be9f8124, transparent 78%),
+    radial-gradient(ellipse 48% 18% at 105% 85%, #aca0be21, transparent 78%),
+    radial-gradient(ellipse 65% 12% at 42% 102%, #b4c5991c, transparent 80%),
+    linear-gradient(108deg, #10191a, #0c1215 34%, #0c1114 62%, #16171b);
+  mask-image: linear-gradient(to bottom, transparent, #000 88px, #000 calc(100% - 160px), transparent);
 }
 
 .home-atmosphere__grain {

@@ -58,8 +58,8 @@ html[data-motion] .dub-reel[data-reel-enhanced=true] .dub-factory {
 
 /* Editorial relief is on pseudo-elements; prose and code retain their exact
    layout and overflow. The muted trailing edges avoid another block of solid UI. */
-.detail-page[data-project-world] .signature-entry--principle,
-.detail-page[data-project-world] .engineering-copy[data-copy-density='long'] {
+html .detail-page[data-project-world] .signature-entry--principle,
+html .detail-page[data-project-world] .engineering-copy[data-copy-density='long'] {
   background: transparent;
 }
 .detail-page[data-project-world] .signature-entry--principle::before {

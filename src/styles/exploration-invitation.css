@@ -1,0 +1,107 @@
+/* One lit, unfolding image; the questions occupy its margins rather than a list. */
+.exploration-invitation {
+  --invite-tone: #ffd08a;
+  position: relative;
+  isolation: isolate;
+  padding-block: 36px 20px;
+  overflow: visible;
+}
+.invitation-darkroom {
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  inset: -65px calc(50% - 50vw) -80px;
+  overflow: clip;
+  mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 86%, transparent);
+  background: radial-gradient(ellipse at 44% 44%, #111c24, #0b1118 57%, transparent 82%);
+}
+.invitation-light {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 38% 43%, color-mix(in srgb, var(--invite-tone) 13%, transparent), transparent 56%);
+  pointer-events: none;
+}
+.invitation-heading { display: flex; justify-content: space-between; align-items: end; gap: 40px; margin-bottom: 48px; }
+.invitation-heading h2 { font-size: clamp(48px, 6.4vw, 94px); font-weight: 500; line-height: 1.12; letter-spacing: -.055em; margin: 0; }
+.invitation-heading > p { font-size: 18px; line-height: 1.9; color: #b7c3c7; margin: 0 6% 12px 0; }
+.invitation-composition { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: center; gap: 12px 20px; }
+.invitation-question { position: relative; z-index: 2; display: block; width: fit-content; max-width: 100%; padding: 13px 0; color: #d1d9d9; }
+.invitation-question__text { display: block; font-size: clamp(23px, 2.25vw, 34px); font-weight: 450; letter-spacing: -.035em; line-height: 1.5; text-wrap: balance; }
+.invitation-question__route { display: flex; align-items: center; gap: 30px; margin-top: 7px; font-size: 15px; color: var(--question-tone); }
+.invitation-question__route > span { font-size: 24px; line-height: 1; transition: transform 200ms ease; }
+.invitation-question:hover, .invitation-question:focus-visible, .invitation-question[data-active=true] { color: #f4f5ed; }
+.invitation-question:hover .invitation-question__route > span, .invitation-question:focus-visible .invitation-question__route > span { transform: translate(4px, -3px); }
+.invitation-question[data-active=true]::before { content: ''; position: absolute; width: 24px; height: 3px; top: 0; left: 0; background: var(--question-tone); transform: rotate(-6deg); transform-origin: left; }
+.invitation-question--light { grid-column: 1 / 8; grid-row: 1; margin-left: 6%; }
+.invitation-question--cost { grid-column: 10 / -1; grid-row: 2; align-self: center; transform: translateY(-8px); }
+.invitation-question--cost .invitation-question__text { font-size: clamp(23px, 2.05vw, 30px); }
+.invitation-question--life { grid-column: 4 / 12; grid-row: 3; margin-top: 34px; }
+.invitation-camera { grid-column: 1 / 10; grid-row: 2; position: relative; min-width: 0; padding: 36px 26px 40px 20px; perspective: 1600px; }
+.invitation-motion { position: relative; transform-style: preserve-3d; }
+.invitation-fold { position: relative; transform-style: preserve-3d; transform: rotateX(5deg) rotateY(-9deg) rotateZ(-2deg); }
+.invitation-sheet { position: absolute; inset: 0 0 64px; pointer-events: none; transform-origin: 2% 100%; }
+.invitation-sheet--far { background: #17232a; transform: translate3d(13px, 25px, -42px) rotateZ(5deg); clip-path: polygon(0 0, 98% 0, 100% 96%, 1% 100%); }
+.invitation-sheet--near { background: color-mix(in srgb, var(--invite-tone) 18%, #18212a); transform: translate3d(-10px, 14px, -19px) rotateZ(-2deg); clip-path: polygon(0 0, 97% 0, 100% 5%, 100% 91%, 95% 100%, 0 100%); }
+.invitation-sheet--near::after { content: ''; position: absolute; right: 0; bottom: 0; width: 10%; height: 18%; background: color-mix(in srgb, var(--invite-tone) 32%, #263940); clip-path: polygon(100% 0, 100% 100%, 0 100%); }
+.invitation-fold-edge { position: absolute; pointer-events: none; top: 7%; left: -17px; bottom: 100px; width: 12px; background: linear-gradient(90deg, #273a41, color-mix(in srgb, var(--invite-tone) 34%, #263941)); transform: translateZ(-8px) rotateY(-30deg); transform-origin: right; }
+.invitation-pictures { position: relative; transform: translateZ(8px); }
+.invitation-picture { margin: 0; }
+.invitation-picture-link { position: relative; display: block; box-shadow: 13px 32px 46px -24px #000c; }
+.invitation-picture-link > img { display: block; width: 100%; height: auto; }
+.invitation-picture-link::before { content: ''; position: absolute; pointer-events: none; top: 0; bottom: 0; right: -7px; width: 7px; background: linear-gradient(90deg, color-mix(in srgb, var(--invite-tone) 48%, #475354), #14232a); transform: skewY(38deg); transform-origin: left top; }
+.invitation-picture-link::after { content: ''; position: absolute; pointer-events: none; left: 0; right: -7px; height: 6px; bottom: -6px; background: linear-gradient(180deg, color-mix(in srgb, var(--invite-tone) 30%, #3b4b50), #18232a); transform: skewX(45deg); transform-origin: left top; }
+.invitation-photo-edge { pointer-events: none; position: absolute; inset: 0; box-shadow: inset 0 2px #fff2, inset -2px 0 #fff1; }
+.invitation-picture figcaption { min-height: 82px; padding: 20px 0 0 4px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px; }
+.invitation-work { font-family: var(--font-display, Rajdhani, sans-serif); font-size: 22px; color: var(--invite-tone); line-height: 1.15; }
+.invitation-picture figcaption p { margin: 0; max-width: 40em; font-size: 16px; color: #b9c8cd; line-height: 1.65; }
+.invitation-exit { display: flex; justify-content: space-between; align-items: center; gap: 36px; margin: 60px 0 0; }
+.invitation-exit > p { max-width: 26em; margin: 0; color: #b9c8cd; font-size: 17px; }
+.invitation-library-link { display: flex; align-items: center; gap: 22px; font-size: clamp(24px, 2.7vw, 39px); color: #f0f3e9; min-height: 64px; }
+.invitation-library-count { font-size: 15px; color: #b7c4c8; white-space: nowrap; }
+.invitation-library-link > svg { color: var(--invite-tone); transition: transform 200ms ease; }
+.invitation-library-link:hover > svg, .invitation-library-link:focus-visible > svg { transform: translate(5px, -4px); }
+.exploration-invitation a:focus-visible { outline: 2px solid var(--invite-tone); outline-offset: 7px; border-radius: 1px; }
+@media (max-width: 1000px) {
+  .invitation-heading { align-items: start; gap: 25px; }
+  .invitation-heading > p { margin-right: 0; max-width: 15em; font-size: 17px; }
+  .invitation-composition { gap: 10px; }
+  .invitation-camera { grid-column: 1 / 11; padding-right: 30px; }
+  .invitation-question--cost { grid-column: 7 / -1; grid-row: 3; align-self: start; transform: none; }
+  .invitation-question--life { grid-column: 1 / 7; grid-row: 3; margin: 66px 18px 0 0; }
+  .invitation-question--light { margin-left: 2%; }
+  .invitation-question__text, .invitation-question--cost .invitation-question__text { font-size: 25px; }
+  .invitation-exit { align-items: start; margin-top: 44px; }
+}
+@media (max-width: 760px) {
+  .exploration-invitation { padding-block: 15px 0; }
+  .invitation-heading { display: block; margin-bottom: 30px; }
+  .invitation-heading h2 { font-size: clamp(39px, 10vw, 61px); }
+  .invitation-heading > p { margin: 24px 0 0; max-width: none; font-size: 16px; }
+  .invitation-composition { display: flex; flex-direction: column; align-items: stretch; gap: 17px; }
+  .invitation-question { padding-block: 13px 5px; margin: 0; max-width: 100%; }
+  .invitation-question__text, .invitation-question--cost .invitation-question__text { font-size: clamp(21px, 5.3vw, 29px); }
+  .invitation-question__route { margin-top: 3px; font-size: 14px; }
+  .invitation-camera { width: 100%; padding: 18px 14px 24px 8px; }
+  .invitation-fold { transform: rotateX(2deg) rotateY(-3deg) rotateZ(-1.5deg); }
+  .invitation-sheet--far { transform: translate3d(5px, 13px, -26px) rotateZ(3deg); }
+  .invitation-sheet--near { transform: translate3d(-5px, 7px, -12px) rotateZ(-1deg); }
+  .invitation-fold-edge { left: -8px; width: 7px; bottom: 112px; }
+  .invitation-picture figcaption { min-height: 96px; padding-top: 17px; gap: 5px; }
+  .invitation-work { font-size: 21px; }
+  .invitation-picture figcaption p { font-size: 15px; line-height: 1.75; }
+  .invitation-question--cost { align-self: end; max-width: 94%; }
+  .invitation-question--life { margin-top: 8px; }
+  .invitation-exit { display: block; margin-top: 41px; }
+  .invitation-exit > p { font-size: 16px; max-width: 25em; margin-bottom: 20px; }
+  .invitation-library-link { width: fit-content; gap: 15px; font-size: clamp(23px, 6vw, 34px); }
+  .invitation-library-count { font-size: 13px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .exploration-invitation .invitation-fold, .exploration-invitation .invitation-sheet { transform: none; }
+  .invitation-question__route > span, .invitation-library-link > svg { transition: none; }
+}
+@media (forced-colors: active) {
+  .invitation-darkroom, .invitation-sheet, .invitation-fold-edge, .invitation-photo-edge,
+  .invitation-picture-link::before, .invitation-picture-link::after { display: none; }
+  .invitation-picture-link { box-shadow: none; }
+}

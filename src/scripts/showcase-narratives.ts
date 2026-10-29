@@ -13,8 +13,9 @@ export function setupShowcaseNarratives({ signal, preference }: Options): () => 
   let disposed = false;
   const scene = (element: HTMLElement, getTimeline: () => Running, onGate?: (playing:boolean) => void) => {
     let visible = false;
+    let held = false;
     const gate = () => {
-      const playing = visible && !document.hidden && !preference.matches && root.dataset.motionPaused !== 'true';
+      const playing = visible && !held && !document.hidden && !preference.matches && root.dataset.motionPaused !== 'true';
       element.dataset.scenePlaying = String(playing);
       const timeline = getTimeline();
       if (preference.matches) timeline?.progress(1).pause();
@@ -23,6 +24,11 @@ export function setupShowcaseNarratives({ signal, preference }: Options): () => 
     };
     const observer = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; gate(); }, { threshold: .05 });
     observer.observe(element); gates.add(gate);
+    element.addEventListener('pointerdown',event=>{if(event.isPrimary&&event.button===0){held=true;gate();}},{signal:events.signal});
+    const release=()=>{held=false;gate();};
+    window.addEventListener('pointerup',release,{signal:events.signal});
+    window.addEventListener('pointercancel',release,{signal:events.signal});
+    window.addEventListener('blur',release,{signal:events.signal});
     cleanups.push(() => { observer.disconnect(); gates.delete(gate); delete element.dataset.scenePlaying; });
     return gate;
   };
@@ -43,6 +49,7 @@ export function setupShowcaseNarratives({ signal, preference }: Options): () => 
       host.dataset.active = value;
       pictures.forEach(picture => { const active=picture.getAttribute(pictureHook)===value; picture.hidden=!active; picture.inert=!active; picture.dataset.active=String(active); });
       buttons.forEach(button => button.setAttribute('aria-pressed',String(button.getAttribute(buttonHook)===value)));
+      host.dispatchEvent(new CustomEvent('portfolio:scene-select'));
     };
     const bind = (select: (value:string) => void) => buttons.forEach(button => {
       button.disabled=false;
@@ -195,34 +202,88 @@ export function setupShowcaseNarratives({ signal, preference }: Options): () => 
       const region=host.querySelector<HTMLElement>('.framework-showcase__rack,.dub-factory')??host;
       const world=host.querySelector<HTMLElement>('[data-scene-world]');
       if(!world)return;
-      const style=getComputedStyle(world);
-      const restX=parseFloat(style.getPropertyValue('--scene-rest-x'))||0;
-      const restY=parseFloat(style.getPropertyValue('--scene-rest-y'))||0;
-      const restZ=parseFloat(style.getPropertyValue('--scene-rest-z'))||0;
+      let restX=0,restY=0,restZ=0,held=false,visible=false;
+      const readPose=()=>{
+        const style=getComputedStyle(world);
+        restX=parseFloat(style.getPropertyValue('--scene-rest-x'))||0;
+        restY=parseFloat(style.getPropertyValue('--scene-rest-y'))||0;
+        restZ=parseFloat(style.getPropertyValue('--scene-rest-z'))||0;
+      };
+      readPose();
       const originalPointer=host.dataset.scenePointer;
       let rx:ReturnType<typeof gsap.quickTo>,ry:ReturnType<typeof gsap.quickTo>;
+      let lightX:ReturnType<typeof gsap.quickTo>,lightY:ReturnType<typeof gsap.quickTo>,shine:ReturnType<typeof gsap.quickTo>;
       context.add(()=>{
         gsap.set(world,{rotationX:restX,rotationY:restY,rotationZ:restZ});
         rx=gsap.quickTo(world,'rotationX',{duration:.85,ease:'power3.out'});
         ry=gsap.quickTo(world,'rotationY',{duration:.85,ease:'power3.out'});
+        lightX=gsap.quickTo(world,'--material-light-x',{duration:.8,ease:'power3.out'});
+        lightY=gsap.quickTo(world,'--material-light-y',{duration:.8,ease:'power3.out'});
+        shine=gsap.quickTo(world,'--material-shine',{duration:.8,ease:'power3.out'});
       });
       let bounds={left:0,top:0,width:1,height:1};
-      const measure=()=>{const box=region.getBoundingClientRect();bounds={left:box.left+scrollX,top:box.top+scrollY,width:box.width,height:box.height};};
-      const reset=()=>{
-        host.dataset.scenePointer='0.000,0.000';rx(restX);ry(restY);
-        if(document.hidden||root.dataset.motionPaused==='true'){rx.tween.progress(1).pause();ry.tween.progress(1).pause();}
+      let camera={left:0,originX:0,originY:0,worldX:0,worldY:0,width:1,height:1,perspective:1450,viewport:1};
+      let photos:{left:number;top:number;width:number;height:number;depth:number}[]=[];
+      const measure=()=>{
+        const box=region.getBoundingClientRect(),style=getComputedStyle(region);
+        const origin=style.perspectiveOrigin.split(' ').map(parseFloat);
+        bounds={left:box.left+scrollX,top:box.top+scrollY,width:box.width,height:box.height};
+        camera={left:box.left,originX:origin[0]||box.width/2,originY:origin[1]||box.height/2,worldX:world.offsetLeft,worldY:world.offsetTop,width:world.offsetWidth,height:world.offsetHeight,perspective:parseFloat(style.perspective)||1450,viewport:document.documentElement.clientWidth};
+        photos=Array.from(world.querySelectorAll<HTMLElement>('.media-link')).filter(photo=>!photo.closest('[hidden]')).map(photo=>{
+          let left=0,top=0,depth=0;
+          for(let node:HTMLElement|null=photo;node&&node!==world;node=node.offsetParent as HTMLElement|null){left+=node.offsetLeft;top+=node.offsetTop;}
+          for(let node:HTMLElement|null=photo;node&&node!==world;node=node.parentElement){
+            const transform=getComputedStyle(node).transform;
+            if(transform!=='none')depth+=new DOMMatrixReadOnly(transform).m43;
+          }
+          return{left,top,width:photo.offsetWidth,height:photo.offsetHeight,depth};
+        });
       };
+      const tweens=()=>[rx,ry,lightX,lightY,shine];
+      const reset=(immediate=false)=>{
+        host.dataset.scenePointer='0.000,0.000';rx(restX);ry(restY);lightX(0);lightY(0);shine(.58);
+        if(immediate)tweens().forEach(to=>to.tween.progress(1).pause());
+      };
+      const active=()=>visible&&host.dataset.scenePlaying==='true'&&!document.hidden&&root.dataset.motionPaused!=='true';
       measure();
+      const size=new ResizeObserver(measure);size.observe(region);size.observe(world);
+      world.querySelectorAll<HTMLElement>('.media-link').forEach(photo=>size.observe(photo));
+      const view=new IntersectionObserver(([entry])=>{visible=entry.isIntersecting;if(!visible)reset(true);});view.observe(region);
+      resets.push(()=>{size.disconnect();view.disconnect();});
+      window.addEventListener('resize',()=>{readPose();measure();reset(true);},{signal:pointerEvents.signal});
       region.addEventListener('pointerenter',measure,{signal:pointerEvents.signal});
+      // Refresh the cached real-image corners for click, focus and hover
+      // selection alike, before the next pointer frame uses the camera.
+      host.addEventListener('portfolio:scene-select',measure,{signal:pointerEvents.signal});
       region.addEventListener('pointermove',event=>{
-        if(host.dataset.scenePlaying!=='true'||event.pointerType==='touch')return;
-        const x=gsap.utils.clamp(-1,1,(event.pageX-bounds.left)/bounds.width*2-1),y=gsap.utils.clamp(-1,1,(event.pageY-bounds.top)/bounds.height*2-1);
+        if(held||!active()||event.pointerType==='touch')return;
+        const x=gsap.utils.clamp(-1,1,(event.pageX-bounds.left)/Math.max(1,bounds.width)*2-1),y=gsap.utils.clamp(-1,1,(event.pageY-bounds.top)/Math.max(1,bounds.height)*2-1);
+        const ax=restX-y*3,ay=restY+x*4.5;
+        const fits=(strength:number)=>{
+          const a=ax*strength*Math.PI/180,b=ay*strength*Math.PI/180,z=restZ*Math.PI/180;
+          return photos.every(photo=>[-1,1].every(sx=>[-1,1].every(sy=>{
+            const px=photo.left+photo.width/2+sx*photo.width/2-camera.width/2;
+            const py=photo.top+photo.height/2+sy*photo.height/2-camera.height/2;
+            const y1=py*Math.cos(a)-photo.depth*Math.sin(a),z1=py*Math.sin(a)+photo.depth*Math.cos(a);
+            const x2=px*Math.cos(b)+z1*Math.sin(b),z2=-px*Math.sin(b)+z1*Math.cos(b);
+            const x3=x2*Math.cos(z)-y1*Math.sin(z),absolute=camera.worldX+camera.width/2+x3;
+            const screen=camera.left+camera.originX+(absolute-camera.originX)/(1-z2/camera.perspective);
+            return screen>=8&&screen<=camera.viewport-8;
+          })));
+        };
+        let strength=1;
+        if(!fits(1)){let low=0,high=1;for(let i=0;i<8;i++){const mid=(low+high)/2;if(fits(mid))low=mid;else high=mid;}strength=low;}
         host.dataset.scenePointer=`${x.toFixed(3)},${y.toFixed(3)}`;
-        // Rotate the entire assembly; depth alone produces relative parallax.
-        rx(restX-y*2.5);ry(restY+x*3.5);
+        // One camera rotates the full machine, including its front hardware.
+        rx(ax*strength);ry(ay*strength);lightX(x*3);lightY(-y*2);shine(.58+(x-y)*.12);
       },{passive:true,signal:pointerEvents.signal});
-      region.addEventListener('pointerleave',reset,{signal:pointerEvents.signal});
-      const stop=()=>{if(document.hidden||root.dataset.motionPaused==='true')reset();};
+      region.addEventListener('pointerdown',event=>{if(event.isPrimary&&event.button===0){held=true;tweens().forEach(to=>to.tween.pause());}},{signal:pointerEvents.signal});
+      const release=()=>{const wasHeld=held;held=false;if(!region.matches(':hover'))reset();else if(wasHeld&&active())tweens().forEach(to=>{if(to.tween.progress()<1)to.tween.resume();});};
+      window.addEventListener('pointerup',release,{signal:pointerEvents.signal});
+      window.addEventListener('pointercancel',release,{signal:pointerEvents.signal});
+      window.addEventListener('blur',()=>{held=false;reset(true);},{signal:pointerEvents.signal});
+      region.addEventListener('pointerleave',()=>{if(!held)reset();},{signal:pointerEvents.signal});
+      const stop=()=>{if(document.hidden||root.dataset.motionPaused==='true')reset(true);};
       window.addEventListener('portfolio:motion-state',stop,{signal:pointerEvents.signal});
       document.addEventListener('visibilitychange',stop,{signal:pointerEvents.signal});
       resets.push(()=>{if(originalPointer===undefined)delete host.dataset.scenePointer;else host.dataset.scenePointer=originalPointer;});

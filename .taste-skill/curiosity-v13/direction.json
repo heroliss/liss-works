@@ -1,0 +1,416 @@
+{
+ "version": 1,
+ "at": "2026-10-29T14:38:06.017Z",
+ "seed": 893900121,
+ "redraws": 0,
+ "input": {
+  "brief": "Liss: 22 real software projects are answers to stubborn questions. Replace the home project list with one cinematic invitation: follow an interesting question through actual project imagery into the searchable project library. Dark tactile 3D, precise moving light, no decorative technology theatre.",
+  "sector": "personal-portfolio",
+  "tone": "playful",
+  "have": [
+   "product-ui"
+  ],
+  "keep": [
+   "palette",
+   "type"
+  ],
+  "avoid": [],
+  "sections": [
+   "gallery",
+   "cta"
+  ],
+  "direction": "dark-room"
+ },
+ "imagery": "atmosphere",
+ "allow": [],
+ "direction": {
+  "id": "dark-room",
+  "name": "The dark room",
+  "sectors": [
+   "hospitality",
+   "restaurant",
+   "music",
+   "fashion",
+   "physical-product",
+   "finance",
+   "architecture",
+   "studio-portfolio",
+   "ai-product",
+   "personal-portfolio"
+  ],
+  "tones": [
+   "quiet",
+   "luxury"
+  ],
+  "needs": [],
+  "idea": "One dark field from top to bottom, and in it, lit things. Photographs and objects appear like exhibits in a dim gallery: each with space around it, each the brightest thing on its screen. Type is light, small and sparse. The darkness is not a theme switch; it is a room, and the page is a slow walk through it. It suits subjects sold on atmosphere and material: an evening restaurant, a metal card, a record, a house at dusk.",
+  "composition": "A single near-black or deep-toned ground runs the full page with no section bands. First screen: either the name at full width in a light weight along the bottom edge with one dim photograph above it, or one object or photograph centred at 40–50% of the viewport with a line of text beneath at 16–18px. Each later screen holds one or two lit items at a generous size (the main one 40–60% of the screen width) with its text set beside it at full reading size; the darkness frames the items, it does not replace content. Images vary in size but all share the same darkness at their edges so they sit in the ground without frames. Practical details come last in a simple two-column text block. The only solid light element on the page is the single primary action.",
+  "typography": "Light or regular weights; they glow on dark. Avoid heavy bold, which looks cheap on black. Headings 4–7vw at most; text 16–18px with leading 1.6 and a slightly lifted ink (not pure white).",
+  "typeClasses": [
+   "grotesk-light",
+   "serif-light-large",
+   "serif-display",
+   "extended-heavy"
+  ],
+  "colour": "A dark ground with a tint (blue-black, green-black, brown-black), a soft light ink, a dimmer ink for secondary text, and one warm or bright accent used once per screen at most.",
+  "paletteTags": [
+   "dark-neutral"
+  ],
+  "imagery": "Low-key photographs: dark backgrounds, one light source, subjects emerging from shadow. Their dark edges should blend into the page ground.",
+  "photoTreatment": "If a photograph's background is lighter than the page, darken the image slightly (`filter: brightness(0.85) contrast(1.05)`) rather than adding a frame.",
+  "sectionTags": [
+   "photo-led",
+   "quiet",
+   "object-led"
+  ],
+  "motion": "slow-crossfade",
+  "richness": "Light against dark, and the slow pacing.",
+  "pitfalls": "Grey text on black fails contrast quickly: check it. No glow effects, no neon accent, no coloured light blobs. A dark page with a bright busy photograph is not this direction; choose low-key images. Dark does not mean empty: every screen still carries its content at a readable size, and running text is a light ink at 7:1 or more, not a dim grey.",
+  "seenIn": [
+   "opl-kereliott",
+   "aww-moto-finance",
+   "aww-izanami",
+   "aww-cipher",
+   "opl-deeo-studio-2"
+  ],
+  "allow": [],
+  "photoTone": "dark"
+ },
+ "hero": {
+  "id": "counter-object-wide-wordmark",
+  "name": "Counter object, wide wordmark",
+  "archetype": "object-centre",
+  "directions": [
+   "borrowed-category",
+   "dark-room",
+   "hero-object"
+  ],
+  "needs": [],
+  "blueprint": "Borrowed from a watch or perfume counter. One flat charcoal field. Centred slightly above the midline, a single low-key photograph of the object about 31% of the viewport wide (columns 5-8), 4:5, its own dark background matched to the field with filter: brightness(0.9) so it sits without a frame. Under it the name runs on one line as an ultra-wide wordmark spanning 72% of the width yet only about 45px tall: an extended face with letter-spacing near 0.6em, or a regular face stretched with transform: scaleX(2.4). Then one centred serif sentence at clamp(24px, 2.6vw, 38px). Then a single centred row at 15px with 48px between its three parts: one specification, the price inside the one solid light rectangle that is also the action, a second specification. The wordmark repeats small top-left and one text link sits top-right, both on 32px margins. The bottom fifth and both outer quarters of the screen stay empty and dark.",
+  "mobile": "The photograph grows to 70% of the width at 4:5, its top at 16% of the height. The wide wordmark spans the full width inside 20px margins at about 28px tall. The serif sentence sets at 6vw on two lines. The row stacks into three centred lines with the action in the middle at full width. The lowest sixth of the screen stays dark and empty.",
+  "headline": "The name as a very wide, very low wordmark on one line (up to 12 characters); the serif sentence beneath is the supporting line, up to 40 characters.",
+  "motion": "slow-crossfade",
+  "seenIn": [
+   "opl-transport",
+   "aww-moto-finance"
+  ]
+ },
+ "type": null,
+ "palette": null,
+ "photos": {
+  "set": "mountain",
+  "title": "Mountain",
+  "note": "peaks, alpine valleys, snow and rock",
+  "treatment": "If a photograph's background is lighter than the page, darken the image slightly (`filter: brightness(0.85) contrast(1.05)`) rather than adding a frame.",
+  "others": [
+   "fog-and-quiet",
+   "architecture",
+   "interior-and-table",
+   "forest"
+  ],
+  "photos": [
+   {
+    "id": 368,
+    "alt": "Sheer granite cliffs above a hazy valley in warm evening light",
+    "tone": "mid",
+    "colours": [
+     "peach",
+     "warm grey",
+     "slate"
+    ],
+    "mono": false,
+    "calm": "top",
+    "quality": 4,
+    "ratio": 1.5,
+    "by": "Tyssul Patel",
+    "page": "https://unsplash.com/photos/o-zOatT4kQw"
+   },
+   {
+    "id": 735,
+    "alt": "Steep dark cliffs with fog drifting through the gap between them",
+    "tone": "mid",
+    "colours": [
+     "charcoal",
+     "mist grey",
+     "deep green"
+    ],
+    "mono": false,
+    "calm": "centre",
+    "quality": 4,
+    "ratio": 0.62,
+    "by": "wyman H",
+    "page": "https://unsplash.com/photos/ZQeRH1XD4Tc"
+   },
+   {
+    "id": 931,
+    "alt": "Layered mountain slopes fading into blue haze",
+    "tone": "mid",
+    "colours": [
+     "steel blue",
+     "pale blue",
+     "dark teal"
+    ],
+    "mono": false,
+    "calm": "top",
+    "quality": 5,
+    "ratio": 1.51,
+    "by": "Paul Earle",
+    "page": "https://unsplash.com/photos/xJ2tjuUHD9M"
+   },
+   {
+    "id": 235,
+    "alt": "Snow-covered peak rising above dark forested slopes and a lake",
+    "tone": "mid",
+    "colours": [
+     "slate blue",
+     "white",
+     "dark green"
+    ],
+    "mono": false,
+    "calm": "top",
+    "quality": 5,
+    "ratio": 1.5,
+    "by": "Paul E. Harrer",
+    "page": "https://unsplash.com/photos/TI-B-TNYJMU"
+   },
+   {
+    "id": 1018,
+    "alt": "Green cliffs and a winding road under low mist",
+    "tone": "mid",
+    "colours": [
+     "moss green",
+     "mist grey",
+     "dark brown"
+    ],
+    "mono": false,
+    "calm": "top",
+    "quality": 5,
+    "ratio": 1.33,
+    "by": "Andrew Ridley",
+    "page": "https://unsplash.com/photos/Kt5hRENuotI"
+   },
+   {
+    "id": 906,
+    "alt": "Sunlit snowy pyramid peak against a clear blue sky",
+    "tone": "mid",
+    "colours": [
+     "sky blue",
+     "white",
+     "dark slate"
+    ],
+    "mono": false,
+    "calm": "top",
+    "quality": 5,
+    "ratio": 1.33,
+    "by": "Andras Toth",
+    "page": "https://unsplash.com/photos/E9CrQou9K0Y"
+   },
+   {
+    "id": 830,
+    "alt": "Layered blue mountain ridges receding into haze",
+    "tone": "mid",
+    "colours": [
+     "cobalt blue",
+     "pale blue",
+     "navy"
+    ],
+    "mono": false,
+    "calm": "top",
+    "quality": 5,
+    "ratio": 1.5,
+    "by": "Luca Zanon",
+    "page": "https://unsplash.com/photos/X0OoHrPvgXE"
+   },
+   {
+    "id": 918,
+    "alt": "Rocky peak wrapped in sunlit cloud above a forested valley",
+    "tone": "mid",
+    "colours": [
+     "warm gold",
+     "dark green",
+     "grey brown"
+    ],
+    "mono": false,
+    "calm": "top",
+    "quality": 4,
+    "ratio": 1.51,
+    "by": "David Marcu",
+    "page": "https://unsplash.com/photos/CaQ_KITtnVY"
+   }
+  ]
+ },
+ "motion": {
+  "id": "slow-crossfade",
+  "name": "Slow crossfade",
+  "description": "The principal photograph quietly changes: three or four images of the same framing crossfade over about 1.6 seconds, holding five to six seconds each, or the fixed image changes when its matching section arrives. It should feel like light shifting in a room. Pause when the tab is hidden; under reduced motion show only the first image."
+ },
+ "sections": [
+  {
+   "id": "gallery-full-bleed-sequence",
+   "role": "gallery",
+   "name": "Full-bleed sequence, text interlocked",
+   "shape": "full-bleed",
+   "tags": [
+    "photo-led"
+   ],
+   "directions": [
+    "place-carries-it",
+    "dark-room",
+    "hero-object",
+    "pinned-poster",
+    "borrowed-category"
+   ],
+   "needs": [],
+   "blueprint": "Three photographs, each 100vw by 100svh, shown one after another with nothing between them. Each is `position: sticky; top: 0` inside a wrapper 300svh tall, so the second slides up over the first and the third over the second like a curtain; no scroll hijacking. The section above interlocks with the first photograph: a narrow paragraph at 13–14px, 220px wide, sitting on the column line at 58% of the width, is pulled down with a negative bottom margin so its last four lines overlap the photograph's top edge, in a colour that reads on both ground and image. Each photograph carries one caption line at 15px in white at the bottom-left margin, over a neutral dark scrim limited to the lowest 120px. No heading. Choose three frames with the same light and a calm lower-left corner. The last photograph releases into the next section.",
+   "mobile": "Each photograph is 100vw by 88svh in a portrait crop and still sticks so the next covers it. The interlocking paragraph sits at the left margin, 60% wide, overlapping the first photograph by three lines. Captions stay bottom-left at 14px.",
+   "seenIn": [
+    "aww-white-desert",
+    "aww-squarespace-foundations"
+   ]
+  },
+  {
+   "id": "cta-object-returns",
+   "role": "cta",
+   "name": "The object returns",
+   "shape": "split",
+   "tags": [
+    "object-led",
+    "photo-led"
+   ],
+   "directions": [
+    "hero-object",
+    "specimen-catalogue",
+    "dark-room",
+    "one-motif",
+    "borrowed-category"
+   ],
+   "needs": [],
+   "blueprint": "The thing shown in the hero comes back once, from another angle, to close the page. On one flat field 90svh tall, the object's photograph occupies columns 1–8, scaled to about 130% of that area and anchored so the section's bottom and left edges crop it (`overflow: hidden` on the section; on light fields `mix-blend-mode: multiply` removes a white studio background). The text sits small in columns 10–12, vertically centred: a closing line of three to five words at 32–40px, one sentence at 17px, the price or key fact on its own line at 22px, and one rectangular button. Nothing overlaps the object's focal area. Where the page's subject is a shape rather than a photograph, the page's motif takes the object's place at the same scale as a flat filled shape. The closing line is the only heading.",
+   "mobile": "The text block comes first: closing line at 28px, sentence, fact, full-width button. The object follows at 130% of the screen width, shifted so the right and bottom edges crop it, filling about 55svh on the same flat field.",
+   "seenIn": [
+    "opl-dabbit",
+    "opl-monte"
+   ]
+  }
+ ],
+ "references": [
+  {
+   "id": "aww-moto-finance",
+   "name": "Moto Finance",
+   "url": "https://www.moto-card.com/",
+   "source": "Awwwards Site of the Day",
+   "kind": "finance",
+   "score": 7.3,
+   "idea": "A metal card presented like a museum piece: lit by a single overhead light box in a black room, then orbiting through dim architectural stills.",
+   "mood": [
+    "nocturnal",
+    "exclusive",
+    "cold",
+    "cinematic"
+   ],
+   "archetype": "product-object-centre",
+   "hero": "Black full-bleed 3D scene. A pale silver-lavender light panel, a trapezoid in perspective like a ceiling light box, occupies the top 20% and centre 55% of the viewport. The two-line uppercase headline, centred at 4.4vw in medium grotesk with tight leading, straddles the panel's lower edge so its first line sits half on light, half on black. In the exact centre a small metal card stands on a low plinth, only about 150px wide, surrounded by darkness. A light-grey pill button (about 250 by 52px) is centred near the bottom; the logo is top-left and a dark pill button top-right.",
+   "type": "Neue Montreal only: weight 500 uppercase at 64px (4.4vw) with near-zero tracking and leading under 1.0 for headings, 20px sentence case for body, tiny caps labels in the footer. Three sizes; centred until the left-aligned footer.",
+   "colour": "#080808 #edefef #c4cbd6 #e1e5e5 #2a2f3a — Black with cool silver-grey and no brand colour at all. One section inverts to pale grey-white with grey type; the only chroma is amber city lights and a blue atmosphere rim on the globe.",
+   "imagery": "Rendered chrome card with an embossed profile medallion, a night-side Earth, and small dim architectural and fashion stills floating as tilted panels in 3D. Everything underexposed, cool and low-saturation.",
+   "layout": "Full-viewport scenes stacked one per screen, each with a centred uppercase heading, an optional short sub-line and a pill button. One light interlude breaks the black. The footer switches to a left-aligned statement with link columns at the far right.",
+   "sections": [
+    {
+     "role": "features",
+     "description": "Centred heading at the top with a two-line grey sub-line and a pale pill button directly under it. The lower 45% is the top arc of a night-side Earth rising from the bottom edge, about 75% of the viewport wide, with city lights and a bright blue-white rim on the upper right. Three small dark capsule labels with check icons float over and beside the globe at staggered positions, like status notifications."
+    },
+    {
+     "role": "gallery",
+     "description": "A dark 3D room: about twelve small photo panels (roughly 70 by 90px, each tilted at its own angle, heavily dimmed) arranged in two loose rows across the full width, receding with blur. The card stands edge-on in the centre, much larger, catching a specular highlight. Later the card faces front at top-centre and a centred two-line heading with a pill button sits under it."
+    },
+    {
+     "role": "stats",
+     "description": "A pale grey-white band. Two tall columns of currency amounts in mid-size light-grey sans, one at a quarter and one at three-quarters of the width, each fading to white at top and bottom like slot-machine reels, with the centre rows darkest. Between them, three short centred lines of small black text. The bottom edge of the band reveals a dark photograph."
+    }
+   ],
+   "steal": [
+    "Let a headline straddle the edge of a light shape so one line is half on light and half on dark.",
+    "Show the product very small in a large dark space in the first viewport, then let it grow as the page scrolls.",
+    "Use vertically scrolling columns of real-looking figures, faded at both ends, as a quiet backdrop for a three-line statement."
+   ],
+   "media": "An 11s hero video of a CG metal card on a plinth covers the whole first screen and holds on its last frame. Then a pinned WebGL globe in the lower half under centred text, a 3D card centred in a depth cloud of small photo tiles dimmed to 30-40%, full-bleed sticky photographs with text docked in opposite corners, and a photo strip sitting on an index list; all low-key and desaturated, photos meeting the near-black ground through 200-300px fades, 0px radius.",
+   "motion": "The intro ends in about 1.2s as the camera pushes in and the headline, nav and button arrive (load 9.9s), and Lenis then runs 32 ScrollTriggers: the globe pins for 2.5 viewports at scrub 1, the card turns in 3D across its section, the theme inverts to pale grey with the nav colour following, and benefit rows scrub in one by one. Lines rise by yPercent over 0.65s power3.out and leave over 0.45s power2.in, and headings rise from a blur over 1s power2.inOut."
+  },
+  {
+   "id": "aww-cipher",
+   "name": "Cipher",
+   "url": "https://cipher.tv/",
+   "source": "Awwwards Site of the Day",
+   "kind": "studio-portfolio",
+   "score": 7,
+   "idea": "The showreel as a slowly turning wreath: a dozen film stills overlap in an elliptical ring around a tiny emblem on a black screen, with almost no text.",
+   "mood": [
+    "cinematic",
+    "nocturnal",
+    "minimal",
+    "glossy"
+   ],
+   "archetype": "other: orbiting-image-ring",
+   "hero": "The first capture is the preloader: a black screen textured with a fine grid of grey dots that thins out towards the right, the wordmark top-left and a tiny copyright glyph dead centre. Once loaded, the black screen holds a ring of about fourteen landscape film stills, each roughly 10% of the viewport wide, overlapping one another around an ellipse about 35% of the width; the centre is empty except for a 20px white emblem. The wordmark, about 11% wide, stays top-left. Four 9px uppercase links are split: one at the horizontal centre, three at the far right. A partner mark sits bottom-right. There is no headline.",
+   "type": "Favorit only, and only at about 11px: uppercase nav links with slight tracking. The custom wordmark, with a macron and a schwa among its letters, is the sole large letterform. No headline and no body copy; one type size on the page.",
+   "colour": "#070604 #ffffff #c9a45a #2f55c8 #c96a1e — Near-black ground with white micro-type. All colour comes from the stills: gold, cobalt blue, orange, garden green, plus one black-and-white frame.",
+   "imagery": "Stills from fashion, beauty and fragrance films in 3:2 landscape crops, square-cornered and unframed, layered so each overlaps its neighbour by about a third. No captions or titles on them.",
+   "layout": "A single non-scrolling stage. Navigation is pushed to the corners at tiny size and the ring of stills occupies the middle third; over half the screen is empty black. Scrolling rotates the ring instead of moving the page.",
+   "sections": [],
+   "steal": [
+    "Arrange work thumbnails as an overlapping elliptical ring with an empty centre, and bind scroll to rotation instead of vertical travel.",
+    "Shrink all text to one 11px uppercase size and let a custom wordmark be the only large type.",
+    "Give the preloader its own texture (a dot grid fading across the screen) rather than a spinner or percentage."
+   ],
+   "media": "There is no document: one fixed canvas holds every picture as a texture, a ring of overlapping 16:9 film stills (about 240x135, overlapping their neighbours by 20-40%) round a tiny emblem, covering about 62% by 69% of the viewport, with the tiles themselves on 35-40% of the area and warm black between. No video elements; at least 35 distinct stills cycle through the ring.",
+   "motion": "The dot-grid loader with a spinning chrome letter is still up at 4.5s. After that the wheel turns the ring instead of the page, sliding new stills in along the circular path with no fade or mask; nav letters roll on hover, and the few CSS transitions are transform .45s cubic-bezier(.83,.12,.35,.96) and opacity .2-.3s."
+  },
+  {
+   "id": "aww-bleibtgleich26",
+   "name": "bleibtgleich’26",
+   "url": "https://bleibtgleich.dev",
+   "source": "Awwwards Site of the Day",
+   "kind": "personal-portfolio",
+   "score": 7.5,
+   "idea": "One thin vertical rule runs down the page and a tight bold grotesk sentence wraps around it, words stepping from one side of the line to the other.",
+   "mood": [
+    "stark",
+    "typographic",
+    "Swiss",
+    "witty"
+   ],
+   "archetype": "type-poster",
+   "hero": "White page, black type. Content sits in a narrow band between 26% and 68% of the width. A 1px vertical rule drops from the top edge at 37% for two-thirds of the height. Left of it: a black blob avatar at the top, a tiny role caption at its foot. Right of it: a tiny location note at the top, the name in two lines of 90px medium grotesk at the bottom. The tagline continues below at the same size, flush to the band's left edge, running past the fold. The upper half is otherwise blank. The handle is split into two pale-grey words fixed in the bottom corners; a black menu pill sits top-right.",
+   "type": "Akzidenz Grotesk Pro medium only, -0.05em tracking, line-height about 0.9. Two sizes: 90px (6.3vw) for every statement and 11-13px for captions and table rows, a 7:1 jump. Long words are hyphenated and stepped across lines on purpose.",
+   "colour": "#ffffff #000000 #e4e4e4 #f2f2f2 — Black on white with no accent. Pale grey is used for the ghosted corner wordmark and a few small square tiles; tiny coloured rings inside those tiles are the only hue.",
+   "imagery": "Almost none: a black blob avatar, a few 85px grey tiles each with a coloured ring, and a canvas dome of small tilted project thumbnails floating between two words.",
+   "layout": "Everything hangs off one vertical axis at 37%: lines start either at the axis or one indent to its left, giving a stepped rag. Very wide white margins. Sections are separated by a full screen of white rather than rules or colour.",
+   "sections": [
+    {
+     "role": "intro",
+     "description": "A 90px sentence is typeset word by word around the vertical rule: one word ends just left of the rule, the next starts just right of it, and the following line is centred beneath both. Above the sentence a row of five 85px pale-grey squares, each with a small coloured ring at its centre, is spaced unevenly along one baseline, with a three-line 13px description under the second."
+    },
+    {
+     "role": "work",
+     "description": "The heading first appears as one centred line near the bottom of an empty screen, then its two halves separate to the far left and far right edges at mid-height. In the gap a WebGL dome of fifteen or so small project thumbnails, mostly black and white, tilts in perspective like tiles on a sphere. Nothing else is on the screen."
+    },
+    {
+     "role": "proof",
+     "description": "The heading is broken into an ampersand alone in the left margin and two words stepped over three lines with a hyphen break and a growing indent. Below it a four-column table at 11px: year, site name, awarding body, award. Hairline rules sit under every row, columns align to the hero's band, and year groups are separated by a blank row."
+    },
+    {
+     "role": "contact",
+     "description": "The closing sentence is stepped over four lines with shifting indents, right of centre. To its left two tiny grey captions and an email address at 11px. Under it three 36px outlined circles with social initials, centred, then the handle at about 44px centred on the bottom edge with tiny legal text in the two corners."
+    }
+   ],
+   "steal": [
+    "Draw one 1px vertical rule and typeset a large sentence around it, alternating words to either side so the line becomes the text's spine.",
+    "Split the logotype into two words, ghost them at about 10% grey, and fix one in each bottom corner of the viewport.",
+    "Leave the top half of the hero blank and start the name at 50% height so the headline runs off the fold and pulls the scroll."
+   ],
+   "media": "No picture on the first screen, which is all type plus a small black mark. Pictures arrive later as a WebGL sphere of project thumbnails flanked by two words that slide apart on scroll, square tiles placed on separate grid cells with empty cells between them, hover thumbnails behind a text index, and one small image used as a glyph in a row of numerals; no video.",
+   "motion": "A 2.5s progress counter runs although the page loaded in 1.5s, while a vertical line draws down with the role label at its tip. Lenis and 15 ScrollTriggers with nothing pinned: display lines rise by yPercent over 0.47s in-out at a 0.075s stagger, the globe's rotation is scrubbed across its 1178px block, the flanking words are pulled apart on a scrub, and underlines wipe in by background-size over 0.6s cubic-bezier(0.76,0,0.24,1)."
+  }
+ ],
+ "scenes": []
+}

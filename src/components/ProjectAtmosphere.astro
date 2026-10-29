@@ -92,7 +92,13 @@ const drawing = drawings[motif];
 const key = `project-field-${slug.replace(/[^a-z0-9-]/gi, '')}`;
 const seed = Array.from(slug).reduce((sum, letter) => sum + letter.charCodeAt(0), 0);
 const cant = ((seed % 9) - 4) * .45;
-const layers = [{ name: 'upper', depth: -.35 }, { name: 'middle', depth: .55 }, { name: 'lower', depth: 1 }];
+const layers = [
+  { name: 'upper', depth: -.35, traceOnly: false },
+  { name: 'continuation', depth: .2, traceOnly: true },
+  { name: 'middle', depth: .55, traceOnly: false },
+  { name: 'reflection', depth: .35, traceOnly: true },
+  { name: 'lower', depth: 1, traceOnly: false },
+];
 ---
 
 <div class="project-atmosphere" data-project-field data-field-family={world.family} data-field-motion={world.motion} data-field-motif={motif} aria-hidden="true" style={`--field-cant:${cant}deg;--field-accent:${world.accent};--field-surface:${world.surface}`}>
@@ -105,15 +111,15 @@ const layers = [{ name: 'upper', depth: -.35 }, { name: 'middle', depth: .55 }, 
     </defs>
   </svg>
   <div class="project-atmosphere__edge-veil">
-  {layers.map(layer => <div class:list={['project-atmosphere__layer', `project-atmosphere__layer--${layer.name}`]} data-detail-field-layer={layer.depth}>
+  {layers.map(layer => <div class:list={['project-atmosphere__layer', `project-atmosphere__layer--${layer.name}`]} data-detail-field-layer={layer.depth} data-field-trace-only={layer.traceOnly ? '' : undefined}>
     <div class="project-atmosphere__canvas"><div class="project-atmosphere__art"><svg viewBox="0 0 1800 1200" preserveAspectRatio="xMidYMid meet" fill="none" focusable="false">
         {/* Draw from shared data directly: a symbol viewport would clip the
             negative-coordinate terrain/film shapes before the soft masks. */}
-        <g class="detail-field-extrusion" transform="translate(0 17)">{drawing.faces.map(d => <path d={d}/>)}</g>
-        <g class="detail-field-faces" fill={`url(#${key}-face)`} stroke={`url(#${key}-edge)`}>{drawing.faces.map(d => <path d={d}/>)}</g>
+        {!layer.traceOnly && <g class="detail-field-extrusion" transform="translate(0 17)">{drawing.faces.map(d => <path d={d}/>)}</g>}
+        {!layer.traceOnly && <g class="detail-field-faces" fill={`url(#${key}-face)`} stroke={`url(#${key}-edge)`}>{drawing.faces.map(d => <path d={d}/>)}</g>}
         <g class="detail-field-traces">{drawing.lines.map(d => <path d={d}/>)}</g>
-        {drawing.rings && <g class="detail-field-rings">{drawing.rings.map(ring => <ellipse cx={ring.x} cy={ring.y} rx={ring.rx} ry={ring.ry} transform={`rotate(${ring.angle ?? 0} ${ring.x} ${ring.y})`}/>)}</g>}
-        {drawing.points && <g class="detail-field-points">{drawing.points.map(point => <><ellipse cx={point.x} cy={point.y + 8} rx={point.r ?? 7} ry={(point.r ?? 7) * .62} class="detail-field-point-shadow"/><ellipse cx={point.x} cy={point.y} rx={point.r ?? 7} ry={(point.r ?? 7) * .62}/></>)}</g>}
+        {!layer.traceOnly && drawing.rings && <g class="detail-field-rings">{drawing.rings.map(ring => <ellipse cx={ring.x} cy={ring.y} rx={ring.rx} ry={ring.ry} transform={`rotate(${ring.angle ?? 0} ${ring.x} ${ring.y})`}/>)}</g>}
+        {!layer.traceOnly && drawing.points && <g class="detail-field-points">{drawing.points.map(point => <><ellipse cx={point.x} cy={point.y + 8} rx={point.r ?? 7} ry={(point.r ?? 7) * .62} class="detail-field-point-shadow"/><ellipse cx={point.x} cy={point.y} rx={point.r ?? 7} ry={(point.r ?? 7) * .62}/></>)}</g>}
     </svg></div></div>
   </div>)}
   </div>

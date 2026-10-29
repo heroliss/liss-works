@@ -24,6 +24,8 @@ import '../../styles/detail-atmosphere.css';
 import '../../styles/detail-artifacts.css';
 import '../../styles/detail-editorial.css';
 import '../../styles/atmosphere-polish.css';
+import '../../styles/background-depth.css';
+import '../../styles/spatial-materials.css';
 import { getProjectWorld, projectWorldStyle } from '../../data/project-worlds';
 export function getStaticPaths() { return projects.map(project => ({params: {slug: project.slug}, props: {project}})); }
 interface Props { project: Project }

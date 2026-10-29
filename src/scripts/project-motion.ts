@@ -28,7 +28,7 @@ export function setupProjectMotion({ signal, preference }: ProjectMotionOptions)
   }, (context) => {
     const { motion, fine, diagramWide } = context.conditions!;
     const events = new AbortController();
-    const observers: IntersectionObserver[] = [];
+    const observers: (IntersectionObserver | ResizeObserver)[] = [];
     const syncs: (() => void)[] = [];
     const watch = (element: HTMLElement, change: (playing: boolean) => void) => {
       let visible = false;
@@ -46,6 +46,78 @@ export function setupProjectMotion({ signal, preference }: ProjectMotionOptions)
     document.querySelectorAll<HTMLElement>('[data-ambient-region]').forEach((region) => {
       watch(region, (playing) => { region.dataset.motionVisible = String(playing); });
       context.add(() => () => { region.dataset.motionVisible = 'false'; });
+    });
+
+    // The project canvas and its real image turn together. The article keeps
+    // its separate scroll transform; the native image link remains unchanged.
+    if (motion && fine && diagramWide) document.querySelectorAll<HTMLElement>('.game-scene > .game-art').forEach(plane => {
+      const scene = plane.parentElement!;
+      let held = false;
+      let restX = 0, restY = 0, restZ = 0;
+      let bounds = { left:0, top:0, width:1, height:1 };
+      let camera = { left:0, width:1, height:1, perspective:1700, viewport:1 };
+      const readPose = () => {
+        const css = getComputedStyle(plane);
+        restX = parseFloat(css.getPropertyValue('--game-rest-x')) || 0;
+        restY = parseFloat(css.getPropertyValue('--game-rest-y')) || 0;
+        restZ = parseFloat(css.getPropertyValue('--game-rest-z')) || 0;
+      };
+      readPose();
+      const rx = gsap.quickTo(plane, 'rotationX', { duration:.8, ease:'power3.out' });
+      const ry = gsap.quickTo(plane, 'rotationY', { duration:.8, ease:'power3.out' });
+      const lightX = gsap.quickTo(plane, '--material-light-x', { duration:.8, ease:'power3.out' });
+      const lightY = gsap.quickTo(plane, '--material-light-y', { duration:.8, ease:'power3.out' });
+      const shine = gsap.quickTo(plane, '--material-shine', { duration:.8, ease:'power3.out' });
+      const tweens = [rx,ry,lightX,lightY,shine];
+      const reset = (immediate = false) => {
+        rx(restX); ry(restY); lightX(0); lightY(0); shine(.58);
+        if (immediate) tweens.forEach(to => to.tween.progress(1).pause());
+        plane.dataset.gamePointer = '0.000,0.000';
+      };
+      const measure = () => {
+        const box = scene.getBoundingClientRect();
+        bounds = { left:box.left+scrollX, top:box.top+scrollY, width:box.width, height:box.height };
+        camera = { left:box.left+plane.offsetLeft, width:plane.offsetWidth, height:plane.offsetHeight, perspective:parseFloat(getComputedStyle(scene).perspective)||1700, viewport:document.documentElement.clientWidth };
+      };
+      const active = watch(scene, playing => { if (!playing) reset(true); });
+      measure();
+      const size = new ResizeObserver(measure);
+      size.observe(scene); size.observe(plane); observers.push(size);
+      window.addEventListener('resize', () => { readPose(); measure(); reset(true); }, { signal:events.signal });
+      scene.addEventListener('pointerenter', measure, { signal:events.signal });
+      scene.addEventListener('pointermove', event => {
+        if (held || !active() || event.pointerType === 'touch') return;
+        const x = gsap.utils.clamp(-1,1,(event.pageX-bounds.left)/Math.max(1,bounds.width)*2-1);
+        const y = gsap.utils.clamp(-1,1,(event.pageY-bounds.top)/Math.max(1,bounds.height)*2-1);
+        const ax=restX-y*6, ay=restY+x*9;
+        const fits = (strength:number) => {
+          const a=ax*strength*Math.PI/180,b=ay*strength*Math.PI/180,z=restZ*Math.PI/180;
+          return [-1,1].every(sx => [-1,1].every(sy => {
+            const px=sx*camera.width/2,py=sy*camera.height/2,y1=py*Math.cos(a),z1=py*Math.sin(a);
+            const x2=px*Math.cos(b)+z1*Math.sin(b),z2=-px*Math.sin(b)+z1*Math.cos(b);
+            const screen=camera.left+camera.width/2+(x2*Math.cos(z)-y1*Math.sin(z))/(1-z2/camera.perspective);
+            return screen>=8 && screen<=camera.viewport-8;
+          }));
+        };
+        let strength=1;
+        if (!fits(1)) { let low=0,high=1; for(let i=0;i<8;i++){const mid=(low+high)/2;if(fits(mid))low=mid;else high=mid;}strength=low; }
+        rx(ax*strength); ry(ay*strength); lightX(x*3); lightY(-y*2); shine(.58+(x-y)*.12);
+        plane.dataset.gamePointer = `${x.toFixed(3)},${y.toFixed(3)}`;
+      }, { passive:true, signal:events.signal });
+      scene.addEventListener('pointerdown', event => {
+        if (!event.isPrimary || event.button !== 0) return;
+        held=true; tweens.forEach(to => to.tween.pause());
+      }, { signal:events.signal });
+      const release = () => {
+        const wasHeld=held; held=false;
+        if (!scene.matches(':hover')) reset();
+        else if (wasHeld && active()) tweens.forEach(to => { if(to.tween.progress()<1)to.tween.resume(); });
+      };
+      window.addEventListener('pointerup', release, { signal:events.signal });
+      window.addEventListener('pointercancel', release, { signal:events.signal });
+      window.addEventListener('blur', () => { held=false;reset(true); }, { signal:events.signal });
+      scene.addEventListener('pointerleave', () => { if(!held)reset(); }, { signal:events.signal });
+      context.add(() => () => { delete plane.dataset.gamePointer; });
     });
 
     document.querySelectorAll<HTMLElement>('[data-architecture]').forEach((architecture) => {

@@ -7,7 +7,7 @@
 .atlas-tile-camera { position:relative; min-width:0; padding:10px; perspective:1400px; perspective-origin:50% 50%; }
 .atlas-tile-plane { position:relative; width:100%; min-width:0; border-radius:4px; background:transparent; transform-origin:50% 50%; transform-style:preserve-3d; transform:rotateZ(var(--atlas-rest-z)) rotateY(var(--atlas-rest-y)) rotateX(var(--atlas-rest-x)); }
 .atlas-tile-plane::before,.atlas-tile-plane::after { content:""; position:absolute; border-radius:inherit; pointer-events:none; }
-.atlas-tile-plane::before { inset:1px -4px -5px 3px; background:color-mix(in srgb,var(--atlas-tone) 17%,#172024); border:1px solid color-mix(in srgb,var(--atlas-tone) 25%,transparent); transform:translateZ(-6px); box-shadow:0 20px 26px -23px #000d; }
+.atlas-tile-plane::before { inset:1px -5px -7px 4px; background:color-mix(in srgb,var(--atlas-tone) 17%,#172024); border:1px solid color-mix(in srgb,var(--atlas-tone) 25%,transparent); transform:translateZ(-12px); box-shadow:0 20px 26px -23px #000d; }
 .atlas-tile-plane::after { inset:-1px; border:1px solid color-mix(in srgb,var(--atlas-tone) 28%,transparent); transform:translateZ(1px); transition:border-color 180ms; }
 .atlas-tile-plane img { display:block; position:relative; width:100%; height:auto; max-width:100%; max-height:none; aspect-ratio:var(--atlas-image-ratio); object-fit:contain; border-radius:inherit; padding:0; }
 .atlas-tile-copy { min-width:0; padding:22px 10px 0; }

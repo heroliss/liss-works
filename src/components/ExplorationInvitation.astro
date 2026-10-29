@@ -1,0 +1,77 @@
+---
+import { getProject, projects } from '../data/projects';
+import { sitePath } from '../lib/site-path';
+import MediaImage from './MediaImage.astro';
+import Icon from './Icon.astro';
+import '../styles/exploration-invitation.css';
+
+const light = getProject('learnopengl')!;
+const intelligence = getProject('intelligence-index-cost-linear')!;
+const nomad = getProject('nomadworkshop')!;
+const resident = nomad.gallery.find(image => image.src.includes('05-resident-and-world-1080'));
+if (!resident) throw new Error('Exploration invitation needs the genuine Nomad resident-state capture');
+const questions = [
+  { question: '光，怎样给平面以深度？', route: '图形与材质',
+    detail: '在同一只木盒上，观察法线与高度贴图怎样改变表面。',
+    work: 'LearnOpenGL', image: light.cover, tone: '#ffd08a',
+    href: '/projects/?group=graphics&tag=OpenGL' },
+  { question: '更聪明，也一定更贵吗？', route: 'AI 与数据',
+    detail: '把公开模型的能力指数与线性任务成本放进同一张图。',
+    work: 'Intelligence × Cost', image: intelligence.cover, tone: '#a8c7ff',
+    href: '/projects/?group=ai-data&tag=AI' },
+  { question: '居民的一次选择，从哪来？', route: '游戏与规则',
+    detail: '需求、工作价值与路径成本，共同参与居民的下一步行动。',
+    work: 'NomadWorkshop', image: resident, tone: '#bce7ad',
+    href: '/projects/?group=games&tag=Unity' },
+];
+---
+<section class="exploration-invitation home-chapter" id="explore" aria-labelledby="explore-title"
+  data-exploration-invitation data-invite-active="0" style={`--invite-tone:${questions[0].tone}`}>
+  <div class="invitation-darkroom" aria-hidden="true"><div class="invitation-light" data-invite-light></div></div>
+  <header class="invitation-heading">
+    <h2 id="explore-title">还有世界，<br/>没有展开。</h2>
+    <p>一个问题，可以通向一整个工程。<br/>接下来，沿着好奇心走。</p>
+  </header>
+  <div class="invitation-composition">
+    <a class="invitation-question invitation-question--light" data-invite-cue="0" data-active="true"
+      href={sitePath(questions[0].href)} style={`--question-tone:${questions[0].tone}`}>
+      <span class="invitation-question__text">{questions[0].question}</span>
+      <span class="invitation-question__route">{questions[0].route}<span aria-hidden="true">↗</span></span>
+    </a>
+    <div class="invitation-camera" data-invite-camera>
+      <div class="invitation-motion" data-invite-plane>
+        <div class="invitation-fold">
+          <span class="invitation-sheet invitation-sheet--far" aria-hidden="true"></span>
+          <span class="invitation-sheet invitation-sheet--near" aria-hidden="true"></span>
+          <span class="invitation-fold-edge" aria-hidden="true"></span>
+          <div class="invitation-pictures">
+            {questions.map((question, index) => <figure class="invitation-picture" data-invite-picture={index}
+              data-invite-tone={question.tone} hidden={index !== 0} inert={index !== 0}>
+              <a class="invitation-picture-link" href={sitePath(question.href)}
+                aria-label={`沿着“${question.question}”进入工程库`}>
+                <MediaImage image={question.image} sizes="(max-width: 760px) calc(100vw - 64px), (max-width: 1000px) 82vw, 65vw"/>
+                <span class="invitation-photo-edge" aria-hidden="true"></span>
+              </a>
+              <figcaption><span class="invitation-work">{question.work}</span><p>{question.detail}</p></figcaption>
+            </figure>)}
+          </div>
+        </div>
+      </div>
+    </div>
+    <a class="invitation-question invitation-question--cost" data-invite-cue="1"
+      href={sitePath(questions[1].href)} style={`--question-tone:${questions[1].tone}`}>
+      <span class="invitation-question__text">{questions[1].question}</span>
+      <span class="invitation-question__route">{questions[1].route}<span aria-hidden="true">↗</span></span>
+    </a>
+    <a class="invitation-question invitation-question--life" data-invite-cue="2"
+      href={sitePath(questions[2].href)} style={`--question-tone:${questions[2].tone}`}>
+      <span class="invitation-question__text">{questions[2].question}</span>
+      <span class="invitation-question__route">{questions[2].route}<span aria-hidden="true">↗</span></span>
+    </a>
+  </div>
+  <footer class="invitation-exit">
+    <p>从一个问题开始，看看它最后长成了什么。</p>
+    <a href={sitePath('/projects/')} class="invitation-library-link"><span>继续去工程库</span><span class="invitation-library-count">{projects.length} 个工程</span><Icon size={29}/></a>
+  </footer>
+  <p class="sr-only" role="status" aria-live="polite" data-invite-status></p>
+</section>

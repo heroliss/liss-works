@@ -55,11 +55,13 @@ body:has(.detail-page) .site-header { position:relative; z-index:30; }
 .project-atmosphere__grain { position:absolute; inset:0; }
 .project-atmosphere__wash {
   background:
-    radial-gradient(ellipse 48% 720px at 86% 4%, color-mix(in srgb,var(--field-accent) 12%,transparent), transparent 76%),
-    radial-gradient(ellipse 45% 920px at 10% 27%, color-mix(in srgb,var(--detail-cool) 7%,transparent), transparent 77%),
-    radial-gradient(ellipse 48% 980px at 91% 50%, color-mix(in srgb,var(--detail-warm) 6%,transparent), transparent 78%),
-    radial-gradient(ellipse 46% 760px at 17% 76%, color-mix(in srgb,var(--field-accent) 8%,transparent), transparent 78%),
-    radial-gradient(ellipse 62% 460px at 65% 101%, color-mix(in srgb,var(--detail-cool) 5%,transparent), transparent 80%);
+    radial-gradient(ellipse 56% max(780px,12%) at 86% 4%, color-mix(in srgb,var(--field-accent) 14%,transparent), transparent 77%),
+    radial-gradient(ellipse 56% 20% at 5% 26%, color-mix(in srgb,var(--detail-cool) 13%,transparent), transparent 78%),
+    radial-gradient(ellipse 57% 22% at 96% 50%, color-mix(in srgb,var(--detail-warm) 11%,transparent), transparent 79%),
+    radial-gradient(ellipse 55% 20% at 8% 76%, color-mix(in srgb,var(--field-accent) 12%,transparent), transparent 79%),
+    radial-gradient(ellipse 66% 13% at 65% 103%, color-mix(in srgb,var(--detail-cool) 11%,transparent), transparent 80%),
+    linear-gradient(108deg, color-mix(in srgb,var(--detail-cool) 5%,#0d1417), #0c1215 39%, #0c1114 63%, color-mix(in srgb,var(--detail-warm) 5%,#101317));
+  mask-image:linear-gradient(to bottom,transparent,#000 88px,#000 calc(100% - 160px),transparent);
 }
 .project-atmosphere__grain {
   opacity:.022;
@@ -82,7 +84,9 @@ body:has(.detail-page) .site-header { position:relative; z-index:30; }
   transform:none;
 }
 .project-atmosphere__layer--upper { top:-50px; }
-.project-atmosphere__layer--middle { top:37%; opacity:.53; }
+.project-atmosphere__layer--continuation { top:19%; opacity:.29; }
+.project-atmosphere__layer--middle { top:41%; opacity:.53; }
+.project-atmosphere__layer--reflection { top:64%; opacity:.24; }
 .project-atmosphere__layer--lower { bottom:2%; opacity:.38; }
 .project-atmosphere__canvas {
   position:absolute;
@@ -105,6 +109,9 @@ body:has(.detail-page) .site-header { position:relative; z-index:30; }
 .project-atmosphere__layer--lower .project-atmosphere__art {
   transform:perspective(1800px) rotateX(9deg) rotateY(-4deg) rotateZ(-9deg) scale(1.05);
 }
+.project-atmosphere__layer--reflection .project-atmosphere__art {
+  transform:perspective(1800px) rotateX(-5deg) rotateY(6deg) rotateZ(168deg);
+}
 .project-atmosphere__art > svg { display:block; width:100%; height:100%; overflow:visible; }
 .field-stop-cool { stop-color:var(--detail-cool); }
 .field-stop-warm { stop-color:var(--detail-warm); }
@@ -122,11 +129,14 @@ body:has(.detail-page) .site-header { position:relative; z-index:30; }
 @media(max-width:760px) {
   .project-atmosphere__layer { left:-150px; right:-150px; height:900px; }
   .project-atmosphere__layer--upper { top:-12px; }
+  .project-atmosphere__layer--continuation { top:20%; opacity:.23; }
   .project-atmosphere__layer--middle { top:42%; opacity:.4; }
+  .project-atmosphere__layer--reflection { top:65%; opacity:.2; }
   .project-atmosphere__layer--lower { bottom:0; opacity:.3; }
   .project-atmosphere__art { transform:rotateZ(var(--field-cant,0deg)); }
   .project-atmosphere__layer--middle .project-atmosphere__art { transform:rotateZ(174deg); }
   .project-atmosphere__layer--lower .project-atmosphere__art { transform:rotateZ(-9deg); }
+  .project-atmosphere__layer--reflection .project-atmosphere__art { transform:rotateZ(168deg); }
   .project-atmosphere__grain { opacity:.016; }
   .detail-field-extrusion { opacity:.52; }
 }
@@ -134,6 +144,7 @@ body:has(.detail-page) .site-header { position:relative; z-index:30; }
   .project-atmosphere [data-detail-field-layer] { transform:none!important; }
   .project-atmosphere__art,
   .project-atmosphere__layer--middle .project-atmosphere__art,
-  .project-atmosphere__layer--lower .project-atmosphere__art { transform:none; }
+  .project-atmosphere__layer--lower .project-atmosphere__art,
+  .project-atmosphere__layer--reflection .project-atmosphere__art { transform:none; }
 }
 @media(forced-colors:active) { .project-atmosphere { display:none; } }

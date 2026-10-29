@@ -109,12 +109,15 @@ export function setupArchiveAtlas({ signal,preference }:Options) {
     const addGate=(gate:()=>void)=>{gates.add(gate);ownedGates.push(gate);};
     const float=atlas.querySelector<HTMLElement>('[data-atlas-float]')!;
     if(motion){
+      let floatHeld=false;
       const breathing=gsap.to(float,{y:-7,duration:4.4,ease:'sine.inOut',repeat:-1,yoyo:true,paused:true});
-      const gate=()=>breathing.paused(closed||!stageVisible||paused||document.hidden);
+      const gate=()=>breathing.paused(closed||floatHeld||!stageVisible||paused||document.hidden);
       addGate(gate);gate();
-      stage.addEventListener('pointerdown',()=>breathing.pause(),{signal:local.signal});
-      window.addEventListener('pointerup',gate,{signal:local.signal});
-      window.addEventListener('pointercancel',gate,{signal:local.signal});
+      stage.addEventListener('pointerdown',event=>{if(event.isPrimary&&event.button===0){floatHeld=true;gate();}},{signal:local.signal});
+      const releaseFloat=()=>{floatHeld=false;gate();};
+      window.addEventListener('pointerup',releaseFloat,{signal:local.signal});
+      window.addEventListener('pointercancel',releaseFloat,{signal:local.signal});
+      window.addEventListener('blur',releaseFloat,{signal:local.signal});
       ScrollTrigger.batch(items.map(item=>item.querySelector<HTMLElement>('[data-atlas-reveal]')!),{start:'top 94%',once:true,batchMax:3,interval:.07,onEnter:batch=>{if(!paused)context.add(()=>gsap.fromTo(batch,{opacity:.62},{opacity:1,duration:.85,stagger:.07,clearProps:'opacity'}));}});
     }
     if(motion&&fine&&wide){
@@ -136,8 +139,9 @@ export function setupArchiveAtlas({ signal,preference }:Options) {
         const readRest=()=>{const css=getComputedStyle(surface);restX=parseFloat(css.getPropertyValue('--atlas-rest-x'))||0;restY=parseFloat(css.getPropertyValue('--atlas-rest-y'))||0;restZ=parseFloat(css.getPropertyValue('--atlas-rest-z'))||0;};
         readRest();
         const rx=gsap.quickTo(surface,'rotationX',{duration:.85,ease:'power3.out'}),ry=gsap.quickTo(surface,'rotationY',{duration:.85,ease:'power3.out'}),tx=gsap.quickTo(surface,'x',{duration:.7,ease:'power3.out'}),ty=gsap.quickTo(surface,'y',{duration:.7,ease:'power3.out'});
-        const tweens=[rx,ry,tx,ty];
-        const reset=(immediate=false)=>{rx(restX);ry(restY);tx(0);ty(0);if(immediate)tweens.forEach(to=>to.tween.progress(1).pause());region.dataset.atlasPointer='0.000,0.000';};
+        const lightX=gsap.quickTo(surface,'--material-light-x',{duration:.8,ease:'power3.out'}),lightY=gsap.quickTo(surface,'--material-light-y',{duration:.8,ease:'power3.out'}),shine=gsap.quickTo(surface,'--material-shine',{duration:.8,ease:'power3.out'});
+        const tweens=[rx,ry,tx,ty,lightX,lightY,shine];
+        const reset=(immediate=false)=>{rx(restX);ry(restY);tx(0);ty(0);lightX(0);lightY(0);shine(.58);if(immediate)tweens.forEach(to=>to.tween.progress(1).pause());region.dataset.atlasPointer='0.000,0.000';};
         const measure=()=>{const b=region.getBoundingClientRect(),c=surface.closest<HTMLElement>('.atlas-stage-camera,.atlas-tile-camera')!;const cb=c.getBoundingClientRect();bounds={left:b.left+scrollX,top:b.top+scrollY,width:b.width,height:b.height};camera={left:cb.left+(cb.width-surface.offsetWidth)/2,width:surface.offsetWidth,height:surface.offsetHeight,perspective:parseFloat(getComputedStyle(c).perspective)||1800,viewport:document.documentElement.clientWidth};};
         measure();reset(true);
         const gate=()=>{if(!visible||paused||document.hidden)reset(true);};addGate(gate);
@@ -148,10 +152,10 @@ export function setupArchiveAtlas({ signal,preference }:Options) {
         region.addEventListener('pointermove',event=>{
           if(closed||held||!visible||paused||document.hidden||event.pointerType==='touch')return;
           const x=gsap.utils.clamp(-1,1,(event.pageX-bounds.left)/Math.max(1,bounds.width)*2-1),y=gsap.utils.clamp(-1,1,(event.pageY-bounds.top)/Math.max(1,bounds.height)*2-1);
-          const ax=restX-y*8,ay=restY+x*12;
+          const ax=restX-y*9,ay=restY+x*14;
           const fits=(strength:number)=>{const a=ax*strength*Math.PI/180,b=ay*strength*Math.PI/180,z=restZ*Math.PI/180;return[-1,1].every(sx=>[-1,1].every(sy=>{const px=sx*camera.width/2,py=sy*camera.height/2,y1=py*Math.cos(a),z1=py*Math.sin(a),x2=px*Math.cos(b)+z1*Math.sin(b),z2=-px*Math.sin(b)+z1*Math.cos(b);const screen=camera.left+camera.width/2+((x2*Math.cos(z)-y1*Math.sin(z))+x*6*strength)/(1-z2/camera.perspective);return screen>=8&&screen<=camera.viewport-8;}));};
           let strength=1;if(!fits(1)){let low=0,high=1;for(let i=0;i<8;i++){const mid=(low+high)/2;if(fits(mid))low=mid;else high=mid;}strength=low;}
-          rx(ax*strength);ry(ay*strength);tx(x*6*strength);ty(y*5*strength);region.dataset.atlasPointer=`${x.toFixed(3)},${y.toFixed(3)}`;
+          rx(ax*strength);ry(ay*strength);tx(x*6*strength);ty(y*5*strength);lightX(x*3);lightY(-y*2);shine(.58+(x-y)*.12);region.dataset.atlasPointer=`${x.toFixed(3)},${y.toFixed(3)}`;
         },{passive:true,signal:local.signal});
         region.addEventListener('pointerleave',()=>{if(!held)reset();},{signal:local.signal});
         region.addEventListener('pointerdown',event=>{if(event.isPrimary&&event.button===0){held=true;tweens.forEach(to=>to.tween.pause());}},{signal:local.signal});

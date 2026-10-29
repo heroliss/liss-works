@@ -162,9 +162,13 @@ export function setupDetailWorldMotion({ signal, preference }: Options): () => v
       const yTo = pointerEnabled ? gsap.quickTo(plane, 'y', { duration: 0.65, ease: 'power3.out' }) : undefined;
       const rxTo = pointerEnabled ? gsap.quickTo(plane, 'rotationX', { duration: 0.8, ease: 'power3.out' }) : undefined;
       const ryTo = pointerEnabled ? gsap.quickTo(plane, 'rotationY', { duration: 0.8, ease: 'power3.out' }) : undefined;
-      const pointerTweens = [xTo,yTo,rxTo,ryTo];
+      const lightX = pointerEnabled ? gsap.quickTo(plane, '--material-light-x', { duration:.8, ease:'power3.out' }) : undefined;
+      const lightY = pointerEnabled ? gsap.quickTo(plane, '--material-light-y', { duration:.8, ease:'power3.out' }) : undefined;
+      const shine = pointerEnabled ? gsap.quickTo(plane, '--material-shine', { duration:.8, ease:'power3.out' }) : undefined;
+      const pointerTweens = [xTo,yTo,rxTo,ryTo,lightX,lightY,shine];
       const resetPointer = (immediate = false) => {
         xTo?.(0); yTo?.(0); rxTo?.(restX); ryTo?.(restY);
+        lightX?.(0); lightY?.(0); shine?.(.58);
         if (immediate) pointerTweens.forEach(to => to?.tween.progress(1).pause());
         figure.dataset.detailPointer = '0.000,0.000';
       };
@@ -231,7 +235,7 @@ export function setupDetailWorldMotion({ signal, preference }: Options): () => v
           const stage = plane.closest<HTMLElement>('.artifact-stage');
           if (stage) {
             const frame = stage.getBoundingClientRect();
-            camera = { x:frame.x, width:plane.offsetWidth, height:plane.offsetHeight, perspective:parseFloat(getComputedStyle(stage).perspective)||1800, viewport:document.documentElement.clientWidth };
+            camera = { x:frame.x+plane.offsetLeft, width:plane.offsetWidth, height:plane.offsetHeight, perspective:parseFloat(getComputedStyle(stage).perspective)||1800, viewport:document.documentElement.clientWidth };
           }
         };
         measure();
@@ -245,7 +249,7 @@ export function setupDetailWorldMotion({ signal, preference }: Options): () => v
           const x = gsap.utils.clamp(-1, 1, (event.pageX - bounds.left) / Math.max(1, bounds.width) * 2 - 1);
           const y = gsap.utils.clamp(-1, 1, (event.pageY - bounds.top) / Math.max(1, bounds.height) * 2 - 1);
           const broad = kind === 'orbit' || kind === 'light' ? 1.15 : kind === 'reading' ? .7 : 1;
-          const targetX = restX-y*8*response*broad, targetY = restY+x*12*response*broad;
+          const targetX = restX-y*9*response*broad, targetY = restY+x*14*response*broad;
           // A wide plane can approach the viewport edge as it turns. Evaluate
           // its four projected corners from cached geometry before moving it;
           // keep the full screenshot visible instead of clipping its content.
@@ -268,6 +272,7 @@ export function setupDetailWorldMotion({ signal, preference }: Options): () => v
           }
           xTo?.(x*7*response*strength); yTo?.(y*7*response*strength);
           rxTo?.(targetX*strength); ryTo?.(targetY*strength);
+          lightX?.(x*3*response); lightY?.(-y*2*response); shine?.(.58+(x-y)*.12);
           figure.dataset.detailPointer = `${x.toFixed(3)},${y.toFixed(3)}`;
         }, { passive: true, signal: events.signal });
         figure.addEventListener('pointerdown', event => {

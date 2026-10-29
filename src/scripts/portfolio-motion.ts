@@ -239,6 +239,10 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
           return {
             surface, piece: surface.closest<HTMLElement>('[data-stage-piece]')?.dataset.stagePiece,
             restX: 0, restY: 0, restZ: 0,
+            camera: { left: 0, width: 1, height: 1, perspective: 1400, viewport: 1 },
+            lightX: gsap.quickTo(surface, '--material-light-x', { duration: 0.8, ease: 'power3.out' }),
+            lightY: gsap.quickTo(surface, '--material-light-y', { duration: 0.8, ease: 'power3.out' }),
+            shine: gsap.quickTo(surface, '--material-shine', { duration: 0.8, ease: 'power3.out' }),
             x: gsap.quickTo(surface, 'x', { duration: 0.7, ease: 'power3.out' }),
             y: gsap.quickTo(surface, 'y', { duration: 0.7, ease: 'power3.out' }),
             rx: gsap.quickTo(surface, 'rotationX', { duration: 0.8, ease: 'power3.out' }),
@@ -252,11 +256,17 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
           const box = region.getBoundingClientRect();
           // Document coordinates remain valid while the native page scrolls.
           bounds = { left: box.left + window.scrollX, top: box.top + window.scrollY, width: box.width, height: box.height };
+          movers.forEach(move => {
+            const card = move.surface.parentElement!;
+            const frame = card.getBoundingClientRect(), css = getComputedStyle(card);
+            move.camera = { left:frame.left + (parseFloat(css.paddingLeft)||0), width:move.surface.offsetWidth, height:move.surface.offsetHeight, perspective:parseFloat(css.perspective)||1400, viewport:document.documentElement.clientWidth };
+          });
         };
         const reset = (immediate = false) => {
           movers.forEach((move) => {
             move.x(0); move.y(0); move.rx(move.restX); move.ry(move.restY); move.rz(move.restZ);
-            if (immediate) [move.x, move.y, move.rx, move.ry, move.rz].forEach(to => to.tween.progress(1).pause());
+            move.lightX(0); move.lightY(0); move.shine(.58);
+            if (immediate) [move.x, move.y, move.rx, move.ry, move.rz, move.lightX, move.lightY, move.shine].forEach(to => to.tween.progress(1).pause());
           });
           fieldMotion.forEach((to) => {
             if (!to) return;
@@ -291,6 +301,7 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
         // change must never finish the active pose/field tweens prematurely.
         const sizeObserver = new ResizeObserver(remeasure);
         sizeObserver.observe(region);
+        movers.forEach(move => sizeObserver.observe(move.surface.parentElement!));
         window.addEventListener('resize', resize, { signal: pointer.signal });
         const viewObserver = new IntersectionObserver(([entry]) => {
           inView = entry.isIntersecting;
@@ -304,10 +315,22 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
           const y = gsap.utils.clamp(-1, 1, ((event.pageY - bounds.top) / Math.max(bounds.height, 1) - 0.5) * 2);
           movers.forEach((move) => {
             const primary = move.piece === stage.dataset.active;
-            move.x(primary ? x*10 : 0);
-            move.y(primary ? y*8 : 0);
-            move.rx(move.restX-y*9);
-            move.ry(move.restY+x*14);
+            const ax = move.restX-y*10, ay = move.restY+x*16;
+            const fits = (strength:number) => {
+              const a=ax*strength*Math.PI/180,b=ay*strength*Math.PI/180,z=move.restZ*Math.PI/180,c=move.camera;
+              return [-1,1].every(sx => [-1,1].every(sy => {
+                const px=sx*c.width/2,py=sy*c.height/2,y1=py*Math.cos(a),z1=py*Math.sin(a);
+                const x2=px*Math.cos(b)+z1*Math.sin(b),z2=-px*Math.sin(b)+z1*Math.cos(b);
+                const screen=c.left+c.width/2+(x2*Math.cos(z)-y1*Math.sin(z)+(primary?x*10*strength:0))/(1-z2/c.perspective);
+                return screen>=8&&screen<=c.viewport-8;
+              }));
+            };
+            let strength=1;
+            if (!fits(1)) { let low=0,high=1;for(let i=0;i<8;i++){const mid=(low+high)/2;if(fits(mid))low=mid;else high=mid;}strength=low; }
+            move.x(primary ? x*10*strength : 0);
+            move.y(primary ? y*8*strength : 0);
+            move.rx(ax*strength); move.ry(ay*strength);
+            move.lightX(x*3); move.lightY(-y*2); move.shine(.58+(x-y)*.12);
           });
           lightX?.(x * 40);
           lightY?.(y * 30);
@@ -317,7 +340,7 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
         region.addEventListener('pointerdown', (event) => {
           if (!event.isPrimary || event.button !== 0) return;
           pressed = true;
-          movers.forEach(move => [move.x, move.y, move.rx, move.ry, move.rz].forEach(to => to.tween.pause()));
+          movers.forEach(move => [move.x, move.y, move.rx, move.ry, move.rz, move.lightX, move.lightY, move.shine].forEach(to => to.tween.pause()));
           fieldMotion.forEach(to => to?.tween.pause());
         }, { signal: pointer.signal });
         const release = () => {
@@ -325,7 +348,7 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
           pressed = false;
           if (settled && !region.matches(':hover')) reset();
           else if (wasPressed && inView && !document.hidden && document.documentElement.dataset.motionPaused !== 'true') {
-            movers.forEach(move => [move.x, move.y, move.rx, move.ry, move.rz].forEach(to => {
+            movers.forEach(move => [move.x, move.y, move.rx, move.ry, move.rz, move.lightX, move.lightY, move.shine].forEach(to => {
               if (to.tween.progress() < 1) to.tween.resume();
             }));
             fieldMotion.forEach(to => { if (to && to.tween.progress() < 1) to.tween.resume(); });

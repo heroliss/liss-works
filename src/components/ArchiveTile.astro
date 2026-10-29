@@ -19,7 +19,7 @@ if (project.tags.some(tag => tag.includes('算法'))) filterTags.add('算法');
 if (project.tags.some(tag => /^qt(?:\s|\d|$)/i.test(tag))) filterTags.add('Qt');
 if (project.tags.some(tag => tag.startsWith('.NET'))) filterTags.add('.NET');
 
-const poses = [[4,-5,-1.2], [6,4,.7], [3,-3,-.5], [5,6,1.1], [4,-6,-.9], [6,3,.5]] as const;
+const poses = [[5,-6,-1.3], [7,5,.8], [4,-4,-.6], [6,7,1.2], [5,-7,-1], [7,4,.6]] as const;
 const [restX, restY, restZ] = poses[index % poses.length] ?? poses[0];
 const href = sitePath(`/projects/${project.slug}/`);
 const style = `${projectWorldStyle(project.slug)};--atlas-image-ratio:${project.cover.width}/${project.cover.height};--atlas-rest-x:${restX}deg;--atlas-rest-y:${restY}deg;--atlas-rest-z:${restZ}deg`;

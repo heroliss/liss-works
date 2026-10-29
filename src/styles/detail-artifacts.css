@@ -3,8 +3,8 @@
 .detail-page[data-project-world] :is(.project-hero,.engineering-media>figure,.gallery-grid>figure) { overflow:visible; }
 .detail-page[data-project-world] .project-hero { background:transparent; border-radius:0; perspective:none; }
 .detail-page[data-project-world] .artifact-stage {
-  --artifact-rest-x:5deg; --artifact-rest-y:-7deg; --artifact-rest-z:-.65deg;
-  --artifact-response:1; --artifact-depth:20px;
+  --artifact-rest-x:6deg; --artifact-rest-y:-8deg; --artifact-rest-z:-.65deg;
+  --artifact-response:1; --artifact-depth:26px;
   position:relative; width:100%; min-width:0; perspective:1800px; perspective-origin:50% 50%;
   margin:12px 0 30px; padding:0; overflow:visible;
 }
@@ -40,16 +40,16 @@
 }
 .detail-page[data-project-world] .artifact-plane .world-accent { z-index:3; transform:translateZ(10px); opacity:.34; }
 .detail-page[data-project-world] .artifact-plane > .media-link:focus-visible { outline:3px solid var(--accent); outline-offset:7px; }
-.detail-page[data-project-world] .artifact-stage[data-artifact-role="gallery"] { --artifact-rest-x:3deg; --artifact-rest-y:5deg; --artifact-rest-z:.65deg; --artifact-depth:16px; }
-.detail-page[data-project-world] .gallery-grid>figure:nth-child(even) .artifact-stage { --artifact-rest-y:-6deg; --artifact-rest-z:-.75deg; }
-.detail-page[data-project-world] .artifact-stage[data-artifact-role="inset"] { --artifact-rest-x:2deg; --artifact-rest-y:5deg; --artifact-rest-z:1deg; --artifact-response:.55; --artifact-depth:12px; margin:0 0 14px; }
+.detail-page[data-project-world] .artifact-stage[data-artifact-role="gallery"] { --artifact-rest-x:4deg; --artifact-rest-y:6deg; --artifact-rest-z:.75deg; --artifact-depth:21px; }
+.detail-page[data-project-world] .gallery-grid>figure:nth-child(even) .artifact-stage { --artifact-rest-y:-7deg; --artifact-rest-z:-.85deg; }
+.detail-page[data-project-world] .artifact-stage[data-artifact-role="inset"] { --artifact-rest-x:2deg; --artifact-rest-y:5deg; --artifact-rest-z:1deg; --artifact-response:.55; --artifact-depth:15px; margin:0 0 14px; }
 .detail-page[data-project-world] .artifact-stage[data-artifact-format="portrait"] { max-width:460px; margin-inline:auto; --artifact-rest-x:2deg; --artifact-rest-y:-4deg; --artifact-rest-z:-.4deg; --artifact-response:.55; }
 .detail-page[data-project-world] .artifact-stage[data-artifact-format="strip"] { --artifact-rest-x:0deg; --artifact-rest-y:0deg; --artifact-rest-z:0deg; --artifact-response:.2; --artifact-depth:8px; }
-.detail-page[data-world-family="battlefield"] .artifact-stage[data-artifact-role="hero"] { --artifact-rest-x:7deg; --artifact-rest-y:-9deg; --artifact-rest-z:-1.3deg; }
-.detail-page[data-world-family="editing"] .artifact-stage { --artifact-rest-x:4deg; --artifact-rest-y:5deg; --artifact-rest-z:.45deg; }
-.detail-page[data-world-family="survival"] .artifact-stage { --artifact-rest-x:7deg; --artifact-rest-y:5deg; --artifact-rest-z:1deg; }
-.detail-page[data-world-family="strategy"] .artifact-stage { --artifact-rest-x:4deg; --artifact-rest-y:-8deg; --artifact-rest-z:-.5deg; }
-.detail-page[data-world-family="architecture"] .artifact-stage { --artifact-rest-x:4deg; --artifact-rest-y:-6deg; --artifact-rest-z:-.35deg; }
+.detail-page[data-world-family="battlefield"] .artifact-stage[data-artifact-role="hero"] { --artifact-rest-x:8deg; --artifact-rest-y:-10deg; --artifact-rest-z:-1.3deg; }
+.detail-page[data-world-family="editing"] .artifact-stage { --artifact-rest-x:5deg; --artifact-rest-y:6deg; --artifact-rest-z:.45deg; }
+.detail-page[data-world-family="survival"] .artifact-stage { --artifact-rest-x:8deg; --artifact-rest-y:6deg; --artifact-rest-z:1deg; }
+.detail-page[data-world-family="strategy"] .artifact-stage { --artifact-rest-x:5deg; --artifact-rest-y:-9deg; --artifact-rest-z:-.5deg; }
+.detail-page[data-world-family="architecture"] .artifact-stage { --artifact-rest-x:5deg; --artifact-rest-y:-7deg; --artifact-rest-z:-.35deg; }
 .detail-page[data-project-world] .engineering-media .engineering-inset {
   display:block; padding:0; margin-right:0; background:transparent; border:0; border-radius:0; box-shadow:none; transform:none;
 }
@@ -60,6 +60,11 @@
   color:var(--detail-muted,var(--muted)); background:none; max-width:70ch;
 }
 .detail-page[data-project-world] .project-hero .project-caption { padding:0 0 0 15px; margin-top:25px; }
+/* The resting pose must fit before JavaScript or the first hover runs. A small
+   camera gutter contains wide evidence planes without cropping the bitmap. */
+@media(min-width:1101px) {
+  .detail-page[data-project-world] .artifact-stage { box-sizing:border-box; padding-inline:16px; }
+}
 @media(max-width:1100px) {
   .detail-page[data-project-world] .artifact-stage { perspective:2000px; --artifact-response:.8; }
 }

@@ -1,0 +1,125 @@
+/* Continuous reflected light, then a few subject-led contours. These are
+   background leaves; screenshots, layout, hit areas and 3D owners stay intact. */
+.home-next > .framework-chapter { --chapter-field:#b6c89b; }
+.home-next > .dub-reel { --chapter-field:#8eb9ca; }
+.home-next > .games-chapter { --chapter-field:#c5a386; }
+.home-next > .closing-chapter { --chapter-field:#abbc9d; }
+.home-next > :is(.framework-chapter,.dub-reel,.games-chapter,.closing-chapter)::after {
+  content:'';
+  position:absolute;
+  top:-100px;
+  bottom:-110px;
+  left:calc(50% - 50vw);
+  width:100vw;
+  z-index:-2;
+  pointer-events:none;
+  background:radial-gradient(ellipse 61% 73% at 24% 42%,color-mix(in srgb,var(--chapter-field) 11%,transparent),transparent 79%),radial-gradient(ellipse 46% 60% at 95% 68%,color-mix(in srgb,var(--chapter-field) 9%,transparent),transparent 80%);
+  mask-image:linear-gradient(to bottom,transparent,#000 19%,#000 77%,transparent);
+}
+
+/* Long engineering chapters and the final evidence/usage passages receive a
+   low-chroma bounce light, rather than their own opaque rectangular surface. */
+.detail-page[data-project-world] :is(.project-engineering,.project-gallery,.project-usage) { position:relative; }
+.detail-page[data-project-world] :is(.project-engineering,.project-gallery,.project-usage)::before {
+  content:'';
+  position:absolute;
+  inset-block:-90px;
+  left:calc(50% - 50vw);
+  width:100vw;
+  z-index:-1;
+  pointer-events:none;
+  background:radial-gradient(ellipse 58% 77% at 12% 43%,color-mix(in srgb,var(--detail-cool) 10%,transparent),transparent 80%),radial-gradient(ellipse 52% 70% at 95% 69%,color-mix(in srgb,var(--detail-warm) 9%,transparent),transparent 80%);
+  mask-image:linear-gradient(to bottom,transparent,#000 17%,#000 79%,transparent);
+}
+.detail-page[data-project-world] .project-gallery::before {
+  background:radial-gradient(ellipse 66% 71% at 78% 43%,color-mix(in srgb,var(--project-tone) 12%,transparent),transparent 81%);
+}
+.detail-page[data-project-world] .project-usage::before {
+  background:radial-gradient(ellipse 67% 74% at 21% 58%,color-mix(in srgb,var(--detail-warm) 11%,transparent),transparent 81%);
+}
+
+/* The archive aura now continues through all shelves, not just its opening
+   frame. It remains independent of the tiles' moving physical planes. */
+.archive-atlas .atlas-aura {
+  background:
+    radial-gradient(ellipse 58% 680px at 80% 5%,color-mix(in srgb,var(--atlas-tone) 13%,transparent),transparent 80%),
+    radial-gradient(ellipse 61% 21% at 2% 35%,#91b0be21,transparent 80%),
+    radial-gradient(ellipse 56% 24% at 101% 72%,#b8a18b24,transparent 81%),
+    linear-gradient(108deg,#10191c,#0c1215 37%,#0c1115 65%,#17171c);
+  mask-image:linear-gradient(to bottom,transparent,#000 88px,#000 calc(100% - 160px),transparent);
+}
+.archive-atlas .atlas-shelf {
+  position:relative;
+  --shelf-tone:#b8c697;
+  --shelf-bounce:#8ea9b9;
+  --shelf-contour:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1800 1200' fill='none'%3E%3Cg stroke='white' stroke-width='2'%3E%3Cpath d='M-120 870C190 352 505 330 782 571S1370 1064 1870 602M-111 908C199 390 505 371 762 600S1370 1104 1890 642'/%3E%3Cpath d='M1384 112C1542 28 1711 112 1736 288S1563 560 1431 465S1259 229 1384 112ZM1416 151C1544 87 1660 151 1672 294S1553 497 1454 423S1320 247 1416 151Z'/%3E%3C/g%3E%3C/svg%3E");
+}
+.archive-atlas .atlas-shelf[data-atlas-group=ai-data] {
+  --shelf-tone:#9cbcc6;
+  --shelf-bounce:#b7a4a3;
+  --shelf-contour:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1800 1200' fill='none'%3E%3Cg stroke='white' stroke-width='2'%3E%3Cpath d='M-120 840C146 567 312 588 477 764S813 1053 1051 908M-104 881C145 611 291 630 450 792S810 1091 1069 949M1236 107L1546 278L1694 575M1281 80L1591 251L1741 550'/%3E%3Cpath d='M1555 285C1281 365 1237 597 1420 710S1766 848 1860 1068'/%3E%3C/g%3E%3C/svg%3E");
+}
+.archive-atlas .atlas-shelf[data-atlas-group=graphics] {
+  --shelf-tone:#baa7c0;
+  --shelf-bounce:#a7bba7;
+  --shelf-contour:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1800 1200' fill='none'%3E%3Cg stroke='white' stroke-width='2'%3E%3Cpath d='M1256 176L1602 388L1302 650ZM1256 176L1339 108L1685 320L1602 388M1302 650L1385 582L1685 320M-90 842L1313 433M1323 433L1870 695'/%3E%3Cpath d='M-96 582C133 304 423 390 455 655S191 1034-13 994M-69 604C141 355 376 426 410 664S193 977 21 947'/%3E%3C/g%3E%3C/svg%3E");
+}
+.archive-atlas .atlas-shelf::before {
+  content:'';
+  position:absolute;
+  inset-block:-110px;
+  left:calc(50% - 50vw);
+  width:100vw;
+  z-index:-1;
+  pointer-events:none;
+  background:radial-gradient(ellipse 61% 73% at 13% 41%,color-mix(in srgb,var(--shelf-tone) 13%,transparent),transparent 80%),radial-gradient(ellipse 58% 69% at 96% 68%,color-mix(in srgb,var(--shelf-bounce) 10%,transparent),transparent 81%);
+  mask-image:linear-gradient(to bottom,transparent,#000 13%,#000 83%,transparent);
+}
+.archive-atlas .atlas-shelf::after {
+  content:'';
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:min(1920px,100vw);
+  margin-left:max(-960px,-50vw);
+  height:clamp(850px,65vw,1150px);
+  margin-top:clamp(-575px,-32.5vw,-425px);
+  z-index:-1;
+  pointer-events:none;
+  opacity:.2;
+  background:linear-gradient(133deg,var(--shelf-tone),var(--shelf-bounce));
+  mask-image:linear-gradient(to right,transparent 16px,#000 clamp(60px,9vw,180px),#000 calc(100% - clamp(60px,9vw,180px)),transparent calc(100% - 16px)),linear-gradient(to bottom,transparent,#000 17%,#000 81%,transparent),var(--shelf-contour);
+  mask-size:100% 100%;
+  mask-repeat:no-repeat;
+  mask-composite:intersect;
+}
+
+/* Continue the final bounce across the existing footer gap. This is one light
+   leaf behind the footer, not another section or a transformed page ancestor. */
+body:has(.home-next,.archive-atlas,.detail-page) .site-footer {
+  position:relative;
+  isolation:isolate;
+}
+body:has(.home-next,.archive-atlas,.detail-page) .site-footer::before {
+  content:'';
+  position:absolute;
+  top:-190px;
+  bottom:-80px;
+  left:calc(50% - 50vw);
+  width:100vw;
+  z-index:-1;
+  pointer-events:none;
+  background:radial-gradient(ellipse 67% 78% at 28% 37%,#9cb3aa21,transparent 80%),radial-gradient(ellipse 54% 71% at 91% 63%,#baa58e1c,transparent 81%);
+  mask-image:linear-gradient(to bottom,transparent,#000 25%,#000 71%,transparent);
+}
+
+@media(max-width:760px) {
+  .archive-atlas .atlas-shelf::after { opacity:.15; }
+}
+@media(forced-colors:active) {
+  .home-next > :is(.framework-chapter,.dub-reel,.games-chapter,.closing-chapter)::after,
+  .detail-page[data-project-world] :is(.project-engineering,.project-gallery,.project-usage)::before,
+  .archive-atlas .atlas-shelf::before,
+  .archive-atlas .atlas-shelf::after,
+  body:has(.home-next,.archive-atlas,.detail-page) .site-footer::before { display:none; }
+}

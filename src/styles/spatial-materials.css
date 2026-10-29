@@ -1,0 +1,78 @@
+/* Light lives on the rim and on a thin plane in front of the real picture.
+   The three material variables are owned by the existing pointer controllers. */
+:is(.stage-surface,.artifact-plane,.atlas-preview-plane,.atlas-tile-plane,.game-art,[data-scene-world]) {
+  --material-light-x:0px; --material-light-y:0px; --material-shine:.58;
+}
+.home-next .stage-surface { --material-tone:var(--hero-tone); }
+.artifact-plane { --material-tone:var(--accent); }
+:is(.atlas-preview-plane,.atlas-tile-plane) { --material-tone:var(--atlas-tone); }
+.game-art { --material-tone:var(--game-tone); }
+.framework-scene-world { --material-tone:#d7e78e; }
+.dub-scene-world { --material-tone:#9cdef1; }
+.home-next .work-stage .stage-card > .stage-surface {
+  box-shadow:1px 2px 0 #596267,3px 5px 0 #242c31,5px 8px 0 #10161b,
+    8px 13px 0 -3px color-mix(in srgb,var(--material-tone) 19%,#10161b),0 34px 52px -22px #000c;
+}
+.home-next .work-stage .stage-piece[data-stage-offset="0"] .stage-surface {
+  box-shadow:1px 2px 0 #6c767b,3px 5px 0 #303a40,5px 8px 0 #11191e,
+    8px 13px 0 -3px color-mix(in srgb,var(--material-tone) 24%,#10161b),0 40px 64px -25px #000e;
+}
+.home-next .work-stage .stage-surface .screen-chrome { border-radius:8px 8px 0 0; box-shadow:inset 0 1px #ffffff32; }
+.home-next .work-stage .stage-surface .screen-caption { border-radius:0 0 8px 8px; }
+.home-next .work-stage .stage-surface::after,.atlas-tile-plane::after,
+.atlas-preview-plane .atlas-preview-edge,
+.detail-page[data-project-world] .artifact-plane > .artifact-catchlight,
+.game-scene .game-art::after,
+.framework-showcase .framework-showcase__media::after,.dub-reel .dub-screen-bezel::after {
+  content:""; position:absolute; inset:-3px; display:block; border:0; border-radius:inherit;
+  pointer-events:none; z-index:4; opacity:var(--material-shine,.58);
+  background:linear-gradient(90deg,transparent,#ffffffc9 34%,color-mix(in srgb,var(--material-tone) 70%,#fff),transparent) 12% 0/54% 1px no-repeat,
+    linear-gradient(180deg,#ffffff9c,transparent) 0 0/1px 30% no-repeat,
+    linear-gradient(90deg,transparent,color-mix(in srgb,var(--material-tone) 72%,#fff)) 100% 100%/19% 1px no-repeat,
+    linear-gradient(0deg,color-mix(in srgb,var(--material-tone) 65%,#fff),transparent) 100% 100%/1px 17% no-repeat;
+  box-shadow:-1px -1px 0 #ffffff0b,1px 1px 0 color-mix(in srgb,var(--material-tone) 15%,transparent);
+  transform:translate3d(var(--material-light-x),var(--material-light-y),12px);
+}
+.detail-page[data-project-world] .artifact-plane > .artifact-rim {
+  border-color:color-mix(in srgb,var(--accent) 38%,transparent); transform:translateZ(4px);
+  box-shadow:1px 2px 0 #67717a55,3px 5px 0 #111921b8;
+}
+.detail-page[data-project-world] .artifact-plane > .artifact-depth {
+  box-shadow:10px 16px 0 -4px #06090c55,0 40px 58px -26px #000d;
+}
+.atlas-preview-plane .atlas-preview-edge { border-radius:5px; }
+.atlas-tile-plane::after { border-radius:4px; }
+.atlas-tile-plane img { box-shadow:1px 2px 0 #626d7355,3px 5px 0 #10171bc9,0 28px 42px -25px #000d; }
+.framework-showcase .framework-showcase__media,.dub-reel .dub-screen-bezel { position:relative; }
+.framework-showcase .framework-showcase__media { box-shadow:1px 2px 0 #82967266,4px 7px 0 #19231a,12px 24px 34px -13px #000c; }
+.dub-reel .dub-screen-bezel { box-shadow:1px 2px 0 #7da7b980,4px 7px 0 #172d37,0 30px 48px -22px #000d; }
+/* The image and its project canvas share one camera and one transform owner. */
+.game-scene { perspective:1700px; perspective-origin:50% 50%; }
+.game-scene > .game-art {
+  --game-rest-x:5deg; --game-rest-y:-7deg; --game-rest-z:0deg;
+  transform-style:preserve-3d; transform-origin:50% 50%;
+  transform:rotateZ(var(--game-rest-z)) rotateY(var(--game-rest-y)) rotateX(var(--game-rest-x));
+}
+.game-scene--outpost > .game-art { --game-rest-x:6deg; --game-rest-y:8deg; }
+.game-scene--gomoku > .game-art { --game-rest-x:4deg; --game-rest-y:-6deg; }
+.game-scene .game-art::after { inset:24px 12px; transform:translate3d(var(--material-light-x),var(--material-light-y),32px); }
+.game-scene .game-art > canvas { transform:translateZ(26px); }
+.game-scene .game-art > .game-scene__image { box-shadow:1px 2px 0 #8d9a9a55,4px 7px 0 #172126,8px 13px 0 -3px color-mix(in srgb,var(--game-tone) 25%,#10161b),0 32px 48px -24px #000d; }
+@media(max-width:760px) {
+  .home-next .work-stage .stage-card > .stage-surface { box-shadow:1px 2px 0 #596267,3px 5px 0 #242c31,5px 8px 0 #10161b,0 25px 35px -20px #000d; }
+  .game-scene > .game-art { --game-rest-x:2deg; --game-rest-y:-3deg; }
+  .game-scene--outpost > .game-art { --game-rest-y:3deg; }
+  .game-scene .game-art > canvas { transform:translateZ(14px); }
+  .game-scene .game-art::after { transform:translateZ(18px); }
+}
+@media(prefers-reduced-motion:reduce) {
+  .game-scene > .game-art { transform:none!important; }
+  .home-next .work-stage .stage-surface::after,.atlas-tile-plane::after,.atlas-preview-edge,
+  .detail-page[data-project-world] .artifact-plane > .artifact-catchlight,
+  .game-scene .game-art::after,.framework-showcase__media::after,.dub-screen-bezel::after { transform:none; opacity:.45; }
+}
+@media(forced-colors:active) {
+  .home-next .work-stage .stage-surface::after,.atlas-tile-plane::before,.atlas-tile-plane::after,
+  .atlas-preview-depth,.atlas-preview-edge,.game-scene .game-art::after,
+  .framework-showcase__media::after,.dub-screen-bezel::after { display:none!important; }
+}
