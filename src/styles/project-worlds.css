@@ -1,0 +1,183 @@
+/* Real work supplies each world's visual language; no extra interface or data. */
+.detail-page[data-project-world] .project-prologue{position:relative;isolation:isolate;min-width:0}
+.detail-page[data-project-world] .project-prologue::before{content:"";position:absolute;z-index:-1;pointer-events:none}
+.detail-page:is([data-project-world="ssframework"],[data-project-world="dubforge"],[data-project-world="outpost"],[data-project-world="nomadworkshop"],[data-project-world="gomoku"]){--world-gap:clamp(60px,8vw,130px)}
+.detail-page:is([data-project-world="ssframework"],[data-project-world="dubforge"],[data-project-world="outpost"],[data-project-world="nomadworkshop"],[data-project-world="gomoku"]) .project-contents a:hover{color:var(--accent)}
+.detail-page:is([data-project-world="ssframework"],[data-project-world="dubforge"],[data-project-world="outpost"],[data-project-world="nomadworkshop"],[data-project-world="gomoku"]) .project-prologue .project-hero img{max-height:none}
+
+/* SSFramework: the large name is a masthead over a technical atlas. */
+.detail-page[data-project-world="ssframework"]{--accent:#dbf48b;--cyan:#dbf48b;--surface:#18231b;--raised:#243329;--muted:#b6c4b4}
+.detail-page[data-project-world="ssframework"] .project-prologue{display:grid;grid-template-columns:minmax(0,.68fr) minmax(0,1.32fr);gap:24px 7%;padding-top:42px}
+.detail-page[data-project-world="ssframework"] .project-prologue::before{left:27%;right:0;top:175px;bottom:35px;background:#132018}
+.detail-page[data-project-world="ssframework"] :is(.project-intro,.project-intro-copy,.project-opening){display:contents}
+.detail-page[data-project-world="ssframework"] .project-intro h1{grid-column:1/-1;grid-row:1;font-size:clamp(82px,11.2vw,170px);color:var(--accent);line-height:.95;margin:0 0 24px;max-width:none}
+.detail-page[data-project-world="ssframework"] .project-intro .summary{grid-column:1;grid-row:2;font-size:21px;line-height:1.8;max-width:24ch;margin:0}
+.detail-page[data-project-world="ssframework"] .project-facts{grid-column:1;grid-row:3;margin:0}
+.detail-page[data-project-world="ssframework"] .project-intro .button-row{grid-column:1;grid-row:4;justify-content:start;margin:0;align-self:start}
+.detail-page[data-project-world="ssframework"] .project-hero{grid-column:2;grid-row:2/6;align-self:center}
+.detail-page[data-project-world="ssframework"] .project-hero .media-link{padding:0;border-radius:2px}
+.detail-page[data-project-world="ssframework"] .project-signature{grid-column:1;grid-row:5;align-self:start;padding-top:18px}
+.detail-page[data-project-world="ssframework"] .project-signature dt{color:var(--accent)}
+.detail-page[data-project-world="ssframework"] .project-overview{grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr);gap:12%}
+.detail-page[data-project-world="ssframework"] .project-stack{grid-template-columns:repeat(3,minmax(0,1fr));gap:30px}
+.detail-page[data-project-world="ssframework"] .engineering-topic--media{grid-template-columns:minmax(0,1.45fr) minmax(0,.7fr);gap:7%}
+.detail-page[data-project-world="ssframework"] .engineering-topic--beat-1.engineering-topic--media{grid-template-columns:minmax(0,.65fr) minmax(0,1.35fr);width:90%;margin-left:auto}
+.detail-page[data-project-world="ssframework"] .engineering-topic--beat-2.engineering-topic--media{width:100%}
+.detail-page[data-project-world="ssframework"] .engineering-copy h3{color:var(--accent)}
+.detail-page[data-project-world="ssframework"] .engineering-media .media-link{border-radius:2px;padding:0}
+.detail-page[data-project-world="ssframework"] .gallery-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:45px 28px}
+.detail-page[data-project-world="ssframework"] .gallery-grid figure:nth-child(4n+1){grid-column:span 2}
+.detail-page[data-project-world="ssframework"] .gallery-grid figure:nth-child(3n+2){margin-top:70px}
+.detail-page[data-project-world="ssframework"] .gallery-grid figure:nth-child(3n+3){width:100%}
+
+/* DubForge: one large editing surface, then information arranged as tracks. */
+.detail-page[data-project-world="dubforge"]{--accent:#7ee8ff;--cyan:#7ee8ff;--surface:#131e29;--raised:#203445;--muted:#b0c5ce}
+.detail-page[data-project-world="dubforge"] .project-prologue{padding-top:25px}
+.detail-page[data-project-world="dubforge"] .project-prologue::before{left:15%;right:0;top:195px;bottom:130px;background:#121b2c;transform:skewY(2deg)}
+.detail-page[data-project-world="dubforge"] .project-intro{grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);margin:15px 0 48px;gap:8%}
+.detail-page[data-project-world="dubforge"] .project-intro h1{font-size:clamp(100px,12.5vw,190px);line-height:.9;color:var(--accent);max-width:none;margin-bottom:36px}
+.detail-page[data-project-world="dubforge"] .project-intro .summary{font-size:20px;max-width:42ch}
+.detail-page[data-project-world="dubforge"] .project-intro .button-row{justify-content:end;padding-bottom:9px}
+.detail-page[data-project-world="dubforge"] .project-opening{display:block}
+.detail-page[data-project-world="dubforge"] .project-hero{width:92%;margin-left:auto}
+.detail-page[data-project-world="dubforge"] .project-hero .media-link{padding:0;border-radius:6px;box-shadow:0 35px 80px -42px #000c}
+.detail-page[data-project-world="dubforge"] .project-hero img{width:100%}
+.detail-page[data-project-world="dubforge"] .project-signature{display:grid;grid-template-columns:1fr 1.25fr 1fr;gap:5%;margin-top:45px;padding-block:25px 10px;border-top:1px solid #7ee8ff3b}
+.detail-page[data-project-world="dubforge"] .project-signature>div{margin:0}
+.detail-page[data-project-world="dubforge"] .project-signature dt{color:var(--accent)}
+.detail-page[data-project-world="dubforge"] .project-overview{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14%}
+.detail-page[data-project-world="dubforge"] .compact-flow{display:flex;flex-wrap:wrap;gap:12px 36px;padding-left:22px}
+.detail-page[data-project-world="dubforge"] .engineering-topic--media,.detail-page[data-project-world="dubforge"] .engineering-topic--beat-1.engineering-topic--media,.detail-page[data-project-world="dubforge"] .engineering-topic--beat-2.engineering-topic--media{display:grid;grid-template-columns:minmax(0,1fr);width:100%;gap:35px;margin:0 0 var(--world-gap)}
+.detail-page[data-project-world="dubforge"] .engineering-topic--media .engineering-copy{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:0 9%;margin:0;order:0}
+.detail-page[data-project-world="dubforge"] .engineering-copy h3{grid-column:1;grid-row:1/8;font-size:clamp(32px,3.7vw,56px);color:var(--accent)}
+.detail-page[data-project-world="dubforge"] .engineering-copy :is(p,dl){grid-column:2}
+.detail-page[data-project-world="dubforge"] .engineering-copy .code-block{grid-column:1/-1}
+.detail-page[data-project-world="dubforge"] .engineering-topic--media .engineering-media{order:1;width:88%;margin-left:auto}
+.detail-page[data-project-world="dubforge"] .engineering-media img{max-height:none}
+.detail-page[data-project-world="dubforge"] .engineering-media .media-link{padding:0;border-radius:4px}
+.detail-page[data-project-world="dubforge"] .engineering-media .engineering-inset{width:53%;margin-top:-10%;margin-right:auto;margin-left:-9%;transform:rotate(-2deg);position:relative;z-index:1}
+.detail-page[data-project-world="dubforge"] .gallery-grid{grid-template-columns:1fr;gap:65px}
+.detail-page[data-project-world="dubforge"] .gallery-grid figure{width:88%;margin:0}
+.detail-page[data-project-world="dubforge"] .gallery-grid figure:nth-child(even){width:77%;margin-left:auto}
+.detail-page[data-project-world="dubforge"] .gallery-grid img{max-height:none}
+.detail-page[data-project-world="dubforge"] .gallery-grid .media-link{padding:0;border-radius:4px}
+
+/* Outpost: the real battlefield leads from the left; warm light follows it. */
+.detail-page[data-project-world="outpost"]{--accent:#ff9c82;--cyan:#ff9c82;--surface:#271a1b;--raised:#3b2829;--muted:#cbb9b4}
+.detail-page[data-project-world="outpost"] .project-prologue{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:7%;align-items:center;padding-top:60px}
+.detail-page[data-project-world="outpost"] .project-prologue::before{left:-2%;right:20%;top:18%;bottom:12%;background:radial-gradient(ellipse at 46% 45%,#5c2a234f,transparent 71%)}
+.detail-page[data-project-world="outpost"] .project-intro{grid-column:2;grid-row:1;display:block;margin:0}
+.detail-page[data-project-world="outpost"] .project-intro h1{font-size:clamp(84px,9vw,140px);color:var(--accent);line-height:.95;margin-bottom:32px}
+.detail-page[data-project-world="outpost"] .project-intro .summary{font-size:20px;line-height:1.9;max-width:27ch}
+.detail-page[data-project-world="outpost"] .project-intro .button-row{justify-content:start;margin-top:32px}
+.detail-page[data-project-world="outpost"] .project-opening{grid-column:1;grid-row:1;display:block}
+.detail-page[data-project-world="outpost"] .project-hero .media-link{padding:0;border-radius:3px;background:#0d0e15;transform:rotate(-2deg)}
+.detail-page[data-project-world="outpost"] .project-hero img{width:100%}
+.detail-page[data-project-world="outpost"] .project-hero .project-caption{margin-top:29px}
+.detail-page[data-project-world="outpost"] .project-signature{display:grid;grid-template-columns:1fr 1fr;gap:20px 8%;margin-top:35px;padding-left:7%}
+.detail-page[data-project-world="outpost"] .project-signature>div{margin:0}
+.detail-page[data-project-world="outpost"] .project-signature>div:last-child{grid-column:1/-1}
+.detail-page[data-project-world="outpost"] .project-signature dt{color:var(--accent)}
+.detail-page[data-project-world="outpost"] .project-overview{grid-template-columns:minmax(0,.8fr) minmax(0,1fr);gap:13%;padding-top:90px}
+.detail-page[data-project-world="outpost"] .engineering-copy h3{color:var(--accent)}
+.detail-page[data-project-world="outpost"] .engineering-topic--beat-0.engineering-topic--media{grid-template-columns:minmax(0,1.4fr) minmax(0,.7fr)}
+.detail-page[data-project-world="outpost"] .engineering-topic--beat-1.engineering-topic--media{grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);width:93%;margin-left:auto}
+.detail-page[data-project-world="outpost"] .engineering-topic--beat-2.engineering-topic--media{width:86%;margin-left:0}
+.detail-page[data-project-world="outpost"] .engineering-media .media-link{padding:0;border-radius:3px}
+.detail-page[data-project-world="outpost"] .gallery-grid{grid-template-columns:minmax(0,1.3fr) minmax(0,.8fr);gap:65px 5%}
+.detail-page[data-project-world="outpost"] .gallery-grid figure:nth-child(3n+2){margin-top:100px}
+.detail-page[data-project-world="outpost"] .gallery-grid figure:nth-child(3n+3){width:100%;grid-column:1/-1;max-width:82%;justify-self:center}
+
+/* NomadWorkshop: a wide, level world image and a pine-coloured field. */
+.detail-page[data-project-world="nomadworkshop"]{--accent:#bce7ad;--cyan:#bce7ad;--surface:#1b2821;--raised:#2a3b30;--muted:#bdc8bb}
+.detail-page[data-project-world="nomadworkshop"] .project-prologue{padding-top:30px}
+.detail-page[data-project-world="nomadworkshop"] .project-prologue::before{left:16%;right:0;top:165px;bottom:-25px;background:#17251d;transform:skewY(-2deg)}
+.detail-page[data-project-world="nomadworkshop"] .project-intro{grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:6%;margin:15px 0 45px}
+.detail-page[data-project-world="nomadworkshop"] .project-intro h1{font-size:clamp(67px,8.8vw,132px);line-height:.95;color:var(--accent);max-width:none}
+.detail-page[data-project-world="nomadworkshop"] .project-intro .summary{font-size:20px;max-width:42ch}
+.detail-page[data-project-world="nomadworkshop"] .project-opening{grid-template-columns:minmax(0,1.45fr) minmax(0,.45fr);gap:6%;align-items:start}
+.detail-page[data-project-world="nomadworkshop"] .project-hero .media-link{padding:0;border-radius:3px}
+.detail-page[data-project-world="nomadworkshop"] .project-hero img{width:100%}
+.detail-page[data-project-world="nomadworkshop"] .project-signature{padding-top:35px}
+.detail-page[data-project-world="nomadworkshop"] .project-signature dt{color:var(--accent)}
+.detail-page[data-project-world="nomadworkshop"] .engineering-copy h3{color:var(--accent)}
+.detail-page[data-project-world="nomadworkshop"] .engineering-topic--beat-0.engineering-topic--media{display:block;width:90%}
+.detail-page[data-project-world="nomadworkshop"] .engineering-topic--beat-0 .engineering-copy{max-width:60ch;margin:35px 0 0 10%}
+.detail-page[data-project-world="nomadworkshop"] .gallery-grid{grid-template-columns:minmax(0,1.4fr) minmax(0,.8fr);gap:60px 5%}
+.detail-page[data-project-world="nomadworkshop"] .gallery-grid figure:nth-child(3n+3){grid-column:1/-1;width:73%;margin-left:auto}
+
+/* Gomoku: the supplied board provides the geometry; cream type meets plum. */
+.detail-page[data-project-world="gomoku"]{--accent:#c6b6ff;--cyan:#c6b6ff;--surface:#241e2e;--raised:#362c43;--ink:#eee7d5;--text:#eee7d5;--muted:#c4bdca}
+.detail-page[data-project-world="gomoku"] .project-prologue{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:38px 7%;align-items:center;padding-top:50px}
+.detail-page[data-project-world="gomoku"] .project-prologue::before{left:36%;right:0;top:15px;bottom:100px;background:#241c30}
+.detail-page[data-project-world="gomoku"] .project-intro{grid-column:1;grid-row:1;display:block;margin:0}
+.detail-page[data-project-world="gomoku"] .project-intro h1{font-size:clamp(78px,9vw,136px);line-height:.94;max-width:8ch;margin-bottom:32px}
+.detail-page[data-project-world="gomoku"] .project-intro .summary{font-size:20px;max-width:26ch}
+.detail-page[data-project-world="gomoku"] .project-intro .button-row{justify-content:start;margin-top:30px}
+.detail-page[data-project-world="gomoku"] .project-opening{display:contents}
+.detail-page[data-project-world="gomoku"] .project-hero{grid-column:2;grid-row:1}
+.detail-page[data-project-world="gomoku"] .project-hero .media-link{padding:0;border-radius:4px}
+.detail-page[data-project-world="gomoku"] .project-hero img{width:100%}
+.detail-page[data-project-world="gomoku"] .project-signature{grid-column:1/-1;grid-row:2;display:grid;grid-template-columns:.9fr 1.1fr 1fr;gap:8%;padding-top:30px}
+.detail-page[data-project-world="gomoku"] .project-signature>div{margin:0}
+.detail-page[data-project-world="gomoku"] .project-signature dt{color:var(--accent)}
+.detail-page[data-project-world="gomoku"] .project-overview{grid-template-columns:minmax(0,1.15fr) minmax(0,.75fr);gap:12%}
+.detail-page[data-project-world="gomoku"] .engineering-copy h3{color:var(--accent)}
+.detail-page[data-project-world="gomoku"] .engineering-topic--beat-2.engineering-topic--media{width:86%;margin-inline:auto}
+.detail-page[data-project-world="gomoku"] .gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:65px 7%}
+.detail-page[data-project-world="gomoku"] .gallery-grid figure:nth-child(3n+3){width:82%;grid-column:1/-1;justify-self:center}
+
+@media(max-width:1100px){
+ .detail-page[data-project-world="ssframework"] .project-prologue{gap:22px 5%;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)}
+ .detail-page[data-project-world="ssframework"] .project-intro h1{font-size:clamp(72px,11vw,125px)}
+ .detail-page[data-project-world="ssframework"] .project-intro .summary{font-size:18px}
+ .detail-page[data-project-world="ssframework"] .project-stack{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .detail-page[data-project-world="dubforge"] .project-intro{grid-template-columns:1fr;gap:25px}
+ .detail-page[data-project-world="dubforge"] .project-intro .button-row{justify-content:start}
+ .detail-page[data-project-world="outpost"] .project-prologue{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:5%}
+ .detail-page[data-project-world="outpost"] .project-intro h1{font-size:clamp(75px,9.5vw,110px)}
+ .detail-page[data-project-world="outpost"] .project-intro .summary{font-size:18px}
+ .detail-page[data-project-world="nomadworkshop"] .project-intro{grid-template-columns:1fr;gap:25px}
+ .detail-page[data-project-world="nomadworkshop"] .project-opening{grid-template-columns:minmax(0,1.25fr) minmax(0,.55fr);gap:5%}
+ .detail-page[data-project-world="nomadworkshop"] .project-signature{padding-top:0}
+ .detail-page[data-project-world="gomoku"] .project-prologue{gap:30px 5%}
+ .detail-page[data-project-world="gomoku"] .project-intro h1{font-size:clamp(68px,9vw,100px)}
+}
+
+@media(max-width:760px){
+ .detail-page:is([data-project-world="ssframework"],[data-project-world="dubforge"],[data-project-world="outpost"],[data-project-world="nomadworkshop"],[data-project-world="gomoku"]) .project-prologue{display:block;padding-top:24px}
+ .detail-page:is([data-project-world="ssframework"],[data-project-world="dubforge"],[data-project-world="outpost"],[data-project-world="nomadworkshop"],[data-project-world="gomoku"]) .project-intro{display:block;margin:0 0 35px}
+ .detail-page[data-project-world="ssframework"] .project-intro-copy{display:block}
+ .detail-page:is([data-project-world="ssframework"],[data-project-world="dubforge"],[data-project-world="outpost"],[data-project-world="nomadworkshop"],[data-project-world="gomoku"]) .project-intro h1{font-size:clamp(48px,12vw,82px);max-width:100%;line-height:1.02;margin:0 0 24px;overflow-wrap:anywhere}
+ .detail-page[data-project-world="ssframework"] .project-intro h1{font-size:clamp(47px,11.9vw,84px)}
+ .detail-page[data-project-world="nomadworkshop"] .project-intro h1{font-size:clamp(42px,10.1vw,72px)}
+ .detail-page[data-project-world="dubforge"] .project-intro h1{font-size:clamp(65px,15vw,100px)}
+ .detail-page[data-project-world="gomoku"] .project-intro h1{font-size:clamp(64px,14vw,95px);max-width:8ch}
+ .detail-page:is([data-project-world="ssframework"],[data-project-world="dubforge"],[data-project-world="outpost"],[data-project-world="nomadworkshop"],[data-project-world="gomoku"]) .project-intro .summary{font-size:17px;max-width:100%;margin-bottom:22px}
+ .detail-page:is([data-project-world="ssframework"],[data-project-world="dubforge"],[data-project-world="outpost"],[data-project-world="nomadworkshop"],[data-project-world="gomoku"]) .project-intro .button-row{justify-content:start;margin:25px 0 0;padding:0;max-width:none}
+ .detail-page:is([data-project-world="ssframework"],[data-project-world="dubforge"],[data-project-world="outpost"],[data-project-world="nomadworkshop"],[data-project-world="gomoku"]) .project-opening{display:block}
+ .detail-page:is([data-project-world="ssframework"],[data-project-world="dubforge"],[data-project-world="outpost"],[data-project-world="nomadworkshop"],[data-project-world="gomoku"]) .project-hero{width:100%;margin:0}
+ .detail-page[data-project-world="outpost"] .project-hero .media-link{transform:none}
+ .detail-page:is([data-project-world="ssframework"],[data-project-world="dubforge"],[data-project-world="outpost"],[data-project-world="nomadworkshop"],[data-project-world="gomoku"]) .project-signature{display:grid;grid-template-columns:1fr 1fr;gap:25px 22px;margin:32px 0 0;padding:0;border:0}
+ .detail-page:is([data-project-world="ssframework"],[data-project-world="dubforge"],[data-project-world="outpost"],[data-project-world="nomadworkshop"],[data-project-world="gomoku"]) .project-signature>div{margin:0}
+ .detail-page:is([data-project-world="ssframework"],[data-project-world="dubforge"],[data-project-world="outpost"],[data-project-world="nomadworkshop"],[data-project-world="gomoku"]) .project-signature>div:last-child{grid-column:1/-1}
+ .detail-page:is([data-project-world="ssframework"],[data-project-world="dubforge"],[data-project-world="outpost"],[data-project-world="nomadworkshop"],[data-project-world="gomoku"]) .project-prologue::before{left:12%;right:0;top:155px;bottom:80px;transform:none}
+ .detail-page[data-project-world="outpost"] .project-prologue::before{left:0;top:30%;bottom:10%}
+ .detail-page:is([data-project-world="ssframework"],[data-project-world="dubforge"],[data-project-world="outpost"],[data-project-world="nomadworkshop"],[data-project-world="gomoku"]) .project-overview{grid-template-columns:1fr;gap:40px;padding-top:40px}
+ .detail-page[data-project-world="ssframework"] .project-stack{grid-template-columns:1fr 1fr;gap:24px 20px}
+ .detail-page[data-project-world="dubforge"] .compact-flow{display:block}
+ .detail-page:is([data-project-world="ssframework"],[data-project-world="dubforge"],[data-project-world="outpost"],[data-project-world="nomadworkshop"],[data-project-world="gomoku"]) .engineering-topic--media,
+ .detail-page:is([data-project-world="ssframework"],[data-project-world="dubforge"],[data-project-world="outpost"],[data-project-world="nomadworkshop"],[data-project-world="gomoku"]) .engineering-topic--beat-1.engineering-topic--media,
+ .detail-page:is([data-project-world="ssframework"],[data-project-world="dubforge"],[data-project-world="outpost"],[data-project-world="nomadworkshop"],[data-project-world="gomoku"]) .engineering-topic--beat-2.engineering-topic--media{display:grid;grid-template-columns:minmax(0,1fr);width:100%;gap:28px;margin:0 0 65px}
+ .detail-page:is([data-project-world="ssframework"],[data-project-world="dubforge"],[data-project-world="outpost"],[data-project-world="nomadworkshop"],[data-project-world="gomoku"]) .engineering-topic--media .engineering-copy{display:block;margin:0;max-width:100%}
+ .detail-page[data-project-world="dubforge"] .engineering-topic--media .engineering-media{width:100%;margin:0;order:0}
+ .detail-page[data-project-world="dubforge"] .engineering-copy h3{font-size:29px}
+ .detail-page[data-project-world="dubforge"] .engineering-media .engineering-inset{width:83%;margin:23px 0 0 auto;transform:none}
+ .detail-page:is([data-project-world="ssframework"],[data-project-world="dubforge"],[data-project-world="outpost"],[data-project-world="nomadworkshop"],[data-project-world="gomoku"]) .gallery-grid{grid-template-columns:minmax(0,1fr);gap:38px}
+ .detail-page:is([data-project-world="ssframework"],[data-project-world="dubforge"],[data-project-world="outpost"],[data-project-world="nomadworkshop"],[data-project-world="gomoku"]) .gallery-grid figure:nth-child(n){grid-column:auto;width:100%;max-width:100%;margin:0}
+}
+
+@media(max-width:400px){
+ .detail-page:is([data-project-world="ssframework"],[data-project-world="dubforge"],[data-project-world="outpost"],[data-project-world="nomadworkshop"],[data-project-world="gomoku"]) .project-signature{grid-template-columns:1fr}
+ .detail-page:is([data-project-world="ssframework"],[data-project-world="dubforge"],[data-project-world="outpost"],[data-project-world="nomadworkshop"],[data-project-world="gomoku"]) .project-signature>div:last-child{grid-column:auto}
+}

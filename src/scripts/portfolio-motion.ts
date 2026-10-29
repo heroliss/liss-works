@@ -16,7 +16,6 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
   const cleanup: (() => void)[] = [];
   const stages = Array.from(document.querySelectorAll<HTMLElement>('[data-work-stage]'));
   const opened = new WeakSet<Element>();
-  const architectureRuns: { element: HTMLElement; play: () => void; played: () => boolean; finish: () => void }[] = [];
 
   stages.forEach((stage) => {
     const buttons = Array.from(stage.querySelectorAll<HTMLButtonElement>('button[data-stage-select]'));
@@ -26,7 +25,7 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
     let running: gsap.core.Timeline | undefined;
     const select = (value: string, animate: boolean) => {
       const button = buttons.find((entry) => entry.dataset.stageSelect === value);
-      if (!button) return;
+      if (!button || (animate && stage.dataset.active === value)) return;
       running?.revert();
       running = undefined;
       stage.dataset.active = value;
@@ -60,58 +59,20 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
         }
       });
     };
-    buttons.forEach((button) => button.addEventListener('click', () => {
-      select(button.dataset.stageSelect ?? '', true);
-    }, { signal: localSignal }));
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => select(button.dataset.stageSelect ?? '', true), { signal: localSignal });
+      button.addEventListener('pointerenter', (event) => {
+        if (event.pointerType !== 'touch' && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+          select(button.dataset.stageSelect ?? '', true);
+        }
+      }, { signal: localSignal });
+      button.addEventListener('focusin', () => select(button.dataset.stageSelect ?? '', true), { signal: localSignal });
+    });
     stage.querySelectorAll<HTMLElement>('[data-stage-piece]').forEach((piece) => {
       piece.addEventListener('focusin', () => select(piece.dataset.stagePiece ?? '0', true), { signal: localSignal });
     });
     select(stage.dataset.active ?? buttons[0]?.dataset.stageSelect ?? '0', false);
     cleanup.push(() => { running?.revert(); });
-  });
-
-  document.querySelectorAll<HTMLElement>('[data-architecture]').forEach((architecture) => {
-    // This selector intentionally excludes the arrow marker's path in <defs>.
-    const paths = Array.from(architecture.querySelectorAll<SVGPathElement>('.map-connections path'));
-    if (!paths.length) return;
-    const lengths = paths.map((path) => {
-      try { return path.getTotalLength(); } catch { return 0; }
-    });
-    let running: gsap.core.Timeline | undefined;
-    let played = false;
-    const complete = () => {
-      architecture.dataset.playback = 'complete';
-      architecture.setAttribute('aria-busy', 'false');
-    };
-    const finish = () => { running?.kill(); running = undefined; complete(); };
-    const play = () => {
-      running?.revert();
-      running = undefined;
-      played = true;
-      if (preference.matches) { complete(); return; }
-      architecture.dataset.playback = 'drawing';
-      architecture.setAttribute('aria-busy', 'true');
-      interactions.add(() => {
-        running = gsap.timeline({
-          defaults: { duration: 0.45, ease: 'power2.inOut' },
-          onComplete: complete,
-        });
-        paths.forEach((path, index) => {
-          if (!lengths[index]) return;
-          running!.fromTo(path,
-            { strokeDasharray: lengths[index], strokeDashoffset: lengths[index] },
-            { strokeDashoffset: 0, clearProps: 'strokeDasharray,strokeDashoffset' },
-            index * 0.23,
-          );
-        });
-      });
-    };
-    architecture.querySelectorAll<HTMLButtonElement>('button[data-architecture-replay]').forEach((button) => {
-      button.addEventListener('click', play, { signal: localSignal });
-    });
-    complete();
-    architectureRuns.push({ element: architecture, play, played: () => played, finish });
-    cleanup.push(finish);
   });
 
   media.add(
@@ -124,16 +85,6 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
     (context) => {
       const { motion, desktop, fine } = context.conditions!;
       if (!motion) return;
-
-      architectureRuns.forEach((architecture) => {
-        if (architecture.played()) return;
-        ScrollTrigger.create({
-          trigger: architecture.element,
-          start: 'top 80%',
-          once: true,
-          onEnter: () => { if (!architecture.played()) architecture.play(); },
-        });
-      });
 
       stages.forEach((stage) => {
         const surfaces = Array.from(stage.querySelectorAll<HTMLElement>('[data-stage-image]'));
@@ -359,7 +310,6 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
 
   preference.addEventListener('change', () => {
     interactions.revert();
-    architectureRuns.forEach((architecture) => architecture.finish());
     interactions = gsap.context(() => {}, document.body);
   }, { signal: localSignal });
 

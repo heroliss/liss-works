@@ -1,0 +1,127 @@
+/* v4: motion belongs to the work. Native cursors, moving process type,
+   technical architecture, editing tracks, and three distinct game worlds. */
+.hero-copy h1 { margin-bottom: 32px; }
+.process-band { position: relative; margin-top: 50px; padding-bottom: 44px; }
+.process-band .kinetic-strip { margin-top: 0; padding-block: 24px 18px; }
+.process-band [data-kinetic-strip] { display: flex; gap: 0; padding: 0; width: max-content; line-height: 1.12; }
+.marquee-group { display: flex; flex-shrink: 0; align-items: center; gap: 46px; padding-right: 46px; }
+.marquee-group > span { display: block; white-space: nowrap; }
+.motion-toggle { position: absolute; right: 0; bottom: 0; display: flex; align-items: center; gap: 9px; padding: 8px 1px 8px 14px; min-height: 40px; color: var(--muted); background: transparent; font-size: 13px; }
+.motion-toggle:hover { color: var(--citron); }
+.motion-toggle > span { display: inline-flex; }
+.motion-toggle .motion-symbol-play { display: none; }
+.motion-toggle[aria-pressed=true] .motion-symbol-pause { display: none; }
+.motion-toggle[aria-pressed=true] .motion-symbol-play { display: inline-flex; }
+.kinetic-hero [data-ambient-piece] { animation-play-state: paused; }
+.kinetic-hero[data-motion-visible=true] [data-ambient-piece] { animation-play-state: running; }
+.stage-piece[data-project=outpost] [data-ambient-piece] { animation: stage-combat 8s ease-in-out infinite paused; }
+.stage-piece[data-project=dubforge] [data-ambient-piece] { animation: stage-edit 10s ease-in-out -3s infinite paused; }
+.stage-piece[data-project=ssframework] [data-ambient-piece] { animation: stage-system 12s ease-in-out -5s infinite paused; }
+@keyframes stage-combat { 0%,100% { translate: 0 0; rotate: 0deg; } 50% { translate: 0 -8px; rotate: .45deg; } }
+@keyframes stage-edit { 0%,100% { translate: 0 0; } 50% { translate: 5px -5px; } }
+@keyframes stage-system { 0%,100% { translate: 0 0; rotate: 0deg; } 50% { translate: -4px 5px; rotate: -.7deg; } }
+/* SSFramework: a precise, hard-edged technical plate. */
+.framework-chapter { --accent: #dbf48b; --cyan: #dbf48b; }
+.framework-chapter:before { background: #142018; left: 35%; transform: none; top: 126px; }
+.framework-chapter .work-heading { align-items: start; }
+.framework-chapter .work-heading > p { padding-top: 15px; }
+.framework-chapter .architecture-stage { border-radius: 2px; background: #19271e; transform: translateY(58px); padding: 30px 18px; }
+.architecture-stage .map-node rect { fill: #223529; transition: fill 250ms; }
+.architecture-stage .map-node:hover rect { fill: #354a2d; }
+.architecture-stage .map-node { cursor: default; }
+.architecture-stage .map-connections path { stroke-width: 1.5; opacity: .5; }
+.architecture-stage [data-architecture-overlay] { opacity: 1; }
+/* DubForge: the composition follows an editing timeline. */
+.workflow-chapter { --accent: #7ee8ff; --cyan: #7ee8ff; }
+.workflow-chapter:before { background: #121f2b; top: 30px; left: 18%; right: -2%; transform: skewY(2deg); }
+.workflow-main { transform: rotate(-2deg); }
+.workflow-main .media-link { border-radius: 3px; }
+.workflow-aside { transform: rotate(3deg); }
+.workflow-pictures { isolation: isolate; }
+.workflow-orbit { position: absolute; inset: -25px -15px -10px 4%; pointer-events: none; z-index: -1; display: flex; flex-direction: column; justify-content: space-around; gap: 40px; transform: rotate(-2deg); }
+.workflow-orbit span { display: block; width: 95%; height: 30px; border-radius: 2px; background: #7ee8ff0c; border-inline: 2px solid #7ee8ff35; opacity: .7; transform-origin: left center; }
+.workflow-orbit span:nth-child(2) { width: 74%; margin-left: 12%; height: 22px; }
+.workflow-orbit span:nth-child(3) { width: 82%; margin-left: 5%; height: 40px; }
+.workflow-controls button { transition: background 250ms, color 250ms; }
+.workflow-controls button:hover { background: #2c4651; }
+.workflow-controls button[aria-pressed=true] { background: var(--accent); color: var(--bg); }
+.workflow-diagram [data-flow-node] { transition: opacity 200ms; }
+/* A landscape of different games, with the real screenshots kept intact. */
+.games-chapter:before { display: none; }
+.games-landscape { column-gap: 8%; padding-inline: 10px; }
+.game-scene { position: relative; isolation: isolate; }
+.game-scene > .game-art { display: block; position: relative; min-width: 0; margin: 0; }
+.game-art > canvas { display: block; position: absolute; inset: 0; z-index: 3; width: 100%; height: 100%; pointer-events: none; }
+.game-art > .game-scene__image { position: relative; z-index: 2; display: block; width: 100%; border-radius: 3px; }
+.game-art .game-scene__image img { aspect-ratio: auto; object-fit: contain; display: block; }
+.game-scene > .game-scene__copy { display: flex; flex-direction: column; align-items: start; gap: 16px; margin-top: 28px; }
+.game-scene--nomad { --game-tone: #bce7ad; --accent: #bce7ad; }
+.game-scene--nomad:before { content: ''; position: absolute; z-index: -1; left: 16%; right: -7%; top: 22px; bottom: -30px; background: #19251c; transform: rotate(-3deg); }
+.game-art--nomad { padding: 28px 12px; }
+.game-art--nomad > .game-scene__image { transform: rotate(-4deg); border-radius: 3px 24px 3px 3px; }
+.game-scene--nomad h3 { color: #bce7ad; font-size: clamp(37px,4vw,59px); }
+.game-scene--nomad .game-scene__copy { margin-right: 8%; }
+.game-scene--outpost { --game-tone: #ff9c82; --accent: #ff9c82; margin-top: 180px; }
+.game-art--outpost { padding: 40px 10px; }
+.game-art--outpost:before { content: ''; position: absolute; z-index: 0; inset: -18px 6%; border: 1px solid #ff9c8240; border-radius: 50%; background: #241715; }
+.game-art--outpost > .game-scene__image { transform: rotate(5deg); border-radius: 2px; }
+.game-scene--outpost h3 { color: #ff9c82; font-size: clamp(55px,6.2vw,92px); line-height: .9; }
+.game-scene--outpost .game-scene__copy { padding-left: 8%; margin-top: 8px; }
+.game-scene--gomoku { --game-tone: #c6b6ff; --accent: #c6b6ff; margin-top: 125px; width: 95%; margin-left: 5%; grid-template-columns: .6fr 1fr; gap: 50px; }
+.game-scene--gomoku:before { content: ''; position: absolute; z-index: -1; inset: 10px -3% -30px 17%; background: #1c1b2a; transform: rotate(2deg); }
+.game-scene--gomoku > .game-art { grid-column: 2; grid-row: 1; padding: 30px 15px; }
+.game-art--gomoku > .game-scene__image { transform: rotate(1.5deg); }
+.game-scene--gomoku > .game-scene__copy { grid-column: 1; grid-row: 1; }
+.game-scene--gomoku h3 { color: #d4c7ff; font-size: clamp(43px,5vw,73px); }
+html[data-motion-paused=true] [data-ambient-piece] { animation-play-state: paused !important; }
+@media(max-width:1100px) {
+ .marquee-group { gap: 35px; padding-right: 35px; }
+ .game-scene--outpost { margin-top: 145px; }
+ .game-scene--nomad h3 { font-size: 37px; }
+ .game-scene--outpost h3 { font-size: 62px; }
+ .game-scene--gomoku h3 { font-size: 49px; }
+}
+@media(max-width:760px) {
+ .process-band { margin-top: 45px; padding-bottom: 42px; }
+ .process-band .kinetic-strip { padding-block: 20px 14px; }
+ .process-band [data-kinetic-strip] { font-size: clamp(44px,14vw,78px); }
+ .marquee-group { gap: 25px; padding-right: 25px; }
+ .motion-toggle { font-size: 13px; min-height: 40px; }
+ .framework-chapter .architecture-stage { transform: none; padding: 24px 10px; }
+ .framework-chapter:before { top: 90px; left: 13%; }
+ .framework-chapter .work-heading > p { padding: 0; }
+ .workflow-orbit { inset: -15px 0 25px 8%; gap: 24px; }
+ .workflow-orbit span { height: 18px; }
+ .games-landscape { padding-inline: 4px; }
+ .game-scene--outpost { margin-top: 5px; width: 94%; }
+ .game-scene--nomad h3 { font-size: clamp(32px,8.5vw,46px); }
+ .game-scene--outpost h3 { font-size: 66px; }
+ .game-art--nomad { padding: 21px 8px; }
+ .game-art--outpost { padding: 34px 7px; }
+ .game-art--outpost:before { inset: -9px 6%; }
+ .game-scene--gomoku { width: 96%; margin: 0; display: flex; flex-direction: column; gap: 0; }
+ .game-scene--gomoku > .game-art { width: 100%; padding: 20px 12px; }
+ .game-scene--gomoku > .game-scene__copy { margin-top: 18px; }
+ .game-scene--gomoku:before { inset: 10px -1% -20px 11%; }
+ .game-scene--gomoku h3 { font-size: 47px; }
+}
+@media(prefers-reduced-motion:reduce) {
+ [data-ambient-piece] { animation: none !important; translate: none !important; rotate: none !important; }
+ .process-band .kinetic-strip { transform: none; margin-inline: 0; padding: 15px; }
+ .process-band [data-kinetic-strip] { transform: none !important; width: 100%; font-size: clamp(34px,7vw,68px); }
+ .marquee-group { width: 100%; flex-wrap: wrap; gap: 12px 20px; padding: 0; }
+ .marquee-group + .marquee-group { display: none; }
+ .marquee-group i { font-size: .6em; }
+ .motion-toggle { display: none; }
+ .game-art > canvas { display: none; }
+}
+.kinetic-hero[data-motion-visible=true] [data-ambient-piece] { animation-play-state: running; }
+html:not([data-motion]) .process-band .kinetic-strip { transform: none; margin-inline: 0; padding: 15px; }
+html:not([data-motion]) .process-band [data-kinetic-strip] { width: 100%; font-size: clamp(34px,7vw,68px); }
+html:not([data-motion]) .marquee-group { width: 100%; flex-wrap: wrap; gap: 12px 20px; padding: 0; }
+html:not([data-motion]) .marquee-group + .marquee-group,
+html:not([data-motion]) .motion-toggle { display: none; }
+.architecture-stage .map-node[data-current=true] rect { fill: #3b5131; stroke: #dbf48b; stroke-width: 1; }
+.workflow-orbit [data-current=true] { opacity: 1; background: #7ee8ff21; border-inline-color: #7ee8ff85; }
+.game-art .game-scene__image img { aspect-ratio: var(--media-ratio); }
+.process-band .kinetic-strip { transform: none; }

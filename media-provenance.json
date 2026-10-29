@@ -1,6 +1,6 @@
 {
   "schema": "showcase.website-media.v1",
-  "generated_at_utc": "2026-10-29T03:54:12.879665+00:00",
+  "generated_at_utc": "2026-10-29T04:27:41.715357+00:00",
   "source_manifest": "captures/selected-manifest.json",
   "source_manifest_sha256": "2c1802696f789defdfcc69f2f1f64badcce99c0ed4d9fdb33c6a59104e4fe9e3",
   "originals_modified": false,
@@ -7206,11 +7206,11 @@
     "source_image_bytes": 41165885,
     "exported_image_bytes": 39423926,
     "video_bytes": 1363373,
-    "font_bytes": 353920,
-    "font_license_and_provenance_bytes": 13978,
-    "published_media_bytes": 41141219,
+    "font_bytes": 353408,
+    "font_license_and_provenance_bytes": 14079,
+    "published_media_bytes": 41140707,
     "total_public_asset_count": 510,
-    "total_public_asset_bytes": 41155197
+    "total_public_asset_bytes": 41154786
   },
   "fonts": {
     "codec": "fontTools WOFF2 with Node native zlib Brotli (quality 11 / font mode), invoked by fontTools",
@@ -7256,16 +7256,18 @@
       "site-next/src/scripts/expressive-motion.ts",
       "site-next/src/scripts/motion.ts",
       "site-next/src/scripts/portfolio-motion.ts",
+      "site-next/src/scripts/project-atmosphere.ts",
       "site-next/src/scripts/project-filter.ts",
-      "site-next/src/scripts/signal-field-data.ts",
-      "site-next/src/scripts/signal-field.ts",
+      "site-next/src/scripts/project-motion.ts",
       "site-next/src/scripts/site.ts",
       "site-next/src/styles/expressive-home.css",
       "site-next/src/styles/global.css",
       "site-next/src/styles/home-next.css",
       "site-next/src/styles/home-projects.css",
       "site-next/src/styles/interior.css",
-      "site-next/src/styles/new-theme.css"
+      "site-next/src/styles/new-theme.css",
+      "site-next/src/styles/project-showcase.css",
+      "site-next/src/styles/project-worlds.css"
     ],
     "noto_original_metadata": {
       "0": [
@@ -7306,14 +7308,14 @@
       {
         "path": "site-next/public/fonts/noto-sans-sc-subset.woff2",
         "url": "/fonts/noto-sans-sc-subset.woff2",
-        "bytes": 339344,
-        "sha256": "a8b7db77b51bcbc941a8282b6bc1ae3b6d1f39c181e77965f2d3990eee83e0b0",
+        "bytes": 338832,
+        "sha256": "a2498303b07be7e36cf9b54a0bb89f9421114d13442486aa5ac0f4b1da23c023",
         "family": "Noto Sans SC",
         "source": "C:\\Windows\\Fonts\\NotoSansSC-VF.ttf",
         "source_sha256": "763146584cf0710223441356b4395e279021b0806c196614377a7a0174ae074a",
         "source_bytes": 17773244,
-        "requested_codepoints": 1196,
-        "included_codepoints": 1196,
+        "requested_codepoints": 1193,
+        "included_codepoints": 1193,
         "missing_cjk": [],
         "roundtrip_decode_verified": true
       }

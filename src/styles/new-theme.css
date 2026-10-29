@@ -49,7 +49,3 @@ figcaption,.project-caption{color:var(--muted);font-size:14px;line-height:1.6}
 @media(max-width:760px){.site-header{flex-direction:row;flex-wrap:nowrap}.site-header nav{width:auto;flex-wrap:nowrap}.site-header nav a:nth-child(3){display:none}}
 @media(max-width:400px){.site-header .brand svg{display:none}.site-header nav{gap:12px}.site-header nav a{font-size:13px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
-/* Contextual exploration label; the system pointer remains available. */
-.explore-cursor{position:fixed;z-index:50;top:0;left:0;display:flex;align-items:center;gap:13px;border-radius:30px;padding:15px 20px;background:#dbf48b;color:#0b0e10;font-size:13px;white-space:nowrap;pointer-events:none;opacity:0;visibility:hidden;transition:opacity 160ms,visibility 160ms;box-shadow:0 8px 30px #0004}
-.explore-cursor[data-visible=true]{opacity:1;visibility:visible}
-@media(hover:none),(pointer:coarse),(prefers-reduced-motion:reduce){.explore-cursor{display:none}}
