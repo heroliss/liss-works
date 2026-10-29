@@ -103,6 +103,7 @@ body .site-footer.site-footer--colophon[data-site-footer]::before { content:none
 .site-footer--colophon .colophon-link + .colophon-link { margin-top:12px; }
 .site-footer--colophon .colophon-link__name { grid-column:1; font-size:18px; line-height:1.5; }
 .site-footer--colophon .colophon-link__note { grid-column:1; font-size:13px; line-height:1.6; color:#a2b0ab; }
+.site-footer--colophon .colophon-link--forum .colophon-link__name { color:#c5d8bb; }
 .site-footer--colophon .colophon-link > svg { grid-column:2; grid-row:1/3; color:#91aaa0; transition:transform 180ms ease,color 180ms ease; }
 .site-footer--colophon .colophon-link:is(:hover,:focus-visible) .colophon-link__name { color:#c5d8bb; }
 .site-footer--colophon .colophon-link:is(:hover,:focus-visible) > svg { color:#c5d8bb; transform:translate(2px,-2px); }

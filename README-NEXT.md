@@ -1,4 +1,4 @@
-# Liss Works · v15 工程图册
+# Liss Works · v16 工程图册
 
 新版使用 GSAP 官方技能，结合 Taste Skill v2、Frontend Design 与 Impeccable，保留 Astro + TypeScript 和深色模式。v15 让首屏配色与卡片换位共用节奏，区分 SSFramework 的架构轨道与操作按钮，将首页探索入口展开为开放取景台，并以完整语义块组织详情文字层级。工程边注加入当前工程的真实设计主张；相关分岔、开发者落款、连续主题底光与 22 幅工程图版继续保留。详情原文主体、原媒体、下载和讨论目标不变。源码位于 `site-next/`；旧版 `../site/` 的源码和 Git 历史保留，整个新版开发过程未修改旧站，也未执行发布或替换原站。
 
@@ -11,7 +11,15 @@
 
 在 `site-next/` 执行 `npm ci`，然后 `npm run dev -- --port 4322`。旧版在 `../site/` 使用同样命令并指定 4321。对照台在 `../comparison/` 执行 `python -m http.server 4320 --bind 127.0.0.1`。工作区根目录 `启动新旧版对照.ps1` 可启动或复用这三个预览。
 
-## v15 内容与交互
+## v16 收敛打磨
+
+探索区只保留标题旁的一个完整工程库入口，三个探索切口仍进入真实筛选结果。首页收尾把“去论坛聊聊”设为主要动作，亲手体验和关于页面作为次要入口；详情“聊聊这个工程”继续直达各自讨论页。页头与页脚使用明确的论坛文案，手机不再隐藏论坛导航，最窄屏优先让“关于”导航让位；论坛触达至少44px，并有明确键盘焦点。现有视觉、0.92秒配色与卡片同步、内容与动效控制保持。
+
+用户已授权推送稳定节点。v15节点`a54b037325b6faf3d85d3ecb90fbd3f16f96a94d`已保存为`portfolio-v15-stable`标签，设计分支为`design/taste-gsap-dark`，远端为`https://github.com/heroliss/liss-works.git`。本轮验证后的节点另存为`portfolio-v16-stable`。只推设计分支和明确的稳定标签；既有部署工作流仅在main推送或手动触发时运行。
+
+v16已完成74文件零诊断、68项既有测试、根路径及`/liss-works/`子路径构建与内容保留校验。实际浏览器检查了四种屏宽的导航、22页宽窄屏讨论入口，以及真实论坛跳转。本轮证据位于`../verification/site-next/v16/`；报告入口为`acceptance.json`、`runtime-acceptance.json`、`final-integrity.json`与`push-verification.json`。
+
+## 保留的 v15 内容与交互
 
 首页五个项目采用珊瑚橙、冰青、黄绿、翡翠绿和淡紫五种主色。NomadWorkshop 从接近框架的浅绿调整为 `#65d7a0`，在卡片、背景、横幅目标与相关工程中保持同一主题。交流墨带缩小面积并降低透明度与饱和度，左侧文字区进一步淡化；重复线条和后环移除，局部短反光集中于右侧及底部。
 
@@ -35,7 +43,7 @@
 - 详情背景直接绘制共享 SVG 几何，移除会先裁切负坐标线稿的 symbol 视口；首页与详情在静态外层处理两侧渐隐，让内部图形轻移时边缘保持柔和。实心矩形装饰底板改为柔边、斜切或半透明的色场与反光，真实截图、文字及机台的共享透视不受装饰遮罩裁切。
 - 详情主图、工程证据、插图和图集统一使用真实比例的立体图框，厚度、边缘和光感放在位图外围；竖图减小幅度并限制展示宽度，极宽条带保留平直读法。截图、alt、caption、灯箱及键盘链接保留，避免用大块空白垫底。
 - v14 将 `spatial-materials.css` 的反光改为贴着材质的短边光：常规层位于 `translateZ(1px)`，顶部约 27% 宽的 1px 反光与角部短线随材质变量轻变，不再形成前方 12px 的整圈白框。`--material-light-x` 对应短边光的背景位置，明暗继续使用既有控制器；共享透视、按住冻结、全局暂停、隐藏与清理语义保持一致。详情与工程库的基准追加幅度约为 ±9° / ±14°，仍按图幅、主题及投影边界收敛。
-- 首页 `ExplorationInvitation.astro` 采用开放取景台，以“22 个工程，不止一种走法。”开场，明确三个切口只展示部分工程。当前问题置于完整大图上方，斜角折面只在图片局部形成景深；主图之前的“看光影 / 看取舍 / 看行为”沿低阶梯探索带展开，手机收为三列紧凑折片，前后均有完整工程库入口。材料仍来自 LearnOpenGL 木盒材质图、Intelligence × Cost 能力成本图与 NomadWorkshop 居民状态图。图片解码后原子切换，当前问题与入口同步主题色，暗室光用 0.55 秒衔接。三个切口、主图与明确 CTA 均为原生链接，进入对应 `group=graphics&tag=OpenGL`、`group=ai-data&tag=AI`、`group=games&tag=Unity` 筛选；触屏直接导航，无 JavaScript 保留默认真图、三个切口与完整库入口，没有自动轮播。
+- 首页 `ExplorationInvitation.astro` 采用开放取景台，以“22 个工程，不止一种走法。”开场，明确三个切口只展示部分工程。当前问题置于完整大图上方，斜角折面只在图片局部形成景深；主图之前的“看光影 / 看取舍 / 看行为”沿低阶梯探索带展开，手机收为三列紧凑折片，标题旁保留唯一的完整工程库重点入口。材料仍来自 LearnOpenGL 木盒材质图、Intelligence × Cost 能力成本图与 NomadWorkshop 居民状态图。图片解码后原子切换，当前问题与入口同步主题色，暗室光用 0.55 秒衔接。三个切口、主图与明确 CTA 均为原生链接，进入对应 `group=graphics&tag=OpenGL`、`group=ai-data&tag=AI`、`group=games&tag=Unity` 筛选；触屏直接导航，无 JavaScript 保留默认真图、三个切口与完整库入口，没有自动轮播。
 - 详情取消 `ProjectProse` 自动关键词 `<mark>` 和 `ProjectEngineering` 标题关键词分类；文本直接输出，原句、顺序与内容数据保留。层级由完整标题、lead、设计主张、正文、说明、状态和动作的职责表达：项目色组织章节与操作，冷暖色及柔和中性色服务对应语义块，不再把句中词语自动切成不同颜色。无媒体章节的技术要点按可用宽度排成两到三列，手机回到单列；有媒体的既有构图和代码复制入口保留。
 - 原有章节链接形成粘性导航，并用 `aria-current="location"` 标记当前阅读位置。文字和图框的滚动入场在布局就绪后使用安全的 `ScrollTrigger.refresh(true)` 更新位置。截图指针响应使用缓存尺寸计算投影边界，接近视口边缘时收敛角度，以保留完整画面；按住、暂停、离屏、隐藏和减少动态效果均有对应停止与清理行为。
 - `ProjectConversation.astro` 保留原有讨论文案与交流目标，引用当前工程既有的 `signature.principle`；低强度三层主题墨面沿同一弧势衔接真实短句与原生交流入口，仅装饰层响应指针与焦点。`ProjectContinuation.astro` 继续把现有两项或三项相关工程展开成分岔图，所有真实图片、名称和说明同时可见；悬停与聚焦只强调对应分支并触发一次沿线光点，点击仍直接进入该工程，不共用单个预览、也不按顺序解锁内容。
@@ -55,7 +63,7 @@ EazyBuildPipeline 封面改为真实 `17-master-general-clear-empty-state`（121
 
 验证命令：`npm run check`、`npm test`、`npm run test:releases`、`npm run test:paths`、`npm run build`、`npm run verify:dist`。GitHub Pages 子路径验证使用 `SITE_BASE=/liss-works-next/` 和 `SITE_URL=https://heroliss.github.io`；本地默认根路径。
 
-当前 v15 证据在 `../verification/site-next/v15/`。已确认 74 文件 Astro 检查零诊断，68 项既有测试（27 + 20 + 21）通过，分别记录于 `check.log`、`tests-lab.log`、`tests-releases.log`、`tests-paths.log`。最终根路径与子路径构建、正文/媒体完整性及实际浏览器验收已完成；具体覆盖范围见最终报告。
+v15 历史证据在 `../verification/site-next/v15/`。已确认 74 文件 Astro 检查零诊断，68 项既有测试（27 + 20 + 21）通过，分别记录于 `check.log`、`tests-lab.log`、`tests-releases.log`、`tests-paths.log`。最终根路径与子路径构建、正文/媒体完整性及实际浏览器验收已完成；具体覆盖范围见最终报告。
 
 v15 的最终报告入口为 `../verification/site-next/v15/acceptance.json`、`../verification/site-next/v15/runtime-acceptance.json` 与 `../verification/site-next/v15/final-integrity.json`；具体状态和覆盖范围见各报告。完整性核对区分详情原文主体、媒体与外层导航、设计主张引用和落款，不把历史语义计数直接当作本轮最终结果。v6 补拍与字体来源材料、v11–v14 内容、交互与几何基准继续保留；原站 581 个 tracked 文件仍按 baseline 核对 SHA256、字节数、HEAD 和 Git 状态。静态检查不代替浏览器验收，不声称完整 Taste gate、主观高分或全部浏览器 FPS 通过。
 
