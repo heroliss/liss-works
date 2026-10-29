@@ -1,4 +1,5 @@
 ---
+import { getProjectWorld, projectWorldStyle } from '../data/project-worlds';
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import MediaImage from '../components/MediaImage.astro';
@@ -8,13 +9,14 @@ import { sitePath, communityUrl } from '../lib/site-path';
 import '../styles/home-next.css';
 import '../styles/expressive-home.css';
 import '../styles/project-showcase.css';
+import '../styles/interactive-showcase.css';
 const framework = getProject('ssframework')!;
 const dubforge = getProject('dubforge')!;
 const outpost = getProject('outpost')!;
 const nomad = getProject('nomadworkshop')!;
 const gomoku = getProject('gomoku')!;
 const stage = [outpost,dubforge,framework];
-const stageCaptions = ['Outpost：一场炮台与敌群的波次防守。','DubForge：从逐句精修到多版本成片。','SSFramework：连接游戏、工具与生命周期。'];
+const stageCaptions = stage.map(project => project.summary);
 const archive = ['aoe4-flow','eazybuildpipeline','learnopengl','intelligence-index-cost-linear','liss-web','utility-lab'].map(slug=>getProject(slug)!);
 const first = archive[0];
 const flow = [
@@ -27,18 +29,18 @@ const flow = [
  <div class="shell home-next">
   <section class="kinetic-hero" id="start" data-active="0" data-ambient-region aria-labelledby="home-title">
    <div class="pointer-light" data-pointer-light aria-hidden="true"></div>
-   <div class="hero-copy"><h1 id="home-title" data-motion="hero"><span>把想法，</span><br/><span class="hero-accent">做成作品。</span></h1><p class="hero-introduction" data-motion="hero">我是 Liss，独立开发游戏、工具与交互实验。</p><div class="hero-actions" data-motion="hero"><a class="button" href="#selected" data-magnetic><span data-magnet-body>探索作品 <Icon size={19}/></span></a><a class="hero-library" href={sitePath('/projects/')}>浏览全部 {projects.length} 个工程</a></div></div>
+   <div class="hero-copy"><h1 id="home-title" data-motion="hero"><span>把想法，</span><br/><span class="hero-accent">做成作品。</span></h1><p class="hero-introduction" data-motion="hero">我是 Liss，独立开发游戏、工具与交互实验。</p><div class="hero-actions" data-motion="hero"><a class="hero-continue" href="#selected">继续向下探索 <Icon size={17}/></a><a class="hero-library" href={sitePath('/projects/')}>浏览全部 {projects.length} 个工程</a></div></div>
    <div class="work-stage" data-work-stage data-active="0" data-ui>
     <div class="stage-objects" data-stage-objects>
-     {stage.map((project,index)=><article class="stage-piece" data-stage-piece={index} data-project={project.slug}><div class="stage-surface" data-stage-image data-ambient-piece><a href={sitePath(`/projects/${project.slug}/`)} aria-label={`查看 ${project.name}`}><div class="screen-chrome" aria-hidden="true"><span></span><span></span><span></span><strong>{project.name}</strong></div><MediaImage image={project.cover} eager={index===0} sizes="(max-width: 760px) 90vw, 55vw"/><div class="screen-caption"><span>{project.category}</span><Icon size={15}/></div></a></div></article>)}
+     {stage.map((project,index)=><article class="stage-piece" data-stage-piece={index} data-project={project.slug}><div class="stage-surface" data-stage-image data-ambient-piece><button type="button" class="stage-card" data-stage-card={index} aria-pressed={index===0} aria-controls="stage-overview" aria-label={`将 ${project.name} 切到前景`} disabled><span class="screen-chrome" aria-hidden="true"><span></span><span></span><span></span><strong>{project.name}</strong></span><MediaImage image={project.cover} eager={index===0} sizes="(max-width: 760px) 90vw, 55vw"/><span class="screen-caption"><span>{project.category}</span></span></button></div></article>)}
     </div>
-    <div class="stage-bottom"><div class="stage-controls" role="group" aria-label="选择主画面中的工程">{stage.map((project,index)=><button type="button" data-stage-select={index} data-caption={stageCaptions[index]} data-href={sitePath(`/projects/${project.slug}/`)} aria-pressed={index===0}>{project.name}</button>)}</div><div class="stage-description"><p data-stage-caption aria-live="polite">{stageCaptions[0]}</p><a data-stage-link href={sitePath('/projects/outpost/')} aria-label="探索当前工程"><Icon size={22}/></a></div></div>
+    <div class="stage-bottom"><div class="stage-controls" role="group" aria-label="选择主画面中的工程">{stage.map((project,index)=><button type="button" data-stage-select={index} data-name={project.name} data-category={project.category} data-caption={stageCaptions[index]} data-href={sitePath(`/projects/${project.slug}/`)} aria-pressed={index===0}>{project.name}</button>)}</div><div class="stage-description" id="stage-overview"><p class="stage-category" data-stage-category>{stage[0].category}</p><h2 class="project-name" data-stage-name>{stage[0].name}</h2><p class="stage-summary" data-stage-caption aria-live="polite">{stageCaptions[0]}</p><a class="button stage-detail-link" data-stage-link data-project-enter href={sitePath('/projects/outpost/')}>查看项目 <Icon size={20}/></a></div><noscript><div class="stage-fallback-links">{stage.map(project=><a href={sitePath(`/projects/${project.slug}/`)}>{project.name} <Icon size={15}/></a>)}</div></noscript></div>
    </div>
    <a class="hero-scroll" href="#selected"><span>向下，看作品如何运转</span><svg width="19" height="30" viewBox="0 0 19 30" aria-hidden="true"><path d="M9.5 1v26M2 19l7.5 8 7.5-8" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a>
   </section>
 
   <section class="process-band" data-marquee aria-label="创作过程与动态控制">
-   <div class="kinetic-strip" aria-hidden="true"><div data-kinetic-strip>{[0,1].map(()=><div class="marquee-group" data-marquee-group>{['PLAY','BUILD','EXPERIMENT','REPEAT'].map(word=><><span>{word}</span><i>↗</i></>)}</div>)}</div></div>
+   <div class="marquee-tilt" data-marquee-plane><div class="kinetic-strip" aria-hidden="true"><div data-kinetic-strip>{[0,1].map(()=><div class="marquee-group" data-marquee-group>{['PLAY','BUILD','EXPERIMENT','REPEAT'].map(word=><><span>{word}</span><i>↗</i></>)}</div>)}</div></div></div>
    <button type="button" class="motion-toggle" data-motion-toggle aria-pressed="false" aria-label="暂停页面动态"><span class="motion-symbol-pause"><Icon name="pause" size={15}/></span><span class="motion-symbol-play"><Icon name="play" size={15}/></span><span data-motion-toggle-label>暂停动态</span></button>
   </section>
 
@@ -58,7 +60,7 @@ const flow = [
    <article class="game-scene game-scene--gomoku"><div class="game-art game-art--gomoku" data-project-atmosphere="gomoku" style={`--media-ratio:${gomoku.cover.width} / ${gomoku.cover.height}`}><a href={sitePath('/projects/gomoku/')} class="game-scene__image" data-motion="reveal"><MediaImage image={gomoku.cover} sizes="(max-width: 760px) 100vw, 40vw"/></a><canvas aria-hidden="true"></canvas></div><div class="game-scene__copy"><h3 class="project-name"><a href={sitePath('/projects/gomoku/')}>Liss Gomoku</a></h3><p>{gomoku.summary}</p></div></article>
   </div></section>
 
-  <section class="explore-chapter home-chapter" id="explore" aria-labelledby="explore-title" data-archive><header class="work-heading"><h2 id="explore-title" data-motion="reveal">好奇心，<br/>还有别的去处。</h2><p data-motion="reveal">工具、图形、算法，<br/>以及从实际需要出发的应用。</p></header><div class="explore-layout"><div class="explore-index">{archive.map((project,index)=><article data-archive-item data-selected={index===0?'true':'false'} data-preview-src={sitePath(project.cover.src)} data-preview-alt={project.cover.alt} data-preview-title={project.name} data-preview-summary={project.summary} data-preview-href={sitePath(`/projects/${project.slug}/`)}><a class="project-name" href={sitePath(`/projects/${project.slug}/`)}>{project.name.split(' · ')[0]}<Icon size={20}/></a><button type="button" data-archive-select aria-label={`预览 ${project.name}`}><Icon name="expand" size={17}/></button></article>)}<a href={sitePath('/projects/')} class="explore-all">全部 {projects.length} 个工程 <Icon size={18}/></a></div><aside class="explore-preview"><a data-archive-link href={sitePath(`/projects/${first.slug}/`)}><img data-archive-image src={sitePath(first.cover.src)} width={first.cover.width} height={first.cover.height} alt={first.cover.alt} loading="lazy" decoding="async"/></a><h3 class="project-name" data-archive-title>{first.name}</h3><p data-archive-summary>{first.summary}</p></aside></div></section>
+  <section class="explore-chapter home-chapter" id="explore" aria-labelledby="explore-title" data-archive><header class="work-heading"><h2 id="explore-title" data-motion="reveal">好奇心，<br/>还有别的去处。</h2><p data-motion="reveal">工具、图形、算法，<br/>以及从实际需要出发的应用。</p></header><div class="explore-layout"><div class="explore-index">{archive.map((project,index)=><article style={projectWorldStyle(project.slug)} data-preview-accent={getProjectWorld(project.slug).accent} data-archive-item data-selected={index===0?'true':'false'} data-preview-src={sitePath(project.cover.src)} data-preview-alt={project.cover.alt} data-preview-title={project.name} data-preview-summary={project.summary} data-preview-href={sitePath(`/projects/${project.slug}/`)}><a class="project-name" href={sitePath(`/projects/${project.slug}/`)}>{project.name.split(' · ')[0]}<Icon size={20}/></a><button type="button" data-archive-select aria-label={`预览 ${project.name}`}><Icon name="expand" size={17}/></button></article>)}<a href={sitePath('/projects/')} class="explore-all">全部 {projects.length} 个工程 <Icon size={18}/></a></div><aside class="explore-preview"><a data-archive-link href={sitePath(`/projects/${first.slug}/`)}><img data-archive-image src={sitePath(first.cover.src)} width={first.cover.width} height={first.cover.height} alt={first.cover.alt} loading="lazy" decoding="async"/></a><h3 class="project-name" data-archive-title>{first.name}</h3><p data-archive-summary>{first.summary}</p></aside></div></section>
 
   <section class="closing-chapter home-chapter" aria-labelledby="closing-title"><h2 id="closing-title">下一次尝试，<br/>从一个想法开始。</h2><div><p>我把游戏开发、工具制作和代码实验放在这里。它们记录了不同阶段的思考，也留下了继续改进的空间。</p><div class="closing-actions"><a class="button" href={sitePath('/lab/')} data-magnetic><span data-magnet-body>亲手试试 <Icon name="play" size={17}/></span></a><a class="text-link" href={communityUrl}>记录与交流 <Icon size={18}/></a><a class="text-link" href={sitePath('/about/')}>关于 Liss <Icon size={18}/></a></div></div></section>
  </div>

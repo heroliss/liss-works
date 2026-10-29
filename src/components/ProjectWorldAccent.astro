@@ -1,0 +1,37 @@
+---
+interface Props { kind: string }
+const { kind }=Astro.props;
+const network=['nodes','tree','route','pipeline','map'].includes(kind);
+const orbit=['orbit','focus','light'].includes(kind);
+const glyph=kind==='glyph';
+const bars=['bars','blocks'].includes(kind);
+const reading=kind==='reading';
+---
+<svg class="world-accent" viewBox="0 0 1000 650" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+ {network && <>
+  <path data-world-stroke d={kind==='pipeline'?'M28 78H240L270 42H460':'M24 84H95L130 40H230L270 76H420'}/>
+  <path data-world-stroke d={kind==='route'?'M966 460Q920 560 760 608H590':'M970 490H930V575H850L814 612H580'}/>
+  <path data-world-stroke d={kind==='tree'?'M28 440H72V530H130M72 490H160M72 530V600H200':'M28 490V592H210'}/>
+  {[{x:95,y:84},{x:270,y:76},{x:930,y:575}].map(p=><circle data-world-marker cx={p.x} cy={p.y} r="6"/>)}
+ </>}
+ {orbit && <>
+  <g data-world-rotor><path data-world-stroke d="M70 205A180 180 0 0 1 260 32M740 618A180 180 0 0 0 930 445"/><path data-world-stroke d="M60 250A230 230 0 0 1 315 20M685 630A230 230 0 0 0 940 400"/></g>
+  <path data-world-stroke d={kind==='light'?'M20 90L300 18M700 632L980 560':'M20 92V22H115M885 628H980V558'}/>
+  <circle data-world-marker cx="65" cy="80" r="8"/><circle data-world-marker cx="935" cy="570" r="8"/>
+ </>}
+ {glyph && <>
+  <path data-world-stroke d="M105 36H65V90H30V146H65V200H105M895 450H935V504H970V560H935V614H895"/>
+  <path data-world-stroke d="M235 36H420M580 614H765"/>
+  {[0,1,2,3].map(i=><rect data-world-marker x={240+i*31} y="30" width="10" height="10"/>)}
+ </>}
+ {bars && <>
+  {[36,60,43,78,54,92].map((height,index)=><rect data-world-marker x={34+index*27} y={114-height} width="12" height={height} rx={kind==='blocks'?'1':'4'}/>)}
+  <path data-world-stroke d="M25 130H220M780 520H975"/>
+  {[0,1,2].map(i=><path data-world-stroke d={`M${820+i*40} 615V${570-i*25}h25v${45+i*25}`}/>)}
+ </>}
+ {reading && <>
+  <path data-world-stroke d="M26 185Q55 42 265 32H420M580 618H735Q945 608 974 465"/>
+  <path data-world-stroke d="M40 190Q73 61 265 52H335M665 598H735Q927 589 960 460"/>
+  <circle data-world-marker cx="270" cy="32" r="5"/><circle data-world-marker cx="730" cy="618" r="5"/>
+ </>}
+</svg>

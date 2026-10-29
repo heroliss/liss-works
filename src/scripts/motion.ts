@@ -4,15 +4,38 @@ import { setupPortfolioMotion } from './portfolio-motion';
 import { setupExpressiveMotion } from './expressive-motion';
 import { setupProjectMotion } from './project-motion';
 import { setupProjectAtmosphere } from './project-atmosphere';
+import { setupDetailWorldMotion } from './detail-world-motion';
 
 gsap.registerPlugin(ScrollTrigger);
 
 // Every page is complete before this module runs. Motion enhances that readable
 // state; no CSS class or loading gate is needed to reveal the actual content.
 let dispose: (() => void) | undefined;
+let pauseBeforePageHide: boolean | undefined;
+const pauseStorageKey = 'liss:motion-paused';
+
+function readStoredPause(): boolean | undefined {
+  try {
+    const value = window.sessionStorage.getItem(pauseStorageKey);
+    return value === 'true' ? true : value === 'false' ? false : undefined;
+  } catch { return undefined; }
+}
+
+function storePause(value: boolean) {
+  try { window.sessionStorage.setItem(pauseStorageKey, String(value)); } catch { /* Storage is optional. */ }
+}
+
+function restorePause(value: boolean) {
+  document.documentElement.dataset.motionPaused = String(value);
+  document.querySelectorAll('[data-motion-toggle], [data-detail-motion-toggle]').forEach((button) => {
+    button.setAttribute('aria-pressed', String(value));
+  });
+}
 
 function initializeMotion() {
   dispose?.();
+  const storedPause = readStoredPause();
+  if (storedPause !== undefined) restorePause(storedPause);
 
   const root = document.documentElement;
   const abort = new AbortController();
@@ -155,6 +178,10 @@ function initializeMotion() {
   const disposeExpressive = setupExpressiveMotion({ signal, preference });
   const disposeProjects = setupProjectMotion({ signal, preference });
   const disposeAtmosphere = setupProjectAtmosphere({ signal, preference });
+  const disposeDetails = setupDetailWorldMotion({ signal, preference });
+  if (storedPause !== undefined) {
+    window.dispatchEvent(new CustomEvent('portfolio:motion-state', { detail: { paused: storedPause } }));
+  }
 
   preference.addEventListener('change', () => {
     root.dataset.motion = preference.matches ? 'reduced' : 'ready';
@@ -177,6 +204,7 @@ function initializeMotion() {
     disposeExpressive();
     disposeProjects();
     disposeAtmosphere();
+    disposeDetails();
     media.revert();
     delete root.dataset.motion;
   };
@@ -190,5 +218,27 @@ if (document.readyState === 'loading') {
 
 document.addEventListener('astro:page-load', initializeMotion);
 document.addEventListener('astro:before-swap', () => dispose?.());
-window.addEventListener('pagehide', () => dispose?.());
-window.addEventListener('pageshow', (event) => { if (event.persisted) initializeMotion(); });
+window.addEventListener('portfolio:motion-state', (event) => {
+  const value = (event as CustomEvent<{ paused?: unknown }>).detail?.paused;
+  if (typeof value !== 'boolean') return;
+  pauseBeforePageHide = value;
+  storePause(value);
+});
+window.addEventListener('pagehide', () => {
+  const stored = document.documentElement.getAttribute('data-motion-paused');
+  pauseBeforePageHide = stored === null
+    ? Boolean(document.querySelector('[data-motion-toggle][aria-pressed="true"], [data-detail-motion-toggle][aria-pressed="true"]'))
+    : stored === 'true';
+  storePause(pauseBeforePageHide);
+  dispose?.();
+});
+window.addEventListener('pageshow', (event) => {
+  if (!event.persisted) return;
+  const latestPause = readStoredPause() ?? pauseBeforePageHide;
+  if (latestPause !== undefined) {
+    // Disposal restores authored defaults. Put the visitor's choice back before
+    // homepage and detail modules read their respective root/button state.
+    restorePause(latestPause);
+  }
+  initializeMotion();
+});

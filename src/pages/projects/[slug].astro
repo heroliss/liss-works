@@ -13,9 +13,15 @@ import { getProjectStory } from '../../data/project-stories';
 import { getStoryMedia } from '../../data/story-media';
 import type { Project } from '../../data/types';
 import '../../styles/project-worlds.css';
+import '../../styles/project-worlds-tools.css';
+import '../../styles/project-worlds-labs.css';
+import '../../styles/world-continuity.css';
+import ProjectWorldAccent from '../../components/ProjectWorldAccent.astro';
+import { getProjectWorld, projectWorldStyle } from '../../data/project-worlds';
 export function getStaticPaths() { return projects.map(project => ({params: {slug: project.slug}, props: {project}})); }
 interface Props { project: Project }
 const { project } = Astro.props;
+const world = getProjectWorld(project.slug);
 const displayName = project.name.split(' · ')[0];
 const story = getProjectStory(project.slug);
 const topicMedia = getStoryMedia(project);
@@ -27,14 +33,14 @@ const notes = [project.note, story.footnote].filter(Boolean);
 const coverSizes = project.slug === 'dubforge' ? '(max-width: 760px) calc(100vw - 40px), 94vw' : '(max-width: 760px) calc(100vw - 40px), 64vw';
 ---
 <Base title={project.name} description={project.summary} active="projects">
-  <div class="shell detail-page" data-project={project.slug} data-project-world={project.slug}>
-    <a class="back-link" href={sitePath('/projects/')}><Icon name="back" size={16}/> 全部工程</a>
+  <div class="shell detail-page" data-project={project.slug} data-project-world={project.slug} data-world-family={world.family} style={`${projectWorldStyle(project.slug)};--accent:${world.accent};--cyan:${world.accent};--surface:${world.surface}`}>
+    <div class="detail-world-tools"><a class="back-link" href={sitePath('/projects/')}><Icon name="back" size={16}/> 全部工程</a><button class="detail-world-toggle" type="button" data-detail-motion-toggle aria-pressed="false"><Icon name="pause" size={14}/><span data-detail-motion-label>暂停动态</span></button></div>
     <div class="project-prologue">
     <header class="project-intro">
       <div class="project-intro-copy"><h1 class="project-name" aria-label={project.name}>{displayName}</h1>{displayName !== project.name && <p class="project-full-name">{project.name}</p>}<p class="summary" data-motion="reveal">{project.summary}</p><p class="project-facts">{project.category} · {project.status}</p></div>
       <div class="button-row">{project.demo && <a class="button" href={sitePath(project.demo)} target="_blank" rel="noreferrer">在线体验 <Icon name="play" size={17}/></a>}{hasLab && <a class="button" href={sitePath(project.slug === 'ga-sort' ? '/lab/#evolution' : '/lab/')}>打开交互实验 <Icon name="play" size={17}/></a>}{project.download && <ProjectDownload download={project.download}/>}<a class:list={['button', {secondary: Boolean(project.demo || project.download || hasLab)}]} href={project.source} target="_blank" rel="noreferrer">查看源码 <Icon name="code" size={18}/></a></div>
     </header>
-    <div class="project-opening"><figure class="project-hero" data-project-atmosphere={project.slug}><MediaImage image={project.cover} eager zoom group={project.slug} sizes={coverSizes}/><figcaption class="project-caption">{project.cover.caption}</figcaption></figure><ProjectSignature signature={getProjectSignature(project.slug)}/></div>
+    <div class="project-opening"><figure class="project-hero" data-detail-motion={world.motion}><div class="detail-tilt-plane" data-detail-tilt data-shared-cover><MediaImage image={project.cover} eager zoom group={project.slug} sizes={coverSizes}/><ProjectWorldAccent kind={world.motion}/></div><figcaption class="project-caption">{project.cover.caption}</figcaption></figure><ProjectSignature signature={getProjectSignature(project.slug)}/></div>
     </div>
     <nav class="project-contents" aria-label="详情页导航"><a href="#project-origin">项目概览</a><a href="#engineering">设计与实现</a>{gallery.length > 0 && <a href="#gallery">更多画面</a>}<a href="#usage">快速开始</a>{project.docs && <a href={project.docs} target="_blank" rel="noreferrer">完整文档 <Icon size={13}/></a>}</nav>
     <div class="project-overview" id="project-origin">

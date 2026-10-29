@@ -164,6 +164,7 @@ export function setupExpressiveMotion({ signal, preference }: ExpressiveMotionOp
       const groups = marquee.track.querySelectorAll<HTMLElement>('[data-marquee-group]');
       if (groups.length !== 2) return;
       let visible = false;
+      let resetPlane = (_immediate = false) => {};
       gsap.set(marquee.track, { x: 0, xPercent: 0 });
       const loop = gsap.to(marquee.track, {
         xPercent: -50, duration: Math.max(22, groups[0].scrollWidth / 52),
@@ -173,6 +174,7 @@ export function setupExpressiveMotion({ signal, preference }: ExpressiveMotionOp
         const playing = visible && !document.hidden && !marquee.paused();
         loop.paused(!playing);
         marquee.track.dataset.playback = playing ? 'playing' : 'paused';
+        if (!playing) resetPlane(true);
       };
       const observer = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; sync(); });
       observer.observe(marquee.boundary);
@@ -181,6 +183,32 @@ export function setupExpressiveMotion({ signal, preference }: ExpressiveMotionOp
       if (fine) {
         marquee.boundary.addEventListener('pointerenter', () => { loop.timeScale(1.3); }, { signal: marqueeEvents.signal });
         marquee.boundary.addEventListener('pointerleave', () => { loop.timeScale(1); }, { signal: marqueeEvents.signal });
+      }
+      const plane = marquee.boundary.querySelector<HTMLElement>('[data-marquee-plane]');
+      if (fine && desktop && plane) {
+        const xTo = gsap.quickTo(plane, 'x', { duration: 0.6, ease: 'power3.out' });
+        const yTo = gsap.quickTo(plane, 'y', { duration: 0.6, ease: 'power3.out' });
+        let bounds = { left: 0, top: 0, width: 1, height: 1 };
+        const measurePlane = () => {
+          const box = marquee.boundary.getBoundingClientRect();
+          bounds = { left: box.left + window.scrollX, top: box.top + window.scrollY, width: box.width, height: box.height };
+        };
+        resetPlane = (immediate = false) => {
+          [xTo, yTo].forEach((to) => { to(0); if (immediate) to.tween.progress(1).pause(); });
+        };
+        measurePlane();
+        const size = new ResizeObserver(measurePlane);
+        size.observe(marquee.boundary);
+        marquee.boundary.addEventListener('pointerenter', measurePlane, { signal: marqueeEvents.signal });
+        marquee.boundary.addEventListener('pointermove', (event) => {
+          if (!visible || document.hidden || marquee.paused() || event.pointerType === 'touch') return;
+          const x = gsap.utils.clamp(-1, 1, (event.pageX - bounds.left) / Math.max(1, bounds.width) * 2 - 1);
+          const y = gsap.utils.clamp(-1, 1, (event.pageY - bounds.top) / Math.max(1, bounds.height) * 2 - 1);
+          xTo(-x * 55);
+          yTo(-y * 7);
+        }, { passive: true, signal: marqueeEvents.signal });
+        marquee.boundary.addEventListener('pointerleave', () => resetPlane(), { signal: marqueeEvents.signal });
+        context.add(() => () => size.disconnect());
       }
       context.add(() => () => { observer.disconnect(); marquee.setSync(() => {}); });
     });

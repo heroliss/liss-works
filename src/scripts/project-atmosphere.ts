@@ -52,7 +52,7 @@ export function setupProjectAtmosphere({ signal, preference }: Options): () => v
     const original = scene.originalTransform;
     const base = original === 'none' ? '' : original;
     const value = restore || !fine.matches || Math.abs(x) + Math.abs(y) < .001 ? original
-      : `${base} perspective(1000px) translate3d(${(x * 6).toFixed(2)}px,${(y * 6).toFixed(2)}px,0) rotateX(${(-y * 2).toFixed(2)}deg) rotateY(${(x * 3).toFixed(2)}deg)`.trim();
+      : `${base} perspective(1000px) translate3d(${(x * 12).toFixed(2)}px,${(y * 12).toFixed(2)}px,0) rotateX(${(-y * 7).toFixed(2)}deg) rotateY(${(x * 9).toFixed(2)}deg)`.trim();
     if (scene.transform === value) return;
     if (value) scene.root.style.setProperty('transform', value, scene.transformPriority);
     else scene.root.style.removeProperty('transform');

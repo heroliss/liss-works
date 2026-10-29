@@ -1,6 +1,6 @@
 {
   "schema": "showcase.website-media.v1",
-  "generated_at_utc": "2026-10-29T04:27:41.715357+00:00",
+  "generated_at_utc": "2026-10-29T05:35:29.415526+00:00",
   "source_manifest": "captures/selected-manifest.json",
   "source_manifest_sha256": "2c1802696f789defdfcc69f2f1f64badcce99c0ed4d9fdb33c6a59104e4fe9e3",
   "originals_modified": false,
@@ -7207,10 +7207,10 @@
     "exported_image_bytes": 39423926,
     "video_bytes": 1363373,
     "font_bytes": 353408,
-    "font_license_and_provenance_bytes": 14079,
+    "font_license_and_provenance_bytes": 14596,
     "published_media_bytes": 41140707,
     "total_public_asset_count": 510,
-    "total_public_asset_bytes": 41154786
+    "total_public_asset_bytes": 41155303
   },
   "fonts": {
     "codec": "fontTools WOFF2 with Node native zlib Brotli (quality 11 / font mode), invoked by fontTools",
@@ -7225,10 +7225,14 @@
       "site-next/src/components/ProjectDownload.astro",
       "site-next/src/components/ProjectEngineering.astro",
       "site-next/src/components/ProjectSignature.astro",
+      "site-next/src/components/ProjectWorldAccent.astro",
       "site-next/src/data/project-image.ts",
       "site-next/src/data/project-priority.ts",
       "site-next/src/data/project-signatures.ts",
       "site-next/src/data/project-stories.ts",
+      "site-next/src/data/project-worlds-labs.ts",
+      "site-next/src/data/project-worlds-tools.ts",
+      "site-next/src/data/project-worlds.ts",
       "site-next/src/data/projects.ts",
       "site-next/src/data/restored-bundles.ts",
       "site-next/src/data/restored-projects.ts",
@@ -7252,6 +7256,7 @@
       "site-next/src/pages/lab/index.astro",
       "site-next/src/pages/projects/[slug].astro",
       "site-next/src/pages/projects/index.astro",
+      "site-next/src/scripts/detail-world-motion.ts",
       "site-next/src/scripts/downloads.ts",
       "site-next/src/scripts/expressive-motion.ts",
       "site-next/src/scripts/motion.ts",
@@ -7259,15 +7264,20 @@
       "site-next/src/scripts/project-atmosphere.ts",
       "site-next/src/scripts/project-filter.ts",
       "site-next/src/scripts/project-motion.ts",
+      "site-next/src/scripts/site-continuity.ts",
       "site-next/src/scripts/site.ts",
       "site-next/src/styles/expressive-home.css",
       "site-next/src/styles/global.css",
       "site-next/src/styles/home-next.css",
       "site-next/src/styles/home-projects.css",
+      "site-next/src/styles/interactive-showcase.css",
       "site-next/src/styles/interior.css",
       "site-next/src/styles/new-theme.css",
       "site-next/src/styles/project-showcase.css",
-      "site-next/src/styles/project-worlds.css"
+      "site-next/src/styles/project-worlds-labs.css",
+      "site-next/src/styles/project-worlds-tools.css",
+      "site-next/src/styles/project-worlds.css",
+      "site-next/src/styles/world-continuity.css"
     ],
     "noto_original_metadata": {
       "0": [

@@ -1,4 +1,5 @@
 ---
+import { getProjectWorld, projectWorldStyle } from '../data/project-worlds';
 import { sitePath } from '../lib/site-path';
 import type { Project } from '../data/types';
 import MediaImage from './MediaImage.astro';
@@ -17,7 +18,7 @@ if (project.tags.some(tag => tag.includes('算法'))) filterTags.add('算法');
 if (project.tags.some(tag => /^qt(?:\s|\d|$)/i.test(tag))) filterTags.add('Qt');
 if (project.tags.some(tag => tag.startsWith('.NET'))) filterTags.add('.NET');
 ---
-<article class:list={['project-card', { 'project-card--archive': variant === 'archive' }, className]} data-project-card data-archive-item={variant === 'archive' ? true : undefined} data-active={variant === 'archive' && selected ? 'true' : undefined} data-preview-src={variant === 'archive' ? sitePath(project.cover.src) : undefined} data-preview-alt={variant === 'archive' ? project.cover.alt : undefined} data-preview-title={variant === 'archive' ? displayName : undefined} data-preview-summary={variant === 'archive' ? project.summary : undefined} data-preview-href={variant === 'archive' ? sitePath(`/projects/${project.slug}/`) : undefined} data-group={project.group} data-tags={Array.from(filterTags).join('|')} data-search={`${project.name} ${project.repo} ${project.summary} ${project.category} ${project.tags.join(' ')} ${signature.direction} ${signature.principle} ${signature.highlights.join(' ')}`}>
+<article class:list={['project-card', { 'project-card--archive': variant === 'archive' }, className]} style={projectWorldStyle(project.slug)} data-preview-accent={getProjectWorld(project.slug).accent} data-project-card data-archive-item={variant === 'archive' ? true : undefined} data-active={variant === 'archive' && selected ? 'true' : undefined} data-preview-src={variant === 'archive' ? sitePath(project.cover.src) : undefined} data-preview-alt={variant === 'archive' ? project.cover.alt : undefined} data-preview-title={variant === 'archive' ? displayName : undefined} data-preview-summary={variant === 'archive' ? project.summary : undefined} data-preview-href={variant === 'archive' ? sitePath(`/projects/${project.slug}/`) : undefined} data-group={project.group} data-tags={Array.from(filterTags).join('|')} data-search={`${project.name} ${project.repo} ${project.summary} ${project.category} ${project.tags.join(' ')} ${signature.direction} ${signature.principle} ${signature.highlights.join(' ')}`}>
  {variant !== 'archive' && <div class="project-card__visual"><a class="project-card__image" href={sitePath(`/projects/${project.slug}/`)} tabindex="-1" aria-hidden="true"><MediaImage image={project.cover} sizes="(max-width: 700px) 100vw, 44vw" /></a></div>}
  <div class="project-card__body">
  <h2><a href={sitePath(`/projects/${project.slug}/`)} aria-label={project.name}>{displayName}<Icon size={20}/></a></h2>

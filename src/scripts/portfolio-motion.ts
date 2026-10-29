@@ -19,8 +19,11 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
 
   stages.forEach((stage) => {
     const buttons = Array.from(stage.querySelectorAll<HTMLButtonElement>('button[data-stage-select]'));
+    const cards = Array.from(stage.querySelectorAll<HTMLButtonElement>('button[data-stage-card]'));
     const surfaces = Array.from(stage.querySelectorAll<HTMLElement>('[data-stage-image]'));
     const caption = stage.querySelector<HTMLElement>('[data-stage-caption]');
+    const name = stage.querySelector<HTMLElement>('[data-stage-name]');
+    const category = stage.querySelector<HTMLElement>('[data-stage-category]');
     const links = Array.from(stage.querySelectorAll<HTMLAnchorElement>('[data-stage-link]'));
     let running: gsap.core.Timeline | undefined;
     const select = (value: string, animate: boolean) => {
@@ -32,7 +35,10 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
       const hero = stage.closest<HTMLElement>('.kinetic-hero');
       if (hero) hero.dataset.active = value;
       buttons.forEach((entry) => entry.setAttribute('aria-pressed', String(entry === button)));
+      cards.forEach((entry) => entry.setAttribute('aria-pressed', String(entry.dataset.stageCard === value)));
       if (caption && button.dataset.caption) caption.textContent = button.dataset.caption;
+      if (name && button.dataset.name) name.textContent = button.dataset.name;
+      if (category && button.dataset.category) category.textContent = button.dataset.category;
       if (button.dataset.href) links.forEach((link) => { link.href = button.dataset.href!; });
       window.dispatchEvent(new CustomEvent('portfolio:stage-select', { detail: { index: Number(value) } }));
       if (!animate || preference.matches) return;
@@ -68,8 +74,19 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
       }, { signal: localSignal });
       button.addEventListener('focusin', () => select(button.dataset.stageSelect ?? '', true), { signal: localSignal });
     });
+    cards.forEach((card) => {
+      // A native button supplies click, Enter and Space without navigation.
+      // Pointer hover only changes depth; only a deliberate selection lifts it.
+      card.disabled = false;
+      card.addEventListener('click', () => select(card.dataset.stageCard ?? '', true), { signal: localSignal });
+    });
     stage.querySelectorAll<HTMLElement>('[data-stage-piece]').forEach((piece) => {
-      piece.addEventListener('focusin', () => select(piece.dataset.stagePiece ?? '0', true), { signal: localSignal });
+      piece.addEventListener('focusin', (event) => {
+        // Focusing a native card must leave its hitbox still until click,
+        // Enter or Space activates it. Legacy linked pieces retain focus lift.
+        if (event.target instanceof Element && event.target.closest('button[data-stage-card]')) return;
+        select(piece.dataset.stagePiece ?? '0', true);
+      }, { signal: localSignal });
     });
     select(stage.dataset.active ?? buttons[0]?.dataset.stageSelect ?? '0', false);
     cleanup.push(() => { running?.revert(); });
@@ -111,7 +128,7 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
             {
               y: -36, ease: 'none',
               scrollTrigger: {
-                trigger: stage,
+                trigger: stage.closest<HTMLElement>('.kinetic-hero') ?? stage,
                 start: 'clamp(top top)',
                 end: 'clamp(bottom top)',
                 scrub: true,
@@ -128,9 +145,9 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
         const lightX = light ? gsap.quickTo(light, 'x', { duration: 0.9, ease: 'power3.out' }) : undefined;
         const lightY = light ? gsap.quickTo(light, 'y', { duration: 0.9, ease: 'power3.out' }) : undefined;
         const movers = surfaces.map((surface, index) => {
-          const depth = 0.55 + (index % 3) * 0.2;
+          const depth = 0.74 + (index % 2) * 0.12;
           return {
-            depth,
+            depth, piece: surface.closest<HTMLElement>('[data-stage-piece]')?.dataset.stagePiece,
             x: gsap.quickTo(surface, 'x', { duration: 0.7, ease: 'power3.out' }),
             y: gsap.quickTo(surface, 'y', { duration: 0.7, ease: 'power3.out' }),
             rx: gsap.quickTo(surface, 'rotationX', { duration: 0.8, ease: 'power3.out' }),
@@ -166,10 +183,11 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
           const x = gsap.utils.clamp(-1, 1, ((event.pageX - bounds.left) / Math.max(bounds.width, 1) - 0.5) * 2);
           const y = gsap.utils.clamp(-1, 1, ((event.pageY - bounds.top) / Math.max(bounds.height, 1) - 0.5) * 2);
           movers.forEach((move) => {
-            move.x(x * 22 * move.depth);
-            move.y(y * 18 * move.depth);
-            move.rx(-y * 3.6 * move.depth);
-            move.ry(x * 4 * move.depth);
+            const depth = move.piece === stage.dataset.active ? 1 : move.depth;
+            move.x(x * 30 * depth);
+            move.y(y * 24 * depth);
+            move.rx(-y * 10 * depth);
+            move.ry(x * 13 * depth);
           });
           lightX?.(x * 40);
           lightY?.(y * 30);
@@ -254,6 +272,8 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
       if (title) title.textContent = item.dataset.previewTitle ?? '';
       if (summary) summary.textContent = item.dataset.previewSummary ?? '';
       if (link && item.dataset.previewHref) link.href = item.dataset.previewHref;
+      const pane = archive.querySelector<HTMLElement>('.archive-preview,.explore-preview');
+      if (pane && item.dataset.previewAccent) pane.style.setProperty('--project-tone', item.dataset.previewAccent);
       displayed = item;
       delete archive.dataset.loading;
       if (status && announce) status.textContent = `正在预览 ${item.dataset.previewTitle ?? ''}`;
