@@ -52,7 +52,8 @@ function initializeMotion() {
     if (disposed) return;
     clearTimeout(refreshTimer);
     refreshTimer = setTimeout(() => {
-      if (!disposed && !preference.matches) ScrollTrigger.refresh();
+      // Lazy pictures must not interrupt an in-flight native chapter scroll.
+      if (!disposed && !preference.matches) ScrollTrigger.refresh(true);
     }, 100);
   };
 

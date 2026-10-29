@@ -2,12 +2,14 @@
 import { sitePath, projectTalkUrl } from '../../lib/site-path';
 import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
-import MediaImage from '../../components/MediaImage.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
 import ProjectEngineering from '../../components/ProjectEngineering.astro';
 import DubForgeWorkflow from '../../components/DubForgeWorkflow.astro';
 import ProjectSignature from '../../components/ProjectSignature.astro';
 import ProjectDownload from '../../components/ProjectDownload.astro';
+import ProjectArtifact from '../../components/ProjectArtifact.astro';
+import ProjectAtmosphere from '../../components/ProjectAtmosphere.astro';
+import ProjectProse from '../../components/ProjectProse.astro';
 import { getProjectSignature } from '../../data/project-signatures';
 import { projects, getProject } from '../../data/projects';
 import { getProjectStory } from '../../data/project-stories';
@@ -18,7 +20,9 @@ import '../../styles/project-worlds-tools.css';
 import '../../styles/project-worlds-labs.css';
 import '../../styles/world-continuity.css';
 import '../../styles/spatial-scenes.css';
-import ProjectWorldAccent from '../../components/ProjectWorldAccent.astro';
+import '../../styles/detail-atmosphere.css';
+import '../../styles/detail-artifacts.css';
+import '../../styles/detail-editorial.css';
 import { getProjectWorld, projectWorldStyle } from '../../data/project-worlds';
 export function getStaticPaths() { return projects.map(project => ({params: {slug: project.slug}, props: {project}})); }
 interface Props { project: Project }
@@ -36,25 +40,26 @@ const coverSizes = project.slug === 'dubforge' ? '(max-width: 760px) calc(100vw 
 ---
 <Base title={project.name} description={project.summary} active="projects">
   <div class="shell detail-page" data-project={project.slug} data-project-world={project.slug} data-world-family={world.family} style={`${projectWorldStyle(project.slug)};--accent:${world.accent};--cyan:${world.accent};--surface:${world.surface}`}>
+    <ProjectAtmosphere slug={project.slug} world={world}/>
     <div class="detail-world-tools"><a class="back-link" href={sitePath('/projects/')}><Icon name="back" size={16}/> 全部工程</a><button class="detail-world-toggle" type="button" data-detail-motion-toggle aria-pressed="false"><Icon name="pause" size={14}/><span data-detail-motion-label>暂停动态</span></button></div>
     <div class="project-prologue">
     <header class="project-intro">
-      <div class="project-intro-copy"><h1 class="project-name" aria-label={project.name}>{displayName}</h1>{displayName !== project.name && <p class="project-full-name">{project.name}</p>}<p class="summary" data-motion="reveal">{project.summary}</p><p class="project-facts">{project.category} · {project.status}</p></div>
+      <div class="project-intro-copy"><h1 class="project-name" aria-label={project.name}>{displayName}</h1>{displayName !== project.name && <p class="project-full-name">{project.name}</p>}<ProjectProse text={project.summary} tone="lead" class="summary" reveal/><p class="project-facts"><span class="project-facts__category">{project.category}</span> · <span class="project-facts__status">{project.status}</span></p></div>
       <div class="button-row">{project.demo && <a class="button" href={sitePath(project.demo)} target="_blank" rel="noreferrer">在线体验 <Icon name="play" size={17}/></a>}{hasLab && <a class="button" href={sitePath(project.slug === 'ga-sort' ? '/lab/#evolution' : '/lab/')}>打开交互实验 <Icon name="play" size={17}/></a>}{project.download && <ProjectDownload download={project.download}/>}<a class:list={['button', {secondary: Boolean(project.demo || project.download || hasLab)}]} href={project.source} target="_blank" rel="noreferrer">查看源码 <Icon name="code" size={18}/></a></div>
     </header>
-    <div class="project-opening"><figure class="project-hero" data-detail-motion={world.motion}><div class="detail-tilt-plane" data-detail-tilt data-shared-cover><MediaImage image={project.cover} eager zoom group={project.slug} sizes={coverSizes}/><ProjectWorldAccent kind={world.motion}/></div><figcaption class="project-caption">{project.cover.caption}</figcaption></figure><ProjectSignature signature={getProjectSignature(project.slug)}/></div>
+    <div class="project-opening"><figure class="project-hero" data-detail-motion={world.motion}><ProjectArtifact image={project.cover} eager group={project.slug} kind={world.motion} role="hero" shared sizes={coverSizes}/><figcaption class="project-caption">{project.cover.caption}</figcaption></figure><ProjectSignature signature={getProjectSignature(project.slug)}/></div>
     </div>
     <nav class="project-contents" aria-label="详情页导航"><a href="#project-origin">项目概览</a><a href="#engineering">设计与实现</a>{gallery.length > 0 && <a href="#gallery">更多画面</a>}<a href="#usage">快速开始</a>{project.docs && <a href={project.docs} target="_blank" rel="noreferrer">完整文档 <Icon size={13}/></a>}</nav>
     <div class="project-overview" id="project-origin">
-      <section class="story-origin" aria-labelledby="origin-title"><h2 id="origin-title">{story.origin.title}</h2>{story.origin.paragraphs.map(paragraph => <p>{paragraph}</p>)}{story.flow && project.slug !== 'dubforge' && <ol class="compact-flow" aria-label={story.flow.title}>{story.flow.steps.map(step => <li>{step.name}</li>)}</ol>}</section>
+      <section class="story-origin" aria-labelledby="origin-title"><h2 id="origin-title" data-detail-reveal>{story.origin.title}</h2>{story.origin.paragraphs.map((paragraph,index) => <ProjectProse text={paragraph} tone={index===0 ? 'lead' : 'body'} reveal/>)}{story.flow && project.slug !== 'dubforge' && <ol class="compact-flow" aria-label={story.flow.title}>{story.flow.steps.map(step => <li>{step.name}</li>)}</ol>}</section>
       {story.stack?.length && <section class="project-technology" aria-labelledby="stack-title"><h2 id="stack-title">技术构成</h2><dl class="project-stack">{story.stack.map(item => <div><dt>{item.name}</dt><dd>{item.role}</dd></div>)}</dl></section>}
     </div>
     {project.slug === 'dubforge' && <DubForgeWorkflow id="production-path" detail/>}
     <ProjectEngineering story={story} media={topicMedia} group={project.slug}/>
     {project.video && <figure class="project-video"><video controls playsinline preload="none" poster={sitePath(project.video.poster)} aria-label="全国房价图真实界面操作演示"><source src={sitePath(project.video.src)} type="video/mp4"/>浏览器无法播放视频，请<a href={sitePath(project.video.src)}>下载演示片段</a>。</video><figcaption>{project.video.caption}</figcaption></figure>}
-    {gallery.length > 0 && <section class="section project-gallery" id="gallery" aria-labelledby="gallery-title"><div class="section-heading"><h2 id="gallery-title">更多画面</h2></div><div class="gallery-grid">{gallery.map(image => <figure><MediaImage image={image} zoom group={project.slug} sizes="(max-width: 760px) 100vw, 60vw"/><figcaption>{image.caption}</figcaption></figure>)}</div></section>}
+    {gallery.length > 0 && <section class="section project-gallery" id="gallery" aria-labelledby="gallery-title"><div class="section-heading"><h2 id="gallery-title">更多画面</h2></div><div class="gallery-grid">{gallery.map(image => <figure data-detail-motion={world.motion}><ProjectArtifact image={image} group={project.slug} kind={world.motion} role="gallery" sizes="(max-width: 760px) 100vw, 60vw"/><figcaption>{image.caption}</figcaption></figure>)}</div></section>}
     {notes.length > 0 && <details class="capture-notes"><summary>画面与演示说明</summary>{notes.map(note => <p>{note}</p>)}</details>}
-    <section class="project-usage section" id="usage" aria-labelledby="usage-title"><div class="section-heading"><h2 id="usage-title">快速开始</h2></div><div class="usage-grid">{project.usage.map((usage,index) => <article class="usage"><h3>{usage.title}</h3><p>{usage.body}</p>{usage.code && <div class="code-block"><div class="code-toolbar"><span>{usage.language ?? '用法'}</span><span role="status" aria-live="polite"></span><button class="copy-button" type="button" data-copy={`code-${index}`} aria-label={`复制：${usage.title}`}>复制</button></div><pre><code id={`code-${index}`}>{usage.code}</code></pre></div>}</article>)}</div></section>
+    <section class="project-usage section" id="usage" aria-labelledby="usage-title"><div class="section-heading"><h2 id="usage-title" data-detail-reveal>快速开始</h2></div><div class="usage-grid">{project.usage.map((usage,index) => <article class="usage" data-detail-reveal><h3>{usage.title}</h3><ProjectProse text={usage.body}/>{usage.code && <div class="code-block"><div class="code-toolbar"><span>{usage.language ?? '用法'}</span><span role="status" aria-live="polite"></span><button class="copy-button" type="button" data-copy={`code-${index}`} aria-label={`复制：${usage.title}`}>复制</button></div><pre><code id={`code-${index}`}>{usage.code}</code></pre></div>}</article>)}</div></section>
     <aside class="project-conversation" aria-labelledby="conversation-title"><div><h2 id="conversation-title">这个工程，让你想到什么？</h2><p>分享使用心得、遇到的问题，或一个值得继续尝试的想法。</p></div><a class="button secondary" href={projectTalkUrl(project.slug)}>交流想法 <Icon size={17}/></a></aside>
     {related.length > 0 && <section class="section" aria-labelledby="related-title"><div class="section-heading"><h2 id="related-title">继续探索</h2><a class="text-link" href={sitePath('/projects/')}>全部工程 <Icon size={17}/></a></div><div class="related-grid">{related.map(item => <ProjectCard project={item}/>)}</div></section>}
   </div>

@@ -1,0 +1,27 @@
+---
+import type { GalleryImage } from '../data/types';
+import MediaImage from './MediaImage.astro';
+import ProjectWorldAccent from './ProjectWorldAccent.astro';
+
+interface Props {
+  image: GalleryImage;
+  group: string;
+  kind: string;
+  role?: 'hero' | 'evidence' | 'inset' | 'gallery';
+  sizes?: string;
+  eager?: boolean;
+  shared?: boolean;
+}
+const { image, group, kind, role = 'evidence', eager = false, shared = false, sizes } = Astro.props;
+const ratio = image.width / image.height;
+const format = ratio < .7 ? 'portrait' : ratio > 5 ? 'strip' : 'landscape';
+---
+<div class="artifact-stage" data-artifact-role={role} data-artifact-format={format} data-artifact-kind={kind} style={`--artifact-ratio:${image.width} / ${image.height}`}>
+  <div class="detail-tilt-plane artifact-plane" data-detail-tilt data-shared-cover={shared || undefined}>
+    <span class="artifact-depth" aria-hidden="true"></span>
+    <span class="artifact-rim" aria-hidden="true"></span>
+    <MediaImage image={image} eager={eager} zoom group={group} sizes={sizes}/>
+    <span class="artifact-catchlight" aria-hidden="true"></span>
+    {role === 'hero' && <ProjectWorldAccent kind={kind}/>}
+  </div>
+</div>

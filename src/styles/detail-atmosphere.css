@@ -1,0 +1,132 @@
+/* Semantic colours are shared with facts, editorial notes and artifact frames.
+   The backdrop has its own ground; --detail-ink always remains readable ink. */
+body:has(.detail-page) .site-header { position:relative; z-index:30; }
+.detail-page[data-project-world] {
+  position: relative;
+  isolation: isolate;
+  --detail-cool: color-mix(in srgb, var(--project-tone, #9cdef1) 48%, #a4d7e7);
+  --detail-warm: #e2c199;
+  --detail-ink: color-mix(in srgb, var(--project-tone, #9cdef1) 7%, #f0f3ef);
+  --detail-body: color-mix(in srgb, var(--project-tone, #9cdef1) 6%, #d0dad6);
+  --detail-muted: color-mix(in srgb, var(--project-tone, #9cdef1) 9%, #a8b6b0);
+  --detail-ground: #0b0e10;
+}
+.detail-page[data-world-family=architecture] { --detail-cool:#a6d7cc; --detail-warm:#e4ca95; }
+.detail-page[data-world-family=editing] { --detail-cool:#9bccec; --detail-warm:#e7b7a7; }
+.detail-page[data-world-family=battlefield] { --detail-cool:#95bdd8; --detail-warm:#edb779; }
+.detail-page[data-world-family=survival] { --detail-cool:#8ecbbf; --detail-warm:#d9bd86; }
+.detail-page[data-world-family=strategy] { --detail-cool:#a4cadd; --detail-warm:#dfc49d; }
+.detail-page[data-world-family=flow] { --detail-cool:#a2c3d6; --detail-warm:#e0bf87; }
+.detail-page[data-world-family=build] { --detail-cool:#9cbfce; --detail-warm:#edc19b; }
+.detail-page[data-world-family=glyphs] { --detail-cool:#a6cbdc; --detail-warm:#ddbaad; }
+.detail-page[data-world-family=text] { --detail-cool:#adcbd0; --detail-warm:#e4c6ae; }
+.detail-page[data-world-family=desktop] { --detail-cool:#9ecfd1; --detail-warm:#ddcba2; }
+.detail-page[data-world-family=systems] { --detail-cool:#9ed9e4; --detail-warm:#ddbf96; }
+.detail-page[data-world-family=focus] { --detail-cool:#a3cbd8; --detail-warm:#efc99c; }
+.detail-page[data-world-family=blocks] { --detail-cool:#accfe6; --detail-warm:#e2b8ac; }
+.detail-page[data-world-family=journal] { --detail-cool:#a9c9c9; --detail-warm:#e7c1a2; }
+.detail-page[data-world-family=optics] { --detail-cool:#91cbdc; --detail-warm:#f3cc8f; }
+.detail-page[data-world-family=research] { --detail-cool:#a8c7e6; --detail-warm:#d9c89e; }
+.detail-page[data-world-family=geography] { --detail-cool:#99cbc9; --detail-warm:#dec198; }
+.detail-page[data-world-family=sorting] { --detail-cool:#97c6cd; --detail-warm:#eac18e; }
+.detail-page[data-world-family=routing] { --detail-cool:#a2d5d7; --detail-warm:#ddc69d; }
+.detail-page[data-world-family=evolution] { --detail-cool:#9bcece; --detail-warm:#e2bdab; }
+.detail-page[data-world-family=paths] { --detail-cool:#adc8e5; --detail-warm:#ddc8a2; }
+.detail-page[data-world-family=mapping] { --detail-cool:#a4cbd2; --detail-warm:#dfbda3; }
+
+/* Only this decorative leaf crops. Full-viewport colour continues beyond the
+   centrally held drawing; no content ancestor gains clipping or a transform. */
+.project-atmosphere {
+  position: absolute;
+  top: -88px;
+  bottom: -96px;
+  left: calc(50% - 50vw);
+  right: auto;
+  width: 100vw;
+  max-width: none;
+  z-index: -2;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+  color: var(--field-accent, var(--project-tone));
+}
+.project-atmosphere * { pointer-events: none !important; }
+.project-atmosphere__wash,
+.project-atmosphere__grain { position:absolute; inset:0; }
+.project-atmosphere__wash {
+  background:
+    radial-gradient(ellipse 48% 720px at 86% 4%, color-mix(in srgb,var(--field-accent) 12%,transparent), transparent 76%),
+    radial-gradient(ellipse 45% 920px at 10% 27%, color-mix(in srgb,var(--detail-cool) 7%,transparent), transparent 77%),
+    radial-gradient(ellipse 48% 980px at 91% 50%, color-mix(in srgb,var(--detail-warm) 6%,transparent), transparent 78%),
+    radial-gradient(ellipse 46% 760px at 17% 76%, color-mix(in srgb,var(--field-accent) 8%,transparent), transparent 78%),
+    radial-gradient(ellipse 62% 460px at 65% 101%, color-mix(in srgb,var(--detail-cool) 5%,transparent), transparent 80%);
+}
+.project-atmosphere__grain {
+  opacity:.022;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.83' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23fff' filter='url(%23g)' d='M0 0h160v160H0z'/%3E%3C/svg%3E");
+  background-size:160px 160px;
+}
+.project-atmosphere__definitions { position:absolute; width:0; height:0; overflow:hidden; }
+.project-atmosphere__layer {
+  position:absolute;
+  left:-68px;
+  right:-68px;
+  height:clamp(880px,72vw,1280px);
+  transform:none;
+}
+.project-atmosphere__layer--upper { top:-50px; }
+.project-atmosphere__layer--middle { top:37%; opacity:.53; }
+.project-atmosphere__layer--lower { bottom:2%; opacity:.38; }
+.project-atmosphere__canvas {
+  position:absolute;
+  inset-block:0;
+  left:50%;
+  width:min(1920px,100%);
+  margin-left:max(-960px,-50%);
+  mask-image:linear-gradient(to right,transparent,#000 13%,#000 87%,transparent),linear-gradient(to bottom,transparent,#000 12%,#000 82%,transparent);
+  mask-composite:intersect;
+}
+.project-atmosphere__art {
+  position:absolute;
+  inset:0;
+  transform:perspective(1800px) rotateX(7deg) rotateY(-5deg) rotateZ(var(--field-cant,0deg));
+  transform-origin:50% 50%;
+}
+.project-atmosphere__layer--middle .project-atmosphere__art {
+  transform:perspective(1800px) rotateX(-7deg) rotateY(7deg) rotateZ(174deg) scale(.94);
+}
+.project-atmosphere__layer--lower .project-atmosphere__art {
+  transform:perspective(1800px) rotateX(9deg) rotateY(-4deg) rotateZ(-9deg) scale(1.05);
+}
+.project-atmosphere__art > svg { display:block; width:100%; height:100%; overflow:visible; }
+.field-stop-cool { stop-color:var(--detail-cool); }
+.field-stop-warm { stop-color:var(--detail-warm); }
+.field-stop-accent { stop-color:var(--field-accent); }
+.detail-field-extrusion { fill:color-mix(in srgb,var(--field-surface) 72%,#050809); stroke:color-mix(in srgb,var(--detail-cool) 12%,transparent); stroke-width:1; opacity:.72; }
+.detail-field-faces { stroke-width:1.2; }
+.detail-field-traces { fill:none; stroke:var(--field-accent); stroke-opacity:.2; stroke-width:1.15; stroke-linecap:round; stroke-linejoin:round; }
+.detail-field-rings { fill:none; stroke:var(--detail-cool); stroke-opacity:.17; stroke-width:1.25; }
+.detail-field-points { fill:color-mix(in srgb,var(--field-accent) 22%,var(--field-surface)); stroke:color-mix(in srgb,var(--detail-warm) 38%,transparent); stroke-width:1; }
+.detail-field-points .detail-field-point-shadow { fill:var(--field-surface); stroke:none; }
+.detail-field-faces path,
+.detail-field-traces path,
+.detail-field-rings ellipse { vector-effect:non-scaling-stroke; }
+
+@media(max-width:760px) {
+  .project-atmosphere__layer { left:-150px; right:-150px; height:900px; }
+  .project-atmosphere__layer--upper { top:-12px; }
+  .project-atmosphere__layer--middle { top:42%; opacity:.4; }
+  .project-atmosphere__layer--lower { bottom:0; opacity:.3; }
+  .project-atmosphere__art { transform:rotateZ(var(--field-cant,0deg)); }
+  .project-atmosphere__layer--middle .project-atmosphere__art { transform:rotateZ(174deg); }
+  .project-atmosphere__layer--lower .project-atmosphere__art { transform:rotateZ(-9deg); }
+  .project-atmosphere__grain { opacity:.016; }
+  .detail-field-extrusion { opacity:.52; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .project-atmosphere [data-detail-field-layer] { transform:none!important; }
+  .project-atmosphere__art,
+  .project-atmosphere__layer--middle .project-atmosphere__art,
+  .project-atmosphere__layer--lower .project-atmosphere__art { transform:none; }
+}
+@media(forced-colors:active) { .project-atmosphere { display:none; } }

@@ -1,0 +1,324 @@
+/* Shared reading roles; the authored 22 worlds retain their outer compositions. */
+.detail-page[data-project-world] {
+  --editorial-cool: var(--detail-cool, color-mix(in srgb, var(--accent) 16%, #a5d3df));
+  --editorial-warm: var(--detail-warm, color-mix(in srgb, var(--accent) 12%, #edbd98));
+  --editorial-body: var(--detail-body, #c4cecd);
+  --editorial-note: var(--detail-muted, #9eaead);
+  --editorial-sheet: color-mix(in srgb, var(--accent) 6%, #11191c);
+  --editorial-cool-field: color-mix(in srgb, var(--editorial-cool) 8%, #101a1e);
+  --editorial-warm-field: color-mix(in srgb, var(--editorial-warm) 8%, #1a1816);
+}
+
+.detail-page[data-project-world] .project-prose {
+  font-size: 17px;
+  line-height: 1.9;
+  color: var(--editorial-body);
+  max-width: 58ch;
+  margin: 0 0 22px;
+  overflow-wrap: anywhere;
+  text-wrap: pretty;
+}
+.detail-page[data-project-world] .project-prose--lead {
+  font-size: clamp(19px, 1.6vw, 23px);
+  line-height: 1.8;
+  color: var(--detail-ink, var(--ink));
+  max-width: 43ch;
+  margin-bottom: 30px;
+}
+.detail-page[data-project-world] .editorial-emphasis {
+  padding: 0;
+  background: none;
+  font-weight: 500;
+}
+.detail-page[data-project-world] .editorial-emphasis--technical { color: var(--editorial-cool); }
+.detail-page[data-project-world] .editorial-emphasis--decision { color: var(--editorial-warm); }
+
+/* Category is context; status is the project's present, qualified condition. */
+.detail-page[data-project-world] .project-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  align-items: baseline;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--editorial-note);
+}
+.detail-page[data-project-world] .project-facts :is(.project-facts__category, [data-fact-role='category']) { color: var(--editorial-cool); }
+.detail-page[data-project-world] .project-facts :is(.project-facts__status, [data-fact-role='status']) { color: var(--editorial-warm); }
+
+/* The existing document anchors become a calm, readable chapter index. */
+.detail-page[data-project-world] .project-contents {
+  position: sticky;
+  top: 12px;
+  z-index: 25;
+  gap: 4px 24px;
+  margin-block: 40px 15px;
+  padding: 12px 22px;
+  border: 0;
+  background: var(--detail-ground, #0d1418);
+  color: var(--editorial-body);
+  box-shadow: 0 3px 0 color-mix(in srgb, var(--accent) 18%, #182226);
+  font-size: 15px;
+}
+.detail-page[data-project-world] .project-contents a {
+  position: relative;
+  min-height: 42px;
+  padding: 6px 0;
+  color: inherit;
+  text-decoration: none;
+}
+.detail-page[data-project-world] .project-contents a:is(:hover, :focus-visible) { color: var(--editorial-cool); }
+.detail-page[data-project-world] .project-contents a[aria-current]:not([aria-current='false']) { color: var(--accent); font-weight: 600; }
+.detail-page[data-project-world] .project-contents a[aria-current]:not([aria-current='false'])::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: currentColor;
+}
+.detail-page[data-project-world] :is(#project-origin, #engineering, #gallery, #usage) { scroll-margin-top: 116px; }
+
+/* Keep each world's column geometry; give facts and actions their own voice. */
+.detail-page[data-project-world] :is(.story-origin, .project-technology) > h2,
+.detail-page[data-project-world] .project-usage > .section-heading h2 {
+  color: var(--accent);
+  font-size: clamp(25px, 2.25vw, 35px);
+  line-height: 1.45;
+  margin-bottom: 26px;
+}
+.detail-page[data-project-world] .story-origin > p:not(.project-prose) {
+  color: var(--editorial-body);
+  font-size: 17px;
+  line-height: 1.9;
+  margin-bottom: 23px;
+  max-width: 58ch;
+}
+.detail-page[data-project-world] .project-stack > div {
+  position: relative;
+  min-width: 0;
+  padding: 11px 0 15px 17px;
+}
+.detail-page[data-project-world] .project-stack > div::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 15px;
+  height: 23px;
+  width: 4px;
+  background: color-mix(in srgb, var(--editorial-cool) 65%, #32464b);
+}
+.detail-page[data-project-world] .project-stack dt {
+  color: var(--editorial-cool);
+  font-size: 17px;
+  line-height: 1.55;
+  margin-bottom: 10px;
+}
+.detail-page[data-project-world] .project-stack dd { color: var(--editorial-body); font-size: 16px; line-height: 1.8; }
+.detail-page[data-project-world] .usage { position: relative; padding: 9px 0 0 22px; }
+.detail-page[data-project-world] .usage::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 14px;
+  width: 6px;
+  height: 29px;
+  background: var(--editorial-warm);
+  clip-path: polygon(0 0, 100% 4px, 100% 100%, 0 calc(100% - 4px));
+}
+.detail-page[data-project-world] .usage h3 { color: var(--editorial-warm); font-size: 23px; line-height: 1.5; margin-bottom: 20px; }
+.detail-page[data-project-world] .usage > p:not(.project-prose) { color: var(--editorial-body); font-size: 17px; line-height: 1.9; }
+
+/* A direction, a thesis and its three capabilities are different reading jobs. */
+.detail-page[data-project-world] .project-signature--editorial { border-block: 0; }
+.detail-page[data-project-world] .project-signature--editorial > .signature-entry {
+  position: relative;
+  min-width: 0;
+  padding-block: 16px;
+}
+.detail-page[data-project-world] .project-signature--editorial dt {
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 12px;
+  color: var(--editorial-note);
+}
+.detail-page[data-project-world] .project-signature--editorial dd {
+  font-size: 18px;
+  line-height: 1.75;
+  margin: 0;
+}
+.detail-page[data-project-world] .signature-direction { color: var(--editorial-cool); }
+.detail-page[data-project-world] .signature-entry--principle {
+  isolation: isolate;
+  padding: 19px 22px 22px;
+  background: var(--editorial-warm-field);
+}
+.detail-page[data-project-world] .signature-entry--principle::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: 10px;
+  bottom: -9px;
+  right: -9px;
+  width: 9px;
+  background: color-mix(in srgb, var(--editorial-warm) 20%, #151b1b);
+  clip-path: polygon(0 0, 100% 9px, 100% 100%, 0 calc(100% - 9px));
+  pointer-events: none;
+}
+.detail-page[data-project-world] .project-prose--principle {
+  display: block;
+  margin: 0;
+  font-size: clamp(19px, 1.55vw, 24px);
+  line-height: 1.7;
+  color: color-mix(in srgb, var(--editorial-warm) 35%, var(--detail-ink, #eeefeb));
+  max-width: 30ch;
+}
+.detail-page[data-project-world] .signature-highlights { display: block; }
+.detail-page[data-project-world] .signature-highlights li {
+  position: relative;
+  border: 0;
+  background: none;
+  border-radius: 0;
+  font-size: 16px;
+  line-height: 1.65;
+  padding: 0 0 0 17px;
+  color: var(--editorial-cool);
+}
+.detail-page[data-project-world] .signature-highlights li + li { margin-top: 11px; }
+.detail-page[data-project-world] .signature-highlights li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: .43em;
+  width: 5px;
+  height: 12px;
+  background: color-mix(in srgb, var(--accent) 65%, #54767b);
+  clip-path: polygon(0 0, 100% 3px, 100% 100%, 0 calc(100% - 3px));
+}
+
+/* Section titles remain direct grid children in the authored split layouts. */
+.detail-page[data-project-world] .engineering-section-heading { margin-bottom: 48px; }
+.detail-page[data-project-world] .engineering-section-heading h2 { color: var(--accent); }
+.detail-page[data-project-world] .engineering-copy { position: relative; isolation: isolate; }
+.detail-page[data-project-world] .engineering-copy .engineering-title {
+  color: var(--accent);
+  line-height: 1.4;
+  font-weight: 500;
+  margin: 0 0 29px;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+.detail-page[data-project-world] :where(.engineering-copy .engineering-title) { font-size: clamp(27px, 2.3vw, 39px); }
+.detail-page[data-project-world] .engineering-copy[data-copy-density='long'] {
+  padding: clamp(22px, 2.4vw, 38px);
+  background: var(--editorial-sheet);
+}
+.detail-page[data-project-world] .engineering-copy[data-copy-density='long']::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: 15px;
+  left: -9px;
+  bottom: -12px;
+  width: 9px;
+  background: color-mix(in srgb, var(--accent) 24%, #15201d);
+  clip-path: polygon(0 0, 100% 12px, 100% 100%, 0 calc(100% - 12px));
+  pointer-events: none;
+}
+.detail-page[data-project-world] .engineering-points { margin: 10px 0 0; }
+.detail-page[data-project-world] .engineering-points > .engineering-point {
+  --point-tone: var(--editorial-cool);
+  position: relative;
+  margin-top: 0;
+  padding: 0 0 24px 20px;
+  min-width: 0;
+}
+.detail-page[data-project-world] .engineering-points > .engineering-point + .engineering-point { margin-top: 21px; }
+.detail-page[data-project-world] .engineering-points > .engineering-point::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 4px;
+  width: 4px;
+  height: 31px;
+  background: var(--point-tone);
+  pointer-events: none;
+}
+.detail-page[data-project-world] .engineering-point[data-point-role='decision'] { --point-tone: var(--editorial-warm); }
+.detail-page[data-project-world] .engineering-point dt {
+  font-size: clamp(18px, 1.5vw, 21px);
+  line-height: 1.55;
+  color: var(--point-tone);
+  margin: 0 0 13px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+.detail-page[data-project-world] .engineering-point dd { margin: 0; }
+.detail-page[data-project-world] .engineering-point .project-prose { font-size: 17px; margin: 0; }
+.detail-page[data-project-world] .engineering-point .project-prose + .project-prose { margin-top: 14px; }
+.detail-page[data-project-world] .engineering-copy .project-caption { color: var(--editorial-note); font-size: 14px; line-height: 1.75; }
+.detail-page[data-project-world] .engineering-copy .code-block { margin-block: 27px 18px; }
+
+/* Text-only chapters use their real point count, not the screenshot layout. */
+@media (min-width: 761px) {
+  .detail-page[data-project-world] .engineering-topic:not(.engineering-topic--media) .engineering-copy {
+    container: engineering-editorial / inline-size;
+    display: block;
+    width: 100%;
+    max-width: none;
+  }
+  .detail-page[data-project-world] .engineering-topic:not(.engineering-topic--media) .engineering-points {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 30px clamp(28px, 3vw, 52px);
+    align-items: start;
+    width: 100%;
+  }
+  .detail-page[data-project-world] .engineering-topic:not(.engineering-topic--media) .engineering-points > .engineering-point { margin-top: 0; }
+  .detail-page[data-project-world] .engineering-topic:not(.engineering-topic--media) .engineering-copy > :is(h3, p, .code-block) { grid-column: 1 / -1; }
+  .detail-page[data-project-world] .engineering-topic:not(.engineering-topic--media) .engineering-copy > .code-block { width: 100%; }
+  @container engineering-editorial (min-width: 660px) {
+    .detail-page[data-project-world] .engineering-topic:not(.engineering-topic--media) .engineering-points { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @container engineering-editorial (min-width: 1040px) {
+    .detail-page[data-project-world] .engineering-topic:not(.engineering-topic--media) .engineering-points:has(> .engineering-point:nth-child(3):last-child) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+}
+
+@media (max-width: 760px) {
+  .detail-page[data-project-world] .engineering-topic:not(.engineering-topic--media) .engineering-copy { display: block; width: 100%; max-width: 100%; }
+  .detail-page[data-project-world] .engineering-topic:not(.engineering-topic--media) .engineering-points { display: block; }
+  .detail-page[data-project-world] .project-facts { font-size: 14px; gap: 7px 12px; }
+  .detail-page[data-project-world] .project-contents { top: 6px; padding: 8px 13px; gap: 0 17px; margin-top: 31px; font-size: 14px; }
+  .detail-page[data-project-world] .project-contents a { min-height: 44px; }
+  .detail-page[data-project-world] :is(#project-origin, #engineering, #gallery, #usage) { scroll-margin-top: 122px; }
+  .detail-page[data-project-world] :is(.story-origin, .project-technology) > h2,
+  .detail-page[data-project-world] .project-usage > .section-heading h2 { font-size: 25px; margin-bottom: 22px; }
+  .detail-page[data-project-world] .project-stack > div { padding-left: 15px; }
+  .detail-page[data-project-world] .project-stack dt { font-size: 17px; }
+  .detail-page[data-project-world] .project-stack dd { font-size: 16px; }
+  .detail-page[data-project-world] .usage { padding-left: 18px; }
+  .detail-page[data-project-world] .usage h3 { font-size: 22px; }
+  .detail-page[data-project-world] .project-signature--editorial > .signature-entry { display: block; padding-block: 18px; }
+  .detail-page[data-project-world] .project-signature--editorial > .signature-entry--principle { padding: 21px 22px; margin: 12px 0; }
+  .detail-page[data-project-world] .signature-entry--principle::after { right: -6px; width: 6px; }
+  .detail-page[data-project-world] .project-signature--editorial dt { font-size: 14px; margin-bottom: 10px; }
+  .detail-page[data-project-world] .project-signature--editorial dd { font-size: 17px; }
+  .detail-page[data-project-world] .project-prose--principle { font-size: 20px; max-width: none; }
+  .detail-page[data-project-world] .signature-highlights li { font-size: 16px; }
+  .detail-page[data-project-world] .engineering-section-heading { margin-bottom: 33px; }
+  .detail-page[data-project-world] .engineering-copy .engineering-title { font-size: clamp(25px, 6.5vw, 33px); margin-bottom: 23px; }
+  .detail-page[data-project-world] .project-prose { font-size: 17px; line-height: 1.85; max-width: 100%; }
+  .detail-page[data-project-world] .project-prose--lead { font-size: 19px; line-height: 1.8; }
+  .detail-page[data-project-world] .engineering-copy[data-copy-density='long'] { padding: 25px 22px; }
+  .detail-page[data-project-world] .engineering-points > .engineering-point { padding-left: 17px; padding-bottom: 18px; }
+  .detail-page[data-project-world] .engineering-points > .engineering-point + .engineering-point { margin-top: 20px; }
+  .detail-page[data-project-world] .engineering-point dt { font-size: 19px; margin-bottom: 11px; }
+  .detail-page[data-project-world] .engineering-copy[data-copy-density='long']::before { left: -6px; width: 6px; }
+}
+@media (forced-colors: active) {
+  .detail-page[data-project-world] .editorial-emphasis { color: MarkText; background: Mark; }
+  .detail-page[data-project-world] .signature-entry--principle,
+  .detail-page[data-project-world] .engineering-copy[data-copy-density='long'] { border: 1px solid CanvasText; }
+}

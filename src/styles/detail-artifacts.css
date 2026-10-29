@@ -1,0 +1,77 @@
+/* A picture is a real, full-size plane. Its depth is outside the bitmap. */
+.detail-page[data-project-world] .project-prologue::before { display:none; }
+.detail-page[data-project-world] :is(.project-hero,.engineering-media>figure,.gallery-grid>figure) { overflow:visible; }
+.detail-page[data-project-world] .project-hero { background:transparent; border-radius:0; perspective:none; }
+.detail-page[data-project-world] .artifact-stage {
+  --artifact-rest-x:5deg; --artifact-rest-y:-7deg; --artifact-rest-z:-.65deg;
+  --artifact-response:1; --artifact-depth:20px;
+  position:relative; width:100%; min-width:0; perspective:1800px; perspective-origin:50% 50%;
+  margin:12px 0 30px; padding:0; overflow:visible;
+}
+.detail-page[data-project-world] .artifact-plane {
+  position:relative; width:100%; min-width:0; transform-style:preserve-3d;
+  transform:rotateZ(var(--artifact-rest-z)) rotateY(var(--artifact-rest-y)) rotateX(var(--artifact-rest-x));
+  transform-origin:50% 50%; isolation:auto; overflow:visible;
+}
+.detail-page[data-project-world] .artifact-stage[data-artifact-role="hero"] { width:calc(100% - 28px); margin-inline:14px; }
+.detail-page[data-project-world] .artifact-plane > .media-link {
+  position:relative; z-index:1; display:block; width:100%; height:auto; max-width:none;
+  margin:0; padding:0; aspect-ratio:auto; background:transparent; border:0; border-radius:5px;
+  overflow:hidden; transform:none; box-shadow:0 26px 52px -24px #000b;
+  transform:translateZ(1px);
+}
+.detail-page[data-project-world] .artifact-plane > .media-link > img {
+  display:block; width:100%; height:auto; max-width:100%; max-height:none;
+  margin:0; padding:0; aspect-ratio:var(--artifact-ratio); object-fit:contain;
+}
+.detail-page[data-project-world] .artifact-plane > :is(.artifact-depth,.artifact-rim,.artifact-catchlight) {
+  position:absolute; inset:0; display:block; pointer-events:none; border-radius:5px;
+}
+.artifact-depth {
+  background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 21%,#192027),#11161b 50%,color-mix(in srgb,var(--detail-cool,#a4d7df) 12%,#15181c));
+  border:1px solid color-mix(in srgb,var(--accent) 22%,#20282d);
+  box-shadow:9px 14px 0 -4px #06090c55,0 38px 54px -26px #000c;
+  transform:translate3d(7px,11px,calc(var(--artifact-depth)*-1));
+}
+.artifact-rim { border:1px solid color-mix(in srgb,var(--accent) 27%,transparent); transform:translateZ(2px); }
+.artifact-catchlight {
+  z-index:2; background:linear-gradient(118deg,#ffffff05,transparent 28%,transparent 76%,#ffffff02);
+  box-shadow:inset 0 1px 0 #ffffff18; transform:translateZ(3px);
+}
+.detail-page[data-project-world] .artifact-plane .world-accent { z-index:3; transform:translateZ(10px); opacity:.34; }
+.detail-page[data-project-world] .artifact-plane > .media-link:focus-visible { outline:3px solid var(--accent); outline-offset:7px; }
+.detail-page[data-project-world] .artifact-stage[data-artifact-role="gallery"] { --artifact-rest-x:3deg; --artifact-rest-y:5deg; --artifact-rest-z:.65deg; --artifact-depth:16px; }
+.detail-page[data-project-world] .gallery-grid>figure:nth-child(even) .artifact-stage { --artifact-rest-y:-6deg; --artifact-rest-z:-.75deg; }
+.detail-page[data-project-world] .artifact-stage[data-artifact-role="inset"] { --artifact-rest-x:2deg; --artifact-rest-y:5deg; --artifact-rest-z:1deg; --artifact-response:.55; --artifact-depth:12px; margin:0 0 14px; }
+.detail-page[data-project-world] .artifact-stage[data-artifact-format="portrait"] { max-width:460px; margin-inline:auto; --artifact-rest-x:2deg; --artifact-rest-y:-4deg; --artifact-rest-z:-.4deg; --artifact-response:.55; }
+.detail-page[data-project-world] .artifact-stage[data-artifact-format="strip"] { --artifact-rest-x:0deg; --artifact-rest-y:0deg; --artifact-rest-z:0deg; --artifact-response:.2; --artifact-depth:8px; }
+.detail-page[data-world-family="battlefield"] .artifact-stage[data-artifact-role="hero"] { --artifact-rest-x:7deg; --artifact-rest-y:-9deg; --artifact-rest-z:-1.3deg; }
+.detail-page[data-world-family="editing"] .artifact-stage { --artifact-rest-x:4deg; --artifact-rest-y:5deg; --artifact-rest-z:.45deg; }
+.detail-page[data-world-family="survival"] .artifact-stage { --artifact-rest-x:7deg; --artifact-rest-y:5deg; --artifact-rest-z:1deg; }
+.detail-page[data-world-family="strategy"] .artifact-stage { --artifact-rest-x:4deg; --artifact-rest-y:-8deg; --artifact-rest-z:-.5deg; }
+.detail-page[data-world-family="architecture"] .artifact-stage { --artifact-rest-x:4deg; --artifact-rest-y:-6deg; --artifact-rest-z:-.35deg; }
+.detail-page[data-project-world] .engineering-media .engineering-inset {
+  display:block; padding:0; margin-right:0; background:transparent; border:0; border-radius:0; box-shadow:none; transform:none;
+}
+.detail-page[data-project-world] .engineering-inset .artifact-stage { width:100%; }
+.detail-page[data-project-world] .engineering-inset--strip .artifact-stage { max-width:var(--inset-width); margin-inline:auto; }
+.detail-page[data-project-world] :is(.project-hero,.engineering-media,.gallery-grid) figcaption {
+  position:relative; padding-left:15px; border-left:3px solid color-mix(in srgb,var(--accent) 38%,transparent);
+  color:var(--detail-muted,var(--muted)); background:none; max-width:70ch;
+}
+.detail-page[data-project-world] .project-hero .project-caption { padding:0 0 0 15px; margin-top:25px; }
+@media(max-width:1100px) {
+  .detail-page[data-project-world] .artifact-stage { perspective:2000px; --artifact-response:.8; }
+}
+@media(max-width:760px) {
+  .detail-page[data-project-world] .artifact-stage[data-artifact-role] { --artifact-rest-x:2deg; --artifact-rest-y:-3deg; --artifact-rest-z:-.3deg; --artifact-depth:10px; margin:10px 0 22px; perspective:1800px; }
+  .detail-page[data-project-world] .artifact-stage[data-artifact-role="gallery"] { --artifact-rest-x:1deg; --artifact-rest-y:3deg; --artifact-rest-z:.3deg; }
+  .detail-page[data-project-world] .artifact-stage[data-artifact-format="strip"] { --artifact-rest-x:0deg; --artifact-rest-y:0deg; --artifact-rest-z:0deg; }
+  .detail-page[data-project-world] .artifact-depth { transform:translate3d(4px,7px,-10px); }
+  .detail-page[data-project-world] .engineering-media .engineering-inset { width:86%; margin:25px 0 0 auto; }
+  .detail-page[data-project-world] .artifact-plane .world-accent { opacity:.22; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .detail-page[data-project-world] .artifact-plane { transform:none!important; }
+}
+@media(forced-colors:active) { .artifact-depth,.artifact-rim,.artifact-catchlight { display:none!important; } }

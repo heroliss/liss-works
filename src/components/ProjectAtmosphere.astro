@@ -1,0 +1,117 @@
+---
+import type { ProjectWorld } from '../data/project-worlds';
+
+interface Props { slug: string; world: ProjectWorld }
+type Ring = { x: number; y: number; rx: number; ry: number; angle?: number };
+type Point = { x: number; y: number; r?: number };
+type Drawing = { faces: string[]; lines: string[]; rings?: Ring[]; points?: Point[] };
+
+const { slug, world } = Astro.props;
+const familyMotifs: Record<string, string> = {
+  architecture: 'circuit', flow: 'circuit', editing: 'editing', battlefield: 'orbit',
+  survival: 'terrain', geography: 'terrain', strategy: 'strategy', build: 'pipeline',
+  systems: 'pipeline', mapping: 'pipeline', glyphs: 'glyph', text: 'reading',
+  journal: 'reading', desktop: 'desktop', focus: 'focus', blocks: 'blocks',
+  optics: 'light', research: 'paths', paths: 'paths', routing: 'paths',
+  sorting: 'sorting', evolution: 'tree',
+};
+const motif = familyMotifs[world.family] ?? ({ nodes: 'circuit', map: 'terrain', tree: 'tree', bars: 'sorting', route: 'paths', reading: 'reading', light: 'light', glyph: 'glyph', blocks: 'blocks', focus: 'focus', pipeline: 'pipeline' }[world.motion] ?? 'orbit');
+const drawings: Record<string, Drawing> = {
+  circuit: {
+    faces: ['M80 440L292 322L452 414L241 535Z', 'M1364 176L1539 78L1710 176L1535 278Z', 'M1346 828L1538 716L1727 824L1534 940Z'],
+    lines: ['M240 422L403 326H579L662 242H823', 'M342 482L531 590H686L756 660', 'M1538 178L1387 266V403L1286 462H1134', 'M1534 826L1365 730H1214L1122 784H988', 'M1428 218L1333 274V348L1239 402'],
+    points: [{ x: 579, y: 326 }, { x: 686, y: 590 }, { x: 1286, y: 462 }, { x: 1214, y: 730 }],
+  },
+  editing: {
+    faces: ['M-120 646C126 492 307 526 435 687S658 954 922 898L941 979C649 1050 419 923 348 765S113 594-91 729Z', 'M1194 60L1744 235L1706 315L1155 141Z'],
+    lines: ['M-122 666C117 516 284 552 408 708S658 978 928 922', 'M-118 701C122 553 255 595 378 737S654 1009 933 954', 'M1180 98L1732 275', 'M1250 117L1228 158M1350 149L1328 190M1450 181L1428 222M1550 213L1528 254M1650 245L1628 286'],
+    rings: [{ x: 200, y: 370, rx: 171, ry: 120, angle: -18 }, { x: 200, y: 370, rx: 126, ry: 88, angle: -18 }, { x: 1554, y: 675, rx: 148, ry: 101, angle: 16 }],
+    points: [{ x: 200, y: 370, r: 17 }, { x: 1554, y: 675, r: 14 }],
+  },
+  orbit: {
+    faces: ['M1182 72L1495 126L1614 296L1300 239Z', 'M98 761L226 689L379 777L250 851Z'],
+    lines: ['M-108 813C234 417 574 421 792 581S1201 963 1764 572', 'M-97 849C235 454 570 464 769 611S1199 996 1784 612', 'M1248 116L1454 153L1530 261', 'M212 724L327 789'],
+    rings: [{ x: 1394, y: 418, rx: 402, ry: 160, angle: -29 }, { x: 1394, y: 418, rx: 451, ry: 180, angle: -29 }, { x: 1394, y: 418, rx: 305, ry: 335, angle: 24 }],
+    points: [{ x: 228, y: 660, r: 7 }, { x: 1613, y: 230, r: 9 }],
+  },
+  terrain: {
+    faces: ['M-98 520C74 295 311 314 413 490S453 810 257 949S-53 827-98 520Z', 'M1336 132C1464 8 1663 84 1742 240S1623 553 1464 492S1228 267 1336 132Z'],
+    lines: ['M-82 540C75 332 281 351 372 505S406 783 236 903S-38 808-82 540Z', 'M-60 562C76 372 250 391 331 520S358 754 214 857S-19 790-60 562Z', 'M-37 585C78 414 218 432 290 535S311 726 193 811S-1 771-37 585Z', 'M1368 166C1478 60 1620 116 1683 250S1589 492 1472 445S1276 282 1368 166Z', 'M1400 200C1492 112 1578 148 1624 260S1555 431 1480 398S1324 297 1400 200Z'],
+  },
+  strategy: {
+    faces: ['M80 609L439 402L739 574L379 787Z', 'M1364 223L1461 166L1558 222L1462 279Z'],
+    lines: ['M151 568L451 744M222 527L524 701M294 486L595 659M366 444L667 617', 'M140 643L500 435M200 678L560 470M260 713L620 505M320 748L680 540', 'M1462 223V377M1462 377L1280 483M1462 377L1644 483M1280 483V608M1644 483V608M1280 608L1178 667M1280 608L1382 667'],
+    points: [{ x: 321, y: 585, r: 19 }, { x: 382, y: 621, r: 19 }, { x: 451, y: 579, r: 19 }, { x: 1280, y: 483, r: 10 }, { x: 1644, y: 483, r: 10 }],
+  },
+  pipeline: {
+    faces: ['M60 453L265 335L465 450L260 569Z', 'M260 706L467 586L667 703L460 823Z', 'M1360 114L1554 2L1750 114L1554 229Z'],
+    lines: ['M262 451L494 316H688L791 256', 'M364 512L570 630H747', 'M464 704L674 826H861', 'M1552 114L1350 232V358L1170 463H1002', 'M1593 198L1431 292V416L1266 512'],
+    points: [{ x: 688, y: 316, r: 8 }, { x: 747, y: 630, r: 8 }, { x: 1350, y: 358, r: 8 }],
+  },
+  glyph: {
+    faces: ['M291 250L367 293L300 331V458L234 496L300 534V661L367 700L291 744L225 706V579L160 541V451L225 413V287Z', 'M1478 381L1402 425L1469 463V589L1535 627L1469 665V792L1402 831L1478 875L1544 837V710L1609 672V582L1544 544V418Z'],
+    lines: ['M386 233L596 354M386 271L555 369', 'M1238 757L1370 833M1198 779L1331 855', 'M629 190L464 819', 'M1290 333L1151 873'],
+  },
+  reading: {
+    faces: ['M85 381L373 218L524 526L226 699Z', 'M116 421L405 256L557 565L257 740Z', 'M145 460L437 294L588 604L288 779Z', 'M1378 414L1656 258L1758 519L1464 688Z'],
+    lines: ['M145 460Q280 424 437 294M288 779Q420 744 588 604', 'M226 506Q327 465 443 394M242 538Q339 497 458 428', 'M1378 414Q1456 462 1464 688M1391 408L1428 380L1456 437', 'M1290 727C1400 761 1494 749 1586 694'],
+  },
+  desktop: {
+    faces: ['M58 409L376 228L625 373L308 558ZM105 409L376 254L578 373L308 530Z', 'M1235 244L1571 54L1774 172L1438 366ZM1280 244L1571 80L1728 172L1438 340Z'],
+    lines: ['M80 463L309 595L612 421', 'M107 494L310 613L583 455', 'M1267 301L1438 402L1745 225', 'M1451 391L1451 514L1533 561M1367 560L1533 561L1607 517'],
+  },
+  focus: {
+    faces: ['M1267 128L1646 260L1671 605L1292 475ZM1306 172L1611 279L1631 559L1327 452Z', 'M83 810L357 547L482 623L208 885Z'],
+    lines: ['M1306 172L1327 452L1631 559', 'M99 823L361 572L455 627', 'M1133 159C962 341 987 559 1168 731', 'M1087 120C895 334 922 584 1124 777'],
+    rings: [{ x: 1490, y: 386, rx: 111, ry: 163, angle: -19 }, { x: 1490, y: 386, rx: 139, ry: 205, angle: -19 }],
+  },
+  blocks: {
+    faces: ['M64 488L202 409L338 487L200 568Z', 'M202 329L338 251L475 329L338 409Z', 'M338 488L475 409L612 488L475 568Z', 'M200 568L338 488L338 647L200 727Z', 'M1380 236L1517 157L1654 236L1517 316Z', 'M1517 316L1654 236L1654 395L1517 475Z'],
+    lines: ['M64 488V647L200 727M338 251V409M475 329V488M612 488V647L475 727L338 647', 'M1380 236V395L1517 475M1517 316V475', 'M104 783L298 895L529 763'],
+  },
+  light: {
+    faces: ['M1240 196L1612 399L1282 641Z', 'M1240 196L1328 125L1700 328L1612 399Z', 'M1282 641L1612 399L1700 328L1371 570Z', 'M-78 755L1290 411L1297 448L-50 831Z'],
+    lines: ['M1328 125L1371 570L1700 328', 'M1324 433L1845 657M1334 414L1860 577M1344 395L1876 497', 'M-92 791L1282 430'],
+  },
+  paths: {
+    faces: ['M98 458L219 389L339 459L217 530Z', 'M1366 218L1488 148L1610 219L1487 289Z', 'M1445 769L1566 699L1688 770L1566 840Z'],
+    lines: ['M218 458C329 296 481 255 671 310', 'M218 458C371 558 465 677 518 852', 'M1488 219C1300 343 1241 506 1367 663L1566 770', 'M1488 219C1601 401 1589 542 1413 615', 'M518 852C751 1008 1119 1002 1367 663'],
+    points: [{ x: 218, y: 458, r: 10 }, { x: 671, y: 310, r: 7 }, { x: 518, y: 852, r: 10 }, { x: 1488, y: 219, r: 10 }, { x: 1566, y: 770, r: 10 }],
+  },
+  sorting: {
+    faces: [132, 236, 174, 318, 270, 382].map((height, index) => { const x = 80 + index * 86; return `M${x} 780V${780 - height}L${x + 43} ${755 - height}L${x + 78} ${775 - height}V775L${x + 35} 800Z`; }),
+    lines: ['M105 858C310 963 452 985 657 859', 'M1275 203L1698 447M1275 241L1698 485', 'M1351 247V474M1440 298V588M1529 349V650'],
+  },
+  tree: {
+    faces: ['M1420 139L1530 76L1640 139L1530 204Z', 'M1228 402L1323 347L1418 402L1323 458Z', 'M1604 402L1699 347L1794 402L1699 458Z', 'M66 743L176 680L286 743L176 808Z'],
+    lines: ['M1530 139V267L1323 388M1530 267L1699 365', 'M1323 402V569L1170 658M1323 569L1464 650', 'M1699 402V566L1584 633M1699 566L1812 631', 'M176 743L363 636L481 704L622 622', 'M176 743V888L309 964'],
+    points: [{ x: 1170, y: 658, r: 9 }, { x: 1464, y: 650, r: 9 }, { x: 1584, y: 633, r: 9 }, { x: 622, y: 622, r: 9 }],
+  },
+};
+const drawing = drawings[motif];
+const key = `project-field-${slug.replace(/[^a-z0-9-]/gi, '')}`;
+const seed = Array.from(slug).reduce((sum, letter) => sum + letter.charCodeAt(0), 0);
+const cant = ((seed % 9) - 4) * .45;
+const layers = [{ name: 'upper', depth: -.35 }, { name: 'middle', depth: .55 }, { name: 'lower', depth: 1 }];
+---
+
+<div class="project-atmosphere" data-project-field data-field-family={world.family} data-field-motion={world.motion} data-field-motif={motif} aria-hidden="true" style={`--field-cant:${cant}deg;--field-accent:${world.accent};--field-surface:${world.surface}`}>
+  <div class="project-atmosphere__wash"></div>
+  <div class="project-atmosphere__grain"></div>
+  <svg class="project-atmosphere__definitions" width="0" height="0" focusable="false">
+    <defs>
+      <linearGradient id={`${key}-face`} x1="100" y1="200" x2="1600" y2="900" gradientUnits="userSpaceOnUse"><stop class="field-stop-cool" stop-opacity=".14"/><stop offset=".5" class="field-stop-accent" stop-opacity=".035"/><stop offset="1" class="field-stop-warm" stop-opacity=".11"/></linearGradient>
+      <linearGradient id={`${key}-edge`} x1="60" y1="400" x2="1760" y2="700" gradientUnits="userSpaceOnUse"><stop class="field-stop-cool" stop-opacity=".65"/><stop offset=".4" class="field-stop-accent" stop-opacity=".16"/><stop offset=".8" class="field-stop-warm" stop-opacity=".4"/><stop offset="1" class="field-stop-accent" stop-opacity=".08"/></linearGradient>
+      <symbol id={`${key}-motif`} viewBox="0 0 1800 1200">
+        <g class="detail-field-extrusion" transform="translate(0 17)">{drawing.faces.map(d => <path d={d}/>)}</g>
+        <g class="detail-field-faces" fill={`url(#${key}-face)`} stroke={`url(#${key}-edge)`}>{drawing.faces.map(d => <path d={d}/>)}</g>
+        <g class="detail-field-traces">{drawing.lines.map(d => <path d={d}/>)}</g>
+        {drawing.rings && <g class="detail-field-rings">{drawing.rings.map(ring => <ellipse cx={ring.x} cy={ring.y} rx={ring.rx} ry={ring.ry} transform={`rotate(${ring.angle ?? 0} ${ring.x} ${ring.y})`}/>)}</g>}
+        {drawing.points && <g class="detail-field-points">{drawing.points.map(point => <><ellipse cx={point.x} cy={point.y + 8} rx={point.r ?? 7} ry={(point.r ?? 7) * .62} class="detail-field-point-shadow"/><ellipse cx={point.x} cy={point.y} rx={point.r ?? 7} ry={(point.r ?? 7) * .62}/></>)}</g>}
+      </symbol>
+    </defs>
+  </svg>
+  {layers.map(layer => <div class:list={['project-atmosphere__layer', `project-atmosphere__layer--${layer.name}`]} data-detail-field-layer={layer.depth}>
+    <div class="project-atmosphere__canvas"><div class="project-atmosphere__art"><svg viewBox="0 0 1800 1200" preserveAspectRatio="xMidYMid meet" fill="none" focusable="false"><use href={`#${key}-motif`} x="0" y="0" width="1800" height="1200"/></svg></div></div>
+  </div>)}
+</div>

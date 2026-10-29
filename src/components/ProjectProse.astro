@@ -1,0 +1,28 @@
+---
+interface Props {
+  text: string;
+  as?: 'p' | 'span';
+  tone?: 'body' | 'lead' | 'principle';
+  class?: string;
+  reveal?: boolean;
+}
+const { text, as: Tag = 'p', tone = 'body', class: className, reveal = false } = Astro.props;
+
+// Highlight only real words already in the copy. Text nodes remain escaped by
+// Astro; this component never accepts or generates an HTML string.
+const decisions = new Set(['生命周期', '所有权', '作用域', '固定种子', '可恢复', '可重现', '复现', '取消', '隔离', '预算', '校验', '边界', '口径']);
+const terms = /生命周期|所有权|作用域|固定种子|可恢复|可重现|Hierarchy|Context|Command|System|Model|View|UniTask|Softmax|GeoJSON|Markdown|Pareto|GPU|GLSL|JSON|Unicode|复现|取消|隔离|预算|校验|边界|口径/gu;
+const segments: { text: string; role?: 'technical' | 'decision' }[] = [];
+let cursor = 0;
+let emphasis = 0;
+for (const match of text.matchAll(terms)) {
+  if (emphasis === 2) break;
+  const index = match.index!;
+  if (index > cursor) segments.push({ text: text.slice(cursor, index) });
+  segments.push({ text: match[0], role: decisions.has(match[0]) ? 'decision' : 'technical' });
+  cursor = index + match[0].length;
+  emphasis++;
+}
+if (cursor < text.length) segments.push({ text: text.slice(cursor) });
+---
+<Tag class:list={['project-prose', `project-prose--${tone}`, className]} data-detail-reveal={reveal ? '' : undefined}>{segments.map(segment => segment.role ? <mark class={`editorial-emphasis editorial-emphasis--${segment.role}`}>{segment.text}</mark> : segment.text)}</Tag>

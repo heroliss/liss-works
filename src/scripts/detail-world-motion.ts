@@ -1,4 +1,5 @@
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 type Options = { signal: AbortSignal; preference: MediaQueryList };
 type Kind = 'nodes' | 'pipeline' | 'orbit' | 'bars' | 'route' | 'glyph' | 'reading' | 'focus' | 'blocks' | 'tree' | 'map' | 'light';
@@ -54,13 +55,88 @@ export function setupDetailWorldMotion({ signal, preference }: Options): () => v
   document.addEventListener('visibilitychange', sync, { signal: controller.signal });
   updateButtons();
 
-  media.add({ motion: '(prefers-reduced-motion: no-preference)', fine: '(hover: hover) and (pointer: fine)' }, (context) => {
-    const { motion, fine } = context.conditions!;
+  const chapterLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('.project-contents a[href^="#"]'));
+  const chapters = chapterLinks.map(link => document.getElementById(link.hash.slice(1))).filter((section): section is HTMLElement => Boolean(section));
+  const reading = new Set<Element>();
+  const chapterObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => { if (entry.isIntersecting) reading.add(entry.target); else reading.delete(entry.target); });
+    const current = chapters.filter(section => reading.has(section)).at(-1);
+    if (!current) return;
+    chapterLinks.forEach(link => {
+      if (link.hash === `#${current.id}`) link.setAttribute('aria-current','location');
+      else link.removeAttribute('aria-current');
+    });
+  }, { rootMargin:'-12% 0px -62% 0px' });
+  chapters.forEach(section => chapterObserver.observe(section));
+
+  media.add({ motion: '(prefers-reduced-motion: no-preference)', fine: '(hover: hover) and (pointer: fine)', wide: '(min-width: 900px)' }, (context) => {
+    const { motion, fine, wide } = context.conditions!;
     const events = new AbortController();
     const observers: (IntersectionObserver | ResizeObserver)[] = [];
     const currentGates: (() => void)[] = [];
     let closed = false;
     updateButtons();
+    if (motion) {
+      const copy = Array.from(document.querySelectorAll<HTMLElement>('[data-detail-reveal]'));
+      ScrollTrigger.batch(copy, {
+        start:'top 94%', once:true, interval:.06, batchMax:4,
+        onEnter: batch => context.add(() => gsap.fromTo(batch,{y:14},{y:0,duration:.8,stagger:.065,ease:'power3.out',clearProps:'transform'})),
+      });
+    }
+
+    const page = document.querySelector<HTMLElement>('.detail-page');
+    if (page && motion && fine && wide) {
+      const layers = Array.from(page.querySelectorAll<HTMLElement>('[data-detail-field-layer]'));
+      const fields = layers.map(layer => ({
+        layer, visible:false,
+        depth: Number(layer.dataset.detailFieldLayer) || 0,
+        x: gsap.quickTo(layer, 'x', { duration: 1.05, ease: 'power3.out' }),
+        y: gsap.quickTo(layer, 'y', { duration: 1.05, ease: 'power3.out' }),
+      }));
+      let held = false;
+      let visible = false;
+      const active = () => !closed && visible && !held && !paused && !document.hidden;
+      const reset = (immediate = false) => {
+        fields.forEach(field => [field.x,field.y].forEach(to => { to(0); if (immediate) to.tween.progress(1).pause(); }));
+        page.dataset.detailFieldPointer = '0.000,0.000';
+      };
+      const gate = () => { if (!closed && (paused || document.hidden || !visible)) reset(true); };
+      const intersection = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; gate(); });
+      intersection.observe(page);
+      observers.push(intersection);
+      const layerObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          const field = fields.find(field => field.layer === entry.target);
+          if (!field) return;
+          field.visible = entry.isIntersecting;
+          if (!field.visible) [field.x,field.y].forEach(to => { to(0);to.tween.progress(1).pause(); });
+        });
+      });
+      fields.forEach(field => layerObserver.observe(field.layer));
+      observers.push(layerObserver);
+      gates.add(gate); currentGates.push(gate);
+      page.addEventListener('pointermove', event => {
+        if (!active() || event.pointerType === 'touch') return;
+        const x = gsap.utils.clamp(-1,1,event.clientX / Math.max(1,window.innerWidth)*2-1);
+        const y = gsap.utils.clamp(-1,1,event.clientY / Math.max(1,window.innerHeight)*2-1);
+        fields.filter(field => field.visible).forEach(field => { field.x(-x*24*field.depth); field.y(-y*18*field.depth); });
+        page.dataset.detailFieldPointer = `${x.toFixed(3)},${y.toFixed(3)}`;
+      }, { passive:true,signal:events.signal });
+      page.addEventListener('pointerdown', event => {
+        if (!event.isPrimary || event.button !== 0) return;
+        held = true; fields.forEach(field => [field.x,field.y].forEach(to => to.tween.pause()));
+      }, { signal:events.signal });
+      const release = () => {
+        const wasHeld = held; held = false;
+        if (!page.matches(':hover')) reset();
+        else if (wasHeld && active()) fields.filter(field => field.visible).forEach(field => [field.x,field.y].forEach(to => { if (to.tween.progress()<1) to.tween.resume(); }));
+      };
+      window.addEventListener('pointerup',release,{signal:events.signal});
+      window.addEventListener('pointercancel',release,{signal:events.signal});
+      window.addEventListener('blur',() => { held=false;reset(true); },{signal:events.signal});
+      page.addEventListener('pointerleave',() => { if (!held) reset(); },{signal:events.signal});
+      context.add(() => () => { delete page.dataset.detailFieldPointer; });
+    }
     figures.forEach((figure) => {
       const plane = figure.querySelector<HTMLElement>('[data-detail-tilt]');
       const kind = figure.dataset.detailMotion as Kind;
@@ -68,13 +144,28 @@ export function setupDetailWorldMotion({ signal, preference }: Options): () => v
       const animations: gsap.core.Animation[] = [];
       const pulses: SVGGeometryElement[] = [];
       let visible = false;
+      let held = false;
       let bounds = { left: 0, top: 0, width: 1, height: 1 };
-      const xTo = motion && fine && plane ? gsap.quickTo(plane, 'x', { duration: 0.55, ease: 'power3.out' }) : undefined;
-      const yTo = motion && fine && plane ? gsap.quickTo(plane, 'y', { duration: 0.55, ease: 'power3.out' }) : undefined;
-      const rxTo = motion && fine && plane ? gsap.quickTo(plane, 'rotationX', { duration: 0.65, ease: 'power3.out' }) : undefined;
-      const ryTo = motion && fine && plane ? gsap.quickTo(plane, 'rotationY', { duration: 0.65, ease: 'power3.out' }) : undefined;
+      let restX = 0, restY = 0, restZ = 0, response = 1;
+      let camera = { x:0, width:1, height:1, perspective:1800, viewport:1 };
+      const readPose = () => {
+        if (!plane) return;
+        const style = getComputedStyle(plane);
+        restX = parseFloat(style.getPropertyValue('--artifact-rest-x')) || 0;
+        restY = parseFloat(style.getPropertyValue('--artifact-rest-y')) || 0;
+        restZ = parseFloat(style.getPropertyValue('--artifact-rest-z')) || 0;
+        response = parseFloat(style.getPropertyValue('--artifact-response')) || 1;
+      };
+      readPose();
+      const pointerEnabled = motion && fine && wide && plane;
+      const xTo = pointerEnabled ? gsap.quickTo(plane, 'x', { duration: 0.65, ease: 'power3.out' }) : undefined;
+      const yTo = pointerEnabled ? gsap.quickTo(plane, 'y', { duration: 0.65, ease: 'power3.out' }) : undefined;
+      const rxTo = pointerEnabled ? gsap.quickTo(plane, 'rotationX', { duration: 0.8, ease: 'power3.out' }) : undefined;
+      const ryTo = pointerEnabled ? gsap.quickTo(plane, 'rotationY', { duration: 0.8, ease: 'power3.out' }) : undefined;
+      const pointerTweens = [xTo,yTo,rxTo,ryTo];
       const resetPointer = (immediate = false) => {
-        [xTo, yTo, rxTo, ryTo].forEach((to) => { if (to) { to(0); if (immediate) to.tween.progress(1).pause(); } });
+        xTo?.(0); yTo?.(0); rxTo?.(restX); ryTo?.(restY);
+        if (immediate) pointerTweens.forEach(to => to?.tween.progress(1).pause());
         figure.dataset.detailPointer = '0.000,0.000';
       };
       const active = () => Boolean(!closed && motion && visible && !document.hidden && !paused && !preference.matches);
@@ -132,25 +223,66 @@ export function setupDetailWorldMotion({ signal, preference }: Options): () => v
       gates.add(gate);
       currentGates.push(gate);
       gate();
-      if (motion && fine && plane) {
+      if (pointerEnabled) {
         const measure = () => {
           if (closed) return;
           const box = figure.getBoundingClientRect();
           bounds = { left: box.left + window.scrollX, top: box.top + window.scrollY, width: box.width, height: box.height };
+          const stage = plane.closest<HTMLElement>('.artifact-stage');
+          if (stage) {
+            const frame = stage.getBoundingClientRect();
+            camera = { x:frame.x, width:plane.offsetWidth, height:plane.offsetHeight, perspective:parseFloat(getComputedStyle(stage).perspective)||1800, viewport:document.documentElement.clientWidth };
+          }
         };
         measure();
         const size = new ResizeObserver(measure);
         size.observe(figure);
         observers.push(size);
+        window.addEventListener('resize', () => { readPose();measure();resetPointer(true); }, { signal:events.signal });
         figure.addEventListener('pointerenter', measure, { signal: events.signal });
         figure.addEventListener('pointermove', (event) => {
-          if (!active() || event.pointerType === 'touch') return;
+          if (!active() || held || event.pointerType === 'touch') return;
           const x = gsap.utils.clamp(-1, 1, (event.pageX - bounds.left) / Math.max(1, bounds.width) * 2 - 1);
           const y = gsap.utils.clamp(-1, 1, (event.pageY - bounds.top) / Math.max(1, bounds.height) * 2 - 1);
-          xTo?.(x * 12); yTo?.(y * 12); rxTo?.(-y * 7); ryTo?.(x * 9);
+          const broad = kind === 'orbit' || kind === 'light' ? 1.15 : kind === 'reading' ? .7 : 1;
+          const targetX = restX-y*8*response*broad, targetY = restY+x*12*response*broad;
+          // A wide plane can approach the viewport edge as it turns. Evaluate
+          // its four projected corners from cached geometry before moving it;
+          // keep the full screenshot visible instead of clipping its content.
+          const fits = (strength:number) => {
+            const ax=targetX*strength*Math.PI/180,ay=targetY*strength*Math.PI/180,az=restZ*Math.PI/180;
+            return [-1,1].every(sx => [-1,1].every(sy => {
+              const px=sx*camera.width/2,py=sy*camera.height/2;
+              const y1=py*Math.cos(ax),z1=py*Math.sin(ax);
+              const x2=px*Math.cos(ay)+z1*Math.sin(ay),z2=-px*Math.sin(ay)+z1*Math.cos(ay);
+              const x3=x2*Math.cos(az)-y1*Math.sin(az);
+              const screen=camera.x+camera.width/2+(x3+x*7*response*strength)/(1-z2/camera.perspective);
+              return screen>=7&&screen<=camera.viewport-7;
+            }));
+          };
+          let strength=1;
+          if (!fits(1)) {
+            let low=0,high=1;
+            for(let step=0;step<8;step++){const middle=(low+high)/2;if(fits(middle))low=middle;else high=middle;}
+            strength=low;
+          }
+          xTo?.(x*7*response*strength); yTo?.(y*7*response*strength);
+          rxTo?.(targetX*strength); ryTo?.(targetY*strength);
           figure.dataset.detailPointer = `${x.toFixed(3)},${y.toFixed(3)}`;
         }, { passive: true, signal: events.signal });
-        figure.addEventListener('pointerleave', () => resetPointer(), { signal: events.signal });
+        figure.addEventListener('pointerdown', event => {
+          if (!event.isPrimary || event.button !== 0) return;
+          held = true; pointerTweens.forEach(to => to?.tween.pause());
+        }, { signal:events.signal });
+        const release = () => {
+          const wasHeld = held; held = false;
+          if (!figure.matches(':hover')) resetPointer();
+          else if (wasHeld && active()) pointerTweens.forEach(to => { if (to && to.tween.progress()<1) to.tween.resume(); });
+        };
+        window.addEventListener('pointerup',release,{signal:events.signal});
+        window.addEventListener('pointercancel',release,{signal:events.signal});
+        window.addEventListener('blur',() => { held=false;resetPointer(true); },{signal:events.signal});
+        figure.addEventListener('pointerleave', () => { if (!held) resetPointer(); }, { signal: events.signal });
       }
       context.add(() => () => {
         pulses.forEach((pulse) => pulse.remove());
@@ -170,6 +302,7 @@ export function setupDetailWorldMotion({ signal, preference }: Options): () => v
     if (disposed) return;
     disposed = true;
     controller.abort();
+    chapterObserver.disconnect();
     media.revert();
     gates.clear();
     originals.forEach(({ button, pressed, label, disabled, text }) => {
