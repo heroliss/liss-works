@@ -1,0 +1,48 @@
+---
+import type { Project } from '../data/types';
+import { getProjectWorld, projectWorldStyle } from '../data/project-worlds';
+import { getProjectSignature } from '../data/project-signatures';
+import { sitePath } from '../lib/site-path';
+import MediaImage from './MediaImage.astro';
+import Icon from './Icon.astro';
+import '../styles/project-ending.css';
+
+interface Props { project: Project; related: Project[]; }
+const { project, related } = Astro.props;
+const displayName = project.name.split(' · ')[0];
+const defaultPaths = [
+  'M540 28C540 96 36 50 36 170',
+  'M540 28C540 112 836 140 836 310',
+  'M540 28C540 112 740 75 740 180L740 700C740 810 304 760 304 890',
+];
+---
+{related.length > 0 && <section class="project-pathmap" aria-labelledby="related-title" data-project-continuation data-branch-count={related.length}>
+  <header class="project-pathmap__heading">
+    <h2 id="related-title">继续探索</h2>
+    <a href={sitePath('/projects/')} class="project-pathmap__all">全部工程 <Icon size={19}/></a>
+  </header>
+  <div class="project-pathmap__board" data-continuation-board>
+    <div class="project-pathmap__origin"><span class="project-pathmap__origin-pin" data-continuation-origin aria-hidden="true"></span><p>从 <span>{displayName}</span> 出发</p></div>
+    <svg class="project-pathmap__wires" viewBox="0 0 1200 1300" preserveAspectRatio="none" aria-hidden="true" data-continuation-wires>
+      {related.map((item,index) => <g style={`--branch-tone:${getProjectWorld(item.slug).accent}`}>
+        <path d={defaultPaths[index] ?? defaultPaths[0]} data-continuation-path={index}/>
+        <circle cx="0" cy="0" r="4" data-continuation-runner={index}/>
+      </g>)}
+    </svg>
+    <div class="project-pathmap__branches">
+      {related.map((item,index) => {
+        const name = item.name.split(' · ')[0];
+        const signature = getProjectSignature(item.slug);
+        return <article class="project-pathmap__node" style={`${projectWorldStyle(item.slug)};--branch-tone:${getProjectWorld(item.slug).accent}`} data-related-project={item.slug} data-continuation-node={index}>
+          <a class="project-pathmap__link" href={sitePath(`/projects/${item.slug}/`)} aria-label={item.name} data-related-link>
+            <header class="project-pathmap__node-heading"><span class="project-pathmap__pin" aria-hidden="true" data-continuation-pin></span><h3>{name}<Icon size={23}/></h3>{name !== item.name && <p class="project-pathmap__full-name">{item.name}</p>}<p class="project-pathmap__category"><span>{item.category}</span><span>{item.status}</span></p></header>
+            <div class="project-pathmap__picture"><div class="project-pathmap__photo" data-continuation-photo><MediaImage image={item.cover} sizes={index === 1 ? '(max-width: 900px) calc(100vw - 76px), (max-width: 1100px) 43vw, 34vw' : '(max-width: 900px) calc(100vw - 76px), 67vw'}/></div></div>
+            <p class="project-pathmap__summary">{item.summary}</p>
+            <p class="project-pathmap__principle">{signature.principle}</p>
+            <p class="project-pathmap__tags">{item.tags.slice(0,3).map(tag => <span>{tag}</span>)}</p>
+          </a>
+        </article>;
+      })}
+    </div>
+  </div>
+</section>}

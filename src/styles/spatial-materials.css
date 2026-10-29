@@ -26,12 +26,12 @@
 .framework-showcase .framework-showcase__media::after,.dub-reel .dub-screen-bezel::after {
   content:""; position:absolute; inset:-3px; display:block; border:0; border-radius:inherit;
   pointer-events:none; z-index:4; opacity:var(--material-shine,.58);
-  background:linear-gradient(90deg,transparent,#ffffffc9 34%,color-mix(in srgb,var(--material-tone) 70%,#fff),transparent) 12% 0/54% 1px no-repeat,
-    linear-gradient(180deg,#ffffff9c,transparent) 0 0/1px 30% no-repeat,
-    linear-gradient(90deg,transparent,color-mix(in srgb,var(--material-tone) 72%,#fff)) 100% 100%/19% 1px no-repeat,
-    linear-gradient(0deg,color-mix(in srgb,var(--material-tone) 65%,#fff),transparent) 100% 100%/1px 17% no-repeat;
-  box-shadow:-1px -1px 0 #ffffff0b,1px 1px 0 color-mix(in srgb,var(--material-tone) 15%,transparent);
-  transform:translate3d(var(--material-light-x),var(--material-light-y),12px);
+  /* A short reflection sits flush on the material, not as a hovering wire box. */
+  inset:0;
+  background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--material-tone) 44%,#fff) 48%,transparent) calc(28% + var(--material-light-x) + var(--material-light-x) + var(--material-light-x)) 0/27% 1px no-repeat,
+    linear-gradient(0deg,transparent,color-mix(in srgb,var(--material-tone) 28%,transparent)) 100% 100%/1px 10% no-repeat;
+  box-shadow:none;
+  transform:translateZ(1px);
 }
 .detail-page[data-project-world] .artifact-plane > .artifact-rim {
   border-color:color-mix(in srgb,var(--accent) 38%,transparent); transform:translateZ(4px);
@@ -55,7 +55,7 @@
 }
 .game-scene--outpost > .game-art { --game-rest-x:6deg; --game-rest-y:8deg; }
 .game-scene--gomoku > .game-art { --game-rest-x:4deg; --game-rest-y:-6deg; }
-.game-scene .game-art::after { inset:24px 12px; transform:translate3d(var(--material-light-x),var(--material-light-y),32px); }
+.game-scene .game-art::after { inset:24px 12px; transform:translateZ(1px); }
 .game-scene .game-art > canvas { transform:translateZ(26px); }
 .game-scene .game-art > .game-scene__image { box-shadow:1px 2px 0 #8d9a9a55,4px 7px 0 #172126,8px 13px 0 -3px color-mix(in srgb,var(--game-tone) 25%,#10161b),0 32px 48px -24px #000d; }
 @media(max-width:760px) {
@@ -63,7 +63,7 @@
   .game-scene > .game-art { --game-rest-x:2deg; --game-rest-y:-3deg; }
   .game-scene--outpost > .game-art { --game-rest-y:3deg; }
   .game-scene .game-art > canvas { transform:translateZ(14px); }
-  .game-scene .game-art::after { transform:translateZ(18px); }
+  .game-scene .game-art::after { transform:translateZ(1px); }
 }
 @media(prefers-reduced-motion:reduce) {
   .game-scene > .game-art { transform:none!important; }
@@ -76,3 +76,6 @@
   .atlas-preview-depth,.atlas-preview-edge,.game-scene .game-art::after,
   .framework-showcase__media::after,.dub-screen-bezel::after { display:none!important; }
 }
+
+/* The palette tween is the only colour interpolator; CSS must not trail it. */
+.home-next[data-hero-palette=true] :is(.hero-accent,.stage-controls button,.stage-description h2,.stage-detail-link,.home-atmosphere,.pointer-light,.kinetic-strip) { transition-property:opacity,transform; }

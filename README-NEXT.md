@@ -1,6 +1,6 @@
-# Liss Works · v13 工程图册
+# Liss Works · v14 工程图册
 
-新版使用 GSAP 官方技能，结合 Taste Skill v2、Frontend Design 与 Impeccable，保留 Astro + TypeScript 和深色模式。v13 加强真实作品平面的默认透视、指针反馈与窄前沿反光，以连续底光衔接首页、工程库和 22 个详情；首页旧探索列表替换为三个真实问题引导的暗室折页。工程库沿用 v12 的大幅预览、22 幅图版和原生筛选链接，详情保留原文、媒体、真实比例图框与阅读顺序。四角五卡换位、通栏主题字带以及 SSFramework / DubForge 的统一 camera / world 场景继续保留。源码位于 `site-next/`；旧版 `../site/` 的源码和 Git 历史保留，整个新版开发过程未修改旧站，也未执行发布或替换原站。
+新版使用 GSAP 官方技能，结合 Taste Skill v2、Frontend Design 与 Impeccable，保留 Astro + TypeScript 和深色模式。v14 将首页兴趣入口统一为三枚书签、当前问题、真实画面与明确的工程库入口，重新组织详情末尾的工程边注和全部可见的相关项目分岔，并把巨大页尾品牌改为紧凑的开发者落款。首屏颜色使用独立的缓慢衔接，反光贴回材质短边；v13 的空间、连续主题底光，以及 v12 的 22 幅工程图版继续保留。详情原文主体、原媒体、下载和讨论目标不变。源码位于 `site-next/`；旧版 `../site/` 的源码和 Git 历史保留，整个新版开发过程未修改旧站，也未执行发布或替换原站。
 
 ## 预览与对照
 
@@ -11,7 +11,7 @@
 
 在 `site-next/` 执行 `npm ci`，然后 `npm run dev -- --port 4322`。旧版在 `../site/` 使用同样命令并指定 4321。对照台在 `../comparison/` 执行 `python -m http.server 4320 --bind 127.0.0.1`。工作区根目录 `启动新旧版对照.ps1` 可启动或复用这三个预览。
 
-## v13 内容与交互
+## v14 内容与交互
 
 保留首页、工程库、22 项详情、关于页、交互实验、404 及原有资料、源码、下载、交流、筛选和算法功能；独立网页工具仍使用原实现。
 
@@ -21,6 +21,7 @@
 - 首屏呈现 Outpost、DubForge、SSFramework、NomadWorkshop、Gomoku 五张真实作品卡片。桌面主图 620px、后排图 310px，以约 2:1 宽度、4:1 单图面积形成主次；四张后排图的中心靠近主图四个顶点，加入轻微错位。这个比例服务本页构图，不是普适审美定律。主图默认 X / Y / Z 为 `10° / −18° / −4°`，后排使用不同静止角；桌面精细指针统一追加最多约 ±10° / ±16° 的 X / Y 响应，接近视口边缘时按投影收敛。窄屏将介绍移到舞台上方，手机缩放卡片并将后排中心向内收。下方五个可读名称标签、项目说明和“查看项目”分别组织。
 - 点击结构为 `article > button > 3D visual span`：二维槽位由 GSAP Flip 同步移动并补间宽高，按钮外壳承接短弧线，内部画面接收鼠标并做透视反馈；原生按钮保留键盘与点击语义。标题栏与说明栏保留相同槽位，角色变化时保持内部结构稳定。外层透明留白不拦截后方可见卡片；画面中的装饰子层不接收指针事件。按下鼠标时同时暂停换位与画面响应，释放后恢复。
 - 切换时五张卡片用 0.92 秒共同进入新槽位。起始保留旧遮挡顺序，所选后排图先向外略避让，原前图反向让出空间，在同一时间线的 0.48 秒处交换层级，再落入目标位置；到位或重置时清除临时层级和飞行位移。快速改选从当下可见位置接续，手机和粗指针设备同样平滑过渡静止角。ResizeObserver 只更新测量，文案改行不会强制结束内部缓动。离屏、页面隐藏和全局暂停控制换位播放，减少动态效果时直接到位；真实窗口尺寸变化或页面离开时终止旧换位并清除临时状态。
+- 首屏配色与 0.92 秒的空间换位分别管理。`--hero-tone` 与 `--showcase-tone` 使用独立 GSAP 时间线，以 `1.85s / sine.inOut` 进入当前项目色；快速改选先读取当前已绘制的颜色，再从该色接续，不回跳旧端点。按住、离屏、隐藏和全局暂停冻结时间线，减少动态效果时直接到达目标色。
 - 首页背景组件保留页面、首屏、框架、游戏与结尾等原创变体，新探索章节使用独立暗室。低对比色场与静态颗粒铺满视口宽度，线稿保持居中，最大宽度 1920px，左右各 12% 渐隐；静止外层的左右 16px 保持完全透明，避免指针移动时露出裁切边。v13 将中段色场改为随页高延展的深青、青绿与暖灰反射光，并衔接现有页脚，减少长页回到纯黑的空段。首屏背景随指针反向轻移，并与卡片共用暂停和清理规则；背景没有自动循环。裁切限定在装饰叶片，作品场景保留溢出空间。
 - 点击或用 Enter / Space 激活非当前卡片，只将它切到前景；激活已经位于前景的卡片，会进入对应详情。卡片获得焦点时保持位置并显示 outline；名称选择器支持悬停、聚焦与点击切换，“查看项目”也可直接进入当前工程。
 - SSFramework 是黄绿的游戏框架连接背板：单个大图窗口配四个插槽，切换时以拔出、移动、接入线缆衔接架构图、运行诊断、工具中心与根节点绑定/生成弹窗。最后一幅使用真实 `16-binding-generated-script-links`，呈现绑定清单、生成目标、脚本链接和生成入口。截图完整保留、支持灯箱，每幅都有标题与 18px 说明。
@@ -31,28 +32,30 @@
 - 22 个详情保留各自的开场、图文顺序与主题，完整主题表见 `DESIGN.md`。全页背景使用 15 种内容相关的原创母题，色场随页高连续展开，线稿保持居中、最大宽度 1920px、两侧各 13% 渐隐。上、中、下三处完整母题之间增加两处仅有主题路径的延续，共五个局部深度层；新增层不重复整块板面、圆环或节点。各层只在可见且收到有效输入时响应，不自行循环，16px 静止外缘渐隐继续保留。
 - 详情背景直接绘制共享 SVG 几何，移除会先裁切负坐标线稿的 symbol 视口；首页与详情在静态外层处理两侧渐隐，让内部图形轻移时边缘保持柔和。实心矩形装饰底板改为柔边、斜切或半透明的色场与反光，真实截图、文字及机台的共享透视不受装饰遮罩裁切。
 - 详情主图、工程证据、插图和图集统一使用真实比例的立体图框，厚度、边缘和光感放在位图外围；竖图减小幅度并限制展示宽度，极宽条带保留平直读法。截图、alt、caption、灯箱及键盘链接保留，避免用大块空白垫底。
-- `spatial-materials.css` 将高光限定在窄边线与前方薄层，由既有指针控制器更新约 ±3px / ±2px 的反光偏移和明暗；不以大片白色蒙层覆盖截图。详情与工程库的指针基准追加幅度约为 ±9° / ±14°，详情另按主题与图幅调整倍率，实际值按可用空间与投影边界收敛。按住时冻结画面、反光与切换，释放后恢复或归位；共享透视、全局暂停、隐藏与清理语义保持一致。
-- 首页 `ExplorationInvitation.astro` 以“还有世界，没有展开”的暗室折页替代旧列表。三个问题分别用 LearnOpenGL 的真实木盒材质图、Intelligence × Cost 的真实能力成本图、NomadWorkshop 的居民状态图回应；主图解码后切换，有限揭页与局部光源跟随输入，没有自动轮播。问题与主图均为原生链接，分别进入 `group=graphics&tag=OpenGL`、`group=ai-data&tag=AI`、`group=games&tag=Unity` 的工程库；触屏直接导航，无 JavaScript 仍保留三条问题入口、默认真实图片与全库入口。
+- v14 将 `spatial-materials.css` 的反光改为贴着材质的短边光：常规层位于 `translateZ(1px)`，顶部约 27% 宽的 1px 反光与角部短线随材质变量轻变，不再形成前方 12px 的整圈白框。`--material-light-x` 对应短边光的背景位置，明暗继续使用既有控制器；共享透视、按住冻结、全局暂停、隐藏与清理语义保持一致。详情与工程库的基准追加幅度约为 ±9° / ±14°，仍按图幅、主题及投影边界收敛。
+- 首页 `ExplorationInvitation.astro` 统一呈现“图形 / AI / 游戏”三枚兴趣书签、当前真实问题、完整图片和“去工程库看……”入口，不把问题、预览与跳转拆成互不相干的控件。材料分别来自 LearnOpenGL 木盒材质图、Intelligence × Cost 能力成本图、NomadWorkshop 居民状态图。图片解码后原子切换，书签、问题和入口同步采用当前色，仅暗室光在 0.55 秒内缓慢衔接。书签、主图与明确 CTA 均为原生链接，进入对应 `group=graphics&tag=OpenGL`、`group=ai-data&tag=AI`、`group=games&tag=Unity` 筛选；触屏可直接导航，无 JavaScript 保留默认真图、三条兴趣入口与全库入口，没有自动轮播。
 - 正文用项目主色组织章节，冷色表达技术对象与能力，暖色表达主张、约束、状态和操作，柔和中性色承载连续阅读。安全行内标记仅强调已有词语，不改变原文与数据。无媒体章节的技术要点按可用宽度排成两到三列，手机回到单列；有媒体的既有构图和代码复制入口保留。
 - 原有章节链接形成粘性导航，并用 `aria-current="location"` 标记当前阅读位置。文字和图框的滚动入场在布局就绪后使用安全的 `ScrollTrigger.refresh(true)` 更新位置。截图指针响应使用缓存尺寸计算投影边界，接近视口边缘时收敛角度，以保留完整画面；按住、暂停、离屏、隐藏和减少动态效果均有对应停止与清理行为。
-- 同源页面在浏览器支持时使用原生 View Transition 衔接共享封面，普通导航与历史保持有效。首页索引、工程库、继续探索卡片和详情颜色由 `src/data/project-worlds.ts` 统一，不编造界面、数字或结果。
+- `ProjectConversation.astro` 将原有讨论文案保留为工程边注：注明当前项目，以独立原生链接进入相同的工程交流页。`ProjectContinuation.astro` 把现有两项或三项相关工程展开成分岔图，所有真实图片、名称和说明同时可见；悬停与聚焦只强调对应分支并触发一次沿线光点，点击仍直接进入该工程，不共用单个预览、也不按顺序解锁内容。
+- 共享布局页脚由 `SiteFooter.astro` 呈现开发者落款：34px 签名、原句“让画面、功能和使用过程说话。”、两组文字资源导航与 © 2026 Liss。全部工程、交互实验、想法与交流、GitHub、返回首页入口均保留，新增原生 `#main` 回页首；只允许背景光轻移约 10px / 6px，不移动链接，不宣称在线、可约或实时工作状态。
+- 同源页面在浏览器支持时使用原生 View Transition 衔接共享封面，普通导航与历史保持有效。首页索引、工程库、相关工程分支和详情颜色由 `src/data/project-worlds.ts` 统一，不编造界面、数字或结果。
 - 不在图片上添加探索、放大等文字提示或跟随指针的文字标签。全局暂停、离屏、页面隐藏及减少动态效果均会停止相应运动；偏好变化即时生效，页面离开清理资源。手机与无 JavaScript 状态保留自然阅读和有效入口。
 
 SSFramework 架构图来自原仓库文档；运行诊断和工具图采自 Outpost 原生窗口，根节点绑定/生成弹窗来自明确标注的自制 UI 绑定示例，展示实际绑定清单和生成入口。DubForge 九张图为原程序真实生产界面中的隔离演示项目补拍，使用自写双语稿与自绘视频，保留原始截图字节；画面展示待制作状态，并不表示已经执行推理、配音、成片或投稿。来源与核验见 `../verification/site-next/v6/dubforge-nine-step-captures.json`。
 
 EazyBuildPipeline 封面改为真实 `17-master-general-clear-empty-state`（1216×689）：阶段勾选、通用配置与右侧绿色 Run Pipeline 按钮呈现总控窗口。旧封面和原图集保留。用户已放弃补充无法找到的旧版独立 Bundle 编辑器截图，不以原生 Inspector 或只读 Bundle 清单替代；本轮没有新增此类图库条目。
 
-首页样式由 `framework-showcase.css`、`dubforge-workflow.css`、`factory-sequence.css`、`spatial-scenes.css`、`home-atmosphere.css` 等组织；详情继续使用三份 `project-worlds` 主题表、`detail-atmosphere.css`、`detail-artifacts.css` 与 `detail-editorial.css`。`ArchiveTile.astro`、`archive-atlas.css`、`archive-tiles.css` 与 `archive-atlas.ts` 组织工程库；v13 的 `spatial-materials.css` 处理窄前沿反光，`atmosphere-polish.css` 处理装饰背板，末尾的 `background-depth.css` 衔接长段与页脚底光。`HomeAtmosphere.astro` 和 `ProjectAtmosphere.astro` 输出原创背景，`ProjectArtifact.astro` 统一真实图框，`ProjectProse.astro` 安全呈现原文强调，`ExplorationInvitation.astro` 及配套 CSS / 脚本组织三个真实好奇问题。动效由 `src/scripts/motion.ts` 接入各模块，封面连续性在 `site-continuity.ts`。场景切换、world 空间响应、小车与传送带统一遵守全局暂停、离屏、页面隐藏和减少动态效果；无 JavaScript 时提供自然图集与有效链接。暂停状态通过 `documentElement.dataset.motionPaused` 与 `portfolio:motion-state` 同步，并以受保护的 `sessionStorage` 在当前标签页内跨完整导航保留，BFCache 返回时先恢复选择再重建动效。
+首页样式由 `framework-showcase.css`、`dubforge-workflow.css`、`factory-sequence.css`、`spatial-scenes.css`、`home-atmosphere.css` 等组织；详情继续使用三份 `project-worlds` 主题表、`detail-atmosphere.css`、`detail-artifacts.css` 与 `detail-editorial.css`。`ArchiveTile.astro` 与配套 atlas / tile 文件组织工程库；`spatial-materials.css` 处理贴边短反光，`atmosphere-polish.css` 和 `background-depth.css` 组织柔和背景。v14 的 `ExplorationInvitation.astro` 统一兴趣入口，`ProjectConversation.astro`、`ProjectContinuation.astro` 与 `project-ending.css` / `project-ending.ts` 组织详情收尾；`SiteFooter.astro`、`site-footer.css` 与 `footer-motion.ts` 组织开发者落款。动效由 `src/scripts/motion.ts` 接入，封面连续性在 `site-continuity.ts`；暂停状态通过 `documentElement.dataset.motionPaused` 与 `portfolio:motion-state` 同步，并用受保护的 `sessionStorage` 在当前标签页内跨完整导航保留。BFCache 返回时先恢复选择再重建动效。
 
-历史检查点：v1 `75a79327129c73e407eaf9053d24de69736b5260`、v2 `4948588`、v3 `70ebe45`、v4 `1035e69`、v5 `2710801`、v6 `4f53b48`、v7 `137c342`、v8 `8db1d9e4f27d7a66fce2d95d87f33f50b2da40fc`、v9 `26e9782875868de1268cb26752fef92e6e9490cf`、v10 `1ba8c3c36153b9c9fce1bb5ba9725881438299d5`、v11 `c845367036b49aae415b4f4212841545f34785cc`、v12 `1e8334dc620fa06fe67c2384e449b30830a4004a`。对应历史证据与首轮 `.taste-skill/` 方向记录保留，可回退对照。技能位于工作区 `../.agents/skills/`；版本、来源、许可证和校验见 `../verification/site-next/skills-provenance.json`，未修改已有全局技能。
+历史检查点：v1 `75a79327129c73e407eaf9053d24de69736b5260`、v2 `4948588`、v3 `70ebe45`、v4 `1035e69`、v5 `2710801`、v6 `4f53b48`、v7 `137c342`、v8 `8db1d9e4f27d7a66fce2d95d87f33f50b2da40fc`、v9 `26e9782875868de1268cb26752fef92e6e9490cf`、v10 `1ba8c3c36153b9c9fce1bb5ba9725881438299d5`、v11 `c845367036b49aae415b4f4212841545f34785cc`、v12 `1e8334dc620fa06fe67c2384e449b30830a4004a`、v13 `3a992f29589b099c8b29b413f287038bd4591d3f`。对应历史证据与首轮 `.taste-skill/` 方向记录保留，可回退对照。技能位于工作区 `../.agents/skills/`；版本、来源、许可证和校验见 `../verification/site-next/skills-provenance.json`，未修改已有全局技能。
 
 ## 验证与字体更新
 
 验证命令：`npm run check`、`npm test`、`npm run test:releases`、`npm run test:paths`、`npm run build`、`npm run verify:dist`。GitHub Pages 子路径验证使用 `SITE_BASE=/liss-works-next/` 和 `SITE_URL=https://heroliss.github.io`；本地默认根路径。
 
-当前 v13 证据在 `../verification/site-next/v13/`。已确认 68 项项目测试（27 + 20 + 21）通过，分别记录于 `tests-lab.log`、`tests-releases.log`、`tests-paths.log`；69 文件 Astro 检查为零诊断。`archive-controller-review.json` 与 `archive-filter-review.json` 保留控制器和筛选状态核对。最终的根路径 / 子路径构建、实际浏览器与 production QA 仍在进行，不把开发阶段检查扩大为最终验收。
+当前 v14 证据在 `../verification/site-next/v14/`。已确认 74 文件 Astro 检查零诊断，根路径构建与 `verify:dist` 通过；68 项既有测试（27 + 20 + 21）分别记录于 `tests-lab.log`、`tests-releases.log`、`tests-paths.log`。根路径与子路径构建、22 页正文及页尾资料完整性、27 页页脚目的地均已通过；实际浏览器与截图结论见最终报告。
 
-v13 的最终报告入口为 `../verification/site-next/v13/acceptance.json`、`../verification/site-next/v13/runtime-acceptance.json` 与 `../verification/site-next/v13/final-integrity.json`；文件生成或收尾后，以其实际状态及引用的命中、几何、交互、构建、媒体和原站完整性报告为准。历史 v12 完整性报告保留 22 页的 1,569 个语义块、33,001 个规范化顺序文本字符、447 个链接、183 处图像、722 条 srcset 候选、130 处 caption、22 个代码块、11 个下载目标和 2 个视频目标，不能直接充当 v13 最终结论。截图补拍与字体来源材料继续保留在 v6；原站 581 个 tracked 文件继续按原始 baseline 核对 SHA256、字节数、HEAD 和 Git 状态。静态检查不代替浏览器验收，Taste house rules 的失败与其他提示透明保留，不声称完整 Taste gate、主观高分或全部浏览器 FPS 通过。
+v14 的最终报告入口为 `../verification/site-next/v14/acceptance.json`、`../verification/site-next/v14/runtime-acceptance.json` 与 `../verification/site-next/v14/final-integrity.json`；本轮报告已完成，具体覆盖范围以各报告为准。完整性核对区分保留的详情正文、媒体与本轮新增边注、导航和落款，不把历史语义计数直接当作 v14 最终结果。v6 补拍与字体来源材料、v11–v13 内容与几何基准继续保留；原站 581 个 tracked 文件仍按 baseline 核对 SHA256、字节数、HEAD 和 Git 状态。静态检查不代替浏览器验收，不声称完整 Taste gate、主观高分或全部浏览器 FPS 通过。
 
 新增中文文案后，必须从 **`site-next/` 目录**运行：
 

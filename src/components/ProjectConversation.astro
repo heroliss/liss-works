@@ -1,0 +1,24 @@
+---
+import type { Project } from '../data/types';
+import { projectTalkUrl } from '../lib/site-path';
+import Icon from './Icon.astro';
+import '../styles/project-ending.css';
+
+interface Props { project: Project; }
+const { project } = Astro.props;
+const displayName = project.name.split(' · ')[0];
+---
+<aside class="project-postscript" aria-labelledby="conversation-title" data-project-postscript>
+  <div class="project-postscript__stroke" aria-hidden="true" data-postscript-ink>
+    <svg viewBox="0 0 90 280" fill="none"><path d="M76 12C33 9 35 40 38 82C40 114 22 130 8 137C30 143 43 165 40 196C37 239 37 265 80 268"/><path d="M58 22C31 40 47 92 31 116M54 251C35 231 46 197 36 181"/></svg>
+  </div>
+  <div class="project-postscript__copy">
+    <h2 id="conversation-title">这个工程，让你想到什么？</h2>
+    <p>分享使用心得、遇到的问题，或一个值得继续尝试的想法。</p>
+    <p class="project-postscript__source">关于 <span>{displayName}</span></p>
+  </div>
+  <a class="project-postscript__link" href={projectTalkUrl(project.slug)} aria-label={`交流想法：前往 ${displayName} 的工程交流页`}>
+    <span class="project-postscript__link-label">交流想法<small>前往交流页继续聊</small></span>
+    <span class="project-postscript__arrow"><Icon size={30}/></span>
+  </a>
+</aside>

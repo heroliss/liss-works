@@ -1,0 +1,145 @@
+/* A colophon, not another hero. This modifier owns its layout independently of
+   the older .footer-wordmark / .footer-links rules still used by old markup. */
+.site-footer.site-footer--colophon {
+  --colophon-cool:#a9c0b6;
+  --colophon-warm:#c6b7a0;
+  position:relative;
+  isolation:isolate;
+  display:block;
+  min-width:0;
+  margin-top:clamp(80px,9vw,136px);
+  padding:44px 0 22px;
+  border:0;
+  color:var(--ink,#eeefeb);
+}
+/* Replace the preceding version's footer bounce with this footer's own leaf,
+   including on pages that load background-depth.css after the Base styles. */
+body .site-footer.site-footer--colophon[data-site-footer]::before { content:none; }
+.site-footer--colophon .colophon-field {
+  position:absolute;
+  top:-175px;
+  bottom:-70px;
+  left:calc(50% - 50vw);
+  width:100vw;
+  z-index:-1;
+  overflow:hidden;
+  pointer-events:none;
+  mask-image:linear-gradient(to right,transparent 16px,#000 clamp(45px,7vw,140px),#000 calc(100% - clamp(45px,7vw,140px)),transparent calc(100% - 16px)),linear-gradient(to bottom,transparent,#000 28%,#000 75%,transparent);
+  mask-composite:intersect;
+}
+.colophon-field * { pointer-events:none; }
+.site-footer--colophon .colophon-light {
+  position:absolute;
+  inset:-30px -40px;
+  transform:none;
+  background:radial-gradient(ellipse 58% 77% at 24% 51%,#829e8b1c,transparent 80%),radial-gradient(ellipse 52% 74% at 93% 64%,#acb5c217,transparent 81%);
+}
+.site-footer--colophon .colophon-crease {
+  position:absolute;
+  top:30px;
+  left:50%;
+  width:min(1920px,100%);
+  height:190px;
+  margin-left:max(-960px,-50%);
+  overflow:visible;
+  stroke:var(--colophon-cool);
+  stroke-width:1;
+  stroke-opacity:.13;
+  mask-image:linear-gradient(to right,transparent,#000 15%,#000 85%,transparent);
+}
+.site-footer--colophon .colophon-crease path + path { stroke:var(--colophon-warm); stroke-opacity:.055; }
+.site-footer--colophon .colophon-layout {
+  display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);
+  gap:clamp(50px,8vw,150px);
+  align-items:start;
+}
+.site-footer--colophon .colophon-signature {
+  display:inline-flex;
+  align-items:center;
+  gap:13px;
+  min-height:44px;
+  color:var(--ink,#eeefeb);
+  font-family:var(--font-display);
+  font-size:34px;
+  line-height:1.1;
+  font-weight:600;
+  letter-spacing:-.035em;
+}
+.site-footer--colophon .colophon-signature__works { color:#a6b9b0; }
+.site-footer--colophon .colophon-signature > svg { color:var(--colophon-cool); }
+.site-footer--colophon .colophon-note {
+  margin:23px 0 9px;
+  max-width:27ch;
+  font-size:19px;
+  line-height:1.8;
+  color:var(--ink,#eeefeb);
+}
+.site-footer--colophon .colophon-context {
+  margin:0;
+  font-size:14px;
+  line-height:1.8;
+  color:#a7b7b0;
+}
+.site-footer--colophon .colophon-navigation {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:clamp(28px,4vw,72px);
+}
+.site-footer--colophon .colophon-group-title {
+  margin:2px 0 16px;
+  font-size:14px;
+  line-height:1.6;
+  color:#a0b2a8;
+}
+.site-footer--colophon .colophon-link {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 17px;
+  gap:5px 14px;
+  align-items:center;
+  min-height:62px;
+  padding:7px 0;
+}
+.site-footer--colophon .colophon-link + .colophon-link { margin-top:12px; }
+.site-footer--colophon .colophon-link__name { grid-column:1; font-size:18px; line-height:1.5; }
+.site-footer--colophon .colophon-link__note { grid-column:1; font-size:13px; line-height:1.6; color:#a2b0ab; }
+.site-footer--colophon .colophon-link > svg { grid-column:2; grid-row:1/3; color:#91aaa0; transition:transform 180ms ease,color 180ms ease; }
+.site-footer--colophon .colophon-link:is(:hover,:focus-visible) .colophon-link__name { color:#c5d8bb; }
+.site-footer--colophon .colophon-link:is(:hover,:focus-visible) > svg { color:#c5d8bb; transform:translate(2px,-2px); }
+.site-footer--colophon .colophon-baseline {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  margin-top:42px;
+  padding-top:8px;
+}
+.site-footer--colophon .colophon-baseline small { font-size:13px; line-height:1.6; color:#a2b1aa; }
+.site-footer--colophon .colophon-return {
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  min-height:44px;
+  font-size:14px;
+  color:#b6c4bc;
+}
+.site-footer--colophon .colophon-return:is(:hover,:focus-visible) { color:var(--ink,#eeefeb); }
+@media(max-width:760px) {
+  .site-footer.site-footer--colophon { margin-top:78px; padding-top:28px; padding-bottom:20px; }
+  .site-footer--colophon .colophon-layout { grid-template-columns:1fr; gap:34px; }
+  .site-footer--colophon .colophon-signature { font-size:32px; }
+  .site-footer--colophon .colophon-note { font-size:18px; margin-top:18px; }
+  .site-footer--colophon .colophon-navigation { gap:26px; }
+  .site-footer--colophon .colophon-group-title { margin-bottom:13px; }
+  .site-footer--colophon .colophon-link { gap:4px 9px; }
+  .site-footer--colophon .colophon-link__name { font-size:17px; }
+  .site-footer--colophon .colophon-baseline { margin-top:26px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .site-footer--colophon .colophon-light { transform:none!important; }
+  .site-footer--colophon .colophon-link > svg { transition:none; }
+}
+@media(forced-colors:active) {
+  .site-footer--colophon .colophon-field { display:none; }
+  .site-footer--colophon :is(.colophon-signature__works,.colophon-context,.colophon-group-title,.colophon-link__note,.colophon-return,.colophon-baseline small) { color:CanvasText; }
+}

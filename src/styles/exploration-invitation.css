@@ -1,107 +1,107 @@
-/* One lit, unfolding image; the questions occupy its margins rather than a list. */
-.exploration-invitation {
-  --invite-tone: #ffd08a;
-  position: relative;
-  isolation: isolate;
-  padding-block: 36px 20px;
-  overflow: visible;
+/* One folded library guide. Bookmarks, question, full image and entry share
+   one material; the screenshot has no separate reflective frame. */
+.exploration-invitation { --invite-tone:#ffd08a; position:relative; isolation:isolate; padding-block:28px 16px; overflow:visible; }
+.invitation-darkroom { position:absolute; z-index:-1; pointer-events:none; inset:-65px calc(50% - 50vw) -80px; overflow:clip; mask-image:linear-gradient(to bottom,transparent,#000 12%,#000 86%,transparent); background:radial-gradient(ellipse at 48% 47%,#121f26,#0b1118 57%,transparent 84%); }
+.invitation-light { position:absolute; inset:0; pointer-events:none; background:radial-gradient(ellipse at 46% 47%,color-mix(in srgb,var(--invite-ambience,var(--invite-tone)) 11%,transparent),transparent 60%); }
+.invitation-heading { display:flex; justify-content:space-between; align-items:end; gap:40px; margin-bottom:40px; }
+.invitation-heading h2 { font-size:clamp(46px,6.2vw,90px); font-weight:500; line-height:1.14; letter-spacing:-.055em; margin:0; }
+.invitation-heading > p { font-size:18px; line-height:1.85; color:#bdc8cb; margin:0 3% 10px 0; }
+.invitation-composition { width:min(1280px,100%); margin-inline:auto; }
+.invitation-camera { position:relative; min-width:0; padding:32px 30px 38px; perspective:1800px; }
+.invitation-motion { position:relative; transform-style:preserve-3d; }
+.invitation-fold { position:relative; transform-style:preserve-3d; transform:rotateX(3deg) rotateY(-4deg) rotateZ(-1.2deg); }
+.invitation-sheet { position:absolute; inset:46px 0 0; pointer-events:none; transform-origin:2% 100%; }
+.invitation-sheet--far { background:#16232a; transform:translate3d(8px,15px,-30px) rotateZ(1.5deg); clip-path:polygon(0 0,97% 0,100% 4%,100% 95%,96% 100%,0 100%); }
+.invitation-sheet--near { background:color-mix(in srgb,var(--invite-tone) 15%,#19262c); transform:translate3d(-5px,8px,-14px) rotateZ(-.8deg); clip-path:polygon(0 0,97% 0,100% 5%,100% 93%,95% 100%,0 100%); }
+.invitation-sheet--near::after { content:''; position:absolute; right:0; bottom:0; width:6%; height:11%; background:color-mix(in srgb,var(--invite-tone) 24%,#263940); clip-path:polygon(100% 0,100% 100%,0 100%); }
+.invitation-topics { position:relative; display:flex; align-items:stretch; padding:0 10px 0 0; transform:translateZ(10px); }
+.invitation-topics::after { content:''; position:absolute; z-index:3; bottom:0; height:5px; left:0; right:0; background:color-mix(in srgb,var(--invite-tone) 60%,#18272b); pointer-events:none; }
+.invitation-question { position:relative; min-width:0; flex:1; padding:22px 28px 23px; color:#c6d1d2; background:#18252c; clip-path:polygon(0 3%,91% 0,100% 13%,97% 100%,0 100%); }
+.invitation-question + .invitation-question { margin-left:-10px; }
+.invitation-question--0 { flex-grow:1.13; margin-top:10px; transform:rotate(-.5deg); transform-origin:bottom right; }
+.invitation-question--1 { flex-grow:.98; margin-top:0; padding-top:25px; background:#1b2931; transform:rotate(.5deg); transform-origin:bottom center; }
+.invitation-question--2 { flex-grow:1.2; margin-top:7px; padding-top:21px; background:#17272a; transform:rotate(-.35deg); transform-origin:bottom left; }
+.invitation-topic-name { display:block; font-size:clamp(25px,2.4vw,34px); line-height:1.15; font-weight:500; color:#d9e1dc; margin-bottom:10px; }
+.invitation-question__text { display:block; font-size:16px; line-height:1.65; text-wrap:balance; }
+.invitation-question__route { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:13px; font-size:15px; line-height:1.5; color:var(--question-tone); }
+.invitation-question__route > span { font-size:24px; line-height:1; transition:transform 180ms ease; }
+.invitation-contact { position:absolute; bottom:0; left:28px; width:32px; height:8px; background:var(--question-tone); opacity:.15; }
+.invitation-question[data-active=true] { z-index:2; color:#e8efea; background:color-mix(in srgb,var(--question-tone) 19%,#142329); }
+.invitation-question[data-active=true] .invitation-topic-name { color:var(--question-tone); }
+.invitation-question[data-active=true] .invitation-contact { opacity:1; }
+.invitation-question:hover .invitation-question__route > span,.invitation-question:focus-visible .invitation-question__route > span { transform:translate(3px,-3px); }
+.invitation-pictures { position:relative; background:#111d24; transform:translateZ(10px); box-shadow:8px 25px 45px -28px #000c; }
+.invitation-picture { margin:0; }
+.invitation-current-question { display:block; padding:25px 29px 24px; min-height:119px; }
+.invitation-topic-path { font-size:15px; line-height:1.7; color:var(--invite-tone); margin:0 0 8px; }
+.invitation-current-question h3 { margin:0; font-size:clamp(25px,2.7vw,39px); font-weight:500; line-height:1.35; letter-spacing:-.04em; }
+.invitation-picture-link { position:relative; display:block; }
+.invitation-picture-link > img { display:block; width:100%; height:auto; }
+.invitation-photo-edge { position:absolute; pointer-events:none; top:0; left:0; right:0; height:2px; background:color-mix(in srgb,var(--invite-tone) 27%,transparent); }
+.invitation-evidence { display:flex; justify-content:space-between; align-items:center; gap:32px; padding:24px 29px 27px; }
+.invitation-evidence > div { min-width:0; }
+.invitation-work { display:block; font-family:var(--font-display,Rajdhani,sans-serif); font-size:23px; color:#e2e8e5; line-height:1.2; margin-bottom:6px; }
+.invitation-evidence p { margin:0; max-width:35em; font-size:16px; color:#b9c8cd; line-height:1.75; }
+.invitation-current-entry { display:inline-flex; flex-shrink:0; justify-content:space-between; align-items:center; gap:20px; padding:13px 16px; min-height:52px; color:#111c21; background:var(--invite-tone); font-size:17px; font-weight:500; }
+.invitation-current-entry > svg { flex-shrink:0; transition:transform 180ms ease; }
+.invitation-current-entry:hover > svg,.invitation-current-entry:focus-visible > svg { transform:translate(3px,-3px); }
+.invitation-exit { display:flex; justify-content:space-between; align-items:center; gap:30px; width:min(1220px,100%); margin:32px auto 0; }
+.invitation-exit > p { margin:0; color:#b9c8cd; font-size:17px; }
+.invitation-library-link { display:flex; align-items:center; gap:20px; min-height:60px; font-size:clamp(23px,2.2vw,32px); color:#e7eee7; }
+.invitation-library-count { font-size:15px; color:#b7c4c8; white-space:nowrap; }
+.invitation-library-link > svg { color:var(--invite-tone); }
+.exploration-invitation a:focus-visible { outline:2px solid var(--invite-tone); outline-offset:5px; }
+.invitation-question:focus-visible { outline:0; box-shadow:inset 0 0 0 3px var(--question-tone); }
+@media (max-width:1000px) {
+  .invitation-heading { gap:28px; }
+  .invitation-heading > p { margin-right:0; max-width:17em; font-size:17px; }
+  .invitation-camera { padding:26px 22px 32px; }
+  .invitation-question { padding-inline:20px; }
+  .invitation-question__text { font-size:15px; }
+  .invitation-question__route { font-size:14px; gap:5px; }
+  .invitation-contact { left:20px; }
+  .invitation-evidence { align-items:start; gap:20px; }
+  .invitation-current-entry { font-size:16px; gap:10px; padding-inline:12px; }
 }
-.invitation-darkroom {
-  position: absolute;
-  z-index: -1;
-  pointer-events: none;
-  inset: -65px calc(50% - 50vw) -80px;
-  overflow: clip;
-  mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 86%, transparent);
-  background: radial-gradient(ellipse at 44% 44%, #111c24, #0b1118 57%, transparent 82%);
+@media (max-width:760px) {
+  .exploration-invitation { padding-block:12px 0; }
+  .invitation-heading { display:block; margin-bottom:24px; }
+  .invitation-heading h2 { font-size:clamp(38px,9.8vw,60px); }
+  .invitation-heading > p { font-size:16px; max-width:none; margin:23px 0 0; }
+  .invitation-camera { padding:15px 9px 24px; }
+  .invitation-fold { transform:rotateZ(-.45deg); }
+  .invitation-sheet--far { transform:translate3d(5px,10px,-24px) rotateZ(1deg); }
+  .invitation-sheet--near { transform:translate3d(-3px,5px,-12px) rotateZ(-.5deg); }
+  .invitation-topics { display:flex; flex-direction:column; padding:0; }
+  .invitation-question { display:grid; grid-template-columns:48px minmax(0,1fr); column-gap:12px; row-gap:2px; flex:auto; padding:17px 18px 18px; margin:0!important; transform:none; clip-path:polygon(0 0,96% 0,100% 13%,98% 100%,0 100%); }
+  .invitation-question + .invitation-question { margin-top:-2px!important; }
+  .invitation-topic-name { grid-column:1; grid-row:1 / 3; align-self:center; margin:0; font-size:23px; }
+  .invitation-question__text { grid-column:2; grid-row:1; font-size:16px; line-height:1.5; text-wrap:pretty; }
+  .invitation-question__route { grid-column:2; grid-row:2; margin-top:4px; font-size:14px; }
+  .invitation-question__route > span { font-size:20px; }
+  .invitation-contact { left:0; top:18px; bottom:18px; height:auto; width:4px; }
+  .invitation-current-question { padding:20px 17px 19px; min-height:125px; }
+  .invitation-topic-path { font-size:14px; line-height:1.7; margin-bottom:9px; }
+  .invitation-current-question h3 { font-size:clamp(23px,5.9vw,32px); line-height:1.4; }
+  .invitation-evidence { display:block; padding:21px 17px 22px; }
+  .invitation-work { font-size:22px; }
+  .invitation-evidence p { font-size:16px; line-height:1.75; }
+  .invitation-current-entry { display:flex; width:100%; margin-top:20px; padding:13px 15px; font-size:17px; }
+  .invitation-exit { display:block; margin-top:24px; }
+  .invitation-exit > p { font-size:16px; margin-bottom:13px; }
+  .invitation-library-link { width:fit-content; gap:14px; font-size:24px; }
+  .invitation-library-count { font-size:14px; }
 }
-.invitation-light {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at 38% 43%, color-mix(in srgb, var(--invite-tone) 13%, transparent), transparent 56%);
-  pointer-events: none;
+@media (prefers-reduced-motion:reduce) {
+  .exploration-invitation .invitation-fold,.exploration-invitation .invitation-sheet,.exploration-invitation .invitation-question { transform:none; }
+  .invitation-question__route > span,.invitation-current-entry > svg { transition:none; }
 }
-.invitation-heading { display: flex; justify-content: space-between; align-items: end; gap: 40px; margin-bottom: 48px; }
-.invitation-heading h2 { font-size: clamp(48px, 6.4vw, 94px); font-weight: 500; line-height: 1.12; letter-spacing: -.055em; margin: 0; }
-.invitation-heading > p { font-size: 18px; line-height: 1.9; color: #b7c3c7; margin: 0 6% 12px 0; }
-.invitation-composition { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: center; gap: 12px 20px; }
-.invitation-question { position: relative; z-index: 2; display: block; width: fit-content; max-width: 100%; padding: 13px 0; color: #d1d9d9; }
-.invitation-question__text { display: block; font-size: clamp(23px, 2.25vw, 34px); font-weight: 450; letter-spacing: -.035em; line-height: 1.5; text-wrap: balance; }
-.invitation-question__route { display: flex; align-items: center; gap: 30px; margin-top: 7px; font-size: 15px; color: var(--question-tone); }
-.invitation-question__route > span { font-size: 24px; line-height: 1; transition: transform 200ms ease; }
-.invitation-question:hover, .invitation-question:focus-visible, .invitation-question[data-active=true] { color: #f4f5ed; }
-.invitation-question:hover .invitation-question__route > span, .invitation-question:focus-visible .invitation-question__route > span { transform: translate(4px, -3px); }
-.invitation-question[data-active=true]::before { content: ''; position: absolute; width: 24px; height: 3px; top: 0; left: 0; background: var(--question-tone); transform: rotate(-6deg); transform-origin: left; }
-.invitation-question--light { grid-column: 1 / 8; grid-row: 1; margin-left: 6%; }
-.invitation-question--cost { grid-column: 10 / -1; grid-row: 2; align-self: center; transform: translateY(-8px); }
-.invitation-question--cost .invitation-question__text { font-size: clamp(23px, 2.05vw, 30px); }
-.invitation-question--life { grid-column: 4 / 12; grid-row: 3; margin-top: 34px; }
-.invitation-camera { grid-column: 1 / 10; grid-row: 2; position: relative; min-width: 0; padding: 36px 26px 40px 20px; perspective: 1600px; }
-.invitation-motion { position: relative; transform-style: preserve-3d; }
-.invitation-fold { position: relative; transform-style: preserve-3d; transform: rotateX(5deg) rotateY(-9deg) rotateZ(-2deg); }
-.invitation-sheet { position: absolute; inset: 0 0 64px; pointer-events: none; transform-origin: 2% 100%; }
-.invitation-sheet--far { background: #17232a; transform: translate3d(13px, 25px, -42px) rotateZ(5deg); clip-path: polygon(0 0, 98% 0, 100% 96%, 1% 100%); }
-.invitation-sheet--near { background: color-mix(in srgb, var(--invite-tone) 18%, #18212a); transform: translate3d(-10px, 14px, -19px) rotateZ(-2deg); clip-path: polygon(0 0, 97% 0, 100% 5%, 100% 91%, 95% 100%, 0 100%); }
-.invitation-sheet--near::after { content: ''; position: absolute; right: 0; bottom: 0; width: 10%; height: 18%; background: color-mix(in srgb, var(--invite-tone) 32%, #263940); clip-path: polygon(100% 0, 100% 100%, 0 100%); }
-.invitation-fold-edge { position: absolute; pointer-events: none; top: 7%; left: -17px; bottom: 100px; width: 12px; background: linear-gradient(90deg, #273a41, color-mix(in srgb, var(--invite-tone) 34%, #263941)); transform: translateZ(-8px) rotateY(-30deg); transform-origin: right; }
-.invitation-pictures { position: relative; transform: translateZ(8px); }
-.invitation-picture { margin: 0; }
-.invitation-picture-link { position: relative; display: block; box-shadow: 13px 32px 46px -24px #000c; }
-.invitation-picture-link > img { display: block; width: 100%; height: auto; }
-.invitation-picture-link::before { content: ''; position: absolute; pointer-events: none; top: 0; bottom: 0; right: -7px; width: 7px; background: linear-gradient(90deg, color-mix(in srgb, var(--invite-tone) 48%, #475354), #14232a); transform: skewY(38deg); transform-origin: left top; }
-.invitation-picture-link::after { content: ''; position: absolute; pointer-events: none; left: 0; right: -7px; height: 6px; bottom: -6px; background: linear-gradient(180deg, color-mix(in srgb, var(--invite-tone) 30%, #3b4b50), #18232a); transform: skewX(45deg); transform-origin: left top; }
-.invitation-photo-edge { pointer-events: none; position: absolute; inset: 0; box-shadow: inset 0 2px #fff2, inset -2px 0 #fff1; }
-.invitation-picture figcaption { min-height: 82px; padding: 20px 0 0 4px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px; }
-.invitation-work { font-family: var(--font-display, Rajdhani, sans-serif); font-size: 22px; color: var(--invite-tone); line-height: 1.15; }
-.invitation-picture figcaption p { margin: 0; max-width: 40em; font-size: 16px; color: #b9c8cd; line-height: 1.65; }
-.invitation-exit { display: flex; justify-content: space-between; align-items: center; gap: 36px; margin: 60px 0 0; }
-.invitation-exit > p { max-width: 26em; margin: 0; color: #b9c8cd; font-size: 17px; }
-.invitation-library-link { display: flex; align-items: center; gap: 22px; font-size: clamp(24px, 2.7vw, 39px); color: #f0f3e9; min-height: 64px; }
-.invitation-library-count { font-size: 15px; color: #b7c4c8; white-space: nowrap; }
-.invitation-library-link > svg { color: var(--invite-tone); transition: transform 200ms ease; }
-.invitation-library-link:hover > svg, .invitation-library-link:focus-visible > svg { transform: translate(5px, -4px); }
-.exploration-invitation a:focus-visible { outline: 2px solid var(--invite-tone); outline-offset: 7px; border-radius: 1px; }
-@media (max-width: 1000px) {
-  .invitation-heading { align-items: start; gap: 25px; }
-  .invitation-heading > p { margin-right: 0; max-width: 15em; font-size: 17px; }
-  .invitation-composition { gap: 10px; }
-  .invitation-camera { grid-column: 1 / 11; padding-right: 30px; }
-  .invitation-question--cost { grid-column: 7 / -1; grid-row: 3; align-self: start; transform: none; }
-  .invitation-question--life { grid-column: 1 / 7; grid-row: 3; margin: 66px 18px 0 0; }
-  .invitation-question--light { margin-left: 2%; }
-  .invitation-question__text, .invitation-question--cost .invitation-question__text { font-size: 25px; }
-  .invitation-exit { align-items: start; margin-top: 44px; }
+@media (forced-colors:active) {
+  .invitation-darkroom,.invitation-sheet,.invitation-contact,.invitation-photo-edge { display:none; }
+  .invitation-question:focus-visible { outline:2px solid Highlight; outline-offset:-5px; }
+  .invitation-pictures { box-shadow:none; }
+  .invitation-current-entry { border:1px solid ButtonText; }
 }
-@media (max-width: 760px) {
-  .exploration-invitation { padding-block: 15px 0; }
-  .invitation-heading { display: block; margin-bottom: 30px; }
-  .invitation-heading h2 { font-size: clamp(39px, 10vw, 61px); }
-  .invitation-heading > p { margin: 24px 0 0; max-width: none; font-size: 16px; }
-  .invitation-composition { display: flex; flex-direction: column; align-items: stretch; gap: 17px; }
-  .invitation-question { padding-block: 13px 5px; margin: 0; max-width: 100%; }
-  .invitation-question__text, .invitation-question--cost .invitation-question__text { font-size: clamp(21px, 5.3vw, 29px); }
-  .invitation-question__route { margin-top: 3px; font-size: 14px; }
-  .invitation-camera { width: 100%; padding: 18px 14px 24px 8px; }
-  .invitation-fold { transform: rotateX(2deg) rotateY(-3deg) rotateZ(-1.5deg); }
-  .invitation-sheet--far { transform: translate3d(5px, 13px, -26px) rotateZ(3deg); }
-  .invitation-sheet--near { transform: translate3d(-5px, 7px, -12px) rotateZ(-1deg); }
-  .invitation-fold-edge { left: -8px; width: 7px; bottom: 112px; }
-  .invitation-picture figcaption { min-height: 96px; padding-top: 17px; gap: 5px; }
-  .invitation-work { font-size: 21px; }
-  .invitation-picture figcaption p { font-size: 15px; line-height: 1.75; }
-  .invitation-question--cost { align-self: end; max-width: 94%; }
-  .invitation-question--life { margin-top: 8px; }
-  .invitation-exit { display: block; margin-top: 41px; }
-  .invitation-exit > p { font-size: 16px; max-width: 25em; margin-bottom: 20px; }
-  .invitation-library-link { width: fit-content; gap: 15px; font-size: clamp(23px, 6vw, 34px); }
-  .invitation-library-count { font-size: 13px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .exploration-invitation .invitation-fold, .exploration-invitation .invitation-sheet { transform: none; }
-  .invitation-question__route > span, .invitation-library-link > svg { transition: none; }
-}
-@media (forced-colors: active) {
-  .invitation-darkroom, .invitation-sheet, .invitation-fold-edge, .invitation-photo-edge,
-  .invitation-picture-link::before, .invitation-picture-link::after { display: none; }
-  .invitation-picture-link { box-shadow: none; }
-}
+/* Transparent 3D carrier planes must not win hit testing over visible links. */
+.invitation-camera,.invitation-motion,.invitation-fold,.invitation-topics,.invitation-pictures,.invitation-picture,.invitation-evidence { pointer-events:none; }
+.invitation-question,.invitation-picture-link,.invitation-current-entry { pointer-events:auto; }

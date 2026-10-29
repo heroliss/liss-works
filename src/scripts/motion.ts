@@ -8,6 +8,8 @@ import { setupDetailWorldMotion } from './detail-world-motion';
 import { setupShowcaseNarratives } from './showcase-narratives';
 import { setupArchiveAtlas } from './archive-atlas';
 import { setupExplorationInvitation } from './exploration-invitation';
+import { setupFooterMotion } from './footer-motion';
+import { setupProjectEnding } from './project-ending';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -186,6 +188,8 @@ function initializeMotion() {
   const disposeNarratives = setupShowcaseNarratives({ signal, preference });
   const disposeAtlas = setupArchiveAtlas({ signal, preference });
   const disposeInvitation = setupExplorationInvitation({ signal, preference });
+  const disposeFooter = setupFooterMotion({ signal, preference });
+  const disposeEnding = setupProjectEnding({ signal, preference });
   if (storedPause !== undefined) {
     window.dispatchEvent(new CustomEvent('portfolio:motion-state', { detail: { paused: storedPause } }));
   }
@@ -215,6 +219,8 @@ function initializeMotion() {
     disposeNarratives();
     disposeAtlas();
     disposeInvitation();
+    disposeFooter();
+    disposeEnding();
     media.revert();
     delete root.dataset.motion;
   };

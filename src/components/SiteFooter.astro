@@ -1,0 +1,41 @@
+---
+import { sitePath, communityUrl } from '../lib/site-path';
+import Icon from './Icon.astro';
+import '../styles/site-footer.css';
+---
+
+<footer class="site-footer site-footer--colophon shell" data-site-footer aria-label="开发者落款与资源导航">
+  <div class="colophon-field" aria-hidden="true">
+    <div class="colophon-light" data-footer-light></div>
+    <svg class="colophon-crease" viewBox="0 0 1800 240" fill="none" preserveAspectRatio="xMidYMid meet" focusable="false">
+      <path d="M-120 169C211 234 483 66 798 74S1434 236 1930 75"/>
+      <path d="M-120 181C211 246 483 78 798 86S1434 248 1930 87"/>
+    </svg>
+  </div>
+  <div class="colophon-layout">
+    <div class="colophon-authorship">
+      <a class="colophon-signature" href={sitePath('/')} aria-label="返回 Liss Works 首页">
+        <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="m16 2 14 14-14 14L2 16Z" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="m16 9 7 7-7 7-7-7Z" fill="currentColor"/></svg>
+        <span>Liss <span class="colophon-signature__works">Works</span></span>
+      </a>
+      <p class="colophon-note">让画面、功能和使用过程说话。</p>
+      <p class="colophon-context">游戏、工具与交互实验。</p>
+    </div>
+    <nav class="colophon-navigation" aria-label="页尾资源">
+      <div class="colophon-group">
+        <p class="colophon-group-title">作品</p>
+        <a class="colophon-link" href={sitePath('/projects/')}><span class="colophon-link__name">全部工程</span><span class="colophon-link__note">浏览项目图册</span><Icon size={17}/></a>
+        <a class="colophon-link" href={sitePath('/lab/')}><span class="colophon-link__name">交互实验</span><span class="colophon-link__note">在浏览器里试试</span><Icon size={17}/></a>
+      </div>
+      <div class="colophon-group">
+        <p class="colophon-group-title">记录与讨论</p>
+        <a class="colophon-link" href="https://github.com/heroliss" target="_blank" rel="noreferrer"><span class="colophon-link__name">GitHub</span><span class="colophon-link__note">代码与仓库</span><Icon size={17}/></a>
+        <a class="colophon-link" href={communityUrl}><span class="colophon-link__name">想法与交流</span><span class="colophon-link__note">记录、讨论与反馈</span><Icon size={17}/></a>
+      </div>
+    </nav>
+  </div>
+  <div class="colophon-baseline">
+    <small>© 2026 Liss</small>
+    <a class="colophon-return" href="#main"><span>回到页首</span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20V4M6 10l6-6 6 6"/></svg></a>
+  </div>
+</footer>

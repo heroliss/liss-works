@@ -1,8 +1,9 @@
 ---
-import { sitePath, projectTalkUrl } from '../../lib/site-path';
+import { sitePath } from '../../lib/site-path';
 import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
-import ProjectCard from '../../components/ProjectCard.astro';
+import ProjectConversation from '../../components/ProjectConversation.astro';
+import ProjectContinuation from '../../components/ProjectContinuation.astro';
 import ProjectEngineering from '../../components/ProjectEngineering.astro';
 import DubForgeWorkflow from '../../components/DubForgeWorkflow.astro';
 import ProjectSignature from '../../components/ProjectSignature.astro';
@@ -63,7 +64,7 @@ const coverSizes = project.slug === 'dubforge' ? '(max-width: 760px) calc(100vw 
     {gallery.length > 0 && <section class="section project-gallery" id="gallery" aria-labelledby="gallery-title"><div class="section-heading"><h2 id="gallery-title">更多画面</h2></div><div class="gallery-grid">{gallery.map(image => <figure data-detail-motion={world.motion}><ProjectArtifact image={image} group={project.slug} kind={world.motion} role="gallery" sizes="(max-width: 760px) 100vw, 60vw"/><figcaption>{image.caption}</figcaption></figure>)}</div></section>}
     {notes.length > 0 && <details class="capture-notes"><summary>画面与演示说明</summary>{notes.map(note => <p>{note}</p>)}</details>}
     <section class="project-usage section" id="usage" aria-labelledby="usage-title"><div class="section-heading"><h2 id="usage-title" data-detail-reveal>快速开始</h2></div><div class="usage-grid">{project.usage.map((usage,index) => <article class="usage" data-detail-reveal><h3>{usage.title}</h3><ProjectProse text={usage.body}/>{usage.code && <div class="code-block"><div class="code-toolbar"><span>{usage.language ?? '用法'}</span><span role="status" aria-live="polite"></span><button class="copy-button" type="button" data-copy={`code-${index}`} aria-label={`复制：${usage.title}`}>复制</button></div><pre><code id={`code-${index}`}>{usage.code}</code></pre></div>}</article>)}</div></section>
-    <aside class="project-conversation" aria-labelledby="conversation-title"><div><h2 id="conversation-title">这个工程，让你想到什么？</h2><p>分享使用心得、遇到的问题，或一个值得继续尝试的想法。</p></div><a class="button secondary" href={projectTalkUrl(project.slug)}>交流想法 <Icon size={17}/></a></aside>
-    {related.length > 0 && <section class="section" aria-labelledby="related-title"><div class="section-heading"><h2 id="related-title">继续探索</h2><a class="text-link" href={sitePath('/projects/')}>全部工程 <Icon size={17}/></a></div><div class="related-grid">{related.map(item => <ProjectCard project={item}/>)}</div></section>}
+    <ProjectConversation project={project}/>
+    <ProjectContinuation project={project} related={related}/>
   </div>
 </Base>

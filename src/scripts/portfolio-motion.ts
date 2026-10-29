@@ -28,6 +28,13 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
     const name = stage.querySelector<HTMLElement>('[data-stage-name]');
     const category = stage.querySelector<HTMLElement>('[data-stage-category]');
     const links = Array.from(stage.querySelectorAll<HTMLAnchorElement>('[data-stage-link]'));
+    const hero = stage.closest<HTMLElement>('.kinetic-hero');
+    const home = hero?.closest<HTMLElement>('.home-next');
+    const previousHeroTone = hero?.style.getPropertyValue('--hero-tone') ?? '';
+    const previousBandTone = home?.style.getPropertyValue('--showcase-tone') ?? '';
+    const previousPalette = home?.getAttribute('data-hero-palette');
+    if (home) home.dataset.heroPalette = 'true';
+    let colours: gsap.core.Timeline | undefined;
     let running: gsap.core.Timeline | undefined;
     let layout: gsap.core.Timeline | undefined;
     let revision = 0;
@@ -35,8 +42,11 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
     let visible = true;
     const region = stage.closest<HTMLElement>('.kinetic-hero') ?? stage;
     const gate = () => {
-      if (preference.matches) layout?.progress(1).pause();
-      else layout?.paused(held || !visible || document.hidden || document.documentElement.dataset.motionPaused === 'true');
+      if (preference.matches) { layout?.progress(1).pause(); colours?.progress(1).pause(); }
+      else {
+        const frozen = held || !visible || document.hidden || document.documentElement.dataset.motionPaused === 'true';
+        layout?.paused(frozen); colours?.paused(frozen);
+      }
     };
     const settle = () => {
       revision++;
@@ -49,6 +59,8 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
       const button = buttons.find((entry) => entry.dataset.stageSelect === value);
       if (!button || (animate && stage.dataset.active === value)) return;
       const moving = animate && !preference.matches && document.documentElement.dataset.motionPaused !== 'true';
+      const paintedTone = hero ? getComputedStyle(hero).getPropertyValue('--hero-tone').trim() : '';
+      const paintedBand = home ? getComputedStyle(home).getPropertyValue('--showcase-tone').trim() : '';
       const previous = stage.dataset.active;
       const layers = moving ? pieces.map(piece => Number(getComputedStyle(piece).zIndex) || 0) : [];
       const flightStarts = moving ? cards.map(card => ({
@@ -70,11 +82,26 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
       running?.revert();
       running = undefined;
       stage.dataset.active = value;
-      const hero = stage.closest<HTMLElement>('.kinetic-hero');
       if (hero) {
         hero.dataset.active = value;
-        if (button.dataset.tone) hero.style.setProperty('--hero-tone', button.dataset.tone);
-        if (button.dataset.tone) hero.closest<HTMLElement>('.home-next')?.style.setProperty('--showcase-tone', button.dataset.tone);
+        const tone = button.dataset.tone;
+        if (tone) {
+          // A separate, slower colour journey follows the current painted value.
+          // Retargeting never snaps to the previous or newly selected palette.
+          colours?.kill();
+          if (moving) {
+            hero.style.setProperty('--hero-tone', paintedTone || tone);
+            home?.style.setProperty('--showcase-tone', paintedBand || paintedTone || tone);
+            stage.dataset.stageColourTransitioning = 'true';
+            colours = gsap.timeline({ defaults:{duration:1.85,ease:'sine.inOut'}, onComplete:()=>{stage.dataset.stageColourTransitioning='false';} });
+            colours.to(hero, {'--hero-tone':tone}, 0);
+            if (home) colours.to(home, {'--showcase-tone':tone}, 0);
+          } else {
+            hero.style.setProperty('--hero-tone', tone);
+            home?.style.setProperty('--showcase-tone', tone);
+            stage.dataset.stageColourTransitioning = 'false';
+          }
+        }
       }
       pieces.forEach(piece => {
         piece.dataset.stageOffset = String((Number(piece.dataset.stagePiece) - Number(value) + cards.length) % cards.length);
@@ -173,7 +200,12 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
     window.addEventListener('portfolio:motion-state', gate, { signal: localSignal });
     document.addEventListener('visibilitychange', () => { if (document.hidden) held = false; gate(); }, { signal: localSignal });
     preference.addEventListener('change', gate, { signal: localSignal });
-    cleanup.push(() => { observer.disconnect(); settle(); running?.revert(); delete stage.dataset.stageTransitioning; });
+    cleanup.push(() => {
+      observer.disconnect(); settle(); running?.revert(); colours?.kill();
+      if (hero) { if(previousHeroTone)hero.style.setProperty('--hero-tone',previousHeroTone);else hero.style.removeProperty('--hero-tone'); }
+      if (home) { if(previousBandTone)home.style.setProperty('--showcase-tone',previousBandTone);else home.style.removeProperty('--showcase-tone');if(previousPalette==null)home.removeAttribute('data-hero-palette');else home.setAttribute('data-hero-palette',previousPalette); }
+      delete stage.dataset.stageTransitioning; delete stage.dataset.stageColourTransitioning;
+    });
   });
 
   media.add(

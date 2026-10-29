@@ -14,6 +14,7 @@ export function setupExplorationInvitation({ signal, preference }: { signal: Abo
   const events = new AbortController();
   const fine = window.matchMedia('(hover:hover) and (pointer:fine)');
   const saved = { active: root.getAttribute('data-invite-active'), tone: root.style.getPropertyValue('--invite-tone'),
+    ambience: root.style.getPropertyValue('--invite-ambience'),
     states: pictures.map(picture => ({ hidden: picture.hidden, inert: picture.inert, style: picture.getAttribute('style'),
       loading: picture.querySelector('img')?.getAttribute('loading') ?? null })),
     cues: cues.map(cue => cue.getAttribute('data-active')) };
@@ -80,13 +81,16 @@ export function setupExplorationInvitation({ signal, preference }: { signal: Abo
     root.dataset.inviteActive = String(index);
     delete root.dataset.inviteLoading;
     const tone = picture.dataset.inviteTone ?? '#ffd08a';
+    // The selected bookmark, question and entry share their colour immediately;
+    // only the background light eases between topics.
+    root.style.setProperty('--invite-tone', tone);
     if (pendingAnnounce && status) status.textContent = cues[index].querySelector('.invitation-question__text')?.textContent ?? '';
     if (canMove()) context.add(() => {
       turn = gsap.fromTo(picture, { opacity: .35, y: 22, rotationX: -5 },
         { opacity: 1, y: 0, rotationX: 0, duration: .65, ease: 'power3.out', clearProps: 'opacity,transform' });
-      palette = gsap.to(root, { '--invite-tone': tone, duration: .6, ease: 'power2.out' });
+      palette = gsap.to(root, { '--invite-ambience': tone, duration: .55, ease: 'power2.out' });
     });
-    else root.style.setProperty('--invite-tone', tone);
+    else root.style.setProperty('--invite-ambience', tone);
   };
   cues.forEach((cue, index) => {
     cue.addEventListener('pointermove', event => {
@@ -105,7 +109,7 @@ export function setupExplorationInvitation({ signal, preference }: { signal: Abo
     const top = bounds.top - (window.scrollY - measuredScrollY);
     const x = Math.max(-1, Math.min(1, (event.clientX - left) / Math.max(1, bounds.width) * 2 - 1));
     const y = Math.max(-1, Math.min(1, (event.clientY - top) / Math.max(1, bounds.height) * 2 - 1));
-    tiltX(-y * 3); tiltY(x * 4); shiftX(x * 7); shiftY(y * 5);
+    tiltX(-y * 2); tiltY(x * 2.8); shiftX(x * 4); shiftY(y * 3);
     lightX(x * 28); lightY(y * 18);
     root.dataset.invitePointer = `${x.toFixed(3)},${y.toFixed(3)}`;
   }, { passive: true, signal: events.signal });
@@ -141,6 +145,7 @@ export function setupExplorationInvitation({ signal, preference }: { signal: Abo
     cues.forEach((cue, i) => { const value = saved.cues[i]; if (value === null) cue.removeAttribute('data-active'); else cue.setAttribute('data-active', value); });
     if (saved.active === null) root.removeAttribute('data-invite-active'); else root.setAttribute('data-invite-active', saved.active);
     root.style.setProperty('--invite-tone', saved.tone);
+    if (saved.ambience) root.style.setProperty('--invite-ambience', saved.ambience); else root.style.removeProperty('--invite-ambience');
     delete root.dataset.invitePointer; delete root.dataset.inviteState; delete root.dataset.inviteLoading;
     if (status) status.textContent = '';
     signal.removeEventListener('abort', dispose);
