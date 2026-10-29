@@ -4,16 +4,19 @@ import Icon from '../../components/Icon.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
 import { projects, groups } from '../../data/projects';
 import { prioritizeProjects } from '../../data/project-priority';
+import { sitePath } from '../../lib/site-path';
 const orderedProjects = prioritizeProjects(projects);
+const initialProject = orderedProjects[0];
 const tags = ['Unity','C#','C++','AI','Python','Web','Qt','.NET','OpenGL','算法'];
 ---
 <Base title="全部工程" active="projects" description={`浏览 Liss 的${projects.length}个独立开发工程：游戏与Unity工具、AI与数据应用、图形与算法实验。`}>
- <div class="shell archive-page"><div class="page-intro"><h1 class="display">工程库</h1><p data-motion="reveal">游戏、工具、图形和算法。完整的作品与正在生长的原型，都在这里。</p></div>
+ <div class="shell archive-page"><div class="page-intro"><h1 class="display">工程库</h1><p>游戏、工具、图形和算法。完整的作品与正在生长的原型，都在这里。</p></div>
  <div class="filters" data-filters data-ui="true"><div class="filters-top"><label class="search-box"><span>查找工程</span><Icon name="search" size={19}/><input type="search" id="project-search" placeholder="搜索名称、用途或技术" autocomplete="off"/></label><p class="results-count" aria-live="polite" data-result-count>共 {projects.length} 个工程</p></div>
  <div class="filter-buttons" role="group" aria-label="工程分类"><button type="button" data-group-filter="all" aria-pressed="true">全部工程</button>{groups.map(group=><button type="button" data-group-filter={group.id} aria-pressed="false">{group.label}</button>)}</div>
  <div class="filter-bottom"><label>技术标签<select id="tag-filter"><option value="">全部技术</option>{tags.map(tag=><option value={tag}>{tag}</option>)}</select></label><button class="reset-filter" type="button" data-reset-filters>重置筛选</button></div></div>
- <div class="project-grid">{orderedProjects.map(project=><ProjectCard project={project}/>)}</div>
  <div class="empty-state" data-empty hidden><h2>没有匹配的工程</h2><p>试试其他名称或技术，也可以清除筛选查看全部。</p><button class="button secondary" type="button" data-reset-filters>清除筛选</button></div>
+ <div class="archive-layout" data-archive><div class="archive-list" data-archive-list><div class="project-grid">{orderedProjects.map((project,index)=><ProjectCard project={project} variant="archive" selected={index === 0}/>)}</div></div>
+ <aside class="archive-preview" data-archive-preview aria-label="工程预览"><div class="archive-preview__picture"><img data-archive-image src={sitePath(initialProject.cover.src)} width={initialProject.cover.width} height={initialProject.cover.height} alt={initialProject.cover.alt} loading="eager" decoding="async"/></div><div class="archive-preview__body"><h2 class="project-name" data-archive-title>{initialProject.name.split(' · ')[0]}</h2><p data-archive-summary>{initialProject.summary}</p><a class="text-link" data-archive-link href={sitePath(`/projects/${initialProject.slug}/`)}>探索工程与实现 <Icon size={18}/></a></div><span class="sr-only" data-archive-status role="status" aria-live="polite">当前预览 {initialProject.name.split(' · ')[0]}</span></aside></div>
  </div><script>import '../../scripts/project-filter';</script>
 </Base>
 

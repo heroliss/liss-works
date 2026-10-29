@@ -1,6 +1,6 @@
 {
   "schema": "showcase.website-media.v1",
-  "generated_at_utc": "2026-10-29T02:34:17.986037+00:00",
+  "generated_at_utc": "2026-10-29T03:18:29.012076+00:00",
   "source_manifest": "captures/selected-manifest.json",
   "source_manifest_sha256": "2c1802696f789defdfcc69f2f1f64badcce99c0ed4d9fdb33c6a59104e4fe9e3",
   "originals_modified": false,
@@ -7206,11 +7206,11 @@
     "source_image_bytes": 41165885,
     "exported_image_bytes": 39423926,
     "video_bytes": 1363373,
-    "font_bytes": 352720,
-    "font_license_and_provenance_bytes": 13731,
-    "published_media_bytes": 41140019,
+    "font_bytes": 353408,
+    "font_license_and_provenance_bytes": 13781,
+    "published_media_bytes": 41140707,
     "total_public_asset_count": 510,
-    "total_public_asset_bytes": 41153750
+    "total_public_asset_bytes": 41154488
   },
   "fonts": {
     "codec": "fontTools WOFF2 with Node native zlib Brotli (quality 11 / font mode), invoked by fontTools",
@@ -7254,6 +7254,7 @@
       "site-next/src/pages/projects/index.astro",
       "site-next/src/scripts/downloads.ts",
       "site-next/src/scripts/motion.ts",
+      "site-next/src/scripts/portfolio-motion.ts",
       "site-next/src/scripts/project-filter.ts",
       "site-next/src/scripts/site.ts",
       "site-next/src/styles/global.css",
@@ -7301,14 +7302,14 @@
       {
         "path": "site-next/public/fonts/noto-sans-sc-subset.woff2",
         "url": "/fonts/noto-sans-sc-subset.woff2",
-        "bytes": 338144,
-        "sha256": "2755aa07c79bd85f098992a8ae88988693770b69d61af46fd96e3095a74f0049",
+        "bytes": 338832,
+        "sha256": "a2498303b07be7e36cf9b54a0bb89f9421114d13442486aa5ac0f4b1da23c023",
         "family": "Noto Sans SC",
         "source": "C:\\Windows\\Fonts\\NotoSansSC-VF.ttf",
         "source_sha256": "763146584cf0710223441356b4395e279021b0806c196614377a7a0174ae074a",
         "source_bytes": 17773244,
-        "requested_codepoints": 1191,
-        "included_codepoints": 1191,
+        "requested_codepoints": 1193,
+        "included_codepoints": 1193,
         "missing_cjk": [],
         "roundtrip_decode_verified": true
       }

@@ -3,7 +3,7 @@ import type { ProjectSignature } from '../data/project-signatures';
 interface Props { signature: ProjectSignature }
 const { signature } = Astro.props;
 ---
-<dl class="project-signature" aria-label="工程亮点" data-motion="reveal">
+<dl class="project-signature" aria-label="工程亮点">
   <div><dt>技术方向</dt><dd class="signature-direction">{signature.direction}</dd></div>
   <div><dt>设计主张</dt><dd class="signature-principle">{signature.principle}</dd></div>
   <div><dt>关键能力</dt><dd><ul class="signature-highlights">{signature.highlights.map(highlight => <li>{highlight}</li>)}</ul></dd></div>

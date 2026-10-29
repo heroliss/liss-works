@@ -1,6 +1,6 @@
 # Liss Works · 新版试验
 
-新版使用 **Taste Skill v2 + GSAP 官方技能**，保持 Astro + TypeScript，整体为深色模式。源码独立保存在 `site-next/`；旧版 `../site/` 的源码和 Git 历史保留。
+新版使用 **GSAP 官方技能**，结合 **Taste Skill v2、Frontend Design 与 Impeccable**，保持 Astro + TypeScript 和深色模式。第二轮以“夜间创作工作台”替换了首轮网格式接触印样：主屏切换、轻视差、架构流程重放与大图预览都可实际操作。源码独立保存在 `site-next/`；旧版 `../site/` 的源码和 Git 历史保留。
 
 ## 预览与对照
 
@@ -14,7 +14,7 @@
 
 新版覆盖首页、工程库、22 项工程详情、关于页、交互实验及 404。原项目数据、源代码入口、下载、讨论、筛选与实验保留。独立网页工具仍使用各自原实现。主要设计在 `src/styles/new-theme.css`、`home-next.css` 和 `interior.css`，动效在 `src/scripts/motion.ts`。
 
-设计来源为 `.taste-skill/direction.json`，约束与文案记录为 `.taste-skill/brief.md`，当前设计说明见 `DESIGN-NEXT.md`。技能安装在工作区 `.agents/skills/`，版本、来源、许可证和逐文件校验记录为 `../verification/site-next/skills-provenance.json`。本轮核对上游默认分支后锁定提交，不修改已有全局技能。
+当前设计说明见 `DESIGN.md`，第二轮视觉参考与验收见 `../verification/site-next/v2/`。首轮 `.taste-skill/direction.json` 与 `.taste-skill/brief.md` 作为历史探索记录保留。新安装技能在工作区 `.agents/skills/`，版本、来源、许可证和逐文件校验记录为 `../verification/site-next/skills-provenance.json`；未修改已有全局技能。
 
 ## 验证
 

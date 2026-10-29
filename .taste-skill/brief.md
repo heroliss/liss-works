@@ -1,5 +1,7 @@
 # Liss Works · 深色作品档案
 
+> 首轮探索归档。用户随后指出该网格方向死板，当前视觉权威已切换为 `../DESIGN.md` 的“夜间创作工作台”；本文件保留用于对照。
+
 ## Brief and inventory
 
 The visitor wants to see what Liss actually builds, try a working project, and understand the implementation. Keep Astro, all 22 projects, screenshots, downloads, links, filters, discussions, keyboard controls, and algorithm experiments. The human explicitly requested dark mode on 2026-10-29. `site/` is the unchanged comparison baseline; implementation is isolated in `site-next/`.

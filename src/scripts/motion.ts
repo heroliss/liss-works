@@ -1,5 +1,6 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { setupPortfolioMotion } from './portfolio-motion';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -21,7 +22,7 @@ function initializeMotion() {
   let heroPlayed = false;
   const revealed = new WeakSet<Element>();
   const shuttered = new WeakSet<Element>();
-  const restoreInteractions: (() => void)[] = [];
+
   const workflows: (() => void)[] = [];
 
   const refresh = () => {
@@ -148,63 +149,7 @@ function initializeMotion() {
     },
   );
 
-  document.querySelectorAll<HTMLElement>('[data-contact-sheet]').forEach((sheet) => {
-    const items = Array.from(sheet.querySelectorAll<HTMLElement>('[data-contact-item]'));
-    if (!items.length) return;
-    const images = items.map((item) => item.matches('img') ? item : item.querySelector<HTMLElement>('img'));
-    const label = sheet.querySelector<HTMLElement>('[data-preview-label]')
-      ?? document.querySelector<HTMLElement>('[data-preview-label]');
-    const defaultLabel = label?.textContent ?? '';
-    let hovered: HTMLElement | null = null;
-    let focused: HTMLElement | null = null;
-    let active: HTMLElement | null = null;
-
-    const paint = () => {
-      const selected = hovered ?? focused;
-      if (active === selected) return;
-      active = selected;
-      if (label) label.textContent = selected?.dataset.preview || defaultLabel;
-      sheet.dataset.previewActive = String(Boolean(selected));
-      if (preference.matches) return;
-
-      interactions.add(() => {
-        images.forEach((image, index) => {
-          if (!image) return;
-          const current = items[index] === selected;
-          gsap.to(image, {
-            scale: current ? 1.025 : 1,
-            opacity: selected && !current ? 0.7 : 1,
-            duration: 0.28,
-            ease: 'power2.out',
-            overwrite: 'auto',
-            ...(selected ? {} : { clearProps: 'transform,opacity' }),
-          });
-        });
-      });
-    };
-
-    const itemAt = (target: EventTarget | null) => {
-      if (!(target instanceof Element)) return null;
-      const item = target.closest<HTMLElement>('[data-contact-item]');
-      return item && items.includes(item) ? item : null;
-    };
-    sheet.addEventListener('pointerover', (event) => {
-      if (event.pointerType === 'touch') return;
-      hovered = itemAt(event.target);
-      paint();
-    }, { signal });
-    sheet.addEventListener('pointerleave', () => { hovered = null; paint(); }, { signal });
-    sheet.addEventListener('focusin', (event) => { focused = itemAt(event.target); paint(); }, { signal });
-    sheet.addEventListener('focusout', (event) => { focused = itemAt(event.relatedTarget); paint(); }, { signal });
-
-    restoreInteractions.push(() => {
-      hovered = null;
-      focused = null;
-      active = null;
-      sheet.dataset.previewActive = 'false';
-      if (label) label.textContent = defaultLabel;
-    });
-  });
+  const disposePortfolio = setupPortfolioMotion({ signal, preference });
 
   document.querySelectorAll<HTMLElement>('[data-workflow]').forEach((workflow) => {
     const buttons = Array.from(workflow.querySelectorAll<HTMLButtonElement>('button[data-flow-step]'));
@@ -282,7 +227,7 @@ function initializeMotion() {
   preference.addEventListener('change', () => {
     interactions.revert();
     interactions = gsap.context(() => {}, document.body);
-    restoreInteractions.forEach((restore) => restore());
+
     workflows.forEach((restore) => restore());
     root.dataset.motion = preference.matches ? 'reduced' : 'ready';
     refresh();
@@ -300,9 +245,10 @@ function initializeMotion() {
     disposed = true;
     abort.abort();
     clearTimeout(refreshTimer);
+    disposePortfolio();
     media.revert();
     interactions.revert();
-    restoreInteractions.forEach((restore) => restore());
+
     workflows.forEach((restore) => restore());
     delete root.dataset.motion;
   };
