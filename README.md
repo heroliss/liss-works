@@ -2,7 +2,7 @@
 
 本目录是与旧版独立保留的 Taste Skill + GSAP 新版。请先阅读 [README-NEXT.md](README-NEXT.md)；当前设计权威为 [DESIGN-NEXT.md](DESIGN-NEXT.md)。旧版源码在 `../site/`，以下为保留的原站内容与运行说明。
 
-当前工程库包含 20 个作品条目。首页优先呈现 SSFramework、DubForge，再连接游戏实机、实用工具与交互实验；工程库使用统一优先级，搜索与分类保留该顺序。Qt Labs、Text Lab、Systems Lab、NEX 与 Liss Blocks 覆盖 12 项早期桌面程序，配有技术短介绍、原生截图与自动跟随最新正式版的 Windows 下载。
+当前工程库包含 22 个作品条目。首页优先呈现 SSFramework、DubForge，再连接游戏实机、实用工具与交互实验；工程库使用统一优先级，搜索与分类保留该顺序。Qt Labs、Text Lab、Systems Lab、NEX 与 Liss Blocks 覆盖 12 项早期桌面程序，配有技术短介绍、原生截图与自动跟随最新正式版的 Windows 下载。
 
 Liss Community 详情以九张配图连接写作、可选邮箱与管理后台，说明内容恢复、变更确认和持久化设置。管理概览为线上实拍，设置图来自独立本地验证环境；不展示真实用户邮箱或私有配置。真实邮件送达与账户验收保留在工作区 `verification/site/mail-enable-20261024/`，后台验收在 `verification/community-admin/`。
 

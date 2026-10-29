@@ -7,6 +7,7 @@
   isolation:isolate;
   display:block;
   min-width:0;
+  width:100%;
   margin-top:clamp(80px,9vw,136px);
   padding:44px 0 22px;
   border:0;
@@ -19,14 +20,15 @@ body .site-footer.site-footer--colophon[data-site-footer]::before { content:none
   position:absolute;
   top:-175px;
   bottom:-70px;
-  left:calc(50% - 50vw);
-  width:100vw;
+  left:0;
+  right:0;
   z-index:-1;
   overflow:hidden;
   pointer-events:none;
   mask-image:linear-gradient(to right,transparent 16px,#000 clamp(45px,7vw,140px),#000 calc(100% - clamp(45px,7vw,140px)),transparent calc(100% - 16px)),linear-gradient(to bottom,transparent,#000 28%,#000 75%,transparent);
   mask-composite:intersect;
 }
+.site-footer--colophon .colophon-inner { position:relative; z-index:1; }
 .colophon-field * { pointer-events:none; }
 .site-footer--colophon .colophon-light {
   position:absolute;

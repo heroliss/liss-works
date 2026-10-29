@@ -1,0 +1,16 @@
+---
+import Icon from './Icon.astro';
+import { sitePath } from '../lib/site-path';
+import '../styles/creator-room.css';
+---
+<figure class="creator-room" data-creator-room data-room-state="waiting" aria-label="夜间居家工作室：一位戴薄框眼镜的成年创作者，在环绕桌面的三块屏幕前阅读、编程与思考。">
+  <div class="creator-room__stage" data-creator-stage>
+    <canvas class="creator-room__canvas" data-creator-canvas aria-hidden="true" hidden></canvas>
+    <div class="creator-room__fallback" data-creator-fallback>
+      <picture class="creator-room__poster" data-creator-poster-slot aria-hidden="true"><source media="(max-width:700px)" srcset={sitePath('/media/creator-room-poster-mobile.webp')}/><img src={sitePath('/media/creator-room-poster.webp')} width="1180" height="603" alt="" decoding="async"/></picture>
+      <div class="creator-room__fallback-copy"><p data-creator-status>创作空间的静帧。</p></div>
+    </div>
+  </div>
+  <figcaption class="creator-room__caption"><p>动画示意，屏幕内容为虚构片段。</p><button type="button" data-creator-motion-toggle hidden disabled aria-pressed="false"><Icon name="pause" size={16}/><span data-creator-motion-label>暂停场景</span></button></figcaption>
+  <noscript><p class="creator-room__notice">当前以静帧呈现创作空间，介绍与交流入口仍可正常使用。</p></noscript>
+</figure>

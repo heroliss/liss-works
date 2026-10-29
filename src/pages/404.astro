@@ -1,6 +1,21 @@
 ---
 import { sitePath } from '../lib/site-path';
 import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import '../styles/about-studio.css';
 ---
-<Base title="没有找到页面" noindex><div class="shell not-found"><h1 class="display">404</h1><p>这个地址还没有工程。可以从工程库继续探索。</p><div class="button-row"><a class="button" href={sitePath('/projects/')}>打开工程库</a><a class="button secondary" href={sitePath('/')}>回到首页</a></div></div></Base>
+<Base title="没有找到页面" noindex>
+ <div class="shell studio-lost" data-studio-lost>
+  <section class="studio-lost__opening" aria-labelledby="lost-title">
+   <div class="studio-lost__copy"><h1 id="lost-title" aria-label="404"><span>4</span><span>0</span><span>4</span></h1><h2>这条路，先到这里。</h2><p>这个地址还没有工程。可以从工程库继续探索。</p></div>
+   <nav class="studio-lost__routes" aria-label="继续探索的入口">
+    <a class="studio-lost__route-link studio-lost__route-link--primary" href={sitePath('/projects/')}><span>打开工程库</span><code>{sitePath('/projects/')}</code><Icon size={26}/></a>
+    <a class="studio-lost__route-link" href={sitePath('/')}><span>回到首页</span><code>{sitePath('/')}</code><Icon name="back" size={24}/></a>
+   </nav>
+   <div class="studio-lost__camera" data-studio-region>
+    <div class="studio-lost__drawing" data-studio-plane aria-hidden="true"><svg viewBox="0 0 700 570" fill="none"><path class="studio-lost__paper-depth" d="M155 57L574 100L600 420L337 535L118 398Z"/><path class="studio-lost__paper" d="M139 43L558 86L583 406L321 521L102 384Z"/><path class="studio-lost__line" d="M174 143L363 163M185 178L426 203M194 213L339 228"/><path class="studio-lost__route" d="M28 334C134 267 203 371 290 310L337 273M366 250L421 213C471 179 525 238 641 174"/><circle cx="337" cy="273" r="7"/><path class="studio-lost__fold" d="M396 488L458 443L583 406"/></svg></div>
+   </div>
+  </section>
+ </div>
+</Base>
 

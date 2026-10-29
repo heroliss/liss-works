@@ -12,9 +12,10 @@ const highlighted = routeEdges(path, nodes);
 const ga = createEvolution(42);
 ---
 
-<lab-workbench class:list={['workbench', { compact }]} data-compact={String(compact)}>
+<lab-workbench class:list={['workbench', { compact, 'lab-workbench--room': !compact }]} data-compact={String(compact)}>
+  <section class="lab-route-experiment" id={compact ? undefined : 'route-lab'} aria-label="Floyd 最短路径实验" data-lab-station>
   {!compact && <header class="lab-intro">
-    <h2>让路径自己算出来</h2>
+    <div class="lab-experiment-title"><h2>Floyd 最短路径</h2></div>
     <p>修改连接、选择节点，观察最短路径怎样变化。这里是 <a href="https://github.com/heroliss/FloydShortestPath" target="_blank" rel="noreferrer">FloydShortestPath</a> 的网页算法移植；原 C# 仓库已独立验证，以下是可操作的说明实验，并非原程序截图。</p>
   </header>}
   <div class="floyd-layout">
@@ -26,6 +27,8 @@ const ga = createEvolution(42);
           <button type="button" data-pick="end" aria-pressed="true">选终点</button>
         </div>
       </div>
+      <div class="graph-map">
+      <div class="graph-map__depth" aria-hidden="true"><span data-lab-field></span></div>
       <svg class="graph" viewBox="0 0 600 360" role="group" aria-label="六节点路径图。可聚焦节点，按回车或空格选择。青色线表示当前最短路径。">
         <g data-edges>
           {edges.map((edge) => {
@@ -46,7 +49,8 @@ const ga = createEvolution(42);
           </g>)}
         </g>
       </svg>
-      <p class="graph-hint">点选节点，也可使用起点与终点菜单。</p>
+      </div>
+      <p class="graph-hint">先选“起点”或“终点”，再点图中节点。也可聚焦节点，按 Enter / Space。</p>
     </div>
     <div class="route-pane">
       <div class="route-inputs">
@@ -59,6 +63,7 @@ const ga = createEvolution(42);
         <p class="distance">总距离 <strong data-distance>{initial.distances[0][5]}</strong></p>
       </div>
       {!compact && <div class="graph-settings">
+        <h3>改变网络条件</h3>
         <label>连接方案<select name="preset" aria-label="连接方案">
           <option value="network">基础网络</option><option value="shortcut">近路：C — E 权重降为 2</option><option value="disconnected">F 节点断开</option>
         </select></label>
@@ -74,8 +79,8 @@ const ga = createEvolution(42);
     </div>
   </div>
   {!compact && <div class="matrix-section">
-    <div class="matrix-heading"><h3>把结果放进矩阵</h3><label>查看<select name="matrix" aria-label="矩阵类型"><option value="shortest">最短距离矩阵</option><option value="adjacency">原始邻接矩阵</option></select></label></div>
-    <p class="matrix-note">行是起点，列是终点。∞ 表示不可达；青色单元格对应当前查询。</p>
+    <div class="matrix-copy"><h3>把结果放进矩阵</h3><p class="matrix-note">同一网络，另一种读法。行是起点，列是终点。∞ 表示不可达；青色单元格对应当前查询。</p><p class="matrix-tip">先对照邻接与最短距离：没有直连，不一定无法到达。再试“F 节点断开”，观察真正的不可达。</p></div>
+    <div class="matrix-evidence"><div class="matrix-heading"><label>查看<select name="matrix" aria-label="矩阵类型"><option value="shortest">最短距离矩阵</option><option value="adjacency">原始邻接矩阵</option></select></label></div>
     <div class="matrix-scroll" tabindex="0" role="region" aria-label="路径距离矩阵，可横向滚动">
       <table class="distance-matrix">
         <caption data-matrix-caption>最短距离矩阵</caption>
@@ -83,15 +88,20 @@ const ga = createEvolution(42);
         <tbody>{nodes.map((node, i) => <tr><th scope="row">{node.id}</th>{nodes.map((_, j) => <td data-row={i} data-col={j} class:list={{ 'queried-cell': i === 0 && j === 5 }}>{Number.isFinite(initial.distances[i][j]) ? initial.distances[i][j] : '∞'}</td>)}</tr>)}</tbody>
       </table>
     </div>
+    </div>
   </div>}
+  </section>
 
-  {!compact && <section id="evolution" class="evolution-section" aria-label="遗传算法排序实验">
-    <div class="evolution-copy"><h2>看一组排列慢慢有序</h2><p>基于 <a href="https://github.com/heroliss/GA-sort" target="_blank" rel="noreferrer">GA-sort</a> 思路的网页说明实验，非原 Python 程序。48 个候选排列通过选择、交叉与变异演化，柱形展示最佳个体，适应度按顺序正确的数对计分。</p></div>
+  {!compact && <section id="evolution" class="evolution-section" aria-label="遗传算法排序实验" data-lab-station>
+    <div class="evolution-copy"><h2>遗传算法，让排列有序</h2><p>基于 <a href="https://github.com/heroliss/GA-sort" target="_blank" rel="noreferrer">GA-sort</a> 思路的网页说明实验，非原 Python 程序。48 个候选排列通过选择、交叉与变异演化，柱形展示最佳个体，适应度按顺序正确的数对计分。</p><div class="evolution-reading"><h3>把“变化”与“结果”分开看</h3><p>先演化一代，观察最佳排列；换一个随机种子，再比较到达有序状态的过程。每次显示的都是本次计算结果。</p></div></div>
     <div class="evolution-display">
-      <div class="ga-bars" role="img" aria-label={`当前最佳排列：${ga.best.join('、')}`} data-ga-bars>{ga.best.map((value) => <div class="ga-bar" style={`--bar-height: ${value / 8 * 100}%`} data-bar><span>{value}</span></div>)}</div>
+      <div class="evolution-display__depth" aria-hidden="true"><span data-lab-field></span></div>
+      <p class="ga-plot-caption">当前最佳排列<span>柱上是数值，横向是排列位置</span></p>
+      <div class="ga-bars" role="img" aria-label={`当前最佳排列：${ga.best.join('、')}`} data-ga-bars>{ga.best.map((value, index) => <div class="ga-bar" style={`--bar-height: ${value / 8 * 100}%`} data-bar><span>{value}</span><small aria-hidden="true">{index + 1}</small></div>)}</div>
       <p class="ga-status" aria-live="polite" aria-atomic="true" data-ga-status>第 0 代 · 最佳适应度 {ga.bestScore} / {perfectScore}</p>
       <div class="ga-controls"><label>随机种子<input type="number" name="seed" value="42" min="1" max="4294967295" step="1" inputmode="numeric" /></label><button class="wb-button" type="button" data-ga-step>演化一代</button><button class="wb-button secondary" type="button" data-ga-play aria-pressed="false">连续演化</button><button class="wb-button secondary" type="button" data-ga-reset>重新开始</button></div>
       <p class="input-note" data-ga-note>相同种子可复现。达到 28 / 28 时已完全有序；演化最多运行 500 代。</p>
+      <p class="ga-run-state" data-ga-run-state>单步观察，或主动开始连续演化。</p>
     </div>
   </section>}
   <noscript><p class="noscript-note">当前展示默认计算结果。启用 JavaScript 后可以选择节点、调整边权和运行演化。</p></noscript>
@@ -99,11 +109,13 @@ const ga = createEvolution(42);
 
 <script>
   import { adjacencyMatrix, computeFloyd, graphNodes, presetEdges, reconstructPath, routeEdges, type GraphEdge, type GraphPreset } from '../lib/floyd';
-  import { createEvolution, stepEvolution, perfectScore } from '../lib/evolution';
+  import { createEvolution, stepEvolution, perfectScore, type EvolutionState } from '../lib/evolution';
 
   class LabWorkbench extends HTMLElement {
     connectedCallback() {
-      if (this.dataset.ready) return;
+      if (this.controller && !this.controller.signal.aborted) return;
+      this.controller = new AbortController();
+      const events = { signal: this.controller.signal };
       this.dataset.ready = 'true';
       const root = this;
       const query = <T extends Element>(selector: string) => root.querySelector<T>(selector)!;
@@ -113,8 +125,8 @@ const ga = createEvolution(42);
       const matrixMode = root.querySelector<HTMLSelectElement>('select[name="matrix"]');
       const edgeSelect = root.querySelector<HTMLSelectElement>('select[name="edge"]');
       const weight = root.querySelector<HTMLInputElement>('input[name="weight"]');
-      let edges = presetEdges('network');
-      let pick: 'start' | 'end' = 'end';
+      let edges = this.networkState?.edges ?? presetEdges('network');
+      let pick: 'start' | 'end' = this.networkState?.pick ?? 'end';
       const svgNamespace = 'http://www.w3.org/2000/svg';
 
       function drawEdges(selected: Set<string>) {
@@ -175,25 +187,25 @@ const ga = createEvolution(42);
         if (options.some((option) => option.value === previous)) edgeSelect.value = previous;
         weight.value = String(edges.find((edge) => `${edge.from}-${edge.to}` === edgeSelect.value)!.weight);
       }
-      start.addEventListener('change', update); end.addEventListener('change', update);
-      matrixMode?.addEventListener('change', update);
+      start.addEventListener('change', update, events); end.addEventListener('change', update, events);
+      matrixMode?.addEventListener('change', update, events);
       root.querySelectorAll<HTMLButtonElement>('[data-pick]').forEach((button) => button.addEventListener('click', () => {
         pick = button.dataset.pick as 'start' | 'end';
         root.querySelectorAll<HTMLButtonElement>('[data-pick]').forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
         update();
-      }));
+      }, events));
       root.querySelectorAll<SVGGElement>('[data-node]').forEach((node) => {
         const selectNode = () => { (pick === 'start' ? start : end).value = node.dataset.node!; update(); };
-        node.addEventListener('click', selectNode);
+        node.addEventListener('click', selectNode, events);
         node.addEventListener('keydown', (event) => {
           if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); selectNode(); }
-        });
+        }, events);
       });
       preset?.addEventListener('change', () => {
         edges = presetEdges(preset.value as GraphPreset); syncEdgeOptions();
         query('[data-input-note]').textContent = '已切换连接方案，边权修改已清除。'; update();
-      });
-      edgeSelect?.addEventListener('change', () => { weight!.value = String(edges.find((edge) => `${edge.from}-${edge.to}` === edgeSelect.value)!.weight); });
+      }, events);
+      edgeSelect?.addEventListener('change', () => { weight!.value = String(edges.find((edge) => `${edge.from}-${edge.to}` === edgeSelect.value)!.weight); }, events);
       root.querySelector<HTMLFormElement>('[data-edge-form]')?.addEventListener('submit', (event) => {
         event.preventDefault();
         const value = Number(weight!.value);
@@ -202,47 +214,82 @@ const ga = createEvolution(42);
         }
         edges = edges.map((edge): GraphEdge => `${edge.from}-${edge.to}` === edgeSelect!.value ? { ...edge, weight: value } : edge);
         query('[data-input-note]').textContent = `${edgeSelect!.value.replace('-', ' — ')} 的权重已设为 ${value}。`; update();
-      });
+      }, events);
       root.querySelector('[data-reset]')?.addEventListener('click', () => {
         edges = presetEdges('network'); start.value = 'A'; end.value = 'F'; preset!.value = 'network';
         syncEdgeOptions(); query('[data-input-note]').textContent = '已恢复基础网络与默认查询。'; update();
-      });
+      }, events);
+      this.addEventListener('workbench-disconnect', () => { this.networkState = { edges, pick }; }, { once: true, signal: events.signal });
       update();
 
       const gaDisplay = root.querySelector<HTMLElement>('[data-ga-bars]');
       if (gaDisplay) {
-        let state = createEvolution(42);
+        let state = this.evolutionState ?? createEvolution(42);
         let timer: ReturnType<typeof setInterval> | undefined;
+        let visible = false, alive = true;
         const play = query<HTMLButtonElement>('[data-ga-play]');
         const step = query<HTMLButtonElement>('[data-ga-step]');
         const seed = query<HTMLInputElement>('input[name="seed"]');
-        const stop = () => { clearInterval(timer); timer = undefined; play.textContent = '连续演化'; play.setAttribute('aria-pressed', 'false'); };
+        const runState = query<HTMLElement>('[data-ga-run-state]');
+        const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const blocked = () => document.hidden ? '页面隐藏，连续演化已暂停。'
+          : document.documentElement.dataset.motionPaused === 'true' ? '动态已暂停；仍可手动演化一代。'
+          : preference.matches ? '减少动态效果已启用；请使用“演化一代”逐代观察。'
+          : !visible ? '排列离开画面，连续演化已暂停。' : '';
+        const stop = (message?: string) => {
+          clearInterval(timer); timer = undefined; play.textContent = '连续演化'; play.setAttribute('aria-pressed', 'false');
+          if (message) runState.textContent = message;
+        };
         const render = () => {
           gaDisplay.querySelectorAll<HTMLElement>('[data-bar]').forEach((bar, index) => { bar.style.setProperty('--bar-height', `${state.best[index] / 8 * 100}%`); bar.querySelector('span')!.textContent = String(state.best[index]); });
           gaDisplay.setAttribute('aria-label', `当前最佳排列：${state.best.join('、')}`);
           const complete = state.bestScore === perfectScore, limit = state.generation >= 500;
           query('[data-ga-status]').textContent = `第 ${state.generation} 代 · 最佳适应度 ${state.bestScore} / ${perfectScore}${complete ? ' · 已完全有序' : limit ? ' · 已达演示代数上限' : ''}`;
-          step.disabled = complete || limit; play.disabled = complete || limit;
-          if (complete || limit) stop();
+          step.disabled = complete || limit;
+          play.disabled = complete || limit || preference.matches || document.documentElement.dataset.motionPaused === 'true';
+          if (complete || limit) stop(complete ? '本次最佳排列已完全有序。换一个种子可重新观察。' : '已达到 500 代上限。可更换种子重新开始。');
         };
         const tick = () => { state = stepEvolution(state); render(); };
-        step.addEventListener('click', () => { stop(); tick(); });
+        const gate = () => {
+          if (!alive) return;
+          const reason = blocked();
+          if (reason) {
+            const running = timer !== undefined;
+            stop();
+            if (running || preference.matches || document.documentElement.dataset.motionPaused === 'true') runState.textContent = reason;
+          } else if (runState.textContent?.includes('已暂停') || runState.textContent?.includes('逐代观察')) {
+            runState.textContent = '可继续单步观察，或主动开始连续演化。';
+          }
+          render();
+        };
+        step.addEventListener('click', () => { stop('已演化一代；可继续逐代观察。'); tick(); }, events);
         play.addEventListener('click', () => {
-          if (timer) { stop(); return; }
-          play.textContent = '暂停演化'; play.setAttribute('aria-pressed', 'true'); timer = setInterval(tick, 220);
-        });
+          if (timer !== undefined) { stop('连续演化已暂停；保留当前排列。'); return; }
+          const reason = blocked(); if (reason) { stop(reason); return; }
+          play.textContent = '暂停演化'; play.setAttribute('aria-pressed', 'true');
+          runState.textContent = '连续演化中；可随时暂停，或等待本次计算完成。';
+          timer = setInterval(() => { if (blocked()) gate(); else tick(); }, 220);
+        }, events);
         query('[data-ga-reset]').addEventListener('click', () => {
           const value = Number(seed.value);
           if (!seed.value.trim() || !Number.isInteger(value) || value < 1 || value > 4294967295) { query('[data-ga-note]').textContent = '随机种子请输入 1–4294967295 的整数。'; seed.focus(); return; }
-          stop(); state = createEvolution(value); query('[data-ga-note]').textContent = '相同种子可复现。达到 28 / 28 时已完全有序；演化最多运行 500 代。'; render();
-        });
-        document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); }, { signal: this.controller.signal });
-        this.addEventListener('workbench-disconnect', stop, { once: true });
+          stop('已按当前种子重新开始；每次只观察真实计算结果。'); state = createEvolution(value); query('[data-ga-note]').textContent = '相同种子可复现。达到 28 / 28 时已完全有序；演化最多运行 500 代。'; render();
+        }, events);
+        const view = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; gate(); }); view.observe(gaDisplay);
+        document.addEventListener('visibilitychange', gate, events);
+        window.addEventListener('portfolio:motion-state', gate, events);
+        window.addEventListener('pageshow', gate, events);
+        window.addEventListener('pagehide', () => stop('页面离开，连续演化已暂停。'), events);
+        preference.addEventListener('change', gate, events);
+        this.addEventListener('workbench-disconnect', () => { alive = false; stop(); view.disconnect(); this.evolutionState = state; }, { once: true, signal: events.signal });
         render();
+        gate();
       }
     }
-    private controller = new AbortController();
-    disconnectedCallback() { this.dispatchEvent(new Event('workbench-disconnect')); this.controller.abort(); }
+    private controller?: AbortController;
+    private networkState?: { edges: GraphEdge[]; pick: 'start' | 'end' };
+    private evolutionState?: EvolutionState;
+    disconnectedCallback() { this.dispatchEvent(new Event('workbench-disconnect')); this.controller?.abort(); this.controller = undefined; delete this.dataset.ready; }
   }
   if (!customElements.get('lab-workbench')) customElements.define('lab-workbench', LabWorkbench);
 </script>

@@ -10,6 +10,9 @@ import { setupArchiveAtlas } from './archive-atlas';
 import { setupExplorationInvitation } from './exploration-invitation';
 import { setupFooterMotion } from './footer-motion';
 import { setupProjectEnding } from './project-ending';
+import { setupLabRoomMotion } from './lab-room-motion';
+import { setupAboutStudioMotion } from './about-studio-motion';
+import { setupCreatorRoom } from './creator-room';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -190,6 +193,9 @@ function initializeMotion() {
   const disposeInvitation = setupExplorationInvitation({ signal, preference });
   const disposeFooter = setupFooterMotion({ signal, preference });
   const disposeEnding = setupProjectEnding({ signal, preference });
+  const disposeLabRoom = setupLabRoomMotion({ signal, preference });
+  const disposeAboutStudio = setupAboutStudioMotion({ signal, preference });
+  const disposeCreatorRoom = setupCreatorRoom({ signal, preference });
   if (storedPause !== undefined) {
     window.dispatchEvent(new CustomEvent('portfolio:motion-state', { detail: { paused: storedPause } }));
   }
@@ -221,6 +227,9 @@ function initializeMotion() {
     disposeInvitation();
     disposeFooter();
     disposeEnding();
+    disposeLabRoom();
+    disposeAboutStudio();
+    disposeCreatorRoom();
     media.revert();
     delete root.dataset.motion;
   };

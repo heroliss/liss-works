@@ -1,0 +1,25 @@
+.creator-room { position:relative; width:100%; margin:0; color:#e1e8de; }
+.creator-room__stage { position:relative; width:100%; height:clamp(490px,57vw,710px); min-width:0; }
+.creator-room__canvas { position:absolute; inset:0; display:block; width:100%; height:100%; touch-action:pan-y; }
+.creator-room__canvas[hidden] { display:none; }
+.creator-room__fallback { position:absolute; inset:0; width:100%; height:100%; }
+.creator-room__fallback[hidden] { display:none; }
+.creator-room__poster { display:block; width:100%; height:100%; }
+.creator-room__poster img { display:block; width:100%; height:100%; object-fit:contain; }
+.creator-room__fallback-copy { position:absolute; inset:auto 18px 12px; pointer-events:none; }
+.creator-room__fallback-copy p { margin:0; font-size:16px; color:#bccdc5; line-height:1.8; }
+.creator-room__caption { position:relative; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px 24px; padding:7px 0 0; }
+.creator-room__caption p { margin:0; color:#aebfb6; font-size:14px; line-height:1.8; }
+.creator-room__caption button { display:inline-flex; align-items:center; gap:10px; min-height:44px; padding:7px 0; background:none; border:0; border-bottom:1px solid #627d6d; color:#d7e2d4; border-radius:0; font:inherit; font-size:15px; cursor:pointer; }
+.creator-room__caption button[hidden] { display:none; }
+.creator-room__caption button:disabled { cursor:default; color:#adbbb0; }
+.creator-room__caption button[aria-pressed=true] { color:#d6e7b8; }
+.creator-room :is(a,button):focus-visible { outline:2px solid #e3dab8; outline-offset:6px; }
+.creator-room__notice { color:#c9d1c7; font-size:16px; line-height:1.85; margin:20px 0 0; }
+@media(max-width:700px) {
+  .creator-room__stage { height:clamp(430px,126vw,560px); }
+  .creator-room__fallback-copy { inset:auto 8px 12px; }
+  .creator-room__caption { padding-top:5px; }
+  .creator-room__caption p { max-width:21em; font-size:13px; }
+}
+@media(forced-colors:active) { .creator-room__caption button { border:1px solid ButtonText; padding-inline:12px; } }

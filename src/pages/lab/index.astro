@@ -2,8 +2,31 @@
 import Base from '../../layouts/Base.astro';
 import LabWorkbench from '../../components/LabWorkbench.astro';
 import Icon from '../../components/Icon.astro';
+import MediaImage from '../../components/MediaImage.astro';
 import { sitePath } from '../../lib/site-path';
 import { webProjects } from '../../data/web-projects';
+import '../../styles/lab-room.css';
 ---
-<Base title="交互实验" active="lab" description="亲手探索算法、结构映射与本地实用工具，修改输入，观察不同结果。"><div class="shell lab-page interactive-page"><div class="page-intro lab-intro"><h1 class="display">交互实验</h1><p data-motion="reveal">让输入改变结果，让代码变得直观。算法和小工具，都可以直接打开试试。</p></div><div class="lab-instrument" data-ui="true"><LabWorkbench/></div><section class="section" aria-labelledby="web-tools-title"><div class="section-heading"><h2 id="web-tools-title" data-motion="reveal">浏览器里的小工具</h2><p>打开即用，数据在本机处理。</p></div><div class="web-tool-grid">{webProjects.map(project => <a class="web-tool" href={sitePath(project.demo!)} data-motion="reveal"><div><h3>{project.name.split(' · ')[0]}</h3><p class="web-tool-kind">{project.category}</p><p>{project.summary}</p></div><Icon name="arrow" size={22}/></a>)}</div></section></div></Base>
+<Base title="交互实验" active="lab" description="亲手探索算法、结构映射与本地实用工具，修改输入，观察不同结果。">
+  <div class="lab-viewport" data-lab-room>
+    <div class="lab-room__field" aria-hidden="true"><div class="lab-room__field-plane" data-lab-field>
+      <svg viewBox="0 0 1500 1500" preserveAspectRatio="xMidYMid meet" fill="none"><path d="M-120 165C186 6 347 134 621 183S1110 341 1620 104M-120 211C186 52 347 180 621 229S1110 387 1620 150M-120 1040C167 861 440 1014 680 1101S1154 1167 1630 924M-120 1094C167 915 440 1068 680 1155S1154 1221 1630 978"/><path d="M87 380 174 332 375 350 479 291M1031 489 1226 445 1364 512M101 1307 311 1249 500 1288"/></svg>
+    </div></div>
+    <div class="shell lab-page lab-room">
+    <header class="lab-room__intro">
+      <div class="lab-room__title"><div class="lab-room__toolbar"><h1>交互实验</h1><button type="button" class="lab-room__motion" data-lab-motion-toggle aria-pressed="false" disabled><span data-lab-motion-label>暂停动态</span><span aria-hidden="true">Ⅱ</span></button></div><p class="lab-room__headline">让输入，改变结果。</p></div>
+      <div class="lab-room__opening"><p>先动一个条件，再看结果怎样变化。<br/>路径、排列与数据结构，都可以亲手试。</p><p class="lab-room__local">本页算法在浏览器内计算，不上传输入。</p></div>
+      <nav class="lab-room__index" aria-label="实验室章节"><a href="#route-lab">路径与连接<span aria-hidden="true">↘</span></a><a href="#evolution">排列与演化<span aria-hidden="true">↘</span></a><a href="#web-tools">本机小工具<span aria-hidden="true">↘</span></a></nav>
+    </header>
+    <div class="lab-instrument"><LabWorkbench/></div>
+    <section class="lab-tools" id="web-tools" aria-labelledby="web-tools-title" data-lab-station>
+      <header class="lab-tools__heading"><h2 id="web-tools-title">浏览器里的小工具</h2><p>从观察算法，到处理手边的数据。<br/>打开即用，数据在本机处理。</p></header>
+      <div class="lab-tools__entries">{webProjects.map(project => <a class="lab-tool-entry" href={sitePath(project.demo!)}>
+        <div class="lab-tool-entry__picture"><MediaImage image={project.cover} sizes="(max-width: 700px) 80vw, 280px"/></div>
+        <div class="lab-tool-entry__copy"><p class="lab-tool-entry__kind">{project.category}</p><h3>{project.name.split(' · ')[0]}</h3><p>{project.summary}</p><span class="lab-tool-entry__action">打开工具<Icon name="arrow" size={22}/></span></div>
+      </a>)}</div>
+    </section>
+    </div>
+  </div>
+</Base>
 
