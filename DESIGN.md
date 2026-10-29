@@ -1,30 +1,32 @@
-# Liss Works · 夜间创作工作台
+# Liss Works · v3 夜间创作工作台
 
-## Product truth and scope
+## 内容与版本边界
 
-Liss independently makes games, tools and interactive experiments. Preserve Astro, all 22 engineering records, real screenshots, downloads, source and community links, filters, algorithm functions and keyboard navigation. The original `../site/` remains unchanged. The first contact-sheet attempt is preserved at local commit `75a79327129c73e407eaf9053d24de69736b5260` and `../verification/site-next/v1-contact-sheet/`.
+个人网站展示 Liss 的游戏、工具与交互实验。保留 Astro + TypeScript、22 项工程资料、真实截图、源码与下载入口、交流链接、筛选、算法实验和键盘操作。旧版 `../site/` 保持独立，源码与 Git 历史不受新版迭代影响。
 
-The user explicitly requires dark mode and rejected the first redesign as rigid and too similar to a simple grid. This document replaces that contact-sheet direction. Taste's subject-specific imagery, clear typography and accessible fallbacks remain useful; its old layout recipe is no longer authority. Frontend Design and Impeccable now guide composition; GSAP implements the interaction.
+首轮接触印样保存在提交 `75a79327129c73e407eaf9053d24de69736b5260` 和 `../verification/site-next/v1-contact-sheet/`；v2 空间工作台保存在提交 `4948588` 和 `../verification/site-next/v2/`。本轮 v3 验收材料集中在 `../verification/site-next/v3/`。
 
-## Visual world
+## 视觉方向
 
-Experience mode: a night workshop made from actual running works. One dominant project screen, two smaller screens at different depths, stable readable Chinese typography. The visitor can make another project the main screen; that selection changes the spatial composition, caption and actual engineering link. Pointer movement gives the same surfaces a restrained depth response; it never takes over scrolling or the cursor.
+根据用户要求，继续深色模式，增强色彩、排版、空间层次和实时互动。以真实作品构成夜间工作台：主屏大、辅屏小，图片角度、标题位置和章节节奏各有区别，不再重复同一种双栏起手式。
 
-Palette: ground `#0b0e10`, surface `#151a1d`, raised `#20282c`, ink `#eeefeb`, secondary `#b6beba`, ice-blue accent `#9cdef1`, optional warm secondary `#efbd91`. Rajdhani remains the project-name face, Noto Sans SC the Chinese voice. Display lettering is large and stable; body is 16–18px or larger. Actual media can have rounded corners and directional soft shadows because their depth carries the workbench idea. No gradient text, wallpaper grids, generic floating blobs or fabricated dashboard content.
+底色 `#0b0e10`，正文 `#eeefeb`，次级文字 `#b6beba`。三种项目主题贯穿首屏选择和信号目的地：Outpost 珊瑚 `#ff9c82`、DubForge 青蓝 `#7ee8ff`、SSFramework 黄绿 `#dbf48b`。章节采用局部松绿、靛蓝、暖褐暗色场，斜边与跨出色场的真实图片形成纵向连续感。标题强调完整一行，项目名用 Rajdhani，中文用 Noto Sans SC；保留方向性柔影与局部渐变光面，不使用渐变文字、装饰网格或虚构界面。
 
-## Composition and movement
+## 构图与交互
 
-- Hero: strong two-line Chinese statement on the left; Outpost, DubForge and SSFramework form one spatial workbench on the right. The dominant image is materially larger than the two secondary images.
-- SSFramework: its actual Hierarchy evidence has generous scale; a quieter, lower architecture diagram explains the connection between interaction, command, rule and state. A replay button draws the four real diagram connections.
-- DubForge: a large editor with a smaller assembly view at another depth; a working three-stage control connects input, precision editing and multiple outputs.
-- Games: irregular heights and diagonals rather than equal cards. The final Gomoku scene pairs its text with a larger picture to close the composition.
-- Other work: a compact named index controls one real preview picture. The full engineering library uses the same browsing principle, preserving URL filters and a working phone preview button.
-- Inner pages: one artifact leads, facts recede, and evidence changes scale rather than repeating an identical two-column block.
+- 首屏三幅真实工程画面可切换主次，同时更新主题色、说明和工程链接。精细指针带来有界景深与光面响应，位移最多约 22px、转角约 4°。
+- 独立信号实验使用 Canvas 2D：28 个节点、40 条边，鼠标拨动连接，点击或按钮发送沿 Dijkstra 最短路径行进的信号。节点、边和目的地由共享数据定义，静态 SVG 后备使用同一份图结构。
+- SSFramework 用大标题和实际 Hierarchy 证据引入较安静的架构流程；DubForge 用窄列标题配大幅编辑画面及叠放辅图；游戏画面沿不同高度展开；其他工程通过名称索引切换真实预览。
+- GSAP 与有界滚动层延续空间感，游戏整幅图文一起移动，避免裁切框露空。倾斜字带、磁吸按钮内层反馈、探索光标标签和章节位置导航回应操作；滚动始终原生，系统指针保留，不持续无限漂浮。
 
-GSAP only moves inner surfaces, leaving authored CSS positions intact. Hero travel is bounded, pointer motion is around 12px/2 degrees at most, and scrolling is native. No infinite drift. Reduced motion makes selections immediate; failed JavaScript leaves every main claim and real project link readable. A phone has its own composition; dense architecture labels become a readable text flow.
+手机使用独立纵向构图，密集架构图转为可读文字流程。`prefers-reduced-motion` 提供静态信号图和即时选择，停止视差、磁吸和光标标签；偏好变化会同步更新。离屏或页面隐藏时暂停绘制，离开页面时清理监听器、观察器与动画。无 JavaScript 或 Canvas 初始化失败时显示共享静态 SVG 和可用链接，隐藏无效按钮、动态操作说明与状态。
 
-## References and acceptance
+## 参考、验收与维护
 
-References were directly observed on the official Bruno Simon and Lusion websites; see `../verification/site-next/v2/references.md`. Borrow hierarchy, spatial continuity and changes of scale; do not copy their imagery, models, code or brand motifs.
+Frontend Design 与 Impeccable 指导构图，GSAP 官方技能指导动效；Taste 的真实材料、清楚层级与降级原则仍保留。v2 直接观察的 Bruno Simon、Lusion 官方网站参考见 `../verification/site-next/v2/references.md`，借鉴空间连续性与尺度变化，不复制资产或代码。
 
-Use rendered screenshots and actual interactions as the visual evidence. The Impeccable detector is a mechanical check only. Retain Taste observations transparently: its blanket ban on resting shadows conflicts with this deliberately spatial media treatment and does not override the user's new brief. Verify 320–1920px geometry, all three stage choices, archive filtering/preview sync, diagram replay, reduced motion, no-script reading, lightboxes, algorithms and deployment base paths.
+实际渲染与交互结果是验收依据。Taste 对渐变、阴影、eyebrow 和 hairline 的主观 house rules 仍有失败项，与本轮明确选择的视觉方向存在冲突；透明保留报告，不声称 Taste 整体 gate 通过。Impeccable 检测也只是机械检查，不替代视觉复核。
+
+验收覆盖 320–1920px、三种主屏选择、信号点击与键盘按钮、动态偏好切换、无脚本后备、章节导航、预览筛选、架构重放、灯箱、算法与部署子路径。证据和结果以 `../verification/site-next/v3/` 内报告为准。
+
+新增中文文案后，必须在 **`site-next/` 目录**运行 `python scripts/prepare-media.py --fonts-only` 更新字体子集；不要运行旧版同名脚本，以免改动 `../site/`。

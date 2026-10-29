@@ -1,6 +1,8 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { setupPortfolioMotion } from './portfolio-motion';
+import { setupExpressiveMotion } from './expressive-motion';
+import { setupSignalField } from './signal-field';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -150,6 +152,8 @@ function initializeMotion() {
   );
 
   const disposePortfolio = setupPortfolioMotion({ signal, preference });
+  const disposeExpressive = setupExpressiveMotion({ signal, preference });
+  const disposeSignal = setupSignalField({ signal, preference });
 
   document.querySelectorAll<HTMLElement>('[data-workflow]').forEach((workflow) => {
     const buttons = Array.from(workflow.querySelectorAll<HTMLButtonElement>('button[data-flow-step]'));
@@ -246,6 +250,8 @@ function initializeMotion() {
     abort.abort();
     clearTimeout(refreshTimer);
     disposePortfolio();
+    disposeExpressive();
+    disposeSignal();
     media.revert();
     interactions.revert();
 

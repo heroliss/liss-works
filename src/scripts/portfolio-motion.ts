@@ -30,9 +30,12 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
       running?.revert();
       running = undefined;
       stage.dataset.active = value;
+      const hero = stage.closest<HTMLElement>('.kinetic-hero');
+      if (hero) hero.dataset.active = value;
       buttons.forEach((entry) => entry.setAttribute('aria-pressed', String(entry === button)));
       if (caption && button.dataset.caption) caption.textContent = button.dataset.caption;
       if (button.dataset.href) links.forEach((link) => { link.href = button.dataset.href!; });
+      window.dispatchEvent(new CustomEvent('portfolio:stage-select', { detail: { index: Number(value) } }));
       if (!animate || preference.matches) return;
 
       // Outer pieces keep their authored CSS position, rotation and transition.
@@ -169,6 +172,10 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
 
         if (!desktop || !fine || !surfaces.length) return;
         const pointer = new AbortController();
+        const region = stage.closest<HTMLElement>('.kinetic-hero') ?? stage;
+        const light = region.querySelector<HTMLElement>('[data-pointer-light]');
+        const lightX = light ? gsap.quickTo(light, 'x', { duration: 0.9, ease: 'power3.out' }) : undefined;
+        const lightY = light ? gsap.quickTo(light, 'y', { duration: 0.9, ease: 'power3.out' }) : undefined;
         const movers = surfaces.map((surface, index) => {
           const depth = 0.55 + (index % 3) * 0.2;
           return {
@@ -179,24 +186,54 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
             ry: gsap.quickTo(surface, 'rotationY', { duration: 0.8, ease: 'power3.out' }),
           };
         });
-        let bounds = stage.getBoundingClientRect();
-        stage.addEventListener('pointerenter', () => { bounds = stage.getBoundingClientRect(); }, { signal: pointer.signal });
-        stage.addEventListener('pointermove', (event) => {
-          if (!settled || event.pointerType === 'touch') return;
-          const x = gsap.utils.clamp(-1, 1, ((event.clientX - bounds.left) / Math.max(bounds.width, 1) - 0.5) * 2);
-          const y = gsap.utils.clamp(-1, 1, ((event.clientY - bounds.top) / Math.max(bounds.height, 1) - 0.5) * 2);
-          movers.forEach((move) => {
-            move.x(x * 12 * move.depth);
-            move.y(y * 10 * move.depth);
-            move.rx(-y * 1.6 * move.depth);
-            move.ry(x * 1.8 * move.depth);
+        let bounds = { left: 0, top: 0, width: 1, height: 1 };
+        let inView = true;
+        const measure = () => {
+          const box = region.getBoundingClientRect();
+          // Document coordinates remain valid while the native page scrolls.
+          bounds = { left: box.left + window.scrollX, top: box.top + window.scrollY, width: box.width, height: box.height };
+        };
+        const reset = (immediate = false) => {
+          const channels = movers.flatMap((move) => [move.x, move.y, move.rx, move.ry]);
+          if (lightX && lightY) channels.push(lightX, lightY);
+          channels.forEach((to) => {
+            to(0);
+            if (immediate) to.tween.progress(1).pause();
           });
+        };
+        measure();
+        const sizeObserver = new ResizeObserver(measure);
+        sizeObserver.observe(region);
+        const viewObserver = new IntersectionObserver(([entry]) => {
+          inView = entry.isIntersecting;
+          if (!inView && settled) reset(true);
+        });
+        viewObserver.observe(region);
+        region.addEventListener('pointerenter', measure, { signal: pointer.signal });
+        region.addEventListener('pointermove', (event) => {
+          if (!settled || !inView || document.hidden || event.pointerType === 'touch') return;
+          const x = gsap.utils.clamp(-1, 1, ((event.pageX - bounds.left) / Math.max(bounds.width, 1) - 0.5) * 2);
+          const y = gsap.utils.clamp(-1, 1, ((event.pageY - bounds.top) / Math.max(bounds.height, 1) - 0.5) * 2);
+          movers.forEach((move) => {
+            move.x(x * 22 * move.depth);
+            move.y(y * 18 * move.depth);
+            move.rx(-y * 3.6 * move.depth);
+            move.ry(x * 4 * move.depth);
+          });
+          lightX?.(x * 40);
+          lightY?.(y * 30);
         }, { signal: pointer.signal });
-        stage.addEventListener('pointerleave', () => {
-          if (!settled) return;
-          movers.forEach((move) => { move.x(0); move.y(0); move.rx(0); move.ry(0); });
+        region.addEventListener('pointerleave', () => {
+          if (settled) reset();
         }, { signal: pointer.signal });
-        context.add(() => () => pointer.abort());
+        document.addEventListener('visibilitychange', () => {
+          if (document.hidden && settled) reset(true);
+        }, { signal: pointer.signal });
+        context.add(() => () => {
+          pointer.abort();
+          sizeObserver.disconnect();
+          viewObserver.disconnect();
+        });
       });
     },
   );
