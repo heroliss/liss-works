@@ -14,7 +14,8 @@
     "verify:dist": "node scripts/verify-dist.mjs"
   },
   "dependencies": {
-    "astro": "7.4.2"
+    "astro": "7.4.2",
+    "gsap": "3.15.0"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.12",

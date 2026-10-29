@@ -1,4 +1,6 @@
-# Liss Works · 工程展厅
+# Liss Works · 深色新版试验
+
+本目录是与旧版独立保留的 Taste Skill + GSAP 新版。请先阅读 [README-NEXT.md](README-NEXT.md)；当前设计权威为 [DESIGN-NEXT.md](DESIGN-NEXT.md)。旧版源码在 `../site/`，以下为保留的原站内容与运行说明。
 
 当前工程库包含 20 个作品条目。首页优先呈现 SSFramework、DubForge，再连接游戏实机、实用工具与交互实验；工程库使用统一优先级，搜索与分类保留该顺序。Qt Labs、Text Lab、Systems Lab、NEX 与 Liss Blocks 覆盖 12 项早期桌面程序，配有技术短介绍、原生截图与自动跟随最新正式版的 Windows 下载。
 

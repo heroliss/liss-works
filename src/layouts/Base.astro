@@ -1,6 +1,8 @@
 ---
 import { sitePath, communityUrl } from '../lib/site-path';
 import '../styles/global.css';
+import '../styles/new-theme.css';
+import '../styles/interior.css';
 import Icon from '../components/Icon.astro';
 interface Props { title?: string; description?: string; active?: string; noindex?: boolean; }
 const { title = 'Games, tools & experiments.', description = 'Liss Works 工程展厅：独立开发的游戏、Unity 工具、AI 应用、图形与算法实验。', active = '', noindex = false } = Astro.props;
@@ -12,8 +14,8 @@ const canonical = Astro.site && !noindex ? new URL(Astro.url.pathname, Astro.sit
  <header class="site-header shell"><a class="brand" href={sitePath('/')} aria-label="Liss Works 工程展厅首页" title="Liss Works · 工程展厅"><svg width="22" height="22" viewBox="0 0 32 32" aria-hidden="true"><path d="m16 1 15 15-15 15L1 16Z" fill="currentColor"/><path d="m16 9 7 7-7 7-7-7Z" fill="#080c14"/></svg>Liss Works</a>
  <nav aria-label="主要导航"><a href={sitePath('/projects/')} aria-current={active === 'projects' ? 'page' : undefined}>工程</a><a href={sitePath('/lab/')} aria-current={active === 'lab' ? 'page' : undefined}>交互实验</a><a href={communityUrl}>交流</a><a href={sitePath('/about/')} aria-current={active === 'about' ? 'page' : undefined}>关于</a><a class="github-nav" href="https://github.com/heroliss" target="_blank" rel="noreferrer" aria-label="Liss 的 GitHub（新窗口）"><Icon name="github" size={21}/><span>GitHub</span></a></nav></header>
  <main id="main"><slot/></main>
- <footer class="site-footer shell"><div><a class="brand" href={sitePath('/')} aria-label="Liss Works 工程展厅首页">Liss Works</a><p>让画面、功能和使用过程说话。</p></div><div class="footer-links"><a href={sitePath('/projects/')}>全部工程</a><a href={sitePath('/lab/')}>交互实验</a><a href={communityUrl}>想法与交流</a><a href="https://github.com/heroliss" target="_blank" rel="noreferrer">GitHub <Icon size={14}/></a></div><small>© 2026 Liss</small></footer>
+ <footer class="site-footer shell"><div class="site-footer__top"><p>让画面、功能和使用过程说话。</p><div class="footer-links"><a href={sitePath('/projects/')}>全部工程</a><a href={sitePath('/lab/')}>交互实验</a><a href={communityUrl}>想法与交流</a><a href="https://github.com/heroliss" target="_blank" rel="noreferrer">GitHub <Icon size={14}/></a></div></div><a class="footer-wordmark" href={sitePath('/')} aria-label="返回 Liss Works 首页">Liss Works</a><small>© 2026 Liss</small></footer>
  <dialog class="lightbox" aria-label="截图查看器"><div class="lightbox__toolbar"><p class="lightbox__title"></p><button type="button" class="icon-button lightbox__close" aria-label="关闭截图"><Icon name="close" size={24}/></button></div><div class="lightbox__stage"><button type="button" class="icon-button lightbox__prev" aria-label="上一张截图"><Icon name="back" size={25}/></button><div class="lightbox__image-slot"></div><button type="button" class="icon-button lightbox__next" aria-label="下一张截图"><Icon name="chevron" size={25}/></button></div><div class="lightbox__footer"><p class="lightbox__caption"></p><span class="lightbox__count" aria-live="polite"></span><a class="text-link lightbox__original" href={sitePath('/')} target="_blank" rel="noreferrer">打开大图 <Icon size={16}/></a></div></dialog>
- <script>import '../scripts/site';</script>
+ <script>import '../scripts/site'; import '../scripts/motion';</script>
 </body></html>
 

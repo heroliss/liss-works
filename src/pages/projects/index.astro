@@ -8,8 +8,8 @@ const orderedProjects = prioritizeProjects(projects);
 const tags = ['Unity','C#','C++','AI','Python','Web','Qt','.NET','OpenGL','算法'];
 ---
 <Base title="全部工程" active="projects" description={`浏览 Liss 的${projects.length}个独立开发工程：游戏与Unity工具、AI与数据应用、图形与算法实验。`}>
- <div class="shell"><div class="page-intro"><h1>工程库</h1><p>游戏、工具、图形和算法。完整的作品与正在生长的原型，都在这里。</p></div>
- <div class="filters" data-filters><div class="filters-top"><label class="search-box"><span>查找工程</span><Icon name="search" size={19}/><input type="search" id="project-search" placeholder="搜索名称、用途或技术" autocomplete="off"/></label><p class="results-count" aria-live="polite" data-result-count>共 {projects.length} 个工程</p></div>
+ <div class="shell archive-page"><div class="page-intro"><h1 class="display">工程库</h1><p data-motion="reveal">游戏、工具、图形和算法。完整的作品与正在生长的原型，都在这里。</p></div>
+ <div class="filters" data-filters data-ui="true"><div class="filters-top"><label class="search-box"><span>查找工程</span><Icon name="search" size={19}/><input type="search" id="project-search" placeholder="搜索名称、用途或技术" autocomplete="off"/></label><p class="results-count" aria-live="polite" data-result-count>共 {projects.length} 个工程</p></div>
  <div class="filter-buttons" role="group" aria-label="工程分类"><button type="button" data-group-filter="all" aria-pressed="true">全部工程</button>{groups.map(group=><button type="button" data-group-filter={group.id} aria-pressed="false">{group.label}</button>)}</div>
  <div class="filter-bottom"><label>技术标签<select id="tag-filter"><option value="">全部技术</option>{tags.map(tag=><option value={tag}>{tag}</option>)}</select></label><button class="reset-filter" type="button" data-reset-filters>重置筛选</button></div></div>
  <div class="project-grid">{orderedProjects.map(project=><ProjectCard project={project}/>)}</div>

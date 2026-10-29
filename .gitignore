@@ -1,6 +1,8 @@
 node_modules/
 dist/
 .astro/
+.taste-skill/inspect/
+.taste-skill/scenes/
 *.log
 .DS_Store
 

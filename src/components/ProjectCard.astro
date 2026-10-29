@@ -7,6 +7,8 @@ import { getProjectSignature } from '../data/project-signatures';
 interface Props { project: Project; class?: string; }
 const { project, class: className = '' } = Astro.props;
 const signature = getProjectSignature(project.slug);
+const displayName = project.name.split(' · ')[0];
+const contactImages = project.gallery.filter(image => image.src !== project.cover.src).slice(0, 2);
 const filterTags = new Set(project.tags);
 if (project.tags.some(tag => tag.toLowerCase().includes('unity'))) filterTags.add('Unity');
 if (project.tags.some(tag => tag.toLowerCase().includes('opengl'))) filterTags.add('OpenGL');
@@ -17,9 +19,10 @@ if (project.tags.some(tag => /^qt(?:\s|\d|$)/i.test(tag))) filterTags.add('Qt');
 if (project.tags.some(tag => tag.startsWith('.NET'))) filterTags.add('.NET');
 ---
 <article class:list={['project-card', className]} data-project-card data-group={project.group} data-tags={Array.from(filterTags).join('|')} data-search={`${project.name} ${project.repo} ${project.summary} ${project.category} ${project.tags.join(' ')} ${signature.direction} ${signature.principle} ${signature.highlights.join(' ')}`}>
- <a class="project-card__image" href={sitePath(`/projects/${project.slug}/`)} tabindex="-1" aria-hidden="true"><MediaImage image={project.cover} sizes="(max-width: 700px) 100vw, (max-width: 1080px) 50vw, 33vw" /></a>
- <div class="project-card__body"><div class="project-card__meta"><span>{project.category}</span><span>{project.status}</span></div>
- <h2><a href={sitePath(`/projects/${project.slug}/`)}>{project.name}<Icon size={20}/></a></h2>
- <p>{project.summary}</p><p class="card-design"><span>设计</span>{signature.principle}</p><div class="tag-list">{project.tags.slice(0,3).map(tag=><span>{tag}</span>)}</div></div>
+ <div class="project-card__visual" data-motion="reveal"><a class="project-card__image" href={sitePath(`/projects/${project.slug}/`)} tabindex="-1" aria-hidden="true"><MediaImage image={project.cover} sizes="(max-width: 700px) 100vw, 44vw" /></a>{contactImages.length > 0 && <div class="project-card__contact" aria-hidden="true">{contactImages.map(image => <MediaImage image={image} sizes="(max-width: 700px) 45vw, 20vw"/>)}</div>}</div>
+ <div class="project-card__body" data-motion="reveal">
+ <h2><a href={sitePath(`/projects/${project.slug}/`)} aria-label={project.name}>{displayName}<Icon size={20}/></a></h2>
+ {displayName !== project.name && <p class="project-card__full-name">{project.name}</p>}
+ <p>{project.summary}</p><p class="card-design">{signature.principle}</p><div class="project-card__meta"><span>{project.category}</span><span>{project.status}</span></div><div class="tag-list">{project.tags.slice(0,3).map(tag=><span>{tag}</span>)}</div></div>
 </article>
 

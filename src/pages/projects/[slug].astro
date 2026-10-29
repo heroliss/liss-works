@@ -15,7 +15,7 @@ import type { Project } from '../../data/types';
 export function getStaticPaths() { return projects.map(project => ({params: {slug: project.slug}, props: {project}})); }
 interface Props { project: Project }
 const { project } = Astro.props;
-const titleLines = project.slug === 'aoe4-flow' ? project.name.split(' · ', 2) : undefined;
+const displayName = project.name.split(' · ')[0];
 const story = getProjectStory(project.slug);
 const topicMedia = getStoryMedia(project);
 const topicSources = new Set(topicMedia.flatMap(media => [media.image?.src, media.inset?.src]));
@@ -25,23 +25,23 @@ const hasLab = project.slug === 'floydshortestpath' || project.slug === 'ga-sort
 const notes = [project.note, story.footnote].filter(Boolean);
 ---
 <Base title={project.name} description={project.summary} active="projects">
-  <div class="shell">
+  <div class="shell detail-page">
     <a class="back-link" href={sitePath('/projects/')}><Icon name="back" size={16}/> 全部工程</a>
     <header class="project-intro">
-      <div><span class="category">{project.category} · {project.status}</span><h1 class="project-name" aria-label={project.name}>{titleLines ? titleLines.map((line, index) => <span class={index === 0 ? 'project-title-main' : 'project-title-subtitle'}>{line}</span>) : project.name}</h1><p class="summary">{project.summary}</p></div>
+      <div><h1 class="project-name" aria-label={project.name}>{displayName}</h1>{displayName !== project.name && <p class="project-full-name">{project.name}</p>}<p class="summary" data-motion="reveal">{project.summary}</p><p class="project-facts">{project.category} · {project.status}</p></div>
       <div class="button-row">{project.demo && <a class="button" href={sitePath(project.demo)} target="_blank" rel="noreferrer">在线体验 <Icon name="play" size={17}/></a>}{hasLab && <a class="button" href={sitePath(project.slug === 'ga-sort' ? '/lab/#evolution' : '/lab/')}>打开交互实验 <Icon name="play" size={17}/></a>}{project.download && <ProjectDownload download={project.download}/>}<a class:list={['button', {secondary: Boolean(project.demo || project.download || hasLab)}]} href={project.source} target="_blank" rel="noreferrer">查看源码 <Icon name="code" size={18}/></a></div>
     </header>
     <ProjectSignature signature={getProjectSignature(project.slug)}/>
-    <div class="project-hero"><MediaImage image={project.cover} eager zoom group={project.slug} sizes="(max-width: 760px) calc(100vw - 36px), (max-width: 1100px) calc(100vw - 64px), (max-width: 1456px) calc(100vw - 96px), 1360px"/></div>
+    <div class="project-hero" data-motion="reveal"><MediaImage image={project.cover} eager zoom group={project.slug} sizes="(max-width: 760px) calc(100vw - 40px), calc(100vw - 64px)"/></div>
     <p class="project-caption">{project.cover.caption}</p>
     <nav class="project-contents" aria-label="详情页导航"><a href="#project-origin">项目概览</a><a href="#engineering">设计与实现</a>{gallery.length > 0 && <a href="#gallery">更多画面</a>}<a href="#usage">快速开始</a>{project.docs && <a href={project.docs} target="_blank" rel="noreferrer">完整文档 <Icon size={13}/></a>}</nav>
     <div class="project-overview" id="project-origin">
-      <section class="story-origin" aria-labelledby="origin-title"><h2 id="origin-title">{story.origin.title}</h2>{story.origin.paragraphs.map(paragraph => <p>{paragraph}</p>)}{story.flow && <ol class="compact-flow" aria-label={story.flow.title}>{story.flow.steps.map(step => <li>{step.name}</li>)}</ol>}</section>
-      {story.stack?.length && <section class="project-technology" aria-labelledby="stack-title"><h2 id="stack-title">技术构成</h2><dl class="project-stack">{story.stack.map(item => <div><dt>{item.name}</dt><dd>{item.role}</dd></div>)}</dl></section>}
+      <section class="story-origin" aria-labelledby="origin-title" data-motion="reveal"><h2 id="origin-title">{story.origin.title}</h2>{story.origin.paragraphs.map(paragraph => <p>{paragraph}</p>)}{story.flow && <ol class="compact-flow" aria-label={story.flow.title}>{story.flow.steps.map(step => <li>{step.name}</li>)}</ol>}</section>
+      {story.stack?.length && <section class="project-technology" aria-labelledby="stack-title" data-motion="reveal"><h2 id="stack-title">技术构成</h2><dl class="project-stack">{story.stack.map(item => <div><dt>{item.name}</dt><dd>{item.role}</dd></div>)}</dl></section>}
     </div>
     <ProjectEngineering story={story} media={topicMedia} group={project.slug}/>
     {project.video && <figure class="project-video"><video controls playsinline preload="none" poster={sitePath(project.video.poster)} aria-label="全国房价图真实界面操作演示"><source src={sitePath(project.video.src)} type="video/mp4"/>浏览器无法播放视频，请<a href={sitePath(project.video.src)}>下载演示片段</a>。</video><figcaption>{project.video.caption}</figcaption></figure>}
-    {gallery.length > 0 && <section class="section project-gallery" id="gallery" aria-labelledby="gallery-title"><div class="section-heading"><h2 id="gallery-title">更多画面</h2><p>点击图片，放大查看。</p></div><div class="gallery-grid">{gallery.map(image => <figure><MediaImage image={image} zoom group={project.slug} sizes="(max-width: 760px) 100vw, 50vw"/><figcaption>{image.caption}</figcaption></figure>)}</div></section>}
+    {gallery.length > 0 && <section class="section project-gallery" id="gallery" aria-labelledby="gallery-title"><div class="section-heading"><h2 id="gallery-title">更多画面</h2><p>点击图片，放大查看。</p></div><div class="gallery-grid">{gallery.map(image => <figure data-motion="reveal"><MediaImage image={image} zoom group={project.slug} sizes="(max-width: 760px) 100vw, 50vw"/><figcaption>{image.caption}</figcaption></figure>)}</div></section>}
     {notes.length > 0 && <details class="capture-notes"><summary>画面与演示说明</summary>{notes.map(note => <p>{note}</p>)}</details>}
     <section class="project-usage section" id="usage" aria-labelledby="usage-title"><div class="section-heading"><h2 id="usage-title">快速开始</h2></div><div class="usage-grid">{project.usage.map((usage,index) => <article class="usage"><h3>{usage.title}</h3><p>{usage.body}</p>{usage.code && <div class="code-block"><div class="code-toolbar"><span>{usage.language ?? '用法'}</span><span role="status" aria-live="polite"></span><button class="copy-button" type="button" data-copy={`code-${index}`} aria-label={`复制：${usage.title}`}>复制</button></div><pre><code id={`code-${index}`}>{usage.code}</code></pre></div>}</article>)}</div></section>
     <aside class="project-conversation" aria-labelledby="conversation-title"><div><h2 id="conversation-title">这个工程，让你想到什么？</h2><p>分享使用心得、遇到的问题，或一个值得继续尝试的想法。</p></div><a class="button secondary" href={projectTalkUrl(project.slug)}>交流想法 <Icon size={17}/></a></aside>

@@ -1,0 +1,207 @@
+/* Inner pages extend the contact-sheet direction without changing the project data. */
+:is(.archive-page,.detail-page,.about-page,.interactive-page) { --interior-gap:clamp(80px,9vw,144px); }
+:is(.archive-page,.interactive-page) .page-intro { padding-top:clamp(48px,6vw,88px); margin-bottom:44px; display:grid; grid-template-columns:1fr 1fr; gap:28px; align-items:end; }
+:is(.archive-page,.interactive-page) .page-intro h1 { font-size:clamp(52px,7.5vw,112px); line-height:1.04; font-weight:600; letter-spacing:-.045em; margin:0; }
+:is(.archive-page,.interactive-page) .page-intro>p { font-size:18px; line-height:1.7; color:var(--text); max-width:40ch; margin:0 0 6px; }
+.archive-page .filters { border:0; background:var(--surface); padding:28px; margin:0 0 62px; }
+.archive-page .filters-top { align-items:end; gap:30px; }
+.archive-page .search-box { width:min(600px,100%); }
+.archive-page .search-box>span,.archive-page .filter-bottom label { color:var(--text); font-size:14px; }
+.archive-page .search-box input { background:var(--bg); border:0; border-radius:0; min-height:52px; font-size:16px; }
+.archive-page .search-box svg { bottom:17px; }
+.archive-page .results-count { font-size:14px; color:var(--muted); }
+.archive-page .filter-buttons { gap:4px 8px; }
+.archive-page .filter-buttons button { border-radius:0; box-shadow:none; padding:12px 17px; color:var(--text); font-size:15px; min-height:46px; }
+.archive-page .filter-buttons button:hover { background:var(--raised); }
+.archive-page .filter-buttons button[aria-pressed=true] { color:var(--bg); background:var(--text); box-shadow:none; }
+.archive-page .filter-bottom select { background:var(--bg); border:0; border-radius:0; font-size:14px; min-height:44px; }
+.archive-page .reset-filter { min-height:44px; color:var(--text); font-size:14px; }
+.archive-page .project-grid { display:block; }
+.project-card { min-width:0; border:0; border-radius:0; background:transparent; }
+.archive-page .project-card { display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); align-items:start; gap:clamp(30px,5vw,80px); padding:0; margin-bottom:72px; }
+.project-card__visual { min-width:0; }
+.project-card__image { display:block; background:var(--surface); border-radius:0; aspect-ratio:16/10; overflow:hidden; }
+.project-card__image>img { width:100%; height:100%; object-fit:contain; }
+.project-card__contact { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:8px; }
+.project-card__contact img { height:110px; width:100%; object-fit:contain; background:var(--surface); }
+.project-card__body { padding:0; min-width:0; }
+.project-card h2 { font-size:clamp(29px,3vw,44px); line-height:1.12; margin:0 0 20px; overflow-wrap:anywhere; }
+.project-card h2 a { align-items:center; gap:20px; }
+.project-card h2 svg { color:var(--accent); width:22px; height:22px; flex:none; }
+.project-card p { color:var(--text); font-size:16px; line-height:1.8; margin-bottom:20px; }
+.project-card .project-card__full-name { color:var(--muted); font-size:14px; margin-top:-9px; margin-bottom:18px; }
+.project-card .card-design { display:block; font-size:16px; line-height:1.8; color:var(--text); margin:0 0 24px; }
+.project-card__meta { display:flex; flex-wrap:wrap; align-items:baseline; justify-content:flex-start; gap:6px 24px; margin-bottom:10px; font-size:14px; color:var(--muted); }
+.project-card__meta span:last-child { color:var(--muted); display:inline; white-space:normal; }
+.project-card .tag-list { color:var(--muted); font-size:14px; gap:0 12px; }
+.project-card .tag-list span { background:transparent; padding:0; border:0; border-radius:0; }
+.project-card .tag-list span+span::before { content:'/'; margin-right:12px; }
+.archive-page .empty-state { background:var(--surface); border:0; border-radius:0; padding:48px 24px; }
+.detail-page .back-link { font-size:15px; margin-top:36px; min-height:44px; }
+.detail-page .project-intro { grid-template-columns:minmax(0,1fr) auto; align-items:end; gap:35px; margin:36px 0 42px; }
+.detail-page .project-intro h1 { font-size:clamp(48px,7vw,104px); font-weight:600; line-height:1.02; margin:0 0 25px; letter-spacing:-.035em; max-width:20ch; }
+.detail-page .project-intro .summary { font-size:18px; line-height:1.75; color:var(--text); max-width:52ch; }
+.detail-page .project-full-name { font-size:18px; line-height:1.6; margin:0 0 18px; color:var(--text); }
+.detail-page .project-facts { margin:24px 0 0; font-size:14px; color:var(--muted); }
+.detail-page .project-intro .button-row { gap:14px; flex-direction:column; align-items:stretch; min-width:165px; }
+.detail-page .project-intro .button { justify-content:space-between; }
+.detail-page .project-signature { border:0; margin:0 0 32px; padding:25px 28px; background:var(--surface); gap:32px; grid-template-columns:1fr 1.3fr 1fr; }
+.detail-page .project-signature dt { font-size:14px; margin-bottom:8px; color:var(--muted); }
+.detail-page .project-signature dd { font-size:16px; line-height:1.75; color:var(--text); }
+.detail-page .signature-highlights { display:block; }
+.detail-page .signature-highlights li { border:0; border-radius:0; background:transparent; color:var(--text); font-size:16px; padding:0; line-height:1.75; }
+.detail-page .project-hero { border-radius:0; background:var(--surface); }
+.detail-page .project-hero img { max-height:790px; }
+.detail-page .project-caption,.detail-page .engineering-media figcaption,.detail-page .gallery-grid figcaption,.detail-page .project-video figcaption { color:var(--muted); font-size:14px; line-height:1.75; }
+.detail-page .project-caption { margin-top:14px; }
+.detail-page .project-contents { margin-top:38px; border:0; padding:16px 0; font-size:16px; gap:10px 32px; }
+.detail-page .project-contents a { min-height:44px; }
+.detail-page .project-overview { grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(32px,8vw,120px); padding:60px 0 0; }
+.detail-page .story-origin h2,.detail-page .project-technology h2,.detail-page .section-heading h2 { font-size:clamp(28px,3vw,42px); line-height:1.25; font-weight:500; margin-bottom:24px; }
+.detail-page .story-origin p,.detail-page .project-stack dd,.detail-page .engineering-copy>p,.detail-page .engineering-points dd,.detail-page .usage>p { color:var(--text); font-size:16px; line-height:1.85; }
+.detail-page .project-stack { grid-template-columns:1fr 1fr; gap:25px 32px; }
+.detail-page .project-stack dt { font-size:16px; font-weight:600; color:var(--text); }
+.detail-page .compact-flow { list-style:decimal; display:block; padding-left:22px; font-size:16px; color:var(--text); margin-top:25px; }
+.detail-page .compact-flow li { display:list-item; margin-bottom:7px; }
+.detail-page .compact-flow li::after { display:none; }
+.detail-page .project-engineering { margin-top:var(--interior-gap); padding-top:0; border:0; }
+.detail-page .engineering-grid { display:block; }
+.detail-page .engineering-topic { margin-bottom:72px; }
+.detail-page .engineering-topic--media,.detail-page .engineering-topic--media:nth-child(even) { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr); align-items:center; gap:clamp(28px,5vw,76px); padding-top:0; border:0; }
+.detail-page .engineering-topic--media:nth-child(even) { grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr); }
+.detail-page .engineering-topic--media:nth-child(even) .engineering-diagram { order:2; }
+.detail-page .engineering-copy h3 { font-size:clamp(25px,2.7vw,36px); font-weight:500; line-height:1.3; margin-bottom:24px; }
+.detail-page .engineering-points dt { font-size:17px; line-height:1.5; font-weight:600; margin-bottom:9px; }
+.detail-page .engineering-points>div+div { margin-top:26px; }
+.detail-page .engineering-media .media-link,.detail-page .engineering-media .engineering-inset { border-radius:0; border:0; background:var(--surface); }
+.detail-page .engineering-media .engineering-inset { padding:20px; gap:24px; }
+.detail-page .engineering-media img { max-height:590px; }
+.detail-page .engineering-diagram { min-width:0; }
+.detail-page .map-node rect { stroke:var(--accent); }
+.detail-page .framework-mobile-flow { border:0; border-radius:0; padding:24px; }
+.detail-page .framework-mobile-flow li,.detail-page .framework-mobile-flow li span,.detail-page .framework-mobile-flow>p span { font-size:15px; color:var(--text); }
+.detail-page .framework-mobile-flow li strong { font-size:16px; }
+.detail-page .capture-notes { font-size:14px; border:0; background:var(--surface); padding:20px 24px; margin-top:40px; }
+.detail-page .capture-notes summary { min-height:36px; }
+.detail-page .section { margin-top:var(--interior-gap); }
+.detail-page .usage-grid { gap:40px 60px; }
+.detail-page .usage h3 { font-size:23px; line-height:1.35; margin-bottom:18px; }
+.detail-page .code-block { border-radius:0; }
+.detail-page .code-toolbar { min-height:50px; font-size:14px; border:0; }
+.detail-page .code-toolbar .copy-button { min-height:38px; border-radius:0; font-size:14px; }
+.detail-page pre code { color:var(--text); }
+.detail-page .gallery-grid { gap:40px 24px; }
+.detail-page .gallery-grid .media-link { border-radius:0; }
+.detail-page .project-video video { border-radius:0; }
+.detail-page .project-conversation { border:0; padding:32px; background:var(--surface); gap:30px; margin-top:var(--interior-gap); }
+.detail-page .project-conversation h2 { font-size:26px; margin-bottom:13px; }
+.detail-page .project-conversation p { font-size:16px; color:var(--text); }
+.detail-page .related-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:28px; }
+.detail-page .related-grid .project-card__contact { display:none; }
+.detail-page .related-grid .project-card__body { padding-top:24px; }
+.detail-page .related-grid .project-card h2 { font-size:28px; margin-bottom:16px; }
+.detail-page .related-grid .project-card .card-design { display:none; }
+.detail-page .related-grid .project-card p { font-size:16px; }
+.about-page .about-intro { max-width:none; margin:clamp(50px,7vw,100px) 0 70px; }
+.about-page .about-intro h1 { font-size:clamp(58px,8vw,118px); line-height:1.05; font-weight:600; margin-bottom:44px; }
+.about-page .about-story { display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1fr); gap:clamp(30px,8vw,140px); }
+.about-page .about-story .lead { font-size:clamp(22px,2.6vw,34px); line-height:1.5; color:var(--text); max-width:19ch; margin:0; }
+.about-page .about-story p { font-size:17px; line-height:1.85; color:var(--text); }
+.about-page .about-links { margin-top:35px; gap:28px; align-items:center; }
+.about-contact-sheet { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
+.about-contact-sheet a { min-width:0; }
+.about-contact-sheet img { width:100%; height:280px; object-fit:contain; background:var(--surface); }
+.about-contact-sheet span { display:block; margin-top:10px; font-size:16px; }
+.about-page .about-notes { max-width:none; border:0; padding:0; margin-top:100px; gap:clamp(35px,8vw,130px); }
+.about-page .about-notes h2 { font-size:30px; line-height:1.3; margin-bottom:22px; }
+.about-page .about-notes p { font-size:17px; line-height:1.85; color:var(--text); }
+.interactive-page.lab-page { max-width:none; }
+.interactive-page .lab-instrument { background:var(--surface); padding:32px; }
+.interactive-page .workbench .lab-intro h2 { font-size:30px; font-weight:500; line-height:1.3; }
+.interactive-page .workbench .lab-intro p { font-size:16px; color:var(--text); }
+.interactive-page .workbench .floyd-layout,.interactive-page .workbench .route-result,.interactive-page .workbench .matrix-scroll { border-radius:0; }
+.interactive-page .workbench .graph-edge text { font-family:inherit; }
+.interactive-page .workbench .graph-node.endpoint >text:not(.endpoint-label) { fill:var(--bg); }
+.interactive-page .workbench .route-pane { background:var(--bg); }
+.interactive-page .workbench :is(label,.route-sequence,.graph-settings,.matrix-note,.ga-status,.ga-controls,.input-note,.wb-button) { font-size:15px; }
+.interactive-page .workbench :is(.graph-kind,.graph-hint,.endpoint-label) { font-size:14px; }
+.interactive-page .workbench .wb-button { background:var(--accent); color:var(--accent-ink,var(--bg)); border-radius:0; min-height:44px; }
+.interactive-page .workbench .wb-button.secondary { color:var(--text); background:var(--raised); }
+.interactive-page .workbench :is(input,select) { border-radius:0; min-height:44px; }
+.interactive-page .workbench :is(th,td) { font-family:inherit; font-variant-numeric:tabular-nums; font-size:16px; }
+.interactive-page .section { margin-top:var(--interior-gap); }
+.interactive-page .web-tool-grid { display:grid; grid-template-columns:1fr 1fr; gap:32px; }
+.interactive-page .web-tool { display:flex; gap:30px; align-items:start; background:var(--surface); padding:32px; min-width:0; }
+.interactive-page .web-tool h3 { font-family:Rajdhani,'Noto Sans SC',sans-serif; font-size:36px; line-height:1.1; margin:0 0 16px; }
+.interactive-page .web-tool p { color:var(--text); font-size:16px; line-height:1.8; margin-bottom:0; }
+.interactive-page .web-tool .web-tool-kind { font-size:14px; color:var(--muted); margin-bottom:15px; }
+.interactive-page .web-tool>svg { margin-left:auto; flex:none; color:var(--accent); }
+@media(max-width:1100px) {
+ .detail-page .project-intro { grid-template-columns:1fr; }
+ .detail-page .project-intro .button-row { flex-direction:row; flex-wrap:wrap; align-items:start; }
+ .detail-page .project-signature { gap:22px; grid-template-columns:1fr 1.2fr; }
+ .detail-page .project-signature>div:last-child { grid-column:1/-1; }
+ .detail-page .signature-highlights { display:flex; gap:12px 24px; }
+ .detail-page .engineering-topic--media,.detail-page .engineering-topic--media:nth-child(even) { grid-template-columns:1fr 1fr; gap:32px; }
+ .about-contact-sheet img { height:220px; }
+}
+@media(max-width:760px) {
+ :is(.archive-page,.detail-page,.about-page,.interactive-page) { --interior-gap:72px; }
+ :is(.archive-page,.interactive-page) .page-intro { grid-template-columns:1fr; padding-top:42px; gap:24px; margin-bottom:32px; }
+ :is(.archive-page,.interactive-page) .page-intro h1 { font-size:52px; }
+ :is(.archive-page,.interactive-page) .page-intro>p { font-size:16px; max-width:none; }
+ .archive-page .filters { padding:22px 18px; margin-bottom:44px; }
+ .archive-page .filters-top { align-items:start; gap:14px; }
+ .archive-page .filter-buttons { gap:4px; }
+ .archive-page .filter-buttons button { padding:10px 12px; font-size:14px; }
+ .archive-page .filter-bottom { gap:10px; }
+ .archive-page .filter-bottom label { flex-wrap:wrap; font-size:14px; }
+ .archive-page .project-card { grid-template-columns:1fr; gap:25px; margin-bottom:58px; }
+ .project-card__contact img { height:96px; }
+ .project-card h2 { font-size:32px; margin-bottom:17px; }
+ .project-card .project-card__full-name { margin-top:-4px; }
+ .project-card p,.project-card .card-design { font-size:16px; margin-bottom:18px; }
+ .project-card__meta { gap:4px 16px; font-size:14px; }
+ .detail-page .back-link { margin-top:24px; }
+ .detail-page .project-intro { margin:25px 0 30px; gap:28px; }
+ .detail-page .project-intro h1 { font-size:clamp(39px,9vw,64px); max-width:100%; overflow-wrap:anywhere; margin-bottom:20px; }
+ .detail-page .project-intro .summary,.detail-page .project-full-name { font-size:16px; }
+ .detail-page .project-facts { margin-top:20px; }
+ .detail-page .project-intro .button-row { gap:12px; }
+ .detail-page .project-signature { padding:22px; grid-template-columns:1fr; gap:22px; }
+ .detail-page .project-signature>div { display:block; }
+ .detail-page .project-signature>div:last-child { grid-column:auto; }
+ .detail-page .project-signature dt { margin-bottom:6px; font-size:14px; }
+ .detail-page .project-signature dd,.detail-page .signature-highlights li { font-size:16px; }
+ .detail-page .signature-highlights { gap:4px 18px; }
+ .detail-page .project-caption,.detail-page .engineering-media figcaption,.detail-page .gallery-grid figcaption { font-size:14px; }
+ .detail-page .project-contents { font-size:15px; gap:4px 22px; margin-top:24px; }
+ .detail-page .project-overview { padding-top:35px; grid-template-columns:1fr; gap:44px; }
+ .detail-page .story-origin h2,.detail-page .project-technology h2,.detail-page .section-heading h2 { font-size:28px; margin-bottom:22px; }
+ .detail-page .project-stack { gap:24px 20px; }
+ .detail-page .engineering-topic { margin-bottom:48px; }
+ .detail-page .engineering-topic--media,.detail-page .engineering-topic--media:nth-child(even) { grid-template-columns:1fr; gap:26px; padding-top:0; }
+ .detail-page .engineering-topic--media:nth-child(even) .engineering-media,.detail-page .engineering-topic--media:nth-child(even) .engineering-diagram { order:0; }
+ .detail-page .engineering-copy h3 { font-size:26px; margin-bottom:20px; }
+ .detail-page .engineering-media .engineering-inset { padding:18px; }
+ .detail-page .project-conversation { align-items:start; flex-direction:column; padding:26px 22px; gap:24px; }
+ .detail-page .project-conversation h2 { font-size:25px; }
+ .detail-page .related-grid { grid-template-columns:1fr; gap:45px; }
+ .detail-page .related-grid .project-card h2 { font-size:30px; }
+ .about-page .about-intro { margin-top:44px; margin-bottom:45px; }
+ .about-page .about-intro h1 { font-size:58px; margin-bottom:30px; }
+ .about-page .about-story { grid-template-columns:1fr; gap:26px; }
+ .about-page .about-story .lead { font-size:24px; max-width:none; }
+ .about-page .about-story p { font-size:16px; }
+ .about-page .about-links { margin-top:26px; gap:25px; }
+ .about-contact-sheet { grid-template-columns:1fr; gap:30px; }
+ .about-contact-sheet img { height:auto; max-height:330px; }
+ .about-page .about-notes { grid-template-columns:1fr; margin-top:64px; gap:42px; }
+ .about-page .about-notes h2 { font-size:26px; margin-bottom:20px; }
+ .about-page .about-notes p { font-size:16px; }
+ .interactive-page .lab-instrument { padding:20px 15px; }
+ .interactive-page .workbench .lab-intro h2 { font-size:26px; }
+ .interactive-page .web-tool-grid { grid-template-columns:1fr; gap:20px; }
+ .interactive-page .web-tool { padding:28px 22px; gap:20px; }
+ .interactive-page .web-tool h3 { font-size:32px; }
+}

@@ -1,5 +1,7 @@
 # Liss Works · 工程展厅
 
+> 此文档保留原版设计用于对照。新版已按用户要求采用深色模式，当前设计权威为 `DESIGN-NEXT.md` 和 `.taste-skill/direction.json`。
+
 视觉与内容权威为工作区《个人网站方案-v3.md》和 design/v3 现有概念。模式为 Experience，作品先于个人介绍。保持深蓝黑 #080c14、内容表面 #101825、抬高表面 #162336、边界 #293b53、文字 #eaf1fc、次级 #a1b1c8、冰青 #69dff4、淡紫 #b7a6ff。Rajdhani 用于英文工程名和大标题；Noto Sans SC / 微软雅黑用于中文。
 
 首页首先并列展示 SSFramework 与 DubForge：两幅完整截图配合简短用途、技术方向与三项能力，让成熟的重点工程同时可见。之后用 Nomad、Outpost、五子棋的实机组成游戏展区，以 EazyBuildPipeline 的简洁入口承接工具；AoE4 Flow、Liss Community 与 Intelligence × Cost 展示实际需要驱动的应用。保留可操作的最短路径实验，更多工程集中进入工程库，避免首页再重复全部清单。工程库的 20 项使用 project-priority.ts 的稳定优先级，分类和搜索保留该顺序；新工程未设置优先级时仍会呈现。详情以短缘起、技术职责、图文要点和使用方法组织内容。
