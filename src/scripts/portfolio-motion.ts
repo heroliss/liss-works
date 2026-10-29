@@ -1,5 +1,8 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Flip } from 'gsap/Flip';
+
+gsap.registerPlugin(Flip);
 
 interface PortfolioMotionOptions {
   signal: AbortSignal;
@@ -20,15 +23,37 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
   stages.forEach((stage) => {
     const buttons = Array.from(stage.querySelectorAll<HTMLButtonElement>('button[data-stage-select]'));
     const cards = Array.from(stage.querySelectorAll<HTMLButtonElement>('button[data-stage-card]'));
-    const surfaces = Array.from(stage.querySelectorAll<HTMLElement>('[data-stage-image]'));
+    const pieces = Array.from(stage.querySelectorAll<HTMLElement>('[data-stage-piece]'));
     const caption = stage.querySelector<HTMLElement>('[data-stage-caption]');
     const name = stage.querySelector<HTMLElement>('[data-stage-name]');
     const category = stage.querySelector<HTMLElement>('[data-stage-category]');
     const links = Array.from(stage.querySelectorAll<HTMLAnchorElement>('[data-stage-link]'));
     let running: gsap.core.Timeline | undefined;
+    let layout: gsap.core.Timeline | undefined;
+    let revision = 0;
+    let held = false;
+    let visible = true;
+    const region = stage.closest<HTMLElement>('.kinetic-hero') ?? stage;
+    const gate = () => {
+      if (preference.matches) layout?.progress(1).pause();
+      else layout?.paused(held || !visible || document.hidden || document.documentElement.dataset.motionPaused === 'true');
+    };
+    const settle = () => {
+      revision++;
+      layout?.revert();
+      layout?.kill();
+      layout = undefined;
+      stage.dataset.stageTransitioning = 'false';
+    };
     const select = (value: string, animate: boolean) => {
       const button = buttons.find((entry) => entry.dataset.stageSelect === value);
       if (!button || (animate && stage.dataset.active === value)) return;
+      const moving = animate && !preference.matches && document.documentElement.dataset.motionPaused !== 'true';
+      // Capture the currently painted pose before retiring a previous or held
+      // transition. Fast retargeting therefore starts where the cards are now.
+      const before = moving ? Flip.getState(pieces) : undefined;
+      settle();
+      const turn = revision;
       running?.revert();
       running = undefined;
       stage.dataset.active = value;
@@ -38,7 +63,7 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
         if (button.dataset.tone) hero.style.setProperty('--hero-tone', button.dataset.tone);
         if (button.dataset.tone) hero.closest<HTMLElement>('.home-next')?.style.setProperty('--showcase-tone', button.dataset.tone);
       }
-      stage.querySelectorAll<HTMLElement>('[data-stage-piece]').forEach(piece => {
+      pieces.forEach(piece => {
         piece.dataset.stageOffset = String((Number(piece.dataset.stagePiece) - Number(value) + cards.length) % cards.length);
       });
       buttons.forEach((entry) => entry.setAttribute('aria-pressed', String(entry === button)));
@@ -52,21 +77,16 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
       if (name && button.dataset.name) name.textContent = button.dataset.name;
       if (category && button.dataset.category) category.textContent = button.dataset.category;
       if (button.dataset.href) links.forEach((link) => { link.href = button.dataset.href!; });
-      window.dispatchEvent(new CustomEvent('portfolio:stage-select', { detail: { index: Number(value) } }));
-      if (!animate || preference.matches) return;
+      stage.dataset.stageTransitioning = String(moving);
+      window.dispatchEvent(new CustomEvent('portfolio:stage-select', { detail: { index: Number(value), animate: moving } }));
+      if (!moving || !before) return;
 
-      // Native buttons keep fixed hitboxes; only the inner picture settles.
-      const activeSurface = surfaces.find((surface) => surface.closest<HTMLElement>('[data-stage-piece]')?.dataset.stagePiece === value);
-      const activePicture = activeSurface?.querySelector<HTMLImageElement>('img');
       interactions.add(() => {
+        layout = Flip.from(before, {
+          duration: .82, ease: 'power3.inOut', scale: true,
+          onComplete: () => { if (turn === revision) stage.dataset.stageTransitioning = 'false'; },
+        });
         running = gsap.timeline({ defaults: { ease: 'power3.out' } });
-        if (activePicture) {
-          running.fromTo(activePicture,
-            { scale: 1.018 },
-            { scale: 1, duration: 0.55, clearProps: 'scale' },
-            0,
-          );
-        }
         if (caption) {
           running.fromTo(caption,
             { y: 5 },
@@ -75,11 +95,14 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
           );
         }
       });
+      gate();
     };
     buttons.forEach((button) => {
       button.addEventListener('click', () => select(button.dataset.stageSelect ?? '', true), { signal: localSignal });
-      button.addEventListener('pointerenter', (event) => {
-        if (event.pointerType !== 'touch' && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      button.addEventListener('pointermove', (event) => {
+        // Scrolling or a layout animation under a stationary pointer must not
+        // replace a choice made with the keyboard.
+        if ((event.movementX || event.movementY) && event.pointerType !== 'touch' && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
           select(button.dataset.stageSelect ?? '', true);
         }
       }, { signal: localSignal });
@@ -103,7 +126,20 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
       }, { signal: localSignal });
     });
     select(stage.dataset.active ?? buttons[0]?.dataset.stageSelect ?? '0', false);
-    cleanup.push(() => { running?.revert(); });
+    const observer = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; gate(); });
+    observer.observe(region);
+    region.addEventListener('pointerdown', (event) => {
+      if (event.isPrimary && event.button === 0) { held = true; gate(); }
+    }, { signal: localSignal });
+    const release = () => { held = false; gate(); };
+    window.addEventListener('pointerup', release, { signal: localSignal });
+    window.addEventListener('pointercancel', release, { signal: localSignal });
+    window.addEventListener('blur', release, { signal: localSignal });
+    window.addEventListener('resize', settle, { signal: localSignal });
+    window.addEventListener('portfolio:motion-state', gate, { signal: localSignal });
+    document.addEventListener('visibilitychange', () => { if (document.hidden) held = false; gate(); }, { signal: localSignal });
+    preference.addEventListener('change', gate, { signal: localSignal });
+    cleanup.push(() => { observer.disconnect(); settle(); running?.revert(); delete stage.dataset.stageTransitioning; });
   });
 
   media.add(
@@ -187,7 +223,7 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
             if (immediate) to.tween.progress(1).pause();
           });
         };
-        const updateRest = () => {
+        const updateRest = (immediate = true) => {
           // Read every pose before writing any transform to avoid layout churn.
           const values = movers.map((move) => {
             const style = getComputedStyle(move.surface);
@@ -199,7 +235,7 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
             };
           });
           values.forEach(({ move, x, y, z }) => { move.restX = x; move.restY = y; move.restZ = z; });
-          reset(true);
+          reset(immediate);
         };
         updateRest();
         let pressed = false;
@@ -219,15 +255,15 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
         viewObserver.observe(region);
         region.addEventListener('pointerenter', measure, { signal: pointer.signal });
         region.addEventListener('pointermove', (event) => {
-          if (pressed || !settled || !inView || document.hidden || document.documentElement.dataset.motionPaused === 'true' || event.pointerType === 'touch') return;
+          if (pressed || stage.dataset.stageTransitioning === 'true' || !settled || !inView || document.hidden || document.documentElement.dataset.motionPaused === 'true' || event.pointerType === 'touch') return;
           const x = gsap.utils.clamp(-1, 1, ((event.pageX - bounds.left) / Math.max(bounds.width, 1) - 0.5) * 2);
           const y = gsap.utils.clamp(-1, 1, ((event.pageY - bounds.top) / Math.max(bounds.height, 1) - 0.5) * 2);
           movers.forEach((move) => {
             const primary = move.piece === stage.dataset.active;
             move.x(primary ? x*10 : 0);
             move.y(primary ? y*8 : 0);
-            move.rx(move.restX-y*(primary?5:1.5));
-            move.ry(move.restY+x*(primary?7:2));
+            move.rx(move.restX-y*5);
+            move.ry(move.restY+x*7);
           });
           lightX?.(x * 40);
           lightY?.(y * 30);
@@ -238,13 +274,21 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
           movers.forEach(move => [move.x, move.y, move.rx, move.ry, move.rz].forEach(to => to.tween.pause()));
         }, { signal: pointer.signal });
         const release = () => {
+          const wasPressed = pressed;
           pressed = false;
           if (settled && !region.matches(':hover')) reset();
+          else if (wasPressed && inView && !document.hidden && document.documentElement.dataset.motionPaused !== 'true') {
+            movers.forEach(move => [move.x, move.y, move.rx, move.ry, move.rz].forEach(to => {
+              if (to.tween.progress() < 1) to.tween.resume();
+            }));
+          }
         };
         window.addEventListener('pointerup', release, { signal: pointer.signal });
         window.addEventListener('pointercancel', release, { signal: pointer.signal });
         window.addEventListener('blur', () => { pressed = false; if (settled) reset(true); }, { signal: pointer.signal });
-        window.addEventListener('portfolio:stage-select', updateRest, { signal: pointer.signal });
+        window.addEventListener('portfolio:stage-select', (event) => {
+          updateRest(!(event as CustomEvent<{ animate?: boolean }>).detail?.animate);
+        }, { signal: pointer.signal });
         region.addEventListener('pointerleave', () => {
           if (settled && !pressed) reset();
         }, { signal: pointer.signal });

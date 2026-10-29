@@ -5,12 +5,13 @@ type Running = gsap.core.Timeline | undefined;
 
 /** Two authored machines, with real project pictures and ordinary gallery links. */
 export function setupShowcaseNarratives({ signal, preference }: Options): () => void {
+  if(signal.aborted)return()=>{};
   const events = new AbortController();
   const root = document.documentElement;
   const cleanups: (() => void)[] = [];
   const gates = new Set<() => void>();
   let disposed = false;
-  const scene = (element: HTMLElement, getTimeline: () => Running) => {
+  const scene = (element: HTMLElement, getTimeline: () => Running, onGate?: (playing:boolean) => void) => {
     let visible = false;
     const gate = () => {
       const playing = visible && !document.hidden && !preference.matches && root.dataset.motionPaused !== 'true';
@@ -18,6 +19,7 @@ export function setupShowcaseNarratives({ signal, preference }: Options): () => 
       const timeline = getTimeline();
       if (preference.matches) timeline?.progress(1).pause();
       else timeline?.paused(!playing);
+      onGate?.(playing);
     };
     const observer = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; gate(); }, { threshold: .05 });
     observer.observe(element); gates.add(gate);
@@ -47,7 +49,7 @@ export function setupShowcaseNarratives({ signal, preference }: Options): () => 
       const activate=() => select(button.getAttribute(buttonHook)??'0');
       button.addEventListener('click',activate,{signal:events.signal});
       button.addEventListener('focusin',activate,{signal:events.signal});
-      button.addEventListener('pointerenter',event=>{if(event.pointerType!=='touch'&&matchMedia('(hover:hover) and (pointer:fine)').matches)activate();},{signal:events.signal});
+      button.addEventListener('pointermove',event=>{if((event.movementX||event.movementY)&&event.pointerType!=='touch'&&matchMedia('(hover:hover) and (pointer:fine)').matches)activate();},{signal:events.signal});
     });
     cleanups.push(() => {
       originals.forEach(({picture,hidden,inert,active})=>{picture.hidden=hidden;picture.inert=inert;if(active===undefined)delete picture.dataset.active;else picture.dataset.active=active;});
@@ -108,28 +110,75 @@ export function setupShowcaseNarratives({ signal, preference }: Options): () => 
   document.querySelectorAll<HTMLElement>('[data-dub-reel]').forEach(factory=>{
     const {pictures,buttons,mark,bind}=collection(factory,'data-reel-frame','data-reel-select');
     if(!pictures.length||!buttons.length)return;
-    const tracks=Array.from(factory.querySelectorAll<HTMLElement|SVGElement>('[data-factory-track]'));
     const cameras=Array.from(factory.querySelectorAll<HTMLElement>('[data-reel-camera],[data-reel-console]'));
-    const restore=snapshots([...tracks,...cameras]);
+    const carrier=factory.querySelector<SVGGElement>('[data-factory-carrier]');
+    const carrierLabel=factory.querySelector<SVGTextElement>('[data-factory-carrier-label]');
+    const stations=Array.from(factory.querySelectorAll<SVGGElement>('[data-factory-station]'));
+    const belts=Array.from(factory.querySelectorAll<SVGGElement>('[data-factory-belt-motion]'));
+    const rollers=Array.from(factory.querySelectorAll<SVGGElement>('.factory-roller-spokes'));
+    const restoreFeedback=snapshots(cameras);
+    const restoreTransport=snapshots([...(carrier?[carrier]:[]),...belts,...rollers]);
+    const sequenceOriginals=[...stations,...buttons].map(element=>({element,value:element.getAttribute('data-sequence-state')}));
+    const labelOriginal=carrierLabel?.textContent??'';
+    const metadata=['data-reel-target','data-reel-direction','data-reel-traveling','data-reel-moving','data-reel-transport','data-reel-carrier-x'].map(name=>({name,value:factory.getAttribute(name)}));
+    const stationX=(index:number)=>Number(stations.find(station=>Number(station.dataset.factoryStation)===index)?.dataset.stationX??100+104*index);
+    const origin=stationX(0),pose={x:origin};
+    let targetX=origin;
     let timeline:Running;
     let current='0';
-    const gate=scene(factory,()=>timeline);
+    const render=()=>{
+      // SVG attributes update the source assembly, including its mobile <use>.
+      // Every moving part is derived from one position, with no independent loop.
+      carrier?.setAttribute('transform',`translate(${pose.x.toFixed(3)} 0)`);
+      const distance=pose.x-origin;
+      belts.forEach(belt=>belt.setAttribute('transform',`translate(${(distance%112).toFixed(3)} 0)`));
+      rollers.forEach(roller=>roller.setAttribute('transform',`rotate(${(distance/31*180/Math.PI).toFixed(3)})`));
+    };
+    const gate=scene(factory,()=>timeline,playing=>{
+      const traveling=Math.abs(targetX-pose.x)>.1;
+      factory.dataset.reelTraveling=String(traveling);
+      factory.dataset.reelMoving=String(traveling&&playing);
+      factory.dataset.reelTransport=preference.matches?'reduced':traveling?(playing?'moving':'paused'):'rest';
+    });
+    const arrive=()=>{
+      pose.x=targetX;render();
+      factory.dataset.reelCarrierX=pose.x.toFixed(3);
+      factory.dataset.reelTraveling='false';factory.dataset.reelMoving='false';
+      factory.dataset.reelTransport=preference.matches?'reduced':'rest';
+    };
     const move=(value:string,animate=true)=>{
       if(!pictures.some(p=>p.dataset.reelFrame===value)||value===current&&animate)return;
-      const previous=Number(current),index=Number(value),direction=index>=previous?1:-1;
-      timeline?.kill();restore();mark(value);current=value;
-      if(!animate||preference.matches||root.dataset.motionPaused==='true')return;
+      timeline?.kill();timeline=undefined;
+      // Only picture feedback resets. pose.x stays at the latest rendered
+      // position, so rapidly changing a target never teleports the carrier.
+      restoreFeedback();mark(value);current=value;targetX=stationX(Number(value));
+      const direction=targetX>=pose.x?1:-1;
+      const distance=Math.abs(targetX-pose.x);
+      [...stations,...buttons].forEach(element=>{
+        const index=Number(element.getAttribute(element.hasAttribute('data-factory-station')?'data-factory-station':'data-reel-select'));
+        element.dataset.sequenceState=index<Number(value)?'earlier':index===Number(value)?'current':'later';
+      });
+      if(carrierLabel)carrierLabel.textContent=String(Number(value)+1).padStart(2,'0');
+      factory.dataset.reelTarget=value;
+      factory.dataset.reelDirection=distance<.1?'still':direction>0?'forward':'backward';
+      factory.dataset.reelCarrierX=pose.x.toFixed(3);
+      if(!animate||preference.matches||root.dataset.motionPaused==='true'){arrive();gate();return;}
       const frame=pictures.find(p=>p.dataset.reelFrame===value);
       const camera=frame?.querySelector<HTMLElement>('[data-reel-camera]');
-      const console=frame?.querySelector<HTMLElement>('[data-reel-console]');
-      timeline=gsap.timeline({paused:true,defaults:{ease:'power3.out'}});
-      if(camera)timeline.fromTo(camera,{x:direction*82,z:-28},{x:0,z:0,duration:.85,clearProps:'transform'},0);
-      if(console)timeline.fromTo(console,{y:12},{y:0,duration:.55,clearProps:'transform'},.12);
-      tracks.forEach((track,index)=>timeline!.fromTo(track,{x:direction*(index?58:28)},{x:0,duration:.9,clearProps:'transform'},0));
+      const consolePanel=frame?.querySelector<HTMLElement>('[data-reel-console]');
+      timeline=gsap.timeline({paused:true,defaults:{ease:'power3.out'},onComplete:arrive});
+      timeline.to(pose,{x:targetX,duration:gsap.utils.clamp(.35,1.2,.28+distance/1000),onUpdate:render},0);
+      if(camera)timeline.fromTo(camera,{opacity:.72},{opacity:1,duration:.32,clearProps:'opacity'},0);
+      if(consolePanel)timeline.fromTo(consolePanel,{opacity:.65},{opacity:1,duration:.3,clearProps:'opacity'},.04);
       gate();
     };
     factory.dataset.reelEnhanced='true';bind(value=>move(value));move('0',false);
-    cleanups.push(()=>{timeline?.kill();restore();delete factory.dataset.reelEnhanced;});
+    cleanups.push(()=>{
+      timeline?.kill();restoreFeedback();restoreTransport();delete factory.dataset.reelEnhanced;
+      sequenceOriginals.forEach(({element,value})=>{if(value===null)element.removeAttribute('data-sequence-state');else element.setAttribute('data-sequence-state',value);});
+      metadata.forEach(({name,value})=>{if(value===null)factory.removeAttribute(name);else factory.setAttribute(name,value);});
+      if(carrierLabel)carrierLabel.textContent=labelOriginal;
+    });
   });
   const sync=()=>gates.forEach(gate=>gate());
   window.addEventListener('portfolio:motion-state',sync,{signal:events.signal});

@@ -1,0 +1,49 @@
+/* The conveyor carries the selected picture between real workspaces. It never
+   represents a running DubForge job or an invented completion percentage. */
+.dub-reel .dub-step-controls,.dub-reel[data-reel-enhanced=true] .dub-step-controls{display:grid;grid-template-columns:minmax(0,1fr);gap:4px}
+.dub-reel .dub-controls-label{font-size:14px;line-height:1.5;margin-bottom:12px}
+.dub-reel .dub-step-controls button[data-reel-select],.dub-reel[data-reel-enhanced=true] .dub-step-controls button[data-reel-select]{display:grid;grid-template-columns:25px minmax(0,1fr) auto;align-items:center;gap:10px;min-height:44px;padding:7px 10px;line-height:1.3}
+.dub-reel .dub-step-controls .dub-step-name,.dub-reel[data-reel-enhanced=true] .dub-step-controls .dub-step-name{font-size:16px;white-space:normal;line-height:1.4}
+.dub-reel .dub-step-controls .dub-step-number{font-size:18px}
+.dub-reel .dub-step-controls .dub-step-optional,.dub-reel[data-reel-enhanced=true] .dub-step-controls .dub-step-optional{position:static;inset:auto;margin:0;font-size:12px;line-height:1.3;color:inherit;opacity:.8}
+.dub-reel .dub-step-controls button[data-sequence-state=earlier]:not([aria-pressed=true]){border-left-color:#658b98}
+.dub-reel .factory-belt-motion,.dub-reel .factory-roller-spokes{animation:none!important}
+.factory-station-rail>path{stroke:#709cac;stroke-width:2;opacity:.6}
+.factory-station-node{fill:#193e4d;stroke:#95becc;stroke-width:2}
+.factory-station-stem{stroke:#7aabbd;stroke-width:2}
+.factory-station-plaque{fill:#102d3a;stroke:#537e90;stroke-width:1.5}
+.factory-station-number{font:600 29px Rajdhani,'Noto Sans SC',sans-serif;fill:#a1c2cf;stroke:none}
+.factory-station[data-sequence-state=earlier] .factory-station-number{fill:#c0d7df}
+.factory-station[data-sequence-state=current] .factory-station-node{fill:#d1f8ff;stroke:#e5fdff;stroke-width:3}
+.factory-station[data-sequence-state=current] .factory-station-plaque{fill:#a5e7f4;stroke:#dbf8ff;stroke-width:2}
+.factory-station[data-sequence-state=current] .factory-station-number{fill:#102d3a}
+.factory-station[data-optional=true] .factory-station-node{stroke-dasharray:3 2}
+.factory-carrier{pointer-events:none}
+.factory-carrier-foot{fill:#0a202c;stroke:#76b5ca;stroke-width:2}
+.factory-carrier-shell{fill:#73c4db;stroke:#c8f1f9;stroke-width:2}
+.factory-carrier-window{fill:#102d3c;stroke:#a5dae9;stroke-width:1.5}
+.factory-carrier-perforations{stroke:#153d4d;stroke-width:4}
+.factory-carrier-label{font:600 28px Rajdhani,'Noto Sans SC',sans-serif;fill:#d9f9ff;stroke:none}
+.dub-reel[data-reel-traveling=true] .factory-carrier-shell{fill:#a2e3f2}
+@media(max-width:1100px){
+ html[data-motion] .dub-reel[data-reel-enhanced=true] .dub-scene-world{display:grid;grid-template-columns:minmax(0,.42fr) minmax(0,.58fr);gap:22px 18px;aspect-ratio:auto;min-height:0;padding:0}
+ html[data-motion] .dub-reel[data-reel-enhanced=true] .dub-reel-frames,html[data-motion] .dub-reel[data-reel-enhanced=true] .dub-frame:not([hidden]){display:contents!important}
+ html[data-motion] .dub-reel[data-reel-enhanced=true] .dub-frame[hidden]{display:none!important}
+ html[data-motion] .dub-reel[data-reel-enhanced=true] .dub-frame-view{grid-column:1/-1;grid-row:1;max-width:none;width:100%;min-width:0}
+ html[data-motion] .dub-reel[data-reel-enhanced=true] .dub-controls{position:relative;inset:auto;grid-column:1;grid-row:2;width:100%;height:auto;margin:0;padding:16px 12px;align-self:start;order:initial}
+ html[data-motion] .dub-reel[data-reel-enhanced=true] .dub-terminal{position:relative;grid-column:2;grid-row:2;margin:0;min-width:0;min-height:0;padding:22px;align-self:start;order:initial}
+ html[data-motion] .dub-reel[data-reel-enhanced=true] .factory-mobile-conveyor{display:block;position:relative;grid-column:1/-1;grid-row:3;order:initial;width:100%;height:auto;aspect-ratio:1040/200;overflow:visible;pointer-events:none}
+ .dub-reel .dub-step-controls button[data-reel-select],.dub-reel[data-reel-enhanced=true] .dub-step-controls button[data-reel-select]{gap:7px;min-height:44px;padding:7px 8px}
+ .dub-reel .dub-step-controls .dub-step-name,.dub-reel[data-reel-enhanced=true] .dub-step-controls .dub-step-name{font-size:16px}
+ .factory-station-number{font-size:32px}
+}
+@media(max-width:600px){
+ html[data-motion] .dub-reel[data-reel-enhanced=true] .dub-scene-world{grid-template-columns:minmax(0,.43fr) minmax(0,.57fr);gap:20px 12px}
+ html[data-motion] .dub-reel[data-reel-enhanced=true] .dub-controls{padding:14px 8px}
+ html[data-motion] .dub-reel[data-reel-enhanced=true] .dub-terminal{padding:20px 14px}
+ .dub-reel .dub-step-controls button[data-reel-select],.dub-reel[data-reel-enhanced=true] .dub-step-controls button[data-reel-select]{grid-template-columns:19px minmax(0,1fr);gap:4px 6px;padding:7px 5px;min-height:44px}
+ .dub-reel .dub-step-controls .dub-step-name,.dub-reel[data-reel-enhanced=true] .dub-step-controls .dub-step-name{font-size:15px}
+ .dub-reel .dub-step-controls .dub-step-optional,.dub-reel[data-reel-enhanced=true] .dub-step-controls .dub-step-optional{grid-column:2;font-size:12px}
+ .dub-reel .dub-controls-label{font-size:13px}
+}
+@media(prefers-reduced-motion:reduce){.dub-reel .factory-belt-motion,.dub-reel .factory-roller-spokes{animation:none!important}}

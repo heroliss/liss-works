@@ -1,6 +1,6 @@
 {
   "schema": "showcase.website-media.v1",
-  "generated_at_utc": "2026-10-29T09:00:30.012588+00:00",
+  "generated_at_utc": "2026-10-29T09:51:37.848205+00:00",
   "source_manifest": "captures/selected-manifest.json",
   "source_manifest_sha256": "2c1802696f789defdfcc69f2f1f64badcce99c0ed4d9fdb33c6a59104e4fe9e3",
   "originals_modified": false,
@@ -7777,10 +7777,10 @@
     "exported_image_bytes": 44054260,
     "video_bytes": 1363373,
     "font_bytes": 353408,
-    "font_license_and_provenance_bytes": 15010,
+    "font_license_and_provenance_bytes": 15060,
     "published_media_bytes": 45771041,
     "total_public_asset_count": 550,
-    "total_public_asset_bytes": 45786051
+    "total_public_asset_bytes": 45786101
   },
   "fonts": {
     "codec": "fontTools WOFF2 with Node native zlib Brotli (quality 11 / font mode), invoked by fontTools",
@@ -7843,6 +7843,7 @@
       "site-next/src/scripts/site.ts",
       "site-next/src/styles/dubforge-workflow.css",
       "site-next/src/styles/expressive-home.css",
+      "site-next/src/styles/factory-sequence.css",
       "site-next/src/styles/framework-showcase.css",
       "site-next/src/styles/global.css",
       "site-next/src/styles/home-next.css",

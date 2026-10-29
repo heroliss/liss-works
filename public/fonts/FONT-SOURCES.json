@@ -59,6 +59,7 @@
     "site-next/src/scripts/site.ts",
     "site-next/src/styles/dubforge-workflow.css",
     "site-next/src/styles/expressive-home.css",
+    "site-next/src/styles/factory-sequence.css",
     "site-next/src/styles/framework-showcase.css",
     "site-next/src/styles/global.css",
     "site-next/src/styles/home-next.css",

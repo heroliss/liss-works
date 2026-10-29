@@ -4,9 +4,11 @@ import { sitePath } from '../lib/site-path';
 import MediaImage from './MediaImage.astro';
 import Icon from './Icon.astro';
 import '../styles/dubforge-workflow.css';
+import '../styles/factory-sequence.css';
 interface Props { id?: string; detail?: boolean }
 const { id = 'workflow', detail = false } = Astro.props;
 const rollers = [74, 226, 378, 530, 682, 834];
+const stationPositions = dubforgeWorkflow.map((_, index) => 100 + index * 104);
 ---
 <section class:list={['dub-reel', {'home-chapter': !detail, 'dub-reel--detail': detail}]} id={id} data-dub-reel aria-labelledby={`${id}-title`}>
  <header class="dub-reel-heading">
@@ -54,19 +56,36 @@ const rollers = [74, 226, 378, 530, 682, 834];
     <path class="factory-roller-rim" d="M-22-19A29 29 0 0 1 22-19M-24 18A29 29 0 0 0 24 18" stroke="#93b9c5" stroke-width="2.5"/>
     <g class="factory-roller-spokes" style={`animation-delay:${index * -1.1}s`}><circle r="26"/><circle class="factory-spoke-key" cx="18" cy="-18" r="3" fill="#d1f7ff"/><path d="M0-26V-11M0 11V26M-26 0H-11M11 0H26M-18-18L-8-8M8 8L18 18M-18 18L-8 8M8-8L18-18"/></g>
    </g>)}
+   <g class="factory-station-rail">
+    <path d={`M${stationPositions[0]} 701H${stationPositions[8]}`}/>
+    {dubforgeWorkflow.map((step, index) => <g class="factory-station" id={`${id}-station-${index + 1}`} data-factory-station={index} data-station-x={stationPositions[index]} data-optional={String(Boolean(step.optional))} data-sequence-state={index === 0 ? 'current' : 'later'} transform={`translate(${stationPositions[index]} 0)`}>
+     <title>{`${String(index + 1).padStart(2, '0')} ${step.title}${step.optional ? '，按需选用' : ''}`}</title>
+     <circle class="factory-station-node" cy="701" r="6"/>
+     <path class="factory-station-stem" d="M0 707V708"/>
+     <rect class="factory-station-plaque" x="-25" y="708" width="50" height="26" rx="3"/>
+     <text class="factory-station-number" x="0" y="731" text-anchor="middle">{String(index + 1).padStart(2, '0')}</text>
+    </g>)}
+   </g>
+   <g class="factory-carrier" data-factory-carrier transform={`translate(${stationPositions[0]} 0)`}>
+    <path class="factory-carrier-foot" d="M-40 593H40L49 601H-49Z"/>
+    <rect class="factory-carrier-shell" x="-49" y="544" width="98" height="51" rx="5"/>
+    <rect class="factory-carrier-window" x="-34" y="553" width="68" height="32" rx="2"/>
+    <path class="factory-carrier-perforations" d="M-42 553V559M-42 565V571M-42 577V583M42 553V559M42 565V571M42 577V583"/>
+    <text class="factory-carrier-label" data-factory-carrier-label x="0" y="579" text-anchor="middle">01</text>
+   </g>
    </g>
   </svg>
   <div class="dub-reel-frames" aria-label="DubForge 制作工作区">
    {dubforgeWorkflow.map((step, index) => <figure class="dub-frame" id={`${id}-frame-${index}`} data-reel-frame={index}>
     <div class="dub-frame-view"><div class="dub-frame-camera" data-reel-camera><div class="dub-screen-bezel"><MediaImage image={step.image} zoom group={`${id}-dubforge-flow`} sizes="(max-width: 760px) calc(100vw - 54px), (max-width: 1000px) 60vw, 64vw"/></div></div></div>
     <figcaption class="dub-terminal" data-reel-console>
-     <div class="dub-terminal-position"><span>工序 {String(index + 1).padStart(2, '0')}</span>{step.optional && <span class="dub-optional">按需选用</span>}</div>
+     <div class="dub-terminal-position"><span>浏览工序 {String(index + 1).padStart(2, '0')}</span>{step.optional && <span class="dub-optional">按需选用</span>}</div>
      <h3>{step.title}</h3><p>{step.description}</p>
     </figcaption>
    </figure>)}
   </div>
   <nav class="dub-controls" aria-label="查看九个制作工作区">
-   <p class="dub-controls-label">沿着工序，继续探索</p>
+   <p class="dub-controls-label">九道工序，逐站查看</p>
    <div class="dub-step-controls">
     {dubforgeWorkflow.map((step, index) => <button type="button" data-reel-select={index} aria-pressed={index === 0} aria-controls={`${id}-frame-${index}`} disabled>
      <span class="dub-step-number" aria-hidden="true">{String(index + 1).padStart(2,'0')}</span><span class="dub-step-name">{step.title}</span>{step.optional && <span class="dub-step-optional">可选</span>}
