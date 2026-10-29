@@ -5,6 +5,7 @@ import Icon from '../../components/Icon.astro';
 import MediaImage from '../../components/MediaImage.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
 import ProjectEngineering from '../../components/ProjectEngineering.astro';
+import DubForgeWorkflow from '../../components/DubForgeWorkflow.astro';
 import ProjectSignature from '../../components/ProjectSignature.astro';
 import ProjectDownload from '../../components/ProjectDownload.astro';
 import { getProjectSignature } from '../../data/project-signatures';
@@ -16,6 +17,7 @@ import '../../styles/project-worlds.css';
 import '../../styles/project-worlds-tools.css';
 import '../../styles/project-worlds-labs.css';
 import '../../styles/world-continuity.css';
+import '../../styles/spatial-scenes.css';
 import ProjectWorldAccent from '../../components/ProjectWorldAccent.astro';
 import { getProjectWorld, projectWorldStyle } from '../../data/project-worlds';
 export function getStaticPaths() { return projects.map(project => ({params: {slug: project.slug}, props: {project}})); }
@@ -44,9 +46,10 @@ const coverSizes = project.slug === 'dubforge' ? '(max-width: 760px) calc(100vw 
     </div>
     <nav class="project-contents" aria-label="详情页导航"><a href="#project-origin">项目概览</a><a href="#engineering">设计与实现</a>{gallery.length > 0 && <a href="#gallery">更多画面</a>}<a href="#usage">快速开始</a>{project.docs && <a href={project.docs} target="_blank" rel="noreferrer">完整文档 <Icon size={13}/></a>}</nav>
     <div class="project-overview" id="project-origin">
-      <section class="story-origin" aria-labelledby="origin-title"><h2 id="origin-title">{story.origin.title}</h2>{story.origin.paragraphs.map(paragraph => <p>{paragraph}</p>)}{story.flow && <ol class="compact-flow" aria-label={story.flow.title}>{story.flow.steps.map(step => <li>{step.name}</li>)}</ol>}</section>
+      <section class="story-origin" aria-labelledby="origin-title"><h2 id="origin-title">{story.origin.title}</h2>{story.origin.paragraphs.map(paragraph => <p>{paragraph}</p>)}{story.flow && project.slug !== 'dubforge' && <ol class="compact-flow" aria-label={story.flow.title}>{story.flow.steps.map(step => <li>{step.name}</li>)}</ol>}</section>
       {story.stack?.length && <section class="project-technology" aria-labelledby="stack-title"><h2 id="stack-title">技术构成</h2><dl class="project-stack">{story.stack.map(item => <div><dt>{item.name}</dt><dd>{item.role}</dd></div>)}</dl></section>}
     </div>
+    {project.slug === 'dubforge' && <DubForgeWorkflow id="production-path" detail/>}
     <ProjectEngineering story={story} media={topicMedia} group={project.slug}/>
     {project.video && <figure class="project-video"><video controls playsinline preload="none" poster={sitePath(project.video.poster)} aria-label="全国房价图真实界面操作演示"><source src={sitePath(project.video.src)} type="video/mp4"/>浏览器无法播放视频，请<a href={sitePath(project.video.src)}>下载演示片段</a>。</video><figcaption>{project.video.caption}</figcaption></figure>}
     {gallery.length > 0 && <section class="section project-gallery" id="gallery" aria-labelledby="gallery-title"><div class="section-heading"><h2 id="gallery-title">更多画面</h2></div><div class="gallery-grid">{gallery.map(image => <figure><MediaImage image={image} zoom group={project.slug} sizes="(max-width: 760px) 100vw, 60vw"/><figcaption>{image.caption}</figcaption></figure>)}</div></section>}

@@ -3,27 +3,25 @@ import { getProjectWorld, projectWorldStyle } from '../data/project-worlds';
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import MediaImage from '../components/MediaImage.astro';
-import FrameworkDiagram from '../components/FrameworkDiagram.astro';
+import FrameworkShowcase from '../components/FrameworkShowcase.astro';
+import DubForgeWorkflow from '../components/DubForgeWorkflow.astro';
 import { projects, getProject } from '../data/projects';
 import { sitePath, communityUrl } from '../lib/site-path';
 import '../styles/home-next.css';
 import '../styles/expressive-home.css';
 import '../styles/project-showcase.css';
 import '../styles/interactive-showcase.css';
+import '../styles/spatial-scenes.css';
 const framework = getProject('ssframework')!;
 const dubforge = getProject('dubforge')!;
 const outpost = getProject('outpost')!;
 const nomad = getProject('nomadworkshop')!;
 const gomoku = getProject('gomoku')!;
-const stage = [outpost,dubforge,framework];
+const stage = [outpost,dubforge,framework,nomad,gomoku];
 const stageCaptions = stage.map(project => project.summary);
 const archive = ['aoe4-flow','eazybuildpipeline','learnopengl','intelligence-index-cost-linear','liss-web','utility-lab'].map(slug=>getProject(slug)!);
 const first = archive[0];
-const flow = [
- {name:'准备素材',caption:'导入视频，让输入和各制作阶段留在同一项目空间。'},
- {name:'逐句精修',caption:'对照画面，逐句调整双语字幕、时间与声源。'},
- {name:'多版成片',caption:'从同一个项目配置原声双语版、中文配音版等成片版本。'},
-];
+
 ---
 <Base title="Liss · 把想法做成作品">
  <div class="shell home-next">
@@ -32,9 +30,9 @@ const flow = [
    <div class="hero-copy"><h1 id="home-title" data-motion="hero"><span>把想法，</span><br/><span class="hero-accent">做成作品。</span></h1><p class="hero-introduction" data-motion="hero">我是 Liss，独立开发游戏、工具与交互实验。</p><div class="hero-actions" data-motion="hero"><a class="hero-continue" href="#selected">继续向下探索 <Icon size={17}/></a><a class="hero-library" href={sitePath('/projects/')}>浏览全部 {projects.length} 个工程</a></div></div>
    <div class="work-stage" data-work-stage data-active="0" data-ui>
     <div class="stage-objects" data-stage-objects>
-     {stage.map((project,index)=><article class="stage-piece" data-stage-piece={index} data-project={project.slug}><div class="stage-surface" data-stage-image data-ambient-piece><button type="button" class="stage-card" data-stage-card={index} aria-pressed={index===0} aria-controls="stage-overview" aria-label={`将 ${project.name} 切到前景`} disabled><span class="screen-chrome" aria-hidden="true"><span></span><span></span><span></span><strong>{project.name}</strong></span><MediaImage image={project.cover} eager={index===0} sizes="(max-width: 760px) 90vw, 55vw"/><span class="screen-caption"><span>{project.category}</span></span></button></div></article>)}
+     {stage.map((project,index)=><article class="stage-piece" data-stage-piece={index} data-stage-offset={index} data-project={project.slug}><div class="stage-surface" data-stage-image data-ambient-piece><button type="button" class="stage-card" data-stage-card={index} data-href={sitePath(`/projects/${project.slug}/`)} aria-pressed={index===0} aria-controls="stage-overview" aria-label={index===0 ? `打开 ${project.name} 项目` : `将 ${project.name} 切到前景`} disabled><span class="screen-chrome" aria-hidden="true"><span></span><span></span><span></span><strong>{project.name}</strong></span><MediaImage image={project.cover} eager={index===0} sizes="(max-width: 760px) 90vw, 55vw"/><span class="screen-caption"><span>{project.category}</span></span></button></div></article>)}
     </div>
-    <div class="stage-bottom"><div class="stage-controls" role="group" aria-label="选择主画面中的工程">{stage.map((project,index)=><button type="button" data-stage-select={index} data-name={project.name} data-category={project.category} data-caption={stageCaptions[index]} data-href={sitePath(`/projects/${project.slug}/`)} aria-pressed={index===0}>{project.name}</button>)}</div><div class="stage-description" id="stage-overview"><p class="stage-category" data-stage-category>{stage[0].category}</p><h2 class="project-name" data-stage-name>{stage[0].name}</h2><p class="stage-summary" data-stage-caption aria-live="polite">{stageCaptions[0]}</p><a class="button stage-detail-link" data-stage-link data-project-enter href={sitePath('/projects/outpost/')}>查看项目 <Icon size={20}/></a></div><noscript><div class="stage-fallback-links">{stage.map(project=><a href={sitePath(`/projects/${project.slug}/`)}>{project.name} <Icon size={15}/></a>)}</div></noscript></div>
+    <div class="stage-bottom"><div class="stage-controls" role="group" aria-label="选择主画面中的工程">{stage.map((project,index)=><button type="button" data-stage-select={index} data-name={project.name} data-tone={getProjectWorld(project.slug).accent} data-category={project.category} data-caption={stageCaptions[index]} data-href={sitePath(`/projects/${project.slug}/`)} aria-pressed={index===0}>{project.name}</button>)}</div><div class="stage-description" id="stage-overview"><p class="stage-category" data-stage-category>{stage[0].category}</p><h2 class="project-name" data-stage-name>{stage[0].name}</h2><p class="stage-summary" data-stage-caption aria-live="polite">{stageCaptions[0]}</p><a class="button stage-detail-link" data-stage-link data-project-enter href={sitePath('/projects/outpost/')}>查看项目 <Icon size={20}/></a></div><noscript><div class="stage-fallback-links">{stage.map(project=><a href={sitePath(`/projects/${project.slug}/`)}>{project.name} <Icon size={15}/></a>)}</div></noscript></div>
    </div>
    <a class="hero-scroll" href="#selected"><span>向下，看作品如何运转</span><svg width="19" height="30" viewBox="0 0 19 30" aria-hidden="true"><path d="M9.5 1v26M2 19l7.5 8 7.5-8" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a>
   </section>
@@ -46,13 +44,10 @@ const flow = [
 
   <section class="framework-chapter home-chapter" id="selected" aria-labelledby="framework-title">
    <header class="work-heading"><h2 id="framework-title" class="project-name" data-motion="reveal">SSFramework</h2><p data-motion="reveal">游戏背后，<br/>是不断生长的工具。</p></header>
-   <div class="framework-composition"><div class="framework-notes"><p class="work-description">{framework.summary}</p><a class="text-link" href={sitePath('/projects/ssframework/')}>走进框架 <Icon size={18}/></a><figure class="binding-evidence" data-motion="shutter" data-motion-picture><MediaImage image={framework.gallery[3]} zoom group="home-framework" sizes="(max-width: 760px) 100vw, 38vw"/><figcaption>在 Hierarchy 中绑定节点，生成强类型代码。</figcaption></figure></div><div class="architecture-stage" data-architecture data-ui><FrameworkDiagram/></div></div>
+   <div class="framework-composition"><div class="framework-notes"><p class="work-description">{framework.summary}</p><p class="framework-core-note">从职责分层与数据流，看到运行现场，再进入日常工具。</p><a class="text-link" href={sitePath('/projects/ssframework/')}>走进框架 <Icon size={18}/></a></div><FrameworkShowcase/></div>
   </section>
 
-  <section class="workflow-chapter home-chapter" id="workflow" aria-labelledby="workflow-title" data-workflow data-ui>
-   <header class="work-heading"><h2 id="workflow-title" data-motion="reveal">让好内容<br/>跨过语言。</h2><p data-motion="reveal">DubForge，<br/>一个可以反复精修的视频工作台。</p></header>
-   <div class="workflow-composition"><div class="workflow-pictures"><div class="workflow-orbit" data-workflow-orbit aria-hidden="true"><span data-workflow-pulse></span><span data-workflow-pulse></span><span data-workflow-pulse></span></div><div class="workflow-main" data-motion="reveal"><div data-scroll-layer><MediaImage image={dubforge.cover} zoom group="home-dubforge" sizes="(max-width: 760px) 100vw, 62vw"/></div></div><figure class="workflow-aside"><MediaImage image={dubforge.gallery[2]} zoom group="home-dubforge" sizes="(max-width: 760px) 60vw, 29vw"/><figcaption>同一项目，留下不同版本。</figcaption></figure></div><div class="workflow-story"><h3 class="project-name">DubForge</h3><p>{dubforge.summary}</p><div class="workflow-controls" role="group" aria-label="浏览 DubForge 制作流程">{flow.map((step,index)=><button type="button" data-flow-step={index} data-caption={step.caption} aria-pressed={index===0}>{step.name}</button>)}</div><svg class="workflow-diagram" viewBox="0 0 450 100" role="img" aria-label="视频素材经过逐句精修，生成多个成片版本"><path data-flow-path="0" d="M48 50H224"/><path data-flow-path="1" d="M224 50H402"/>{[48,224,402].map((x,index)=><g data-flow-node={index} data-active={index===0?'true':'false'} data-current={index===0?'true':'false'}><circle cx={x} cy="50" r="23"/><text x={x} y="56" text-anchor="middle">{['入','修','出'][index]}</text></g>)}</svg><p class="flow-caption" data-flow-caption role="status" aria-live="polite">{flow[0].caption}</p><a class="text-link" href={sitePath('/projects/dubforge/')}>探索完整工作流 <Icon size={18}/></a></div></div>
-  </section>
+  <DubForgeWorkflow/>
 
   <section class="games-chapter home-chapter" id="games" aria-labelledby="games-title"><header class="work-heading"><h2 id="games-title" data-motion="reveal">规则有了形状，<br/>世界开始运转。</h2><p data-motion="reveal">从居民与资源，<br/>到敌群与炮火，再到落子间的搜索。</p></header><div class="games-landscape">
    <article class="game-scene game-scene--nomad" data-scroll-layer><div class="game-art game-art--nomad" data-project-atmosphere="nomad" style={`--media-ratio:${nomad.cover.width} / ${nomad.cover.height}`}><a href={sitePath('/projects/nomadworkshop/')} class="game-scene__image" data-motion="reveal"><MediaImage image={nomad.cover} sizes="(max-width: 760px) 100vw, 57vw"/></a><canvas aria-hidden="true"></canvas></div><div class="game-scene__copy"><h3 class="project-name"><a href={sitePath('/projects/nomadworkshop/')}>NomadWorkshop</a></h3><p>{nomad.summary}</p></div></article>

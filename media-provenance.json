@@ -1,6 +1,6 @@
 {
   "schema": "showcase.website-media.v1",
-  "generated_at_utc": "2026-10-29T05:35:29.415526+00:00",
+  "generated_at_utc": "2026-10-29T07:02:02.657705+00:00",
   "source_manifest": "captures/selected-manifest.json",
   "source_manifest_sha256": "2c1802696f789defdfcc69f2f1f64badcce99c0ed4d9fdb33c6a59104e4fe9e3",
   "originals_modified": false,
@@ -449,7 +449,7 @@
       "crop": false,
       "upscaled": false,
       "full": {
-        "path": "site/public/media/ssframework/03-live-services-command-trace.webp",
+        "path": "site-next/public/media/ssframework/03-live-services-command-trace.webp",
         "url": "/media/ssframework/03-live-services-command-trace.webp",
         "bytes": 35870,
         "sha256": "3716dd8d9e701ffb01bd4831df07ee4d68419e719650ccc7c9c8980f54a47158",
@@ -461,7 +461,7 @@
       },
       "variants": [
         {
-          "path": "site/public/media/ssframework/03-live-services-command-trace-320.webp",
+          "path": "site-next/public/media/ssframework/03-live-services-command-trace-320.webp",
           "url": "/media/ssframework/03-live-services-command-trace-320.webp",
           "bytes": 5552,
           "sha256": "0b99f514125e61a25ce0df8f5c07d6e13bd9ced14c2c1c6fb617466a95c0a2cb",
@@ -472,7 +472,7 @@
           "lossless": false
         },
         {
-          "path": "site/public/media/ssframework/03-live-services-command-trace-640.webp",
+          "path": "site-next/public/media/ssframework/03-live-services-command-trace-640.webp",
           "url": "/media/ssframework/03-live-services-command-trace-640.webp",
           "bytes": 19188,
           "sha256": "bc5292943a6ae86918571d4432d9187b6228e34600394ce8bd1742078fb0dfc7",
@@ -483,7 +483,7 @@
           "lossless": false
         },
         {
-          "path": "site/public/media/ssframework/03-live-services-command-trace-960.webp",
+          "path": "site-next/public/media/ssframework/03-live-services-command-trace-960.webp",
           "url": "/media/ssframework/03-live-services-command-trace-960.webp",
           "bytes": 36220,
           "sha256": "26f652ee6f89fce08bd430fb242e4f33827c250d5583c68a612fd017e68425b3",
@@ -506,7 +506,7 @@
       "crop": false,
       "upscaled": false,
       "full": {
-        "path": "site/public/media/ssframework/04-project-configuration-assets.webp",
+        "path": "site-next/public/media/ssframework/04-project-configuration-assets.webp",
         "url": "/media/ssframework/04-project-configuration-assets.webp",
         "bytes": 44706,
         "sha256": "eb18787d1c460474746de377cd3673164fa5894004912d3202d339fa6f3e1ba9",
@@ -518,7 +518,7 @@
       },
       "variants": [
         {
-          "path": "site/public/media/ssframework/04-project-configuration-assets-320.webp",
+          "path": "site-next/public/media/ssframework/04-project-configuration-assets-320.webp",
           "url": "/media/ssframework/04-project-configuration-assets-320.webp",
           "bytes": 6964,
           "sha256": "86c53d02782623d6dc37640af6ceadcc32cc406cf05dea157405e05f387dcf83",
@@ -529,7 +529,7 @@
           "lossless": false
         },
         {
-          "path": "site/public/media/ssframework/04-project-configuration-assets-640.webp",
+          "path": "site-next/public/media/ssframework/04-project-configuration-assets-640.webp",
           "url": "/media/ssframework/04-project-configuration-assets-640.webp",
           "bytes": 20288,
           "sha256": "77457ef8bf2e16632043effbced5047aecfbed876a86aa1939bcf352713da8ba",
@@ -540,7 +540,7 @@
           "lossless": false
         },
         {
-          "path": "site/public/media/ssframework/04-project-configuration-assets-960.webp",
+          "path": "site-next/public/media/ssframework/04-project-configuration-assets-960.webp",
           "url": "/media/ssframework/04-project-configuration-assets-960.webp",
           "bytes": 38118,
           "sha256": "a2c49eac4e0bde094bc22b34f1821206f5ccf6bbfbd4ef9ce0a7d7596c6cc73e",
@@ -563,7 +563,7 @@
       "crop": false,
       "upscaled": false,
       "full": {
-        "path": "site/public/media/dubforge/05-editor-detail.webp",
+        "path": "site-next/public/media/dubforge/05-editor-detail.webp",
         "url": "/media/dubforge/05-editor-detail.webp",
         "bytes": 392792,
         "sha256": "a589b8e54bd5c7dad87e15236a47f7a8de187681421c00264123a542e404b62e",
@@ -575,7 +575,7 @@
       },
       "variants": [
         {
-          "path": "site/public/media/dubforge/05-editor-detail-320.webp",
+          "path": "site-next/public/media/dubforge/05-editor-detail-320.webp",
           "url": "/media/dubforge/05-editor-detail-320.webp",
           "bytes": 11564,
           "sha256": "5567a988c379d931a5ea7aacd9a4dda8c36d687cad51b97048d180ed9e00660f",
@@ -586,7 +586,7 @@
           "lossless": false
         },
         {
-          "path": "site/public/media/dubforge/05-editor-detail-640.webp",
+          "path": "site-next/public/media/dubforge/05-editor-detail-640.webp",
           "url": "/media/dubforge/05-editor-detail-640.webp",
           "bytes": 32386,
           "sha256": "2a045d6b92a26bb65f418251f3c658256f176b78f990a9bd9f9178bafd15456a",
@@ -597,7 +597,7 @@
           "lossless": false
         },
         {
-          "path": "site/public/media/dubforge/05-editor-detail-960.webp",
+          "path": "site-next/public/media/dubforge/05-editor-detail-960.webp",
           "url": "/media/dubforge/05-editor-detail-960.webp",
           "bytes": 61726,
           "sha256": "2062b2e73e201daea5e2d9d9437b4feba608ab9e2972a66b1f5dfb7d284a15ba",
@@ -620,7 +620,7 @@
       "crop": false,
       "upscaled": false,
       "full": {
-        "path": "site/public/media/dubforge/06-project-overview.webp",
+        "path": "site-next/public/media/dubforge/06-project-overview.webp",
         "url": "/media/dubforge/06-project-overview.webp",
         "bytes": 211870,
         "sha256": "251e58d4bd0132218f209772c635bc3763195e2c3077aa6d260a4a7519df4bcf",
@@ -632,7 +632,7 @@
       },
       "variants": [
         {
-          "path": "site/public/media/dubforge/06-project-overview-320.webp",
+          "path": "site-next/public/media/dubforge/06-project-overview-320.webp",
           "url": "/media/dubforge/06-project-overview-320.webp",
           "bytes": 7004,
           "sha256": "3250747b9dde0c0b627a5616e5e65b9f9e5fe6880dc6676ae1cc3b221f8e581f",
@@ -643,7 +643,7 @@
           "lossless": false
         },
         {
-          "path": "site/public/media/dubforge/06-project-overview-640.webp",
+          "path": "site-next/public/media/dubforge/06-project-overview-640.webp",
           "url": "/media/dubforge/06-project-overview-640.webp",
           "bytes": 19938,
           "sha256": "2a5ce39ba3aff8a1dd51b285df7aea427494419b5e95738af580da07b2d77539",
@@ -654,7 +654,7 @@
           "lossless": false
         },
         {
-          "path": "site/public/media/dubforge/06-project-overview-960.webp",
+          "path": "site-next/public/media/dubforge/06-project-overview-960.webp",
           "url": "/media/dubforge/06-project-overview-960.webp",
           "bytes": 37988,
           "sha256": "589a9d6478376737ef67968a77a7da31966f680b0f00014e3bb9776b715444a6",
@@ -677,7 +677,7 @@
       "crop": false,
       "upscaled": false,
       "full": {
-        "path": "site/public/media/dubforge/07-assembly-versions.webp",
+        "path": "site-next/public/media/dubforge/07-assembly-versions.webp",
         "url": "/media/dubforge/07-assembly-versions.webp",
         "bytes": 286690,
         "sha256": "4971f493f320e155f08f263313b187f9b37c4175c65813c67027b4ee7a57bc84",
@@ -689,7 +689,7 @@
       },
       "variants": [
         {
-          "path": "site/public/media/dubforge/07-assembly-versions-320.webp",
+          "path": "site-next/public/media/dubforge/07-assembly-versions-320.webp",
           "url": "/media/dubforge/07-assembly-versions-320.webp",
           "bytes": 7792,
           "sha256": "4e65c6e0a9aec256ab5277938b228df0c44e2d9985e708322c5880f46465ce74",
@@ -700,7 +700,7 @@
           "lossless": false
         },
         {
-          "path": "site/public/media/dubforge/07-assembly-versions-640.webp",
+          "path": "site-next/public/media/dubforge/07-assembly-versions-640.webp",
           "url": "/media/dubforge/07-assembly-versions-640.webp",
           "bytes": 23100,
           "sha256": "49860e7576e62a4df5073a49570a8aec2c1ee021445411f8d58d7141d416e95c",
@@ -711,7 +711,7 @@
           "lossless": false
         },
         {
-          "path": "site/public/media/dubforge/07-assembly-versions-960.webp",
+          "path": "site-next/public/media/dubforge/07-assembly-versions-960.webp",
           "url": "/media/dubforge/07-assembly-versions-960.webp",
           "bytes": 44542,
           "sha256": "9b6f86639288a9622dd65b458f75888f69355a2f09d8aca5675eb4c39a2ec06b",
@@ -734,7 +734,7 @@
       "crop": false,
       "upscaled": false,
       "full": {
-        "path": "site/public/media/dubforge/08-production-settings.webp",
+        "path": "site-next/public/media/dubforge/08-production-settings.webp",
         "url": "/media/dubforge/08-production-settings.webp",
         "bytes": 232532,
         "sha256": "d977014c749bb1612ebe8a52bb2a12984c5caee225f16621ba6dfdac9378a080",
@@ -746,7 +746,7 @@
       },
       "variants": [
         {
-          "path": "site/public/media/dubforge/08-production-settings-320.webp",
+          "path": "site-next/public/media/dubforge/08-production-settings-320.webp",
           "url": "/media/dubforge/08-production-settings-320.webp",
           "bytes": 6794,
           "sha256": "6335dc4c08ba9ddbdb966df5ceb758dcb14ac495304cdaeebe89e5f73d1edd01",
@@ -757,7 +757,7 @@
           "lossless": false
         },
         {
-          "path": "site/public/media/dubforge/08-production-settings-640.webp",
+          "path": "site-next/public/media/dubforge/08-production-settings-640.webp",
           "url": "/media/dubforge/08-production-settings-640.webp",
           "bytes": 17968,
           "sha256": "539ffe138b1e9dd7e4517057b586bf43d571d761805dcee5b2e3274e3f41902b",
@@ -768,7 +768,7 @@
           "lossless": false
         },
         {
-          "path": "site/public/media/dubforge/08-production-settings-960.webp",
+          "path": "site-next/public/media/dubforge/08-production-settings-960.webp",
           "url": "/media/dubforge/08-production-settings-960.webp",
           "bytes": 36604,
           "sha256": "0170ed1260cd2ada82f9c15e7ae52090582584d90e9f9721f74d73fc1a7e75b6",
@@ -791,7 +791,7 @@
       "crop": false,
       "upscaled": false,
       "full": {
-        "path": "site/public/media/dubforge/09-project-space-large.webp",
+        "path": "site-next/public/media/dubforge/09-project-space-large.webp",
         "url": "/media/dubforge/09-project-space-large.webp",
         "bytes": 300540,
         "sha256": "244c2bce612c1205ae17114127932ea97bd244cdf819c1ba6ae5da323391a53c",
@@ -803,7 +803,7 @@
       },
       "variants": [
         {
-          "path": "site/public/media/dubforge/09-project-space-large-320.webp",
+          "path": "site-next/public/media/dubforge/09-project-space-large-320.webp",
           "url": "/media/dubforge/09-project-space-large-320.webp",
           "bytes": 8540,
           "sha256": "48a92a722fd5722564dfdf6857d90c63f5abbcb1777ea7e2a0656dcb356d2f05",
@@ -814,7 +814,7 @@
           "lossless": false
         },
         {
-          "path": "site/public/media/dubforge/09-project-space-large-640.webp",
+          "path": "site-next/public/media/dubforge/09-project-space-large-640.webp",
           "url": "/media/dubforge/09-project-space-large-640.webp",
           "bytes": 25280,
           "sha256": "12f7f05e68ef7c50ab70c1335d21d85a9d560af78578056d03eff33c47f04828",
@@ -825,7 +825,7 @@
           "lossless": false
         },
         {
-          "path": "site/public/media/dubforge/09-project-space-large-960.webp",
+          "path": "site-next/public/media/dubforge/09-project-space-large-960.webp",
           "url": "/media/dubforge/09-project-space-large-960.webp",
           "bytes": 48572,
           "sha256": "37ed9263304ee127d4633bca151a0cb799fbbb2a327f6ce201cd84a53a8222bc",
@@ -2920,7 +2920,7 @@
       "crop": false,
       "upscaled": false,
       "full": {
-        "path": "site/public/media/ssframework/05-module-tools-center.webp",
+        "path": "site-next/public/media/ssframework/05-module-tools-center.webp",
         "url": "/media/ssframework/05-module-tools-center.webp",
         "bytes": 54648,
         "sha256": "6b02836dcbb423774319e5b2d6153df26688624f7919b240a272258ce8fdefb7",
@@ -2932,7 +2932,7 @@
       },
       "variants": [
         {
-          "path": "site/public/media/ssframework/05-module-tools-center-320.webp",
+          "path": "site-next/public/media/ssframework/05-module-tools-center-320.webp",
           "url": "/media/ssframework/05-module-tools-center-320.webp",
           "bytes": 6762,
           "sha256": "c5ac02c38d0de9cb954d7bfd9118cab65dd5b2fc4139c8fefe00cb1dbf0cc27f",
@@ -2943,7 +2943,7 @@
           "lossless": false
         },
         {
-          "path": "site/public/media/ssframework/05-module-tools-center-640.webp",
+          "path": "site-next/public/media/ssframework/05-module-tools-center-640.webp",
           "url": "/media/ssframework/05-module-tools-center-640.webp",
           "bytes": 18878,
           "sha256": "1cdfb5f1cd23c17561a461e46739ca31738b423ccf86becae5c06454af24c7e1",
@@ -2954,7 +2954,7 @@
           "lossless": false
         },
         {
-          "path": "site/public/media/ssframework/05-module-tools-center-960.webp",
+          "path": "site-next/public/media/ssframework/05-module-tools-center-960.webp",
           "url": "/media/ssframework/05-module-tools-center-960.webp",
           "bytes": 36126,
           "sha256": "bcf257d4d9317bb42061fe5bf7e2c497b66246b0c96b72d2c7a905b7cb5bd16a",
@@ -2977,7 +2977,7 @@
       "crop": false,
       "upscaled": false,
       "full": {
-        "path": "site/public/media/ssframework/08-module-dependency-audit.webp",
+        "path": "site-next/public/media/ssframework/08-module-dependency-audit.webp",
         "url": "/media/ssframework/08-module-dependency-audit.webp",
         "bytes": 84044,
         "sha256": "1b2b6feaff4a78e46bef00a99ad797251a0c7fda8015ac0c447afba68511c69d",
@@ -2989,7 +2989,7 @@
       },
       "variants": [
         {
-          "path": "site/public/media/ssframework/08-module-dependency-audit-320.webp",
+          "path": "site-next/public/media/ssframework/08-module-dependency-audit-320.webp",
           "url": "/media/ssframework/08-module-dependency-audit-320.webp",
           "bytes": 11016,
           "sha256": "c67e93769b8a548f41a483d2f9a76bd36a32278833cbc754e2ee107c5e29659c",
@@ -3000,7 +3000,7 @@
           "lossless": false
         },
         {
-          "path": "site/public/media/ssframework/08-module-dependency-audit-640.webp",
+          "path": "site-next/public/media/ssframework/08-module-dependency-audit-640.webp",
           "url": "/media/ssframework/08-module-dependency-audit-640.webp",
           "bytes": 35336,
           "sha256": "0378371a24bc89223415f411f077e314b327ffeddf09037ed45e23205d184332",
@@ -3011,7 +3011,7 @@
           "lossless": false
         },
         {
-          "path": "site/public/media/ssframework/08-module-dependency-audit-960.webp",
+          "path": "site-next/public/media/ssframework/08-module-dependency-audit-960.webp",
           "url": "/media/ssframework/08-module-dependency-audit-960.webp",
           "bytes": 70336,
           "sha256": "ed122a2b4deede738cb8195990782588c8ce24517182064485e59868f85cb430",
@@ -3034,7 +3034,7 @@
       "crop": false,
       "upscaled": false,
       "full": {
-        "path": "site/public/media/ssframework/15-hierarchy-binding-compact.webp",
+        "path": "site-next/public/media/ssframework/15-hierarchy-binding-compact.webp",
         "url": "/media/ssframework/15-hierarchy-binding-compact.webp",
         "bytes": 13090,
         "sha256": "5d8fc3004100714b28a1cf0c7b16263466888caaad807d6344cfe57b52af9a9c",
@@ -3046,7 +3046,7 @@
       },
       "variants": [
         {
-          "path": "site/public/media/ssframework/15-hierarchy-binding-compact-320.webp",
+          "path": "site-next/public/media/ssframework/15-hierarchy-binding-compact-320.webp",
           "url": "/media/ssframework/15-hierarchy-binding-compact-320.webp",
           "bytes": 3342,
           "sha256": "b15621104f6245f1368d3887799dbb22772d91cedf7ed016572e9bcc9d5a1a86",
@@ -3057,7 +3057,7 @@
           "lossless": false
         },
         {
-          "path": "site/public/media/ssframework/15-hierarchy-binding-compact-640.webp",
+          "path": "site-next/public/media/ssframework/15-hierarchy-binding-compact-640.webp",
           "url": "/media/ssframework/15-hierarchy-binding-compact-640.webp",
           "bytes": 10576,
           "sha256": "71f9b613f1c14ab24944d1a9ad28780ef795cec98c2f315995af5871760f577c",
@@ -3080,7 +3080,7 @@
       "crop": false,
       "upscaled": false,
       "full": {
-        "path": "site/public/media/ssframework/16-binding-generated-script-links.webp",
+        "path": "site-next/public/media/ssframework/16-binding-generated-script-links.webp",
         "url": "/media/ssframework/16-binding-generated-script-links.webp",
         "bytes": 27472,
         "sha256": "caca5991f561e23aa146662b54df41fc372f8b53f5cda45301ec3039c634788c",
@@ -3092,7 +3092,7 @@
       },
       "variants": [
         {
-          "path": "site/public/media/ssframework/16-binding-generated-script-links-320.webp",
+          "path": "site-next/public/media/ssframework/16-binding-generated-script-links-320.webp",
           "url": "/media/ssframework/16-binding-generated-script-links-320.webp",
           "bytes": 19940,
           "sha256": "21b10bf30d20309345c946fef556904e4079d301a6ce980f1a4f738faa70cb98",
@@ -3115,7 +3115,7 @@
       "crop": false,
       "upscaled": false,
       "full": {
-        "path": "site/public/media/ssframework/17-actual-generated-binding-source.webp",
+        "path": "site-next/public/media/ssframework/17-actual-generated-binding-source.webp",
         "url": "/media/ssframework/17-actual-generated-binding-source.webp",
         "bytes": 57466,
         "sha256": "ddc6ee0bae51ed5b4b0796bef4f472250a1b02518b406a385f35e110783099ad",
@@ -3127,7 +3127,7 @@
       },
       "variants": [
         {
-          "path": "site/public/media/ssframework/17-actual-generated-binding-source-320.webp",
+          "path": "site-next/public/media/ssframework/17-actual-generated-binding-source-320.webp",
           "url": "/media/ssframework/17-actual-generated-binding-source-320.webp",
           "bytes": 5864,
           "sha256": "09d660cd52146a1692ff6e888f59f91afb4a32151b7d069e683bd60ba78c83d3",
@@ -3138,7 +3138,7 @@
           "lossless": false
         },
         {
-          "path": "site/public/media/ssframework/17-actual-generated-binding-source-640.webp",
+          "path": "site-next/public/media/ssframework/17-actual-generated-binding-source-640.webp",
           "url": "/media/ssframework/17-actual-generated-binding-source-640.webp",
           "bytes": 24614,
           "sha256": "281ca6c431d470491ae0309dabbe9d1ef87b191e8edbacbd83b5ec30a05a9d3a",
@@ -3149,7 +3149,7 @@
           "lossless": false
         },
         {
-          "path": "site/public/media/ssframework/17-actual-generated-binding-source-960.webp",
+          "path": "site-next/public/media/ssframework/17-actual-generated-binding-source-960.webp",
           "url": "/media/ssframework/17-actual-generated-binding-source-960.webp",
           "bytes": 47400,
           "sha256": "d13a76ce4d98971beba45600ca31c6a3fc61c1c9dec5a84ea4d41c76906efb51",
@@ -3172,7 +3172,7 @@
       "crop": false,
       "upscaled": false,
       "full": {
-        "path": "site/public/media/ssframework/18-binding-directory-resolution.webp",
+        "path": "site-next/public/media/ssframework/18-binding-directory-resolution.webp",
         "url": "/media/ssframework/18-binding-directory-resolution.webp",
         "bytes": 43506,
         "sha256": "c8ace632618599feb489801c6bc5064d59f845f2fbfcd4744f0d5f43ce6ac35c",
@@ -3184,7 +3184,7 @@
       },
       "variants": [
         {
-          "path": "site/public/media/ssframework/18-binding-directory-resolution-320.webp",
+          "path": "site-next/public/media/ssframework/18-binding-directory-resolution-320.webp",
           "url": "/media/ssframework/18-binding-directory-resolution-320.webp",
           "bytes": 7230,
           "sha256": "5fe2210b639d9c160e0cdf4e23742203ce18baaae0b3e80bc5119ec1a4d0ffba",
@@ -3195,7 +3195,7 @@
           "lossless": false
         },
         {
-          "path": "site/public/media/ssframework/18-binding-directory-resolution-640.webp",
+          "path": "site-next/public/media/ssframework/18-binding-directory-resolution-640.webp",
           "url": "/media/ssframework/18-binding-directory-resolution-640.webp",
           "bytes": 20712,
           "sha256": "bcec34bc65cb17738a58a9b8c27c469fee1dafd31649703c848dc8b6fa1e60df",
@@ -3206,7 +3206,7 @@
           "lossless": false
         },
         {
-          "path": "site/public/media/ssframework/18-binding-directory-resolution-960.webp",
+          "path": "site-next/public/media/ssframework/18-binding-directory-resolution-960.webp",
           "url": "/media/ssframework/18-binding-directory-resolution-960.webp",
           "bytes": 38918,
           "sha256": "5e5ec1984e8a538d23c7522b527f56fc96012bdfd30fad2b1292cc6524c50a96",
@@ -3229,7 +3229,7 @@
       "crop": false,
       "upscaled": false,
       "full": {
-        "path": "site/public/media/ssframework/13-node-component-popup.webp",
+        "path": "site-next/public/media/ssframework/13-node-component-popup.webp",
         "url": "/media/ssframework/13-node-component-popup.webp",
         "bytes": 5064,
         "sha256": "1b1d60fec66ea928ce02032d8ae3af13d8e23701d5ec0901d7908a2c6498f031",
@@ -7186,10 +7186,580 @@
           "lossless": false
         }
       ]
+    },
+    {
+      "repo": "SSFramework",
+      "source": "captures/SSFramework/selected/SSFramework-architecture.png",
+      "source_sha256": "369a793ac1f982a1af40dbf51c986e6648a1bf2f66b4e552ff01d3783c239d49",
+      "source_bytes": 1704274,
+      "source_width": 1448,
+      "source_height": 1086,
+      "source_authenticity": "Original SSFramework repository architecture diagram; not an application screenshot",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site-next/public/media/ssframework/SSFramework-architecture.webp",
+        "url": "/media/ssframework/SSFramework-architecture.webp",
+        "bytes": 1382316,
+        "sha256": "b6af412ef2dc770a7b4930399dda4e8cd5bc34e74a38cddb9a754fda86d6ad62",
+        "width": 1448,
+        "height": 1086,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site-next/public/media/ssframework/SSFramework-architecture-320.webp",
+          "url": "/media/ssframework/SSFramework-architecture-320.webp",
+          "bytes": 27092,
+          "sha256": "64e58008d705dc6acaaeaec206d314eae4cf45d5954afaf20622cc40860c9298",
+          "width": 320,
+          "height": 240,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site-next/public/media/ssframework/SSFramework-architecture-640.webp",
+          "url": "/media/ssframework/SSFramework-architecture-640.webp",
+          "bytes": 79490,
+          "sha256": "60df784866d8f451a6a38ee1d461b3f423dc5d418e1b97cf728eb905d71f6338",
+          "width": 640,
+          "height": 480,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site-next/public/media/ssframework/SSFramework-architecture-960.webp",
+          "url": "/media/ssframework/SSFramework-architecture-960.webp",
+          "bytes": 142808,
+          "sha256": "5037011337a370d118253d533e9bd0f23157225f038ee0c089d5abfa30a3a208",
+          "width": 960,
+          "height": 720,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "dubforge",
+      "source": "captures/dubforge/selected/v6-01-download.jpg",
+      "source_sha256": "a060649a5c9f3e16d99525a2e2c37a7b34eb8b02332bc4b97b6542912ea9a62f",
+      "source_bytes": 82616,
+      "source_width": 1440,
+      "source_height": 900,
+      "source_authenticity": "Real DubForge UI in the official isolated GET-only demo with self-authored silent footage and bilingual text. Pending production state; no model generation, accounts or publishing.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site-next/public/media/dubforge/v6-01-download.webp",
+        "url": "/media/dubforge/v6-01-download.webp",
+        "bytes": 219764,
+        "sha256": "01aeeb606945dc741e0c2d018c37ec3e1bce63f2ca81d502e79c01b0595842e4",
+        "width": 1440,
+        "height": 900,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site-next/public/media/dubforge/v6-01-download-320.webp",
+          "url": "/media/dubforge/v6-01-download-320.webp",
+          "bytes": 6008,
+          "sha256": "a87fadf855b6951266294c5d53a64c58059505ae7eb95146e5fdc7efaf1c0c6b",
+          "width": 320,
+          "height": 200,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site-next/public/media/dubforge/v6-01-download-640.webp",
+          "url": "/media/dubforge/v6-01-download-640.webp",
+          "bytes": 17290,
+          "sha256": "34a1932667e0d887be7b730d9cc53522891425b8d461400a41d12213d792de37",
+          "width": 640,
+          "height": 400,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site-next/public/media/dubforge/v6-01-download-960.webp",
+          "url": "/media/dubforge/v6-01-download-960.webp",
+          "bytes": 34106,
+          "sha256": "3e87993837b79bf0682f838e8ba31f2d5db9a46a81fb649ed5b51032857f56ed",
+          "width": 960,
+          "height": 600,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "dubforge",
+      "source": "captures/dubforge/selected/v6-02-preprocess.jpg",
+      "source_sha256": "ffd1b018e61e95b187729655a8dd531b884d36202176002e89dbb58a08a3b1aa",
+      "source_bytes": 78233,
+      "source_width": 1440,
+      "source_height": 900,
+      "source_authenticity": "Real DubForge UI in the official isolated GET-only demo with self-authored silent footage and bilingual text. Pending production state; no model generation, accounts or publishing.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site-next/public/media/dubforge/v6-02-preprocess.webp",
+        "url": "/media/dubforge/v6-02-preprocess.webp",
+        "bytes": 219528,
+        "sha256": "e4b8824514792dd9af13026a16a1f231c5955fea05a05a4a79069f0db40535ad",
+        "width": 1440,
+        "height": 900,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site-next/public/media/dubforge/v6-02-preprocess-320.webp",
+          "url": "/media/dubforge/v6-02-preprocess-320.webp",
+          "bytes": 5610,
+          "sha256": "2efbd3d143b92866e6ef58fc22b3cb4aaf486da64185e3e0aa65c298052f4f61",
+          "width": 320,
+          "height": 200,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site-next/public/media/dubforge/v6-02-preprocess-640.webp",
+          "url": "/media/dubforge/v6-02-preprocess-640.webp",
+          "bytes": 16560,
+          "sha256": "63af524645fb02a8a0b432bbc3b9470f7b7756b3eae24d58ad859ad060859667",
+          "width": 640,
+          "height": 400,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site-next/public/media/dubforge/v6-02-preprocess-960.webp",
+          "url": "/media/dubforge/v6-02-preprocess-960.webp",
+          "bytes": 32486,
+          "sha256": "4ee6d7152a999ea3091354ce11be856e0aeaeca4ddb17d4d89de5dbffffaadf3",
+          "width": 960,
+          "height": 600,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "dubforge",
+      "source": "captures/dubforge/selected/v6-03-transcribe.jpg",
+      "source_sha256": "2a974e22fbe7372c13dd219d216c57177640d3d83ea9f61314ec0ec6e4f7e271",
+      "source_bytes": 104591,
+      "source_width": 1440,
+      "source_height": 900,
+      "source_authenticity": "Real DubForge UI in the official isolated GET-only demo with self-authored silent footage and bilingual text. Pending production state; no model generation, accounts or publishing.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site-next/public/media/dubforge/v6-03-transcribe.webp",
+        "url": "/media/dubforge/v6-03-transcribe.webp",
+        "bytes": 295580,
+        "sha256": "bad6936dd8a0e4a18da34a66d0e985da6adc697a192e925e15da958aecf944cc",
+        "width": 1440,
+        "height": 900,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site-next/public/media/dubforge/v6-03-transcribe-320.webp",
+          "url": "/media/dubforge/v6-03-transcribe-320.webp",
+          "bytes": 7508,
+          "sha256": "02cc17aef2874c530aedbe48283a6c0228d73cb689db2a45fe04462232a2057f",
+          "width": 320,
+          "height": 200,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site-next/public/media/dubforge/v6-03-transcribe-640.webp",
+          "url": "/media/dubforge/v6-03-transcribe-640.webp",
+          "bytes": 22266,
+          "sha256": "8589a0c474494070f3ebbac7294d711020a143bd686b7bb11d25a177e5f533ac",
+          "width": 640,
+          "height": 400,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site-next/public/media/dubforge/v6-03-transcribe-960.webp",
+          "url": "/media/dubforge/v6-03-transcribe-960.webp",
+          "bytes": 42970,
+          "sha256": "0c3cd4334ef54bd685b7ff47a71d66b930dde483a63d1a6db281df6a6523edc5",
+          "width": 960,
+          "height": 600,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "dubforge",
+      "source": "captures/dubforge/selected/v6-04-split.jpg",
+      "source_sha256": "2a0d62cace6177e0dacc2f5bdcbe4983793310ee959a244257130c8f8caf4671",
+      "source_bytes": 83308,
+      "source_width": 1440,
+      "source_height": 900,
+      "source_authenticity": "Real DubForge UI in the official isolated GET-only demo with self-authored silent footage and bilingual text. Pending production state; no model generation, accounts or publishing.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site-next/public/media/dubforge/v6-04-split.webp",
+        "url": "/media/dubforge/v6-04-split.webp",
+        "bytes": 209646,
+        "sha256": "ac60612553b89a82ad4d5d2d22864a18aa061e611488d2e8a20fc3f36499c675",
+        "width": 1440,
+        "height": 900,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site-next/public/media/dubforge/v6-04-split-320.webp",
+          "url": "/media/dubforge/v6-04-split-320.webp",
+          "bytes": 5980,
+          "sha256": "edae2be2ae1f7f91893b5b0dc059dca0615dd68c9d487f4d97a89339f33a75ad",
+          "width": 320,
+          "height": 200,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site-next/public/media/dubforge/v6-04-split-640.webp",
+          "url": "/media/dubforge/v6-04-split-640.webp",
+          "bytes": 16590,
+          "sha256": "f78aa7c19b7c30620b46f59e6034a54106ca105ef8589d6448e4db4703d30f52",
+          "width": 640,
+          "height": 400,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site-next/public/media/dubforge/v6-04-split-960.webp",
+          "url": "/media/dubforge/v6-04-split-960.webp",
+          "bytes": 30736,
+          "sha256": "ee57125218849740d2a155846daac897277f5700233f4524fd548beaa7f31b2b",
+          "width": 960,
+          "height": 600,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "dubforge",
+      "source": "captures/dubforge/selected/v6-05-translate.jpg",
+      "source_sha256": "b7c5e4598808b6e922262cb0e1a4a39cc26322c09d0c0631fb79c95af41148e2",
+      "source_bytes": 89633,
+      "source_width": 1440,
+      "source_height": 900,
+      "source_authenticity": "Real DubForge UI in the official isolated GET-only demo with self-authored silent footage and bilingual text. Pending production state; no model generation, accounts or publishing.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site-next/public/media/dubforge/v6-05-translate.webp",
+        "url": "/media/dubforge/v6-05-translate.webp",
+        "bytes": 214000,
+        "sha256": "4819c236dba95e37830f714250e723fba267f0810e92591bd9d3ba7017cd30ce",
+        "width": 1440,
+        "height": 900,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site-next/public/media/dubforge/v6-05-translate-320.webp",
+          "url": "/media/dubforge/v6-05-translate-320.webp",
+          "bytes": 6194,
+          "sha256": "68d69a3053721126466f87ea4d4e8258f15fb15a1ce793cb2cd39ca2c6d3bf49",
+          "width": 320,
+          "height": 200,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site-next/public/media/dubforge/v6-05-translate-640.webp",
+          "url": "/media/dubforge/v6-05-translate-640.webp",
+          "bytes": 17962,
+          "sha256": "5f2c56398215b7781e122e0518a97454cf72d1390ef869eb3a2acbfee2656c97",
+          "width": 640,
+          "height": 400,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site-next/public/media/dubforge/v6-05-translate-960.webp",
+          "url": "/media/dubforge/v6-05-translate-960.webp",
+          "bytes": 35448,
+          "sha256": "f3bc979906afecc83319abb0d953f663b0a38d26295f79ef1da1460010f40738",
+          "width": 960,
+          "height": 600,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "dubforge",
+      "source": "captures/dubforge/selected/v6-06-tts.jpg",
+      "source_sha256": "73709f49989595f4ab7c0daebb906c9c7e6708a33bf1aaab9c005ab497508280",
+      "source_bytes": 137125,
+      "source_width": 1440,
+      "source_height": 900,
+      "source_authenticity": "Real DubForge UI in the official isolated GET-only demo with self-authored silent footage and bilingual text. Pending production state; no model generation, accounts or publishing.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site-next/public/media/dubforge/v6-06-tts.webp",
+        "url": "/media/dubforge/v6-06-tts.webp",
+        "bytes": 408332,
+        "sha256": "c8f966bd06583e91c02157b5360757c3d60d6ccfa085394b93d5991c5f2709bf",
+        "width": 1440,
+        "height": 900,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site-next/public/media/dubforge/v6-06-tts-320.webp",
+          "url": "/media/dubforge/v6-06-tts-320.webp",
+          "bytes": 9534,
+          "sha256": "609d1ea8e5a938e72b2ff716a1bf6a9bc38472e46d062801ea3f2659efe16f65",
+          "width": 320,
+          "height": 200,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site-next/public/media/dubforge/v6-06-tts-640.webp",
+          "url": "/media/dubforge/v6-06-tts-640.webp",
+          "bytes": 31654,
+          "sha256": "d8b6bdb159aef75e814906185b9caa6035152ce774f117bf99d1aa33a07023ba",
+          "width": 640,
+          "height": 400,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site-next/public/media/dubforge/v6-06-tts-960.webp",
+          "url": "/media/dubforge/v6-06-tts-960.webp",
+          "bytes": 63268,
+          "sha256": "0dda2dc0eed114cbb9fac12c43e6a2eee14325e827a56f72a74d5cbf94f6072e",
+          "width": 960,
+          "height": 600,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "dubforge",
+      "source": "captures/dubforge/selected/v6-07-comments.jpg",
+      "source_sha256": "58e6d155f044b33deb65233bb414008bd1eed364df92f8a1e6bf5f3f19292cca",
+      "source_bytes": 93225,
+      "source_width": 1440,
+      "source_height": 900,
+      "source_authenticity": "Real DubForge UI in the official isolated GET-only demo with self-authored silent footage and bilingual text. Pending production state; no model generation, accounts or publishing.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site-next/public/media/dubforge/v6-07-comments.webp",
+        "url": "/media/dubforge/v6-07-comments.webp",
+        "bytes": 253676,
+        "sha256": "c68ab8f1a5d93c8039d43db3b82c4335da9bf59d1f130e341944834ae9224849",
+        "width": 1440,
+        "height": 900,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site-next/public/media/dubforge/v6-07-comments-320.webp",
+          "url": "/media/dubforge/v6-07-comments-320.webp",
+          "bytes": 6766,
+          "sha256": "f3decacd23c095ea5a0f35f85b1e50bd71b07cba52fd2836ade15f69a7eab9ab",
+          "width": 320,
+          "height": 200,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site-next/public/media/dubforge/v6-07-comments-640.webp",
+          "url": "/media/dubforge/v6-07-comments-640.webp",
+          "bytes": 20632,
+          "sha256": "3774764d064ac86f9fb344edee7b080458b024f139c0daaa3bee19b0b8ae8c8b",
+          "width": 640,
+          "height": 400,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site-next/public/media/dubforge/v6-07-comments-960.webp",
+          "url": "/media/dubforge/v6-07-comments-960.webp",
+          "bytes": 39000,
+          "sha256": "e87705a3ebb11033ad778bde08335e84e0c7975b6d46c601b6cc4fec7a2336c0",
+          "width": 960,
+          "height": 600,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "dubforge",
+      "source": "captures/dubforge/selected/v6-08-assemble.jpg",
+      "source_sha256": "8204948f151eb51edb43a4e16e68fd84497773367686a45caee4621d2829147d",
+      "source_bytes": 100952,
+      "source_width": 1440,
+      "source_height": 900,
+      "source_authenticity": "Real DubForge UI in the official isolated GET-only demo with self-authored silent footage and bilingual text. Pending production state; no model generation, accounts or publishing.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site-next/public/media/dubforge/v6-08-assemble.webp",
+        "url": "/media/dubforge/v6-08-assemble.webp",
+        "bytes": 275156,
+        "sha256": "127cf686224a22571a460457de522e9a293d6a57c3c95d04dcbce94268829bd2",
+        "width": 1440,
+        "height": 900,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site-next/public/media/dubforge/v6-08-assemble-320.webp",
+          "url": "/media/dubforge/v6-08-assemble-320.webp",
+          "bytes": 7420,
+          "sha256": "45cff574a8d6ef2d6f204ffd8fb9d3f5e1e4b25e093826e911040c1d10a15517",
+          "width": 320,
+          "height": 200,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site-next/public/media/dubforge/v6-08-assemble-640.webp",
+          "url": "/media/dubforge/v6-08-assemble-640.webp",
+          "bytes": 21498,
+          "sha256": "4c9336ce968a11d4c59b73d1e1a7d3cfab14cc68d551a396260107bd4146f3a2",
+          "width": 640,
+          "height": 400,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site-next/public/media/dubforge/v6-08-assemble-960.webp",
+          "url": "/media/dubforge/v6-08-assemble-960.webp",
+          "bytes": 42018,
+          "sha256": "17afd6358fb05b16bc30d3cc459b98b0e682b667b41f08e9d08ab67ed0cd0873",
+          "width": 960,
+          "height": 600,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "dubforge",
+      "source": "captures/dubforge/selected/v6-09-publish.jpg",
+      "source_sha256": "82654be814aecc21e142cfc6297b32bcd9c0e90c7a7ed80511ff1c8ab1c65a99",
+      "source_bytes": 101455,
+      "source_width": 1440,
+      "source_height": 900,
+      "source_authenticity": "Real DubForge UI in the official isolated GET-only demo with self-authored silent footage and bilingual text. Pending production state; no model generation, accounts or publishing.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site-next/public/media/dubforge/v6-09-publish.webp",
+        "url": "/media/dubforge/v6-09-publish.webp",
+        "bytes": 291050,
+        "sha256": "4c49110cc6e619c7f57c3985d78175d8d5ea84816a1c15c34bfb946fcd9e2f03",
+        "width": 1440,
+        "height": 900,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site-next/public/media/dubforge/v6-09-publish-320.webp",
+          "url": "/media/dubforge/v6-09-publish-320.webp",
+          "bytes": 7690,
+          "sha256": "441698aa560e2c529d5f80ab032b74d35993c5f39dc08119d3ee906a8caf2a66",
+          "width": 320,
+          "height": 200,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site-next/public/media/dubforge/v6-09-publish-640.webp",
+          "url": "/media/dubforge/v6-09-publish-640.webp",
+          "bytes": 22406,
+          "sha256": "b93bc7b507b8a859dded043bcabbf134c926ad4573961cdcf55a4e736695d14b",
+          "width": 640,
+          "height": 400,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site-next/public/media/dubforge/v6-09-publish-960.webp",
+          "url": "/media/dubforge/v6-09-publish-960.webp",
+          "bytes": 42296,
+          "sha256": "0b2c9e400083e9a093dadc706050439fc79c3b8dfdf45fb94b077237477153be",
+          "width": 960,
+          "height": 600,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
     }
   ],
   "video": {
-    "path": "site/public/media/china-house-price-map/demo.mp4",
+    "path": "site-next/public/media/china-house-price-map/demo.mp4",
     "url": "/media/china-house-price-map/demo.mp4",
     "bytes": 1363373,
     "sha256": "3e63812f8d103c794dfe814e07c69770720191ce7fd3b3bf42b3643a1eda3a98",
@@ -7201,23 +7771,25 @@
     "note": "Real map UI capture, 19.133 s, encoded 30 CFR with frame duplication; not a rendering performance claim."
   },
   "totals": {
-    "original_image_count": 126,
-    "exported_image_count": 504,
-    "source_image_bytes": 41165885,
-    "exported_image_bytes": 39423926,
+    "original_image_count": 136,
+    "exported_image_count": 544,
+    "source_image_bytes": 43741297,
+    "exported_image_bytes": 44054260,
     "video_bytes": 1363373,
     "font_bytes": 353408,
-    "font_license_and_provenance_bytes": 14596,
-    "published_media_bytes": 41140707,
-    "total_public_asset_count": 510,
-    "total_public_asset_bytes": 41155303
+    "font_license_and_provenance_bytes": 15010,
+    "published_media_bytes": 45771041,
+    "total_public_asset_count": 550,
+    "total_public_asset_bytes": 45786051
   },
   "fonts": {
     "codec": "fontTools WOFF2 with Node native zlib Brotli (quality 11 / font mode), invoked by fontTools",
     "content_sources": [
       "captures/selected-manifest.json",
       "design/v3/index.html",
+      "site-next/src/components/DubForgeWorkflow.astro",
       "site-next/src/components/FrameworkDiagram.astro",
+      "site-next/src/components/FrameworkShowcase.astro",
       "site-next/src/components/Icon.astro",
       "site-next/src/components/LabWorkbench.astro",
       "site-next/src/components/MediaImage.astro",
@@ -7226,6 +7798,8 @@
       "site-next/src/components/ProjectEngineering.astro",
       "site-next/src/components/ProjectSignature.astro",
       "site-next/src/components/ProjectWorldAccent.astro",
+      "site-next/src/data/dubforge-workflow.ts",
+      "site-next/src/data/framework-showcase.ts",
       "site-next/src/data/project-image.ts",
       "site-next/src/data/project-priority.ts",
       "site-next/src/data/project-signatures.ts",
@@ -7264,9 +7838,12 @@
       "site-next/src/scripts/project-atmosphere.ts",
       "site-next/src/scripts/project-filter.ts",
       "site-next/src/scripts/project-motion.ts",
+      "site-next/src/scripts/showcase-narratives.ts",
       "site-next/src/scripts/site-continuity.ts",
       "site-next/src/scripts/site.ts",
+      "site-next/src/styles/dubforge-workflow.css",
       "site-next/src/styles/expressive-home.css",
+      "site-next/src/styles/framework-showcase.css",
       "site-next/src/styles/global.css",
       "site-next/src/styles/home-next.css",
       "site-next/src/styles/home-projects.css",
@@ -7277,6 +7854,7 @@
       "site-next/src/styles/project-worlds-labs.css",
       "site-next/src/styles/project-worlds-tools.css",
       "site-next/src/styles/project-worlds.css",
+      "site-next/src/styles/spatial-scenes.css",
       "site-next/src/styles/world-continuity.css"
     ],
     "noto_original_metadata": {
@@ -7345,5 +7923,15 @@
       }
     ],
     "refresh_rule": "Re-run prepare-media.py --fonts-only after adding website copy; only supported current glyphs are included."
-  }
+  },
+  "source_manifests": [
+    {
+      "path": "captures/selected-manifest.json",
+      "sha256": "2c1802696f789defdfcc69f2f1f64badcce99c0ed4d9fdb33c6a59104e4fe9e3"
+    },
+    {
+      "path": "site-next/media-additions.json",
+      "sha256": "48210bcdbc4f74fe6e992ae5fd8cdde42fa5b8f33e8bf2b902b675ff90f1dec4"
+    }
+  ]
 }

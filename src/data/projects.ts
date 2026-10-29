@@ -2,6 +2,7 @@ import type { Project, ProjectGroup } from './types';
 import { projectImage as image } from './project-image.ts';
 import { restoredProjects } from './restored-projects.ts';
 import { webProjects } from './web-projects.ts';
+import { frameworkArchitecture } from './framework-showcase.ts';
 
 export const groups: { id: ProjectGroup; label: string; description: string }[] = [
   { id: 'games', label: '游戏与工具', description: '游戏、桌面工具，以及背后的框架和编辑器。' },
@@ -232,7 +233,7 @@ export const projects: Project[] = [
     ],
     note: '诊断与工具图采自 Outpost。节点绑定使用本轮自制的独立 Prefab 示例；代码图为只读查看实际生成文件。计数与警告只表示采集时状态。',
     source: 'https://github.com/heroliss/SSFramework', docs: 'https://github.com/heroliss/SSFramework/blob/main/docs/framework-guide.md',
-    cover: framework[0], gallery: framework, related: ['outpost', 'nomadworkshop', 'eazybuildpipeline'],
+    cover: frameworkArchitecture, gallery: framework, related: ['outpost', 'nomadworkshop', 'eazybuildpipeline'],
   },
   {
     slug: 'eazybuildpipeline', repo: 'EazyBuildPipeline', name: 'EazyBuildPipeline', category: 'Unity 资源与构建工具', group: 'games',

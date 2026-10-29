@@ -5,6 +5,7 @@ import { setupExpressiveMotion } from './expressive-motion';
 import { setupProjectMotion } from './project-motion';
 import { setupProjectAtmosphere } from './project-atmosphere';
 import { setupDetailWorldMotion } from './detail-world-motion';
+import { setupShowcaseNarratives } from './showcase-narratives';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -179,6 +180,7 @@ function initializeMotion() {
   const disposeProjects = setupProjectMotion({ signal, preference });
   const disposeAtmosphere = setupProjectAtmosphere({ signal, preference });
   const disposeDetails = setupDetailWorldMotion({ signal, preference });
+  const disposeNarratives = setupShowcaseNarratives({ signal, preference });
   if (storedPause !== undefined) {
     window.dispatchEvent(new CustomEvent('portfolio:motion-state', { detail: { paused: storedPause } }));
   }
@@ -205,6 +207,7 @@ function initializeMotion() {
     disposeProjects();
     disposeAtmosphere();
     disposeDetails();
+    disposeNarratives();
     media.revert();
     delete root.dataset.motion;
   };

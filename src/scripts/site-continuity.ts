@@ -6,9 +6,11 @@ const restore = () => {
  changed.clear();
 };
 document.addEventListener('click',(event) => {
- const target=event.target instanceof Element ? event.target.closest<HTMLAnchorElement>('a[href]') : null;
- if(!target || event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || target.target==='_blank' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
- const destination=new URL(target.href,location.href);
+ const target=event.target instanceof Element ? event.target.closest<HTMLElement>('a[href], button[data-stage-card][aria-pressed="true"]') : null;
+ if(!target || event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || (target instanceof HTMLAnchorElement && target.target==='_blank') || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+ const href=target instanceof HTMLAnchorElement ? target.href : target.dataset.href;
+ if(!href) return;
+ const destination=new URL(href,location.href);
  if(destination.origin!==location.origin || !/\/projects\/[^/]+\/?$/.test(destination.pathname)) return;
  restore();
  let picture:HTMLElement|null=target.querySelector('img');
@@ -19,7 +21,7 @@ document.addEventListener('click',(event) => {
  if(!picture) picture=target.closest('.project-card')?.querySelector<HTMLElement>('img')??null;
  if(!picture) {
   const preview=document.querySelector<HTMLAnchorElement>('[data-archive-link]');
-  if(preview?.href===target.href) picture=document.querySelector<HTMLElement>('[data-archive-image]');
+  if(preview?.href===destination.href) picture=document.querySelector<HTMLElement>('[data-archive-image]');
  }
  if(!picture) return;
  document.querySelectorAll<HTMLElement>('[data-shared-cover]').forEach(element=>{

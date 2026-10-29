@@ -1,0 +1,61 @@
+---
+import { dubforgeWorkflow } from '../data/dubforge-workflow';
+import { sitePath } from '../lib/site-path';
+import MediaImage from './MediaImage.astro';
+import Icon from './Icon.astro';
+import '../styles/dubforge-workflow.css';
+interface Props { id?: string; detail?: boolean }
+const { id = 'workflow', detail = false } = Astro.props;
+const rollers = [74, 226, 378, 530, 682, 834];
+---
+<section class:list={['dub-reel', {'home-chapter': !detail, 'dub-reel--detail': detail}]} id={id} data-dub-reel aria-labelledby={`${id}-title`}>
+ <header class="dub-reel-heading">
+  <div><h2 id={`${id}-title`} class="project-name" data-motion="reveal">DubForge</h2><p class="dub-reel-title">一条视频的制作现场。</p></div>
+  <div class="dub-reel-introduction"><p>素材变成文字，文字找到声音。九个真实工作区，让同一条视频留下不同的成片版本。</p>{!detail && <a class="text-link" href={sitePath('/projects/dubforge/')}>走进制作工作台 <Icon size={18}/></a>}</div>
+ </header>
+ <div class="dub-factory">
+  <svg class="dub-factory-geometry" viewBox="0 0 1320 720" fill="none" aria-hidden="true" focusable="false">
+   <path class="factory-back-wall" d="M74 40H1197L1292 134V626H74Z"/>
+   <path class="factory-wall-seam" d="M74 142H1292M1077 40V626M1166 40V626M1219 80V626"/>
+   <path class="factory-overhead" d="M-100 112H886L994 52H1440V88H1004L896 148H-100Z"/>
+   <g class="factory-far-rail" data-factory-track="far">
+    <path d="M-150 190H820L928 126H1460M-150 205H828L936 142H1460"/>
+    {Array.from({length: 19}, (_, index) => <path d={`M${index * 68 - 110} 177V218`}/>)}
+   </g>
+   <path class="factory-screen-mount" d="M104 194H821L854 251V566H104Z"/>
+   <path class="factory-screen-mount-edge" d="M104 194V566H854M821 194L854 251"/>
+   <path class="factory-support" d="M201 522H237V636H201ZM722 522H758V636H722Z"/>
+   <path class="factory-belt-body" d="M-120 579H929L1014 625L941 684H-120Z"/>
+   <path class="factory-belt-edge" d="M-120 579H929L1014 625M-120 684H941L1014 625M-120 601H925L969 626L925 661H-120"/>
+   <g class="factory-near-rail" data-factory-track="near">
+    {Array.from({length: 19}, (_, index) => <path d={`M${index * 67 - 145} 601L${index * 67 - 114} 661`}/>)}
+    <path d="M-180 596H1510M-180 666H1510"/>
+   </g>
+   {rollers.map((x, index) => <g class="factory-roller" transform={`translate(${x} 633)`}>
+    <circle r="23"/><circle r="8"/>
+    <g class="factory-roller-spokes" style={`animation-delay:${index * -1.1}s`}><circle r="19"/><path d="M0-19V-8M0 8V19M-19 0H-8M8 0H19M-13-13L-6-6M6 6L13 13M-13 13L-6 6M6-6L13-13"/></g>
+   </g>)}
+   <path class="factory-console-pedestal" d="M1053 497H1101V668H1053ZM995 668H1159V688H995Z"/>
+   <path class="factory-floor" d="M-150 705H1460M972 703L1200 720M815 703L878 720M402 703L302 720"/>
+   <path class="factory-light-bar" d="M18 153H454M935 104H1231"/>
+  </svg>
+  <div class="dub-reel-frames" aria-label="DubForge 制作工作区">
+   {dubforgeWorkflow.map((step, index) => <figure class="dub-frame" id={`${id}-frame-${index}`} data-reel-frame={index}>
+    <div class="dub-frame-view"><div class="dub-frame-camera" data-reel-camera><div class="dub-screen-bezel"><MediaImage image={step.image} zoom group={`${id}-dubforge-flow`} sizes="(max-width: 760px) calc(100vw - 54px), (max-width: 1000px) 60vw, 64vw"/></div></div></div>
+    <figcaption class="dub-terminal" data-reel-console>
+     <div class="dub-terminal-position"><span>工序 {String(index + 1).padStart(2, '0')}</span>{step.optional && <span class="dub-optional">按需选用</span>}</div>
+     <h3>{step.title}</h3><p>{step.description}</p>
+    </figcaption>
+   </figure>)}
+  </div>
+  <nav class="dub-controls" aria-label="查看九个制作工作区">
+   <p class="dub-controls-label">沿着工序，继续探索</p>
+   <div class="dub-step-controls">
+    {dubforgeWorkflow.map((step, index) => <button type="button" data-reel-select={index} aria-pressed={index === 0} aria-controls={`${id}-frame-${index}`} disabled>
+     <span class="dub-step-number" aria-hidden="true">{String(index + 1).padStart(2,'0')}</span><span class="dub-step-name">{step.title}</span>{step.optional && <span class="dub-step-optional">可选</span>}
+    </button>)}
+   </div>
+  </nav>
+ </div>
+ <footer class="dub-reel-end"><p>上屏评论与投稿按需要选择，每个工作区都可以单独精修。</p><p>隔离演示项目 · 自写双语稿与自绘视频，画面展示待制作状态。</p></footer>
+</section>

@@ -12,7 +12,8 @@ const cache=new Map();
 async function htmlFor(p){if(!cache.has(p))cache.set(p,await readFile(p,'utf8'));return cache.get(p);}
 const redirectTarget=html=>html.match(/<meta\s+http-equiv="refresh"\s+content="0;url=([^"]+)"/i)?.[1];
 for(const file of pages){
- const html=await htmlFor(file), ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
+ // A data-*-id attribute is not an HTML id.
+ const html=await htmlFor(file), ids=[...html.matchAll(/\sid="([^"]+)"/g)].map(m=>m[1]);
  if(new Set(ids).size!==ids.length)failures.push(`${file}: duplicate IDs`);
  const refresh=redirectTarget(html);
  if(refresh){

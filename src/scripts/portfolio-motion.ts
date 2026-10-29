@@ -33,9 +33,20 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
       running = undefined;
       stage.dataset.active = value;
       const hero = stage.closest<HTMLElement>('.kinetic-hero');
-      if (hero) hero.dataset.active = value;
+      if (hero) {
+        hero.dataset.active = value;
+        if (button.dataset.tone) hero.style.setProperty('--hero-tone', button.dataset.tone);
+      }
+      stage.querySelectorAll<HTMLElement>('[data-stage-piece]').forEach(piece => {
+        piece.dataset.stageOffset = String((Number(piece.dataset.stagePiece) - Number(value) + cards.length) % cards.length);
+      });
       buttons.forEach((entry) => entry.setAttribute('aria-pressed', String(entry === button)));
-      cards.forEach((entry) => entry.setAttribute('aria-pressed', String(entry.dataset.stageCard === value)));
+      cards.forEach((entry) => {
+        const active = entry.dataset.stageCard === value;
+        entry.setAttribute('aria-pressed', String(active));
+        const projectName = buttons.find(button => button.dataset.stageSelect === entry.dataset.stageCard)?.dataset.name ?? '';
+        entry.setAttribute('aria-label', active ? `打开 ${projectName} 项目` : `将 ${projectName} 切到前景`);
+      });
       if (caption && button.dataset.caption) caption.textContent = button.dataset.caption;
       if (name && button.dataset.name) name.textContent = button.dataset.name;
       if (category && button.dataset.category) category.textContent = button.dataset.category;
@@ -75,10 +86,13 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
       button.addEventListener('focusin', () => select(button.dataset.stageSelect ?? '', true), { signal: localSignal });
     });
     cards.forEach((card) => {
-      // A native button supplies click, Enter and Space without navigation.
-      // Pointer hover only changes depth; only a deliberate selection lifts it.
+      // Native activation selects a rear card. Repeating on the front card opens
+      // its real project, matching the adjacent explicit project link.
       card.disabled = false;
-      card.addEventListener('click', () => select(card.dataset.stageCard ?? '', true), { signal: localSignal });
+      card.addEventListener('click', () => {
+        if (stage.dataset.active === card.dataset.stageCard && card.dataset.href) window.location.assign(card.dataset.href);
+        else select(card.dataset.stageCard ?? '', true);
+      }, { signal: localSignal });
     });
     stage.querySelectorAll<HTMLElement>('[data-stage-piece]').forEach((piece) => {
       piece.addEventListener('focusin', (event) => {
@@ -179,7 +193,7 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
         viewObserver.observe(region);
         region.addEventListener('pointerenter', measure, { signal: pointer.signal });
         region.addEventListener('pointermove', (event) => {
-          if (!settled || !inView || document.hidden || event.pointerType === 'touch') return;
+          if (!settled || !inView || document.hidden || document.documentElement.dataset.motionPaused === 'true' || event.pointerType === 'touch') return;
           const x = gsap.utils.clamp(-1, 1, ((event.pageX - bounds.left) / Math.max(bounds.width, 1) - 0.5) * 2);
           const y = gsap.utils.clamp(-1, 1, ((event.pageY - bounds.top) / Math.max(bounds.height, 1) - 0.5) * 2);
           movers.forEach((move) => {
@@ -197,6 +211,9 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
         }, { signal: pointer.signal });
         document.addEventListener('visibilitychange', () => {
           if (document.hidden && settled) reset(true);
+        }, { signal: pointer.signal });
+        window.addEventListener('portfolio:motion-state', () => {
+          if (document.documentElement.dataset.motionPaused === 'true' && settled) reset(true);
         }, { signal: pointer.signal });
         context.add(() => () => {
           pointer.abort();

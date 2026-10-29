@@ -1,0 +1,62 @@
+---
+import MediaImage from './MediaImage.astro';
+import { frameworkShowcase } from '../data/framework-showcase';
+import '../styles/framework-showcase.css';
+interface Props { id?: string; }
+const { id = 'framework-showcase' } = Astro.props;
+const ports = frameworkShowcase.map((item, index) => {
+  const y = 168 + index * 96;
+  return { item, index, x: 184, y, wire: `M184 ${y} C246 ${y} 206 300 230 300 C238 300 244 300 252 300` };
+});
+---
+<section id={id} class="framework-showcase" data-framework-gallery data-active="0" aria-label="SSFramework 架构与功能图册">
+  <div class="framework-showcase__rack">
+    <svg class="framework-circuit" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <marker id={`${id}-flow-arrow`} markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0 6 3 0 6" fill="currentColor"/></marker>
+        {ports.map(port => <path data-framework-route={port.index} d={port.wire}/>)}
+      </defs>
+      <path class="framework-circuit__rear" d="M210 80 924 62 980 107 958 544 222 565 185 531 185 108Z"/>
+      <path class="framework-circuit__bevel" d="M213 83 928 83 957 111 957 531 934 548 213 548 190 525 190 108Z"/>
+      <path class="framework-circuit__panel" d="M230 95H930L944 109V520L930 534H230L216 520V109Z"/>
+      <path class="framework-circuit__rim" d="M238 103H926M936 115V513M926 526H240M224 510V120"/>
+      <path class="framework-circuit__mounts" d="M252 130V111H273M905 111H925V130M925 499V518H905M273 518H252V499"/>
+      <g class="framework-circuit__flow" marker-end={`url(#${id}-flow-arrow)`}>
+        <path d="M404 47H444"/><path d="M566 47H606"/><path d="M728 47H768"/>
+      </g>
+      <g class="framework-circuit__node"><rect x="284" y="29" width="120" height="36" rx="3"/><text x="344" y="53">View</text></g>
+      <g class="framework-circuit__node"><rect x="446" y="29" width="120" height="36" rx="3"/><text x="506" y="53">Command</text></g>
+      <g class="framework-circuit__node"><rect x="608" y="29" width="120" height="36" rx="3"/><text x="668" y="53">System</text></g>
+      <g class="framework-circuit__node"><rect x="770" y="29" width="120" height="36" rx="3"/><text x="830" y="53">Model</text></g>
+      <path class="framework-circuit__feedback" d="M890 47H972V566H924M798 566H202V548"/>
+      <g class="framework-circuit__node framework-circuit__utility"><rect x="798" y="548" width="126" height="36" rx="3"/><text x="861" y="572">Utility</text></g>
+      <g class="framework-circuit__scope"><path d="M36 116H164V506H36"/><text x="102" y="550">Context</text></g>
+      {ports.map(port => <g class="framework-circuit__socket" data-framework-socket={port.index} transform={`translate(${port.x} ${port.y})`}><circle r="13"/><circle r="6"/><path d="M-26 0H-13M13 0H21"/></g>)}
+      <path class="framework-circuit__wire" data-framework-wire d={ports[0].wire}/>
+      <g class="framework-circuit__input" transform="translate(252 300)"><rect x="-7" y="-15" width="13" height="30" rx="3"/><path d="M-2-8H6M-2 0H6M-2 8H6"/></g>
+      <g class="framework-circuit__plug" data-framework-plug transform="translate(184 168)"><path d="M-14-7H-7V-11H10L17-5V5L10 11H-7V7H-14Z"/><path d="M-5-6V6M0-6V6M5-6V6"/></g>
+    </svg>
+    <div class="framework-showcase__port-plane">
+      <div class="framework-showcase__controls" role="group" aria-label="选择框架展示内容">
+        {ports.map(({ item, index, x, y, wire }) => (
+          <button type="button" data-framework-select={index} data-framework-id={item.id} data-framework-port-x={x} data-framework-port-y={y} data-framework-wire-d={wire} aria-controls={`${id}-${item.id}`} aria-pressed={index === 0} disabled>
+            <span>{item.label}</span><span class="framework-showcase__control-title">{item.image.kind}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+    <div class="framework-showcase__pictures" data-framework-picture-stage>
+      {frameworkShowcase.map((item, index) => (
+        <figure id={`${id}-${item.id}`} class="framework-picture" data-framework-picture={index} data-framework-id={item.id} data-active={index === 0 ? 'true' : 'false'}>
+          <div class="framework-showcase__media" data-framework-media>
+            <MediaImage image={item.image} zoom group={id} sizes="(max-width: 760px) 96vw, 76vw"/>
+          </div>
+          <figcaption class="framework-showcase__caption">
+            <h3 data-framework-title>{item.title}</h3>
+            <p data-framework-description>{item.description}</p>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>

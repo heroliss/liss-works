@@ -25,6 +25,7 @@ SITE = Path(__file__).resolve().parents[1]
 WORKSPACE = SITE.parent
 PUBLIC = SITE / "public"
 MANIFEST = WORKSPACE / "captures/selected-manifest.json"
+ADDITIONS = SITE / "media-additions.json"
 REPORT = SITE / "media-provenance.json"
 SIZES = (320, 640, 960, 1600)
 GAME_REPOS = {"outpost", "nomadworkshop", "learnopengl"}
@@ -209,8 +210,15 @@ def main() -> None:
               "source_manifest": relative(MANIFEST), "source_manifest_sha256": sha256(MANIFEST),
               "originals_modified": False,
               "transform": "Full-image WebP encoding and Lanczos proportional downscaling only; no crop, no AI alterations, no upscaling."}
+    # New-design additions are separate from the original site's capture list.
+    manifests = [MANIFEST, *([ADDITIONS] if ADDITIONS.exists() else [])]
+    result["source_manifests"] = [{"path": relative(path), "sha256": sha256(path)} for path in manifests]
     if not args.fonts_only:
-        manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
+        manifest = {"images": [item for path in manifests for item in json.loads(path.read_text(encoding="utf-8"))["images"]]}
+        sources = [item["source"] for item in manifest["images"]]
+        destinations = [(item["repo"].lower(), Path(item["source"]).stem) for item in manifest["images"]]
+        assert len(sources) == len(set(sources)), "Duplicate source in capture manifests"
+        assert len(destinations) == len(set(destinations)), "Duplicate exported media filename"
         selected = manifest["images"]
         retained = {}
         if args.repo:
@@ -260,7 +268,7 @@ def main() -> None:
     totals["total_public_asset_bytes"] = totals["published_media_bytes"] + totals["font_license_and_provenance_bytes"]
     result["totals"] = totals
     REPORT.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    proof = WORKSPACE / "verification/site/media-export.json"
+    proof = WORKSPACE / "verification/site-next/media-export.json"
     proof.parent.mkdir(parents=True, exist_ok=True)
     proof.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(totals, ensure_ascii=False))

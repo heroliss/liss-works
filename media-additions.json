@@ -1,0 +1,96 @@
+{
+  "schema": "showcase.capture-additions.v1",
+  "scope": "New design only; original capture manifest remains unchanged.",
+  "images": [
+    {
+      "repo": "SSFramework",
+      "source": "captures/SSFramework/selected/SSFramework-architecture.png",
+      "source_sha256": "369a793ac1f982a1af40dbf51c986e6648a1bf2f66b4e552ff01d3783c239d49",
+      "width": 1448,
+      "height": 1086,
+      "authenticity": "Original SSFramework repository architecture diagram; not an application screenshot",
+      "upstream_source": "runtime/SSFramework/docs/SSFramework-architecture.png"
+    },
+    {
+      "repo": "dubforge",
+      "source": "captures/dubforge/selected/v6-01-download.jpg",
+      "source_sha256": "a060649a5c9f3e16d99525a2e2c37a7b34eb8b02332bc4b97b6542912ea9a62f",
+      "width": 1440,
+      "height": 900,
+      "authenticity": "Real DubForge UI in the official isolated GET-only demo with self-authored silent footage and bilingual text. Pending production state; no model generation, accounts or publishing.",
+      "capture_receipt": "verification/site-next/v6/dubforge-nine-step-captures.json"
+    },
+    {
+      "repo": "dubforge",
+      "source": "captures/dubforge/selected/v6-02-preprocess.jpg",
+      "source_sha256": "ffd1b018e61e95b187729655a8dd531b884d36202176002e89dbb58a08a3b1aa",
+      "width": 1440,
+      "height": 900,
+      "authenticity": "Real DubForge UI in the official isolated GET-only demo with self-authored silent footage and bilingual text. Pending production state; no model generation, accounts or publishing.",
+      "capture_receipt": "verification/site-next/v6/dubforge-nine-step-captures.json"
+    },
+    {
+      "repo": "dubforge",
+      "source": "captures/dubforge/selected/v6-03-transcribe.jpg",
+      "source_sha256": "2a974e22fbe7372c13dd219d216c57177640d3d83ea9f61314ec0ec6e4f7e271",
+      "width": 1440,
+      "height": 900,
+      "authenticity": "Real DubForge UI in the official isolated GET-only demo with self-authored silent footage and bilingual text. Pending production state; no model generation, accounts or publishing.",
+      "capture_receipt": "verification/site-next/v6/dubforge-nine-step-captures.json"
+    },
+    {
+      "repo": "dubforge",
+      "source": "captures/dubforge/selected/v6-04-split.jpg",
+      "source_sha256": "2a0d62cace6177e0dacc2f5bdcbe4983793310ee959a244257130c8f8caf4671",
+      "width": 1440,
+      "height": 900,
+      "authenticity": "Real DubForge UI in the official isolated GET-only demo with self-authored silent footage and bilingual text. Pending production state; no model generation, accounts or publishing.",
+      "capture_receipt": "verification/site-next/v6/dubforge-nine-step-captures.json"
+    },
+    {
+      "repo": "dubforge",
+      "source": "captures/dubforge/selected/v6-05-translate.jpg",
+      "source_sha256": "b7c5e4598808b6e922262cb0e1a4a39cc26322c09d0c0631fb79c95af41148e2",
+      "width": 1440,
+      "height": 900,
+      "authenticity": "Real DubForge UI in the official isolated GET-only demo with self-authored silent footage and bilingual text. Pending production state; no model generation, accounts or publishing.",
+      "capture_receipt": "verification/site-next/v6/dubforge-nine-step-captures.json"
+    },
+    {
+      "repo": "dubforge",
+      "source": "captures/dubforge/selected/v6-06-tts.jpg",
+      "source_sha256": "73709f49989595f4ab7c0daebb906c9c7e6708a33bf1aaab9c005ab497508280",
+      "width": 1440,
+      "height": 900,
+      "authenticity": "Real DubForge UI in the official isolated GET-only demo with self-authored silent footage and bilingual text. Pending production state; no model generation, accounts or publishing.",
+      "capture_receipt": "verification/site-next/v6/dubforge-nine-step-captures.json"
+    },
+    {
+      "repo": "dubforge",
+      "source": "captures/dubforge/selected/v6-07-comments.jpg",
+      "source_sha256": "58e6d155f044b33deb65233bb414008bd1eed364df92f8a1e6bf5f3f19292cca",
+      "width": 1440,
+      "height": 900,
+      "authenticity": "Real DubForge UI in the official isolated GET-only demo with self-authored silent footage and bilingual text. Pending production state; no model generation, accounts or publishing.",
+      "capture_receipt": "verification/site-next/v6/dubforge-nine-step-captures.json"
+    },
+    {
+      "repo": "dubforge",
+      "source": "captures/dubforge/selected/v6-08-assemble.jpg",
+      "source_sha256": "8204948f151eb51edb43a4e16e68fd84497773367686a45caee4621d2829147d",
+      "width": 1440,
+      "height": 900,
+      "authenticity": "Real DubForge UI in the official isolated GET-only demo with self-authored silent footage and bilingual text. Pending production state; no model generation, accounts or publishing.",
+      "capture_receipt": "verification/site-next/v6/dubforge-nine-step-captures.json"
+    },
+    {
+      "repo": "dubforge",
+      "source": "captures/dubforge/selected/v6-09-publish.jpg",
+      "source_sha256": "82654be814aecc21e142cfc6297b32bcd9c0e90c7a7ed80511ff1c8ab1c65a99",
+      "width": 1440,
+      "height": 900,
+      "authenticity": "Real DubForge UI in the official isolated GET-only demo with self-authored silent footage and bilingual text. Pending production state; no model generation, accounts or publishing.",
+      "capture_receipt": "verification/site-next/v6/dubforge-nine-step-captures.json"
+    }
+  ]
+}
