@@ -35,9 +35,9 @@ export const frameworkShowcase: FrameworkShowcaseItem[] = [
       '工具中心按用途聚合构建、代码生成、诊断与开发辅助工作台。', '编辑器工具'),
   },
   {
-    id: 'binding-code', label: '生成', title: '把节点关系，落成强类型代码',
-    description: '自制 UI 绑定示例的真实生成结果：字段和 BindNodes() 路径写入 .nodes.g.cs，生成部分与手写窗口逻辑分开。',
-    image: image('SSFramework', '17-actual-generated-binding-source.png', 1196, 689,
-      '只读查看实际生成的 .nodes.g.cs：6 个强类型字段与对应的 BindNodes() 路径绑定。', '真实生成代码'),
+    id: 'binding-code', label: '生成', title: '点开根节点，查看绑定与生成目标',
+    description: '自制 UI 绑定示例的根节点弹窗：字段、路径、组件与最终生成目标同屏，可定位两份脚本，并在此生成或重新生成代码。',
+    image: image('SSFramework', '16-binding-generated-script-links.png', 436, 496,
+      '自制示例的根节点绑定弹窗：字段、路径、组件类型、最终生成目标与两份已生成脚本。', '绑定与生成'),
   },
 ];

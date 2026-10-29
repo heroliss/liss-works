@@ -1,4 +1,4 @@
-/* v7: one camera and one world per machine. Every artifact shares its axes. */
+/* Shared scene cameras; v8 keeps the hero hit frames flat and colors its interlude. */
 .framework-chapter .framework-composition{display:block}
 .framework-chapter .framework-notes{display:flex;align-items:center;justify-content:space-between;gap:40px;padding:0;margin:0 0 24px}
 .framework-chapter .framework-notes .work-description{font-size:18px;max-width:46ch;margin:0}
@@ -50,7 +50,6 @@ html[data-motion] .dub-reel[data-reel-enhanced=true] .dub-controls{right:1.5%;to
 .dub-frame-view,.dub-frame-camera,.dub-screen-bezel,.framework-showcase__media{pointer-events:none}
 .dub-frame-view .media-link,.framework-showcase__media .media-link{pointer-events:auto;position:relative;transform:none}
 .stage-surface{pointer-events:none}.stage-card{pointer-events:auto}
-@media(min-width:1101px){.home-next .stage-piece{transform:translate(var(--tx),var(--ty)) rotateX(4deg) rotateY(-8deg) rotateZ(var(--angle)) scale(var(--size));transform-style:preserve-3d}}
 @media(max-width:1100px){
  .framework-chapter .framework-notes{display:block}.framework-chapter .framework-notes .work-description{font-size:17px;max-width:none;margin-bottom:20px}
  html[data-motion] .framework-showcase[data-framework-enhanced=true] .framework-showcase__rack{padding:12px 10px 22px;perspective:1800px}
@@ -76,6 +75,10 @@ html[data-motion] .dub-reel[data-reel-enhanced=true] .dub-controls{right:1.5%;to
 }
 @media(prefers-reduced-motion:reduce){
  [data-scene-world],.dub-frame-view,.dub-terminal,.dub-controls,.framework-showcase__pictures{transform:none!important}
- .factory-belt-motion,.factory-roller-spokes{animation:none!important}.stage-piece{transform:translate(var(--tx),var(--ty)) rotate(var(--angle)) scale(var(--size))!important}
+ .factory-belt-motion,.factory-roller-spokes{animation:none!important}
 }
 html:not([data-motion]) .dub-controls,html:not([data-motion]) .framework-scene-summary,html:not([data-motion]) .factory-foreground-geometry,html:not([data-motion]) .factory-mobile-conveyor{display:none}
+/* The interlude belongs to the project currently on the main screen. */
+.home-next .process-band .kinetic-strip{--banner-tone:var(--showcase-tone,#ff9c82);color:var(--banner-tone);background:color-mix(in srgb,var(--banner-tone) 8%,#0b0e10);border-color:color-mix(in srgb,var(--banner-tone) 28%,transparent);transition:color .5s,background-color .5s,border-color .5s}
+.home-next .process-band .kinetic-strip i{color:color-mix(in srgb,var(--showcase-tone,#ff9c82) 65%,#b6beba);transition:color .5s}
+@media(prefers-reduced-motion:reduce){.home-next .process-band .kinetic-strip,.home-next .process-band .kinetic-strip i{transition:none}}

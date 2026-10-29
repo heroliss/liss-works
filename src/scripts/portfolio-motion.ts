@@ -36,6 +36,7 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
       if (hero) {
         hero.dataset.active = value;
         if (button.dataset.tone) hero.style.setProperty('--hero-tone', button.dataset.tone);
+        if (button.dataset.tone) hero.closest<HTMLElement>('.home-next')?.style.setProperty('--showcase-tone', button.dataset.tone);
       }
       stage.querySelectorAll<HTMLElement>('[data-stage-piece]').forEach(piece => {
         piece.dataset.stageOffset = String((Number(piece.dataset.stagePiece) - Number(value) + cards.length) % cards.length);
@@ -54,8 +55,7 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
       window.dispatchEvent(new CustomEvent('portfolio:stage-select', { detail: { index: Number(value) } }));
       if (!animate || preference.matches) return;
 
-      // Outer pieces keep their authored CSS position, rotation and transition.
-      // Only the inner surface gives the new selection a short settling beat.
+      // Native buttons keep fixed hitboxes; only the inner picture settles.
       const activeSurface = surfaces.find((surface) => surface.closest<HTMLElement>('[data-stage-piece]')?.dataset.stagePiece === value);
       const activePicture = activeSurface?.querySelector<HTMLImageElement>('img');
       interactions.add(() => {
@@ -127,10 +127,10 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
             defaults: { duration: 1.05, ease: 'expo.out' },
             onComplete: () => { settled = true; },
           }).fromTo(fresh,
-            { clipPath: 'inset(0 0 100% 0)', rotationX: 4, rotationY: -3, scale: 1.045 },
+            { clipPath: 'inset(0 0 100% 0)' },
             {
-              clipPath: 'inset(0 0 0% 0)', rotationX: 0, rotationY: 0, scale: 1,
-              stagger: 0.1, immediateRender: false, clearProps: 'clipPath,transform',
+              clipPath: 'inset(0 0 0% 0)',
+              stagger: 0.08, immediateRender: false, clearProps: 'clipPath',
             },
           );
         }
@@ -158,14 +158,15 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
         const light = region.querySelector<HTMLElement>('[data-pointer-light]');
         const lightX = light ? gsap.quickTo(light, 'x', { duration: 0.9, ease: 'power3.out' }) : undefined;
         const lightY = light ? gsap.quickTo(light, 'y', { duration: 0.9, ease: 'power3.out' }) : undefined;
-        const movers = surfaces.map((surface, index) => {
-          const depth = 0.74 + (index % 2) * 0.12;
+        const movers = surfaces.map((surface) => {
           return {
-            depth, piece: surface.closest<HTMLElement>('[data-stage-piece]')?.dataset.stagePiece,
+            surface, piece: surface.closest<HTMLElement>('[data-stage-piece]')?.dataset.stagePiece,
+            restX: 0, restY: 0, restZ: 0,
             x: gsap.quickTo(surface, 'x', { duration: 0.7, ease: 'power3.out' }),
             y: gsap.quickTo(surface, 'y', { duration: 0.7, ease: 'power3.out' }),
             rx: gsap.quickTo(surface, 'rotationX', { duration: 0.8, ease: 'power3.out' }),
             ry: gsap.quickTo(surface, 'rotationY', { duration: 0.8, ease: 'power3.out' }),
+            rz: gsap.quickTo(surface, 'rotation', { duration: 0.65, ease: 'power3.out' }),
           };
         });
         let bounds = { left: 0, top: 0, width: 1, height: 1 };
@@ -176,16 +177,41 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
           bounds = { left: box.left + window.scrollX, top: box.top + window.scrollY, width: box.width, height: box.height };
         };
         const reset = (immediate = false) => {
-          const channels = movers.flatMap((move) => [move.x, move.y, move.rx, move.ry]);
-          if (lightX && lightY) channels.push(lightX, lightY);
-          channels.forEach((to) => {
+          movers.forEach((move) => {
+            move.x(0); move.y(0); move.rx(move.restX); move.ry(move.restY); move.rz(move.restZ);
+            if (immediate) [move.x, move.y, move.rx, move.ry, move.rz].forEach(to => to.tween.progress(1).pause());
+          });
+          [lightX, lightY].forEach((to) => {
+            if (!to) return;
             to(0);
             if (immediate) to.tween.progress(1).pause();
           });
         };
+        const updateRest = () => {
+          // Read every pose before writing any transform to avoid layout churn.
+          const values = movers.map((move) => {
+            const style = getComputedStyle(move.surface);
+            return {
+              move,
+              x: parseFloat(style.getPropertyValue('--card-rest-x')) || 0,
+              y: parseFloat(style.getPropertyValue('--card-rest-y')) || 0,
+              z: parseFloat(style.getPropertyValue('--card-rest-z')) || 0,
+            };
+          });
+          values.forEach(({ move, x, y, z }) => { move.restX = x; move.restY = y; move.restZ = z; });
+          reset(true);
+        };
+        updateRest();
+        let pressed = false;
+        let resizeFrame = 0;
+        const resize = () => {
+          cancelAnimationFrame(resizeFrame);
+          resizeFrame = requestAnimationFrame(() => { measure(); updateRest(); });
+        };
         measure();
-        const sizeObserver = new ResizeObserver(measure);
+        const sizeObserver = new ResizeObserver(resize);
         sizeObserver.observe(region);
+        window.addEventListener('resize', resize, { signal: pointer.signal });
         const viewObserver = new IntersectionObserver(([entry]) => {
           inView = entry.isIntersecting;
           if (!inView && settled) reset(true);
@@ -193,23 +219,37 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
         viewObserver.observe(region);
         region.addEventListener('pointerenter', measure, { signal: pointer.signal });
         region.addEventListener('pointermove', (event) => {
-          if (!settled || !inView || document.hidden || document.documentElement.dataset.motionPaused === 'true' || event.pointerType === 'touch') return;
+          if (pressed || !settled || !inView || document.hidden || document.documentElement.dataset.motionPaused === 'true' || event.pointerType === 'touch') return;
           const x = gsap.utils.clamp(-1, 1, ((event.pageX - bounds.left) / Math.max(bounds.width, 1) - 0.5) * 2);
           const y = gsap.utils.clamp(-1, 1, ((event.pageY - bounds.top) / Math.max(bounds.height, 1) - 0.5) * 2);
           movers.forEach((move) => {
-            const depth = move.piece === stage.dataset.active ? 1 : move.depth;
-            move.x(x * 30 * depth);
-            move.y(y * 24 * depth);
-            move.rx(-y * 10 * depth);
-            move.ry(x * 13 * depth);
+            const primary = move.piece === stage.dataset.active;
+            move.x(primary ? x*10 : 0);
+            move.y(primary ? y*8 : 0);
+            move.rx(move.restX-y*(primary?5:1.5));
+            move.ry(move.restY+x*(primary?7:2));
           });
           lightX?.(x * 40);
           lightY?.(y * 30);
         }, { signal: pointer.signal });
+        region.addEventListener('pointerdown', (event) => {
+          if (!event.isPrimary || event.button !== 0) return;
+          pressed = true;
+          movers.forEach(move => [move.x, move.y, move.rx, move.ry, move.rz].forEach(to => to.tween.pause()));
+        }, { signal: pointer.signal });
+        const release = () => {
+          pressed = false;
+          if (settled && !region.matches(':hover')) reset();
+        };
+        window.addEventListener('pointerup', release, { signal: pointer.signal });
+        window.addEventListener('pointercancel', release, { signal: pointer.signal });
+        window.addEventListener('blur', () => { pressed = false; if (settled) reset(true); }, { signal: pointer.signal });
+        window.addEventListener('portfolio:stage-select', updateRest, { signal: pointer.signal });
         region.addEventListener('pointerleave', () => {
-          if (settled) reset();
+          if (settled && !pressed) reset();
         }, { signal: pointer.signal });
         document.addEventListener('visibilitychange', () => {
+          if (document.hidden) pressed = false;
           if (document.hidden && settled) reset(true);
         }, { signal: pointer.signal });
         window.addEventListener('portfolio:motion-state', () => {
@@ -217,6 +257,7 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
         }, { signal: pointer.signal });
         context.add(() => () => {
           pointer.abort();
+          cancelAnimationFrame(resizeFrame);
           sizeObserver.disconnect();
           viewObserver.disconnect();
         });
