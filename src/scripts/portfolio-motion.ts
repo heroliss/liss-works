@@ -49,6 +49,19 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
       const button = buttons.find((entry) => entry.dataset.stageSelect === value);
       if (!button || (animate && stage.dataset.active === value)) return;
       const moving = animate && !preference.matches && document.documentElement.dataset.motionPaused !== 'true';
+      const previous = stage.dataset.active;
+      const layers = moving ? pieces.map(piece => Number(getComputedStyle(piece).zIndex) || 0) : [];
+      const flightStarts = moving ? cards.map(card => ({
+        x: Number(gsap.getProperty(card, 'x')) || 0,
+        y: Number(gsap.getProperty(card, 'y')) || 0,
+      })) : [];
+      const oldFront = moving ? pieces.find(piece => piece.dataset.stagePiece === previous)?.getBoundingClientRect() : undefined;
+      const incoming = moving ? pieces.find(piece => piece.dataset.stagePiece === value)?.getBoundingClientRect() : undefined;
+      const compact = region.clientWidth < 760;
+      const arc = oldFront && incoming ? {
+        x: gsap.utils.clamp(compact ? -22 : -36, compact ? 22 : 36, (incoming.x + incoming.width/2 - oldFront.x - oldFront.width/2) * .12),
+        y: gsap.utils.clamp(compact ? -16 : -24, compact ? 16 : 24, (incoming.y + incoming.height/2 - oldFront.y - oldFront.height/2) * .1),
+      } : { x: 0, y: 0 };
       // Capture the currently painted pose before retiring a previous or held
       // transition. Fast retargeting therefore starts where the cards are now.
       const before = moving ? Flip.getState(pieces) : undefined;
@@ -82,10 +95,31 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
       if (!moving || !before) return;
 
       interactions.add(() => {
+        const destinationLayers = pieces.map(piece => Number(getComputedStyle(piece).zIndex) || 0);
         layout = Flip.from(before, {
-          duration: .82, ease: 'power3.inOut', scale: true,
+          // Keep a constant camera distance while the card frame changes size.
+          // Scaling an already projected 3D plane changes its apparent camera
+          // and creates a visible corner jump on the first frame.
+          duration: .92, ease: 'power3.inOut', scale: false,
           onComplete: () => { if (turn === revision) stage.dataset.stageTransitioning = 'false'; },
         });
+        // Keep the painted overlap while the incoming window clears the pile.
+        // Exchange layers during the flight, after the two windows have moved
+        // apart, rather than exposing the whole rear window on pointer-up.
+        layout.set(pieces, { zIndex: (index: number) => layers[index], immediateRender: true }, 0);
+        cards.forEach((card, index) => {
+          const weight = card.dataset.stageCard === value ? 1 : card.dataset.stageCard === previous ? -.55 : 0;
+          layout!.fromTo(card, flightStarts[index], {
+            keyframes: [
+              { x: arc.x * weight, y: arc.y * weight, duration: .38, ease: 'power2.out' },
+              { x: 0, y: 0, duration: .54, ease: 'power3.inOut' },
+            ],
+            clearProps: 'transform',
+          }, 0);
+        });
+        layout.set(pieces, { zIndex: (index: number) => destinationLayers[index] }, .48);
+        layout.set(pieces, { clearProps: 'zIndex' }, .92);
+        layout.set(cards, { clearProps: 'transform' }, .92);
         running = gsap.timeline({ defaults: { ease: 'power3.out' } });
         if (caption) {
           running.fromTo(caption,
@@ -188,12 +222,19 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
           );
         }
 
-        if (!desktop || !fine || !surfaces.length) return;
+        if (!surfaces.length) return;
+        // Every viewport interpolates between resting poses; only a fine
+        // desktop pointer drives the additional live parallax.
+        const pointerEnabled = desktop && fine;
         const pointer = new AbortController();
         const region = stage.closest<HTMLElement>('.kinetic-hero') ?? stage;
-        const light = region.querySelector<HTMLElement>('[data-pointer-light]');
+        const light = pointerEnabled ? region.querySelector<HTMLElement>('[data-pointer-light]') : null;
+        const atmosphere = pointerEnabled ? region.querySelector<HTMLElement>('[data-atmosphere-plane]') : null;
         const lightX = light ? gsap.quickTo(light, 'x', { duration: 0.9, ease: 'power3.out' }) : undefined;
         const lightY = light ? gsap.quickTo(light, 'y', { duration: 0.9, ease: 'power3.out' }) : undefined;
+        const atmosphereX = atmosphere ? gsap.quickTo(atmosphere, 'x', { duration: 0.95, ease: 'power3.out' }) : undefined;
+        const atmosphereY = atmosphere ? gsap.quickTo(atmosphere, 'y', { duration: 0.95, ease: 'power3.out' }) : undefined;
+        const fieldMotion = [lightX, lightY, atmosphereX, atmosphereY];
         const movers = surfaces.map((surface) => {
           return {
             surface, piece: surface.closest<HTMLElement>('[data-stage-piece]')?.dataset.stagePiece,
@@ -217,7 +258,7 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
             move.x(0); move.y(0); move.rx(move.restX); move.ry(move.restY); move.rz(move.restZ);
             if (immediate) [move.x, move.y, move.rx, move.ry, move.rz].forEach(to => to.tween.progress(1).pause());
           });
-          [lightX, lightY].forEach((to) => {
+          fieldMotion.forEach((to) => {
             if (!to) return;
             to(0);
             if (immediate) to.tween.progress(1).pause();
@@ -240,12 +281,15 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
         updateRest();
         let pressed = false;
         let resizeFrame = 0;
-        const resize = () => {
+        const remeasure = () => {
           cancelAnimationFrame(resizeFrame);
-          resizeFrame = requestAnimationFrame(() => { measure(); updateRest(); });
+          resizeFrame = requestAnimationFrame(measure);
         };
+        const resize = () => { remeasure(); updateRest(); };
         measure();
-        const sizeObserver = new ResizeObserver(resize);
+        // Project copy may wrap differently during selection. Measuring that
+        // change must never finish the active pose/field tweens prematurely.
+        const sizeObserver = new ResizeObserver(remeasure);
         sizeObserver.observe(region);
         window.addEventListener('resize', resize, { signal: pointer.signal });
         const viewObserver = new IntersectionObserver(([entry]) => {
@@ -255,23 +299,26 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
         viewObserver.observe(region);
         region.addEventListener('pointerenter', measure, { signal: pointer.signal });
         region.addEventListener('pointermove', (event) => {
-          if (pressed || stage.dataset.stageTransitioning === 'true' || !settled || !inView || document.hidden || document.documentElement.dataset.motionPaused === 'true' || event.pointerType === 'touch') return;
+          if (!pointerEnabled || pressed || stage.dataset.stageTransitioning === 'true' || !settled || !inView || document.hidden || document.documentElement.dataset.motionPaused === 'true' || event.pointerType === 'touch') return;
           const x = gsap.utils.clamp(-1, 1, ((event.pageX - bounds.left) / Math.max(bounds.width, 1) - 0.5) * 2);
           const y = gsap.utils.clamp(-1, 1, ((event.pageY - bounds.top) / Math.max(bounds.height, 1) - 0.5) * 2);
           movers.forEach((move) => {
             const primary = move.piece === stage.dataset.active;
             move.x(primary ? x*10 : 0);
             move.y(primary ? y*8 : 0);
-            move.rx(move.restX-y*5);
-            move.ry(move.restY+x*7);
+            move.rx(move.restX-y*9);
+            move.ry(move.restY+x*14);
           });
           lightX?.(x * 40);
           lightY?.(y * 30);
+          atmosphereX?.(-x * 24);
+          atmosphereY?.(-y * 16);
         }, { signal: pointer.signal });
         region.addEventListener('pointerdown', (event) => {
           if (!event.isPrimary || event.button !== 0) return;
           pressed = true;
           movers.forEach(move => [move.x, move.y, move.rx, move.ry, move.rz].forEach(to => to.tween.pause()));
+          fieldMotion.forEach(to => to?.tween.pause());
         }, { signal: pointer.signal });
         const release = () => {
           const wasPressed = pressed;
@@ -281,6 +328,7 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
             movers.forEach(move => [move.x, move.y, move.rx, move.ry, move.rz].forEach(to => {
               if (to.tween.progress() < 1) to.tween.resume();
             }));
+            fieldMotion.forEach(to => { if (to && to.tween.progress() < 1) to.tween.resume(); });
           }
         };
         window.addEventListener('pointerup', release, { signal: pointer.signal });

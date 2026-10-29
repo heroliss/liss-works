@@ -1,5 +1,5 @@
 /* Screen planes float above the machinery; only decorative artwork is cropped. */
-body{overflow-x:clip}
+html,body{overflow-x:clip}
 .home-next{overflow:visible}
 .framework-showcase,.framework-showcase__rack,.framework-scene-world,.framework-showcase__pictures,.framework-picture,.dub-factory,.dub-scene-world,.dub-reel-frames,.dub-frame,.dub-frame-view,.dub-frame-camera,.dub-screen-bezel{overflow:visible}
 .framework-chapter .framework-composition{display:block}

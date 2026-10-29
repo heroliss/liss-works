@@ -1,0 +1,167 @@
+/* One quiet field behind the real work. Cropping belongs to these decorative
+   leaves; the product scenes keep their existing overflow and 3D hierarchy. */
+.home-next {
+  position: relative;
+  isolation: isolate;
+}
+
+.home-atmosphere {
+  --atmosphere-tone: var(--showcase-tone, #ff9c82);
+  position: absolute;
+  top: -90px;
+  bottom: -90px;
+  left: calc(50% - 50vw);
+  right: auto;
+  width: 100vw;
+  max-width: none;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+  color: var(--atmosphere-tone);
+  transition: color 650ms ease;
+}
+
+.home-atmosphere *,
+.hero-light-clip,
+.hero-light-clip * {
+  pointer-events: none !important;
+}
+
+.home-atmosphere__plane {
+  position: absolute;
+  inset: -36px;
+  transform: none;
+}
+
+.home-atmosphere__art {
+  position: absolute;
+  inset-block: 0;
+  left: 50%;
+  width: min(1920px, 100%);
+  margin-left: max(-960px, -50%);
+  /* The composition stays central on wide displays. Its own ends dissolve
+     into the full-viewport wash instead of exposing an SVG-sized hard edge. */
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+
+.home-atmosphere svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  /* The SVG's viewBox must not become a second, interior clipping rectangle. */
+  overflow: visible;
+}
+
+.home-atmosphere:not(.home-atmosphere--page) {
+  /* Join neighbouring colour fields vertically, never at the content gutters. */
+  mask-image: linear-gradient(to bottom, transparent, #000 64px, #000 calc(100% - 104px), transparent);
+}
+
+.home-atmosphere__contour {
+  stroke: currentColor;
+  stroke-opacity: .115;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.home-atmosphere__thread {
+  stroke: currentColor;
+  stroke-opacity: .085;
+  stroke-width: 22;
+}
+
+.home-atmosphere__edge-light {
+  stroke: currentColor;
+  stroke-opacity: .35;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.home-atmosphere--page {
+  top: -88px;
+  bottom: -80px;
+  z-index: -2;
+  transition: none;
+}
+
+.home-atmosphere__wash,
+.home-atmosphere__grain {
+  position: absolute;
+  inset: 0;
+}
+
+.home-atmosphere__wash {
+  background:
+    radial-gradient(ellipse 62% 620px at 92% 2%, color-mix(in srgb, var(--atmosphere-tone) 8%, transparent), transparent 76%),
+    radial-gradient(ellipse 44% 800px at -8% 23%, #9eba6810, transparent 76%),
+    radial-gradient(ellipse 54% 780px at 105% 43%, #6dcbe810, transparent 78%),
+    radial-gradient(ellipse 50% 1000px at -9% 64%, #d18e5812, transparent 76%),
+    radial-gradient(ellipse 38% 720px at 109% 84%, #af9fe011, transparent 76%),
+    radial-gradient(ellipse 60% 440px at 42% 101%, #b6cd6d0b, transparent 78%);
+}
+
+.home-atmosphere__grain {
+  opacity: .024;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23fff' filter='url(%23n)' d='M0 0h160v160H0z'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+}
+
+.home-atmosphere--hero {
+  top: -88px;
+  bottom: -100px;
+}
+
+.home-atmosphere--hero .home-atmosphere__plane {
+  inset: -48px -68px;
+}
+
+.hero-light-clip {
+  position: absolute;
+  top: -32px;
+  bottom: -40px;
+  left: calc(50% - 50vw);
+  right: auto;
+  width: 100vw;
+  max-width: none;
+  z-index: -2;
+  overflow: hidden;
+}
+
+.home-atmosphere--framework { --atmosphere-tone: #dbf48b; }
+.home-atmosphere--games { --atmosphere-tone: #efb17d; }
+.home-atmosphere--explore { --atmosphere-tone: #b9abef; }
+.home-atmosphere--closing { --atmosphere-tone: #c7dca1; }
+
+.home-atmosphere--framework,
+.home-atmosphere--games {
+  background: radial-gradient(ellipse 38% 65% at -7% 42%, color-mix(in srgb, currentColor 5%, transparent), transparent 78%);
+}
+
+.home-atmosphere--explore {
+  background: radial-gradient(ellipse 43% 90% at 109% 43%, #9387c70c, transparent 77%);
+}
+
+@media (max-width: 1100px) {
+  .home-atmosphere--hero .home-atmosphere__plane { inset: -36px -160px; }
+  .home-atmosphere--hero .home-atmosphere__ribbon { opacity: .7; }
+  .home-atmosphere__thread { stroke-width: 15; }
+}
+
+@media (max-width: 600px) {
+  .home-atmosphere--hero .home-atmosphere__plane { inset: -40px -280px; }
+  .home-atmosphere--hero .home-atmosphere__contour { opacity: .6; }
+  .home-atmosphere__edge-light { stroke-opacity: .25; }
+  .home-atmosphere__grain { opacity: .018; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-atmosphere { transition: none; }
+  .home-atmosphere [data-atmosphere-plane] { transform: none !important; }
+}
+
+@media (forced-colors: active) {
+  .home-atmosphere,
+  .hero-light-clip { display: none; }
+}

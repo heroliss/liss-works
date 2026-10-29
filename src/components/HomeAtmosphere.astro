@@ -1,0 +1,48 @@
+---
+import '../styles/home-atmosphere.css';
+
+interface Props {
+  variant?: 'page' | 'hero' | 'framework' | 'games' | 'explore' | 'closing';
+}
+
+const { variant = 'page' } = Astro.props;
+---
+
+<div class:list={['home-atmosphere', `home-atmosphere--${variant}`]} aria-hidden="true">
+  {variant === 'page' ? <><div class="home-atmosphere__wash"></div><div class="home-atmosphere__grain"></div></> :
+    <div class="home-atmosphere__plane" data-atmosphere-plane={variant === 'hero' ? '' : undefined}>
+      <div class="home-atmosphere__art">
+      {variant === 'hero' && <svg viewBox="0 0 1800 1080" preserveAspectRatio="xMidYMid meet" fill="none" focusable="false">
+        <defs>
+          <linearGradient id="home-ambient-ribbon" x1="1690" y1="50" x2="1090" y2="1070" gradientUnits="userSpaceOnUse"><stop stop-color="currentColor" stop-opacity=".2"/><stop offset=".42" stop-color="currentColor" stop-opacity=".035"/><stop offset=".73" stop-color="currentColor" stop-opacity=".13"/><stop offset="1" stop-color="currentColor" stop-opacity="0"/></linearGradient>
+          <linearGradient id="home-ambient-edge" x1="1590" y1="0" x2="1030" y2="1050" gradientUnits="userSpaceOnUse"><stop stop-color="currentColor" stop-opacity=".05"/><stop offset=".36" stop-color="currentColor" stop-opacity=".42"/><stop offset=".72" stop-color="currentColor" stop-opacity=".08"/><stop offset="1" stop-color="currentColor" stop-opacity="0"/></linearGradient>
+        </defs>
+        <path class="home-atmosphere__ribbon" d="M1714-168C1372-144 1158-21 1246 210C1334 441 1810 410 1870 678C1919 897 1697 1066 1377 1118L1320 1037C1627 1003 1805 860 1765 694C1716 489 1241 489 1142 233C1038-38 1328-229 1714-252Z" fill="url(#home-ambient-ribbon)"/>
+        <path d="M1714-168C1372-144 1158-21 1246 210C1334 441 1810 410 1870 678C1919 897 1697 1066 1377 1118M1714-252C1328-229 1038-38 1142 233C1241 489 1716 489 1765 694C1805 860 1627 1003 1320 1037" stroke="url(#home-ambient-edge)" stroke-width="1.3"/>
+        <g class="home-atmosphere__contour"><path d="M-210 869C63 707 275 906 480 967S810 1000 947 892"/><path d="M-220 904C65 741 273 936 473 991S794 1033 937 936"/><path d="M-230 939C68 778 271 969 465 1016S780 1065 925 980"/></g>
+        <path class="home-atmosphere__thread" d="M1730 60C1504 112 1504 254 1631 337S1906 478 1905 643"/>
+        <path class="home-atmosphere__edge-light" d="M1199 40C1182 102 1197 158 1224 203M1781 702C1783 735 1773 772 1752 804"/>
+      </svg>}
+      {variant === 'framework' && <svg viewBox="0 0 1800 1000" preserveAspectRatio="xMidYMid meet" fill="none" focusable="false">
+        <g class="home-atmosphere__contour"><path d="M-180 110C94 28 292 96 367 269S332 611 101 789S-23 969 196 1040"/><path d="M-164 151C74 70 258 138 321 285S291 587 75 759S-48 978 141 1056"/><path d="M-146 192C59 116 222 176 275 301S250 563 49 729S-70 985 88 1072"/></g>
+        <path class="home-atmosphere__thread" d="M1664-91C1417 94 1434 215 1637 279S1891 446 1684 613S1566 856 1859 942"/>
+        <path class="home-atmosphere__edge-light" d="M271 299C298 365 286 443 249 509M1613 567C1590 585 1569 606 1551 632"/>
+      </svg>}
+      {variant === 'games' && <svg viewBox="0 0 1800 1500" preserveAspectRatio="xMidYMid meet" fill="none" focusable="false">
+        <g class="home-atmosphere__contour"><path d="M-191 262C66 44 207 195 214 387S-32 707 128 887S435 1006 489 1224S428 1488 214 1593"/><path d="M-159 296C61 95 164 220 173 391S-64 719 94 912S391 1031 447 1239S391 1484 187 1570"/><path d="M-127 330C56 146 121 245 132 395S-96 731 60 937S347 1056 405 1254S354 1480 160 1547"/></g>
+        <path class="home-atmosphere__thread" d="M1942 379C1752 318 1626 409 1677 558S1946 806 1831 1036S1516 1306 1588 1546"/>
+        <path class="home-atmosphere__edge-light" d="M185 375C187 420 177 459 157 497M439 1212C455 1263 456 1309 442 1349"/>
+      </svg>}
+      {variant === 'explore' && <svg viewBox="0 0 1800 1000" preserveAspectRatio="xMidYMid meet" fill="none" focusable="false">
+        <g class="home-atmosphere__contour"><path d="M1268-173C1565-175 1860 41 1863 353S1581 895 1287 938"/><path d="M1320-117C1574-103 1808 73 1806 353S1563 838 1311 887"/><path d="M1372-61C1583-31 1756 105 1749 353S1545 781 1335 836"/></g>
+        <path class="home-atmosphere__thread" d="M-132 849C90 601 237 699 349 873S669 1105 813 1022"/>
+        <path class="home-atmosphere__edge-light" d="M1781 304C1787 353 1781 400 1767 444"/>
+      </svg>}
+      {variant === 'closing' && <svg viewBox="0 0 1800 800" preserveAspectRatio="xMidYMid meet" fill="none" focusable="false">
+        <g class="home-atmosphere__contour"><path d="M-180 664C149 373 312 516 620 645S1262 824 1663 548S1997 261 2074 326"/><path d="M-180 700C149 409 312 552 620 681S1262 860 1663 584S1997 297 2074 362"/></g>
+        <path class="home-atmosphere__edge-light" d="M1451 679C1492 657 1536 630 1581 600"/>
+      </svg>}
+      </div>
+    </div>
+  }
+</div>
