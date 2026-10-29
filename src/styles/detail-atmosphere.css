@@ -67,6 +67,13 @@ body:has(.detail-page) .site-header { position:relative; z-index:30; }
   background-size:160px 160px;
 }
 .project-atmosphere__definitions { position:absolute; width:0; height:0; overflow:hidden; }
+.project-atmosphere__edge-veil {
+  position:absolute;
+  inset:0;
+  /* The final composite fades at the visible viewport, after all perspective
+     and pointer transforms. The full-width wash and grain stay outside it. */
+  mask-image:linear-gradient(to right,transparent 16px,#000 clamp(40px,7vw,140px),#000 calc(100% - clamp(40px,7vw,140px)),transparent calc(100% - 16px));
+}
 .project-atmosphere__layer {
   position:absolute;
   left:-68px;

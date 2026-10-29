@@ -34,6 +34,14 @@
   transform: none;
 }
 
+.home-atmosphere__edge-veil {
+  position: absolute;
+  inset: 0;
+  /* This veil does not move with the overscanned pointer plane. At either
+     viewport edge the complete artwork is transparent before the leaf clips. */
+  mask-image: linear-gradient(to right, transparent 16px, #000 clamp(40px, 7vw, 140px), #000 calc(100% - clamp(40px, 7vw, 140px)), transparent calc(100% - 16px));
+}
+
 .home-atmosphere__art {
   position: absolute;
   inset-block: 0;

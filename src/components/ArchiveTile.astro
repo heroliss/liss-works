@@ -1,0 +1,50 @@
+---
+import type { Project } from '../data/types';
+import { getProjectWorld, projectWorldStyle } from '../data/project-worlds';
+import { getProjectSignature } from '../data/project-signatures';
+import { sitePath } from '../lib/site-path';
+import MediaImage from './MediaImage.astro';
+import '../styles/archive-tiles.css';
+
+interface Props { project: Project; index: number; }
+const { project, index } = Astro.props;
+const signature = getProjectSignature(project.slug);
+const displayName = project.name.split(' · ')[0];
+const filterTags = new Set(project.tags);
+if (project.tags.some(tag => tag.toLowerCase().includes('unity'))) filterTags.add('Unity');
+if (project.tags.some(tag => tag.toLowerCase().includes('opengl'))) filterTags.add('OpenGL');
+if (project.tags.some(tag => /ai|llm|nlp|word2vec/i.test(tag)) || project.slug === 'intelligence-index-cost-linear') filterTags.add('AI');
+if (project.tags.some(tag => /javascript|typescript|vue|flask|litegraph/i.test(tag))) filterTags.add('Web');
+if (project.tags.some(tag => tag.includes('算法'))) filterTags.add('算法');
+if (project.tags.some(tag => /^qt(?:\s|\d|$)/i.test(tag))) filterTags.add('Qt');
+if (project.tags.some(tag => tag.startsWith('.NET'))) filterTags.add('.NET');
+
+const poses = [[4,-5,-1.2], [6,4,.7], [3,-3,-.5], [5,6,1.1], [4,-6,-.9], [6,3,.5]] as const;
+const [restX, restY, restZ] = poses[index % poses.length] ?? poses[0];
+const href = sitePath(`/projects/${project.slug}/`);
+const style = `${projectWorldStyle(project.slug)};--atlas-image-ratio:${project.cover.width}/${project.cover.height};--atlas-rest-x:${restX}deg;--atlas-rest-y:${restY}deg;--atlas-rest-z:${restZ}deg`;
+---
+<article class="atlas-item" style={style} data-atlas-item={project.slug} data-project-card
+  data-group={project.group} data-tags={Array.from(filterTags).join('|')}
+  data-search={`${project.name} ${project.repo} ${project.summary} ${project.category} ${project.tags.join(' ')} ${signature.direction} ${signature.principle} ${signature.highlights.join(' ')}`}
+  data-preview-src={sitePath(project.cover.src)} data-preview-alt={project.cover.alt}
+  data-preview-title={displayName} data-preview-summary={project.summary} data-preview-href={href}
+  data-preview-accent={getProjectWorld(project.slug).accent}
+  data-preview-width={project.cover.width} data-preview-height={project.cover.height}
+  data-preview-principle={signature.principle} data-preview-direction={signature.direction}
+  data-preview-highlights={signature.highlights.join('|')}>
+  <div class="atlas-tile-reveal" data-atlas-reveal>
+    <a class="atlas-tile-link" data-atlas-project-link href={href} aria-label={project.name}>
+      <div class="atlas-tile-camera">
+        <div class="atlas-tile-plane" data-atlas-tilt>
+          <MediaImage image={project.cover} sizes="(max-width: 760px) calc(100vw - 56px), (max-width: 1100px) 75vw, 58vw"/>
+        </div>
+      </div>
+      <div class="atlas-tile-copy">
+        <h2 class="atlas-tile-title">{displayName}</h2>
+        <p class="atlas-tile-summary">{project.summary}</p>
+        <p class="atlas-tile-meta"><span>{project.category}</span><span>{project.status}</span></p>
+      </div>
+    </a>
+  </div>
+</article>

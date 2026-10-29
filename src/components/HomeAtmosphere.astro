@@ -10,6 +10,7 @@ const { variant = 'page' } = Astro.props;
 
 <div class:list={['home-atmosphere', `home-atmosphere--${variant}`]} aria-hidden="true">
   {variant === 'page' ? <><div class="home-atmosphere__wash"></div><div class="home-atmosphere__grain"></div></> :
+    <div class="home-atmosphere__edge-veil">
     <div class="home-atmosphere__plane" data-atmosphere-plane={variant === 'hero' ? '' : undefined}>
       <div class="home-atmosphere__art">
       {variant === 'hero' && <svg viewBox="0 0 1800 1080" preserveAspectRatio="xMidYMid meet" fill="none" focusable="false">
@@ -43,6 +44,7 @@ const { variant = 'page' } = Astro.props;
         <path class="home-atmosphere__edge-light" d="M1451 679C1492 657 1536 630 1581 600"/>
       </svg>}
       </div>
+    </div>
     </div>
   }
 </div>

@@ -1,0 +1,9 @@
+# v12 archive direction
+
+The pinned-poster draw is adapted to a real, searchable library of 22 projects. One large suspended proof frame carries the selected project, its actual summary, design principle and technical direction. Three freely scrolling shelves keep every real screenshot and native project link available. Authored variations in image scale, spacing and rest angle give the wall a reading rhythm.
+
+The original dark palette, project accents and Noto Sans SC / Rajdhani typography are retained. No new stock pictures, fabricated product UI, vanity numbers, WebGL runtime or scroll hijacking are introduced. A forced 22-screen pin would obstruct filtering and direct navigation, so the preview remains in normal document flow. Moving a fine pointer over a project or focusing its link selects its preview; clicking the native link opens its detail. The previous/next controls browse the filtered set.
+
+GSAP quickTo controllers own the card planes and background response, a separate parent owns ambient float, and an inner child owns the finite image reveal. Cached geometry, viewport projection guards, pointer-held freeze, offscreen/visibility gates, global pause, reduced motion and context cleanup protect ordinary reading and navigation. Deferred image decodes use request tickets and preserve keyboard announcements.
+
+The user's requested 3D material, layered lighting, project colours and animated ribbon take precedence over Taste's blanket bans on gradients, shadows, numbering and outlines. Raw inspector failures remain in the verification directory; the complete Taste house-style gate is not claimed. Actual screenshots and behavior checks are evaluated separately. Original source, project text, screenshots and the old site are preserved, with the authorized EazyBuildPipeline cover selection changed to its real master window.

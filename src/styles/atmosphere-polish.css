@@ -1,0 +1,94 @@
+/* Last-layer background polish. These rules shape decorative leaves and empty
+   material behind the work, never the screenshots or their interactive owners. */
+.home-next .framework-chapter::before {
+  background: radial-gradient(ellipse at 66% 38%, #2a3c2454, #16241a28 47%, transparent 76%);
+  border-radius: 48% 14% 38% 18%;
+  mask-image: linear-gradient(to right, transparent, #000 19%, #000 79%, transparent), linear-gradient(to bottom, transparent, #000 17%, #000 76%, transparent);
+  mask-composite: intersect;
+}
+.home-next .game-scene--nomad::before {
+  background: linear-gradient(145deg, #30402b54, #182a2133 58%, transparent);
+  border-radius: 10% 32% 18% 43%;
+  clip-path: polygon(6% 12%, 92% 0, 100% 12%, 94% 91%, 16% 100%, 0 81%);
+  mask-image: radial-gradient(ellipse at 54% 47%, #000 36%, transparent 77%);
+}
+.home-next .game-scene--gomoku::before {
+  background: linear-gradient(123deg, #3830494d, #211d302b 66%, transparent);
+  border-radius: 34% 8% 29% 12%;
+  clip-path: polygon(0 13%, 88% 0, 100% 17%, 96% 85%, 17% 100%, 0 87%);
+  mask-image: radial-gradient(ellipse at 48% 50%, #000 34%, transparent 77%);
+}
+
+/* Any legacy world that still shows a prologue plate gets a shaped, fading
+   colour field. Worlds whose artifact styles disable the plate stay disabled. */
+.detail-page[data-project-world] .project-prologue::before {
+  background: radial-gradient(ellipse at 67% 37%, color-mix(in srgb, var(--project-tone) 10%, transparent), transparent 75%), linear-gradient(125deg, color-mix(in srgb, var(--detail-cool) 5%, transparent), transparent 71%);
+  border-radius: 48% 12% 39% 18%;
+  mask-image: linear-gradient(to right, transparent, #000 18%, #000 77%, transparent), linear-gradient(to bottom, transparent, #000 14%, #000 77%, transparent);
+  mask-composite: intersect;
+}
+
+/* The factory's hardware retains its shared camera. The unprojected solid
+   rectangular wrapper is replaced by a separate sloping pool of reflected light. */
+.dub-reel .dub-factory,
+html[data-motion] .dub-reel[data-reel-enhanced=true] .dub-factory {
+  background: transparent;
+}
+.dub-reel .dub-factory::before {
+  inset: -2% -3% -4% 2%;
+  background: radial-gradient(ellipse at 57% 49%, #21465370, #122d3a3d 54%, transparent 79%);
+  border-radius: 38% 12% 29% 17%;
+  clip-path: polygon(4% 9%, 89% 0, 100% 16%, 96% 87%, 18% 100%, 0 82%);
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 85%, transparent), linear-gradient(to bottom, transparent, #000 14%, #000 79%, transparent);
+  mask-composite: intersect;
+}
+.dub-reel .factory-back-wall { fill: #10232c78; stroke: #31536058; }
+.dub-reel .factory-wall-seam { opacity: .21; }
+.framework-showcase .framework-circuit__rear { fill: #0b17118f; }
+.framework-showcase .framework-circuit__bevel { fill: #213327bb; }
+.framework-showcase .framework-circuit__panel { fill: #12221ab8; stroke: #738e5b80; }
+.dub-reel .dub-terminal {
+  background: linear-gradient(135deg, #1b3a46f0, #122b35ed);
+  border-radius: 7px 25px 9px 12px;
+}
+.dub-reel .dub-controls {
+  background: linear-gradient(145deg, #122a35f2, #0d202aeb);
+  border-radius: 17px 6px 20px 7px;
+}
+
+/* Editorial relief is on pseudo-elements; prose and code retain their exact
+   layout and overflow. The muted trailing edges avoid another block of solid UI. */
+.detail-page[data-project-world] .signature-entry--principle,
+.detail-page[data-project-world] .engineering-copy[data-copy-density='long'] {
+  background: transparent;
+}
+.detail-page[data-project-world] .signature-entry--principle::before {
+  content: '';
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(118deg, var(--editorial-warm-field), color-mix(in srgb, var(--editorial-warm-field) 78%, transparent) 74%, transparent);
+  border-radius: 10px 35px 12px 17px;
+  clip-path: polygon(0 6%, 94% 0, 100% 13%, 97% 91%, 8% 100%, 0 90%);
+}
+.detail-page[data-project-world] .signature-entry--principle::after {
+  opacity: .35;
+  border-radius: 0 0 12px 0;
+}
+.detail-page[data-project-world] .engineering-copy[data-copy-density='long']::after {
+  content: '';
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(119deg, color-mix(in srgb, var(--editorial-sheet) 93%, transparent), color-mix(in srgb, var(--editorial-sheet) 76%, transparent) 72%, transparent);
+  border-radius: 14px 52px 19px 14px;
+  clip-path: polygon(0 3%, 94% 0, 100% 7%, 98% 96%, 7% 100%, 0 94%);
+}
+.detail-page[data-project-world] .engineering-copy[data-copy-density='long']::before { opacity: .4; }
+
+@media (forced-colors: active) {
+  .detail-page[data-project-world] .signature-entry--principle::before,
+  .detail-page[data-project-world] .engineering-copy[data-copy-density='long']::after { display: none; }
+}

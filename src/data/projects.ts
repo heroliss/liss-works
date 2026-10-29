@@ -251,7 +251,7 @@ export const projects: Project[] = [
     ],
     note: '窗口使用自制材质、贴图与示例配置。公司专用集成与完整发布流程需要原 SDK、签名和平台工具链。',
     source: 'https://github.com/heroliss/EazyBuildPipeline',
-    cover: eazy[0], gallery: eazy, related: ['ssframework', 'outpost'],
+    cover: eazy[5], gallery: eazy, related: ['ssframework', 'outpost'],
   },
   {
     slug: 'intelligence-index-cost-linear', repo: 'intelligence-index-cost-linear', name: 'Intelligence × Cost', category: '模型能力与成本图表', group: 'ai-data',

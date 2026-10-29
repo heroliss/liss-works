@@ -102,16 +102,19 @@ const layers = [{ name: 'upper', depth: -.35 }, { name: 'middle', depth: .55 }, 
     <defs>
       <linearGradient id={`${key}-face`} x1="100" y1="200" x2="1600" y2="900" gradientUnits="userSpaceOnUse"><stop class="field-stop-cool" stop-opacity=".14"/><stop offset=".5" class="field-stop-accent" stop-opacity=".035"/><stop offset="1" class="field-stop-warm" stop-opacity=".11"/></linearGradient>
       <linearGradient id={`${key}-edge`} x1="60" y1="400" x2="1760" y2="700" gradientUnits="userSpaceOnUse"><stop class="field-stop-cool" stop-opacity=".65"/><stop offset=".4" class="field-stop-accent" stop-opacity=".16"/><stop offset=".8" class="field-stop-warm" stop-opacity=".4"/><stop offset="1" class="field-stop-accent" stop-opacity=".08"/></linearGradient>
-      <symbol id={`${key}-motif`} viewBox="0 0 1800 1200">
+    </defs>
+  </svg>
+  <div class="project-atmosphere__edge-veil">
+  {layers.map(layer => <div class:list={['project-atmosphere__layer', `project-atmosphere__layer--${layer.name}`]} data-detail-field-layer={layer.depth}>
+    <div class="project-atmosphere__canvas"><div class="project-atmosphere__art"><svg viewBox="0 0 1800 1200" preserveAspectRatio="xMidYMid meet" fill="none" focusable="false">
+        {/* Draw from shared data directly: a symbol viewport would clip the
+            negative-coordinate terrain/film shapes before the soft masks. */}
         <g class="detail-field-extrusion" transform="translate(0 17)">{drawing.faces.map(d => <path d={d}/>)}</g>
         <g class="detail-field-faces" fill={`url(#${key}-face)`} stroke={`url(#${key}-edge)`}>{drawing.faces.map(d => <path d={d}/>)}</g>
         <g class="detail-field-traces">{drawing.lines.map(d => <path d={d}/>)}</g>
         {drawing.rings && <g class="detail-field-rings">{drawing.rings.map(ring => <ellipse cx={ring.x} cy={ring.y} rx={ring.rx} ry={ring.ry} transform={`rotate(${ring.angle ?? 0} ${ring.x} ${ring.y})`}/>)}</g>}
         {drawing.points && <g class="detail-field-points">{drawing.points.map(point => <><ellipse cx={point.x} cy={point.y + 8} rx={point.r ?? 7} ry={(point.r ?? 7) * .62} class="detail-field-point-shadow"/><ellipse cx={point.x} cy={point.y} rx={point.r ?? 7} ry={(point.r ?? 7) * .62}/></>)}</g>}
-      </symbol>
-    </defs>
-  </svg>
-  {layers.map(layer => <div class:list={['project-atmosphere__layer', `project-atmosphere__layer--${layer.name}`]} data-detail-field-layer={layer.depth}>
-    <div class="project-atmosphere__canvas"><div class="project-atmosphere__art"><svg viewBox="0 0 1800 1200" preserveAspectRatio="xMidYMid meet" fill="none" focusable="false"><use href={`#${key}-motif`} x="0" y="0" width="1800" height="1200"/></svg></div></div>
+    </svg></div></div>
   </div>)}
+  </div>
 </div>
