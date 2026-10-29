@@ -1,21 +1,46 @@
 ---
 import type { Project } from '../data/types';
 import { projectTalkUrl } from '../lib/site-path';
+import { getProjectSignature } from '../data/project-signatures';
+import { getProjectWorld } from '../data/project-worlds';
 import Icon from './Icon.astro';
 import '../styles/project-ending.css';
 
 interface Props { project: Project; }
 const { project } = Astro.props;
 const displayName = project.name.split(' · ')[0];
+const signature = getProjectSignature(project.slug);
+const world = getProjectWorld(project.slug);
+const inkId = `postscript-${project.slug}`;
+const structured = ['nodes','pipeline','bars','glyph','reading'].includes(world.motion);
 ---
-<aside class="project-postscript" aria-labelledby="conversation-title" data-project-postscript>
+<aside class="project-postscript" aria-labelledby="conversation-title" data-project-postscript data-postscript-project={project.slug} data-postscript-shape={structured ? 'folded' : 'flowing'}>
+  <div class="project-postscript__echo-camera" aria-hidden="true">
+    <div class="project-postscript__echo-light" data-postscript-light></div>
+    <div class="project-postscript__echo-layer project-postscript__echo-layer--far" data-postscript-layer="-1">
+      <svg viewBox="0 0 1200 520" preserveAspectRatio="none" fill="none">
+        <defs><linearGradient id={`${inkId}-wash`} x1="80" y1="450" x2="1120" y2="100" gradientUnits="userSpaceOnUse"><stop stop-color="var(--accent)" stop-opacity=".08"/><stop offset=".46" stop-color="var(--world-surface,#182126)" stop-opacity=".62"/><stop offset="1" stop-color="var(--accent)" stop-opacity=".04"/></linearGradient></defs>
+        <path fill={`url(#${inkId}-wash)`} d={structured ? 'M54 155L294 75L729 108L1142 52L1170 324L934 427L471 392L66 470Z' : 'M45 188C193 26 416 53 619 112C827 172 1021 139 1146 58C1212 250 1127 400 962 432C686 486 525 350 330 386C200 409 111 468 52 458C18 366 3 271 45 188Z'}/>
+      </svg>
+    </div>
+    <div class="project-postscript__echo-layer project-postscript__echo-layer--near" data-postscript-layer=".7">
+      <svg viewBox="0 0 1200 520" preserveAspectRatio="none" fill="none">
+        <defs><linearGradient id={`${inkId}-edge`} x1="80" y1="355" x2="1135" y2="185" gradientUnits="userSpaceOnUse"><stop stop-color="var(--accent)" stop-opacity=".02"/><stop offset=".25" stop-color="var(--accent)" stop-opacity=".16"/><stop offset=".72" stop-color="var(--accent)" stop-opacity=".1"/><stop offset="1" stop-color="var(--accent)" stop-opacity=".28"/></linearGradient></defs>
+        <path class="project-postscript__echo-edge" stroke={`url(#${inkId}-edge)`} d={structured ? 'M710 416L969 349L1136 192' : 'M708 427C906 422 1065 326 1135 191'}/>
+      </svg>
+    </div>
+    <div class="project-postscript__echo-layer project-postscript__echo-layer--front" data-postscript-layer="1.2">
+      <svg viewBox="0 0 1200 520" preserveAspectRatio="none" fill="none"><path class="project-postscript__echo-glint" d="M678 430C741 439 808 430 859 410M1006 331C1078 307 1134 248 1134 201"/></svg>
+    </div>
+  </div>
   <div class="project-postscript__stroke" aria-hidden="true" data-postscript-ink>
-    <svg viewBox="0 0 90 280" fill="none"><path d="M76 12C33 9 35 40 38 82C40 114 22 130 8 137C30 143 43 165 40 196C37 239 37 265 80 268"/><path d="M58 22C31 40 47 92 31 116M54 251C35 231 46 197 36 181"/></svg>
+    <svg viewBox="0 0 90 280" fill="none"><path d="M76 12C33 9 35 40 38 82C40 114 22 130 8 137C30 143 43 165 40 196C37 239 37 265 80 268"/></svg>
   </div>
   <div class="project-postscript__copy">
     <h2 id="conversation-title">这个工程，让你想到什么？</h2>
     <p>分享使用心得、遇到的问题，或一个值得继续尝试的想法。</p>
     <p class="project-postscript__source">关于 <span>{displayName}</span></p>
+    <blockquote class="project-postscript__thought"><svg width="24" height="20" viewBox="0 0 24 20" aria-hidden="true"><path d="M10 2C4 4 2 8 2 14H9V8H5M22 2C16 4 14 8 14 14H21V8H17" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg><p>{signature.principle}</p></blockquote>
   </div>
   <a class="project-postscript__link" href={projectTalkUrl(project.slug)} aria-label={`交流想法：前往 ${displayName} 的工程交流页`}>
     <span class="project-postscript__link-label">交流想法<small>前往交流页继续聊</small></span>

@@ -22,7 +22,9 @@ export function setupProjectEnding({ signal, preference }: Options): () => void 
   document.querySelectorAll<HTMLElement>('[data-project-postscript]').forEach(note => {
     const ink = note.querySelector<HTMLElement>('[data-postscript-ink]');
     if (!ink) return;
-    let visible = false, held = false;
+    const light = note.querySelector<HTMLElement>('[data-postscript-light]');
+    const layers = Array.from(note.querySelectorAll<HTMLElement>('[data-postscript-layer]'));
+    let visible = false, held = false, focused = false;
     let bounds = { left:0, top:0, width:1, height:1 };
     const measure = () => { const box=note.getBoundingClientRect();bounds={left:box.left+scrollX,top:box.top+scrollY,width:box.width,height:box.height}; };
     const size = new ResizeObserver(measure); size.observe(note); observers.push(size);
@@ -30,26 +32,55 @@ export function setupProjectEnding({ signal, preference }: Options): () => void 
     measure();
     note.addEventListener('pointerenter',measure,{signal:events.signal});
     media.add({ motion:'(prefers-reduced-motion:no-preference)', fine:'(hover:hover) and (pointer:fine)' }, context => {
-      if (!context.conditions!.motion || !context.conditions!.fine) return;
+      if (!context.conditions!.motion) return;
       const local = new AbortController();
+      focused=note.contains(document.activeElement);
       const xTo=gsap.quickTo(ink,'x',{duration:.9,ease:'power3.out'}),yTo=gsap.quickTo(ink,'y',{duration:.9,ease:'power3.out'});
-      const tweens=[xTo,yTo];
+      const fields=layers.map(layer=>({depth:Number(layer.dataset.postscriptLayer)||0,
+        x:gsap.quickTo(layer,'x',{duration:1.05,ease:'power3.out'}),y:gsap.quickTo(layer,'y',{duration:1.05,ease:'power3.out'})}));
+      const lightX=light?gsap.quickTo(light,'x',{duration:1.1,ease:'power3.out'}):undefined;
+      const lightY=light?gsap.quickTo(light,'y',{duration:1.1,ease:'power3.out'}):undefined;
+      const tweens=[xTo,yTo,...fields.flatMap(field=>[field.x,field.y]),...[lightX,lightY].filter((to):to is gsap.QuickToFunc=>Boolean(to))];
       const active=()=>visible&&!held&&!paused()&&!document.hidden&&!preference.matches;
-      const reset=(immediate=false)=>{xTo(0);yTo(0);if(immediate)tweens.forEach(to=>to.tween.progress(1).pause());};
-      const gate=()=>{if(document.hidden)held=false;if(!visible||paused()||document.hidden)reset(true);};gates.add(gate);
+      const apply=(x:number,y:number)=>{
+        if(!active())return;
+        xTo(x*7);yTo(y*5);
+        fields.forEach(field=>{field.x(x*10*field.depth);field.y(y*7*field.depth);});
+        lightX?.(x*28);lightY?.(y*18);
+        note.dataset.postscriptPointer=`${x.toFixed(3)},${y.toFixed(3)}`;
+      };
+      const reset=(immediate=false)=>{
+        tweens.forEach(to=>{to(0);if(immediate)to.tween.progress(1).pause();});
+        note.dataset.postscriptPointer='0.000,0.000';
+      };
+      const gate=()=>{
+        if(document.hidden)held=false;
+        if(!visible||paused()||document.hidden)reset(true);
+        else if(focused&&!held)apply(.35,-.25);
+      };gates.add(gate);
       note.addEventListener('pointermove',event=>{
-        if(!active()||event.pointerType==='touch')return;
+        if(!context.conditions!.fine||!active()||event.pointerType==='touch')return;
         const x=gsap.utils.clamp(-1,1,(event.pageX-bounds.left)/Math.max(1,bounds.width)*2-1);
         const y=gsap.utils.clamp(-1,1,(event.pageY-bounds.top)/Math.max(1,bounds.height)*2-1);
-        xTo(x*7);yTo(y*5);
+        apply(x,y);
       },{passive:true,signal:local.signal});
+      note.addEventListener('focusin',()=>{focused=true;note.dataset.postscriptFocus='true';apply(.35,-.25);},{signal:local.signal});
+      note.addEventListener('focusout',event=>{
+        if(event.relatedTarget instanceof Node&&note.contains(event.relatedTarget))return;
+        focused=false;delete note.dataset.postscriptFocus;if(!held)reset();
+      },{signal:local.signal});
       note.addEventListener('pointerdown',event=>{if(event.isPrimary&&event.button===0){held=true;tweens.forEach(to=>to.tween.pause());}},{signal:local.signal});
-      const release=()=>{const wasHeld=held;held=false;if(!note.matches(':hover'))reset();else if(wasHeld&&active())tweens.forEach(to=>{if(to.tween.progress()<1)to.tween.resume();});};
+      const release=()=>{
+        const wasHeld=held;held=false;
+        if(!note.matches(':hover')){if(focused&&active())apply(.35,-.25);else reset();}
+        else if(wasHeld&&active())tweens.forEach(to=>{if(to.tween.progress()<1)to.tween.resume();});
+      };
       window.addEventListener('pointerup',release,{signal:local.signal});
       window.addEventListener('pointercancel',release,{signal:local.signal});
       window.addEventListener('blur',()=>{held=false;reset(true);},{signal:local.signal});
-      note.addEventListener('pointerleave',()=>{if(!held)reset();},{signal:local.signal});
-      return()=>{held=false;local.abort();gates.delete(gate);};
+      note.addEventListener('pointerleave',()=>{if(!held){if(focused&&active())apply(.35,-.25);else reset();}},{signal:local.signal});
+      gate();
+      return()=>{held=false;local.abort();gates.delete(gate);delete note.dataset.postscriptPointer;delete note.dataset.postscriptFocus;};
     });
   });
 

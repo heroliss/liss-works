@@ -55,11 +55,11 @@
 .game-art > .game-scene__image { position: relative; z-index: 2; display: block; width: 100%; border-radius: 3px; }
 .game-art .game-scene__image img { aspect-ratio: auto; object-fit: contain; display: block; }
 .game-scene > .game-scene__copy { display: flex; flex-direction: column; align-items: start; gap: 16px; margin-top: 28px; }
-.game-scene--nomad { --game-tone: #bce7ad; --accent: #bce7ad; }
+.game-scene--nomad { --game-tone: #65d7a0; --accent: #65d7a0; }
 .game-scene--nomad:before { content: ''; position: absolute; z-index: -1; left: 16%; right: -7%; top: 22px; bottom: -30px; background: #19251c; transform: rotate(-3deg); }
 .game-art--nomad { padding: 28px 12px; }
 .game-art--nomad > .game-scene__image { transform: rotate(-4deg); border-radius: 3px 24px 3px 3px; }
-.game-scene--nomad h3 { color: #bce7ad; font-size: clamp(37px,4vw,59px); }
+.game-scene--nomad h3 { color: #65d7a0; font-size: clamp(37px,4vw,59px); }
 .game-scene--nomad .game-scene__copy { margin-right: 8%; }
 .game-scene--outpost { --game-tone: #ff9c82; --accent: #ff9c82; margin-top: 180px; }
 .game-art--outpost { padding: 40px 10px; }

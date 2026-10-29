@@ -15,6 +15,7 @@ const ports = frameworkShowcase.map((item, index) => {
     <svg class="framework-circuit" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true">
       <defs>
         <marker id={`${id}-flow-arrow`} markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0 6 3 0 6" fill="currentColor"/></marker>
+        <linearGradient id={`${id}-architecture-surface`} x1="260" y1="72" x2="932" y2="96" gradientUnits="userSpaceOnUse"><stop stop-color="#78975b" stop-opacity=".17"/><stop offset=".5" stop-color="#526a46" stop-opacity=".055"/><stop offset="1" stop-color="#b3cb83" stop-opacity=".12"/></linearGradient>
         {ports.map(port => <path data-framework-route={port.index} d={port.wire}/>)}
       </defs>
       <path class="framework-circuit__rear" d="M210 80 924 62 980 107 958 544 222 565 185 531 185 108Z"/>
@@ -22,15 +23,23 @@ const ports = frameworkShowcase.map((item, index) => {
       <path class="framework-circuit__panel" d="M230 95H930L944 109V520L930 534H230L216 520V109Z"/>
       <path class="framework-circuit__rim" d="M238 103H926M936 115V513M926 526H240M224 510V120"/>
       <path class="framework-circuit__mounts" d="M252 130V111H273M905 111H925V130M925 499V518H905M273 518H252V499"/>
-      <g class="framework-circuit__flow" marker-end={`url(#${id}-flow-arrow)`}>
-        <path d="M404 47H444"/><path d="M566 47H606"/><path d="M728 47H768"/>
+      <g class="framework-architecture">
+        <path class="framework-architecture__surface" d="M267 78H923L936 91H280Z" fill={`url(#${id}-architecture-surface)`}/>
+        <path class="framework-architecture__rail" d="M267 78H923M280 91H936M344 68V78M506 68V78M668 68V78M830 68V78"/>
+        <text class="framework-architecture__caption" x="232" y="43">职责分层</text>
+        <g class="framework-architecture__layer"><text x="344" y="40">View</text><text class="framework-architecture__role" x="344" y="61">交互表达</text></g>
+        <g class="framework-architecture__layer"><text x="506" y="40">Command</text><text class="framework-architecture__role" x="506" y="61">操作传递</text></g>
+        <g class="framework-architecture__layer"><text x="668" y="40">System</text><text class="framework-architecture__role" x="668" y="61">业务规则</text></g>
+        <g class="framework-architecture__layer"><text x="830" y="40">Model</text><text class="framework-architecture__role" x="830" y="61">保存状态</text></g>
+        <g class="framework-architecture__call" marker-end={`url(#${id}-flow-arrow)`}><path d="M402 72H446"/><path d="M564 72H608"/><path d="M726 72H770"/></g>
       </g>
-      <g class="framework-circuit__node"><rect x="284" y="29" width="120" height="36" rx="3"/><text x="344" y="53">View</text></g>
-      <g class="framework-circuit__node"><rect x="446" y="29" width="120" height="36" rx="3"/><text x="506" y="53">Command</text></g>
-      <g class="framework-circuit__node"><rect x="608" y="29" width="120" height="36" rx="3"/><text x="668" y="53">System</text></g>
-      <g class="framework-circuit__node"><rect x="770" y="29" width="120" height="36" rx="3"/><text x="830" y="53">Model</text></g>
-      <path class="framework-circuit__feedback" d="M890 47H972V566H924M798 566H202V548"/>
-      <g class="framework-circuit__node framework-circuit__utility"><rect x="798" y="548" width="126" height="36" rx="3"/><text x="861" y="572">Utility</text></g>
+      <path class="framework-circuit__feedback" d="M891 70H972V548H254V82H311"/>
+      <g class="framework-architecture__foundation">
+        <path class="framework-architecture__foundation-face" d="M285 556H924L911 580H272Z"/>
+        <path class="framework-architecture__foundation-edge" d="M285 556H924M272 580H911"/>
+        <text x="304" y="574">Utility</text><text class="framework-architecture__foundation-role" x="403" y="573">通用工具</text>
+        <path class="framework-architecture__foundation-trace" d="M494 568H897M565 563V573M672 563V573M779 563V573"/>
+      </g>
       <g class="framework-circuit__scope"><path d="M36 116H164V506H36"/><text x="102" y="550">Context</text></g>
       {ports.map(port => <g class="framework-circuit__socket" data-framework-socket={port.index} transform={`translate(${port.x} ${port.y})`}><circle r="13"/><circle r="6"/><path d="M-26 0H-13M13 0H21"/></g>)}
       <path class="framework-circuit__wire" data-framework-wire d={ports[0].wire}/>
@@ -38,10 +47,11 @@ const ports = frameworkShowcase.map((item, index) => {
       <g class="framework-circuit__plug" data-framework-plug transform="translate(184 168)"><path d="M-14-7H-7V-11H10L17-5V5L10 11H-7V7H-14Z"/><path d="M-5-6V6M0-6V6M5-6V6"/></g>
     </svg>
     <div class="framework-showcase__port-plane">
-      <div class="framework-showcase__controls" role="group" aria-label="选择框架展示内容">
+      <p class="framework-showcase__control-caption" id={`${id}-controls-label`}>选择画面</p>
+      <div class="framework-showcase__controls" role="group" aria-labelledby={`${id}-controls-label`}>
         {ports.map(({ item, index, x, y, wire }) => (
-          <button type="button" data-framework-select={index} data-framework-id={item.id} data-framework-port-x={x} data-framework-port-y={y} data-framework-wire-d={wire} aria-controls={`${id}-${item.id}`} aria-pressed={index === 0} disabled>
-            <span>{item.label}</span><span class="framework-showcase__control-title">{item.image.kind}</span>
+          <button type="button" data-framework-select={index} data-framework-id={item.id} data-framework-port-x={x} data-framework-port-y={y} data-framework-wire-d={wire} aria-controls={`${id}-${item.id}`} aria-label={`查看${item.label}：${item.image.kind}`} aria-pressed={index === 0} disabled>
+            <span class="framework-showcase__choice"><span class="framework-showcase__choice-mark" aria-hidden="true"></span><span class="framework-showcase__choice-label">{item.label}</span><svg class="framework-showcase__choice-arrow" viewBox="0 0 8 12" width="8" height="12" fill="none" aria-hidden="true"><path d="m1 1 5 5-5 5"/></svg></span><span class="framework-showcase__control-title">{item.image.kind}</span>
           </button>
         ))}
       </div>

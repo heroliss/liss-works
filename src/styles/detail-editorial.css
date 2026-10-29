@@ -25,13 +25,7 @@
   max-width: 43ch;
   margin-bottom: 30px;
 }
-.detail-page[data-project-world] .editorial-emphasis {
-  padding: 0;
-  background: none;
-  font-weight: 500;
-}
-.detail-page[data-project-world] .editorial-emphasis--technical { color: var(--editorial-cool); }
-.detail-page[data-project-world] .editorial-emphasis--decision { color: var(--editorial-warm); }
+/* Whole reading roles carry emphasis. Never colour words by keyword matches. */
 
 /* Category is context; status is the project's present, qualified condition. */
 .detail-page[data-project-world] .project-facts {
@@ -245,7 +239,6 @@
   background: var(--point-tone);
   pointer-events: none;
 }
-.detail-page[data-project-world] .engineering-point[data-point-role='decision'] { --point-tone: var(--editorial-warm); }
 .detail-page[data-project-world] .engineering-point dt {
   font-size: clamp(18px, 1.5vw, 21px);
   line-height: 1.55;
@@ -318,7 +311,6 @@
   .detail-page[data-project-world] .engineering-copy[data-copy-density='long']::before { left: -6px; width: 6px; }
 }
 @media (forced-colors: active) {
-  .detail-page[data-project-world] .editorial-emphasis { color: MarkText; background: Mark; }
   .detail-page[data-project-world] .signature-entry--principle,
   .detail-page[data-project-world] .engineering-copy[data-copy-density='long'] { border: 1px solid CanvasText; }
 }

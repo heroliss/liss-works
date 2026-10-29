@@ -8,7 +8,6 @@ import FrameworkDiagram from './FrameworkDiagram.astro';
 interface Props { story: ProjectStory; media: StoryMedia[]; group: string; }
 const { story, media, group } = Astro.props;
 const world = getProjectWorld(group);
-const decisionTitle = /约束|边界|所有权|生命周期|预算|恢复|校验|取消|安全|保留|依赖|可靠|风险|异常|一致|隔离|清理|口径|持久|重现|复现/;
 ---
 <section class="project-engineering" id="engineering" aria-labelledby="engineering-title">
   <div class="section-heading engineering-section-heading"><h2 id="engineering-title" data-detail-reveal>设计与实现</h2></div>
@@ -21,7 +20,7 @@ const decisionTitle = /约束|边界|所有权|生命周期|预算|恢复|校验
         <h3 class="engineering-title" id={`heading-${section.id}`} data-detail-reveal>{section.title}</h3>
         {section.intro && <ProjectProse text={section.intro} tone="lead" class="engineering-intro" reveal/>}
         {section.paragraphs?.map((paragraph, paragraphIndex) => <ProjectProse text={paragraph} tone={!section.intro && paragraphIndex === 0 ? 'lead' : 'body'} reveal/>)}
-        {section.items && <dl class="engineering-points">{section.items.map(item => <div class="engineering-point" data-point-role={decisionTitle.test(item.title) ? 'decision' : 'technical'} data-detail-reveal><dt><span>{item.title}</span></dt><dd>{item.body.map(paragraph => <ProjectProse text={paragraph}/>)}</dd></div>)}</dl>}
+        {section.items && <dl class="engineering-points">{section.items.map(item => <div class="engineering-point" data-detail-reveal><dt><span>{item.title}</span></dt><dd>{item.body.map(paragraph => <ProjectProse text={paragraph}/>)}</dd></div>)}</dl>}
         {section.code && <div class="code-block"><div class="code-toolbar"><span>{section.code.language}</span><span role="status" aria-live="polite"></span><button class="copy-button" type="button" data-copy={`story-code-${section.id}`} aria-label={`复制：${section.title}`}>复制</button></div><pre><code id={`story-code-${section.id}`}>{section.code.source}</code></pre></div>}
         {section.code?.caption && <p class="project-caption">{section.code.caption}</p>}
       </div>

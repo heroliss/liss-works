@@ -6,7 +6,7 @@ type Scene = {
   x: number; y: number; targetX: number; targetY: number; time: number; lastQA: number;
   originalTransform: string; transform: string; transformPriority: string;
 };
-const COLORS: Record<Kind, string> = { outpost: '#ff9c82', nomad: '#bce7ad', gomoku: '#c6b6ff' };
+const COLORS: Record<Kind, string> = { outpost: '#ff9c82', nomad: '#65d7a0', gomoku: '#c6b6ff' };
 const clamp = (value: number) => Math.min(1, Math.max(0, value));
 
 /** Project-specific peripheral motion; real screenshots remain the content. */

@@ -1,5 +1,6 @@
 ---
 import { getProject, projects } from '../data/projects';
+import { getProjectWorld } from '../data/project-worlds';
 import { sitePath } from '../lib/site-path';
 import MediaImage from './MediaImage.astro';
 import Icon from './Icon.astro';
@@ -11,17 +12,17 @@ const nomad = getProject('nomadworkshop')!;
 const resident = nomad.gallery.find(image => image.src.includes('05-resident-and-world-1080'));
 if (!resident) throw new Error('Exploration invitation needs the genuine Nomad resident-state capture');
 const questions = [
-  { question: '光，怎样给平面以深度？', route: '图形', path: '图形与代码实验 / OpenGL', action: '去工程库看图形',
+  { question: '光，怎样给平面以深度？', lens: '看光影', route: '图形切口', path: '图形与代码实验 / OpenGL', action: '去工程库看图形',
     detail: '在同一只木盒上，观察法线与高度贴图怎样改变表面。',
     work: 'LearnOpenGL', image: light.cover, tone: '#ffd08a',
     href: '/projects/?group=graphics&tag=OpenGL' },
-  { question: '更聪明，也一定更贵吗？', route: 'AI', path: 'AI 与数据 / AI', action: '去工程库看 AI',
+  { question: '更聪明，也一定更贵吗？', lens: '看取舍', route: 'AI 切口', path: 'AI 与数据 / AI', action: '去工程库看 AI',
     detail: '把公开模型的能力指数与线性任务成本放进同一张图。',
     work: 'Intelligence × Cost', image: intelligence.cover, tone: '#a8c7ff',
     href: '/projects/?group=ai-data&tag=AI' },
-  { question: '居民的一次选择，从哪来？', route: '游戏', path: '游戏与工具 / Unity', action: '去工程库看游戏',
+  { question: '居民的一次选择，从哪来？', lens: '看行为', route: '游戏切口', path: '游戏与工具 / Unity', action: '去工程库看游戏',
     detail: '需求、工作价值与路径成本，共同参与居民的下一步行动。',
-    work: 'NomadWorkshop', image: resident, tone: '#bce7ad',
+    work: 'NomadWorkshop', image: resident, tone: getProjectWorld(nomad.slug).accent,
     href: '/projects/?group=games&tag=Unity' },
 ];
 ---
@@ -29,36 +30,46 @@ const questions = [
   data-exploration-invitation data-invite-active="0" style={`--invite-tone:${questions[0].tone};--invite-ambience:${questions[0].tone}`}>
   <div class="invitation-darkroom" aria-hidden="true"><div class="invitation-light" data-invite-light></div></div>
   <header class="invitation-heading">
-    <h2 id="explore-title">从兴趣，<br/>走进工程库。</h2>
-    <p>三个入口，同一本工程目录。<br/>选一个方向，点击后继续看同类作品。</p>
+    <h2 id="explore-title">{projects.length} 个工程，<br/>不止一种走法。</h2>
+    <div class="invitation-opening">
+      <p>下面只是三个探索切口。<br/>工具、社区、系统与代码实验，也都在完整工程库里。</p>
+      <a href={sitePath('/projects/')} class="invitation-complete-link">进入完整工程库<Icon size={27}/></a>
+    </div>
   </header>
   <div class="invitation-composition">
     <div class="invitation-camera" data-invite-camera>
       <div class="invitation-motion" data-invite-plane>
         <div class="invitation-fold">
-          <span class="invitation-sheet invitation-sheet--far" aria-hidden="true"></span>
-          <span class="invitation-sheet invitation-sheet--near" aria-hidden="true"></span>
-          <nav class="invitation-topics" aria-label="工程库兴趣导航">
-            {questions.map((question, index) => <a class={`invitation-question invitation-question--${index}`}
-              data-invite-cue={index} data-active={index === 0 ? 'true' : undefined}
-              href={sitePath(question.href)} style={`--question-tone:${question.tone}`}>
-              <span class="invitation-topic-name">{question.route}</span>
-              <span class="invitation-question__text">{question.question}</span>
-              <span class="invitation-question__route">{question.action}<span aria-hidden="true">↗</span></span>
-              <span class="invitation-contact" aria-hidden="true"></span>
-            </a>)}
+          <nav class="invitation-topics" aria-label={`${projects.length} 个工程中的三个探索切口`}>
+            <p class="invitation-cuts-note">三个切口，点击进入对应工程库。</p>
+            <div class="invitation-cuts">
+              {questions.map((question, index) => <a class={`invitation-question invitation-question--${index}`}
+                data-invite-cue={index} data-active={index === 0 ? 'true' : undefined}
+                href={sitePath(question.href)} aria-label={`${question.lens}，${question.question}，${question.action}`}
+                style={`--question-tone:${question.tone}`}>
+                <span class="invitation-topic-name">{question.lens}<small>{question.route}</small></span>
+                <span class="invitation-question__text">{question.question}</span>
+                <span class="invitation-question__route">{question.action}<span aria-hidden="true">↗</span></span>
+                <span class="invitation-contact" aria-hidden="true"></span>
+              </a>)}
+            </div>
           </nav>
           <div class="invitation-pictures">
             {questions.map((question, index) => <figure class="invitation-picture" data-invite-picture={index}
               data-invite-tone={question.tone} hidden={index !== 0} inert={index !== 0}>
               <figcaption class="invitation-current-question">
-                <p class="invitation-topic-path">工程库<span aria-hidden="true"> / </span>{question.path}</p>
+                <p class="invitation-topic-path">探索切口<span aria-hidden="true"> / </span>{question.path}</p>
                 <h3>{question.question}</h3>
               </figcaption>
-              <a class="invitation-picture-link" href={sitePath(question.href)} aria-label={question.action}>
-                <MediaImage image={question.image} sizes="(max-width: 760px) calc(100vw - 64px), 86vw"/>
-                <span class="invitation-photo-edge" aria-hidden="true"></span>
-              </a>
+              <div class="invitation-viewfinder">
+                <span class="invitation-sheet invitation-sheet--far" aria-hidden="true"></span>
+                <span class="invitation-sheet invitation-sheet--near" aria-hidden="true"></span>
+                <span class="invitation-sheet invitation-sheet--return" aria-hidden="true"></span>
+                <a class="invitation-picture-link" href={sitePath(question.href)} aria-label={question.action}>
+                  <MediaImage image={question.image} sizes="(max-width: 760px) calc(100vw - 64px), 82vw"/>
+                  <span class="invitation-photo-edge" aria-hidden="true"></span>
+                </a>
+              </div>
               <div class="invitation-evidence">
                 <div><span class="invitation-work">{question.work}</span><p>{question.detail}</p></div>
                 <a class="invitation-current-entry" href={sitePath(question.href)}>{question.action}<Icon size={24}/></a>
@@ -70,8 +81,8 @@ const questions = [
     </div>
   </div>
   <footer class="invitation-exit">
-    <p>换一个兴趣，也能找到另一条路。</p>
-    <a href={sitePath('/projects/')} class="invitation-library-link"><span>浏览全部工程</span><span class="invitation-library-count">{projects.length} 个工程</span><Icon size={29}/></a>
+    <p>这里的三个切口，只展开了一部分。</p>
+    <a href={sitePath('/projects/')} class="invitation-library-link"><span>看看全部 {projects.length} 个工程</span><Icon size={29}/></a>
   </footer>
   <p class="sr-only" role="status" aria-live="polite" data-invite-status></p>
 </section>

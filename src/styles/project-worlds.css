@@ -89,7 +89,7 @@
 .detail-page[data-project-world="outpost"] .gallery-grid figure:nth-child(3n+3){width:100%;grid-column:1/-1;max-width:82%;justify-self:center}
 
 /* NomadWorkshop: a wide, level world image and a pine-coloured field. */
-.detail-page[data-project-world="nomadworkshop"]{--accent:#bce7ad;--cyan:#bce7ad;--surface:#1b2821;--raised:#2a3b30;--muted:#bdc8bb}
+.detail-page[data-project-world="nomadworkshop"]{--accent:#65d7a0;--cyan:#65d7a0;--surface:#1b2821;--raised:#2a3b30;--muted:#bdc8bb}
 .detail-page[data-project-world="nomadworkshop"] .project-prologue{padding-top:30px}
 .detail-page[data-project-world="nomadworkshop"] .project-prologue::before{left:16%;right:0;top:165px;bottom:-25px;background:#17251d;transform:skewY(-2deg)}
 .detail-page[data-project-world="nomadworkshop"] .project-intro{grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:6%;margin:15px 0 45px}

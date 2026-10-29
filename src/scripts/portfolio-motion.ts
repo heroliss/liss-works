@@ -4,6 +4,10 @@ import { Flip } from 'gsap/Flip';
 
 gsap.registerPlugin(Flip);
 
+// Palette and card travel share a clock so their visual change finishes together.
+const STAGE_CHANGE_SECONDS = .92;
+const STAGE_CHANGE_EASE = 'power3.inOut';
+
 interface PortfolioMotionOptions {
   signal: AbortSignal;
   preference: MediaQueryList;
@@ -86,14 +90,14 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
         hero.dataset.active = value;
         const tone = button.dataset.tone;
         if (tone) {
-          // A separate, slower colour journey follows the current painted value.
+          // A separately owned colour transition follows the current painted value.
           // Retargeting never snaps to the previous or newly selected palette.
           colours?.kill();
           if (moving) {
             hero.style.setProperty('--hero-tone', paintedTone || tone);
             home?.style.setProperty('--showcase-tone', paintedBand || paintedTone || tone);
             stage.dataset.stageColourTransitioning = 'true';
-            colours = gsap.timeline({ defaults:{duration:1.85,ease:'sine.inOut'}, onComplete:()=>{stage.dataset.stageColourTransitioning='false';} });
+            colours = gsap.timeline({ defaults:{duration:STAGE_CHANGE_SECONDS,ease:STAGE_CHANGE_EASE}, onComplete:()=>{stage.dataset.stageColourTransitioning='false';} });
             colours.to(hero, {'--hero-tone':tone}, 0);
             if (home) colours.to(home, {'--showcase-tone':tone}, 0);
           } else {
@@ -127,7 +131,7 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
           // Keep a constant camera distance while the card frame changes size.
           // Scaling an already projected 3D plane changes its apparent camera
           // and creates a visible corner jump on the first frame.
-          duration: .92, ease: 'power3.inOut', scale: false,
+          duration: STAGE_CHANGE_SECONDS, ease: STAGE_CHANGE_EASE, scale: false,
           onComplete: () => { if (turn === revision) stage.dataset.stageTransitioning = 'false'; },
         });
         // Keep the painted overlap while the incoming window clears the pile.
@@ -139,14 +143,14 @@ export function setupPortfolioMotion({ signal, preference }: PortfolioMotionOpti
           layout!.fromTo(card, flightStarts[index], {
             keyframes: [
               { x: arc.x * weight, y: arc.y * weight, duration: .38, ease: 'power2.out' },
-              { x: 0, y: 0, duration: .54, ease: 'power3.inOut' },
+              { x: 0, y: 0, duration: STAGE_CHANGE_SECONDS - .38, ease: STAGE_CHANGE_EASE },
             ],
             clearProps: 'transform',
           }, 0);
         });
         layout.set(pieces, { zIndex: (index: number) => destinationLayers[index] }, .48);
-        layout.set(pieces, { clearProps: 'zIndex' }, .92);
-        layout.set(cards, { clearProps: 'transform' }, .92);
+        layout.set(pieces, { clearProps: 'zIndex' }, STAGE_CHANGE_SECONDS);
+        layout.set(cards, { clearProps: 'transform' }, STAGE_CHANGE_SECONDS);
         running = gsap.timeline({ defaults: { ease: 'power3.out' } });
         if (caption) {
           running.fromTo(caption,
