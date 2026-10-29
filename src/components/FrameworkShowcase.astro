@@ -11,6 +11,7 @@ const ports = frameworkShowcase.map((item, index) => {
 ---
 <section id={id} class="framework-showcase" data-framework-gallery data-active="0" aria-label="SSFramework 架构与功能图册">
   <div class="framework-showcase__rack">
+   <div class="framework-scene-world" data-scene-world>
     <svg class="framework-circuit" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true">
       <defs>
         <marker id={`${id}-flow-arrow`} markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0 6 3 0 6" fill="currentColor"/></marker>
@@ -58,5 +59,10 @@ const ports = frameworkShowcase.map((item, index) => {
         </figure>
       ))}
     </div>
+   </div>
+  </div>
+  <div class="framework-scene-summary">
+    <h3 data-framework-summary-title>{frameworkShowcase[0].title}</h3>
+    <p data-framework-summary-description>{frameworkShowcase[0].description}</p>
   </div>
 </section>

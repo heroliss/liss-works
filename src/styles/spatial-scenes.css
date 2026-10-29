@@ -1,50 +1,81 @@
-/* The same perspective carries the artifact, its support and its surroundings. */
+/* v7: one camera and one world per machine. Every artifact shares its axes. */
 .framework-chapter .framework-composition{display:block}
-.framework-chapter .framework-notes{display:flex;align-items:center;justify-content:space-between;gap:40px;padding:0;margin:0 0 34px;max-width:100%}
+.framework-chapter .framework-notes{display:flex;align-items:center;justify-content:space-between;gap:40px;padding:0;margin:0 0 24px}
 .framework-chapter .framework-notes .work-description{font-size:18px;max-width:46ch;margin:0}
 .framework-chapter .framework-core-note{display:none}
 .framework-chapter .framework-notes .text-link{flex-shrink:0}
-.framework-showcase__rack{perspective:2000px;transform-style:preserve-3d;padding-bottom:12px}
+.framework-scene-world,.dub-scene-world{position:relative}
+.framework-scene-summary{display:none}
+html[data-motion] .framework-showcase[data-framework-enhanced=true] .framework-showcase__rack{perspective:1450px;perspective-origin:52% 40%;padding:38px 30px 55px;transform-style:flat}
+html[data-motion] .framework-showcase[data-framework-enhanced=true] .framework-scene-world{--scene-rest-x:7deg;--scene-rest-y:-12deg;--scene-rest-z:-1.7deg;aspect-ratio:4/3;transform-origin:50% 50%;transform-style:preserve-3d;transform:rotateZ(var(--scene-rest-z)) rotateY(var(--scene-rest-y)) rotateX(var(--scene-rest-x))}
 html[data-motion] .framework-showcase[data-framework-enhanced=true] .framework-circuit,
-html[data-motion] .framework-showcase[data-framework-enhanced=true] .framework-showcase__port-plane{height:auto;aspect-ratio:4/3;transform-origin:50% 30%;transform:translate3d(calc(var(--scene-x,0px)*-.65),calc(var(--scene-y,0px)*-.65),-30px) rotateX(3deg) rotateY(-3deg) rotateZ(-.8deg);transition:transform .35s ease-out}
-.framework-circuit{filter:drop-shadow(17px 26px 14px #0009)}
-.framework-showcase__controls button{height:72px;min-height:72px;align-self:center;width:96%;border-radius:2px 12px 3px 3px;transform:rotate(-1.2deg);box-shadow:inset 0 1px #b8df9138,6px 8px 10px -6px #000a}
-.framework-showcase__controls button:nth-child(2n){transform:translateX(-3px) rotate(1deg)}
-html[data-motion] .framework-showcase[data-framework-enhanced=true] .framework-showcase__pictures{padding-top:12%;transform:translateZ(30px) rotateY(-1.7deg) rotateZ(.5deg);transform-style:preserve-3d}
-html[data-motion] .framework-showcase[data-framework-enhanced=true] .framework-showcase__media{aspect-ratio:4/3;border:0;overflow:visible;perspective:1600px;background:#0b1410;box-shadow:17px 28px 36px -16px #000b}
-.framework-showcase .framework-showcase__media .media-link{transform-style:preserve-3d;border-radius:5px;overflow:hidden}
-html[data-motion] .framework-showcase[data-framework-enhanced=true] .framework-showcase__caption{margin-top:12%;max-width:61ch}
-.dub-factory{perspective:2000px;transform-style:preserve-3d}
-.dub-factory-geometry{transform:translate3d(calc(var(--scene-x,0px)*-.7),calc(var(--scene-y,0px)*-.7),-35px) rotateX(5deg) rotateZ(-1.2deg);transform-origin:50% 60%;transition:transform .35s ease-out;filter:drop-shadow(16px 24px 18px #0008)}
-.dub-frame-view{transform:rotateY(1.7deg) rotateZ(-1deg) translateZ(36px);transform-style:preserve-3d}
-.dub-frame-view{max-width:none}
-/* Decorative depth planes must never cover the real links in 3D hit testing. */
+html[data-motion] .framework-showcase[data-framework-enhanced=true] .framework-showcase__port-plane{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;margin:0;transform:translateZ(0);transform-origin:50% 50%;transition:none;pointer-events:none}
+html[data-motion] .framework-showcase[data-framework-enhanced=true] .framework-circuit{filter:drop-shadow(15px 24px 15px #0009);z-index:auto;opacity:1}
+html[data-motion] .framework-showcase[data-framework-enhanced=true] .framework-showcase__port-plane{z-index:auto;transform-style:preserve-3d}
+html[data-motion] .framework-showcase[data-framework-enhanced=true] .framework-showcase__pictures{position:absolute;left:26%;top:18.666667%;width:66.5%;height:67.333333%;margin:0;padding:0;transform:translateZ(25px);transform-style:preserve-3d;z-index:auto;display:grid}
+html[data-motion] .framework-showcase[data-framework-enhanced=true] .framework-picture{grid-area:1/1;margin:0;min-width:0;min-height:0;transform-style:preserve-3d}
+html[data-motion] .framework-showcase[data-framework-enhanced=true] .framework-showcase__media{width:100%;height:100%;aspect-ratio:auto;border:0;perspective:none;transform:none;overflow:visible;background:#0b1410;box-shadow:12px 20px 28px -14px #000b}
+.framework-showcase .framework-showcase__media .media-link{transform:none;border-radius:4px;overflow:hidden}
+html[data-motion] .framework-showcase[data-framework-enhanced=true] .framework-showcase__caption{display:none}
+.framework-showcase__controls button{height:72px;min-height:72px;align-self:center;width:96%;border-radius:2px 10px 3px 3px;transform:none;box-shadow:inset 0 1px #b8df9138,6px 8px 10px -6px #000a}
+.framework-showcase__controls button:nth-child(2n){transform:none}
+.framework-showcase__controls button:is(:hover,:focus-visible,[aria-pressed=true]){transform:translateZ(3px)}
+html[data-motion] .framework-showcase[data-framework-enhanced=true] .framework-scene-summary{display:block;max-width:62ch;margin:30px 0 0 auto}
+.framework-scene-summary h3{font-size:clamp(25px,2.1vw,32px);line-height:1.4;font-weight:500;letter-spacing:-.025em;color:var(--accent);margin:0 0 14px}
+.framework-scene-summary p{font-size:18px;line-height:1.85;margin:0;color:var(--ink)}
+/* The screen, control desk, rails and front conveyor inherit this exact camera. */
+html[data-motion] .dub-reel[data-reel-enhanced=true] .dub-factory{display:block;perspective:1450px;perspective-origin:50% 38%;padding:52px 30px 66px;min-height:0;overflow:visible;transform-style:flat;background:#0b171e}
+html[data-motion] .dub-reel[data-reel-enhanced=true] .dub-scene-world{--scene-rest-x:8deg;--scene-rest-y:11deg;--scene-rest-z:-2deg;aspect-ratio:1320/820;padding:0 1.5%;transform-origin:50% 50%;transform-style:preserve-3d;transform:rotateZ(var(--scene-rest-z)) rotateY(var(--scene-rest-y)) rotateX(var(--scene-rest-x))}
+html[data-motion] .dub-reel[data-reel-enhanced=true] .dub-factory-geometry,
+html[data-motion] .dub-reel[data-reel-enhanced=true] .factory-foreground-geometry{display:block;position:absolute;inset:0;width:100%;height:100%;overflow:hidden;pointer-events:none;z-index:auto;transition:none;filter:none}
+html[data-motion] .dub-reel[data-reel-enhanced=true] .dub-factory-geometry{transform:translateZ(-15px)}
+html[data-motion] .dub-reel[data-reel-enhanced=true] .factory-foreground-geometry{transform:translateZ(65px);filter:drop-shadow(0 14px 10px #0009)}
+.dub-reel-frames,.dub-frame,.dub-frame-view,.dub-frame-camera,.dub-screen-bezel{transform-style:preserve-3d}
+html[data-motion] .dub-reel[data-reel-enhanced=true] .dub-reel-frames{position:relative;min-height:0;z-index:auto}
+html[data-motion] .dub-reel[data-reel-enhanced=true] .dub-frame{grid-template-columns:minmax(0,1fr) 24%;gap:3%;position:relative}
+.dub-frame-view{max-width:none;perspective:none;transform:translateZ(32px);z-index:auto}
+.dub-screen-bezel{position:relative;transform:none;box-shadow:0 25px 40px -22px #000d,0 3px 0 #527482}
+.dub-terminal{transform:translateZ(32px);box-shadow:9px 14px 25px -12px #0009}
+html[data-motion] .dub-reel[data-reel-enhanced=true] .dub-controls{right:1.5%;top:35%;width:23.28%;transform:translateZ(32px);transform-style:preserve-3d;box-shadow:9px 14px 25px -12px #0009}
+.factory-belt-body{fill:#234858;stroke:#74a4b2;stroke-width:2}
+.factory-belt-edge{stroke:#92c6d2;stroke-width:2}
+.factory-roller>circle:first-child{fill:#183845;stroke:#9bccd7;stroke-width:2.5}
+.factory-roller>circle:nth-child(2){fill:#85e7fa;stroke:#d1f7ff}
+.factory-roller-spokes{stroke:#a8d7e1;animation-duration:5s}
+.factory-belt-motion{animation:factory-belt-travel 1.6s linear infinite;animation-play-state:paused;transform-box:view-box}
+.dub-reel[data-scene-playing=true] .factory-belt-motion{animation-play-state:running}
+@keyframes factory-belt-travel{from{transform:translateX(0)}to{transform:translateX(112px)}}
+.factory-mobile-conveyor{display:none}
+/* Keep physical links above decorative hit planes, including in preserve-3d. */
 .dub-frame-view,.dub-frame-camera,.dub-screen-bezel,.framework-showcase__media{pointer-events:none}
-.dub-frame-view .media-link,.framework-showcase__media .media-link{pointer-events:auto;position:relative;transform:translateZ(2px)}
+.dub-frame-view .media-link,.framework-showcase__media .media-link{pointer-events:auto;position:relative;transform:none}
 .stage-surface{pointer-events:none}.stage-card{pointer-events:auto}
-.dub-screen-bezel{position:relative;transform-style:preserve-3d}
-.dub-terminal{transform:rotateY(-5deg) rotateZ(1.2deg);box-shadow:10px 17px 28px -13px #0009}
-.dub-reel[data-reel-enhanced=true] .dub-controls{transform:rotateY(-5deg) rotateZ(1.2deg);box-shadow:9px 15px 24px -12px #0009}
-@media(max-width:1100px){.framework-chapter .framework-notes{margin-bottom:25px}.framework-showcase__caption p{max-width:58ch}}
+@media(min-width:1101px){.home-next .stage-piece{transform:translate(var(--tx),var(--ty)) rotateX(4deg) rotateY(-8deg) rotateZ(var(--angle)) scale(var(--size));transform-style:preserve-3d}}
 @media(max-width:1100px){
  .framework-chapter .framework-notes{display:block}.framework-chapter .framework-notes .work-description{font-size:17px;max-width:none;margin-bottom:20px}
- html[data-motion] .framework-showcase[data-framework-enhanced=true] .framework-showcase__port-plane{position:relative;left:auto;top:auto;width:100%;height:auto;aspect-ratio:auto;transform:none;z-index:4}
- html[data-motion] .framework-showcase[data-framework-enhanced=true] .framework-showcase__controls{position:relative;left:auto;top:auto;width:100%;height:auto;display:flex;gap:8px;justify-content:space-between;margin:0 0 34px}
- .framework-showcase__controls button{flex:1;height:48px;min-height:48px;align-items:center;padding:8px;font-size:18px;transform:rotate(-1deg)}
- .framework-showcase__controls button:nth-child(2n){transform:translateY(5px) rotate(1deg)}
- html[data-motion] .framework-showcase[data-framework-enhanced=true] .framework-circuit{top:68px;left:-7%;width:114%;height:auto;aspect-ratio:4/3;opacity:.65;transform:rotateX(3deg) rotateZ(-1deg)}
- html[data-motion] .framework-showcase[data-framework-enhanced=true] .framework-showcase__pictures{margin:0;padding-top:0;transform:rotateZ(-.5deg)}
- html[data-motion] .framework-showcase[data-framework-enhanced=true] .framework-showcase__media{height:auto;aspect-ratio:4/3;box-shadow:12px 20px 28px -15px #000b}
- html[data-motion] .framework-showcase[data-framework-enhanced=true] .framework-showcase__caption{margin:38px 0 0;width:100%;max-width:none;transform:none}
+ html[data-motion] .framework-showcase[data-framework-enhanced=true] .framework-showcase__rack{padding:12px 10px 22px;perspective:1800px}
+ html[data-motion] .framework-showcase[data-framework-enhanced=true] .framework-scene-world{--scene-rest-x:3deg;--scene-rest-y:-5deg;--scene-rest-z:-1deg;aspect-ratio:auto}
+ html[data-motion] .framework-showcase[data-framework-enhanced=true] .framework-circuit{display:none}
+ html[data-motion] .framework-showcase[data-framework-enhanced=true] .framework-showcase__port-plane{position:relative;height:auto;transform:none;z-index:auto}
+ html[data-motion] .framework-showcase[data-framework-enhanced=true] .framework-showcase__controls{position:relative;left:auto;top:auto;width:100%;height:auto;display:flex;gap:8px;justify-content:space-between;margin:0 0 30px;pointer-events:auto}
+ .framework-showcase__controls button{height:48px;min-height:48px;flex:1;align-items:center;padding:8px;font-size:18px}
+ html[data-motion] .framework-showcase[data-framework-enhanced=true] .framework-showcase__pictures{position:relative;inset:auto;width:100%;height:auto;transform:translateZ(20px)}
+ html[data-motion] .framework-showcase[data-framework-enhanced=true] .framework-showcase__media{height:auto;aspect-ratio:4/3}
+ html[data-motion] .framework-showcase[data-framework-enhanced=true] .framework-scene-summary{margin-top:20px;max-width:none}
+ html[data-motion] .dub-reel[data-reel-enhanced=true] .dub-factory{padding:30px 18px 40px;perspective:1800px;overflow:clip}
+ html[data-motion] .dub-reel[data-reel-enhanced=true] .dub-scene-world{--scene-rest-x:3deg;--scene-rest-y:5deg;--scene-rest-z:-1deg;aspect-ratio:auto;padding:0;display:flex;flex-direction:column;gap:25px}
+ html[data-motion] .dub-reel[data-reel-enhanced=true] .dub-reel-frames{order:1;width:100%}
+ html[data-motion] .dub-reel[data-reel-enhanced=true] .dub-frame{display:grid!important;grid-template-columns:minmax(0,1fr);gap:25px}
+ html[data-motion] .dub-reel[data-reel-enhanced=true] .dub-controls{position:relative;inset:auto;width:100%;order:0;margin:0;transform:translateZ(20px)}
+ .dub-step-controls{grid-template-columns:repeat(3,minmax(0,1fr))}
+ html[data-motion] .dub-reel[data-reel-enhanced=true] .dub-terminal{margin:0;min-height:0;transform:translateZ(20px)}
+ html[data-motion] .dub-reel[data-reel-enhanced=true] .dub-factory-geometry{height:100%;transform:translateZ(-15px);opacity:.5}
+ html[data-motion] .dub-reel[data-reel-enhanced=true] .factory-foreground-geometry{display:none}
+ html[data-motion] .dub-reel[data-reel-enhanced=true] .factory-mobile-conveyor{display:block;position:relative;order:2;width:100%;height:auto;aspect-ratio:1040/200;overflow:visible;transform:translateZ(45px);pointer-events:none}
+ .dub-frame-view{transform:translateZ(20px)}
 }
-@media(min-width:821px) and (max-width:1100px){
- .dub-reel[data-reel-enhanced=true] .dub-factory{display:flex;flex-direction:column;padding:28px 24px 40px;min-height:0}
- .dub-reel[data-reel-enhanced=true] .dub-reel-frames{order:1;min-height:0}
- .dub-reel[data-reel-enhanced=true] .dub-frame{grid-template-columns:minmax(0,1fr);gap:24px}
- .dub-reel[data-reel-enhanced=true] .dub-controls{position:relative;right:auto;top:auto;width:100%;order:0;margin:0 0 30px;transform:none}
- .dub-step-controls{grid-template-columns:repeat(5,minmax(0,1fr))}
- .dub-reel[data-reel-enhanced=true] .dub-terminal{margin:0;min-height:0;max-width:680px}
+@media(prefers-reduced-motion:reduce){
+ [data-scene-world],.dub-frame-view,.dub-terminal,.dub-controls,.framework-showcase__pictures{transform:none!important}
+ .factory-belt-motion,.factory-roller-spokes{animation:none!important}.stage-piece{transform:translate(var(--tx),var(--ty)) rotate(var(--angle)) scale(var(--size))!important}
 }
-@media(max-width:760px){.dub-frame-view{transform:rotateZ(-.5deg)}.dub-terminal,.dub-reel[data-reel-enhanced=true] .dub-controls{transform:none}}
-@media(prefers-reduced-motion:reduce){.framework-circuit,.framework-showcase__port-plane,.framework-showcase__pictures,.dub-factory-geometry,.dub-frame-view,.dub-terminal,.dub-controls{transform:none!important;transition:none!important}}
-html:not([data-motion]) .dub-controls{display:none}
+html:not([data-motion]) .dub-controls,html:not([data-motion]) .framework-scene-summary,html:not([data-motion]) .factory-foreground-geometry,html:not([data-motion]) .factory-mobile-conveyor{display:none}

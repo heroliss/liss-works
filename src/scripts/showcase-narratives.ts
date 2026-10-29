@@ -72,6 +72,11 @@ export function setupShowcaseNarratives({ signal, preference }: Options): () => 
       const previous=buttons.find(button=>button.dataset.frameworkSelect===current);
       timeline?.kill();restore();
       mark(value);current=value;
+      const selected=pictures.find(p=>p.dataset.frameworkPicture===value);
+      const summaryTitle=gallery.querySelector<HTMLElement>('[data-framework-summary-title]');
+      const summaryDescription=gallery.querySelector<HTMLElement>('[data-framework-summary-description]');
+      if(summaryTitle)summaryTitle.textContent=selected?.querySelector('[data-framework-title]')?.textContent??'';
+      if(summaryDescription)summaryDescription.textContent=selected?.querySelector('[data-framework-description]')?.textContent??'';
       const plane=pictures.find(p=>p.dataset.frameworkPicture===value)?.querySelector<HTMLElement>('[data-framework-media]');
       const x=Number(button.dataset.frameworkPortX??184),y=Number(button.dataset.frameworkPortY??168);
       const d=button.dataset.frameworkWireD;
@@ -93,7 +98,7 @@ export function setupShowcaseNarratives({ signal, preference }: Options): () => 
           .to(wire,{attr:{d},duration:.38,ease:'power3.inOut'},.16)
           .to(wire,{opacity:1,duration:.18},.51);
       }
-      if(plane)timeline.fromTo(plane,{y:9,rotationX:-2},{y:0,rotationX:0,duration:.6,ease:'power3.out',clearProps:'transform'},.1);
+      if(plane)timeline.fromTo(plane,{y:9},{y:0,duration:.6,ease:'power3.out',clearProps:'transform'},.1);
       gate();
     };
     gallery.dataset.frameworkEnhanced='true';bind(value=>connect(value));connect('0',false);
@@ -118,7 +123,7 @@ export function setupShowcaseNarratives({ signal, preference }: Options): () => 
       const camera=frame?.querySelector<HTMLElement>('[data-reel-camera]');
       const console=frame?.querySelector<HTMLElement>('[data-reel-console]');
       timeline=gsap.timeline({paused:true,defaults:{ease:'power3.out'}});
-      if(camera)timeline.fromTo(camera,{x:direction*82,z:-38,rotationY:direction*4},{x:0,z:0,rotationY:0,duration:.85,clearProps:'transform'},0);
+      if(camera)timeline.fromTo(camera,{x:direction*82,z:-28},{x:0,z:0,duration:.85,clearProps:'transform'},0);
       if(console)timeline.fromTo(console,{y:12},{y:0,duration:.55,clearProps:'transform'},.12);
       tracks.forEach((track,index)=>timeline!.fromTo(track,{x:direction*(index?58:28)},{x:0,duration:.9,clearProps:'transform'},0));
       gate();
@@ -131,36 +136,47 @@ export function setupShowcaseNarratives({ signal, preference }: Options): () => 
   document.addEventListener('visibilitychange',sync,{signal:events.signal});
   preference.addEventListener('change',sync,{signal:events.signal});
   const spatial=gsap.matchMedia();
-  spatial.add('(min-width:900px) and (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference)',()=>{
+  spatial.add({desktop:'(min-width:900px)',wide:'(min-width:1101px)',fine:'(hover:hover) and (pointer:fine)',motion:'(prefers-reduced-motion:no-preference)'},mediaContext=>{
+    const {desktop,fine,motion}=mediaContext.conditions!;
+    if(!desktop||!fine||!motion)return;
     const pointerEvents=new AbortController();
     const context=gsap.context(()=>{},document.body);
     const resets:(()=>void)[]=[];
     document.querySelectorAll<HTMLElement>('[data-framework-gallery],[data-dub-reel]').forEach(host=>{
       const region=host.querySelector<HTMLElement>('.framework-showcase__rack,.dub-factory')??host;
-      const planes=Array.from(host.querySelectorAll<HTMLElement>('.framework-showcase__media .media-link,.dub-screen-bezel'));
-      const restore=snapshots(planes);
-      const originalX=host.style.getPropertyValue('--scene-x'),originalY=host.style.getPropertyValue('--scene-y');
-      const movers: {plane:HTMLElement;rx:ReturnType<typeof gsap.quickTo>;ry:ReturnType<typeof gsap.quickTo>}[]=[];
-      context.add(()=>planes.forEach(plane=>movers.push({plane,rx:gsap.quickTo(plane,'rotationX',{duration:.7,ease:'power3.out'}),ry:gsap.quickTo(plane,'rotationY',{duration:.7,ease:'power3.out'})})));
+      const world=host.querySelector<HTMLElement>('[data-scene-world]');
+      if(!world)return;
+      const style=getComputedStyle(world);
+      const restX=parseFloat(style.getPropertyValue('--scene-rest-x'))||0;
+      const restY=parseFloat(style.getPropertyValue('--scene-rest-y'))||0;
+      const restZ=parseFloat(style.getPropertyValue('--scene-rest-z'))||0;
+      const originalPointer=host.dataset.scenePointer;
+      let rx:ReturnType<typeof gsap.quickTo>,ry:ReturnType<typeof gsap.quickTo>;
+      context.add(()=>{
+        gsap.set(world,{rotationX:restX,rotationY:restY,rotationZ:restZ});
+        rx=gsap.quickTo(world,'rotationX',{duration:.85,ease:'power3.out'});
+        ry=gsap.quickTo(world,'rotationY',{duration:.85,ease:'power3.out'});
+      });
       let bounds={left:0,top:0,width:1,height:1};
       const measure=()=>{const box=region.getBoundingClientRect();bounds={left:box.left+scrollX,top:box.top+scrollY,width:box.width,height:box.height};};
       const reset=()=>{
-        host.style.setProperty('--scene-x','0px');host.style.setProperty('--scene-y','0px');
-        movers.forEach(({rx,ry})=>[rx,ry].forEach(to=>{to(0);if(document.hidden||root.dataset.motionPaused==='true')to.tween.progress(1).pause();}));
+        host.dataset.scenePointer='0.000,0.000';rx(restX);ry(restY);
+        if(document.hidden||root.dataset.motionPaused==='true'){rx.tween.progress(1).pause();ry.tween.progress(1).pause();}
       };
       measure();
       region.addEventListener('pointerenter',measure,{signal:pointerEvents.signal});
       region.addEventListener('pointermove',event=>{
         if(host.dataset.scenePlaying!=='true'||event.pointerType==='touch')return;
         const x=gsap.utils.clamp(-1,1,(event.pageX-bounds.left)/bounds.width*2-1),y=gsap.utils.clamp(-1,1,(event.pageY-bounds.top)/bounds.height*2-1);
-        host.style.setProperty('--scene-x',`${(x*12).toFixed(2)}px`);host.style.setProperty('--scene-y',`${(y*9).toFixed(2)}px`);
-        movers.forEach(({plane,rx,ry})=>{const active=plane.closest<HTMLElement>('[data-framework-picture],[data-reel-frame]')?.dataset.active==='true';rx(active?-y*4:0);ry(active?x*6:0);});
+        host.dataset.scenePointer=`${x.toFixed(3)},${y.toFixed(3)}`;
+        // Rotate the entire assembly; depth alone produces relative parallax.
+        rx(restX-y*2.5);ry(restY+x*3.5);
       },{passive:true,signal:pointerEvents.signal});
       region.addEventListener('pointerleave',reset,{signal:pointerEvents.signal});
       const stop=()=>{if(document.hidden||root.dataset.motionPaused==='true')reset();};
       window.addEventListener('portfolio:motion-state',stop,{signal:pointerEvents.signal});
       document.addEventListener('visibilitychange',stop,{signal:pointerEvents.signal});
-      resets.push(()=>{restore();if(originalX)host.style.setProperty('--scene-x',originalX);else host.style.removeProperty('--scene-x');if(originalY)host.style.setProperty('--scene-y',originalY);else host.style.removeProperty('--scene-y');});
+      resets.push(()=>{if(originalPointer===undefined)delete host.dataset.scenePointer;else host.dataset.scenePointer=originalPointer;});
     });
     return()=>{pointerEvents.abort();context.revert();resets.forEach(reset=>reset());};
   });
