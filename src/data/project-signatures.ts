@@ -5,6 +5,11 @@ export interface ProjectSignature {
 }
 
 const signatures: Record<string, ProjectSignature> = {
+  'glass-atoll': {
+    direction: '实时海岛 / WebGL 视觉体验',
+    principle: '让天空、浅海与一座岛在同一片光里呼吸。',
+    highlights: ['可漫游的海岸', '昼夜与天气', '水面与烟花倒影'],
+  },
   mkfun: {
     direction: 'Python 工具 / 结构映射',
     principle: '用样例表达位置，让规则与结果都可解释。',

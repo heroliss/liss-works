@@ -4,6 +4,7 @@
     "captures/selected-manifest.json",
     "design/v3/index.html",
     "site/src/components/FrameworkDiagram.astro",
+    "site/src/components/GlassAtollFeature.astro",
     "site/src/components/Icon.astro",
     "site/src/components/LabWorkbench.astro",
     "site/src/components/MediaImage.astro",
@@ -19,6 +20,7 @@
     "site/src/data/restored-bundles.ts",
     "site/src/data/restored-projects.ts",
     "site/src/data/stories/dubforge.ts",
+    "site/src/data/stories/glass-atoll.ts",
     "site/src/data/stories/other-projects.ts",
     "site/src/data/stories/restored-projects.ts",
     "site/src/data/stories/ssframework.ts",
@@ -41,6 +43,7 @@
     "site/src/scripts/downloads.ts",
     "site/src/scripts/project-filter.ts",
     "site/src/scripts/site.ts",
+    "site/src/styles/glass-atoll-feature.css",
     "site/src/styles/global.css",
     "site/src/styles/home-projects.css"
   ],
@@ -83,14 +86,14 @@
     {
       "path": "site/public/fonts/noto-sans-sc-subset.woff2",
       "url": "/fonts/noto-sans-sc-subset.woff2",
-      "bytes": 338640,
-      "sha256": "afd2317652a411a0149c5026ebb59e9b6e9f7d186d6048e0f9f70a9cc9bb9732",
+      "bytes": 354380,
+      "sha256": "020fab7f4ebfebba9c50f628615919815548b2c7210614d9d7c344191dbb7382",
       "family": "Noto Sans SC",
       "source": "C:\\Windows\\Fonts\\NotoSansSC-VF.ttf",
       "source_sha256": "763146584cf0710223441356b4395e279021b0806c196614377a7a0174ae074a",
       "source_bytes": 17773244,
-      "requested_codepoints": 1193,
-      "included_codepoints": 1193,
+      "requested_codepoints": 1243,
+      "included_codepoints": 1243,
       "missing_cjk": [],
       "roundtrip_decode_verified": true
     }

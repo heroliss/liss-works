@@ -2,6 +2,7 @@ import type { GalleryImage, Project } from './types';
 
 // Place each image beside its topic or in the gallery, without repeating it.
 const topicMedia: Record<string, (string | null)[]> = {
+  'glass-atoll': ['58-final-desktop-v2', 'sunset-island-final', 'flower-final'],
   nomadworkshop: ['05-resident-and-world-1080'],
   outpost: ['23-modern-battle-settings'],
   dubforge: ['07-assembly-versions', '08-production-settings', '06-project-overview'],

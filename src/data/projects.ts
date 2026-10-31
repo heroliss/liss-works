@@ -9,6 +9,14 @@ export const groups: { id: ProjectGroup; label: string; description: string }[] 
   { id: 'graphics', label: '图形与代码实验', description: '渲染、系统模拟与算法实验，记录代码带来的不同可能。' },
 ];
 
+const glassAtoll = [
+  image('glass-atoll', '40-aerial-final.png', 1440, 900, '晴天下俯瞰白沙岛屿，浅海由近岸的透明蓝渐变至远处深蓝。', 'WebGL 实机'),
+  image('glass-atoll', '58-final-desktop-v2.png', 1440, 900, '靠近椰树与白沙，透过清澈水面观察海底的光影。', '海岸近景'),
+  image('glass-atoll', 'sunset-island-final.png', 1209, 1292, '日落时的岛屿剪影与海面倒影，时间和机位控制同屏。', '黄昏场景'),
+  image('glass-atoll', 'flower-final.png', 1209, 1292, '夜空中绽放的烟花，海面保留微弱倒影与远处岛屿轮廓。', '夜间烟花'),
+  image('glass-atoll', 'controls-desktop.png', 1280, 900, '日景中的光线、镜头与抗锯齿设置，场景和交互面板同屏。', '画面控制'),
+];
+
 const nomad = [
   image('NomadWorkshop', '02-reference-vehicle-final-1080.png', 1920, 1080, '车辆甲板、三名居民与生活设施，资源状态常驻在 HUD 中。', '游戏实机'),
   image('NomadWorkshop', '04-build-and-world-1080.png', 1920, 1080, '建造面板与场景同屏，展示设施选择、网格和位置、角度吸附。', '建造交互'),
@@ -139,6 +147,24 @@ const sortLab = [
 ];
 
 export const projects: Project[] = [
+  {
+    slug: 'glass-atoll', repo: 'glass-atoll', name: '玻璃海 · Atoll', category: '实时海岛场景', group: 'games',
+    summary: '走近一座可漫游的热带离岛，看浅海、天光、昼夜与烟花随视角流动。',
+    intro: '一座由实时 WebGL 场景构成的热带离岛。白沙、椰树、天空与透明浅海围绕同一片光运转；访客可以调整视角与时间，向水面投石、放下漂浮叶片，在夜色里欣赏烟花。',
+    status: '持续打磨', tags: ['WebGL 2', 'JavaScript', 'Three.js', '实时渲染'],
+    features: [
+      { title: '看得见海底的浅海', body: '水面把透明、反射和波纹叠在一起，近岸可见海床与随光变化的焦散。' },
+      { title: '同一座岛的不同光线', body: '切换昼夜与天气，调整机位和镜头，让天空、椰树与水面重新组合成画面。' },
+      { title: '让海面与夜空回应', body: '投石和漂浮叶片带来近处的小互动；夜间烟花加入倒影、环境受光与分层音效。' },
+    ],
+    usage: [
+      { title: '从不同机位看海岸', body: '近看沙滩和透光浅海，再把镜头抬高，观察白沙岛屿与海水颜色的整体构图。' },
+      { title: '观察一天的光线', body: '从晴天切到日落或夜晚，留意天光、椰树剪影和海面反射如何一起变化。' },
+      { title: '为静景加入动作', body: '投石、放叶、点燃烟花，看看水面、灯光和声音怎样回应。待项目具备稳定的公开体验版本后补充入口。' },
+    ],
+    note: '展示图片为项目实际 WebGL 运行画面，采集于 2026 年 10 月至 11 月；没有使用概念图或视频。当前仍在持续优化视觉与性能，尚无公开体验入口。',
+    cover: glassAtoll[0], gallery: glassAtoll, related: ['learnopengl', 'outpost', 'nomadworkshop'],
+  },
   {
     slug: 'nomadworkshop', repo: 'NomadWorkshop', name: 'NomadWorkshop', category: '移动生存游戏', group: 'games',
     summary: '用 AI 驱动开发的移动生存游戏，让居民、资源与设施一起运转。',

@@ -1,6 +1,6 @@
 # Liss Works · 工程展厅
 
-当前工程库包含 20 个作品条目。首页优先呈现 SSFramework、DubForge，再连接游戏实机、实用工具与交互实验；工程库使用统一优先级，搜索与分类保留该顺序。Qt Labs、Text Lab、Systems Lab、NEX 与 Liss Blocks 覆盖 12 项早期桌面程序，配有技术短介绍、原生截图与自动跟随最新正式版的 Windows 下载。
+当前工程库包含 23 个作品条目。玻璃海在工程库中有专属展示位和五张真实 WebGL 截图，尚无公开体验或源码入口。首页优先呈现 SSFramework、DubForge，再连接游戏实机、实用工具与交互实验；工程库使用统一优先级，搜索与分类保留该顺序。Qt Labs、Text Lab、Systems Lab、NEX 与 Liss Blocks 覆盖 12 项早期桌面程序，配有技术短介绍、原生截图与自动跟随最新正式版的 Windows 下载。
 
 Liss Community 详情以九张配图连接写作、可选邮箱与管理后台，说明内容恢复、变更确认和持久化设置。管理概览为线上实拍，设置图来自独立本地验证环境；不展示真实用户邮箱或私有配置。真实邮件送达与账户验收保留在工作区 `verification/site/mail-enable-20261024/`，后台验收在 `verification/community-admin/`。
 
@@ -28,7 +28,7 @@ npm run dev -- --port 4321
 ## 页面
 
 - `/`：两项并列重点工程、游戏与实用工具分区、轻量算法交互。
-- `/projects/`：20 项工程，支持搜索、分类与技术标签，筛选保存在 URL。
+- `/projects/`：23 项工程，支持搜索、分类与技术标签，筛选保存在 URL。
 - `/projects/<slug>/`：每项独立详情、项目缘起、功能、技术机制、使用示例、图库与关联作品；SSFramework / DubForge 有更完整的流程与设计说明。
 - `/lab/`：Floyd 路径、可修改边权与矩阵、可复现种子的 GA 排序。
 - `/about/`：简短介绍与 GitHub；`/404.html`：未找到页面。
@@ -83,7 +83,7 @@ npm run preview -- --port 4322
 
 - `src/data/projects.ts`：工程库与原有 15 项的内容和图片顺序；导入新增桌面作品。
 - `src/data/restored-projects.ts`、`restored-bundles.ts`：5 项桌面作品、合集介绍与原生截图顺序。
-- `src/data/web-projects.ts`：mkfun 与 Liss Utilities 的作品介绍、技术主题和浏览器体验入口；当前共展示 22 项工程。
+- `src/data/web-projects.ts`：mkfun 与 Liss Utilities 的作品介绍、技术主题和浏览器体验入口；当前共展示 23 项工程。
 - `src/data/project-image.ts`：统一的全幅图片与响应式变体路径。
 - `src/data/stories/`：项目缘起、技术职责、流程和实现介绍；`story-types.ts` 定义内容结构。
 - `src/components/ProjectEngineering.astro`：截图与精简技术要点；详情页使用简短导航、技术职责与流程。
@@ -96,7 +96,7 @@ npm run preview -- --port 4322
 - `public/fonts/`：自托管 Rajdhani、Noto Sans SC 子集及官方 OFL。
 - `media-provenance.json`：原件 SHA、导出尺寸、字节数、保真检查和字体覆盖。
 
-源截图原件仍在上级 `captures/`，本网站未改动它们。工具全尺寸截图无损，游戏画面使用 WebP quality 92，保持完整构图。素材数据与离线预览在工程详情简短注明。
+原有源截图在上级 `captures/`；玻璃海原件在上级 `glass-atoll/verification/`。原件均未修改。玻璃海画面以 WebP quality 92 导出，保留完整构图，并提供 320、640、960 像素宽的自适应版本；来源与哈希记录在 `media-provenance.json`。
 
 中文字库随文案重新生成，并验证所需汉字覆盖与 WOFF2 解码；具体码点、体积与来源见 `media-provenance.json`。历史截图保留归档，新增原件逐张核对 SHA-256。旧博客发布 WebP 位于工作区 `artifacts/site-retired-media-20261024/lihou-web/`，当前页面没有旧媒体引用。
 

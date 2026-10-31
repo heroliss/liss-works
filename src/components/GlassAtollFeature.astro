@@ -1,0 +1,32 @@
+---
+import { sitePath } from '../lib/site-path';
+import type { Project } from '../data/types';
+import { getProjectSignature } from '../data/project-signatures';
+import Icon from './Icon.astro';
+import MediaImage from './MediaImage.astro';
+
+interface Props { project: Project }
+const { project } = Astro.props;
+const signature = getProjectSignature(project.slug);
+const preview = [project.cover, project.gallery[2], project.gallery[3]];
+const detail = sitePath('/projects/glass-atoll/');
+---
+
+<article class="atoll-feature" data-project-card data-group={project.group} data-tags={['Web', ...project.tags].join('|')} data-search={[project.name, project.repo, project.summary, project.category, ...project.tags, signature.direction, signature.principle, ...signature.highlights].join(' ')}>
+  <div class="atoll-feature__content">
+    <div class="atoll-feature__masthead"><span class="atoll-feature__mark" aria-hidden="true">◌</span><span>SELECTED WORK / 玻璃海</span><span class="atoll-feature__index">01 / {String(project.gallery.length).padStart(2, '0')}</span></div>
+    <div class="atoll-feature__copy">
+      <p class="atoll-feature__type">{signature.direction}</p>
+      <h2><a href={detail}>玻璃海 <span>Atoll</span></a></h2>
+      <p class="atoll-feature__summary">{project.summary}</p>
+      <p class="atoll-feature__principle">{signature.principle}</p>
+    </div>
+    <div class="atoll-feature__bottom"><a class="button" href={detail}>探索这座岛 <Icon size={17}/></a><span>真实场景截图 · {project.status}</span></div>
+  </div>
+  <div class="atoll-feature__visual" aria-label="玻璃海实机画面">
+    {preview.map((image, index) => <div class:list={['atoll-feature__frame', {'atoll-feature__frame--main': index === 0}]}>
+      <MediaImage image={image} zoom group="glass-atoll-feature" sizes={index === 0 ? '(max-width: 760px) 100vw, 44vw' : '(max-width: 760px) 45vw, 18vw'}/>
+      <span class="atoll-feature__frame-label">{index === 0 ? '晴日 · 俯瞰' : index === 1 ? '日落 · 海面' : '夜色 · 烟花'}</span>
+    </div>)}
+  </div>
+</article>
