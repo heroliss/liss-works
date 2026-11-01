@@ -1,0 +1,243 @@
+{
+  "schema": "glass-atoll.aces2-output-vendor.v1",
+  "variant": "aces2-ocio26-accurate-atan-v1",
+  "OCIOVersion": "2.6.0",
+  "nonOfficialNumericalVariant": true,
+  "supportedPeaks": [
+    100,
+    700,
+    1270
+  ],
+  "input": "exposed scene-linear Rec709/D65; complete official AP1 adaptation/domain wrapper included once",
+  "output": "display-linear Rec709; numeric1=100nit; no OETF",
+  "tolerance": {
+    "absolute": 0.00002,
+    "relative": 0.0002
+  },
+  "license": {
+    "file": "OCIO-LICENSE.txt",
+    "sha256": "8850b0c83cd41d26ad0e080861d47ee00afb685386a459a1cbe8c347555621a7",
+    "bytes": 1511
+  },
+  "atanHelper": {
+    "file": "accurate-atan-helper.glsl",
+    "sha256": "49dd358bfdf956aa14aa14dcff89775c4e662e4024bcbe7e71bb5df178c40552",
+    "bytes": 1892
+  },
+  "targets": [
+    {
+      "peakNits": 100,
+      "function": "aces2Display100",
+      "functionFile": {
+        "file": "100/accurate-atan.glsl",
+        "sha256": "795e20a505ffd09752441ea33446fb35cff54d99ddc3fdfdaf0669e945a99b74",
+        "bytes": 17141
+      },
+      "originalFile": {
+        "file": "100/original-ocio26.glsl",
+        "sha256": "38b78efcb0d7d8eace7e906cc19defdf42d72ad54a2f06d2c81d4ce503b16b44",
+        "bytes": 15238
+      },
+      "tables": [
+        {
+          "file": "100/table-0-rgba.f32",
+          "sha256": "6d78d188ad593cc15112478abea090c405b2b3de4ae3f0d502a2a8589a9b3de4",
+          "bytes": 5808,
+          "index": 0,
+          "samplerName": "aces2_100_reach_m_table_0Sampler",
+          "width": 363,
+          "height": 1,
+          "components": 4,
+          "internalFormat": "RGBA32F",
+          "format": "RGBA",
+          "type": "FLOAT",
+          "filter": "NEAREST",
+          "wrap": "CLAMP_TO_EDGE",
+          "mipmaps": false,
+          "colorSpace": "NoColorSpace",
+          "flipY": false
+        },
+        {
+          "file": "100/table-1-rgba.f32",
+          "sha256": "17d6f284107072d824e69101210971fff5fb0f0b019ca560a8551598290003d2",
+          "bytes": 5808,
+          "index": 1,
+          "samplerName": "aces2_100_gamut_cusp_table_0Sampler",
+          "width": 363,
+          "height": 1,
+          "components": 4,
+          "internalFormat": "RGBA32F",
+          "format": "RGBA",
+          "type": "FLOAT",
+          "filter": "NEAREST",
+          "wrap": "CLAMP_TO_EDGE",
+          "mipmaps": false,
+          "colorSpace": "NoColorSpace",
+          "flipY": false
+        }
+      ],
+      "anchors": {
+        "file": "100/anchors.json",
+        "sha256": "da81f30019a84f1a7fc1c7132d203372658107fee4f8309d41b559214b05350c",
+        "bytes": 5316
+      },
+      "inverse": {
+        "prefixFile": "accurate-atan-helper.glsl",
+        "from": "atan(Aab.b, Aab.g)",
+        "to": "qaAccurateAtan2(Aab.b, Aab.g)",
+        "replacements": 1,
+        "wholeOriginalSHA256": "38b78efcb0d7d8eace7e906cc19defdf42d72ad54a2f06d2c81d4ce503b16b44"
+      },
+      "reference": {
+        "officialExportSHA256": "dc28a8de0cb7bb582c07ade5690c913d67b7f1df220f135b8f2fd3c28b24d1c9",
+        "candidateFunctionSHA256": "795e20a505ffd09752441ea33446fb35cff54d99ddc3fdfdaf0669e945a99b74",
+        "GPU77ReportSHA256": "0c26b5fa7f553c8c03e618ae966f744f356db124d140bc26c843915b1d4daa8c"
+      }
+    },
+    {
+      "peakNits": 700,
+      "function": "aces2Display700",
+      "functionFile": {
+        "file": "700/accurate-atan.glsl",
+        "sha256": "d5540babf48b69a245a48b027863fe347d725fe4d5dbfa33d69a20a3f71e9414",
+        "bytes": 17267
+      },
+      "originalFile": {
+        "file": "700/original-ocio26.glsl",
+        "sha256": "43d3fa65412f678490a15ae1394adeaf14d32dafd57c5612917a056937256b62",
+        "bytes": 15364
+      },
+      "tables": [
+        {
+          "file": "700/table-0-rgba.f32",
+          "sha256": "afd69bc2ba8313cbd1d45c2b8afd4cfec6aa319b76f276dd2810f14957012e61",
+          "bytes": 5808,
+          "index": 0,
+          "samplerName": "aces2_700_reach_m_table_0Sampler",
+          "width": 363,
+          "height": 1,
+          "components": 4,
+          "internalFormat": "RGBA32F",
+          "format": "RGBA",
+          "type": "FLOAT",
+          "filter": "NEAREST",
+          "wrap": "CLAMP_TO_EDGE",
+          "mipmaps": false,
+          "colorSpace": "NoColorSpace",
+          "flipY": false
+        },
+        {
+          "file": "700/table-1-rgba.f32",
+          "sha256": "ca6efd3e030afb28918522c3b4447e3bf484cd4645c35ddaefdd1ac5ffc69746",
+          "bytes": 5808,
+          "index": 1,
+          "samplerName": "aces2_700_gamut_cusp_table_0Sampler",
+          "width": 363,
+          "height": 1,
+          "components": 4,
+          "internalFormat": "RGBA32F",
+          "format": "RGBA",
+          "type": "FLOAT",
+          "filter": "NEAREST",
+          "wrap": "CLAMP_TO_EDGE",
+          "mipmaps": false,
+          "colorSpace": "NoColorSpace",
+          "flipY": false
+        }
+      ],
+      "anchors": {
+        "file": "700/anchors.json",
+        "sha256": "ef84d533293df4a8e1d924df4296a440f8cc8d77ea32eee03fa94a57fd2a0ef8",
+        "bytes": 5364
+      },
+      "inverse": {
+        "prefixFile": "accurate-atan-helper.glsl",
+        "from": "atan(Aab.b, Aab.g)",
+        "to": "qaAccurateAtan2(Aab.b, Aab.g)",
+        "replacements": 1,
+        "wholeOriginalSHA256": "43d3fa65412f678490a15ae1394adeaf14d32dafd57c5612917a056937256b62"
+      },
+      "reference": {
+        "officialExportSHA256": "dc28a8de0cb7bb582c07ade5690c913d67b7f1df220f135b8f2fd3c28b24d1c9",
+        "candidateFunctionSHA256": "d5540babf48b69a245a48b027863fe347d725fe4d5dbfa33d69a20a3f71e9414",
+        "GPU77ReportSHA256": "0c26b5fa7f553c8c03e618ae966f744f356db124d140bc26c843915b1d4daa8c"
+      }
+    },
+    {
+      "peakNits": 1270,
+      "function": "aces2Display1270",
+      "functionFile": {
+        "file": "1270/accurate-atan.glsl",
+        "sha256": "8f8db65e8ed5a676ba54c52af52f0839bb41a6df302118e9b9734bbafcbcd815",
+        "bytes": 17338
+      },
+      "originalFile": {
+        "file": "1270/original-ocio26.glsl",
+        "sha256": "36c2cbc64f541577153a33eab0948bd69405b4c71c5bb0229fb391f9e8a56891",
+        "bytes": 15435
+      },
+      "tables": [
+        {
+          "file": "1270/table-0-rgba.f32",
+          "sha256": "127ae937e9fc63994a51ac0fbd66c6acb096fb0575370496acde6f595f630b34",
+          "bytes": 5808,
+          "index": 0,
+          "samplerName": "aces2_1270_reach_m_table_0Sampler",
+          "width": 363,
+          "height": 1,
+          "components": 4,
+          "internalFormat": "RGBA32F",
+          "format": "RGBA",
+          "type": "FLOAT",
+          "filter": "NEAREST",
+          "wrap": "CLAMP_TO_EDGE",
+          "mipmaps": false,
+          "colorSpace": "NoColorSpace",
+          "flipY": false
+        },
+        {
+          "file": "1270/table-1-rgba.f32",
+          "sha256": "dd9c55727247a7f604cc6e2066c3ca18dbf1c8704001581bc9007cf65a521970",
+          "bytes": 5808,
+          "index": 1,
+          "samplerName": "aces2_1270_gamut_cusp_table_0Sampler",
+          "width": 363,
+          "height": 1,
+          "components": 4,
+          "internalFormat": "RGBA32F",
+          "format": "RGBA",
+          "type": "FLOAT",
+          "filter": "NEAREST",
+          "wrap": "CLAMP_TO_EDGE",
+          "mipmaps": false,
+          "colorSpace": "NoColorSpace",
+          "flipY": false
+        }
+      ],
+      "anchors": {
+        "file": "1270/anchors.json",
+        "sha256": "e63fe8f4bc6cb6acd2675bc24ed30c12de6ad8ae3c0c7f026e9685a71b9cf331",
+        "bytes": 5382
+      },
+      "inverse": {
+        "prefixFile": "accurate-atan-helper.glsl",
+        "from": "atan(Aab.b, Aab.g)",
+        "to": "qaAccurateAtan2(Aab.b, Aab.g)",
+        "replacements": 1,
+        "wholeOriginalSHA256": "36c2cbc64f541577153a33eab0948bd69405b4c71c5bb0229fb391f9e8a56891"
+      },
+      "reference": {
+        "officialExportSHA256": "dc28a8de0cb7bb582c07ade5690c913d67b7f1df220f135b8f2fd3c28b24d1c9",
+        "candidateFunctionSHA256": "8f8db65e8ed5a676ba54c52af52f0839bb41a6df302118e9b9734bbafcbcd815",
+        "GPU77ReportSHA256": "0c26b5fa7f553c8c03e618ae966f744f356db124d140bc26c843915b1d4daa8c"
+      }
+    }
+  ],
+  "sourceAdmission": {
+    "actualGPUReport": "verification/aces2-atan-gpu-first.json",
+    "sha256": "0c26b5fa7f553c8c03e618ae966f744f356db124d140bc26c843915b1d4daa8c",
+    "checks": 77,
+    "notOfficialCertification": true,
+    "productionDefaultPromotion": false
+  }
+}

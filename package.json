@@ -5,12 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev --host 127.0.0.1",
-    "build": "astro build && node scripts/finalize-tools.mjs",
+    "build": "astro build && node scripts/finalize-tools.mjs && node scripts/finalize-atoll.mjs",
     "preview": "astro preview --host 127.0.0.1",
     "check": "astro check",
     "test": "node --experimental-strip-types scripts/test-lab.mjs",
     "test:releases": "node --experimental-strip-types scripts/test-releases.mjs",
     "test:paths": "node --experimental-strip-types scripts/test-site-path.mjs",
+    "test:atoll": "node scripts/test-atoll-actions.mjs",
     "verify:dist": "node scripts/verify-dist.mjs"
   },
   "dependencies": {

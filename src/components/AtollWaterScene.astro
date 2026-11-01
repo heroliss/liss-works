@@ -1,0 +1,23 @@
+---
+import type { Project } from '../data/types';
+import { sitePath } from '../lib/site-path';
+import Icon from './Icon.astro';
+import '../styles/glass-atoll-feature.css';
+interface Props { project: Project; detail?: boolean }
+const { project, detail = false } = Astro.props;
+---
+<figure class:list={["atoll-water", {"atoll-water--detail": detail}]} data-atoll-water data-water-state="waiting">
+    <div class="atoll-water__stage" data-atoll-stage>
+      <div class="atoll-water__fallback" data-atoll-fallback><picture><source media="(max-width:760px)" srcset={sitePath('/media/atoll-water-poster-mobile.webp')}/><img src={sitePath('/media/atoll-water-poster-desktop.webp')} width="1471" height="619" alt={`${project.name}：绘制的椰树沙洲和浅海倒影。`} loading={detail ? "eager" : "lazy"} decoding="async"/></picture></div>
+      <canvas data-atoll-canvas aria-hidden="true" hidden></canvas>
+    </div>
+    <figcaption class="atoll-water__footer">
+      <div class="atoll-water__moments" role="group" aria-label="选择海岛时光">
+        {['晴日', '日落', '入夜'].map((name, index) => <button type="button" data-atoll-moment={index} aria-pressed={index === 0} disabled>{name}</button>)}
+      </div>
+      <p class="atoll-water__caption">海风很轻，时间慢一点。</p>
+      <button class="atoll-water__pause" type="button" data-atoll-pause aria-pressed="false" hidden><Icon name="pause" size={16}/><span data-atoll-pause-label>暂停海面</span></button>
+      <a class="atoll-water__gallery" href={detail ? '#gallery' : sitePath('/projects/glass-atoll/#gallery')}>看看完整画面 <Icon size={16}/></a>
+    </figcaption>
+    <span class="sr-only" data-atoll-status role="status">浅海与离岛。</span>
+  </figure>

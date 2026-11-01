@@ -1,0 +1,125 @@
+{
+  "verifiedDate": "2026-10-31",
+  "sourceLicenseEvidence": "Freesound source pages display Creative Commons 0; source URLs and byte hashes retained",
+  "subjectiveListening": "not performed; waveform/English ASR checks do not prove absence of speech or music",
+  "sources": [
+    {
+      "id": "firecracker",
+      "title": "Firecracker - Single in Ground",
+      "author": "iliyabylich04",
+      "page": "https://freesound.org/people/iliyabylich04/sounds/651332/",
+      "previewURL": "https://cdn.freesound.org/previews/651/651332_14128260-hq.mp3",
+      "original": {
+        "file": "originals/firecracker-single-hq-preview.mp3",
+        "bytes": 12672,
+        "sha256": "aee91779c6620dc1acdc82c8ed6446d72f03011c9b61d9a208bb6515668b9151"
+      },
+      "derived": [
+        {
+          "file": "firecracker-iliyabylich04-mono.ogg",
+          "rangeSeconds": [
+            0,
+            0.38
+          ],
+          "processing": "mono 48 kHz; highpass 90 Hz; lowpass 14.5 kHz; fade 0.28-0.38 s; Vorbis q6",
+          "bytes": 8055,
+          "sha256": "36cceaf36ebfa0c44d3e963d641a0f523682a5f2bc0002dddef735ab7db7c816"
+        }
+      ],
+      "license": "CC0 1.0",
+      "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "downloadedKind": "public compressed HQ MP3 preview, NOT original WAV"
+    },
+    {
+      "id": "bang",
+      "title": "Loud Firewords Bang Cut Off",
+      "author": "qubodup",
+      "page": "https://freesound.org/people/qubodup/sounds/840510/",
+      "previewURL": "https://cdn.freesound.org/previews/840/840510_71257-hq.mp3",
+      "original": {
+        "file": "originals/loud-bang-cutoff-hq-preview.mp3",
+        "bytes": 31824,
+        "sha256": "ea8e52fe1fb54c0b4eda224902df7397afb40d2bf19231306c343f64a7a7cfa3"
+      },
+      "derived": [
+        {
+          "file": "bang-qubodup-mono.ogg",
+          "rangeSeconds": [
+            0,
+            1.1
+          ],
+          "processing": "mono 48 kHz; highpass 75 Hz; lowpass 14.5 kHz; -2 dB; fade 0.99-1.10 s; Vorbis q6",
+          "bytes": 16046,
+          "sha256": "fc4c02ccb08a7bbdc21248415298191199996e28bf9ee57ddc4e8950d683c3fd"
+        }
+      ],
+      "license": "CC0 1.0",
+      "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "downloadedKind": "public compressed HQ MP3 preview, NOT original WAV"
+    },
+    {
+      "id": "booms",
+      "title": "NYE Loud Booms",
+      "author": "LOVEBURD",
+      "page": "https://freesound.org/people/LOVEBURD/sounds/376662/",
+      "previewURL": "https://cdn.freesound.org/previews/376/376662_5735740-hq.mp3",
+      "original": {
+        "file": "originals/nye-loud-booms-hq-preview.mp3",
+        "bytes": 144768,
+        "sha256": "a76bc35e03459b0ca20abc01293161e9052d0a406a2293666f013c7c9706533f"
+      },
+      "derived": [
+        {
+          "file": "boom-lovebird-a-mono.ogg",
+          "rangeSeconds": [
+            0.98,
+            1.52
+          ],
+          "processing": "mono 48 kHz; highpass 40 Hz; lowpass 11 kHz; -8 dB; fade 0.46-0.54 s; Vorbis q6",
+          "bytes": 9537,
+          "sha256": "d3bd71ae090d33f315bf901667d1dfba96ea96928bfec0e13f25b55e98a6dc7d"
+        },
+        {
+          "file": "boom-lovebird-b-mono.ogg",
+          "rangeSeconds": [
+            1.53,
+            2.15
+          ],
+          "processing": "mono 48 kHz; highpass 40 Hz; lowpass 11 kHz; -8 dB; fade 0.52-0.62 s; Vorbis q6",
+          "bytes": 10539,
+          "sha256": "edc3d355fe06e04d6d49d45c411b9dd123c02583c94700595a8ca057d97fbbd1"
+        }
+      ],
+      "license": "CC0 1.0",
+      "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "downloadedKind": "public compressed HQ MP3 preview, NOT original WAV"
+    },
+    {
+      "id": "crackle",
+      "title": "Fireworks Crackle",
+      "author": "16FThumaF",
+      "page": "https://freesound.org/people/16FThumaF/sounds/505264/",
+      "previewURL": "https://cdn.freesound.org/previews/505/505264_10791958-hq.mp3",
+      "original": {
+        "file": "originals/fireworks-crackle-hq-preview.mp3",
+        "bytes": 1657920,
+        "sha256": "766b8c07556014415f8e34165bd90c1955e68ba0d2618d65b668b32e67a6aae0"
+      },
+      "derived": [
+        {
+          "file": "crackle-16fthumaf-mono.ogg",
+          "rangeSeconds": [
+            38,
+            41.25
+          ],
+          "processing": "mono 48 kHz; highpass 650 Hz; lowpass 13 kHz; +2 dB; fade 3.05-3.25 s; Vorbis q6",
+          "bytes": 36536,
+          "sha256": "3351d444c5a51e82a146563b2ea2e2dd0bb9e424b6c9022864e4d68e94ba9386"
+        }
+      ],
+      "license": "CC0 1.0",
+      "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "downloadedKind": "public compressed HQ MP3 preview, NOT original WAV"
+    }
+  ]
+}

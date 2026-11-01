@@ -1,0 +1,4 @@
+Catalogue data/derivatives CC BY-NC3.0IGO, Credit ESA; ESA1997 SP1200, Hogetal2000 A&A355L27, CDS/VizieR DOI10.26093/cds/vizier; NASA background separate SVS4851 source terms
+derived runtime resources; raw full sources retained only under verification/plans/assets/catalog-source
+Original sources and hashes: ../../../verification/plans/assets/catalog-source/manifest.json
+User authorized personal non-commercial use only. Original runtime code is not relicensed by this data notice.

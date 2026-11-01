@@ -1,0 +1,267 @@
+{
+  "schema": "glass-atoll.aces2-output-anchors.v1",
+  "peakNits": 700,
+  "units": "display-linear Rec709 normalized100nit",
+  "tolerance": {
+    "absolute": 0.00002,
+    "relative": 0.0002
+  },
+  "sourceCPUOracleSHA256": "128150a6be6149a506ce81a62c40e2c229bc08cdb41c246d79fa4eeef4d30dbd",
+  "rows": [
+    {
+      "id": "neutral-0",
+      "inputFloat32": [
+        0,
+        0,
+        0
+      ],
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "exactBlack": true,
+      "positiveBlue": false
+    },
+    {
+      "id": "neutral-0.18",
+      "inputFloat32": [
+        0.18000000715255737,
+        0.18000000715255737,
+        0.18000000715255737
+      ],
+      "expected": [
+        0.13840246200561523,
+        0.1384029984474182,
+        0.13840274512767792
+      ],
+      "exactBlack": false,
+      "positiveBlue": false
+    },
+    {
+      "id": "neutral-1",
+      "inputFloat32": [
+        1,
+        1,
+        1
+      ],
+      "expected": [
+        0.9782921075820923,
+        0.9782915115356445,
+        0.9782916903495789
+      ],
+      "exactBlack": false,
+      "positiveBlue": false
+    },
+    {
+      "id": "hue-red-1",
+      "inputFloat32": [
+        4.70366907119751,
+        0,
+        0
+      ],
+      "expected": [
+        4.151796817779541,
+        0.15453124046325684,
+        0.06901882588863373
+      ],
+      "exactBlack": false,
+      "positiveBlue": false
+    },
+    {
+      "id": "hue-green-1",
+      "inputFloat32": [
+        0,
+        1.3982102870941162,
+        0
+      ],
+      "expected": [
+        0.10944285988807678,
+        1.3162591457366943,
+        0.08002182841300964
+      ],
+      "exactBlack": false,
+      "positiveBlue": false
+    },
+    {
+      "id": "hue-blue-1",
+      "inputFloat32": [
+        0,
+        0,
+        13.850415229797363
+      ],
+      "expected": [
+        0.436708003282547,
+        0.594274640083313,
+        7
+      ],
+      "exactBlack": false,
+      "positiveBlue": false
+    },
+    {
+      "id": "hue-cyan-1",
+      "inputFloat32": [
+        0,
+        1.2700024843215942,
+        1.2700024843215942
+      ],
+      "expected": [
+        0.1690046638250351,
+        1.1859663724899292,
+        1.1845346689224243
+      ],
+      "exactBlack": false,
+      "positiveBlue": false
+    },
+    {
+      "id": "hue-magenta-1",
+      "inputFloat32": [
+        3.5112359523773193,
+        0,
+        3.5112359523773193
+      ],
+      "expected": [
+        3.1621100902557373,
+        0.12650638818740845,
+        3.0703797340393066
+      ],
+      "exactBlack": false,
+      "positiveBlue": false
+    },
+    {
+      "id": "hue-yellow-1",
+      "inputFloat32": [
+        1.077818512916565,
+        1.077818512916565,
+        0
+      ],
+      "expected": [
+        1.043965220451355,
+        1.0578129291534424,
+        0.06676551699638367
+      ],
+      "exactBlack": false,
+      "positiveBlue": false
+    },
+    {
+      "id": "profile-red-1",
+      "inputFloat32": [
+        4.63247537612915,
+        0,
+        0.20963585376739502
+      ],
+      "expected": [
+        4.042088508605957,
+        0.16408151388168335,
+        0.29156336188316345
+      ],
+      "exactBlack": false,
+      "positiveBlue": false
+    },
+    {
+      "id": "profile-green-1",
+      "inputFloat32": [
+        0,
+        1.3713752031326294,
+        0.26582321524620056
+      ],
+      "expected": [
+        0.15794236958026886,
+        1.261671543121338,
+        0.3582804501056671
+      ],
+      "exactBlack": false,
+      "positiveBlue": false
+    },
+    {
+      "id": "profile-blue-1",
+      "inputFloat32": [
+        0.4846985638141632,
+        0,
+        12.423172950744629
+      ],
+      "expected": [
+        0.6762720346450806,
+        0.49352145195007324,
+        7
+      ],
+      "exactBlack": false,
+      "positiveBlue": false
+    },
+    {
+      "id": "profile-yellow-1",
+      "inputFloat32": [
+        2.5592427253723145,
+        0.6374510526657104,
+        0
+      ],
+      "expected": [
+        2.3322017192840576,
+        0.6854301691055298,
+        0.06969688832759857
+      ],
+      "exactBlack": false,
+      "positiveBlue": false
+    },
+    {
+      "id": "profile-thermal-1",
+      "inputFloat32": [
+        1.8277674913406372,
+        0.8316207528114319,
+        0.23049132525920868
+      ],
+      "expected": [
+        1.627425193786621,
+        0.8557869791984558,
+        0.3426114320755005
+      ],
+      "exactBlack": false,
+      "positiveBlue": false
+    },
+    {
+      "id": "negative-or-extreme-2",
+      "inputFloat32": [
+        -0.009999999776482582,
+        0.18000000715255737,
+        0.5
+      ],
+      "expected": [
+        0.0028104176744818687,
+        0.13919660449028015,
+        0.36225056648254395
+      ],
+      "exactBlack": false,
+      "positiveBlue": false
+    },
+    {
+      "id": "hue-blue-1.71661376953125e-07",
+      "inputFloat32": [
+        0,
+        0,
+        0.000002377581495238701
+      ],
+      "expected": [
+        0,
+        0,
+        4.221926898795997e-13
+      ],
+      "exactBlack": false,
+      "positiveBlue": true
+    },
+    {
+      "id": "AP1-axis-0--1e-05",
+      "inputFloat32": [
+        -0.1269262433052063,
+        0.20344747602939606,
+        0.1843208521604538
+      ],
+      "expected": [
+        0,
+        0.11207138001918793,
+        0.1045605018734932
+      ],
+      "exactBlack": false,
+      "positiveBlue": false
+    }
+  ]
+}

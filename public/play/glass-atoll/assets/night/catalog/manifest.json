@@ -1,0 +1,217 @@
+{
+  "version": 1,
+  "generatedUTC": "2026-10-26T15:01:10.105473+00:00",
+  "license": "Catalogue data/derivatives CC BY-NC3.0IGO, Credit ESA; ESA1997 SP1200, Hogetal2000 A&A355L27, CDS/VizieR DOI10.26093/cds/vizier; NASA background separate SVS4851 source terms",
+  "scope": "derived runtime resources; raw full sources retained only under verification/plans/assets/catalog-source",
+  "sourceManifest": "../../../verification/plans/assets/catalog-source/manifest.json",
+  "counts": {
+    "hip_input": 118218,
+    "master": 1496028,
+    "HIP_admitted": 116833,
+    "diffuse": 1418103,
+    "HIP_fainter_than_master": 1384,
+    "hip_combined_photometry": 10783,
+    "missing_color_white": 1084,
+    "hip_identifier_position_fallback": 263,
+    "hip_no_JohnsonV": 1,
+    "tycho_input": 2539913,
+    "TYC_fainter_than_master": 1053117,
+    "TYC_admitted": 1367704,
+    "tycho_observed_position_fallback": 108369,
+    "tycho_HIP_system_already_represented": 122627,
+    "tycho_BT_only_V_fallback": 24,
+    "tycho_VT_only_color_fallback": 1006,
+    "ambiguous_fallback_HIP_neighbourhood": 1,
+    "suppl_input": 17588,
+    "TYC-S1_admitted": 11491,
+    "TYC-S1_fainter_than_master": 2252,
+    "supp_duplicate_main": 254,
+    "fallback_systems_reconciled": 41,
+    "TYC_aliases_retired_for_HIP_system": 56
+  },
+  "pointLimitMagnitude": 8.5,
+  "pointCount": 77925,
+  "pointRecordFloats": 12,
+  "pointTextureWidth": 1024,
+  "pointTextureHeight": 229,
+  "tileResolution": 128,
+  "tables": [
+    {
+      "name": "native",
+      "supportDegrees": 0.18,
+      "width": 1024,
+      "height": 478,
+      "bytes": 7831552,
+      "entryCount": 390960,
+      "meanCandidates": 3.97705078125,
+      "maximumCandidates": 50,
+      "maximumBucketFluxChannelUnitF0": 5.396329879760742
+    },
+    {
+      "name": "wide",
+      "supportDegrees": 2.0,
+      "width": 1024,
+      "height": 4083,
+      "bytes": 66895872,
+      "entryCount": 4081955,
+      "meanCandidates": 41.52379353841146,
+      "maximumCandidates": 225,
+      "maximumBucketFluxChannelUnitF0": 5.549199104309082
+    }
+  ],
+  "diffuseLevels": [
+    {
+      "width": 2048,
+      "height": 1024,
+      "offsetBytes": 0,
+      "bytes": 16777216
+    },
+    {
+      "width": 1024,
+      "height": 512,
+      "offsetBytes": 16777216,
+      "bytes": 4194304
+    },
+    {
+      "width": 512,
+      "height": 256,
+      "offsetBytes": 20971520,
+      "bytes": 1048576
+    },
+    {
+      "width": 256,
+      "height": 128,
+      "offsetBytes": 22020096,
+      "bytes": 262144
+    },
+    {
+      "width": 128,
+      "height": 64,
+      "offsetBytes": 22282240,
+      "bytes": 65536
+    },
+    {
+      "width": 64,
+      "height": 32,
+      "offsetBytes": 22347776,
+      "bytes": 16384
+    },
+    {
+      "width": 32,
+      "height": 16,
+      "offsetBytes": 22364160,
+      "bytes": 4096
+    },
+    {
+      "width": 16,
+      "height": 8,
+      "offsetBytes": 22368256,
+      "bytes": 1024
+    },
+    {
+      "width": 8,
+      "height": 4,
+      "offsetBytes": 22369280,
+      "bytes": 256
+    },
+    {
+      "width": 4,
+      "height": 2,
+      "offsetBytes": 22369536,
+      "bytes": 64
+    },
+    {
+      "width": 2,
+      "height": 1,
+      "offsetBytes": 22369600,
+      "bytes": 16
+    },
+    {
+      "width": 1,
+      "height": 1,
+      "offsetBytes": 22369616,
+      "bytes": 8
+    }
+  ],
+  "diffuseRGBIntegralUnitF0": [
+    121.47306351471528,
+    99.99641794992428,
+    90.38931218400356
+  ],
+  "masterRGBFluxUnitF0": [
+    290.4955584136334,
+    248.98815221552348,
+    246.97336255295144
+  ],
+  "pointRGBFluxUnitF0": [
+    169.02248162249452,
+    148.99172273019212,
+    156.58403865102446
+  ],
+  "maximumPointFluxChannelUnitF0": 5.387646198272705,
+  "photometry": {
+    "magnitudeZeroLux": 2.54e-06,
+    "defaultRawPerLux": 3.6e-05,
+    "defaultF0Physical": 9.144e-11,
+    "source": "https://www2.keck.hawaii.edu/realpublic/inst/kitn/KITN0005.pdf",
+    "NASAbackgroundScale": 2e-07,
+    "NASAbackgroundRGBIntegral": [
+      0.3832387652513938,
+      0.3367354684429634,
+      0.29843006166654723
+    ],
+    "color": "Ballesteros B-V blackbody plus Wyman2013 analytic CIE fit, linear sRGB normalizedY1; effective color, not measured SPD"
+  },
+  "epochs": {
+    "HIP": 1991.25,
+    "TYC": 2000,
+    "pointStorage": 2000,
+    "properMotionYearsSupported": [
+      1800,
+      2200
+    ],
+    "diffuse": "fixed J2000 aggregate; no per-star epoch motion"
+  },
+  "files": {
+    "diffuse-rgba16f.bin": {
+      "bytes": 22369624,
+      "sha256": "7d34ee4ae2141f1f0d7adb4706678d008b80057aad3ddeeed5b3723d07d50c4a"
+    },
+    "LICENSE-SOURCES.txt": {
+      "bytes": 488,
+      "sha256": "cadac43f14e466413fed5c30c61d337363859fcd985f7eecfba1f1783cd1cb37"
+    },
+    "lookup-native-float32.bin": {
+      "bytes": 7831552,
+      "sha256": "944f0bdf0f0eea1e21cecfd58bab57263b5aa917092cb09fb0a2573e204beb2e"
+    },
+    "lookup-wide-float32.bin": {
+      "bytes": 66895872,
+      "sha256": "02c61e6e09ff86929fbd2ef564d9f6d4257a7383f2c8247bff87b8ef8ff0b2a1"
+    },
+    "milkyway-4k.hdr": {
+      "bytes": 31474895,
+      "sha256": "ba5b744a68bcac2b6c318360bf798828c1888f2822a4de5a9b34ea83c96d9474"
+    },
+    "point-identifiers.json": {
+      "bytes": 1842473,
+      "sha256": "f44450b05e6606ca8ef29ca20952ded82717f383d7128eaaa0d9cc3a2477498b"
+    },
+    "stars-float32.bin": {
+      "bytes": 3740400,
+      "sha256": "52c12cc496101ed83b9356fc162717fa9e83c1ccf87ee360f9569e37465ed1c4"
+    },
+    "system-reconciliation.json": {
+      "bytes": 151977,
+      "sha256": "7a44ba9eeb38f137d3658eeef4a74a87f0e2e5893179d2b0bda7eb3154154987"
+    }
+  },
+  "elapsedSeconds": 58.41384439996909,
+  "limits": [
+    "NASA background and full atlas have independent visualization gains, not an additive layer calibration",
+    "HIP combined systems take precedence over all linked Tycho components; no coordinate-only merging",
+    "Magnitude/colour boundary differs from exact unpublished NASA generator; no claim of perfect1.7B-source reconstruction",
+    "Missing photometry/positions and effective Tycho->Johnson conversions are counted",
+    "Bright-star supplement18Yale audit still required; no false complete-as-NASA claim"
+  ]
+}

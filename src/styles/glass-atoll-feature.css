@@ -1,18 +1,43 @@
-/* The island's real daylight, dusk and night frames form one open landscape. */
-.atoll-showcase { --atoll-tone:#7bdcd1; position:relative; padding-block:clamp(56px,8vw,120px); }
-.atoll-showcase__heading { display:flex; align-items:end; justify-content:space-between; gap:40px; margin-bottom:48px; }
+/* A drawn island and optical water share an open, unframed stage. */
+.atoll-showcase { --atoll-tone:#7bdcd1; position:relative; padding-block:clamp(36px,5vw,80px); }
+.atoll-showcase__heading { display:flex; align-items:end; justify-content:space-between; gap:40px; margin-bottom:8px; position:relative; z-index:1; }
 .atoll-showcase__heading h2 { margin:0; color:var(--atoll-tone); font-size:clamp(64px,8vw,116px); line-height:1.05; letter-spacing:-.05em; font-weight:500; }
 .atoll-showcase__name { margin:20px 0 0; color:var(--muted); font-size:17px; }
 .atoll-showcase__introduction { display:grid; gap:20px; padding-bottom:3px; }
 .atoll-showcase__introduction p { margin:0; font-size:20px; line-height:1.8; }
 .atoll-showcase__introduction .text-link { color:var(--atoll-tone); min-height:44px; }
-.atoll-showcase__scenes { display:grid; grid-template-columns:minmax(0,3.3fr) minmax(0,1fr); grid-template-rows:1fr 1fr; align-items:start; gap:25px 30px; }
-.atoll-showcase__scene { margin:0; min-width:0; }
-.atoll-showcase__scene--main { grid-row:1/3; }
-.atoll-showcase__scene .media-link { display:block; padding:0; background:none; border:0; box-shadow:none; border-radius:3px; }
-.atoll-showcase__scene img { display:block; width:100%; height:auto; border-radius:3px; }
-.atoll-showcase__scene figcaption { font-size:14px; line-height:1.7; color:var(--muted); margin:13px 0 0; }
-.atoll-showcase__closing { margin:34px 0 0; color:var(--ink); font-size:18px; line-height:1.8; }
+.atoll-water { margin:0; position:relative; }
+.atoll-water__stage { position:relative; height:clamp(430px,43vw,690px); margin-inline:-4%; touch-action:pan-y; }
+.atoll-water__stage canvas { display:block; width:100%; height:100%; }
+.atoll-water__stage canvas[hidden],.atoll-water__fallback[hidden] { display:none; }
+.atoll-water__fallback { position:absolute; inset:0; }
+.atoll-water__fallback picture,.atoll-water__fallback img { width:100%; height:100%; display:block; object-fit:contain; }
+.atoll-water__footer { position:relative; display:flex; align-items:center; gap:16px 28px; flex-wrap:wrap; margin-top:-18px; }
+.atoll-water__moments { display:flex; align-items:center; gap:8px; }
+.atoll-water__moments button { background:none; padding:11px 14px; min-height:44px; color:var(--muted); font-size:17px; border-radius:0; }
+.atoll-water__moments button[aria-pressed=true] { color:var(--atoll-tone); text-decoration:underline; text-underline-offset:9px; text-decoration-thickness:2px; }
+.atoll-water__moments button:hover { color:var(--ink); }
+.atoll-water__moments button:disabled { cursor:default; }
+.atoll-water__caption { margin:0 auto 0 0; color:var(--muted); font-size:15px; line-height:1.8; }
+.atoll-water__pause,.atoll-water__gallery { display:inline-flex; align-items:center; justify-content:center; gap:9px; min-height:44px; background:none; color:var(--muted); font-size:15px; padding:8px 0; }
+.atoll-water__gallery { color:var(--atoll-tone); }
+.atoll-water__pause[hidden] { display:none; }
+.atoll-water :is(button,a):focus-visible { outline:2px solid var(--atoll-tone); outline-offset:5px; }
+@media(max-width:760px) {
+ .atoll-showcase__heading { display:block; margin-bottom:0; }
+ .atoll-showcase__heading h2 { font-size:64px; }
+ .atoll-showcase__introduction { margin-top:24px; gap:10px; }
+ .atoll-showcase__introduction p { font-size:17px; }
+ .atoll-showcase__name { font-size:15px; }
+ .atoll-water__stage { height:clamp(340px,105vw,420px); margin-inline:-7%; }
+ .atoll-water__footer { gap:12px 20px; margin-top:-20px; }
+ .atoll-water__moments { gap:2px; }
+ .atoll-water__moments button { padding-inline:12px; font-size:16px; }
+ .atoll-water__caption { flex-basis:100%; order:3; font-size:14px; }
+ .atoll-water__pause { margin-left:auto; font-size:14px; }
+ .atoll-water__gallery { font-size:14px; }
+}
+@media(forced-colors:active) { .atoll-water__stage canvas { display:none; }.atoll-water__fallback { display:block!important; border:1px solid CanvasText; border-radius:0; }.atoll-water__moments button[aria-pressed=true] { color:Highlight; } }
 
 /* The archive keeps one filterable item while giving this project a full shelf. */
 .archive-atlas .atlas-gallery .atlas-wall>.atlas-item.atlas-item--atoll { grid-column:1/-1; margin:0 0 24px; width:100%; }
@@ -31,18 +56,10 @@
 .atoll-tile-enter { display:flex; align-items:center; gap:18px; color:var(--atlas-tone); font-size:17px; min-height:44px; margin-top:25px; }
 
 @media(max-width:1000px) {
- .atoll-showcase__scenes { grid-template-columns:minmax(0,2.8fr) minmax(0,1fr); gap:20px; }
+
  .atlas-item--atoll .atlas-tile-link { gap:28px; padding:24px; grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr); }
 }
 @media(max-width:760px) {
- .atoll-showcase__heading { display:block; margin-bottom:28px; }
- .atoll-showcase__heading h2 { font-size:64px; }
- .atoll-showcase__introduction { margin-top:25px; gap:12px; }
- .atoll-showcase__introduction p { font-size:18px; }
- .atoll-showcase__scenes { grid-template-columns:repeat(2,minmax(0,1fr)); grid-template-rows:auto; gap:25px 16px; }
- .atoll-showcase__scene--main { grid-column:1/-1; grid-row:auto; }
- .atoll-showcase__scene figcaption { font-size:14px; }
- .atoll-showcase__closing { font-size:17px; margin-top:26px; }
  .archive-atlas .atlas-gallery .atlas-wall>.atlas-item.atlas-item--atoll { grid-column:1/-1; margin:0; width:100%; }
  .atlas-item--atoll .atlas-tile-link { grid-template-columns:1fr; padding:20px; gap:27px; }
  .atlas-item--atoll .atlas-tile-title { font-size:46px; }
@@ -54,11 +71,27 @@
 /* Detail view: a broad seascape and quiet, sand-coloured supporting text. */
 .detail-page[data-project-world="glass-atoll"] { --raised:#1a3439; --muted:#bad0cc; }
 .detail-page[data-project-world="glass-atoll"] .project-intro h1 { color:var(--accent); font-size:clamp(68px,10vw,144px); line-height:1.05; }
-.detail-page[data-project-world="glass-atoll"] .project-opening { grid-template-columns:minmax(0,1.5fr) minmax(0,.5fr); gap:6%; }
+.detail-page[data-project-world="glass-atoll"] .project-opening { grid-template-columns:1fr; gap:clamp(26px,4vw,56px); }
 .detail-page[data-project-world="glass-atoll"] .project-hero { width:100%; }
-.detail-page[data-project-world="glass-atoll"] .project-signature { align-self:center; }
+.detail-page[data-project-world="glass-atoll"] .project-signature {
+ display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.5fr) minmax(0,1fr);
+ align-items:start; gap:clamp(24px,4vw,64px); width:100%; max-width:none;
+ margin:0; padding:0; text-align:left;
+}
+.detail-page[data-project-world="glass-atoll"] .project-signature > .signature-entry { margin:0; }
+.detail-page[data-project-world="glass-atoll"] .signature-entry--principle { padding:19px 24px 24px; }
+.detail-page[data-project-world="glass-atoll"] .project-prose--principle { max-width:none; }
 .detail-page[data-project-world="glass-atoll"] .project-stack dt { color:var(--accent); }
+@media(max-width:900px) {
+ .detail-page[data-project-world="glass-atoll"] .project-signature { grid-template-columns:1fr; gap:12px; }
+ .detail-page[data-project-world="glass-atoll"] .signature-highlights { display:flex; flex-wrap:wrap; gap:12px 28px; }
+ .detail-page[data-project-world="glass-atoll"] .signature-highlights li + li { margin-top:0; }
+}
 @media(max-width:760px) {
  .detail-page[data-project-world="glass-atoll"] .project-opening { grid-template-columns:1fr; }
  .detail-page[data-project-world="glass-atoll"] .project-intro h1 { font-size:72px; }
 }
+
+.atoll-water--detail { --atoll-tone:var(--accent); min-width:0; }
+.atoll-water--detail .atoll-water__stage { height:clamp(440px,46vw,690px); }
+@media(max-width:760px) { .atoll-water--detail .atoll-water__stage { height:clamp(340px,105vw,420px); } }

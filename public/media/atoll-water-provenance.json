@@ -1,0 +1,78 @@
+{
+  "created_utc": "2026-11-01T02:20:10.661160+00:00",
+  "authenticity": "Actual paused canvas exports. Island painted with 2D filled contours and cel shading; optical water uses one fullscreen shader with premultiplied alpha. No 3D models or project screenshots in this illustrated scene.",
+  "files": [
+    {
+      "source": "verification/atoll-water-scene-20261101/scene-desktop.png",
+      "source_sha256": "056010b11fec3ecd8e5d92f3ce1d7b75451cb8c365f3d902225a16259c91db27",
+      "output": "public/media/atoll-water-poster-desktop.webp",
+      "sha256": "d03cbd14a7262f05d2acc0783fb8a758d97b9a29360d7e46668dafb9c971b334",
+      "width": 1471,
+      "height": 619,
+      "edge_alpha": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "bytes": 75454
+    },
+    {
+      "source": "verification/atoll-water-scene-20261101/scene-mobile.png",
+      "source_sha256": "939d225e4f0643e0854d5855abcb090ae44e9b8ddbd2b89135a6ec18eb628fcb",
+      "output": "public/media/atoll-water-poster-mobile.webp",
+      "sha256": "87a3691fc0cad5e885fca96eb729aa3763f6a530aa07aaecbdb9fa8cbc61c9d6",
+      "width": 404,
+      "height": 410,
+      "edge_alpha": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "bytes": 25686
+    }
+  ],
+  "render_sources": [
+    {
+      "path": "src/scripts/atoll-island-paint.ts",
+      "sha256": "20f71d0c1d93326a23adfd9854577fa81eef62397c4e22203e32fe959155288c"
+    },
+    {
+      "path": "src/scripts/atoll-water-engine.ts",
+      "sha256": "f0adcd8078e892364fd7b349c3842508a80b9eff4fa51051d8ddd382e0b5bdc6"
+    },
+    {
+      "path": "src/scripts/atoll-water-shaders.ts",
+      "sha256": "5a1c711ff1332d82498432b502ec149be1cb1675a7ce3e4c3fd9e2743d6a62f1"
+    },
+    {
+      "path": "src/scripts/atoll-water.ts",
+      "sha256": "cd1ca591741203646cd9961235fc3f079512ab47d18008f11c5c1a9f033e47bd"
+    }
+  ]
+}

@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#b6dedf" />
+    <meta name="description" content="一座可自由探索的热带离岛。环顾玻璃海，移动阳光，轻点海面，留下涟漪。" />
+    <title>玻璃海 · Atoll</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23186770'/%3E%3Cpath d='M5 21Q10 15 16 21T27 21M5 16Q10 10 16 16T27 16' fill='none' stroke='%23d1efe8' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./viewer-ui.css" />
+    <script>window.ATOLL_STATIC_HOST=true;</script>
+    <script type="importmap">
+      {"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/addons/"}}
+    </script>
+  </head>
+  <body class="time-panel-collapsed fireworks-collapsed">
+    <main id="scene" aria-label="可交互的热带离岛。左拖环绕，右拖环顾，滚轮前后移动。按住左键蓄力，松开投石。"></main>
+
+    <div id="loading" role="status" aria-live="polite">
+      <div class="loading-mark" aria-hidden="true"><i></i><i></i><i></i></div>
+      <p class="loading-title">去海边。</p>
+      <p class="loading-detail">正在准备阳光、白沙和一片海</p>
+    </div>
+
+    <div id="error" hidden role="alert">
+      <p>这片海暂时没有加载成功</p>
+      <p id="error-detail">请刷新页面，或使用支持 WebGL 的浏览器。</p>
+      <button type="button" onclick="location.reload()">重新加载</button>
+    </div>
+
+    <header class="masthead chrome">
+      <div class="identity"><a class="portfolio-return" href="../../projects/glass-atoll/" aria-label="返回玻璃海作品介绍">←</a>
+        <span class="wordmark">Atoll<span class="wordmark-dot">.</span></span>
+        <span class="identity-divider" aria-hidden="true"></span>
+        <h1>玻璃海</h1>
+      </div>
+      <nav class="utilities" aria-label="画面工具">
+        <button type="button" id="sound" class="icon-button" aria-label="关闭环境声" aria-pressed="true" title="海浪、海风与烟花 · 首次交互后自动播放">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m11 5-6 4H2v6h3l6 4V5Z"/><path class="sound-waves" d="M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/><path class="sound-muted" d="m16 9 5 6m0-6-5 6"/></svg>
+        </button>
+        <button type="button" id="screenshot" class="icon-button" aria-label="保存当前画面" title="保存画面">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 5 6.5 8H4a2 2 0 0 0-2 2v9h20v-9a2 2 0 0 0-2-2h-2.5L16 5H8Z"/><circle cx="12" cy="13" r="3.5"/></svg>
+        </button>
+        <button type="button" id="fullscreen" class="icon-button" aria-label="进入全屏" title="全屏">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg>
+        </button>
+        <button type="button" id="help-toggle" class="icon-button" aria-label="操作帮助" title="操作帮助 · ?"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 8.8a2.6 2.6 0 0 1 5 1c0 1.9-2.5 2-2.5 3.7m0 3h.01"/></svg></button>
+        <button type="button" id="hide-ui" class="icon-button" aria-label="隐藏界面，按 H 恢复" title="隐藏界面 · H">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/><path d="m3 3 18 18"/></svg>
+        </button>
+      </nav>
+    </header>
+
+    <div class="place-note chrome">
+      <span class="place-name">晴天，停在一座离岛。</span>
+      <p><span class="desktop-instructions">右拖环顾 · 滚轮前后移动</span><span class="mobile-instructions">拖动环绕 · 双指移动视角</span></p>
+    </div>
+
+    <section id="time-panel" class="time-panel chrome collapsed" aria-label="时间选择">
+      <button type="button" id="time-panel-toggle" class="drawer-heading" aria-expanded="false" aria-controls="quick-time-content"><span>时刻</span><svg class="chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="m4 10 4-4 4 4"/></svg></button>
+      <div id="quick-time-content" hidden>
+        <p class="panel-caption">只改变时间，机位由你选择。</p>
+        <div class="quick-time-options" role="group" aria-label="时间预设">
+          <button type="button" data-quick-time="day" aria-pressed="false"><span>白昼</span><small>日光与玻璃海</small></button>
+          <button type="button" data-quick-time="sunset" aria-pressed="false"><span>日落</span><small>当地落日时刻</small></button>
+          <button type="button" data-quick-time="moon" aria-pressed="false"><span>月夜</span><small>有月夜示例</small></button>
+          <button type="button" data-quick-time="stars" aria-pressed="false"><span>星空</span><small>无月夜示例</small></button>
+        </div>
+        <p id="quick-time-status" role="status" aria-live="polite">时间与机位独立，可分别切换。</p>
+      </div>
+    </section>
+
+    <aside id="view-drawer" class="view-drawer chrome collapsed" aria-label="机位选择">
+      <button type="button" id="views-toggle" class="drawer-heading" aria-expanded="false" aria-controls="views-content"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m7 14 3-4 4 5 3-3"/></svg><span>机位</span><svg class="chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="m4 10 4-4 4 4"/></svg></button>
+      <div id="views-content" hidden><p class="drawer-caption" id="view-label">沙滩视角</p><div class="view-gallery" role="group" aria-label="风景机位"><button type="button" class="view-card" data-view="shore" aria-pressed="true"><img src="./assets/views/shore.webp" alt="" width="256" height="144" loading="lazy" decoding="async" /><span class="view-card-name">白沙岸边</span><span class="view-card-caption">沙与海的交界</span></button>
+<button type="button" class="view-card" data-view="lagoon" aria-pressed="false"><img src="./assets/views/lagoon.webp" alt="" width="256" height="144" loading="lazy" decoding="async" /><span class="view-card-name">玻璃浅海</span><span class="view-card-caption">看见海底的光</span></button>
+<button type="button" class="view-card" data-view="aerial" aria-pressed="false"><img src="./assets/views/aerial.webp" alt="" width="256" height="144" loading="lazy" decoding="async" /><span class="view-card-name">高空俯瞰</span><span class="view-card-caption">小岛与潟湖</span></button>
+<button type="button" class="view-card" data-view="sandbar" aria-pressed="false"><img src="./assets/views/sandbar.webp" alt="" width="256" height="144" loading="lazy" decoding="async" /><span class="view-card-name">沙舌尽头</span><span class="view-card-caption">沿着白沙漫游</span></button>
+<button type="button" class="view-card" data-view="palm" aria-pressed="false"><img src="./assets/views/palm.webp" alt="" width="256" height="144" loading="lazy" decoding="async" /><span class="view-card-name">椰林树下</span><span class="view-card-caption">抬头穿过树影</span></button>
+<button type="button" class="view-card" data-view="reef" aria-pressed="false"><img src="./assets/views/reef.webp" alt="" width="256" height="144" loading="lazy" decoding="async" /><span class="view-card-name">珊瑚浅滩</span><span class="view-card-caption">浅水与珊瑚沙</span></button>
+<button type="button" class="view-card" data-view="waterline" aria-pressed="false"><img src="./assets/views/waterline.webp" alt="" width="256" height="144" loading="lazy" decoding="async" /><span class="view-card-name">贴近水面</span><span class="view-card-caption">听海浪靠近</span></button>
+<button type="button" class="view-card" data-view="island" aria-pressed="false"><img src="./assets/views/island.webp" alt="" width="256" height="144" loading="lazy" decoding="async" /><span class="view-card-name">离岛全景</span><span class="view-card-caption">让整座岛入画</span></button></div><button type="button" class="view-card view-card-compact" data-view="fireworks" aria-pressed="false"><span class="view-card-name">烟花与离岛</span><span class="view-card-caption">留出完整夜空</span></button><button type="button" class="view-card view-card-compact" data-view="fireworks-close" aria-pressed="false"><span class="view-card-name">岛边观烟花</span><span class="view-card-caption">当前样式与小岛，同框近看</span></button><div class="view-extras"><div class="lens-switch-row"><label for="view-preset">全部机位</label><select id="view-preset"><option value="shore">白沙岸边</option><option value="lagoon">玻璃浅海</option><option value="aerial">高空俯瞰</option><option value="sandbar">沙舌尽头</option><option value="palm">椰林树下</option><option value="reef">珊瑚浅滩</option><option value="waterline">贴近水面</option><option value="island">离岛全景</option><option value="fireworks">烟花与离岛</option><option value="fireworks-close">岛边观烟花</option><option value="stars">星河视角</option><option value="sun">朝向太阳</option><option value="moon">朝向月亮</option></select></div><div class="lens-switch-row"><label for="director-mode">自动运镜</label><select id="director-mode" data-callback="onDirectorChange"><option value="off">手动漫游</option><option value="island">缓缓环岛</option><option value="fireworks">环岛观赏烟花</option></select></div>
+        <div class="lens-switch-row"><label for="director-period">环绕一圈</label><select id="director-period" data-callback="onDirectorChange"><option value="120">2 分钟</option><option value="240" selected>4 分钟</option><option value="480">8 分钟</option></select></div>
+        <p class="flow-hint" id="director-status">时间与天气独立；拖动、滚轮或移动键立即接管镜头。</p><p class="flow-hint">缩略图是机位参考；切换保留当前时间与天气。</p></div></div>
+    </aside>
+
+    <aside class="control-panel chrome collapsed" aria-label="详细场景设置">
+      <button type="button" class="panel-toggle" id="panel-toggle" aria-expanded="false" aria-controls="panel-content"><span class="panel-heading"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="3"/><circle cx="15" cy="17" r="3"/></svg>画面设置</span><svg class="chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="m4 10 4-4 4 4"/></svg></button>
+      <div id="panel-content" hidden><div class="settings-tabs" role="tablist" aria-label="设置分类"><button type="button" id="tab-camera" role="tab" data-category="camera" aria-controls="settings-camera" aria-selected="true" tabindex="0">画质</button>
+<button type="button" id="tab-sea" role="tab" data-category="sea" aria-controls="settings-sea" aria-selected="false" tabindex="-1">海水</button>
+<button type="button" id="tab-weather" role="tab" data-category="weather" aria-controls="settings-weather" aria-selected="false" tabindex="-1">天气</button>
+<button type="button" id="tab-time" role="tab" data-category="time" aria-controls="settings-time" aria-selected="false" tabindex="-1">时间</button>
+<button type="button" id="tab-lighting" role="tab" data-category="lighting" aria-controls="settings-lighting" aria-selected="false" tabindex="-1">显示</button>
+<button type="button" id="tab-lamps" role="tab" data-category="lamps" aria-controls="settings-lamps" aria-selected="false" tabindex="-1">灯光</button>
+<button type="button" id="tab-fireworks" role="tab" data-category="fireworks" aria-controls="settings-fireworks" aria-selected="false" tabindex="-1">烟花</button>
+<button type="button" id="tab-navigation" role="tab" data-category="navigation" aria-controls="settings-navigation" aria-selected="false" tabindex="-1">操作</button></div><div class="settings-scroll"><section class="settings-pane" id="settings-sea" role="tabpanel" aria-labelledby="tab-sea" hidden>
+          <h2 class="settings-title">海水与风</h2>
+          <div class="water-controls">
+            <div class="range-row"><label for="wind-speed">海风</label><output for="wind-speed" id="wind-output">1.8 m/s</output><input type="range" id="wind-speed" min="0" max="5" value="1.8" step="0.1" aria-valuetext="1.8 米每秒" /></div>
+            <div class="range-row"><label for="current-speed">潮流</label><output for="current-speed" id="current-output">16 cm/s</output><input type="range" id="current-speed" min="0" max="0.5" value="0.16" step="0.01" aria-valuetext="16 厘米每秒" /></div>
+            <div class="range-row"><label for="swell-height">远海涌浪</label><output for="swell-height" id="swell-output">16 cm</output><input type="range" id="swell-height" min="0" max="0.32" value="0.16" step="0.01" /></div>
+            <div class="range-row"><label for="wind-sea">风浪起伏</label><output for="wind-sea" id="windsea-output">100%</output><input type="range" id="wind-sea" min="0" max="1.5" value="1" step="0.05" /></div>
+            <div class="range-row"><label for="water-clarity">清澈度</label><output for="water-clarity" id="clarity-output">90%</output><input type="range" id="water-clarity" min="0" max="100" value="90" step="1" aria-describedby="clarity-hint" aria-valuetext="清澈度 90%，清透玻璃海" /></div>
+            <p class="flow-hint" id="clarity-hint">清透玻璃海。0% 颗粒较多，100% 极清澈；水下距离越远，细节越淡，颜色越明显。</p>
+            <p class="flow-hint">长涌浪与短风浪各自传播，固定随机相位自然形成波组。平静潟湖不会出现大洋碎浪。</p>
+            <button type="button" id="float-leaf" class="float-button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19.5 3.5c-8-1-14 3.5-14 9.5a5 5 0 0 0 5 5c6 0 10-6.5 9-14.5Z"/><path d="m4 21 11-12M8 15l5 .5m-3-3-.5-4"/></svg>放一片叶子</button>
+            <p class="flow-hint">叶片长22厘米，放在远处时会靠近查看。</p>
+            <button type="button" id="find-leaf" class="float-button" hidden>靠近刚放下的叶子</button>
+            <p class="flow-hint"><a href="./assets/credits.html" target="_blank" rel="noopener">星空数据与声音来源</a></p>
+          </div>
+        </section><section class="settings-pane" id="settings-weather" role="tabpanel" aria-labelledby="tab-weather" hidden>
+          <h2 class="settings-title">天气与空气</h2>
+          <div class="water-controls">
+            <div class="preset-options" role="group" aria-label="天气预设"><button type="button" data-weather="clear">澄澈</button><button type="button" data-weather="fair">晴朗</button><button type="button" data-weather="cloudy">多云</button><button type="button" data-weather="humid">湿润</button></div>
+            <div class="range-row"><label for="weather-humidity">相对湿度</label><output id="humidity-output" for="weather-humidity">68%</output><input type="range" id="weather-humidity" min="0.4" max="0.95" step="0.01" value="0.68" /></div>
+            <div class="range-row"><label for="weather-temperature">气温</label><output id="temperature-output" for="weather-temperature">29°C</output><input type="range" id="weather-temperature" min="22" max="34" step="0.5" value="29" /></div>
+            <div class="range-row"><label for="weather-coverage">云量</label><output id="coverage-output" for="weather-coverage">35%</output><input type="range" id="weather-coverage" min="0" max="0.9" step="0.01" value="0.35" /></div>
+            <div class="range-row"><label for="weather-thickness">云层厚度</label><output id="thickness-output" for="weather-thickness">950 m</output><input type="range" id="weather-thickness" min="400" max="1800" step="50" value="950" /></div>
+            <label class="automatic-quality"><input type="checkbox" id="weather-auto-base" checked />根据温湿度估算凝结高度</label>
+            <div class="range-row"><label for="weather-base">云底高度</label><output id="base-output" for="weather-base"></output><input type="range" id="weather-base" min="100" max="3000" step="50" value="800" disabled /></div>
+            <div class="range-row"><label for="weather-shear">高空风切变</label><output id="shear-output" for="weather-shear">1.1 m/s/km</output><input type="range" id="weather-shear" min="0" max="3" step="0.1" value="1.1" /></div>
+            <p class="flow-hint" id="weather-diagnostic">海风同时推动海面、树叶和高空云层。</p>
+            <label class="automatic-quality"><input type="checkbox" id="air-enabled" checked />空气透视</label>
+            <div class="range-row"><label for="air-aerosol">空气朦胧度</label><output id="air-output" for="air-aerosol">轻霭</output><input type="range" id="air-aerosol" min="0" max="24" step="1" value="8" /></div>
+            <label class="automatic-quality"><input type="checkbox" id="air-shadows" checked />空气中的光与影</label>
+            <p class="flow-hint">海盐微粒让远景柔和，湿度会增强散射；清澈晴天的光束较淡。</p>
+          </div>
+        </section><section class="settings-pane" id="settings-lighting" role="tabpanel" aria-labelledby="tab-lighting" hidden>
+          <h2 class="settings-title">光照与显示</h2>
+          <div class="water-controls">
+            <div class="lens-switch-row"><label for="indirect-light">间接反射光</label><select id="indirect-light"><option value="off">关闭</option><option value="low" selected>一次反射 · 推荐</option><option value="high">两次反射 · 精细</option></select></div>
+            <p class="flow-hint">沙滩与植被互相反射太阳光，保留天空照明。低频缓存兼顾细节与速度。</p>
+            <div class="lens-switch-row"><label for="shadow-quality">阴影清晰度</label><select id="shadow-quality"><option value="soft">流畅 · 2048</option><option value="recommended" selected>推荐 · 4096</option><option value="fine">精细 · 6144</option><option value="ultra">极致 · 8192</option></select></div>
+            <div class="lens-switch-row"><label for="wave-resolution">海面细节</label><select id="wave-resolution"><option value="256">标准 · 256</option><option value="512" selected>清晰 · 512</option><option value="1024">极致 · 1024</option></select></div>
+            <div class="lens-switch-row"><label for="hdr-mode">显示输出</label><select id="hdr-mode"><option value="auto" selected>自动 HDR / SDR</option><option value="sdr">SDR</option><option value="hdr">HDR</option></select></div>
+            <p class="flow-hint" id="hdr-status" role="status">正在检查显示环境…</p>
+            <div class="lens-switch-row"><label for="hdr-display">显示器</label><select id="hdr-display"><option value="auto">自动识别</option></select></div>
+            <label class="automatic-quality"><input type="checkbox" id="hdr-system" checked />使用系统报告的亮度</label>
+            <div class="lens-switch-row"><label for="hdr-peak">峰值亮度</label><span><input type="number" id="hdr-peak" min="80" max="10000" step="10" value="1000" disabled /> nit</span></div>
+            <div class="lens-switch-row"><label for="hdr-white">参考白亮度</label><span><input type="number" id="hdr-white" min="40" max="1000" step="10" value="203" disabled /> nit</span></div>
+            <button type="button" id="hdr-refresh" class="float-button">重新读取显示器信息</button>
+            <p class="flow-hint" id="hdr-calibration">系统报告能力不等于实测亮度；可手动输入校准值。普通 PNG 仍导出 SDR。</p>
+          </div>
+        </section><section class="settings-pane" id="settings-time" role="tabpanel" aria-labelledby="tab-time" hidden>
+          <h2 class="settings-title">时间与地点</h2>
+          <div class="water-controls">
+            <div class="lens-switch-row"><label for="time-mode">太阳与天体</label><select id="time-mode" data-callback="onTimeChange"><option value="astronomical">按日期与地点</option><option value="artistic">自由调节太阳</option></select></div>
+            <div class="preset-options" role="group" aria-label="时间预设"><button type="button" data-time="dawn">黎明</button><button type="button" data-time="day">白昼</button><button type="button" data-time="sunset">日落</button><button type="button" data-time="moon">月夜</button><button type="button" data-time="stars">星河</button></div>
+            <label class="field-label" for="night-date">当地日期与时间</label><input class="date-field" type="datetime-local" id="night-date" value="2026-10-26T12:00" step="1" />
+            <div class="range-row"><label for="time-of-day">一天中的时刻</label><output for="time-of-day" id="time-output">12:00</output><input type="range" id="time-of-day" min="0" max="1439" value="720" step="1" data-callback="onTimeChange" /></div>
+            <div class="lens-switch-row"><label for="time-rate">时间速度</label><select id="time-rate" data-callback="onTimeChange"><option value="1">实时 · 1×</option><option value="10">10×</option><option value="60">1分钟 / 秒</option><option value="300">5分钟 / 秒</option><option value="1800">半小时 / 秒</option><option value="-60">倒放 · 1分钟 / 秒</option></select></div>
+            <label class="automatic-quality"><input type="checkbox" id="time-running" checked data-callback="onTimeChange" />推进天文时间</label>
+            <p class="flow-hint" id="utc-readout">UTC 2026-10-26 04:00:00 · UTC+08:00</p>
+            <details class="nested-settings"><summary>地点与民用时区</summary><div class="location-grid"><label for="observer-latitude">纬度 °<input type="number" id="observer-latitude" min="-90" max="90" step="0.001" value="4.478" data-callback="onLocationChange" /></label><label for="observer-longitude">经度 °<input type="number" id="observer-longitude" min="-180" max="180" step="0.001" value="118.61" data-callback="onLocationChange" /></label><label for="observer-height">海拔 m<input type="number" id="observer-height" min="-100" max="10000" step="1" value="0" data-callback="onLocationChange" /></label><label for="time-zone">UTC 时差 h<input type="number" id="time-zone" min="-12" max="14" step="0.25" value="8" data-callback="onLocationChange" /></label></div><p class="flow-hint">时区由你指定，不根据经度猜测。时差改变时保留同一 UTC 时刻。</p></details>
+            <div class="light-controls" id="artistic-sun-controls" hidden>
+              <div class="range-row"><label for="sun-azimuth">太阳方向</label><output for="sun-azimuth" id="azimuth-output">100°</output><input type="range" id="sun-azimuth" min="0" max="360" value="100" step="1" /></div>
+              <div class="range-row"><label for="sun-elevation">太阳高度</label><output for="sun-elevation" id="elevation-output">48°</output><input type="range" id="sun-elevation" min="-40" max="82" value="48" step="1" /></div>
+              <div class="range-row"><label for="sun-intensity">光照强度</label><output for="sun-intensity" id="intensity-output">100%</output><input type="range" id="sun-intensity" min="0.4" max="1.6" value="1" step="0.01" /></div>
+            </div>
+            <p class="flow-hint" id="night-info">时间只改变天体；海浪、烟花与声音继续按物理秒运行。</p>
+          </div>
+        </section><section class="settings-pane" id="settings-lamps" role="tabpanel" aria-labelledby="tab-lamps" hidden>
+          <h2 class="settings-title">地灯与手电</h2>
+          <div class="water-controls">
+            <div class="lens-switch-row"><label for="lamp-mode">地灯策略</label><select id="lamp-mode" data-callback="onLampMode"><option value="night">夜间自动亮起</option><option value="on">始终亮起</option><option value="off">全部熄灭</option></select></div>
+            <div class="lens-switch-row"><label for="lamp-select">调整哪一盏</label><select id="lamp-select"><option value="0">地灯一 · 西侧</option><option value="1">地灯二 · 东侧</option><option value="2">地灯三 · 北侧</option></select></div>
+            <label class="automatic-quality"><input type="checkbox" id="lamp-linked" />联动调整三盏灯</label>
+            <label class="automatic-quality"><input type="checkbox" id="lamp-enabled" checked data-callback="onLampChange" />这盏灯启用</label>
+            <div class="range-row"><label for="lamp-brightness">亮度</label><output id="lamp-brightness-output" for="lamp-brightness">65%</output><input type="range" id="lamp-brightness" min="0" max="1" step="0.01" value="0.65" data-callback="onLampChange" /></div>
+            <div class="lens-switch-row"><label for="lamp-color">灯光颜色</label><input type="color" id="lamp-color" value="#ffdfab" data-callback="onLampChange" /></div>
+            <p class="flow-hint" id="lamp-status">三盏低矮球灯呈三角形环绕小岛，向四周发光。联动只影响接下来的调整。</p>
+            <label class="automatic-quality"><input type="checkbox" id="flashlight-enabled" data-callback="onFlashlightChange" />开启随身手电</label>
+            <div class="range-row"><label for="flashlight-brightness">手电亮度</label><output id="flashlight-output" for="flashlight-brightness">100%</output><input type="range" id="flashlight-brightness" min="0" max="1" step="0.01" value="1" data-callback="onFlashlightChange" /></div>
+          </div>
+        </section><section class="settings-pane" id="settings-fireworks" role="tabpanel" aria-labelledby="tab-fireworks" hidden>
+          <h2 class="settings-title">海岛烟花</h2>
+          <div class="water-controls">
+            <div class="lens-switch-row"><label for="firework-type">烟花类型</label><select id="firework-type" data-callback="onFireworksChange" aria-describedby="firework-complex-description"><option value="peony">牡丹</option><option value="chrysanthemum">菊</option><option value="willow">垂柳</option><option value="palm">棕榈</option><option value="ring">笑脸</option><option value="heart">爱心</option><option value="crossette">分裂十字</option><option value="strobe">闪星</option><option value="fan">扇形彗星</option><option value="bouquet">近地花束</option><optgroup label="大型编排"><option value="display-saturn">流彩·星环</option><option value="display-heart">流彩·星心</option><option value="display-flower">流彩·星冠</option><option value="display-chase">逐光·双环</option><option value="display-vfan">金羽·往返扫射</option><option value="display-helix">螺旋·升龙</option><option value="display-vortex">旋翼·群星</option><option value="display-waterfall">星河·横空银瀑</option><option value="display-double">双响·花中花</option><option value="display-brocade">锦冠·三幕</option></optgroup></select></div>
+            <div class="lens-switch-row"><label for="firework-profile">变化方式</label><select id="firework-profile" data-callback="onFireworksChange" aria-describedby="firework-profile-hint"><option value="legacy">原有样式</option><option value="three-heart-v1">三层芯 · 菊（实验）</option><option value="three-heart-scale120-v1">三层芯 · 120米参考（实验）</option><option value="three-heart-radiant120-v1">三层菊 · 长金尾（实验）</option><option value="two-colour-v1">红转绿 · 菊（实验）</option></select></div>
+            <p class="flow-hint" id="firework-profile-hint">共20种烟花；随机燃放包含常用样式与大型编排。</p>
+            <p class="flow-hint" id="firework-complex-description" title="这是创作参考编排，尺寸与亮度未按实物测量标定。" hidden></p>
+            <div class="launch-actions"><button type="button" id="launch-firework" class="drop-button" data-callback="onLaunchFirework">发射所选</button><button type="button" id="launch-random-firework" class="float-button" data-callback="onRandomFirework">随机一发</button></div>
+            <p class="flow-hint" id="firework-height">标准仰角约120米爆开；低仰角会降低实际高度。</p>
+            <div class="range-row"><label for="firework-brightness">烟花亮度</label><output id="firework-brightness-output" for="firework-brightness">1×</output><input type="range" id="firework-brightness" min="0.1" max="32" step="0.1" value="1" /></div>
+            <p class="flow-hint">1× 是本场景的参考亮度，尚未按实物测光标定。只影响后续发射。</p>
+            <details class="effect-debug"><summary>调试选项</summary><label class="automatic-quality"><input type="checkbox" id="firework-blackout" />关闭烟花发光，保留运动与烟尘</label></details>
+            <label class="automatic-quality"><input type="checkbox" id="firework-auto" data-callback="onFireworksChange" />持续随机燃放</label>
+            <label class="automatic-quality"><input type="checkbox" id="firework-random-intervals" checked data-callback="onFireworksChange" />每次随机选择发射间隔</label>
+            <div class="auto-show-range" role="group" aria-label="自动燃放随机间隔范围">
+              <label for="firework-interval-min">最短间隔 <span><input type="number" id="firework-interval-min" min="0.35" max="30" step="0.05" value="1" required data-callback="onFireworksChange" /> 秒</span></label>
+              <label for="firework-interval-max">最长间隔 <span><input type="number" id="firework-interval-max" min="0.35" max="30" step="0.05" value="5" required data-callback="onFireworksChange" /> 秒</span></label>
+            </div>
+            <div class="range-row"><label for="firework-interval">固定发射间隔</label><output id="firework-interval-output" for="firework-interval">7.5 秒</output><input type="range" id="firework-interval" min="0.35" max="30" step="0.05" value="7.5" disabled /></div>
+            <p class="flow-hint">随机间隔开启时覆盖固定间隔，仅影响持续燃放。最短值不能大于最长值。</p>
+            <label class="automatic-quality"><input type="checkbox" id="firework-random-launch-tilt" checked data-callback="onFireworksChange" />自动燃放使用随机发射倾角</label>
+            <div class="auto-show-range" role="group" aria-label="自动燃放有符号倾角范围">
+              <label for="firework-auto-tilt-min">最小倾角 <span><input type="number" id="firework-auto-tilt-min" min="-65" max="65" step="1" value="-40" required data-callback="onFireworksChange" /> °</span></label>
+              <label for="firework-auto-tilt-max">最大倾角 <span><input type="number" id="firework-auto-tilt-max" min="-65" max="65" step="1" value="40" required data-callback="onFireworksChange" /> °</span></label>
+            </div>
+            <p class="flow-hint">0°为竖直，正负表示沿发射方位的两侧倾斜；只影响自动燃放。关闭后自动燃放使用下方固定仰角，手动发射仍使用该仰角。</p>
+            <div class="range-row"><label for="firework-spread">发射方向随机范围</label><output id="firework-spread-output" for="firework-spread">±3°</output><input type="range" id="firework-spread" min="0" max="15" step="0.5" value="3" /></div>
+            <div class="range-row"><label for="firework-tilt">图案倾斜随机范围</label><output id="firework-tilt-output" for="firework-tilt">±12°</output><input type="range" id="firework-tilt" min="0" max="45" step="1" value="12" /></div>
+            <div class="range-row"><label for="firework-roll">图案旋转随机范围</label><output id="firework-roll-output" for="firework-roll">±8°</output><input type="range" id="firework-roll" min="0" max="30" step="1" value="8" /></div>
+            <p class="flow-hint" id="firework-capacity-hint">并发上限以实际配置为准；满额时跳过新发射，不积压排队。手动发射保留细微方向随机；爆开图案随机始终生效。</p>
+            <label class="automatic-quality"><input type="checkbox" id="firework-direction" checked data-callback="onFireworksChange" />自动朝向外海</label>
+            <div class="range-row"><label for="firework-azimuth">发射方位</label><output id="firework-azimuth-output" for="firework-azimuth">110°</output><input type="range" id="firework-azimuth" min="0" max="360" step="1" value="110" data-callback="onFireworksChange" /></div>
+            <div class="range-row"><label for="firework-elevation">手动 / 固定发射仰角</label><output id="firework-elevation-output" for="firework-elevation">78°</output><input type="range" id="firework-elevation" min="25" max="90" step="1" value="78" data-callback="onFireworksChange" /></div>
+            <label class="automatic-quality"><input type="checkbox" id="firework-frame" data-callback="onFireworksChange" />自动构图观看烟花</label>
+            <p class="flow-hint">方向与亮度影响后续发射，照明与倒影同步变化。手动移动立即接管镜头；已升空的烟花继续燃烧。</p>
+            <button type="button" id="stop-fireworks" class="float-button" data-callback="onStopFireworks">停止后续发射</button>
+            <div class="lens-switch-row"><label for="smoke-quality">烟气表现</label><select id="smoke-quality" data-callback="onFireworksChange" aria-describedby="smoke-quality-status"><option value="light" selected>轻量短烟 · 推荐</option><option value="full">长期体积烟 · 高开销</option><option value="off">关闭烟气</option></select></div>
+            <p class="flow-hint" id="smoke-quality-status" role="status">轻量短烟使用简化烟团，受整体烟花光源照亮并较快消散；不计算逐源穿烟遮光。切换烟气模式会清空已有烟气。</p>
+            <label class="automatic-quality"><input type="checkbox" id="persistent-smoke" />体积烟尘 · 随风长期保留</label>
+            <p class="flow-hint">此开关对应长期体积烟：勾选切到长期模式，取消切到关闭。推荐短烟请在上方选择；它更省计算，但不会长期累积烟雾。</p>
+            <label class="automatic-quality"><input type="checkbox" id="firework-cloud-light" checked />烟花照亮云层</label>
+            <label class="automatic-quality"><input type="checkbox" id="smoke-resolved-light" data-callback="onFireworksChange" />细致烟气受光 · 实验选项</label>
+            <p class="flow-hint" id="smoke-light-status">让烟气跟随附近火星的颜色与位置受光。</p>
+            <label class="automatic-quality"><input type="checkbox" id="smoke-gpu" checked />GPU 烟尘遮光 · 实验选项</label>
+            <p class="flow-hint" id="smoke-gpu-status" role="status">正在检查设备支持。</p>
+            <button type="button" id="clear-smoke" class="float-button">清除当前烟尘</button>
+            <p class="flow-hint">无风时烟尘缓缓升散。关闭体积烟只隐藏效果，清除可重置积累；连续燃放会增加绘制开销。</p>
+            <p class="flow-hint" id="firework-status" role="status">准备发射。</p>
+          </div>
+        </section><section class="settings-pane" id="settings-camera" role="tabpanel" aria-labelledby="tab-camera">
+          <h2 class="settings-title">画质与镜头</h2>
+          <div class="water-controls">
+<div class="quality-row"><label for="quality">画质</label><select id="quality"><option value="low">低</option><option value="balanced">较低</option><option value="medium" selected>中</option><option value="high">高</option><option value="ultra">极高</option><option value="custom" disabled hidden>自定义</option></select></div>
+<button type="button" id="stats-toggle" class="inline-diagnostic" aria-pressed="false"><span id="stats-toggle-label">显示帧率</span></button>
+<p class="flow-hint" id="quality-status">中档是推荐起点；可按设备调整。</p>
+            <div class="range-row"><label for="lens-focal">焦距</label><output for="lens-focal" id="focal-output">28 mm</output><input type="range" id="lens-focal" min="24" max="70" value="28" step="1" /></div>
+            <label class="automatic-quality"><input type="checkbox" id="night-exposure" checked />自动曝光 · 保留昼夜明暗</label>
+            <p class="exposure-readout" id="camera-exposure-readout" aria-live="off">当前曝光：等待画面</p>
+            <div class="range-row"><label for="camera-manual-gain">手动曝光增益</label><output id="camera-manual-gain-output" for="camera-manual-gain">0 EV</output><input type="range" id="camera-manual-gain" min="-4" max="20" step="0.25" value="0" disabled /></div>
+            <p class="flow-hint">关闭自动曝光时锁定当前增益。正值使画面更亮；它不是摄影机的绝对 EV100。</p>
+            <div class="range-row"><label for="lens-exposure">曝光补偿</label><output for="lens-exposure" id="exposure-output">0 EV</output><input type="range" id="lens-exposure" min="-1.5" max="1.5" value="0" step="0.1" /></div>
+            <div class="lens-switch-row"><label for="lens-dof"><input type="checkbox" id="lens-dof" />镜头景深</label><select id="lens-aperture" aria-label="光圈" disabled><option value="1.4">f/1.4</option><option value="2.8">f/2.8</option><option value="4">f/4</option><option value="5.6">f/5.6</option><option value="8" selected>f/8</option><option value="11">f/11</option><option value="16">f/16</option></select></div>
+            <label class="automatic-quality"><input type="checkbox" id="focus-auto" checked />对焦跟随环绕中心</label>
+            <div class="lens-switch-row"><label for="focus-distance">对焦距离</label><span><input type="number" id="focus-distance" min="0.3" max="24000" step="0.1" value="60" /> 米</span></div>
+            <button type="button" id="focus-pick" class="float-button">点选对焦</button>
+            <p class="flow-hint" id="focus-info">28mm 广角远景本就清晰。靠近叶片、增大光圈或焦距，才能明显看出虚化。</p>
+            <div class="lens-switch-row"><label for="antialias">抗锯齿</label><select id="antialias"><option value="smaa">MSAA + SMAA</option><option value="msaa">MSAA</option></select></div>
+            <label class="automatic-quality"><input type="checkbox" id="temporal-aa" checked />稳定细叶与树干边缘</label>
+            <label class="automatic-quality"><input type="checkbox" id="glint-aa" checked />抑制海面细碎闪烁</label>
+            <label class="automatic-quality"><input type="checkbox" id="firelight-aa" checked aria-describedby="firelight-aa-hint" />柔和火光抗锯齿</label>
+            <p class="flow-hint" id="firelight-aa-hint">改善远处细小火光的像素边缘；不改变烟花实际尺寸。</p>
+            <label class="automatic-quality"><input type="checkbox" id="optical-bloom" checked />镜头微量高光散射</label>
+            <div class="range-row"><label for="optical-bloom-strength">高光散射程度</label><output for="optical-bloom-strength" id="optical-bloom-strength-output">75%</output><input type="range" id="optical-bloom-strength" min="0" max="100" value="75" step="1" /></div>
+            <label class="automatic-quality"><input type="checkbox" id="optical-flare" />镜头光晕与鬼影</label>
+            <label class="automatic-quality"><input type="checkbox" id="automatic-quality" />自动降低内部像素以保流畅（可选）</label>
+            <div class="lens-switch-row"><label for="frame-budget">参考帧率</label><select id="frame-budget"><option value="60" selected>60 · 推荐</option><option value="30">30 · 高级画质</option><option value="24">24 · 画质优先</option></select></div>
+            <p class="flow-hint">默认完整分辨率。此项只在开启时降低内部像素再重建，不改贴图、几何或阴影，也不锁帧。</p>
+          </div>
+        </section><section class="settings-pane" id="settings-navigation" role="tabpanel" aria-labelledby="tab-navigation" hidden>
+  <h2 class="settings-title">漫游与操作</h2>
+  <p class="flow-hint">时刻与机位可分别选择。底部直接放烟花；有后续发射时，同一按钮可停止后续。</p>
+  <p class="touch-guide">单指拖动环绕，双指缩放与平移。</p>
+  <dl class="control-guide">
+    <div><dt>环绕海岛</dt><dd>左键拖动</dd></div>
+    <div><dt>看向四周</dt><dd>右键拖动</dd></div>
+    <div><dt>前后移动</dt><dd>滚轮 / <kbd>WASD</kbd></dd></div>
+    <div><dt>投一颗石子</dt><dd>按住左键蓄力，松开投石；拖动取消。</dd></div>
+    <div><dt>暂停 / 继续</dt><dd><kbd>空格</kbd> 或底部暂停按钮</dd></div>
+    <div><dt>安静看海</dt><dd><kbd>H</kbd> 隐藏界面，右下角可恢复</dd></div>
+  </dl>
+  <details class="water-settings"><summary>更多键盘操作</summary><p class="flow-hint"><kbd>Q E</kbd> 转向，<kbd>R F</kbd> 俯仰，PageUp / PageDown 升降；Shift 加速。按住右键滚轮可调移动速度。Alt + 点击移动环绕中心；Home 还原视角。</p></details>
+  <p class="flow-hint" id="navigation-status">移动速度由漫游控制器提供。</p>
+  <button type="button" id="restore-pivot" class="float-button">环绕中心归位</button>
+</section></div></div>
+    </aside>
+
+    <section id="experience-dock" class="experience-dock chrome collapsed" aria-label="烟花与常用操作">
+      <div class="experience-heading">
+        <button type="button" id="fireworks-toggle" class="drawer-heading" aria-expanded="false" aria-controls="fireworks-content"><span id="quick-current-style">牡丹</span><svg class="chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="m4 10 4-4 4 4"/></svg></button>
+        <button type="button" id="quick-launch" class="quick-primary quick-launch-now">放烟花</button><div class="playback-actions" aria-label="场景操作"><button type="button" id="pause" class="small-icon" aria-label="暂停场景" aria-pressed="false" title="暂停场景 · 空格"><svg class="pause-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M8 6v12M16 6v12"/></svg><svg class="play-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="m8 5 11 7-11 7V5Z"/></svg></button><button type="button" id="reset" class="small-icon" aria-label="重置场景与画面设置" title="重置场景与画面设置"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5v6h6M4.7 10a8 8 0 1 1-.2 5"/></svg></button></div>
+      </div>
+      <div id="fireworks-content" class="fireworks-quick" hidden>
+        <div class="quick-heading"><button type="button" class="text-action" data-view="fireworks-close" aria-pressed="false">烟花观赏机位 <span aria-hidden="true">↗</span></button><button type="button" id="quick-firework-settings" class="text-action">详细烟花设置 <span aria-hidden="true">↗</span></button></div>
+        <div class="quick-firework-controls">
+          <label class="sr-only" for="quick-firework-type">快捷烟花样式</label>
+          <select id="quick-firework-type" aria-describedby="quick-firework-description">
+            <optgroup label="常用样式"><option value="type:peony">牡丹</option><option value="type:chrysanthemum">菊</option><option value="type:willow">垂柳</option><option value="type:palm">棕榈</option><option value="type:smiley">笑脸</option><option value="type:heart">爱心</option><option value="type:crossette">分裂十字</option><option value="type:strobe">闪星</option><option value="type:comet">扇形彗星</option><option value="type:bouquet">近地花束</option></optgroup>
+            <optgroup label="大型编排"><option value="type:display-saturn">流彩·星环</option><option value="type:display-heart">流彩·星心</option><option value="type:display-flower">流彩·星冠</option><option value="type:display-chase">逐光·双环</option><option value="type:display-vfan">金羽·往返扫射</option><option value="type:display-helix">螺旋·升龙</option><option value="type:display-vortex">旋翼·群星</option><option value="type:display-waterfall">星河·横空银瀑</option><option value="type:display-double">双响·花中花</option><option value="type:display-brocade">锦冠·三幕</option></optgroup>
+            <optgroup label="单发实验样式"><option value="profile:three-heart-v1">三层芯 · 菊（实验）</option><option value="profile:three-heart-radiant120-v1">三层菊 · 长金尾（实验）</option><option value="profile:two-colour-v1">红转绿 · 菊（实验）</option></optgroup>
+          </select>
+          <button type="button" id="quick-random" class="quick-secondary">随机一发</button>
+          <button type="button" id="quick-auto" class="quick-secondary" aria-pressed="false">持续随机</button>
+          <button type="button" id="quick-stop" class="quick-secondary">停止后续</button>
+        </div>
+        <p class="flow-hint" id="quick-firework-description" title="这是创作参考编排，尺寸与亮度未按实物测量标定。" hidden></p>
+        <p id="quick-firework-status" role="status" aria-live="polite">选择样式，立即发射。</p>
+
+      </div>
+      <p id="throw-control-hint" class="control-hint">按住左键蓄力，松开投石</p>
+    </section>
+
+    <div id="performance-hud" class="performance-hud chrome" role="group" aria-label="实时性能"><span><strong id="fps-value">—</strong><span class="fps-unit">FPS</span></span><span id="performance-detail">正在测量</span></div>
+
+    <button type="button" id="restore-ui" aria-label="显示界面" hidden>显示界面<span>H</span></button>
+    <div id="toast" role="status" aria-live="polite"></div>
+    <div id="impact-locator" aria-hidden="true" hidden><span></span><b>落水点</b></div>
+    <div id="leaf-locator" aria-hidden="true" hidden><span></span><b>叶片 · 22 cm</b></div>
+    <div id="throw-charge" class="chrome" role="meter" aria-label="投石力度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" hidden><span id="throw-charge-label">投石力度</span><i aria-hidden="true"><b></b></i></div>
+    <span id="scene-status" class="sr-only" aria-live="polite"></span>
+    <noscript><p class="static-notice">请启用 JavaScript 来探索这座岛。<a href="../../projects/glass-atoll/#gallery">查看实机画面</a></p></noscript>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

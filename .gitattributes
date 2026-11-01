@@ -1,2 +1,5 @@
 # Vendored exports are verified byte-for-byte by tools-provenance.json.
 public/tools/** -text whitespace=cr-at-eol
+# Keep the standalone Atoll snapshot identical on Windows and Pages' Linux host.
+public/play/** -text whitespace=-trailing-space,-blank-at-eof,cr-at-eol
+public/play/glass-atoll/vendor/** whitespace=-trailing-space,-blank-at-eof,-space-before-tab,cr-at-eol

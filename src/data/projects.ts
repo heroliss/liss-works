@@ -152,18 +152,19 @@ export const projects: Project[] = [
     slug: 'glass-atoll', repo: 'glass-atoll', name: '玻璃海 · Atoll', category: '实时海岛场景', group: 'games',
     summary: '走近一座可漫游的热带离岛，看浅海、天光、昼夜与烟花随视角流动。',
     intro: '一座由实时 WebGL 场景构成的热带离岛。白沙、椰树、天空与透明浅海围绕同一片光运转；访客可以调整视角与时间，向水面投石、放下漂浮叶片，在夜色里欣赏烟花。',
-    status: '持续打磨', tags: ['WebGL 2', 'JavaScript', 'Three.js', '实时渲染'],
+    status: '可在线体验', demo: '/play/glass-atoll/', tags: ['WebGL 2', 'JavaScript', 'Three.js', '实时渲染'],
     features: [
       { title: '看得见海底的浅海', body: '水面把透明、反射和波纹叠在一起，近岸可见海床与随光变化的焦散。' },
       { title: '同一座岛的不同光线', body: '切换昼夜与天气，调整机位和镜头，让天空、椰树与水面重新组合成画面。' },
       { title: '让海面与夜空回应', body: '投石和漂浮叶片带来近处的小互动；夜间烟花加入倒影、环境受光与分层音效。' },
     ],
     usage: [
+      { title: '打开在线体验', body: '点击在线体验即可进入海岛，无需安装；首次加载会准备场景资源，声音在首次交互后开启。' },
       { title: '从不同机位看海岸', body: '近看沙滩和透光浅海，再把镜头抬高，观察白沙岛屿与海水颜色的整体构图。' },
       { title: '观察一天的光线', body: '从晴天切到日落或夜晚，留意天光、椰树剪影和海面反射如何一起变化。' },
       { title: '为静景加入动作', body: '投石、放叶、点燃烟花，看看水面、灯光和声音怎样回应。' },
     ],
-    note: '截图来自项目实际 WebGL 运行画面。视觉与性能仍在持续优化，公开体验入口将在可用时补充。',
+    note: '截图来自项目实际 WebGL 运行画面。在线版可直接漫游、切换昼夜并体验水面与烟花互动；初次加载需要下载场景资源。',
     cover: glassAtoll[0], gallery: glassAtoll, related: ['learnopengl', 'outpost', 'nomadworkshop'],
   },
   {

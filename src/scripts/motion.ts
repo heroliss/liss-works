@@ -13,6 +13,7 @@ import { setupProjectEnding } from './project-ending';
 import { setupLabRoomMotion } from './lab-room-motion';
 import { setupAboutStudioMotion } from './about-studio-motion';
 import { setupCreatorRoom } from './creator-room';
+import { setupAtollWater } from './atoll-water';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -196,6 +197,7 @@ function initializeMotion() {
   const disposeLabRoom = setupLabRoomMotion({ signal, preference });
   const disposeAboutStudio = setupAboutStudioMotion({ signal, preference });
   const disposeCreatorRoom = setupCreatorRoom({ signal, preference });
+  const disposeAtollWater = setupAtollWater({ signal, preference });
   if (storedPause !== undefined) {
     window.dispatchEvent(new CustomEvent('portfolio:motion-state', { detail: { paused: storedPause } }));
   }
@@ -230,6 +232,7 @@ function initializeMotion() {
     disposeLabRoom();
     disposeAboutStudio();
     disposeCreatorRoom();
+    disposeAtollWater();
     media.revert();
     delete root.dataset.motion;
   };

@@ -36,7 +36,7 @@ const glassAtoll: ProjectStory = {
       ],
     },
   ],
-  footnote: '这是持续开发中的实时场景。画面与流畅度会随浏览器、显卡和显示分辨率变化；目前没有对所有设备作统一帧率承诺。',
+  footnote: '在线版需要支持 WebGL 2 的浏览器。可在画面设置中降低画质；声音需先点击或触摸页面。场景素材署名可从在线体验中的来源入口查看。',
 };
 
 export default glassAtoll;

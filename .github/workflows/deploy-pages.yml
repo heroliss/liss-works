@@ -40,6 +40,8 @@ jobs:
         run: npm run test:paths
       - name: Check release downloads
         run: npm run test:releases
+      - name: Check Atoll common actions
+        run: npm run test:atoll
       - name: Build static site
         run: npm run build
       - name: Verify generated pages and assets
