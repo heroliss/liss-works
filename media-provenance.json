@@ -1,8 +1,8 @@
 {
   "schema": "showcase.website-media.v1",
-  "generated_at_utc": "2026-10-29T20:34:49.170586+00:00",
+  "generated_at_utc": "2026-11-01T00:46:18.089870+00:00",
   "source_manifest": "captures/selected-manifest.json",
-  "source_manifest_sha256": "2c1802696f789defdfcc69f2f1f64badcce99c0ed4d9fdb33c6a59104e4fe9e3",
+  "source_manifest_sha256": "67d60c2289c031d14b180bc0b26ddcac2548fd7d425474912616c17353b85997",
   "originals_modified": false,
   "transform": "Full-image WebP encoding and Lanczos proportional downscaling only; no crop, no AI alterations, no upscaling.",
   "images": [
@@ -7188,6 +7188,291 @@
       ]
     },
     {
+      "repo": "glass-atoll",
+      "source": "glass-atoll/verification/40-aerial-final.png",
+      "source_sha256": "73a3bdb7f273b339bd208b30bcebf16760fac5a435674cf141b13dc3378281b5",
+      "source_bytes": 162402,
+      "source_width": 1440,
+      "source_height": 900,
+      "source_authenticity": "真实 WebGL 场景截图：晴天俯瞰",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site-next/public/media/glass-atoll/40-aerial-final.webp",
+        "url": "/media/glass-atoll/40-aerial-final.webp",
+        "bytes": 726622,
+        "sha256": "b2e5566865cb57009c5a764e54b7036954faabd895aa72816f22e897c7f6940f",
+        "width": 1440,
+        "height": 900,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site-next/public/media/glass-atoll/40-aerial-final-320.webp",
+          "url": "/media/glass-atoll/40-aerial-final-320.webp",
+          "bytes": 11696,
+          "sha256": "28ee6a9301689cdb7d96780447bf88c5ec29b4c1e6c47aed4ed5224c1f98882d",
+          "width": 320,
+          "height": 200,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site-next/public/media/glass-atoll/40-aerial-final-640.webp",
+          "url": "/media/glass-atoll/40-aerial-final-640.webp",
+          "bytes": 49078,
+          "sha256": "7eef1ad3ae51fb25392c7df7f4117e977343c716588a0c248312a2a20fcfaddb",
+          "width": 640,
+          "height": 400,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site-next/public/media/glass-atoll/40-aerial-final-960.webp",
+          "url": "/media/glass-atoll/40-aerial-final-960.webp",
+          "bytes": 102336,
+          "sha256": "25e78e628eeccad0983f6d2c7cad822909c38a0fc0a670c616b0e626071d937a",
+          "width": 960,
+          "height": 600,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "glass-atoll",
+      "source": "glass-atoll/verification/58-final-desktop-v2.png",
+      "source_sha256": "a2248709e77d861227960e43af3fa9f55dff141ffb4af4dad02911492e0ec77c",
+      "source_bytes": 1580050,
+      "source_width": 1440,
+      "source_height": 900,
+      "source_authenticity": "真实 WebGL 场景截图：晴天近景",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site-next/public/media/glass-atoll/58-final-desktop-v2.webp",
+        "url": "/media/glass-atoll/58-final-desktop-v2.webp",
+        "bytes": 1125458,
+        "sha256": "85b1b724f98ffe6fb867bb4052d030bc58e4aa8206541cd7bbdf94d0d09166fb",
+        "width": 1440,
+        "height": 900,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site-next/public/media/glass-atoll/58-final-desktop-v2-320.webp",
+          "url": "/media/glass-atoll/58-final-desktop-v2-320.webp",
+          "bytes": 18864,
+          "sha256": "b9f1608aff7bcbf6124c918a2ac90270ae03c26ba63e855352de6759f93216be",
+          "width": 320,
+          "height": 200,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site-next/public/media/glass-atoll/58-final-desktop-v2-640.webp",
+          "url": "/media/glass-atoll/58-final-desktop-v2-640.webp",
+          "bytes": 65614,
+          "sha256": "22f7f64dcaa9f8bdd2fa3cac593068036574090f9d8c5029d849a9fc88e491f3",
+          "width": 640,
+          "height": 400,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site-next/public/media/glass-atoll/58-final-desktop-v2-960.webp",
+          "url": "/media/glass-atoll/58-final-desktop-v2-960.webp",
+          "bytes": 134562,
+          "sha256": "f0bab05c4aec73673133bff22a68ac07dfe67b817fdef94d8e0e2dc3bba14097",
+          "width": 960,
+          "height": 600,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "glass-atoll",
+      "source": "glass-atoll/verification/ui-r2/sunset-island-final.png",
+      "source_sha256": "abd0c215144eb4e650d4fbef129e0d3c3d7f0a706b75fb8f28666998f6309fe6",
+      "source_bytes": 147899,
+      "source_width": 1209,
+      "source_height": 1292,
+      "source_authenticity": "真实 WebGL 场景截图：黄昏",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site-next/public/media/glass-atoll/sunset-island-final.webp",
+        "url": "/media/glass-atoll/sunset-island-final.webp",
+        "bytes": 631954,
+        "sha256": "91c8595c00c89c1361634ce3e26b4613cff0e9a28cc3b333233dc455cb4a8274",
+        "width": 1209,
+        "height": 1292,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site-next/public/media/glass-atoll/sunset-island-final-320.webp",
+          "url": "/media/glass-atoll/sunset-island-final-320.webp",
+          "bytes": 18312,
+          "sha256": "d3650ecc68f972c4cd42f4b7cf03866c174f6f587b9171b93af5e5723eb8991e",
+          "width": 320,
+          "height": 342,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site-next/public/media/glass-atoll/sunset-island-final-640.webp",
+          "url": "/media/glass-atoll/sunset-island-final-640.webp",
+          "bytes": 59390,
+          "sha256": "2143dbbf6ac7abd6a10d979af887085b4f3fcd270498bdcc33b2b9fc2f5cbb3b",
+          "width": 640,
+          "height": 684,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site-next/public/media/glass-atoll/sunset-island-final-960.webp",
+          "url": "/media/glass-atoll/sunset-island-final-960.webp",
+          "bytes": 116580,
+          "sha256": "529e7588baa670705a828e722b6781dccb50fb8ea7e8c49c44e0a276739b6e62",
+          "width": 960,
+          "height": 1026,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "glass-atoll",
+      "source": "glass-atoll/verification/complex-fireworks/flower-final.png",
+      "source_sha256": "e13a064dbe8f0afcaf2e404ca6486e96c3a75add617f1cc7ab75473737b17dfc",
+      "source_bytes": 74566,
+      "source_width": 1209,
+      "source_height": 1292,
+      "source_authenticity": "真实 WebGL 场景截图：夜景烟花",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site-next/public/media/glass-atoll/flower-final.webp",
+        "url": "/media/glass-atoll/flower-final.webp",
+        "bytes": 215194,
+        "sha256": "7057477e837ffffb882dd1089d59ca14bf1bf6d380787b1c054827ee43be3dd8",
+        "width": 1209,
+        "height": 1292,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site-next/public/media/glass-atoll/flower-final-320.webp",
+          "url": "/media/glass-atoll/flower-final-320.webp",
+          "bytes": 8520,
+          "sha256": "3473e2c484c688d47e9b01b3d98ed16769e6e81b7f2e6501a1671b67439be683",
+          "width": 320,
+          "height": 342,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site-next/public/media/glass-atoll/flower-final-640.webp",
+          "url": "/media/glass-atoll/flower-final-640.webp",
+          "bytes": 25460,
+          "sha256": "1a03a41fc5104025af1d794975d90f01a7b83f2784a5885abace72717afe4cd5",
+          "width": 640,
+          "height": 684,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site-next/public/media/glass-atoll/flower-final-960.webp",
+          "url": "/media/glass-atoll/flower-final-960.webp",
+          "bytes": 47958,
+          "sha256": "e2c1a3057bcbea82c5eb1ee54b1f34c4205530e9a89f8fd4f9c91c4f911519c0",
+          "width": 960,
+          "height": 1026,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "glass-atoll",
+      "source": "glass-atoll/verification/sound-bloom-controls/controls-desktop.png",
+      "source_sha256": "27401693fe8301973af71803366ebd654639e0f12eaf5dd4e68f29f102833dec",
+      "source_bytes": 846452,
+      "source_width": 1280,
+      "source_height": 900,
+      "source_authenticity": "真实 WebGL 场景截图：设置面板",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site-next/public/media/glass-atoll/controls-desktop.webp",
+        "url": "/media/glass-atoll/controls-desktop.webp",
+        "bytes": 561984,
+        "sha256": "b9a521019a278c63635ba13f5e54aaabf1157412247f583a13e8894f22441d85",
+        "width": 1280,
+        "height": 900,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site-next/public/media/glass-atoll/controls-desktop-320.webp",
+          "url": "/media/glass-atoll/controls-desktop-320.webp",
+          "bytes": 15894,
+          "sha256": "fda57f840c187c014ded2caca3b8b723790952953b2643797dbdb531ceaff94a",
+          "width": 320,
+          "height": 225,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site-next/public/media/glass-atoll/controls-desktop-640.webp",
+          "url": "/media/glass-atoll/controls-desktop-640.webp",
+          "bytes": 51618,
+          "sha256": "0a8ab5a3af0a66631250eb9f4940f4f9a46ae78f0aba120787345648228f0f6f",
+          "width": 640,
+          "height": 450,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site-next/public/media/glass-atoll/controls-desktop-960.webp",
+          "url": "/media/glass-atoll/controls-desktop-960.webp",
+          "bytes": 102434,
+          "sha256": "e750c086e18262fc0e9010dda4b21a19f8c39b0369ebd99d061ae025a34e34a1",
+          "width": 960,
+          "height": 675,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
       "repo": "SSFramework",
       "source": "captures/SSFramework/selected/SSFramework-architecture.png",
       "source_sha256": "369a793ac1f982a1af40dbf51c986e6648a1bf2f66b4e552ff01d3783c239d49",
@@ -7771,16 +8056,16 @@
     "note": "Real map UI capture, 19.133 s, encoded 30 CFR with frame duplication; not a rendering performance claim."
   },
   "totals": {
-    "original_image_count": 136,
-    "exported_image_count": 544,
-    "source_image_bytes": 43741297,
-    "exported_image_bytes": 44054260,
+    "original_image_count": 141,
+    "exported_image_count": 564,
+    "source_image_bytes": 46552666,
+    "exported_image_bytes": 48143788,
     "video_bytes": 1363373,
-    "font_bytes": 356364,
-    "font_license_and_provenance_bytes": 16987,
-    "published_media_bytes": 45773997,
-    "total_public_asset_count": 550,
-    "total_public_asset_bytes": 45790984
+    "font_bytes": 369832,
+    "font_license_and_provenance_bytes": 17147,
+    "published_media_bytes": 49876993,
+    "total_public_asset_count": 570,
+    "total_public_asset_bytes": 49894140
   },
   "fonts": {
     "codec": "fontTools WOFF2 with Node native zlib Brotli (quality 11 / font mode), invoked by fontTools",
@@ -7793,6 +8078,7 @@
       "site-next/src/components/ExplorationInvitation.astro",
       "site-next/src/components/FrameworkDiagram.astro",
       "site-next/src/components/FrameworkShowcase.astro",
+      "site-next/src/components/GlassAtollFeature.astro",
       "site-next/src/components/HomeAtmosphere.astro",
       "site-next/src/components/Icon.astro",
       "site-next/src/components/LabWorkbench.astro",
@@ -7821,6 +8107,7 @@
       "site-next/src/data/restored-bundles.ts",
       "site-next/src/data/restored-projects.ts",
       "site-next/src/data/stories/dubforge.ts",
+      "site-next/src/data/stories/glass-atoll.ts",
       "site-next/src/data/stories/other-projects.ts",
       "site-next/src/data/stories/restored-projects.ts",
       "site-next/src/data/stories/ssframework.ts",
@@ -7878,6 +8165,7 @@
       "site-next/src/styles/expressive-home.css",
       "site-next/src/styles/factory-sequence.css",
       "site-next/src/styles/framework-showcase.css",
+      "site-next/src/styles/glass-atoll-feature.css",
       "site-next/src/styles/global.css",
       "site-next/src/styles/home-atmosphere.css",
       "site-next/src/styles/home-next.css",
@@ -7935,14 +8223,14 @@
       {
         "path": "site-next/public/fonts/noto-sans-sc-subset.woff2",
         "url": "/fonts/noto-sans-sc-subset.woff2",
-        "bytes": 341788,
-        "sha256": "3b4d4e217595237436bf7a0f3d10c1f02f3db12007c8fb0bbc24cd848bbdda94",
+        "bytes": 355256,
+        "sha256": "20ae3439598ac776781b77d78cfca51b80c718c9823b7325542da2ede658e248",
         "family": "Noto Sans SC",
         "source": "C:\\Windows\\Fonts\\NotoSansSC-VF.ttf",
         "source_sha256": "763146584cf0710223441356b4395e279021b0806c196614377a7a0174ae074a",
         "source_bytes": 17773244,
-        "requested_codepoints": 1205,
-        "included_codepoints": 1205,
+        "requested_codepoints": 1253,
+        "included_codepoints": 1253,
         "missing_cjk": [],
         "roundtrip_decode_verified": true
       }
@@ -7966,7 +8254,7 @@
   "source_manifests": [
     {
       "path": "captures/selected-manifest.json",
-      "sha256": "2c1802696f789defdfcc69f2f1f64badcce99c0ed4d9fdb33c6a59104e4fe9e3"
+      "sha256": "67d60c2289c031d14b180bc0b26ddcac2548fd7d425474912616c17353b85997"
     },
     {
       "path": "site-next/media-additions.json",

@@ -13,10 +13,14 @@ const familyMotifs: Record<string, string> = {
   systems: 'pipeline', mapping: 'pipeline', glyphs: 'glyph', text: 'reading',
   journal: 'reading', desktop: 'desktop', focus: 'focus', blocks: 'blocks',
   optics: 'light', research: 'paths', paths: 'paths', routing: 'paths',
-  sorting: 'sorting', evolution: 'tree',
+  sorting: 'sorting', evolution: 'tree', island: 'shore',
 };
 const motif = familyMotifs[world.family] ?? ({ nodes: 'circuit', map: 'terrain', tree: 'tree', bars: 'sorting', route: 'paths', reading: 'reading', light: 'light', glyph: 'glyph', blocks: 'blocks', focus: 'focus', pipeline: 'pipeline' }[world.motion] ?? 'orbit');
 const drawings: Record<string, Drawing> = {
+  shore: {
+    faces: ['M-110 507C59 331 273 343 396 470S410 743 237 820S-32 747-110 507Z', 'M1370 197C1465 94 1647 116 1740 240S1646 501 1503 457S1275 302 1370 197Z'],
+    lines: ['M-168 517C42 287 319 311 454 457S473 790 253 882S-83 774-168 517Z', 'M-222 532C32 243 361 279 512 444S534 838 269 945S-134 799-222 532Z', 'M1320 177C1441 40 1669 65 1790 224S1681 568 1499 514S1189 310 1320 177Z', 'M1267 154C1417-14 1697 12 1840 208S1716 635 1495 571S1103 318 1267 154Z', 'M650 905C910 811 1124 971 1370 877S1700 808 1950 883'],
+  },
   circuit: {
     faces: ['M80 440L292 322L452 414L241 535Z', 'M1364 176L1539 78L1710 176L1535 278Z', 'M1346 828L1538 716L1727 824L1534 940Z'],
     lines: ['M240 422L403 326H579L662 242H823', 'M342 482L531 590H686L756 660', 'M1538 178L1387 266V403L1286 462H1134', 'M1534 826L1365 730H1214L1122 784H988', 'M1428 218L1333 274V348L1239 402'],

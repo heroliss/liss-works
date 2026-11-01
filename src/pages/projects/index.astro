@@ -13,7 +13,7 @@ import '../../styles/spatial-materials.css';
 const orderedProjects = prioritizeProjects(projects);
 const initial = orderedProjects[0];
 const signature = getProjectSignature(initial.slug);
-const tags = ['Unity','C#','C++','AI','Python','Web','Qt','.NET','OpenGL','算法'];
+const tags = ['Unity','C#','C++','AI','Python','Web','WebGL 2','Three.js','Qt','.NET','OpenGL','算法'];
 ---
 <Base title="全部工程" active="projects" description={`浏览 Liss 的${projects.length}个独立开发工程：游戏与Unity工具、AI与数据应用、图形与算法实验。`}>
  <div class="shell archive-page archive-atlas" data-project-atlas style={`--atlas-tone:${getProjectWorld(initial.slug).accent}`}>

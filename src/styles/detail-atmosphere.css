@@ -15,6 +15,7 @@ body:has(.detail-page) .site-header { position:relative; z-index:30; }
 .detail-page[data-world-family=editing] { --detail-cool:#9bccec; --detail-warm:#e7b7a7; }
 .detail-page[data-world-family=battlefield] { --detail-cool:#95bdd8; --detail-warm:#edb779; }
 .detail-page[data-world-family=survival] { --detail-cool:#8ecbbf; --detail-warm:#d9bd86; }
+.detail-page[data-world-family=island] { --detail-cool:#9cddd8; --detail-warm:#e0c5a2; }
 .detail-page[data-world-family=strategy] { --detail-cool:#a4cadd; --detail-warm:#dfc49d; }
 .detail-page[data-world-family=flow] { --detail-cool:#a2c3d6; --detail-warm:#e0bf87; }
 .detail-page[data-world-family=build] { --detail-cool:#9cbfce; --detail-warm:#edc19b; }

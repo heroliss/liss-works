@@ -23,7 +23,7 @@ export interface Project {
   features: { title: string; body: string }[];
   usage: { title: string; body: string; code?: string; language?: string }[];
   note?: string;
-  source: string;
+  source?: string;
   demo?: string;
   download?: { repository: string; assetPattern: string };
   docs?: string;

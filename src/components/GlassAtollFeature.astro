@@ -1,0 +1,26 @@
+---
+import type { Project } from '../data/types';
+import { sitePath } from '../lib/site-path';
+import Icon from './Icon.astro';
+import MediaImage from './MediaImage.astro';
+import '../styles/glass-atoll-feature.css';
+
+interface Props { project: Project }
+const { project } = Astro.props;
+const scenes = [project.cover, project.gallery[2], project.gallery[3]];
+const captions = ['晴日，看清浅海的层次。', '日落，让光留在海面。', '入夜，等一朵烟花。'];
+---
+
+<section class="atoll-showcase home-chapter" id="atoll" aria-labelledby="atoll-title">
+  <header class="atoll-showcase__heading">
+    <div><h2 id="atoll-title" data-motion="reveal">玻璃海</h2><p class="atoll-showcase__name">Atoll · 一座实时生成的离岛</p></div>
+    <div class="atoll-showcase__introduction"><p data-motion="reveal">从透明浅海到日落与烟花，<br/>在同一座岛，停留一会儿。</p><a class="text-link" href={sitePath('/projects/glass-atoll/')}>走近这座岛 <Icon size={20}/></a></div>
+  </header>
+  <div class="atoll-showcase__scenes">
+    {scenes.map((image, index) => <figure class:list={['atoll-showcase__scene', {'atoll-showcase__scene--main': index === 0}]} data-motion="reveal">
+      <MediaImage image={image} zoom group="home-atoll" sizes={index === 0 ? '(max-width: 760px) 100vw, 70vw' : '(max-width: 760px) 45vw, 24vw'}/>
+      <figcaption>{captions[index]}</figcaption>
+    </figure>)}
+  </div>
+  <p class="atoll-showcase__closing">海水、天空、椰树与光，在浏览器里一起变化。</p>
+</section>

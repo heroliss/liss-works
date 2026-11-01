@@ -34,6 +34,8 @@ jobs:
         run: npm ci
       - name: Check Astro and TypeScript
         run: npm run check
+      - name: Check interactive experiments
+        run: npm test
       - name: Check site paths
         run: npm run test:paths
       - name: Check release downloads

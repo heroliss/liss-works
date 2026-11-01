@@ -3,7 +3,7 @@ import type { Project } from './types';
 // Shared editorial order for the home page and project library. Unknown projects
 // retain their source order, so adding a project never silently drops it.
 export const projectPriority = [
-  'ssframework', 'dubforge', 'nomadworkshop', 'outpost', 'gomoku',
+  'glass-atoll', 'ssframework', 'dubforge', 'nomadworkshop', 'outpost', 'gomoku',
   'aoe4-flow', 'eazybuildpipeline', 'liss-web',
   'intelligence-index-cost-linear', 'learnopengl', 'china-house-price-map',
   'sort-lab', 'route-lab', 'qt-labs', 'systems-lab', 'text-lab', 'nex',
