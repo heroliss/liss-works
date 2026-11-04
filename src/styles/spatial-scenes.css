@@ -43,7 +43,7 @@ html[data-motion] .dub-reel[data-reel-enhanced=true] .dub-controls{right:1.5%;to
 .factory-belt-body{fill:#234858;stroke:#74a4b2;stroke-width:2}
 .factory-belt-edge{stroke:#92c6d2;stroke-width:2}
 .factory-roller>circle:first-child{fill:#183845;stroke:#9bccd7;stroke-width:2.5}
-.factory-roller>circle:nth-child(2){fill:#85e7fa;stroke:#d1f7ff}
+.factory-roller>circle:nth-child(2){fill:var(--accent);stroke:color-mix(in srgb,var(--accent) 35%,#fff)}
 .factory-roller-spokes{stroke:#a8d7e1;animation-duration:5s}
 .factory-belt-motion{animation:factory-belt-travel 1.6s linear infinite;animation-play-state:paused;transform-box:view-box}
 .dub-reel[data-scene-playing=true] .factory-belt-motion{animation-play-state:running}

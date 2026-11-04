@@ -1,6 +1,7 @@
 ---
 import MediaImage from './MediaImage.astro';
 import { frameworkShowcase } from '../data/framework-showcase';
+import { getProjectWorld, projectWorldStyle } from '../data/project-worlds';
 import '../styles/framework-showcase.css';
 interface Props { id?: string; }
 const { id = 'framework-showcase' } = Astro.props;
@@ -9,7 +10,7 @@ const ports = frameworkShowcase.map((item, index) => {
   return { item, index, x: 184, y, wire: `M184 ${y} C246 ${y} 206 300 230 300 C238 300 244 300 252 300` };
 });
 ---
-<section id={id} class="framework-showcase" data-framework-gallery data-active="0" aria-label="SSFramework 架构与功能图册">
+<section id={id} class="framework-showcase" data-framework-gallery data-active="0" aria-label="SSFramework 架构与功能图册" style={`${projectWorldStyle('ssframework')};--accent:${getProjectWorld('ssframework').accent}`}>
   <div class="framework-showcase__rack">
    <div class="framework-scene-world" data-scene-world>
     <svg class="framework-circuit" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true">

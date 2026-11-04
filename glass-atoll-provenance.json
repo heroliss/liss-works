@@ -6,7 +6,7 @@
     "Static host flag and works return link; no-JavaScript fallback.",
     "Native-only display report is explicitly unavailable; pinned ACES targets remain available.",
     "Optional server-generated ACES targets decline with a controlled reason.",
-    "Catalogue gzip transfer with byte-identical decompression and uncompressed fallback.",
+    "Catalogue gzip transfer with byte-identical decompression; HTTP, network and decoding failures fall back to the original catalogue.",
     "Hosted default uses the existing low preset, with all quality options available; initial caustics allocate that preset directly.",
     "Failure guidance refers to the browser rather than a local launcher.",
     "Credits receive explicit HTML head/body for host metadata."
@@ -986,8 +986,8 @@
     {
       "path": "star-field.js",
       "sourceSHA256": "e20ea06f25d59db50a48a19a20e1cc710051e3e21c784b076d29ccf77b0ca447",
-      "sha256": "baba6d3fb745317bf52fe9005cc6147ab662257293a82009e0719275e790fb21",
-      "bytes": 11572,
+      "sha256": "cb9fe28384b6fdf9436becb01e8001309ac536830086a23ee11640b65aeec5ce",
+      "bytes": 11770,
       "adapted": true
     },
     {

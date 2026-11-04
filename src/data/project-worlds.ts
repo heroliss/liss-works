@@ -2,12 +2,12 @@ import { toolWorlds } from './project-worlds-tools';
 import { labWorlds } from './project-worlds-labs';
 export interface ProjectWorld { accent: string; surface: string; motion: string; family: string; }
 export const projectWorlds: Record<string,ProjectWorld> = {
- 'glass-atoll': { accent:'#7bdcd1',surface:'#12272b',motion:'light',family:'island' },
- 'ssframework': { accent:'#dbf48b',surface:'#18231b',motion:'nodes',family:'architecture' },
- 'dubforge': { accent:'#7ee8ff',surface:'#131e29',motion:'pipeline',family:'editing' },
- 'outpost': { accent:'#ff9c82',surface:'#271a1b',motion:'orbit',family:'battlefield' },
- 'nomadworkshop': { accent:'#65d7a0',surface:'#1b2821',motion:'map',family:'survival' },
- 'gomoku': { accent:'#c6b6ff',surface:'#241e2e',motion:'tree',family:'strategy' },
+ 'glass-atoll': { accent:'#7bdcd1',surface:'#0f1f1d',motion:'light',family:'island' },
+ 'ssframework': { accent:'#dbf48b',surface:'#1a1d12',motion:'nodes',family:'architecture' },
+ 'dubforge': { accent:'#32bcf7',surface:'#111e24',motion:'pipeline',family:'editing' },
+ 'outpost': { accent:'#ff9c82',surface:'#251815',motion:'orbit',family:'battlefield' },
+ 'nomadworkshop': { accent:'#8ed77f',surface:'#161e15',motion:'map',family:'survival' },
+ 'gomoku': { accent:'#ea99d1',surface:'#23181f',motion:'tree',family:'strategy' },
  ...toolWorlds,...labWorlds,
 };
 export function getProjectWorld(slug:string): ProjectWorld {

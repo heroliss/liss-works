@@ -1,14 +1,14 @@
 /* Light lives on the rim and on a thin plane in front of the real picture.
    The three material variables are owned by the existing pointer controllers. */
-:is(.stage-surface,.artifact-plane,.atlas-preview-plane,.atlas-tile-plane,.game-art,[data-scene-world]) {
+:is(.stage-surface,.artifact-plane,.atlas-tile-plane,.game-art,[data-scene-world]) {
   --material-light-x:0px; --material-light-y:0px; --material-shine:.58;
 }
 .home-next .stage-surface { --material-tone:var(--hero-tone); }
 .artifact-plane { --material-tone:var(--accent); }
-:is(.atlas-preview-plane,.atlas-tile-plane) { --material-tone:var(--atlas-tone); }
+.atlas-tile-plane { --material-tone:var(--atlas-tone); }
 .game-art { --material-tone:var(--game-tone); }
-.framework-scene-world { --material-tone:#d7e78e; }
-.dub-scene-world { --material-tone:#9cdef1; }
+.framework-scene-world { --material-tone:var(--accent); }
+.dub-scene-world { --material-tone:var(--accent); }
 .home-next .work-stage .stage-card > .stage-surface {
   box-shadow:1px 2px 0 #596267,3px 5px 0 #242c31,5px 8px 0 #10161b,
     8px 13px 0 -3px color-mix(in srgb,var(--material-tone) 19%,#10161b),0 34px 52px -22px #000c;
@@ -20,7 +20,6 @@
 .home-next .work-stage .stage-surface .screen-chrome { border-radius:8px 8px 0 0; box-shadow:inset 0 1px #ffffff32; }
 .home-next .work-stage .stage-surface .screen-caption { border-radius:0 0 8px 8px; }
 .home-next .work-stage .stage-surface::after,.atlas-tile-plane::after,
-.atlas-preview-plane .atlas-preview-edge,
 .detail-page[data-project-world] .artifact-plane > .artifact-catchlight,
 .game-scene .game-art::after,
 .framework-showcase .framework-showcase__media::after,.dub-reel .dub-screen-bezel::after {
@@ -40,7 +39,6 @@
 .detail-page[data-project-world] .artifact-plane > .artifact-depth {
   box-shadow:10px 16px 0 -4px #06090c55,0 40px 58px -26px #000d;
 }
-.atlas-preview-plane .atlas-preview-edge { border-radius:5px; }
 .atlas-tile-plane::after { border-radius:4px; }
 .atlas-tile-plane img { box-shadow:1px 2px 0 #626d7355,3px 5px 0 #10171bc9,0 28px 42px -25px #000d; }
 .framework-showcase .framework-showcase__media,.dub-reel .dub-screen-bezel { position:relative; }
@@ -67,13 +65,13 @@
 }
 @media(prefers-reduced-motion:reduce) {
   .game-scene > .game-art { transform:none!important; }
-  .home-next .work-stage .stage-surface::after,.atlas-tile-plane::after,.atlas-preview-edge,
+  .home-next .work-stage .stage-surface::after,.atlas-tile-plane::after,
   .detail-page[data-project-world] .artifact-plane > .artifact-catchlight,
   .game-scene .game-art::after,.framework-showcase__media::after,.dub-screen-bezel::after { transform:none; opacity:.45; }
 }
 @media(forced-colors:active) {
   .home-next .work-stage .stage-surface::after,.atlas-tile-plane::before,.atlas-tile-plane::after,
-  .atlas-preview-depth,.atlas-preview-edge,.game-scene .game-art::after,
+  .game-scene .game-art::after,
   .framework-showcase__media::after,.dub-screen-bezel::after { display:none!important; }
 }
 

@@ -1,6 +1,6 @@
 /* An open viewfinder, not a panel: only the photograph is rectangular.
    Cut facets sit behind its corners; the three routes are samples of the library. */
-.exploration-invitation { --invite-tone:#ffd08a; position:relative; isolation:isolate; padding-block:24px 16px; overflow:visible; }
+.exploration-invitation { --invite-tone:#e79c27; position:relative; isolation:isolate; padding-block:24px 16px; overflow:visible; }
 .invitation-darkroom { position:absolute; z-index:-1; pointer-events:none; inset:-65px calc(50% - 50vw) -80px; overflow:clip; mask-image:linear-gradient(to bottom,transparent,#000 12%,#000 86%,transparent); background:radial-gradient(ellipse at 56% 42%,#12202a,#0b1118 59%,transparent 84%); }
 .invitation-light { position:absolute; inset:0; pointer-events:none; background:radial-gradient(ellipse at 46% 45%,color-mix(in srgb,var(--invite-ambience,var(--invite-tone)) 11%,transparent),transparent 61%); }
 .invitation-heading { display:flex; justify-content:space-between; align-items:end; gap:52px; margin-bottom:22px; }

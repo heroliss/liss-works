@@ -1,11 +1,11 @@
 /** Themes follow each project's real material; motion is decorative, never a result simulation. */
 export const labWorlds: Record<string, { accent: string; surface: string; motion: string; family: string }> = {
-  learnopengl: { accent: '#ffd08a', surface: '#251e20', motion: 'light', family: 'optics' },
-  'intelligence-index-cost-linear': { accent: '#a8c7ff', surface: '#182338', motion: 'nodes', family: 'research' },
-  'china-house-price-map': { accent: '#8cd8c1', surface: '#172b27', motion: 'map', family: 'geography' },
-  'sort-lab': { accent: '#f4bb78', surface: '#2c241c', motion: 'bars', family: 'sorting' },
-  'route-lab': { accent: '#87dadd', surface: '#152c30', motion: 'route', family: 'routing' },
-  'ga-sort': { accent: '#cfb2f7', surface: '#2b2035', motion: 'tree', family: 'evolution' },
-  floydshortestpath: { accent: '#aeb8ff', surface: '#20263b', motion: 'nodes', family: 'paths' },
-  mkfun: { accent: '#e7a4be', surface: '#301f2e', motion: 'pipeline', family: 'mapping' },
+  learnopengl: { accent: '#e79c27', surface: '#221a10', motion: 'light', family: 'optics' },
+  'intelligence-index-cost-linear': { accent: '#acdbff', surface: '#121d25', motion: 'nodes', family: 'research' },
+  'china-house-price-map': { accent: '#92ae56', surface: '#1a1e12', motion: 'map', family: 'geography' },
+  'sort-lab': { accent: '#b48710', surface: '#211b10', motion: 'bars', family: 'sorting' },
+  'route-lab': { accent: '#30a890', surface: '#101f1b', motion: 'route', family: 'routing' },
+  'ga-sort': { accent: '#c16acf', surface: '#211822', motion: 'tree', family: 'evolution' },
+  floydshortestpath: { accent: '#b6b6f6', surface: '#1a1a26', motion: 'nodes', family: 'paths' },
+  mkfun: { accent: '#fdb9c0', surface: '#251819', motion: 'pipeline', family: 'mapping' },
 };

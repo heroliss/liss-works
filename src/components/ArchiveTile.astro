@@ -4,13 +4,10 @@ import { getProjectWorld, projectWorldStyle } from '../data/project-worlds';
 import { getProjectSignature } from '../data/project-signatures';
 import { sitePath } from '../lib/site-path';
 import MediaImage from './MediaImage.astro';
-import Icon from './Icon.astro';
 import '../styles/archive-tiles.css';
-import '../styles/glass-atoll-feature.css';
 
 interface Props { project: Project; index: number; }
 const { project, index } = Astro.props;
-const isAtoll = project.slug === 'glass-atoll';
 const signature = getProjectSignature(project.slug);
 const displayName = project.name.split(' · ')[0];
 const filterTags = new Set(project.tags);
@@ -27,7 +24,7 @@ const [restX, restY, restZ] = poses[index % poses.length] ?? poses[0];
 const href = sitePath(`/projects/${project.slug}/`);
 const style = `${projectWorldStyle(project.slug)};--atlas-image-ratio:${project.cover.width}/${project.cover.height};--atlas-rest-x:${restX}deg;--atlas-rest-y:${restY}deg;--atlas-rest-z:${restZ}deg`;
 ---
-<article class:list={['atlas-item', {'atlas-item--atoll': isAtoll}]} style={style} data-atlas-item={project.slug} data-project-card
+<article class="atlas-item" style={style} data-atlas-item={project.slug} data-project-card
   data-group={project.group} data-tags={Array.from(filterTags).join('|')}
   data-search={`${project.name} ${project.repo} ${project.summary} ${project.category} ${project.tags.join(' ')} ${signature.direction} ${signature.principle} ${signature.highlights.join(' ')}`}
   data-preview-src={sitePath(project.cover.src)} data-preview-alt={project.cover.alt}
@@ -38,18 +35,15 @@ const style = `${projectWorldStyle(project.slug)};--atlas-image-ratio:${project.
   data-preview-highlights={signature.highlights.join('|')}>
   <div class="atlas-tile-reveal" data-atlas-reveal>
     <a class="atlas-tile-link" data-atlas-project-link href={href} aria-label={project.name}>
-      <div class:list={{'atoll-tile-art': isAtoll}}><div class="atlas-tile-camera">
+      <div class="atlas-tile-camera">
         <div class="atlas-tile-plane" data-atlas-tilt>
           <MediaImage image={project.cover} sizes="(max-width: 760px) calc(100vw - 56px), (max-width: 1100px) 75vw, 58vw"/>
         </div>
-      </div>{isAtoll && <div class="atoll-tile-seasons">{[project.gallery[2], project.gallery[3]].map((image,index) => <figure><MediaImage image={image} sizes="(max-width: 760px) 40vw, 23vw"/><figcaption>{index === 0 ? '日落时分' : '夜海烟花'}</figcaption></figure>)}</div>}</div>
+      </div>
       <div class="atlas-tile-copy">
         <h2 class="atlas-tile-title">{displayName}</h2>
-        {isAtoll && <p class="atoll-tile-name">Atoll · 实时海岛场景</p>}
         <p class="atlas-tile-summary">{project.summary}</p>
-        {isAtoll && <p class="atoll-tile-principle">{signature.principle}</p>}
         <p class="atlas-tile-meta"><span>{project.category}</span><span>{project.status}</span></p>
-        {isAtoll && <span class="atoll-tile-enter">走近这座岛 <Icon size={20}/></span>}
       </div>
     </a>
   </div>

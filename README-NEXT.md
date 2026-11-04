@@ -1,5 +1,7 @@
 # Liss Works · 新版作品站
 
+> 历史设计与实施记录。当前维护入口、2.0 功能及验证命令以 [README.md](README.md)、[DESIGN.md](DESIGN.md) 和 [CHANGELOG.md](CHANGELOG.md) 为准。下方旧通栏展示及历史“当前版本”措辞仅对应记录日期。
+
 新版使用 GSAP 官方技能，结合 Taste Skill v2、Frontend Design 与 Impeccable，保留 Astro + TypeScript 和深色模式。
 
 2026-11-01：新版接管正式 `/liss-works/` 作品站，工程库共 23 项。玻璃海替换首页顶部五作品中的 NomadWorkshop，并在工具与游戏章节之间获得独立海岛展位；工程库游戏组首幅为通栏玻璃海图版。详情增加海岸主题、五张完整实机截图、设计实现与交流入口，不使用视频或虚构源码；实际在线体验位于 `/play/glass-atoll/`。NomadWorkshop 的普通作品页及其他入口继续保留。五张图的原始来源、完整尺寸、导出变体与 SHA-256 保存在 `public/media/glass-atoll-provenance.json`。
@@ -77,7 +79,7 @@ EazyBuildPipeline 封面改为真实 `17-master-general-clear-empty-state`（121
 
 ## 验证与字体更新
 
-验证命令：`npm run check`、`npm test`、`npm run test:releases`、`npm run test:paths`、`npm run build`、`npm run verify:dist`。GitHub Pages 子路径验证使用 `SITE_BASE=/liss-works-next/` 和 `SITE_URL=https://heroliss.github.io`；本地默认根路径。
+当前验证命令见根 README。正式 GitHub Pages 子路径为 `SITE_BASE=/liss-works/`，`SITE_URL=https://heroliss.github.io`；`/liss-works-next/` 仅是早期预览路径，本地默认根路径。
 
 v15 历史证据在 `../verification/site-next/v15/`。已确认 74 文件 Astro 检查零诊断，68 项既有测试（27 + 20 + 21）通过，分别记录于 `check.log`、`tests-lab.log`、`tests-releases.log`、`tests-paths.log`。最终根路径与子路径构建、正文/媒体完整性及实际浏览器验收已完成；具体覆盖范围见最终报告。
 

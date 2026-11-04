@@ -42,6 +42,12 @@ jobs:
         run: npm run test:releases
       - name: Check Atoll common actions
         run: npm run test:atoll
+      - name: Check Atoll packed asset fallback
+        run: npm run test:atoll-transfer
+      - name: Check project ring behavior and lifecycle
+        run: npm run test:atlas
+      - name: Check project palette consistency and contrast
+        run: npm run test:palette
       - name: Build static site
         run: npm run build
       - name: Verify generated pages and assets

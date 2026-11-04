@@ -7,7 +7,7 @@
 .detail-page:is([data-project-world="learnopengl"],[data-project-world="intelligence-index-cost-linear"],[data-project-world="china-house-price-map"],[data-project-world="sort-lab"],[data-project-world="route-lab"],[data-project-world="ga-sort"],[data-project-world="floydshortestpath"],[data-project-world="mkfun"]) :is(.project-signature dt,.engineering-copy h3,.project-contents a:hover){color:var(--accent)}
 
 /* OpenGL: the material specimen sits beside a compact optical introduction. */
-.detail-page[data-project-world="learnopengl"]{--accent:#ffd08a;--cyan:#ffd08a;--surface:#251e20;--raised:#362c30;--muted:#c6bbb9}
+.detail-page[data-project-world="learnopengl"]{--accent:#e79c27;--cyan:#e79c27;--surface:#221a10;--raised:#251e15;--muted:#c6bbb9}
 .detail-page[data-project-world="learnopengl"] .project-prologue{display:grid;grid-template-columns:minmax(0,.64fr) minmax(0,1.36fr);gap:5%;padding-top:50px;align-items:start}
 .detail-page[data-project-world="learnopengl"] .project-prologue::before{left:37%;right:-2%;top:15px;bottom:90px;background:#1e191f;transform:skewY(-3deg)}
 .detail-page[data-project-world="learnopengl"] .project-intro{display:block;margin:35px 0 0}
@@ -27,7 +27,7 @@
 .detail-page[data-project-world="learnopengl"] .gallery-grid figure:nth-child(3n+3){grid-column:1/-1;width:76%;justify-self:end}
 
 /* Model research: a wide real plot, with reading notes kept off its axes. */
-.detail-page[data-project-world="intelligence-index-cost-linear"]{--accent:#a8c7ff;--cyan:#a8c7ff;--surface:#182338;--raised:#273750;--muted:#b7c4d6}
+.detail-page[data-project-world="intelligence-index-cost-linear"]{--accent:#acdbff;--cyan:#acdbff;--surface:#121d25;--raised:#172128;--muted:#b7c4d6}
 .detail-page[data-project-world="intelligence-index-cost-linear"] .project-prologue{padding-top:25px}
 .detail-page[data-project-world="intelligence-index-cost-linear"] .project-prologue::before{left:8%;right:0;top:180px;bottom:130px;background:#131d2e}
 .detail-page[data-project-world="intelligence-index-cost-linear"] .project-intro{grid-template-columns:minmax(0,1.5fr) minmax(0,.65fr);gap:7%;margin:20px 0 45px}
@@ -45,7 +45,7 @@
 .detail-page[data-project-world="intelligence-index-cost-linear"] .gallery-grid figure:nth-child(n){width:88%;margin:0 0 45px auto}
 
 /* Geography: the map leads from the left, like an atlas beside its commentary. */
-.detail-page[data-project-world="china-house-price-map"]{--accent:#8cd8c1;--cyan:#8cd8c1;--surface:#172b27;--raised:#28443d;--muted:#b8c9c1}
+.detail-page[data-project-world="china-house-price-map"]{--accent:#92ae56;--cyan:#92ae56;--surface:#1a1e12;--raised:#1d2117;--muted:#b8c9c1}
 .detail-page[data-project-world="china-house-price-map"] .project-prologue{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:7%;padding-top:42px}
 .detail-page[data-project-world="china-house-price-map"] .project-prologue::before{left:0;right:25%;top:15%;bottom:90px;background:#14231f}
 .detail-page[data-project-world="china-house-price-map"] .project-intro{grid-column:2;grid-row:1;display:block;margin:70px 0 0;align-self:start}
@@ -63,7 +63,7 @@
 .detail-page[data-project-world="china-house-price-map"] .gallery-grid figure:first-child{grid-column:1/-1;width:88%;justify-self:center}
 
 /* Sorting: task, evidence and code form horizontal experimental lanes. */
-.detail-page[data-project-world="sort-lab"]{--accent:#f4bb78;--cyan:#f4bb78;--surface:#2c241c;--raised:#413226;--muted:#ccbdac}
+.detail-page[data-project-world="sort-lab"]{--accent:#b48710;--cyan:#b48710;--surface:#211b10;--raised:#241f15;--muted:#ccbdac}
 .detail-page[data-project-world="sort-lab"] .project-prologue{padding-top:25px}
 .detail-page[data-project-world="sort-lab"] .project-prologue::before{left:0;right:16%;top:51%;bottom:80px;background:#241e18}
 .detail-page[data-project-world="sort-lab"] .project-intro{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:18px 12%;margin:25px 0 48px}
@@ -84,7 +84,7 @@
 .detail-page[data-project-world="sort-lab"] .gallery-grid figure:last-child{grid-column:span 2;justify-self:end}
 
 /* Route search: a long diagonal reading path joins the introduction to its proof. */
-.detail-page[data-project-world="route-lab"]{--accent:#87dadd;--cyan:#87dadd;--surface:#152c30;--raised:#24434a;--muted:#b2c8cb}
+.detail-page[data-project-world="route-lab"]{--accent:#30a890;--cyan:#30a890;--surface:#101f1b;--raised:#16221f;--muted:#b2c8cb}
 .detail-page[data-project-world="route-lab"] .project-prologue{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:0 2%;padding-top:40px}
 .detail-page[data-project-world="route-lab"] .project-prologue::before{left:20%;right:0;top:150px;bottom:70px;background:#13272a;transform:skewY(3deg)}
 .detail-page[data-project-world="route-lab"] .project-intro{grid-column:1/6;grid-row:1;display:block;margin:0;align-self:start}
@@ -102,7 +102,7 @@
 .detail-page[data-project-world="route-lab"] .gallery-grid figure:nth-child(n){width:78%;margin:0 0 45px auto}
 
 /* Evolution: a centred question opens into a branching set of actual reports. */
-.detail-page[data-project-world="ga-sort"]{--accent:#cfb2f7;--cyan:#cfb2f7;--surface:#2b2035;--raised:#41304f;--muted:#c8bcd5}
+.detail-page[data-project-world="ga-sort"]{--accent:#c16acf;--cyan:#c16acf;--surface:#211822;--raised:#241c25;--muted:#c8bcd5}
 .detail-page[data-project-world="ga-sort"] .project-prologue{padding-top:38px}
 .detail-page[data-project-world="ga-sort"] .project-prologue::before{left:23%;right:4%;top:280px;bottom:90px;background:#221b2b}
 .detail-page[data-project-world="ga-sort"] .project-intro{display:block;text-align:center;max-width:850px;margin:0 auto 52px}
@@ -122,7 +122,7 @@
 .detail-page[data-project-world="ga-sort"] .gallery-grid figure:nth-child(n){width:100%;margin:0 0 45px}
 
 /* Floyd: a full-width algorithm name, a narrow contract and a wide matrix proof. */
-.detail-page[data-project-world="floydshortestpath"]{--accent:#aeb8ff;--cyan:#aeb8ff;--surface:#20263b;--raised:#303b56;--muted:#bbc3dc}
+.detail-page[data-project-world="floydshortestpath"]{--accent:#b6b6f6;--cyan:#b6b6f6;--surface:#1a1a26;--raised:#1e1e28;--muted:#bbc3dc}
 .detail-page[data-project-world="floydshortestpath"] .project-prologue{display:grid;grid-template-columns:minmax(0,.55fr) minmax(0,1.45fr);gap:22px 7%;padding-top:35px}
 .detail-page[data-project-world="floydshortestpath"] .project-prologue::before{left:30%;right:0;top:180px;bottom:80px;background:#191f31}
 .detail-page[data-project-world="floydshortestpath"] :is(.project-intro,.project-intro-copy,.project-opening){display:contents}
@@ -139,7 +139,7 @@
 .detail-page[data-project-world="floydshortestpath"] .usage-grid{grid-template-columns:minmax(0,.65fr) minmax(0,1.35fr);gap:8%}
 
 /* Mapping: the short name is a source block; the real three-pane tool is the output. */
-.detail-page[data-project-world="mkfun"]{--accent:#e7a4be;--cyan:#e7a4be;--surface:#301f2e;--raised:#493046;--muted:#d0bccb}
+.detail-page[data-project-world="mkfun"]{--accent:#fdb9c0;--cyan:#fdb9c0;--surface:#251819;--raised:#281c1d;--muted:#d0bccb}
 .detail-page[data-project-world="mkfun"] .project-prologue{padding-top:38px}
 .detail-page[data-project-world="mkfun"] .project-prologue::before{left:0;right:23%;top:200px;bottom:80px;background:#261a27;transform:skewY(-2deg)}
 .detail-page[data-project-world="mkfun"] .project-intro{grid-template-columns:minmax(0,.65fr) minmax(0,1.35fr);gap:14px 10%;margin:0 0 44px}

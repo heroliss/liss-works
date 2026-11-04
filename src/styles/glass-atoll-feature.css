@@ -39,35 +39,6 @@
 }
 @media(forced-colors:active) { .atoll-water__stage canvas { display:none; }.atoll-water__fallback { display:block!important; border:1px solid CanvasText; border-radius:0; }.atoll-water__moments button[aria-pressed=true] { color:Highlight; } }
 
-/* The archive keeps one filterable item while giving this project a full shelf. */
-.archive-atlas .atlas-gallery .atlas-wall>.atlas-item.atlas-item--atoll { grid-column:1/-1; margin:0 0 24px; width:100%; }
-.atlas-item--atoll .atlas-tile-link { display:grid; grid-template-columns:minmax(0,1.5fr) minmax(0,.7fr); gap:40px; align-items:center; padding:32px; background:#12272b; }
-.atoll-tile-art { min-width:0; }
-.atoll-tile-art .atlas-tile-camera { padding:0; }
-.atoll-tile-seasons { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:18px; }
-.atoll-tile-seasons figure { margin:0; min-width:0; }
-.atoll-tile-seasons img { width:100%; height:auto; display:block; border-radius:3px; }
-.atoll-tile-seasons figcaption { margin:7px 0 0; font-size:14px; color:var(--muted); }
-.atlas-item--atoll .atlas-tile-copy { padding:0; }
-.atlas-item--atoll .atlas-tile-title { color:var(--atlas-tone); font-size:clamp(42px,5vw,70px); line-height:1.1; }
-.atoll-tile-name { margin:14px 0 24px; color:var(--muted); font-size:17px; }
-.atlas-item--atoll .atlas-tile-summary { font-size:18px; line-height:1.85; }
-.atoll-tile-principle { color:#b5d9d3; font-size:16px; line-height:1.85; margin:24px 0; }
-.atoll-tile-enter { display:flex; align-items:center; gap:18px; color:var(--atlas-tone); font-size:17px; min-height:44px; margin-top:25px; }
-
-@media(max-width:1000px) {
-
- .atlas-item--atoll .atlas-tile-link { gap:28px; padding:24px; grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr); }
-}
-@media(max-width:760px) {
- .archive-atlas .atlas-gallery .atlas-wall>.atlas-item.atlas-item--atoll { grid-column:1/-1; margin:0; width:100%; }
- .atlas-item--atoll .atlas-tile-link { grid-template-columns:1fr; padding:20px; gap:27px; }
- .atlas-item--atoll .atlas-tile-title { font-size:46px; }
- .atlas-item--atoll .atlas-tile-summary { font-size:16px; }
- .atoll-tile-principle { margin:18px 0; }
- .atoll-tile-enter { margin-top:20px; }
-}
-
 /* Detail view: a broad seascape and quiet, sand-coloured supporting text. */
 .detail-page[data-project-world="glass-atoll"] { --raised:#1a3439; --muted:#bad0cc; }
 .detail-page[data-project-world="glass-atoll"] .project-intro h1 { color:var(--accent); font-size:clamp(68px,10vw,144px); line-height:1.05; }

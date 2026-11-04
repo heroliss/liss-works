@@ -80,7 +80,7 @@ export function setupExplorationInvitation({ signal, preference }: { signal: Abo
     active = index;
     root.dataset.inviteActive = String(index);
     delete root.dataset.inviteLoading;
-    const tone = picture.dataset.inviteTone ?? '#ffd08a';
+    const tone = picture.dataset.inviteTone ?? '#e79c27';
     // The selected bookmark, question and entry share their colour immediately;
     // only the background light eases between topics.
     root.style.setProperty('--invite-tone', tone);

@@ -14,11 +14,11 @@ if (!resident) throw new Error('Exploration invitation needs the genuine Nomad r
 const questions = [
   { question: '光，怎样给平面以深度？', lens: '看光影', route: '图形切口', path: '图形与代码实验 / OpenGL', action: '去工程库看图形',
     detail: '在同一只木盒上，观察法线与高度贴图怎样改变表面。',
-    work: 'LearnOpenGL', image: light.cover, tone: '#ffd08a',
+    work: 'LearnOpenGL', image: light.cover, tone: getProjectWorld(light.slug).accent,
     href: '/projects/?group=graphics&tag=OpenGL' },
   { question: '更聪明，也一定更贵吗？', lens: '看取舍', route: 'AI 切口', path: 'AI 与数据 / AI', action: '去工程库看 AI',
     detail: '把公开模型的能力指数与线性任务成本放进同一张图。',
-    work: 'Intelligence × Cost', image: intelligence.cover, tone: '#a8c7ff',
+    work: 'Intelligence × Cost', image: intelligence.cover, tone: getProjectWorld(intelligence.slug).accent,
     href: '/projects/?group=ai-data&tag=AI' },
   { question: '居民的一次选择，从哪来？', lens: '看行为', route: '游戏切口', path: '游戏与工具 / Unity', action: '去工程库看游戏',
     detail: '需求、工作价值与路径成本，共同参与居民的下一步行动。',

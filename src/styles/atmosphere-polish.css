@@ -6,14 +6,14 @@
   mask-image: linear-gradient(to right, transparent, #000 19%, #000 79%, transparent), linear-gradient(to bottom, transparent, #000 17%, #000 76%, transparent);
   mask-composite: intersect;
 }
-.home-next .game-scene--nomad::before {
-  background: linear-gradient(145deg, #30402b54, #182a2133 58%, transparent);
+.home-next .game-scene--blocks::before {
+  background: linear-gradient(145deg, #34435a54, #22243c33 58%, transparent);
   border-radius: 10% 32% 18% 43%;
   clip-path: polygon(6% 12%, 92% 0, 100% 12%, 94% 91%, 16% 100%, 0 81%);
   mask-image: radial-gradient(ellipse at 54% 47%, #000 36%, transparent 77%);
 }
 .home-next .game-scene--gomoku::before {
-  background: linear-gradient(123deg, #3830494d, #211d302b 66%, transparent);
+  background: linear-gradient(123deg, #5130444d, #2a1c292b 66%, transparent);
   border-radius: 34% 8% 29% 12%;
   clip-path: polygon(0 13%, 88% 0, 100% 17%, 96% 85%, 17% 100%, 0 87%);
   mask-image: radial-gradient(ellipse at 48% 50%, #000 34%, transparent 77%);
@@ -43,7 +43,6 @@ html[data-motion] .dub-reel[data-reel-enhanced=true] .dub-factory {
   mask-composite: intersect;
 }
 .dub-reel .factory-back-wall { fill: #10232c78; stroke: #31536058; }
-.dub-reel .factory-wall-seam { opacity: .21; }
 .framework-showcase .framework-circuit__rear { fill: #0b17118f; }
 .framework-showcase .framework-circuit__bevel { fill: #213327bb; }
 .framework-showcase .framework-circuit__panel { fill: #12221ab8; stroke: #738e5b80; }

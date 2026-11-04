@@ -71,8 +71,13 @@ export function createStarField(THREE,{enabled=true}={}){
     const fetchBin=async name=>{
       // Lossless transfer compression; identical catalogue bytes on the GPU.
       if(typeof DecompressionStream==='function'){
-        const r=await fetch(new URL(name+'.pack',base));
-        if(r.ok)return new Response(r.body.pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();
+        try{
+          const r=await fetch(new URL(name+'.pack',base));
+          if(r.ok)return await new Response(r.body.pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();
+        }catch{
+          // A failed transfer, unsupported codec or corrupt optional pack must
+          // not prevent the intact original catalogue from loading.
+        }
       }
       const r=await fetch(new URL(name,base));if(!r.ok)throw new Error(name+' HTTP '+r.status);return r.arrayBuffer();
     };

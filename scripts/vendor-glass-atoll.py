@@ -61,8 +61,13 @@ def adapt(name, data):
         after = """const fetchBin=async name=>{
       // Lossless transfer compression; identical catalogue bytes on the GPU.
       if(typeof DecompressionStream==='function'){
-        const r=await fetch(new URL(name+'.pack',base));
-        if(r.ok)return new Response(r.body.pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();
+        try{
+          const r=await fetch(new URL(name+'.pack',base));
+          if(r.ok)return await new Response(r.body.pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();
+        }catch{
+          // A failed transfer, unsupported codec or corrupt optional pack must
+          // not prevent the intact original catalogue from loading.
+        }
       }
       const r=await fetch(new URL(name,base));if(!r.ok)throw new Error(name+' HTTP '+r.status);return r.arrayBuffer();
     };"""
@@ -88,7 +93,7 @@ for name in sorted(files):
         records.append({'path': name + '.pack', 'sha256': hashlib.sha256(compressed).hexdigest(), 'bytes': len(compressed), 'losslessSource': name})
 
 manifest = {'schema': 'liss.atoll-static.v1', 'source': '../glass-atoll (local runtime snapshot)', 'originalsModified': False,
-    'adapters': ['Static host flag and works return link; no-JavaScript fallback.', 'Native-only display report is explicitly unavailable; pinned ACES targets remain available.', 'Optional server-generated ACES targets decline with a controlled reason.', 'Catalogue gzip transfer with byte-identical decompression and uncompressed fallback.', 'Hosted default uses the existing low preset, with all quality options available; initial caustics allocate that preset directly.', 'Failure guidance refers to the browser rather than a local launcher.', 'Credits receive explicit HTML head/body for host metadata.'],
+    'adapters': ['Static host flag and works return link; no-JavaScript fallback.', 'Native-only display report is explicitly unavailable; pinned ACES targets remain available.', 'Optional server-generated ACES targets decline with a controlled reason.', 'Catalogue gzip transfer with byte-identical decompression; HTTP, network and decoding failures fall back to the original catalogue.', 'Hosted default uses the existing low preset, with all quality options available; initial caustics allocate that preset directly.', 'Failure guidance refers to the browser rather than a local launcher.', 'Credits receive explicit HTML head/body for host metadata.'],
     'excluded': ['server.mjs', 'verification/', 'tools/', 'original recordings', 'reference downloads', 'native probes', 'workspace history'],
     'files': records}
 (SITE / 'glass-atoll-provenance.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')

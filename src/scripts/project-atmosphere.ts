@@ -1,12 +1,18 @@
+import { getProjectWorld } from '../data/project-worlds';
+
 type Options = { signal: AbortSignal; preference: MediaQueryList };
-type Kind = 'outpost' | 'nomad' | 'gomoku';
+type Kind = 'outpost' | 'blocks' | 'gomoku';
 type Scene = {
   root: HTMLElement; canvas: HTMLCanvasElement; ctx: CanvasRenderingContext2D; kind: Kind;
   width: number; height: number; left: number; top: number; dpr: number; visible: boolean;
   x: number; y: number; targetX: number; targetY: number; time: number; lastQA: number;
   originalTransform: string; transform: string; transformPriority: string;
 };
-const COLORS: Record<Kind, string> = { outpost: '#ff9c82', nomad: '#65d7a0', gomoku: '#c6b6ff' };
+const COLORS: Record<Kind, string> = {
+  outpost: getProjectWorld('outpost').accent,
+  blocks: getProjectWorld('liss-blocks').accent,
+  gomoku: getProjectWorld('gomoku').accent,
+};
 const clamp = (value: number) => Math.min(1, Math.max(0, value));
 
 /** Project-specific peripheral motion; real screenshots remain the content. */
@@ -116,26 +122,36 @@ export function setupProjectAtmosphere({ signal, preference }: Options): () => v
       ], .8);
     }
   };
-  const nomad = (scene: Scene) => {
+  const blocks = (scene: Scene) => {
     const { ctx, width: w, height: h, time: t, x, y } = scene;
-    const wind = (x - .5) * 21;
-    for (let bank = 0; bank < 2; bank++) {
-      for (let line = 0; line < 3; line++) {
-        const points: number[][] = [];
-        for (let sample = 0; sample <= 26; sample++) {
-          const horizontal = sample / 26;
-          const wave = Math.sin(horizontal * 6 + t * .34 + line * .43) * (5 + line * 2);
-          const base = bank ? h * .92 - line * 10 : h * .075 + line * 10;
-          points.push([horizontal * w + wind, base + wave + (y - .5) * 13]);
-        }
-        stroke(ctx, points, .27 + line * .13);
-      }
-    }
-    const cx = w * .87 + wind * .5;
-    const cy = h * .85 + Math.sin(t * .6) * 5 + (y - .5) * 10;
-    circle(ctx, cx, cy, 7, .75);
-    circle(ctx, cx, cy, 15 + Math.sin(t * .65) * 3, .3);
-    stroke(ctx, [[cx - 21, cy + 13], [cx - 8, cy + 5], [cx + 19, cy - 10]], .5);
+    const size = Math.max(7, Math.min(w, h) * .027);
+    const depth = size * .28;
+    const dx = (x - .5) * 14, dy = (y - .5) * 9;
+    // Small physical pieces stay outside the real board; no fabricated play state.
+    const pieces = [
+      { x:.055, y:.07, color:COLORS.blocks, cells:[[0,1],[1,1],[2,1],[1,0]] },
+      { x:.87, y:.055, color:'#f3ad5b', cells:[[0,0],[0,1],[0,2],[1,2]] },
+      { x:.70, y:.90, color:'#66d0e2', cells:[[0,0],[1,0],[2,0],[3,0]] },
+    ];
+    pieces.forEach((piece, index) => {
+      const left = piece.x * w + dx;
+      const top = piece.y * h + dy + Math.sin(t * .45 + index * 1.7) * 2.5;
+      ctx.strokeStyle = ctx.fillStyle = piece.color;
+      piece.cells.forEach(([column, row]) => {
+        const px = left + column * size, py = top + row * size;
+        ctx.globalAlpha = .07;ctx.fillRect(px, py, size, size);
+        ctx.globalAlpha = .5;ctx.strokeRect(px, py, size, size);
+        ctx.globalAlpha = .27;
+        ctx.beginPath();ctx.moveTo(px, py);ctx.lineTo(px + depth, py - depth);
+        ctx.lineTo(px + size + depth, py - depth);ctx.lineTo(px + size, py);ctx.stroke();
+        ctx.beginPath();ctx.moveTo(px + size, py);ctx.lineTo(px + size + depth, py - depth);
+        ctx.lineTo(px + size + depth, py + size - depth);ctx.lineTo(px + size, py + size);ctx.stroke();
+      });
+    });
+    // A faint landing footprint supplies depth without drawing another game board.
+    const ghostX = w * .07 + dx, ghostY = h * .87 + dy;
+    ctx.strokeStyle = COLORS.blocks;ctx.globalAlpha = .18;
+    [[0,1],[1,1],[2,1],[1,0]].forEach(([column,row]) => ctx.strokeRect(ghostX + column * size, ghostY + row * size * .42, size, size * .42));
   };
   const gomoku = (scene: Scene) => {
     const { ctx, width: w, height: h, time: t, x, y } = scene;
@@ -166,10 +182,11 @@ export function setupProjectAtmosphere({ signal, preference }: Options): () => v
     ctx.rect(w * .18, h * .19, w * .64, h * .62);
     ctx.clip('evenodd');
     ctx.strokeStyle = COLORS[scene.kind];
+    ctx.fillStyle = COLORS[scene.kind];
     ctx.lineWidth = 1.05;
     ctx.lineCap = 'round';
     if (scene.kind === 'outpost') outpost(scene);
-    else if (scene.kind === 'nomad') nomad(scene);
+    else if (scene.kind === 'blocks') blocks(scene);
     else gomoku(scene);
     ctx.restore();
   };

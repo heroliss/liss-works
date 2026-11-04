@@ -1,5 +1,5 @@
 /* v4: motion belongs to the work. Native cursors, moving process type,
-   technical architecture, editing tracks, and three distinct game worlds. */
+   technical architecture, editing tracks, and distinct game rules. */
 .hero-copy h1 { margin-bottom: 32px; }
 .process-band { position: relative; margin-top: 50px; padding-bottom: 44px; }
 .process-band .kinetic-strip { margin-top: 0; padding-block: 24px 18px; }
@@ -32,14 +32,14 @@
 .architecture-stage .map-connections path { stroke-width: 1.5; opacity: .5; }
 .architecture-stage [data-architecture-overlay] { opacity: 1; }
 /* DubForge: the composition follows an editing timeline. */
-.workflow-chapter { --accent: #7ee8ff; --cyan: #7ee8ff; }
+.workflow-chapter { --accent: #32bcf7; --cyan: #32bcf7; }
 .workflow-chapter:before { background: #121f2b; top: 30px; left: 18%; right: -2%; transform: skewY(2deg); }
 .workflow-main { transform: rotate(-2deg); }
 .workflow-main .media-link { border-radius: 3px; }
 .workflow-aside { transform: rotate(3deg); }
 .workflow-pictures { isolation: isolate; }
 .workflow-orbit { position: absolute; inset: -25px -15px -10px 4%; pointer-events: none; z-index: -1; display: flex; flex-direction: column; justify-content: space-around; gap: 40px; transform: rotate(-2deg); }
-.workflow-orbit span { display: block; width: 95%; height: 30px; border-radius: 2px; background: #7ee8ff0c; border-inline: 2px solid #7ee8ff35; opacity: .7; transform-origin: left center; }
+.workflow-orbit span { display: block; width: 95%; height: 30px; border-radius: 2px; background: #32bcf70c; border-inline: 2px solid #32bcf735; opacity: .7; transform-origin: left center; }
 .workflow-orbit span:nth-child(2) { width: 74%; margin-left: 12%; height: 22px; }
 .workflow-orbit span:nth-child(3) { width: 82%; margin-left: 5%; height: 40px; }
 .workflow-controls button { transition: background 250ms, color 250ms; }
@@ -55,29 +55,32 @@
 .game-art > .game-scene__image { position: relative; z-index: 2; display: block; width: 100%; border-radius: 3px; }
 .game-art .game-scene__image img { aspect-ratio: auto; object-fit: contain; display: block; }
 .game-scene > .game-scene__copy { display: flex; flex-direction: column; align-items: start; gap: 16px; margin-top: 28px; }
-.game-scene--nomad { --game-tone: #65d7a0; --accent: #65d7a0; }
-.game-scene--nomad:before { content: ''; position: absolute; z-index: -1; left: 16%; right: -7%; top: 22px; bottom: -30px; background: #19251c; transform: rotate(-3deg); }
-.game-art--nomad { padding: 28px 12px; }
-.game-art--nomad > .game-scene__image { transform: rotate(-4deg); border-radius: 3px 24px 3px 3px; }
-.game-scene--nomad h3 { color: #65d7a0; font-size: clamp(37px,4vw,59px); }
-.game-scene--nomad .game-scene__copy { margin-right: 8%; }
+.game-scene--blocks { --game-tone: #9792fb; --accent: #9792fb; }
+.game-scene--blocks:before { content: ''; position: absolute; z-index: -1; left: 16%; right: -7%; top: 22px; bottom: -30px; background: #202638; transform: rotate(-3deg); }
+.game-art--blocks { padding: 28px 12px; }
+.game-art--blocks > .game-scene__image { transform: rotate(-4deg); border-radius: 3px 24px 3px 3px; }
+.game-scene--blocks h3 { color: var(--game-tone); font-size: clamp(37px,4vw,59px); }
+.game-scene--blocks .game-scene__copy { margin-right: 8%; }
+.game-scene__entry { display:inline-flex;align-items:center;gap:12px;min-height:44px;color:var(--game-tone);font-size:14px;line-height:1.5;text-underline-offset:5px; }
+.game-scene__entry:hover { text-decoration:underline; }
+.game-scene__entry:focus-visible { outline:2px solid var(--game-tone);outline-offset:5px; }
 .game-scene--outpost { --game-tone: #ff9c82; --accent: #ff9c82; margin-top: 180px; }
 .game-art--outpost { padding: 40px 10px; }
 .game-art--outpost:before { content: ''; position: absolute; z-index: 0; inset: -18px 6%; border: 1px solid #ff9c8240; border-radius: 50%; background: #241715; }
 .game-art--outpost > .game-scene__image { transform: rotate(5deg); border-radius: 2px; }
 .game-scene--outpost h3 { color: #ff9c82; font-size: clamp(55px,6.2vw,92px); line-height: .9; }
 .game-scene--outpost .game-scene__copy { padding-left: 8%; margin-top: 8px; }
-.game-scene--gomoku { --game-tone: #c6b6ff; --accent: #c6b6ff; margin-top: 125px; width: 95%; margin-left: 5%; grid-template-columns: .6fr 1fr; gap: 50px; }
-.game-scene--gomoku:before { content: ''; position: absolute; z-index: -1; inset: 10px -3% -30px 17%; background: #1c1b2a; transform: rotate(2deg); }
+.game-scene--gomoku { --game-tone: #ea99d1; --accent: #ea99d1; margin-top: 125px; width: 95%; margin-left: 5%; grid-template-columns: .6fr 1fr; gap: 50px; }
+.game-scene--gomoku:before { content: ''; position: absolute; z-index: -1; inset: 10px -3% -30px 17%; background: #291d27; transform: rotate(2deg); }
 .game-scene--gomoku > .game-art { grid-column: 2; grid-row: 1; padding: 30px 15px; }
 .game-art--gomoku > .game-scene__image { transform: rotate(1.5deg); }
 .game-scene--gomoku > .game-scene__copy { grid-column: 1; grid-row: 1; }
-.game-scene--gomoku h3 { color: #d4c7ff; font-size: clamp(43px,5vw,73px); }
+.game-scene--gomoku h3 { color: var(--game-tone); font-size: clamp(43px,5vw,73px); }
 html[data-motion-paused=true] [data-ambient-piece] { animation-play-state: paused !important; }
 @media(max-width:1100px) {
  .marquee-group { gap: 35px; padding-right: 35px; }
  .game-scene--outpost { margin-top: 145px; }
- .game-scene--nomad h3 { font-size: 37px; }
+ .game-scene--blocks h3 { font-size: 37px; }
  .game-scene--outpost h3 { font-size: 62px; }
  .game-scene--gomoku h3 { font-size: 49px; }
 }
@@ -94,9 +97,9 @@ html[data-motion-paused=true] [data-ambient-piece] { animation-play-state: pause
  .workflow-orbit span { height: 18px; }
  .games-landscape { padding-inline: 4px; }
  .game-scene--outpost { margin-top: 5px; width: 94%; }
- .game-scene--nomad h3 { font-size: clamp(32px,8.5vw,46px); }
+ .game-scene--blocks h3 { font-size: clamp(32px,8.5vw,46px); }
  .game-scene--outpost h3 { font-size: 66px; }
- .game-art--nomad { padding: 21px 8px; }
+ .game-art--blocks { padding: 21px 8px; }
  .game-art--outpost { padding: 34px 7px; }
  .game-art--outpost:before { inset: -9px 6%; }
  .game-scene--gomoku { width: 96%; margin: 0; display: flex; flex-direction: column; gap: 0; }
@@ -122,6 +125,6 @@ html:not([data-motion]) .marquee-group { width: 100%; flex-wrap: wrap; gap: 12px
 html:not([data-motion]) .marquee-group + .marquee-group,
 html:not([data-motion]) .motion-toggle { display: none; }
 .architecture-stage .map-node[data-current=true] rect { fill: #3b5131; stroke: #dbf48b; stroke-width: 1; }
-.workflow-orbit [data-current=true] { opacity: 1; background: #7ee8ff21; border-inline-color: #7ee8ff85; }
+.workflow-orbit [data-current=true] { opacity: 1; background: #32bcf721; border-inline-color: #32bcf785; }
 .game-art .game-scene__image img { aspect-ratio: var(--media-ratio); }
 .process-band .kinetic-strip { transform: none; }

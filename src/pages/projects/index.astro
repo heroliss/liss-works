@@ -14,6 +14,11 @@ const orderedProjects = prioritizeProjects(projects);
 const initial = orderedProjects[0];
 const signature = getProjectSignature(initial.slug);
 const tags = ['Unity','C#','C++','AI','Python','Web','WebGL 2','Three.js','Qt','.NET','OpenGL','算法'];
+const ringImage = (project: typeof initial) => {
+ const cover=project.cover;
+ const choices=(cover.srcset??[...[320,640,960,1600].filter(width=>width<cover.width).map(width=>`${cover.src.replace(/\.webp$/,`-${width}.webp`)} ${width}w`),`${cover.src} ${cover.width}w`].join(', '));
+ return choices.split(',').map(choice=>{const [src,...size]=choice.trim().split(/\s+/);return[sitePath(src),...size].join(' ');}).join(', ');
+};
 ---
 <Base title="全部工程" active="projects" description={`浏览 Liss 的${projects.length}个独立开发工程：游戏与Unity工具、AI与数据应用、图形与算法实验。`}>
  <div class="shell archive-page archive-atlas" data-project-atlas style={`--atlas-tone:${getProjectWorld(initial.slug).accent}`}>
@@ -23,7 +28,16 @@ const tags = ['Unity','C#','C++','AI','Python','Web','WebGL 2','Three.js','Qt','
   <div class="filters atlas-filters" data-filters data-ui="true"><div class="filters-top"><label class="search-box"><span>查找工程</span><Icon name="search" size={19}/><input type="search" id="project-search" placeholder="搜索名称、用途或技术" autocomplete="off"/></label><p class="results-count" aria-live="polite" data-result-count>共 {projects.length} 个工程</p></div><div class="filter-buttons" role="group" aria-label="工程分类"><button type="button" data-group-filter="all" aria-pressed="true">全部工程</button>{groups.map(group=><button type="button" data-group-filter={group.id} aria-pressed="false">{group.label}</button>)}</div><div class="filter-bottom"><label>技术标签<select id="tag-filter"><option value="">全部技术</option>{tags.map(tag=><option value={tag}>{tag}</option>)}</select></label><button class="reset-filter" type="button" data-reset-filters>重置筛选</button></div></div>
   <section class="atlas-stage" data-atlas-stage aria-label="当前工程预览">
    <div class="atlas-display-copy"><p class="atlas-category" data-atlas-category>{initial.category}</p><h2 class="project-name" data-atlas-title>{initial.name.split(' · ')[0]}</h2><p class="atlas-summary" data-atlas-summary>{initial.summary}</p><dl class="atlas-facts"><div><dt>设计主张</dt><dd data-atlas-principle>{signature.principle}</dd></div><div><dt>技术方向</dt><dd data-atlas-direction>{signature.direction}</dd></div></dl><a class="atlas-enter" data-atlas-link href={sitePath(`/projects/${initial.slug}/`)} data-project-enter>走进工程 <Icon size={21}/></a></div>
-   <div class="atlas-stage-art"><div class="atlas-stage-camera"><div class="atlas-float" data-atlas-float><div class="atlas-preview-plane" data-atlas-preview-tilt style={`--atlas-ratio:${initial.cover.width/initial.cover.height}`}><div class="atlas-preview-content" data-atlas-preview-content><span class="atlas-preview-depth" aria-hidden="true"></span><a class="atlas-preview-link" data-atlas-link href={sitePath(`/projects/${initial.slug}/`)} aria-label={`打开 ${initial.name} 项目`}><img data-atlas-image src={sitePath(initial.cover.src)} width={initial.cover.width} height={initial.cover.height} alt={initial.cover.alt} decoding="async" fetchpriority="high"/></a><span class="atlas-preview-edge" aria-hidden="true"></span></div></div></div></div><div class="atlas-stage-footer"><button type="button" data-atlas-previous aria-label="预览上一个工程"><Icon name="back" size={21}/></button><p data-atlas-position>1 / {projects.length}</p><button type="button" data-atlas-next aria-label="预览下一个工程"><Icon name="chevron" size={21}/></button><a href="#atlas-gallery">浏览图版 <Icon name="chevron" size={16}/></a></div></div>
+   <div class="atlas-stage-art">
+    <div class="atlas-ring-viewport" data-atlas-ring tabindex="0" role="region" aria-roledescription="环形项目画廊" aria-label="浏览工程截图" aria-describedby="atlas-ring-help">
+     <div class="atlas-ring-camera" data-atlas-ring-camera>
+      {orderedProjects.map((project,index)=><a class="atlas-ring-card" data-atlas-ring-card={project.slug} href={sitePath(`/projects/${project.slug}/`)} data-project-enter aria-label={`打开 ${project.name} 项目`} tabindex={index===0?0:-1} aria-hidden={index!==0?'true':undefined} hidden={index!==0}>
+       <span class="atlas-ring-screen"><img src={index===0?sitePath(project.cover.src):undefined} srcset={index===0?ringImage(project):undefined} data-ring-src={sitePath(project.cover.src)} data-ring-srcset={ringImage(project)} sizes="(max-width:760px) 74vw, 38vw" width={project.cover.width} height={project.cover.height} alt={project.cover.alt} decoding="async" fetchpriority={index===0?'high':'auto'}/></span><span class="atlas-ring-caption">{project.name.split(' · ')[0]}</span>
+      </a>)}
+     </div>
+    </div>
+    <div class="atlas-stage-footer"><p data-atlas-position>1 / {projects.length}</p><p id="atlas-ring-help" data-atlas-ring-help>拖动或滚轮浏览 · 方向键切换</p><a href="#atlas-gallery">浏览图版 <Icon name="chevron" size={16}/></a></div>
+   </div>
    <p class="sr-only" data-atlas-status role="status" aria-live="polite">当前预览 {initial.name}</p>
   </section>
   <div class="empty-state atlas-empty" data-empty hidden><h2>没有匹配的工程</h2><p>试试其他名称或技术，也可以清除筛选查看全部。</p><button class="button secondary" type="button" data-reset-filters>清除筛选</button></div>
