@@ -163,8 +163,11 @@ export function setupArchiveAtlas({ signal, preference }: Options) {
   }
   function measure() {
     width=Math.max(1, viewport!.clientWidth);
-    cardWidth=Math.max(230,Math.min(width*.67,470));
+    cardWidth=Math.max(230,Math.min(width*.74,560));
     viewport!.style.setProperty('--ring-card-width',`${cardWidth}px`);
+    // Keep the enlarged screenshot, caption and floating shadow inside the stage
+    // at the wide-phone breakpoint as well as in the desktop two-column layout.
+    viewport!.style.setProperty('--ring-height',`${Math.ceil(Math.max(300,cardWidth*.625+140))}px`);
     render();
   }
   function syncControls() {

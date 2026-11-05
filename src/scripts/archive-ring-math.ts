@@ -18,19 +18,25 @@ export function nearestPhase(index: number, phase: number, count: number): numbe
 
 export function ringPose(offset: number, width: number, count: number) {
   const distance = Math.abs(offset);
-  const angle = offset * 26 * Math.PI / 180;
-  const radius = Math.max(240, width * .73);
-  const seam = Math.min(count / 2, 3.4);
-  const fade = count < 2 ? 1 : clamp((seam - distance) / .65, 0, 1);
-  const facing = Math.max(0, Math.cos(angle));
-  const opacity = Math.pow(facing, 1.45) * fade;
+  const angle = offset * 32 * Math.PI / 180;
+  const radius = Math.max(240, width * .82);
+  const depth = Math.max(340, width * 1.35);
+  // Reach transparency before the rear seam, including short filtered lists.
+  // Most of the falloff is linear; only the almost-invisible end eases to zero.
+  const seam = Math.min(count / 2, 2.65);
+  const remaining = Math.max(0, seam - distance);
+  const tail = Math.min(.24, seam * .2);
+  const t = tail > 0 ? clamp(remaining / tail, 0, 1) : 0;
+  const opacity = count < 2 ? 1 : remaining < tail
+    ? tail / seam * t * t * (2 - t)
+    : clamp(remaining / seam, 0, 1);
   return {
     x: Math.sin(angle) * radius,
     y: -Math.sin(Math.min(Math.PI / 2, Math.abs(angle))) * 28,
-    z: (Math.cos(angle) - 1) * radius,
-    rotateY: offset * 26,
+    z: (Math.cos(angle) - 1) * depth,
+    rotateY: offset * 32,
     opacity,
-    visible: count > 0 && opacity > .006 && distance < 3.4,
+    visible: count > 0 && opacity > .003 && (count < 2 || distance < seam),
     zIndex: Math.round(1000 - distance * 100),
   };
 }

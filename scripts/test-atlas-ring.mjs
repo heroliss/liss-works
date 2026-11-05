@@ -74,6 +74,31 @@ check('short filtered rings fade to invisibility at their index seam', () => {
   }
 });
 
+check('depth and falloff stay symmetric and monotone while cards turn away', () => {
+  let previousDepth=0, previousOpacity=1;
+  for (let offset=0;offset<3;offset+=.025) {
+    const left=ringPose(-offset,900,23),right=ringPose(offset,900,23);
+    near(left.x,-right.x); near(left.rotateY,-right.rotateY);
+    near(left.z,right.z); near(left.y,right.y); near(left.opacity,right.opacity);
+    if (right.visible) assert.ok(Math.abs(right.rotateY)<90,'visible cards must still face the viewer');
+    assert.ok(right.z<=previousDepth+1e-9);
+    assert.ok(right.opacity<=previousOpacity+1e-9);
+    previousDepth=right.z;previousOpacity=right.opacity;
+  }
+});
+
+check('the main fade loses equal opacity over equal travel instead of dropping at the end', () => {
+  const values=[.2,.6,1,1.4,1.8].map(offset=>ringPose(offset,900,23).opacity);
+  for(let i=2;i<values.length;i++) near(values[i-1]-values[i],values[0]-values[1],1e-8);
+  for(const count of [2,3,4]) {
+    const epsilon=.0001;
+    const approaching=ringPose(count/2-epsilon,900,count);
+    const wrapped=ringPose(-count/2+epsilon,900,count);
+    near(approaching.opacity,wrapped.opacity);
+    assert.ok(approaching.opacity<epsilon,'short-list seam must already be invisible before wrapping');
+  }
+});
+
 check('spring and free coast are time-based across 60Hz and 120Hz steps', () => {
   for (const state of [{ position: 4, velocity: -2, target: 1 }, { position: 0, velocity: 10, target: null }]) {
     const sixty = stepFor(state, .3, 1 / 60), oneTwenty = stepFor(state, .3, 1 / 120);
