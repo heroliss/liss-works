@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {
-  wrapPhase, circularOffset, nearestPhase, ringPose, advanceRing,
+  wrapPhase, circularOffset, nearestPhase, ringPose, ringCardWidth, ringStep, advanceRing,
   normalizeWheel, gestureAxis,
 } from '../src/scripts/archive-ring-math.ts';
 
@@ -87,15 +87,37 @@ check('depth and falloff stay symmetric and monotone while cards turn away', () 
   }
 });
 
-check('the main fade loses equal opacity over equal travel instead of dropping at the end', () => {
-  const values=[.2,.6,1,1.4,1.8].map(offset=>ringPose(offset,900,23).opacity);
-  for(let i=2;i<values.length;i++) near(values[i-1]-values[i],values[0]-values[1],1e-8);
-  for(const count of [2,3,4]) {
-    const epsilon=.0001;
-    const approaching=ringPose(count/2-epsilon,900,count);
-    const wrapped=ringPose(-count/2+epsilon,900,count);
-    near(approaching.opacity,wrapped.opacity);
-    assert.ok(approaching.opacity<epsilon,'short-list seam must already be invisible before wrapping');
+check('the full catalogue keeps seven cards readable and fades the rest before they turn edge-on', () => {
+  for (const width of [1440, 1100, 375]) {
+    const poses = Array.from({ length: 23 }, (_, index) => ringPose(circularOffset(index, 0, 23), width, 23));
+    assert.equal(poses.filter(pose => pose.opacity > .5).length, 7, `readable cards at ${width}px`);
+    for (const pose of poses.filter(pose => pose.visible)) assert.ok(Math.abs(pose.rotateY) < 86, 'no visible card turns edge-on');
+    for (const offset of [0, .5, 1, 1.5]) near(ringPose(offset, width, 23).opacity, 1);
+  }
+});
+
+check('front neighbours do not overlap and side cards darken gradually', () => {
+  for (const width of [1440, 900, 375]) {
+    const card = ringCardWidth(width);
+    assert.ok(ringPose(1, width, 23).x - ringPose(0, width, 23).x >= card, 'arc spacing is wider than a card');
+    let previous = -1;
+    for (let offset = 0; offset <= 4; offset += .25) {
+      const shade = ringPose(offset, width, 23).shade;
+      assert.ok(shade >= previous - 1e-12 && shade <= .6);
+      previous = shade;
+    }
+    near(ringPose(0, width, 23).shade, 0);
+  }
+  assert.equal(ringStep(1), 0); assert.equal(ringStep(23), 19); assert.equal(ringStep(3), 26);
+});
+
+check('short filtered lists are already invisible at the seam before they wrap', () => {
+  for (const count of [2, 3, 4]) {
+    const epsilon = .0001;
+    const approaching = ringPose(count / 2 - epsilon, 900, count);
+    const wrapped = ringPose(-count / 2 + epsilon, 900, count);
+    near(approaching.opacity, wrapped.opacity);
+    assert.ok(approaching.opacity < .01, 'short-list seam must already be invisible before wrapping');
   }
 });
 

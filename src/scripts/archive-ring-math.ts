@@ -16,26 +16,41 @@ export function nearestPhase(index: number, phase: number, count: number): numbe
   return count > 1 ? phase + circularOffset(index, phase, count) : 0;
 }
 
+/**
+ * Degrees between neighbouring cards. Long lists use an open 19° arc rather than a
+ * full cylinder: cards past the visible side wrap round the back while invisible.
+ */
+export function ringStep(count: number): number {
+  return count < 2 ? 0 : clamp(360 / count, 19, 26);
+}
+
+/** Card width used by the cylinder; the controller and the pose share one rule. */
+export function ringCardWidth(width: number): number {
+  return clamp(width < 700 ? width * .56 : width * .205, 200, 320);
+}
+
+/**
+ * A cylinder carousel seen slightly from above: the front card faces the viewer and
+ * three neighbours on each side stay legible while they turn and recede around the
+ * same axis; a fourth fades in at each edge. Cards fade before they turn edge-on; short filtered lists also fade
+ * at their index seam so nothing pops when the phase wraps.
+ */
 export function ringPose(offset: number, width: number, count: number) {
-  const distance = Math.abs(offset);
-  const angle = offset * 32 * Math.PI / 180;
-  const radius = Math.max(240, width * .82);
-  const depth = Math.max(340, width * 1.35);
-  // Reach transparency before the rear seam, including short filtered lists.
-  // Most of the falloff is linear; only the almost-invisible end eases to zero.
-  const seam = Math.min(count / 2, 2.65);
-  const remaining = Math.max(0, seam - distance);
-  const tail = Math.min(.24, seam * .2);
-  const t = tail > 0 ? clamp(remaining / tail, 0, 1) : 0;
-  const opacity = count < 2 ? 1 : remaining < tail
-    ? tail / seam * t * t * (2 - t)
-    : clamp(remaining / seam, 0, 1);
+  const distance = Math.abs(offset), step = ringStep(count), degrees = offset * step;
+  const angle = degrees * Math.PI / 180;
+  // Front arc spacing is slightly wider than a card, so neighbours never overlap.
+  const radius = count < 2 ? 0 : ringCardWidth(width) * 1.06 / (step * Math.PI / 180);
+  const side = clamp((86 - Math.abs(degrees)) / 36, 0, 1);
+  const seam = count / 2;
+  const seamFade = clamp((seam - distance) / Math.min(.6, seam * .4), 0, 1);
+  const opacity = count < 2 ? 1 : Math.min(side * side * (3 - 2 * side), seamFade);
   return {
     x: Math.sin(angle) * radius,
-    y: -Math.sin(Math.min(Math.PI / 2, Math.abs(angle))) * 28,
-    z: (Math.cos(angle) - 1) * depth,
-    rotateY: offset * 32,
+    y: 0,
+    z: (Math.cos(angle) - 1) * radius,
+    rotateY: degrees,
     opacity,
+    shade: count < 2 ? 0 : clamp((1 - Math.cos(angle)) * 1.2, 0, .6),
     visible: count > 0 && opacity > .003 && (count < 2 || distance < seam),
     zIndex: Math.round(1000 - distance * 100),
   };

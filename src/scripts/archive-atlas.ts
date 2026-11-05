@@ -1,6 +1,6 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { advanceRing, circularOffset, gestureAxis, nearestPhase, normalizeWheel, ringPose, wrapPhase, type RingMotion } from './archive-ring-math';
+import { advanceRing, circularOffset, gestureAxis, nearestPhase, normalizeWheel, ringCardWidth, ringPose, wrapPhase, type RingMotion } from './archive-ring-math';
 
 type Options = { signal: AbortSignal; preference: MediaQueryList };
 type Pointer = { id:number;x:number;y:number;phase:number;lastPhase:number;time:number;axis:'pending'|'horizontal'|'vertical' };
@@ -23,6 +23,8 @@ export function setupArchiveAtlas({ signal, preference }: Options) {
   const status = atlas.querySelector<HTMLElement>('[data-atlas-status]');
   const positionLabel = atlas.querySelector<HTMLElement>('[data-atlas-position]');
   const help = atlas.querySelector<HTMLElement>('[data-atlas-ring-help]');
+  const copyBlock = atlas.querySelector<HTMLElement>('.atlas-display-copy');
+  let copyFade: Animation | undefined;
   const links = Array.from(atlas.querySelectorAll<HTMLAnchorElement>('[data-atlas-link]'));
   const initial = items.find(item => item.dataset.previewHref === links[0]?.getAttribute('href')) ?? items[0];
   let selected: HTMLElement | undefined = initial;
@@ -40,7 +42,12 @@ export function setupArchiveAtlas({ signal, preference }: Options) {
 
   function updateCopy(item: HTMLElement, announce = false) {
     if (selected === item && atlas.dataset.atlasSelected === item.dataset.atlasItem) return;
+    const changed = selected !== undefined && selected !== item;
     selected = item;
+    if (changed && copyBlock && typeof copyBlock.animate === 'function' && !preference.matches) {
+      copyFade?.cancel();
+      copyFade = copyBlock.animate([{ opacity: .45, transform: 'translateY(5px)' }, { opacity: 1, transform: 'none' }], { duration: 260, easing: 'cubic-bezier(.2,.7,.2,1)' });
+    }
     atlas.dataset.atlasSelected = item.dataset.atlasItem;
     atlas.style.setProperty('--atlas-tone', item.dataset.previewAccent ?? '#9cdef1');
     items.forEach(entry => entry.dataset.active = String(entry === item));
@@ -83,8 +90,10 @@ export function setupArchiveAtlas({ signal, preference }: Options) {
       else { card.setAttribute('aria-hidden','true'); card.removeAttribute('aria-current'); }
       card.dataset.ringActive = String(index === activeIndex);
       if (!pose.visible) return;
-      card.style.transform = `translate(-50%,-50%) translate3d(${pose.x.toFixed(2)}px,${pose.y.toFixed(2)}px,${pose.z.toFixed(2)}px) rotateY(${pose.rotateY.toFixed(2)}deg)`;
+      // The whole cylinder leans back a little, so cards further round sit higher.
+      card.style.transform = `translate(-50%,-50%) rotateX(-6deg) translate3d(${pose.x.toFixed(2)}px,${pose.y.toFixed(2)}px,${pose.z.toFixed(2)}px) rotateY(${pose.rotateY.toFixed(2)}deg)`;
       card.style.opacity = pose.opacity.toFixed(3);
+      card.style.setProperty('--ring-shade', pose.shade.toFixed(3));
       card.style.zIndex = String(pose.zIndex);
       if (stageVisible) loadImage(card);
     });
@@ -185,11 +194,11 @@ export function setupArchiveAtlas({ signal, preference }: Options) {
   }
   function measure() {
     width=Math.max(1, viewport!.clientWidth);
-    cardWidth=Math.max(230,Math.min(width*.74,560));
+    cardWidth=ringCardWidth(width);
     viewport!.style.setProperty('--ring-card-width',`${cardWidth}px`);
     // Keep the enlarged screenshot, caption and floating shadow inside the stage
     // at the wide-phone breakpoint as well as in the desktop two-column layout.
-    viewport!.style.setProperty('--ring-height',`${Math.ceil(Math.max(300,cardWidth*.625+140))}px`);
+    viewport!.style.setProperty('--ring-height',`${Math.ceil(Math.max(290,cardWidth*.625+130))}px`);
     render();
   }
   function syncControls() {
@@ -223,7 +232,7 @@ export function setupArchiveAtlas({ signal, preference }: Options) {
       }
       if(pointer.axis!=='horizontal')return;
       if(event.cancelable)event.preventDefault();
-      const phase=pointer.phase-dx/Math.max(150,cardWidth*.63),dt=Math.max(.008,Math.min(.06,(event.timeStamp-pointer.time)/1000));
+      const phase=pointer.phase-dx/Math.max(150,cardWidth*1.06),dt=Math.max(.008,Math.min(.06,(event.timeStamp-pointer.time)/1000));
       motion.velocity=motion.velocity*.55+(phase-pointer.lastPhase)/dt*.45;
       motion.position=phase;motion.target=null;pointer.lastPhase=phase;pointer.time=event.timeStamp;
       render();return;
@@ -308,9 +317,9 @@ export function setupArchiveAtlas({ signal, preference }: Options) {
   atlas.dataset.ringReady='true';measure();filterChanged();syncControls();
   const dispose=()=>{
     if(disposed)return;
-    endWheel();endWheelHint();releasePointer(false);stopFrame();disposed=true;events.abort();stageObserver.disconnect();resize.disconnect();media.revert();tileGates.clear();
+    endWheel();endWheelHint();copyFade?.cancel();releasePointer(false);stopFrame();disposed=true;events.abort();stageObserver.disconnect();resize.disconnect();media.revert();tileGates.clear();
     delete atlas.dataset.ringReady;delete viewport.dataset.ringAnimating;delete viewport.dataset.dragging;camera.style.removeProperty('transform');
-    cards.forEach((card,index)=>{card.hidden=index!==0;card.tabIndex=index===0?0:-1;card.style.removeProperty('transform');card.style.removeProperty('opacity');card.style.removeProperty('z-index');card.removeAttribute('aria-current');delete card.dataset.ringActive;if(index===0)card.removeAttribute('aria-hidden');else card.setAttribute('aria-hidden','true');});
+    cards.forEach((card,index)=>{card.hidden=index!==0;card.tabIndex=index===0?0:-1;card.style.removeProperty('transform');card.style.removeProperty('opacity');card.style.removeProperty('z-index');card.style.removeProperty('--ring-shade');card.removeAttribute('aria-current');delete card.dataset.ringActive;if(index===0)card.removeAttribute('aria-hidden');else card.setAttribute('aria-hidden','true');});
     signal.removeEventListener('abort',dispose);
   };
   signal.addEventListener('abort',dispose,{once:true});return dispose;
