@@ -9,6 +9,9 @@ const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
 const smooth=(a,b,x)=>{const t=clamp((x-a)/(b-a),0,1);return t*t*(3-2*t);};
 export const FULL_MOON_SOLAR_RATIO=2.2e-6;
 export const NIGHT_STAR_SCALE=2e-7;
+// The atlas and binary star catalogue are fetched once the Sun falls below this
+// elevation (before the 10deg night-exposure ramp), or earlier on request.
+export const NIGHT_ASSET_ELEVATION_DEGREES=12;
 export const nightDefaults=Object.freeze({latitude:4.5,longitude:118.6,height:2,date:'2026-10-26T14:00:00.000Z',rotationDegrees:0,automaticExposure:true,moonIntensity:1,starIntensity:1});
 export function sanitizeNight(patch={},previous=nightDefaults){
   const n={...previous};
@@ -113,8 +116,8 @@ export const nightSkyGLSL=/* glsl */`
   }
 `;
 
-export function createNightSky(THREE,initial={}){
-  let settings=sanitizeNight(initial),lastTime=0,disposed=false,loadError=null,loaded=false,external=false;
+export function createNightSky(THREE,initial={},{onLoad}={}){
+  let settings=sanitizeNight(initial),lastTime=0,disposed=false,loadError=null,loaded=false,external=false,loading=null;
   const controller=createCelestialController({utcMs:Date.parse(settings.date),latitude:settings.latitude,longitude:settings.longitude,height:settings.height,northYawDeg:settings.rotationDegrees,mode:'artistic'});
   const starField=createStarField(THREE);
   const black=new THREE.DataTexture(new Uint8Array([0,0,0,255]),1,1,THREE.RGBAFormat);black.needsUpdate=true;
@@ -162,22 +165,42 @@ export function createNightSky(THREE,initial={}){
     settings={...settings,date:snapshot.date,latitude:snapshot.observer.latitudeDeg,longitude:snapshot.observer.longitudeDeg,height:snapshot.observer.heightM,rotationDegrees:snapshot.observer.northYawDeg};
     applyCelestial(snapshot);starField.update({time:lastTime,epochJulianYear:current.epochJulianYear,starIntensity:settings.starIntensity});return state();
   }
-  const state=()=>({...current,settings:{...settings},currentDate:current.date,loaded,loadError,externalClock:external,starMap:'NASA SVS4851 no-HIP/Tycho background + HIP/Tycho8.5 point kernels + diffuse complementary aggregate',starField:starField.diagnostics(),lunarMap:'NASA SVS4720,LRO1024x512,local',starScale:NIGHT_STAR_SCALE*settings.starIntensity,ephemerisRefreshSeconds:30,ephemerisInterpolation:'continuous endpoints; exact current EQJ rotation'});
+  const state=()=>({...current,settings:{...settings},currentDate:current.date,loaded,loadError,loadRequested:!!loading,externalClock:external,starMap:'NASA SVS4851 no-HIP/Tycho background + HIP/Tycho8.5 point kernels + diffuse complementary aggregate',starField:starField.diagnostics(),lunarMap:'NASA SVS4720,LRO1024x512,local',starScale:NIGHT_STAR_SCALE*settings.starIntensity,ephemerisRefreshSeconds:30,ephemerisInterpolation:'continuous endpoints; exact current EQJ rotation'});
   update(0,true);
+  const browser=typeof document!=='undefined';
   let starTexture=null,moonTexture=null;
-  const ready=typeof document==='undefined'?Promise.resolve({loaded:false,reason:'Node CPU-only context'}):Promise.all([
-    import('./vendor/addons/loaders/HDRLoader.js').then(({HDRLoader})=>new HDRLoader().setDataType(THREE.HalfFloatType).loadAsync(new URL('./assets/night/catalog/milkyway-4k.hdr',import.meta.url).href)),
-    new THREE.TextureLoader().loadAsync(new URL('./assets/night/lroc_color_poles_1k.jpg',import.meta.url).href),
-    starField.ready
-  ]).then(([stars,moon])=>{
-    if(disposed){stars.dispose();moon.dispose();return{loaded:false,disposed:true};}
-    starTexture=stars;moonTexture=moon;
-    stars.colorSpace=THREE.LinearSRGBColorSpace;stars.flipY=true;stars.generateMipmaps=true;stars.minFilter=THREE.LinearMipmapLinearFilter;stars.magFilter=THREE.LinearFilter;stars.wrapS=THREE.RepeatWrapping;stars.wrapT=THREE.ClampToEdgeWrapping;stars.anisotropy=4;stars.needsUpdate=true;
+  // Daytime set: the small lunar albedo (the Moon can stand in a daytime sky)
+  // and the star manifest photometry. dayReady settles with them.
+  const moonReady=browser?new THREE.TextureLoader().loadAsync(new URL('./assets/night/lroc_color_poles_1k.jpg',import.meta.url).href).then(moon=>{
+    if(disposed){moon.dispose();return null;}
+    moonTexture=moon;
     moon.colorSpace=THREE.SRGBColorSpace;moon.flipY=true;moon.generateMipmaps=true;moon.minFilter=THREE.LinearMipmapLinearFilter;moon.magFilter=THREE.LinearFilter;moon.wrapS=THREE.RepeatWrapping;moon.wrapT=THREE.ClampToEdgeWrapping;moon.needsUpdate=true;
-    stars.name='NASA catalog stellar radiance + Milky Way / ICRF J2000';moon.name='NASA LRO lunar albedo';uniforms.uNightStarMap.value=stars;uniforms.uMoonMap.value=moon;loaded=true;return state();
-  }).catch(error=>{loadError=String(error);throw error;});
-  // Retain rejection on ready for callers while avoiding an unhandled global
-  // promise if a CPU-only client intentionally does not await asset loading.
-  ready.catch(()=>{});
-  return{uniforms,ready,update,setNight,setCelestial,prepareStarView(camera,options){starField.update({time:uniforms.uStarPhysicalTime.value,epochJulianYear:current.epochJulianYear,starIntensity:settings.starIntensity});return starField.prepareView(camera,{...options,frame:{...options?.frame,starIntensity:settings.starIntensity}});},getRadianceBound:()=>{const b=starField.getRadianceBound();return {...b,maxRGB:b.maxRGB+NIGHT_STAR_SCALE*settings.starIntensity};},getStellarMeanRGB:()=>{const mean=starField.meanPhysicalRGB(),m=starField.manifest;return mean&&m?mean.map((v,i)=>v+m.photometry.NASAbackgroundRGBIntegral[i]/(4*Math.PI)*NIGHT_STAR_SCALE*settings.starIntensity):null;},captureSnapshot:()=>({current:structuredClone(current),settings:{...settings},external,stars:starField.captureSnapshot()}),withSnapshot(snapshot,fn){const saved={current,settings,external};try{settings={...snapshot.settings};external=snapshot.external;applyCelestial(snapshot.current);return starField.withSnapshot(snapshot.stars,fn);}finally{settings=saved.settings;external=saved.external;applyCelestial(saved.current);}},get state(){return state();},get physical(){return current;},get settings(){return {...settings};},dispose(){if(disposed)return;disposed=true;starTexture?.dispose();moonTexture?.dispose();black.dispose();starField.dispose();}};
+    moon.name='NASA LRO lunar albedo';uniforms.uMoonMap.value=moon;return moon;
+  }):Promise.resolve(null);
+  const dayReady=browser?Promise.all([moonReady,starField.manifestReady]).then(()=>state()).catch(error=>{loadError=String(error);throw error;}):Promise.resolve({loaded:false,reason:'Node CPU-only context'});
+  dayReady.catch(()=>{});
+  // Night set: the 4K Milky Way atlas and the binary star catalogue. Fetched
+  // once, on first load() or ready access. Until then their samplers keep the
+  // valid placeholders above, which contribute zero radiance.
+  function load(){
+    if(loading)return loading;
+    loading=!browser?Promise.resolve({loaded:false,reason:'Node CPU-only context'}):disposed?Promise.resolve({loaded:false,disposed:true}):Promise.all([
+      import('./vendor/addons/loaders/HDRLoader.js').then(({HDRLoader})=>new HDRLoader().setDataType(THREE.HalfFloatType).loadAsync(new URL('./assets/night/catalog/milkyway-4k.hdr',import.meta.url).href)),
+      moonReady,
+      starField.load()
+    ]).then(([stars])=>{
+      if(disposed){stars.dispose();return{loaded:false,disposed:true};}
+      starTexture=stars;
+      stars.colorSpace=THREE.LinearSRGBColorSpace;stars.flipY=true;stars.generateMipmaps=true;stars.minFilter=THREE.LinearMipmapLinearFilter;stars.magFilter=THREE.LinearFilter;stars.wrapS=THREE.RepeatWrapping;stars.wrapT=THREE.ClampToEdgeWrapping;stars.anisotropy=4;stars.needsUpdate=true;
+      stars.name='NASA catalog stellar radiance + Milky Way / ICRF J2000';uniforms.uNightStarMap.value=stars;loaded=true;
+      const result=state();
+      try{onLoad?.(result);}catch(error){console.warn('Night sky onLoad:',error);}
+      return result;
+    }).catch(error=>{loadError=String(error);throw error;});
+    // Retain rejection on ready for callers while avoiding an unhandled global
+    // promise if a client intentionally does not await asset loading.
+    loading.catch(()=>{});
+    return loading;
+  }
+  return{uniforms,dayReady,load,get ready(){return load();},update,setNight,setCelestial,prepareStarView(camera,options){starField.update({time:uniforms.uStarPhysicalTime.value,epochJulianYear:current.epochJulianYear,starIntensity:settings.starIntensity});return starField.prepareView(camera,{...options,frame:{...options?.frame,starIntensity:settings.starIntensity}});},getRadianceBound:()=>{const b=starField.getRadianceBound();return {...b,maxRGB:b.maxRGB+NIGHT_STAR_SCALE*settings.starIntensity};},getStellarMeanRGB:()=>{const mean=starField.meanPhysicalRGB(),m=starField.manifest;return mean&&m?mean.map((v,i)=>v+m.photometry.NASAbackgroundRGBIntegral[i]/(4*Math.PI)*NIGHT_STAR_SCALE*settings.starIntensity):null;},captureSnapshot:()=>({current:structuredClone(current),settings:{...settings},external,stars:starField.captureSnapshot()}),withSnapshot(snapshot,fn){const saved={current,settings,external};try{settings={...snapshot.settings};external=snapshot.external;applyCelestial(snapshot.current);return starField.withSnapshot(snapshot.stars,fn);}finally{settings=saved.settings;external=saved.external;applyCelestial(saved.current);}},get state(){return state();},get physical(){return current;},get settings(){return {...settings};},dispose(){if(disposed)return;disposed=true;starTexture?.dispose();moonTexture?.dispose();black.dispose();starField.dispose();}};
 }

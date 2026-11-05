@@ -82,6 +82,7 @@ let soundscape,atmosphere,environmentScene;
 let cloudShadowCache,indirectLighting,shadowQuality,hdrOutput,displayTransform,displayReport=null,hdrCalibration=null,lastDisplaySignature=null,refreshingDisplay=null;
 let displaySettingsApplying=false,displaySettingsPending=false,displayRefreshPending=false,lastDisplayObservationKey=null;
 let nightSettings={date:'2026-10-26T22:00',autoExposure:true},lastSolarExposure=null;
+let timeChangeEpoch=0,nightAssetsArrived=false;
 const qaTransmissionLayoutReports=Object.create(null);
 let celestialController,celestialFrame,localLights,environmentLocalLights,environmentCapture,fireworks,fireworksAudio,pyroSmoke,reflectionDepthCopy,frameSnapshot=null,qualityApplying=false,throwGesture=null,qaRenderLock=false,qaSmokeVariants=null;
 let qaSmokeTransmissionField=null,qaSmokeTransmissionAdmission=null,qaSmokeTransmissionInput=null;
@@ -147,7 +148,7 @@ const ui=initUI({
   onRefreshDisplay(){return refreshDisplay();},
   onGraphicsChange(value){return setGraphics(value);},
   onSeaChange(value){setSea(value);},
-  onSunChange(value){Object.assign(parameters.sun,value);if(celestialController)celestialFrame=celestialController.configure({mode:'artistic'});setSun();syncTimeUI();},
+  onSunChange(value){timeChangeEpoch++;Object.assign(parameters.sun,value);if(celestialController)celestialFrame=celestialController.configure({mode:'artistic'});setSun();syncTimeUI();},
   onView(name){moveTo(name);},
   async onReset(){nightSettings.autoExposure=true;ui.setNight({autoExposure:true});await setNightPreset('day');moveTo('shore');},
   onQuality(value){return applyQualityPreset(value==='balanced'?'balanced':'high');},
@@ -235,12 +236,16 @@ async function init(){
   renderBenchmark=createRenderBenchmark(()=>({viewport:[innerWidth,innerHeight],dpr:devicePixelRatio,renderScale,lens:lens.state,water:water?.diagnostics?.(),spectrum:waveSpectrum?.state,performance:governor.state,parameters:structuredClone(parameters),atmosphere:atmosphere?.diagnostics(),audio:soundscape?.state,camera:camera.position.toArray(),target:controls.target.toArray()}));
   setLens();
   ui.setStats({loading:'展开真实晴空…'});
-  atmosphere=createAtmosphere(THREE,{sunDirection,cloudSteps:64,cloudCoverage:.35,weather:parameters.weather});
+  // The frame loop refreshes the environment cube and paused frame once the
+  // night atlas/catalogue is bound (setting a flag is safe at any moment).
+  atmosphere=createAtmosphere(THREE,{sunDirection,cloudSteps:64,cloudCoverage:.35,weather:parameters.weather,onNightLoad(){nightAssetsArrived=true;}});
   atmosphere.setCloudBaseContinuity(1);
   // A clear initial location in the same 3-D weather field. This is set once;
   // subsequent advection/evolution can bring these clouds over the island.
   atmosphere.uniforms.uCloudWeatherOrigin.value.set(.421875,.734375);
-  await atmosphere.ready;
+  // Daytime set only: lunar albedo and star photometry manifest. The night
+  // atlas/catalogue loads after the first frame or when night is requested.
+  await atmosphere.dayReady;
   celestialController=createCelestialController({utcMs:Math.floor(Date.now()/86400000)*86400000+(12-118.6/15)*3600000,latitude:4.5,longitude:118.6,rate:1,running:true,mode:'astronomical'});
   celestialFrame=celestialController.state;atmosphere.setCelestial(celestialFrame);atmosphere.setStorageExposureEV(0);
   sky=atmosphere.mesh;scene.add(sky);
@@ -351,12 +356,18 @@ async function init(){
   renderer.compile(scene,camera);
   frame();
   ui.setReady();
+  // Fetch the night atlas/catalogue once the browser is idle after the first
+  // daytime frame. Dusk, night presets/views and night diagnostics ask sooner.
+  const preloadNight=()=>{atmosphere.loadNight().catch(error=>console.warn('Atoll night assets:',error));};
+  if(typeof requestIdleCallback==='function')requestIdleCallback(preloadNight,{timeout:5000});else setTimeout(preloadNight,2000);
   window.__ATOLL__={
-    get state(){return {ready:true,time,fps,gpuMs,renderScale,graphicsContextInterrupted,pausedRenderCached,pausedSteadyFrames,parameters:structuredClone(parameters),lens:lens.state,caustics:{quality:causticQuality,gridSegments:caustics.gridSegments,maxHz:caustics.maxHz},performance:governor.state,camera:camera.position.toArray(),target:controls.target.toArray(),ripples:water.uniforms.uRipples.value.map(v=>v.toArray()),triangles:lens.state.sceneStats.triangles,drawCalls:lens.state.sceneStats.calls,leaves:floatingLeaves.state};},
+    get state(){return {ready:true,time,fps,gpuMs,renderScale,graphicsContextInterrupted,pausedRenderCached,pausedSteadyFrames,parameters:structuredClone(parameters),lens:lens.state,caustics:{quality:causticQuality,gridSegments:caustics.gridSegments,maxHz:caustics.maxHz},performance:governor.state,camera:camera.position.toArray(),target:controls.target.toArray(),ripples:water.uniforms.uRipples.value.map(v=>v.toArray()),triangles:lens.state.sceneStats.triangles,drawCalls:lens.state.sceneStats.calls,leaves:floatingLeaves.state,nightAssets:(({loaded,loadRequested,loadError})=>({loaded,loadRequested,loadError}))(atmosphere.getNightState())};},
     setMotionEnabled(value){lens.setMotionEnabled(value);},
     navigation(){return navigation.state;},
     celestial(){return celestialController.state;},
     setTime, timePreset:setNightPreset,weatherPreset:setWeatherPreset,
+    // Night captures that bypass the presets await this before rendering.
+    async loadNightAssets(){await atmosphere.ready;return atmosphere.getNightState();},
     setWeather,
     photometry(){return {...radiometry.state,frame:frameSnapshot,environment:environmentCapture.state};},
     get diagnosticCameraEV(){return qaCameraExposureEV;},
@@ -677,10 +688,10 @@ async function init(){
     async runMomentsBoundCheck(){if(qaRenderLock)throw new Error('A GPU diagnostic already owns the renderer');qaRenderLock=true;try{const {runFireworksBoundGPUCheck}=await import('./verification/fireworks/bound-gpu-check.js');return await runFireworksBoundGPUCheck(THREE,renderer,(T,options)=>createFireworks(T,{...options,clusterModel:'moments'}));}finally{clock.getDelta();qaRenderLock=false;lastPausedRenderKey=null;}},
     async runFireworksContactCheck(){const {runFireworksContactCheck}=await import('./verification/fireworks/contact-gpu-check.js');return runFireworksContactCheck(THREE,renderer,createFireworks);},
     async runFireworksAudioABCheck(){const {runFireworksAudioABCheck}=await import('./verification/fireworks/audio-ab-check.js');return runFireworksAudioABCheck({capture:true});},
-    async runCelestialDiscCheck(){const {runCelestialDiscCheck}=await import('./verification/celestial-disc-gpu-check.js');return runCelestialDiscCheck(THREE,renderer,atmosphere);},
-    async runStarFieldCheck(){const {runStarFieldCheck}=await import('./verification/star-field-gpu-check.js');return runStarFieldCheck(THREE,renderer,atmosphere);},
-    async runCelestialZeroCheck(){const {runCelestialZeroCheck}=await import('./verification/celestial-zero-gpu-check.js');return runCelestialZeroCheck(THREE,renderer,atmosphere);},
-    async runCelestialZeroCostCheck(){const {runCelestialZeroCostCheck}=await import('./verification/celestial-zero-cost-gpu.js');return runCelestialZeroCostCheck(THREE,renderer,atmosphere,{camera,width:lens.state.width,height:lens.state.height,cubePosition:[0,2,0]});},
+    async runCelestialDiscCheck(){await atmosphere.ready;const {runCelestialDiscCheck}=await import('./verification/celestial-disc-gpu-check.js');return runCelestialDiscCheck(THREE,renderer,atmosphere);},
+    async runStarFieldCheck(){await atmosphere.ready;const {runStarFieldCheck}=await import('./verification/star-field-gpu-check.js');return runStarFieldCheck(THREE,renderer,atmosphere);},
+    async runCelestialZeroCheck(){await atmosphere.ready;const {runCelestialZeroCheck}=await import('./verification/celestial-zero-gpu-check.js');return runCelestialZeroCheck(THREE,renderer,atmosphere);},
+    async runCelestialZeroCostCheck(){await atmosphere.ready;const {runCelestialZeroCostCheck}=await import('./verification/celestial-zero-cost-gpu.js');return runCelestialZeroCostCheck(THREE,renderer,atmosphere,{camera,width:lens.state.width,height:lens.state.height,cubePosition:[0,2,0]});},
     async runRadianceRangeCheck(){const {runRadianceRangeGPUCheck}=await import('./verification/radiance-range-gpu-check.js');return runRadianceRangeGPUCheck(THREE,renderer);},
     async runRadianceDefaultBufferCheck(){if(qaRenderLock||graphicsContextInterrupted)throw new Error('A live renderer with no active GPU diagnostic is required');qaRenderLock=true;try{const {runRadianceDefaultBufferGPUCheck}=await import('./verification/r9-radiance-default-buffer-gpu-check.js');return await runRadianceDefaultBufferGPUCheck(THREE,renderer);}finally{clock.getDelta();qaRenderLock=false;lastPausedRenderKey=null;}},
     interactions(){return {stones:stoneThrow.state,underwater:stoneThrow.underwaterState,resting:stoneThrow.restingState,stoneDiagnostics:stoneThrow.diagnostics(),splashes:splashes.state,pending:!!pendingThrow};},
@@ -694,7 +705,7 @@ async function init(){
     setTransientIndirect(enabled){transientIndirectEnabled=!!enabled;updateScenePhotometry(0,true);lens.resetTemporalHistory('local indirect comparison');lastPausedRenderKey=null;return indirectLighting.diagnostics().transient;},
     setGraphics,
     setSea,
-    async runNightCheck(){const {runNightSkyCheck}=await import('./verification/night-sky-gpu-check.js');return runNightSkyCheck(THREE,renderer,atmosphere);},
+    async runNightCheck(){await atmosphere.ready;const {runNightSkyCheck}=await import('./verification/night-sky-gpu-check.js');return runNightSkyCheck(THREE,renderer,atmosphere);},
     async runVegetationMotionCheck(){const {runVegetationMotionGPUCheck}=await import('./verification/vegetation-motion-gpu-check.js');const {selectiveTemporalGLSL}=await import('./lens.js');return runVegetationMotionGPUCheck(THREE,renderer,grove,camera,selectiveTemporalGLSL);},
     async runSeaStateCheck(){const {runSeaStateCheck}=await import('./verification/sea-state-gpu-check.js');return runSeaStateCheck(THREE,renderer);},
     async runIndirectCheck(){const {runIndirectLightingGPUCheck}=await import('./verification/indirect-lighting-gpu-check.js');return runIndirectLightingGPUCheck(THREE,renderer,indirectLighting);},
@@ -1041,8 +1052,20 @@ async function applyShowcase(id){
   return {id,view:preset.view,clockStopped:true,launched:false};
 }
 
+// Non-day presets wait for the night atlas/catalogue, so their first frame is
+// complete. Any later time change cancels the wait (returns false). A failed
+// load is reported and the clock still moves; placeholders give zero starlight.
+async function ensureNightAssets(){
+  const night=atmosphere?.getNightState();
+  if(!night||night.loaded)return night??null;
+  if(!night.loadError)ui.notify('正在载入星表与银河…',8000);
+  try{return await atmosphere.ready;}
+  catch(error){console.warn('Atoll night assets:',error);ui.notify('星空数据暂时没有载入，夜空将不含星点');return null;}
+}
 async function setNightPreset(name){
   if(!celestialController)return;
+  const epoch=++timeChangeEpoch;
+  if(name!=='day'){await ensureNightAssets();if(epoch!==timeChangeEpoch)return false;}
   const c=celestialController.state,day=Math.floor(c.utcMs/86400000)*86400000,noon=day+(12-c.observer.longitudeDeg/15)*3600000;
   let utc=name==='moon'?Date.parse('2026-10-26T14:00:00Z'):name==='stars'?Date.parse('2026-08-13T14:00:00Z'):noon;
   if(name==='dawn'||name==='sunset'){const approx=noon+(name==='dawn'?-6:6)*3600000;let lo=approx-3*3600000,hi=approx+3*3600000;const altitude=t=>exactCelestialEphemeris(t,c.observer).sun.altitudeDeg+.30;let a=altitude(lo),b=altitude(hi);if(a*b>0){ui.notify('此地点今天没有对应的日出或日落，时间保持不变');return false;}for(let i=0;i<20;i++){const mid=(lo+hi)/2,v=altitude(mid);if(a*v<=0)hi=mid;else{lo=mid;a=v;}}utc=(lo+hi)/2;}
@@ -1265,7 +1288,7 @@ function syncTimeUI(){
   ui.setNight({label:altitude>0?'晴空与海，随时间流转。':altitude>-12?'暮光，慢慢落在海上。':'夜色，环抱一座海岛。'});
 }
 function refreshLocalSettings(){if(!localLights)return;const s=localLights.state;ui.syncLamps(s);ui.syncFlashlight(s.flashlight);lastPausedRenderKey=null;lens?.resetTemporalHistory('local light parameters');if(atmosphere)updateScenePhotometry(0,true);}
-async function setTime(patch={}){if(!celestialController)return;if(['utcMs','utcISO','date','latitude','longitude','height','latitudeDeg','longitudeDeg','heightM','mode'].some(k=>Object.hasOwn(patch,k)))exposureResetPending=true;celestialFrame=celestialController.configure(patch);atmosphere.setCelestial(celestialFrame);if(celestialFrame.mode==='artistic')setSun(false);else{sunDirection.fromArray(celestialFrame.sunDirection);atmosphere.setSun({intensity:1});}updateScenePhotometry(0,true);shadowQuality?.update();lens?.resetTemporalHistory('clock/location');updateEnvironment();syncTimeUI();lastPausedRenderKey=null;return celestialFrame;}
+async function setTime(patch={}){if(!celestialController)return;timeChangeEpoch++;if(['utcMs','utcISO','date','latitude','longitude','height','latitudeDeg','longitudeDeg','heightM','mode'].some(k=>Object.hasOwn(patch,k)))exposureResetPending=true;celestialFrame=celestialController.configure(patch);atmosphere.setCelestial(celestialFrame);if(celestialFrame.mode==='artistic')setSun(false);else{sunDirection.fromArray(celestialFrame.sunDirection);atmosphere.setSun({intensity:1});}updateScenePhotometry(0,true);shadowQuality?.update();lens?.resetTemporalHistory('clock/location');updateEnvironment();syncTimeUI();lastPausedRenderKey=null;return celestialFrame;}
 function setWeatherPreset(name){const presets={clear:{humidity:.55,temperature:29,coverage:.08,thickness:650,shear:.8},fair:{humidity:.68,temperature:29,coverage:.35,thickness:950,shear:1.1},cloudy:{humidity:.78,temperature:28,coverage:.72,thickness:1450,shear:1.8},humid:{humidity:.90,temperature:28,coverage:.28,thickness:850,shear:.7}};if(!presets[name])return;setWeather(presets[name]);ui.syncWeather(parameters.weather);ui.notify('天气预设已更新，时间与视角保持当前设置');}
 async function applyQualityPreset(id=DEFAULT_QUALITY){
   parameters.qualityPreset=id;const requested=getQualityPreset(id),caps=renderer?{maxTextureSize:renderer.capabilities.maxTextureSize,sampleSupport:lens.state.sampleSupport}:{};const result=resolveQualityPreset(id,caps),q=result.effective;parameters.renderSampling=q;parameters.qualityCustom=false;qualityApplying=true;
@@ -1466,6 +1489,7 @@ function beginCameraTransition(position,target){
 function moveTo(name){
   manualCameraActivity();
   if(!camera)return;
+  if(name==='stars'||name==='moon')void atmosphere?.loadNight();
   let view=views[name];
   if(name==='sun'||name==='moon'){
     const direction=new THREE.Vector3(...(name==='moon'?celestialFrame.moonDirection:celestialFrame.sunDirection));
@@ -1860,6 +1884,9 @@ function frame(){
   if(throwGesture&&!throwGesture.cancelled&&!throwGesture.picking)ui.setThrowCharge(Math.min(1,(performance.now()-throwGesture.time)/1200),true);
   ui.locateLeaf(performance.now()<leafLocatorUntil?floatingLeaves.locate(camera,{viewportWidth:innerWidth,viewportHeight:innerHeight}):null,performance.now()<leafLocatorUntil);
   mark('locators-cloud-GI');
+  // Newly bound night textures: recapture the sky cube now (a paused or slow
+  // clock would otherwise keep the pre-load capture) and redraw a paused view.
+  if(nightAssetsArrived){nightAssetsArrived=false;updateEnvironment();lastPausedRenderKey=null;}
   updateDynamicEnvironment();
   mark('environment-capture');
   if(!parameters.paused&&time-lastShadowTime>=1/shadowQuality.hz){shadowQuality.update();sunLight.shadow.needsUpdate=true;renderer.shadowMap.needsUpdate=true;lastShadowTime=time;}

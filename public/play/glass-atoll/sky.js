@@ -8,7 +8,7 @@
  */
 
 import { createWeatherController } from './weather.js';
-import { createNightSky,nightSkyGLSL,recommendedNightExposure,NIGHT_STAR_SCALE } from './night-sky.js';
+import { createNightSky,nightSkyGLSL,recommendedNightExposure,NIGHT_STAR_SCALE,NIGHT_ASSET_ELEVATION_DEGREES } from './night-sky.js';
 
 const EARTH=6360000,TOP=6460000,HR=8000,HM=1200;
 const BR=[5.802e-6,13.558e-6,33.1e-6],BM=3.996e-6,BO=[0.650e-6,1.881e-6,0.085e-6];
@@ -314,7 +314,7 @@ export const transientCloudGLSL=/* glsl */`
   }
 `;
 
-export function createAtmosphere(THREE,{sunDirection,seed=7183,cloudSteps=64,cloudCoverage=0.35,cloudBase,cloudTop,cloudExtinction=0.0036,windMultiplier=1.6,weather={},night={}}={}){
+export function createAtmosphere(THREE,{sunDirection,seed=7183,cloudSteps=64,cloudCoverage=0.35,cloudBase,cloudTop,cloudExtinction=0.0036,windMultiplier=1.6,weather={},night={},onNightLoad}={}){
   const start=performance.now();let rng=seed>>>0;
   const weatherController=createWeatherController({coverage:cloudCoverage,
     ...(Number.isFinite(cloudBase)?{cloudBase,thickness:Number.isFinite(cloudTop)?cloudTop-cloudBase:950}:{}),...weather});
@@ -424,7 +424,7 @@ export function createAtmosphere(THREE,{sunDirection,seed=7183,cloudSteps=64,clo
   if(direction.lengthSq()<1e-12)direction.set(.65,.74,-.18);
   direction.normalize();
   const sunUniform={value:direction},intensityUniform={value:1},timeUniform={value:0};
-  const nightSky=createNightSky(THREE,night);
+  const nightSky=createNightSky(THREE,night,{onLoad:onNightLoad});
   const uniforms={...nightSky.uniforms,sunPosition:sunUniform,uSkyIntensity:intensityUniform,uSolarDistanceGain:{value:1},uSkyPreExposure:{value:1},uSolarDisk:{value:1},uSunAngularRadius:{value:.00465},uCelestialDiscDebug:{value:0},uCloudTime:timeUniform,uAirMieScale:{value:1},uAirDiffuseStrength:{value:1},uAirDiffuseRadiance:{value:new THREE.Vector3()},
     uMoonSourceRatio:{value:nightSky.physical.moonSourceRatio},uMoonSourceColor:{value:new THREE.Vector3(1,.96,.90)},
     uCloudLightDirection:{value:direction.clone()},uCloudLightColor:{value:new THREE.Vector3(1,1,1)},uCloudLightStrength:{value:1},uCloudAmbientColor:{value:new THREE.Vector3(.24,.325,.42)},uCloudSupportEnabled:{value:1},uCloudShapeBlend:{value:2},uCloudBaseContinuity:{value:0},
@@ -676,6 +676,8 @@ export function createAtmosphere(THREE,{sunDirection,seed=7183,cloudSteps=64,clo
     const physicalSunStrength=peak*intensityUniform.value*uniforms.uSolarDistanceGain.value,n=nightSky.physical,moonDirection=nightSky.uniforms.uMoonDirection.value;
     const mt=solarTransmittance(Math.asin(clamp(moonDirection.y,-1,1)),2,uniforms.uAirMieScale.value),moonRGB=mt.map((v,i)=>v/Math.max(1e-6,referenceTransmission[i])*[1,.96,.90][i]),moonPeak=Math.max(...moonRGB,0),moonColor=new THREE.Color().setRGB(...moonRGB.map(v=>v/Math.max(moonPeak,1e-6)));
     const physicalMoonStrength=moonPeak*n.moonSourceRatio,elevation=Math.asin(clamp(direction.y,-1,1))*180/Math.PI;
+    // Toward dusk, fetch the atlas/catalogue before stars can be visible. Idempotent.
+    if(elevation<NIGHT_ASSET_ELEVATION_DEGREES)nightSky.load();
     const recommendedExposureEV=recommendedNightExposure(elevation,n.moonSourceRatio,n.moonAltitudeDegrees,nightSky.settings.automaticExposure),preExposureEV=storageExposureOverride??recommendedExposureEV,preExposureScale=2**preExposureEV;
     const keyIsMoon=physicalMoonStrength>physicalSunStrength,keyDirection=keyIsMoon?moonDirection:direction,keyColor=keyIsMoon?moonColor:sunColor,physicalKeyStrength=keyIsMoon?physicalMoonStrength:physicalSunStrength;
     // The finite camera-air integral must share the sky single-scatter source
@@ -829,5 +831,6 @@ export function createAtmosphere(THREE,{sunDirection,seed=7183,cloudSteps=64,clo
     return value;
   }
   lighting();
-  return {mesh,uniforms,ready:nightSky.ready,update,setSun,setCelestial,setStorageExposureEV,captureSnapshot,withSnapshot,prepareStarView,getRadianceBound,lighting,setNight,getNightState:()=>nightSky.state,setDiffuseAirEnabled,setCloudShape,setCloudBaseContinuity,setAirMieScale,setQuality,setSampling,setWeather,getWeatherState:weatherController.state,cloudShadowAt,cloudDensityAt,cloudShadowGLSL,transientCloudGLSL,setTransientLights,renderTransientClouds,diagnostics,dispose};
+  // ready starts the night asset load on access and resolves once it is bound.
+  return {mesh,uniforms,get ready(){return nightSky.ready;},dayReady:nightSky.dayReady,loadNight:nightSky.load,update,setSun,setCelestial,setStorageExposureEV,captureSnapshot,withSnapshot,prepareStarView,getRadianceBound,lighting,setNight,getNightState:()=>nightSky.state,setDiffuseAirEnabled,setCloudShape,setCloudBaseContinuity,setAirMieScale,setQuality,setSampling,setWeather,getWeatherState:weatherController.state,cloudShadowAt,cloudDensityAt,cloudShadowGLSL,transientCloudGLSL,setTransientLights,renderTransientClouds,diagnostics,dispose};
 }

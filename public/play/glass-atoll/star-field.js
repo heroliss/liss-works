@@ -65,9 +65,22 @@ export function createStarField(THREE,{enabled=true}={}){
   let manifest=null,disposed=false,error=null,currentView={width:1440,height:900,minimumPixelOmega:1e-8,table:'native'},textures=[],currentRawPerLux=DEFAULT_RAW_PER_LUX,currentGain=1;
   const base=new URL('./assets/night/catalog/',import.meta.url);
   function floatTexture(buffer,width,height){const values=new Float32Array(width*height*4);values.set(new Float32Array(buffer));const t=new THREE.DataTexture(values,width,height,THREE.RGBAFormat,THREE.FloatType);t.minFilter=t.magFilter=THREE.NearestFilter;t.generateMipmaps=false;t.needsUpdate=true;textures.push(t);return t;}
-  const tables=new Map();
-  const ready=!enabled||typeof document==='undefined'?Promise.resolve({loaded:false,reason:'CPU-only or disabled'}):fetch(new URL('manifest.json',base)).then(r=>{if(!r.ok)throw new Error('Star manifest HTTP '+r.status);return r.json();}).then(async m=>{
+  const tables=new Map(),browser=enabled&&typeof document!=='undefined';
+  // The small manifest carries the photometry used by exposure bounds and the
+  // sky irradiance mean, so it loads at once. The binary catalogue (points,
+  // lookup tables, diffuse aggregate) loads only when load() or ready asks.
+  const manifestReady=!browser?Promise.resolve(null):fetch(new URL('manifest.json',base)).then(r=>{if(!r.ok)throw new Error('Star manifest HTTP '+r.status);return r.json();}).then(m=>{
     manifest=m;if(m.tables.some(t=>t.maximumCandidates>256))throw new Error('Catalogue tile exceeds validated256 candidate loop; cannot drop stars');
+    return m;
+  }).catch(e=>{error=String(e);throw e;});manifestReady.catch(()=>{});
+  let ready=null;
+  function load(){
+    if(ready)return ready;
+    ready=!browser?Promise.resolve({loaded:false,reason:'CPU-only or disabled'}):disposed?Promise.resolve({loaded:false,disposed:true}):manifestReady.then(loadCatalogue).catch(e=>{error=String(e);throw e;});
+    ready.catch(()=>{});return ready;
+  }
+  async function loadCatalogue(m){
+    if(disposed)return {loaded:false,disposed:true};
     const fetchBin=async name=>{
       // Lossless transfer compression; identical catalogue bytes on the GPU.
       if(typeof DecompressionStream==='function'){
@@ -90,7 +103,7 @@ export function createStarField(THREE,{enabled=true}={}){
     texture.mipmaps=levels;texture.generateMipmaps=false;texture.minFilter=THREE.LinearMipmapLinearFilter;texture.magFilter=THREE.LinearFilter;texture.wrapS=THREE.RepeatWrapping;texture.wrapT=THREE.ClampToEdgeWrapping;texture.flipY=false;texture.needsUpdate=true;textures.push(texture);
     uniforms.uStarDiffuse.value=texture;uniforms.uStarLookup.value=tables.get('native').texture;uniforms.uStarCatalogueReady.value=1;
     return diagnostics();
-  }).catch(e=>{error=String(e);throw e;});ready.catch(()=>{});
+  }
   function update({time=0,epochJulianYear=2026.82,starIntensity=currentGain,rawPerLux=currentRawPerLux,exposureSeconds=uniforms.uStarExposureSeconds.value,twinkle=1}={}){
     currentRawPerLux=rawPerLux;currentGain=starIntensity;
     uniforms.uStarPhysicalTime.value=((time%4096)+4096)%4096;uniforms.uStarYears.value=clamp(epochJulianYear,1800,2200)-2000;
@@ -113,5 +126,5 @@ export function createStarField(THREE,{enabled=true}={}){
   function getRadianceBound(){const t=manifest?.tables.find(t=>t.name===currentView.table),point=(t?.maximumBucketFluxChannelUnitF0??6)*uniforms.uStarF0.value/Math.max(1e-12,currentView.minimumPixelOmega)*1.15,diffuse=65504*uniforms.uStarDiffuseScale.value;return {maxRGB:point+diffuse,components:{point,diffuse},limits:['Conservative sum of candidate flux channels divided by minimum prepared pixel solid angle','FP16 diffuse uses finite representable bound; actual texture maximum is usually much lower','View footprint must stay within the selected conservative tile support']};}
   function meanPhysicalRGB(){if(!manifest)return null;return manifest.masterRGBFluxUnitF0.map(v=>v*uniforms.uStarF0.value/(4*Math.PI));}
   function diagnostics(){return {model:'HIP/Tycho magnitude8.5 direction-cube candidates plus area-conserving diffuse, weak shutter-averaged scintillation',loaded:uniforms.uStarCatalogueReady.value===1,error,pointCount:manifest?.pointCount??0,pointLimit:manifest?.pointLimitMagnitude,tables:manifest?.tables.map(({texture,...t})=>t),view:{...currentView},epochYears:uniforms.uStarYears.value,exposureSeconds:uniforms.uStarExposureSeconds.value,physicalF0:uniforms.uStarF0.value,license:manifest?.license,limits:manifest?.limits??[]};}
-  return {uniforms,ready,update,prepareView,getRadianceBound,meanPhysicalRGB,diagnostics,captureSnapshot:()=>({view:{...currentView},rawPerLux:currentRawPerLux,gain:currentGain}),withSnapshot(snapshot,fn){const saved={view:currentView,raw:currentRawPerLux,gain:currentGain};try{if(snapshot){currentView={...snapshot.view};currentRawPerLux=snapshot.rawPerLux;currentGain=snapshot.gain;}return fn();}finally{currentView=saved.view;currentRawPerLux=saved.raw;currentGain=saved.gain;}},get manifest(){return manifest;},dispose(){disposed=true;zero.dispose();textures.forEach(t=>t.dispose());}};
+  return {uniforms,manifestReady,load,get ready(){return load();},update,prepareView,getRadianceBound,meanPhysicalRGB,diagnostics,captureSnapshot:()=>({view:{...currentView},rawPerLux:currentRawPerLux,gain:currentGain}),withSnapshot(snapshot,fn){const saved={view:currentView,raw:currentRawPerLux,gain:currentGain};try{if(snapshot){currentView={...snapshot.view};currentRawPerLux=snapshot.rawPerLux;currentGain=snapshot.gain;}return fn();}finally{currentView=saved.view;currentRawPerLux=saved.raw;currentGain=saved.gain;}},get manifest(){return manifest;},dispose(){disposed=true;zero.dispose();textures.forEach(t=>t.dispose());}};
 }
