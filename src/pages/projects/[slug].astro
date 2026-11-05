@@ -44,7 +44,7 @@ const hasLab = project.slug === 'floydshortestpath' || project.slug === 'ga-sort
 const notes = [project.note, story.footnote].filter(Boolean);
 const coverSizes = project.slug === 'dubforge' ? '(max-width: 760px) calc(100vw - 40px), 94vw' : '(max-width: 760px) calc(100vw - 40px), 64vw';
 ---
-<Base title={project.name} description={project.summary} active="projects">
+<Base title={project.name} description={project.summary} active="projects" image={project.cover}>
   <div class="shell detail-page" data-project={project.slug} data-project-world={project.slug} data-world-family={world.family} style={`${projectWorldStyle(project.slug)};--accent:${world.accent};--cyan:${world.accent};--surface:${world.surface}`}>
     <ProjectAtmosphere slug={project.slug} world={world}/>
     <div class="detail-world-tools"><a class="back-link" href={sitePath('/projects/')}><Icon name="back" size={16}/> 全部工程</a><button class="detail-world-toggle" type="button" data-detail-motion-toggle aria-pressed="false"><Icon name="pause" size={14}/><span data-detail-motion-label>暂停动态</span></button></div>
@@ -62,7 +62,7 @@ const coverSizes = project.slug === 'dubforge' ? '(max-width: 760px) calc(100vw 
     </div>
     {project.slug === 'dubforge' && <DubForgeWorkflow id="production-path" detail/>}
     <ProjectEngineering story={story} media={topicMedia} group={project.slug}/>
-    {project.video && <figure class="project-video"><video controls playsinline preload="none" poster={sitePath(project.video.poster)} aria-label="全国房价图真实界面操作演示"><source src={sitePath(project.video.src)} type="video/mp4"/>浏览器无法播放视频，请<a href={sitePath(project.video.src)}>下载演示片段</a>。</video><figcaption>{project.video.caption}</figcaption></figure>}
+    {project.video && <figure class="project-video"><video controls playsinline preload="none" poster={sitePath(project.video.poster)} aria-label={`${displayName} 真实界面操作演示`}><source src={sitePath(project.video.src)} type="video/mp4"/>浏览器无法播放视频，请<a href={sitePath(project.video.src)}>下载演示片段</a>。</video><figcaption>{project.video.caption}</figcaption></figure>}
     {gallery.length > 0 && <section class="section project-gallery" id="gallery" aria-labelledby="gallery-title"><div class="section-heading"><h2 id="gallery-title">更多画面</h2></div><div class="gallery-grid">{gallery.map(image => <figure data-detail-motion={world.motion}><ProjectArtifact image={image} group={project.slug} kind={world.motion} role="gallery" sizes="(max-width: 760px) 100vw, 60vw"/><figcaption>{image.caption}</figcaption></figure>)}</div></section>}
     {notes.length > 0 && <details class="capture-notes"><summary>画面与演示说明</summary>{notes.map(note => <p>{note}</p>)}</details>}
     <section class="project-usage section" id="usage" aria-labelledby="usage-title"><div class="section-heading"><h2 id="usage-title" data-detail-reveal>{project.slug === 'glass-atoll' ? '如何探索' : '快速开始'}</h2></div><div class="usage-grid">{project.usage.map((usage,index) => <article class="usage" data-detail-reveal><h3>{usage.title}</h3><ProjectProse text={usage.body}/>{usage.code && <div class="code-block"><div class="code-toolbar"><span>{usage.language ?? '用法'}</span><span role="status" aria-live="polite"></span><button class="copy-button" type="button" data-copy={`code-${index}`} aria-label={`复制：${usage.title}`}>复制</button></div><pre><code id={`code-${index}`}>{usage.code}</code></pre></div>}</article>)}</div></section>

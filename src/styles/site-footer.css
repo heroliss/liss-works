@@ -83,6 +83,19 @@ body .site-footer.site-footer--colophon[data-site-footer]::before { content:none
   line-height:1.8;
   color:#a7b7b0;
 }
+/* The header hides 关于 on narrow phones; the colophon keeps the page reachable everywhere. */
+.site-footer--colophon .colophon-about {
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  min-height:44px;
+  margin-top:6px;
+  font-size:14px;
+  color:#c5d8bb;
+}
+.site-footer--colophon .colophon-about > svg { color:#91aaa0; transition:transform 180ms ease,color 180ms ease; }
+.site-footer--colophon .colophon-about:is(:hover,:focus-visible) { color:var(--ink,#eeefeb); }
+.site-footer--colophon .colophon-about:is(:hover,:focus-visible) > svg { color:#c5d8bb; transform:translate(2px,-2px); }
 .site-footer--colophon .colophon-navigation {
   display:grid;
   grid-template-columns:minmax(0,1fr) minmax(0,1fr);
@@ -140,7 +153,7 @@ body .site-footer.site-footer--colophon[data-site-footer]::before { content:none
 }
 @media(prefers-reduced-motion:reduce) {
   .site-footer--colophon .colophon-light { transform:none!important; }
-  .site-footer--colophon .colophon-link > svg { transition:none; }
+  .site-footer--colophon :is(.colophon-link,.colophon-about) > svg { transition:none; }
 }
 @media(forced-colors:active) {
   .site-footer--colophon .colophon-field { display:none; }

@@ -57,17 +57,29 @@ export function setupDetailWorldMotion({ signal, preference }: Options): () => v
 
   const chapterLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('.project-contents a[href^="#"]'));
   const chapters = chapterLinks.map(link => document.getElementById(link.hash.slice(1))).filter((section): section is HTMLElement => Boolean(section));
-  const reading = new Set<Element>();
-  const chapterObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => { if (entry.isIntersecting) reading.add(entry.target); else reading.delete(entry.target); });
-    const current = chapters.filter(section => reading.has(section)).at(-1);
-    if (!current) return;
+  // The current chapter is the last one whose heading has reached the reading
+  // line. Measuring positions (rather than band intersections) keeps the right
+  // entry after fast jumps such as End, across short sections, and at the page
+  // bottom where a short final chapter can never reach the line.
+  let chapterFrame = 0;
+  const markChapter = () => {
+    chapterFrame = 0;
+    if (disposed || !chapters.length) return;
+    const line = window.innerHeight * .38;
+    const atBottom = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4;
+    const tops = chapters.map(section => section.getBoundingClientRect().top);
+    let index = tops.findLastIndex(top => top <= line);
+    if (atBottom) index = Math.max(index, tops.findLastIndex(top => top < window.innerHeight));
+    const current = chapters[index];
     chapterLinks.forEach(link => {
-      if (link.hash === `#${current.id}`) link.setAttribute('aria-current','location');
+      if (current && link.hash === `#${current.id}`) link.setAttribute('aria-current','location');
       else link.removeAttribute('aria-current');
     });
-  }, { rootMargin:'-12% 0px -62% 0px' });
-  chapters.forEach(section => chapterObserver.observe(section));
+  };
+  const queueChapter = () => { if (!chapterFrame) chapterFrame = requestAnimationFrame(markChapter); };
+  window.addEventListener('scroll', queueChapter, { passive: true, signal: controller.signal });
+  window.addEventListener('resize', queueChapter, { passive: true, signal: controller.signal });
+  queueChapter();
 
   media.add({ motion: '(prefers-reduced-motion: no-preference)', fine: '(hover: hover) and (pointer: fine)', wide: '(min-width: 900px)' }, (context) => {
     const { motion, fine, wide } = context.conditions!;
@@ -307,7 +319,8 @@ export function setupDetailWorldMotion({ signal, preference }: Options): () => v
     if (disposed) return;
     disposed = true;
     controller.abort();
-    chapterObserver.disconnect();
+    cancelAnimationFrame(chapterFrame);
+    chapterLinks.forEach(link => link.removeAttribute('aria-current'));
     media.revert();
     gates.clear();
     originals.forEach(({ button, pressed, label, disabled, text }) => {
