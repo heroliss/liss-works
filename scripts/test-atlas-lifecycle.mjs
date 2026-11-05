@@ -90,7 +90,7 @@ function fixture({ aborted = false, reduced = false } = {}) {
   const dispose = sandbox.exports.setupArchiveAtlas({ signal: signal.signal, preference });
   const flush = () => { let remaining = 500; while (frames.size && remaining-- > 0) { clock += 1000 / 60; const batch = [...frames.values()]; frames.clear(); batch.forEach(callback => callback(clock)); } assert.ok(remaining > 0, 'controller should settle without an idle RAF'); };
   return { atlas, viewport, camera, items, cards, document, window, preference, signal, dispose, frames, timers, flush,
-    observations: () => ({ disconnected, reverted }), status };
+    observations: () => ({ disconnected, reverted }), status, help };
 }
 
 check('an already-aborted owner cannot initialize listeners or observers', () => {
@@ -155,15 +155,36 @@ check('aborting mid-animation removes ownership and stale current-card semantics
   app.dispose(); assert.deepEqual(app.observations(), { disconnected: 2, reverted: 1 });
 });
 
-check('aborting a wheel gesture clears its deferred snap and pending frame', () => {
+check('a plain vertical wheel scrolls the page and only shows a short hint', () => {
   const app = fixture();
   const wheel = event('wheel', { deltaX: 0, deltaY: 140, deltaMode: 0 });
   app.viewport.dispatchEvent(wheel);
-  assert.equal(wheel.defaultPrevented, true); assert.equal(app.timers.size, 1); assert.ok(app.frames.size);
-  app.signal.abort();
-  assert.equal(app.timers.size, 0); assert.equal(app.frames.size, 0);
-  app.viewport.dispatchEvent(event('wheel', { deltaX: 0, deltaY: 140, deltaMode: 0 }));
-  assert.equal(app.timers.size, 0); assert.equal(app.frames.size, 0);
+  assert.equal(wheel.defaultPrevented, false); assert.equal(app.frames.size, 0);
+  assert.equal(app.help.dataset.hint, 'true'); assert.match(app.help.textContent, /Shift/); assert.equal(app.timers.size, 1);
+  [...app.timers.values()][0](); app.timers.clear();
+  assert.equal(app.help.dataset.hint, undefined); assert.doesNotMatch(app.help.textContent, /照常滚动/);
+  const again = event('wheel', { deltaX: 0, deltaY: 140, deltaMode: 0 });
+  app.viewport.dispatchEvent(again);
+  assert.equal(again.defaultPrevented, false); assert.equal(app.timers.size, 0, 'the hint is rate-limited');
+  app.dispose();
+});
+
+check('sideways and Shift wheels turn the ring; aborting clears the snap, frame and hint', () => {
+  for (const properties of [{ deltaX: 140, deltaY: 6 }, { deltaX: 0, deltaY: 140, shiftKey: true }]) {
+    const app = fixture();
+    const wheel = event('wheel', { deltaMode: 0, ...properties });
+    app.viewport.dispatchEvent(wheel);
+    assert.equal(wheel.defaultPrevented, true); assert.equal(app.timers.size, 1); assert.ok(app.frames.size);
+    assert.equal(app.help.dataset.hint, undefined);
+    app.signal.abort();
+    assert.equal(app.timers.size, 0); assert.equal(app.frames.size, 0);
+    app.viewport.dispatchEvent(event('wheel', { deltaMode: 0, ...properties }));
+    assert.equal(app.timers.size, 0); assert.equal(app.frames.size, 0);
+  }
+  const hinted = fixture();
+  hinted.viewport.dispatchEvent(event('wheel', { deltaX: 0, deltaY: 140, deltaMode: 0 }));
+  hinted.signal.abort();
+  assert.equal(hinted.timers.size, 0); assert.equal(hinted.help.dataset.hint, undefined);
 });
 
 console.log(JSON.stringify({ passed: true, groups: checks.length, checks,

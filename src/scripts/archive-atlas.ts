@@ -31,6 +31,7 @@ export function setupArchiveAtlas({ signal, preference }: Options) {
   let motion: RingMotion = { position:0, velocity:0, target:null };
   let raf = 0, previousTime = 0, wheelEnd: ReturnType<typeof setTimeout> | undefined;
   let pointer: Pointer | null = null, suppressClickUntil = 0, wheelTarget: number | null = null;
+  let hintTimer: ReturnType<typeof setTimeout> | undefined, hintReadyAt = 0;
   let width = Math.max(1, viewport.clientWidth), cardWidth = 440;
   let tiltX = 0, tiltY = 0, targetX = 0, targetY = 0;
   const tileGates = new Set<() => void>();
@@ -92,7 +93,28 @@ export function setupArchiveAtlas({ signal, preference }: Options) {
     viewport.dataset.ringPhase = wrapPhase(motion.position, count).toFixed(4);
     viewport.dataset.count = String(count);
     if (positionLabel) positionLabel.textContent = count ? `${activeIndex + 1} / ${count}` : '0 / 0';
-    if (help) help.textContent = count > 1 ? '拖动或滚轮浏览 · 方向键切换' : '点击画面进入工程';
+    if (help) help.textContent = helpText(count);
+  }
+
+  function helpText(count: number) {
+    if (count < 2) return '点击画面进入工程';
+    if (hintTimer !== undefined) return '页面照常滚动 · 按住 Shift 再滚动可转动';
+    return matchMedia('(hover:hover) and (pointer:fine)').matches ? '拖动或 Shift + 滚轮浏览 · 方向键切换' : '左右拖动浏览';
+  }
+  // A plain vertical wheel over the ring scrolls the page; briefly say how to turn it.
+  function showWheelHint() {
+    if (!help || performance.now() < hintReadyAt) return;
+    hintReadyAt = performance.now() + 6000;
+    clearTimeout(hintTimer);
+    hintTimer = setTimeout(endWheelHint, 2400);
+    help.dataset.hint = 'true';
+    help.textContent = helpText(list.length);
+  }
+  function endWheelHint() {
+    clearTimeout(hintTimer); hintTimer = undefined;
+    if (!help) return;
+    delete help.dataset.hint;
+    help.textContent = helpText(list.length);
   }
 
   function stopFrame() {
@@ -232,6 +254,9 @@ export function setupArchiveAtlas({ signal, preference }: Options) {
   },{capture:true,signal:events.signal});
   viewport.addEventListener('wheel',event=>{
     if(list.length<2||event.ctrlKey||event.metaKey||pointer)return;
+    // The ring never traps page scrolling: sideways trackpad swipes and Shift+wheel
+    // turn it, while a plain vertical wheel passes through to the page.
+    if(!event.shiftKey&&Math.abs(event.deltaX)<=Math.abs(event.deltaY)){if(event.deltaY)showWheelHint();return;}
     const delta=normalizeWheel(event.deltaX,event.deltaY,event.deltaMode,viewport.clientHeight);
     if(!delta)return;
     event.preventDefault();
@@ -283,7 +308,7 @@ export function setupArchiveAtlas({ signal, preference }: Options) {
   atlas.dataset.ringReady='true';measure();filterChanged();syncControls();
   const dispose=()=>{
     if(disposed)return;
-    endWheel();releasePointer(false);stopFrame();disposed=true;events.abort();stageObserver.disconnect();resize.disconnect();media.revert();tileGates.clear();
+    endWheel();endWheelHint();releasePointer(false);stopFrame();disposed=true;events.abort();stageObserver.disconnect();resize.disconnect();media.revert();tileGates.clear();
     delete atlas.dataset.ringReady;delete viewport.dataset.ringAnimating;delete viewport.dataset.dragging;camera.style.removeProperty('transform');
     cards.forEach((card,index)=>{card.hidden=index!==0;card.tabIndex=index===0?0:-1;card.style.removeProperty('transform');card.style.removeProperty('opacity');card.style.removeProperty('z-index');card.removeAttribute('aria-current');delete card.dataset.ringActive;if(index===0)card.removeAttribute('aria-hidden');else card.setAttribute('aria-hidden','true');});
     signal.removeEventListener('abort',dispose);
