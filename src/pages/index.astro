@@ -8,6 +8,7 @@ import DubForgeWorkflow from '../components/DubForgeWorkflow.astro';
 import GlassAtollFeature from '../components/GlassAtollFeature.astro';
 import HomeAtmosphere from '../components/HomeAtmosphere.astro';
 import ExplorationInvitation from '../components/ExplorationInvitation.astro';
+import PanxuShowcase from '../components/PanxuShowcase.astro';
 import { projects, getProject } from '../data/projects';
 import { sitePath, communityUrl } from '../lib/site-path';
 import '../styles/home-next.css';
@@ -21,10 +22,11 @@ import '../styles/spatial-materials.css';
 const framework = getProject('ssframework')!;
 const dubforge = getProject('dubforge')!;
 const outpost = getProject('outpost')!;
+const panxu = getProject('panxu')!;
 const blocks = getProject('liss-blocks')!;
 const atoll = getProject('glass-atoll')!;
 const gomoku = getProject('gomoku')!;
-const stage = [outpost,dubforge,framework,atoll,gomoku];
+const stage = [panxu,dubforge,framework,atoll,gomoku];
 const stageCaptions = stage.map(project => project.summary);
 
 ---
@@ -39,7 +41,7 @@ const stageCaptions = stage.map(project => project.summary);
     <div class="stage-objects" data-stage-objects>
      {stage.map((project,index)=><article class="stage-piece" data-stage-piece={index} data-stage-offset={index} data-project={project.slug}><button type="button" class="stage-card" data-stage-card={index} data-href={sitePath(`/projects/${project.slug}/`)} aria-pressed={index===0} aria-controls="stage-overview" aria-label={index===0 ? `打开 ${project.name} 项目` : `将 ${project.name} 切到前景`} disabled><span class="stage-surface" data-stage-image><span class="screen-chrome" aria-hidden="true"><span></span><span></span><span></span><strong>{project.name.split(' · ')[0]}</strong></span><MediaImage image={project.cover} eager={index===0} sizes="(max-width: 760px) 90vw, 55vw"/><span class="screen-caption"><span>{project.category}</span></span></span></button></article>)}
     </div>
-    <div class="stage-bottom"><div class="stage-controls" role="group" aria-label="选择主画面中的工程">{stage.map((project,index)=><button type="button" data-stage-select={index} data-name={project.name} data-tone={getProjectWorld(project.slug).accent} data-category={project.category} data-caption={stageCaptions[index]} data-href={sitePath(`/projects/${project.slug}/`)} aria-pressed={index===0}>{project.name}</button>)}</div><div class="stage-description" id="stage-overview"><p class="stage-category" data-stage-category>{stage[0].category}</p><h2 class="project-name" data-stage-name>{stage[0].name}</h2><p class="stage-summary" data-stage-caption aria-live="polite">{stageCaptions[0]}</p><a class="button stage-detail-link" data-stage-link data-project-enter href={sitePath('/projects/outpost/')}>查看项目 <Icon size={20}/></a></div><noscript><div class="stage-fallback-links">{stage.map(project=><a href={sitePath(`/projects/${project.slug}/`)}>{project.name} <Icon size={15}/></a>)}</div></noscript></div>
+    <div class="stage-bottom"><div class="stage-controls" role="group" aria-label="选择主画面中的工程">{stage.map((project,index)=><button type="button" data-stage-select={index} data-name={project.name} data-tone={getProjectWorld(project.slug).accent} data-category={project.category} data-caption={stageCaptions[index]} data-href={sitePath(`/projects/${project.slug}/`)} aria-pressed={index===0}>{project.name}</button>)}</div><div class="stage-description" id="stage-overview"><p class="stage-category" data-stage-category>{stage[0].category}</p><h2 class="project-name" data-stage-name>{stage[0].name}</h2><p class="stage-summary" data-stage-caption aria-live="polite">{stageCaptions[0]}</p><a class="button stage-detail-link" data-stage-link data-project-enter href={sitePath(`/projects/${stage[0].slug}/`)}>查看项目 <Icon size={20}/></a></div><noscript><div class="stage-fallback-links">{stage.map(project=><a href={sitePath(`/projects/${project.slug}/`)}>{project.name} <Icon size={15}/></a>)}</div></noscript></div>
    </div>
    <a class="hero-scroll" href="#selected"><span>向下，看作品如何运转</span><svg width="19" height="30" viewBox="0 0 19 30" aria-hidden="true"><path d="M9.5 1v26M2 19l7.5 8 7.5-8" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a>
   </section>
@@ -57,6 +59,8 @@ const stageCaptions = stage.map(project => project.summary);
 
   <DubForgeWorkflow/>
 
+  <PanxuShowcase/>
+
   <GlassAtollFeature project={atoll}/>
 
   <section class="games-chapter home-chapter" id="games" aria-labelledby="games-title"><HomeAtmosphere variant="games"/><header class="work-heading"><h2 id="games-title" data-motion="reveal">规则有了形状，<br/>世界开始运转。</h2><p data-motion="reveal">从方块的预判与消行，<br/>到敌群与炮火，再到落子间的搜索。</p></header><div class="games-landscape">
@@ -69,5 +73,5 @@ const stageCaptions = stage.map(project => project.summary);
 
   <section class="closing-chapter home-chapter" aria-labelledby="closing-title"><HomeAtmosphere variant="closing"/><h2 id="closing-title">下一次尝试，<br/>从一个想法开始。</h2><div><p>一个使用心得、一个问题，或一个还没成形的想法，都欢迎带到 Liss Community。简单说几句，也可能成为下一次改进的起点。</p><div class="closing-actions"><a class="button" href={communityUrl} data-magnetic><span data-magnet-body><Icon name="chat" size={21}/> 来聊聊 <Icon size={18}/></span></a><a class="text-link" href={sitePath('/lab/')}>亲手试试 <Icon name="play" size={17}/></a><a class="text-link" href={sitePath('/about/')}>关于 Liss <Icon size={18}/></a></div></div></section>
  </div>
- <nav class="chapter-nav" data-chapter-nav aria-label="本页章节"><span class="chapter-progress" data-page-progress aria-hidden="true"></span><a href="#start" data-active="true" aria-current="location"><span>开场</span></a><a href="#selected"><span>框架</span></a><a href="#workflow"><span>工具</span></a><a href="#atoll"><span>玻璃海</span></a><a href="#games"><span>游戏</span></a><a href="#explore"><span>探索</span></a></nav>
+ <nav class="chapter-nav" data-chapter-nav aria-label="本页章节"><span class="chapter-progress" data-page-progress aria-hidden="true"></span><a href="#start" data-active="true" aria-current="location"><span>开场</span></a><a href="#selected"><span>框架</span></a><a href="#workflow"><span>工具</span></a><a href="#panxu"><span>盘序</span></a><a href="#atoll"><span>玻璃海</span></a><a href="#games"><span>游戏</span></a><a href="#explore"><span>探索</span></a></nav>
 </Base>

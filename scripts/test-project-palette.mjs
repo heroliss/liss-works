@@ -92,7 +92,7 @@ function pairs(worlds, selected = ids) {
 }
 function nearestMean(worlds) { return ids.reduce((sum, id) => sum + Math.min(...ids.filter(other => other !== id).map(other => distance(worlds[id].accent, worlds[other].accent))), 0) / ids.length; }
 const after = pairs(projectWorlds);
-const hero = ['outpost', 'dubforge', 'ssframework', 'glass-atoll', 'gomoku'];
+const hero = ['panxu', 'dubforge', 'ssframework', 'glass-atoll', 'gomoku'];
 const games = ['liss-blocks', 'outpost', 'gomoku'];
 const adjacent = [];
 for (const group of new Set(projects.map(project => project.group))) {

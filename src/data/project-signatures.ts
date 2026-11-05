@@ -35,6 +35,11 @@ const signatures: Record<string, ProjectSignature> = {
     principle: '让分层、作用域与所有权都有边界。',
     highlights: ['类型化业务分层', '资源生命周期', 'Hierarchy 节点绑定'],
   },
+  panxu: {
+    direction: 'Windows 工具 / AI 辅助判断',
+    principle: '讲清楚每一项，再让你决定删什么。',
+    highlights: ['一键体检', '0–10 分建议清理度', '可撤销的操作记录'],
+  },
   dubforge: {
     direction: 'AI 应用 / 媒体工作流',
     principle: '按依赖复用结果，让修改与恢复有据可查。',

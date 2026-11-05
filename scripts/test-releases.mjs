@@ -56,6 +56,7 @@ test('restored desktop projects follow versioned formal packages with version an
     ['heroliss/systems-lab', 'SystemsLab'],
     ['heroliss/nex', 'Liss-NEX'],
     ['heroliss/liss-blocks', 'Liss-Blocks'],
+    ['heroliss/panxu', 'PanXu'],
   ]) {
     const config = projectDownload(repository);
     for (const [version, size] of [['v1.0.0', 52_000_001], ['v2.4.0', 61_000_003]]) {

@@ -68,6 +68,19 @@ const dubforge = [
   image('dubforge', '09-project-space-large.jpg', 1440, 1000, '项目空间统一浏览视频、制作状态和项目入口。', '示例项目'),
 ];
 
+const panxu = [
+  image('panxu', '01-checkup-plan.png', 1650, 1075, '一键体检后的清理方案：放心清理、建议你看看、仅供了解三组，并按类别说明空间都在哪里。', '演练环境'),
+  image('panxu', '02-plan-scores.png', 1650, 1075, '每一项写明是什么、为什么列出，并给出 0–10 分的建议清理度；可以按分数一键勾选。', '清理方案'),
+  image('panxu', '03-score-basis.png', 1650, 1075, '展开一项查看评分依据：处理方式、命中的规则、为什么自动勾选，以及具体位置。', '评分依据'),
+  image('panxu', '04-cleanup-confirm.png', 1650, 1075, '执行前分开列出永久删除的缓存和移到回收站的项目，以及各自的大小。', '执行确认'),
+  image('panxu', '05-cleanup-result.png', 1650, 1075, '清理完成后分开显示真正释放的空间和仍在回收站里的空间。', '清理结果'),
+  image('panxu', '06-space-treemap.png', 1650, 1075, '空间分析用文件夹树和占用图查看整块磁盘，已知位置会标注用途。', '空间分析'),
+  image('panxu', '07-duplicate-files.png', 1650, 1075, '重复文件逐字节比对；每组可以按最早、最新或路径最短的规则选出要保留的一份。', '重复文件'),
+  image('panxu', '08-startup-items.png', 1650, 1075, '开机启动项和任务管理器用的是同一套开关，找不到程序文件的条目会直接标出。', '开机与服务'),
+  image('panxu', '09-junk-rules.png', 1650, 1075, '垃圾清理按 39 项内置规则分组，只清理公认可以重建的缓存和临时文件。', '垃圾清理'),
+  image('panxu', '10-operation-history.png', 1650, 1075, '操作记录汇总释放了多少空间、有几次操作，以及哪些修改还能撤销。', '操作记录'),
+];
+
 const chart = [
   image('intelligence-index-cost-linear', '07-default-dark-live.png', 1280, 720, '默认深色主题：在线性任务成本轴上比较公开模型能力指数，结合图例与 Pareto 线观察取舍。', '默认深色主题'),
   image('intelligence-index-cost-linear', '08-provider-highlight-dark-live.png', 1280, 720, '点击 Anthropic 图例高亮对应模型，其余供应商淡化；深色视图保持点位与标签对应。', '供应商筛选'),
@@ -243,6 +256,26 @@ export const projects: Project[] = [
     note: '截图使用真实工作台与自建短片示例，展示编辑和配置用法；本组素材未执行实际模型译制或生成配音。',
     source: 'https://github.com/heroliss/dubforge', docs: 'https://github.com/heroliss/dubforge/tree/main/docs/tutorials',
     cover: dubforge[0], gallery: dubforge, related: ['intelligence-index-cost-linear', 'aoe4-flow'],
+  },
+  {
+    slug: 'panxu', repo: 'panxu', name: '盘序 · Windows 磁盘清理助手', category: 'Windows 磁盘清理助手', group: 'games',
+    summary: '一键体检，把占空间的东西找出来、讲清楚，再安全地清理掉。',
+    intro: '面向 Windows 10 / 11 的磁盘清理助手。一键体检依次检查垃圾、系统盘空间、个人文件和重复文件，再交给 AI 复核，生成分成三组的清理方案；每一项都写明是什么、为什么列出、清理后会怎样，并给出 0–10 分的建议清理度。个人文件只会移到回收站，受保护的位置删不了，每次修改都记进操作记录，能撤销的都可以撤销。',
+    status: '1.1.0 正式版', tags: ['Python', 'AI', 'pywebview', 'WebView2', 'Windows'],
+    features: [
+      { title: '一键体检与三组方案', body: '放心清理默认勾好，建议你看看和仅供了解只给依据和入口；清理后分开显示释放的空间和回收站里的空间。' },
+      { title: '0–10 分建议清理度', body: '内置规则判断常见情况，规则不认识的交给 AI；每一项都能展开评分依据，也可以随时「问 AI」。' },
+      { title: '你的文件由你决定', body: '个人文件从不自动勾选，只移到回收站；受保护的位置、链接和云端占位文件都不会被碰。' },
+    ],
+    usage: [
+      { title: '下载即用', body: '在 Releases 下载 PanXu-1.1.0-win-x64.zip，解压到任意文件夹后双击 PanXu.exe，不需要安装。需要 Windows 10 / 11（64 位）和 WebView2 运行时；点「一键体检」就会生成清理方案。' },
+      { title: '先在演练环境里试', body: '用 --sandbox 启动会生成一台模拟的「用了几年的电脑」，所有删除、禁用和卸载都只发生在里面，可以随时还原或重建。', code: 'PanXu.exe --sandbox', language: 'PowerShell' },
+      { title: '从源码运行', body: '需要 Python 3.10 以上；--debug 打开 WebView 开发者工具。', code: 'python -m pip install -r requirements.txt\npython run.py --sandbox', language: 'PowerShell' },
+    ],
+    note: '截图来自真实的盘序 1.1.0 界面，运行在演练环境（模拟电脑）中；AI 复核使用测试脚本作答，没有连接真实模型，也没有处理真实文件。',
+    source: 'https://github.com/heroliss/panxu', docs: 'https://github.com/heroliss/panxu/tree/main/docs',
+    download: { repository: 'heroliss/panxu', assetPattern: '^PanXu(?:-v?\\d+(?:\\.\\d+)*)?-(?:Windows|win)-x64\\.zip$' },
+    cover: panxu[0], gallery: panxu, related: ['nex', 'dubforge', 'utility-lab'],
   },
   {
     slug: 'ssframework', repo: 'SSFramework', name: 'SSFramework', category: 'Unity 模块化框架', group: 'games',

@@ -1,6 +1,6 @@
 {
   "schema": "showcase.website-media.v1",
-  "generated_at_utc": "2026-11-01T02:14:45.342651+00:00",
+  "generated_at_utc": "2026-11-05T08:30:24.279388+00:00",
   "source_manifest": "captures/selected-manifest.json",
   "source_manifest_sha256": "67d60c2289c031d14b180bc0b26ddcac2548fd7d425474912616c17353b85997",
   "originals_modified": false,
@@ -8041,10 +8041,690 @@
           "lossless": false
         }
       ]
+    },
+    {
+      "repo": "panxu",
+      "source": "captures/panxu/selected/01-checkup-plan.png",
+      "source_sha256": "8a6b5d32800d92a51b97cc4956a551638033daa1463eb2dfcbbeb3c493a40636",
+      "source_bytes": 352182,
+      "source_width": 1650,
+      "source_height": 1075,
+      "source_authenticity": "Real PanXu 1.1.0 interface served by tools/ui_harness.py against a generated 演练环境 (simulated computer); the model is the harness script, no real files or network. Downscaled from a 2x headless Chrome capture of a 1320x860 window.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/panxu/01-checkup-plan.webp",
+        "url": "/media/panxu/01-checkup-plan.webp",
+        "bytes": 276188,
+        "sha256": "fb4c7a57ba4744d94c1f9ed94c2907b8b406ff57200edf9bd87201ca216e51e0",
+        "width": 1650,
+        "height": 1075,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/panxu/01-checkup-plan-320.webp",
+          "url": "/media/panxu/01-checkup-plan-320.webp",
+          "bytes": 8328,
+          "sha256": "1d0b144dec5257f98dd53e9ea35733eb86326c40b92b61a7ce26144f0601f750",
+          "width": 320,
+          "height": 208,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/panxu/01-checkup-plan-640.webp",
+          "url": "/media/panxu/01-checkup-plan-640.webp",
+          "bytes": 22808,
+          "sha256": "bcb83ac85406ff61aa9d7ff62eccdf0f66fe268fe7ed7751987763af0531a1ed",
+          "width": 640,
+          "height": 417,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/panxu/01-checkup-plan-960.webp",
+          "url": "/media/panxu/01-checkup-plan-960.webp",
+          "bytes": 43666,
+          "sha256": "9a46ee367b6397ea630b9f3e803873942e8d613b12f540d45c4b21b36ae0d651",
+          "width": 960,
+          "height": 625,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/panxu/01-checkup-plan-1600.webp",
+          "url": "/media/panxu/01-checkup-plan-1600.webp",
+          "bytes": 98128,
+          "sha256": "53a6109137cc59b2dc9c830bcf8a6ff72f5c49247ec217ae38804d3e69db64e7",
+          "width": 1600,
+          "height": 1042,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "panxu",
+      "source": "captures/panxu/selected/02-plan-scores.png",
+      "source_sha256": "6a20a41d6dbf1f6b5b9dc20d1c37265f7dc03b47dd941bf0a02392075e1818fe",
+      "source_bytes": 401173,
+      "source_width": 1650,
+      "source_height": 1075,
+      "source_authenticity": "Real PanXu 1.1.0 interface served by tools/ui_harness.py against a generated 演练环境 (simulated computer); the model is the harness script, no real files or network. Downscaled from a 2x headless Chrome capture of a 1320x860 window.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/panxu/02-plan-scores.webp",
+        "url": "/media/panxu/02-plan-scores.webp",
+        "bytes": 317948,
+        "sha256": "d49038bb889ec3e6f2a22708539234d60459d2e8288f7ed96851e18eaa53faf3",
+        "width": 1650,
+        "height": 1075,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/panxu/02-plan-scores-320.webp",
+          "url": "/media/panxu/02-plan-scores-320.webp",
+          "bytes": 8814,
+          "sha256": "50c7e0315789d69e69bf755432513e6a138d34bbb83513f71bfac87285a4be1c",
+          "width": 320,
+          "height": 208,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/panxu/02-plan-scores-640.webp",
+          "url": "/media/panxu/02-plan-scores-640.webp",
+          "bytes": 25928,
+          "sha256": "856cb2dee3d8ebe49ae7b2048d4001fffee0915baccc3c2fc338818eef7528c9",
+          "width": 640,
+          "height": 417,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/panxu/02-plan-scores-960.webp",
+          "url": "/media/panxu/02-plan-scores-960.webp",
+          "bytes": 51088,
+          "sha256": "00683016b20dd2ac64b4f774f64afb8a42b1871df41ae5b154fc0567e1f0bbeb",
+          "width": 960,
+          "height": 625,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/panxu/02-plan-scores-1600.webp",
+          "url": "/media/panxu/02-plan-scores-1600.webp",
+          "bytes": 112092,
+          "sha256": "88cf3157311ad2048fca4d414c9c2c7fc4f14eb6a7dce33d214823814a1c022b",
+          "width": 1600,
+          "height": 1042,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "panxu",
+      "source": "captures/panxu/selected/03-score-basis.png",
+      "source_sha256": "d9bac9a4426c31fb967c471ed0bd7d3c56a9a668dfb4a46d8c80f3f2614bb054",
+      "source_bytes": 444001,
+      "source_width": 1650,
+      "source_height": 1075,
+      "source_authenticity": "Real PanXu 1.1.0 interface served by tools/ui_harness.py against a generated 演练环境 (simulated computer); the model is the harness script, no real files or network. Downscaled from a 2x headless Chrome capture of a 1320x860 window.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/panxu/03-score-basis.webp",
+        "url": "/media/panxu/03-score-basis.webp",
+        "bytes": 360760,
+        "sha256": "cf9806033980aae5a9df293daf3321808019a22906bc8dcbb0d54247a4674910",
+        "width": 1650,
+        "height": 1075,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/panxu/03-score-basis-320.webp",
+          "url": "/media/panxu/03-score-basis-320.webp",
+          "bytes": 8812,
+          "sha256": "22e75fd2535e96beaf3e16ee06d6ab9012d472bd98f7ac292817a2c4963742fc",
+          "width": 320,
+          "height": 208,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/panxu/03-score-basis-640.webp",
+          "url": "/media/panxu/03-score-basis-640.webp",
+          "bytes": 27384,
+          "sha256": "454e23f4e26664d03470d29772ac0f6338859e76e240d4c90cb05a6ae27a81c2",
+          "width": 640,
+          "height": 417,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/panxu/03-score-basis-960.webp",
+          "url": "/media/panxu/03-score-basis-960.webp",
+          "bytes": 54458,
+          "sha256": "3ef9c7e39e3c063acda9f621812a2e445d4d4e89be7ac75b0610843751d0d866",
+          "width": 960,
+          "height": 625,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/panxu/03-score-basis-1600.webp",
+          "url": "/media/panxu/03-score-basis-1600.webp",
+          "bytes": 126318,
+          "sha256": "715066df3aaf39b32e1a5c484b778d3dc749d7fd9310aab9a1658ed453e7c7b9",
+          "width": 1600,
+          "height": 1042,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "panxu",
+      "source": "captures/panxu/selected/04-cleanup-confirm.png",
+      "source_sha256": "abfcc1b69d3d89d03fed95cad19bc42ccad3060cf0266429379220bb79a9a99e",
+      "source_bytes": 375561,
+      "source_width": 1650,
+      "source_height": 1075,
+      "source_authenticity": "Real PanXu 1.1.0 interface served by tools/ui_harness.py against a generated 演练环境 (simulated computer); the model is the harness script, no real files or network. Downscaled from a 2x headless Chrome capture of a 1320x860 window.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/panxu/04-cleanup-confirm.webp",
+        "url": "/media/panxu/04-cleanup-confirm.webp",
+        "bytes": 262616,
+        "sha256": "2c46a10f9d16e24a42c64ddfc5a70116bdc9719be9d95858cd6e25e6acbbacd6",
+        "width": 1650,
+        "height": 1075,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/panxu/04-cleanup-confirm-320.webp",
+          "url": "/media/panxu/04-cleanup-confirm-320.webp",
+          "bytes": 8246,
+          "sha256": "d8b673302bd3dcec8d8883685ad00a01e527ab3a4f747e7da0bbad034eefd9c1",
+          "width": 320,
+          "height": 208,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/panxu/04-cleanup-confirm-640.webp",
+          "url": "/media/panxu/04-cleanup-confirm-640.webp",
+          "bytes": 23574,
+          "sha256": "af0a9b852d8246bc584af2378e690bfc05506f2312e83057c3c082f34f2a9785",
+          "width": 640,
+          "height": 417,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/panxu/04-cleanup-confirm-960.webp",
+          "url": "/media/panxu/04-cleanup-confirm-960.webp",
+          "bytes": 44364,
+          "sha256": "59fb852e94b587cfcf1caccec8eb979a7d0a5a8523e1b6c6898484912f4b1fd8",
+          "width": 960,
+          "height": 625,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/panxu/04-cleanup-confirm-1600.webp",
+          "url": "/media/panxu/04-cleanup-confirm-1600.webp",
+          "bytes": 95782,
+          "sha256": "f36c3ffaea6541835a35606f472eac26f15ba9d5052299664bb595b0c36ebf4e",
+          "width": 1600,
+          "height": 1042,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "panxu",
+      "source": "captures/panxu/selected/05-cleanup-result.png",
+      "source_sha256": "2135a9896e50a02f2534f955aafa7d23c8cd44136006b42e6fe1caf9dfef28da",
+      "source_bytes": 300173,
+      "source_width": 1650,
+      "source_height": 1075,
+      "source_authenticity": "Real PanXu 1.1.0 interface served by tools/ui_harness.py against a generated 演练环境 (simulated computer); the model is the harness script, no real files or network. Downscaled from a 2x headless Chrome capture of a 1320x860 window.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/panxu/05-cleanup-result.webp",
+        "url": "/media/panxu/05-cleanup-result.webp",
+        "bytes": 238444,
+        "sha256": "0f996c9d76ae68be13b9fa702282789bb51ead1ded2560bc7db59324420fe541",
+        "width": 1650,
+        "height": 1075,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/panxu/05-cleanup-result-320.webp",
+          "url": "/media/panxu/05-cleanup-result-320.webp",
+          "bytes": 6998,
+          "sha256": "b92280efafe52fd9ea3df7233d08564afc2425842daa6e42f1dfc2ff4d9e47a6",
+          "width": 320,
+          "height": 208,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/panxu/05-cleanup-result-640.webp",
+          "url": "/media/panxu/05-cleanup-result-640.webp",
+          "bytes": 19478,
+          "sha256": "f8dd78df7330eb5af06bff8fca4c419bf318e932d7078ae3f84ec792d50b686b",
+          "width": 640,
+          "height": 417,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/panxu/05-cleanup-result-960.webp",
+          "url": "/media/panxu/05-cleanup-result-960.webp",
+          "bytes": 37222,
+          "sha256": "9a3b2364992bc49d3595d64b2d97ce2b87cea4b2926a113787528f94affc2eb7",
+          "width": 960,
+          "height": 625,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/panxu/05-cleanup-result-1600.webp",
+          "url": "/media/panxu/05-cleanup-result-1600.webp",
+          "bytes": 82930,
+          "sha256": "56e9d0aa35a40d11f83eaf1fe49c96d54d064366d991579868b523a6621c2aba",
+          "width": 1600,
+          "height": 1042,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "panxu",
+      "source": "captures/panxu/selected/06-space-treemap.png",
+      "source_sha256": "9e20407e1091639e3db5a662134113a4954a37edb3f25fa423a6d1c3683c1fc1",
+      "source_bytes": 379465,
+      "source_width": 1650,
+      "source_height": 1075,
+      "source_authenticity": "Real PanXu 1.1.0 interface served by tools/ui_harness.py against a generated 演练环境 (simulated computer); the model is the harness script, no real files or network. Downscaled from a 2x headless Chrome capture of a 1320x860 window.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/panxu/06-space-treemap.webp",
+        "url": "/media/panxu/06-space-treemap.webp",
+        "bytes": 264154,
+        "sha256": "c9f022940cf45c2727796f161b5005b0e53b5ca42037231add8aa18f37c4e266",
+        "width": 1650,
+        "height": 1075,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/panxu/06-space-treemap-320.webp",
+          "url": "/media/panxu/06-space-treemap-320.webp",
+          "bytes": 9602,
+          "sha256": "254b87ddd0b2c681ce47c8f4b35c07731439295a3ba8891230ec1b78e3b1adc5",
+          "width": 320,
+          "height": 208,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/panxu/06-space-treemap-640.webp",
+          "url": "/media/panxu/06-space-treemap-640.webp",
+          "bytes": 25794,
+          "sha256": "6b840cc88791956bef4744ff1311c866f711297b926474c24294a452b9a5a94c",
+          "width": 640,
+          "height": 417,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/panxu/06-space-treemap-960.webp",
+          "url": "/media/panxu/06-space-treemap-960.webp",
+          "bytes": 48080,
+          "sha256": "aa09fe50d027e5b71e96a65a31311fb3b5721dae280a377e7ef95e98f5832811",
+          "width": 960,
+          "height": 625,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/panxu/06-space-treemap-1600.webp",
+          "url": "/media/panxu/06-space-treemap-1600.webp",
+          "bytes": 102698,
+          "sha256": "b0637494ad2da475e486b98aaf238eaa3bfc18568692293be29fa1dd4aa88512",
+          "width": 1600,
+          "height": 1042,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "panxu",
+      "source": "captures/panxu/selected/07-duplicate-files.png",
+      "source_sha256": "459fce4a6e0110822640bd8e6f108a74d9e44055080ce087946e91837f5b2c0c",
+      "source_bytes": 353198,
+      "source_width": 1650,
+      "source_height": 1075,
+      "source_authenticity": "Real PanXu 1.1.0 interface served by tools/ui_harness.py against a generated 演练环境 (simulated computer); the model is the harness script, no real files or network. Downscaled from a 2x headless Chrome capture of a 1320x860 window.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/panxu/07-duplicate-files.webp",
+        "url": "/media/panxu/07-duplicate-files.webp",
+        "bytes": 266696,
+        "sha256": "01c186bfb6a90d088d3b779edb09d8e7b412f024eb720f89d0ca7c8f38640a77",
+        "width": 1650,
+        "height": 1075,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/panxu/07-duplicate-files-320.webp",
+          "url": "/media/panxu/07-duplicate-files-320.webp",
+          "bytes": 8372,
+          "sha256": "dae7f23eab6350341d7c8cad96a2f42f62086a05558080572a0e5540ca68908b",
+          "width": 320,
+          "height": 208,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/panxu/07-duplicate-files-640.webp",
+          "url": "/media/panxu/07-duplicate-files-640.webp",
+          "bytes": 24258,
+          "sha256": "6a6d5bd14b25918add6eb647130f846c166e5e19608789476e5330b1d049fe84",
+          "width": 640,
+          "height": 417,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/panxu/07-duplicate-files-960.webp",
+          "url": "/media/panxu/07-duplicate-files-960.webp",
+          "bytes": 45868,
+          "sha256": "5eafd046ea7ab1b7b36dc797c2d1cbea45e9c863843e3a6594c3d1eec7f82d77",
+          "width": 960,
+          "height": 625,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/panxu/07-duplicate-files-1600.webp",
+          "url": "/media/panxu/07-duplicate-files-1600.webp",
+          "bytes": 100020,
+          "sha256": "27707abfe0ba408cd0d7a393b11da6d468f614c18b08badc4b81d228da18e155",
+          "width": 1600,
+          "height": 1042,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "panxu",
+      "source": "captures/panxu/selected/08-startup-items.png",
+      "source_sha256": "e707e4626da2e1b1537bff0367828201bdfb5fdc5fb6eb99458399d5ae7aeeb3",
+      "source_bytes": 469686,
+      "source_width": 1650,
+      "source_height": 1075,
+      "source_authenticity": "Real PanXu 1.1.0 interface served by tools/ui_harness.py against a generated 演练环境 (simulated computer); the model is the harness script, no real files or network. Downscaled from a 2x headless Chrome capture of a 1320x860 window.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/panxu/08-startup-items.webp",
+        "url": "/media/panxu/08-startup-items.webp",
+        "bytes": 356184,
+        "sha256": "e65261b87707e862f0ac877bfaad04a330d9c6271290b322788df86b29183c62",
+        "width": 1650,
+        "height": 1075,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/panxu/08-startup-items-320.webp",
+          "url": "/media/panxu/08-startup-items-320.webp",
+          "bytes": 10196,
+          "sha256": "c769df664d8b43b265af12cde0b30ec97981616d3236ba9617268b3a9d4e47e0",
+          "width": 320,
+          "height": 208,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/panxu/08-startup-items-640.webp",
+          "url": "/media/panxu/08-startup-items-640.webp",
+          "bytes": 30648,
+          "sha256": "e89aae09749c3ccd8f9a7b95d954eb2ab75a7ed8a736f9a9b0be4401ac3f3fcd",
+          "width": 640,
+          "height": 417,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/panxu/08-startup-items-960.webp",
+          "url": "/media/panxu/08-startup-items-960.webp",
+          "bytes": 58964,
+          "sha256": "2c54f3af58d41d4c8da545f235617c6bb3586931b0d4fffe953e9cb340c6c061",
+          "width": 960,
+          "height": 625,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/panxu/08-startup-items-1600.webp",
+          "url": "/media/panxu/08-startup-items-1600.webp",
+          "bytes": 133436,
+          "sha256": "d5284d6e78b01e492236009cc4e6b56b756a2edb3a89ee1335b740516b82e777",
+          "width": 1600,
+          "height": 1042,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "panxu",
+      "source": "captures/panxu/selected/09-junk-rules.png",
+      "source_sha256": "a908bbef08c4f967d5d8f145b1f5fb810737f29a6a1f2b3337a03aaf813d8438",
+      "source_bytes": 386356,
+      "source_width": 1650,
+      "source_height": 1075,
+      "source_authenticity": "Real PanXu 1.1.0 interface served by tools/ui_harness.py against a generated 演练环境 (simulated computer); the model is the harness script, no real files or network. Downscaled from a 2x headless Chrome capture of a 1320x860 window.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/panxu/09-junk-rules.webp",
+        "url": "/media/panxu/09-junk-rules.webp",
+        "bytes": 311354,
+        "sha256": "2c8a970be8e9ace8ccc9485e10fd2dd2b3bc7737e38cdc67eabd7d993c934a26",
+        "width": 1650,
+        "height": 1075,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/panxu/09-junk-rules-320.webp",
+          "url": "/media/panxu/09-junk-rules-320.webp",
+          "bytes": 8942,
+          "sha256": "841a76a985bf7d8695b1e06996e1ad7578f0130d64f05e31241c7ad58589ee5d",
+          "width": 320,
+          "height": 208,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/panxu/09-junk-rules-640.webp",
+          "url": "/media/panxu/09-junk-rules-640.webp",
+          "bytes": 24798,
+          "sha256": "3f5257d6894c583da5beec272d15847e3370709f71942749428cc16b919bdaae",
+          "width": 640,
+          "height": 417,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/panxu/09-junk-rules-960.webp",
+          "url": "/media/panxu/09-junk-rules-960.webp",
+          "bytes": 48406,
+          "sha256": "739aecae47a43954d5778cd81f44627e5e5a7d7d050dba6b243ab5963ef07c54",
+          "width": 960,
+          "height": 625,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/panxu/09-junk-rules-1600.webp",
+          "url": "/media/panxu/09-junk-rules-1600.webp",
+          "bytes": 107968,
+          "sha256": "345fa24c37ff2999f06898c1c61080c07218a4ad9791bb7c332dc674bf5b4c91",
+          "width": 1600,
+          "height": 1042,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "panxu",
+      "source": "captures/panxu/selected/10-operation-history.png",
+      "source_sha256": "4fdb6b5f27dac0658d3f2ac08bbda98f62b8fccc98cf034c1d58271ab715dc71",
+      "source_bytes": 250002,
+      "source_width": 1650,
+      "source_height": 1075,
+      "source_authenticity": "Real PanXu 1.1.0 interface served by tools/ui_harness.py against a generated 演练环境 (simulated computer); the model is the harness script, no real files or network. Downscaled from a 2x headless Chrome capture of a 1320x860 window.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/panxu/10-operation-history.webp",
+        "url": "/media/panxu/10-operation-history.webp",
+        "bytes": 197444,
+        "sha256": "e8b54117ce995c03561aae3182138c1be021b61b5adb8af9188643b6929ed7c5",
+        "width": 1650,
+        "height": 1075,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/panxu/10-operation-history-320.webp",
+          "url": "/media/panxu/10-operation-history-320.webp",
+          "bytes": 5228,
+          "sha256": "55a0a21bddeca1d4581eabe8cb64bb882306ba8d642c430e602c3ba3e39c61f6",
+          "width": 320,
+          "height": 208,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/panxu/10-operation-history-640.webp",
+          "url": "/media/panxu/10-operation-history-640.webp",
+          "bytes": 15554,
+          "sha256": "22f0c3fab088abef655234c80eb81006203f798d10219a40d39b67d05b1d4b65",
+          "width": 640,
+          "height": 417,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/panxu/10-operation-history-960.webp",
+          "url": "/media/panxu/10-operation-history-960.webp",
+          "bytes": 30826,
+          "sha256": "efbd26f088400dd9b9b8d16012b3a1e787116f60d4d54102a0eddc71b22999a2",
+          "width": 960,
+          "height": 625,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/panxu/10-operation-history-1600.webp",
+          "url": "/media/panxu/10-operation-history-1600.webp",
+          "bytes": 69202,
+          "sha256": "e45041933df1f7d1ff7378a4aa45413d4aa541ea91e9513021f80b55da28aae9",
+          "width": 1600,
+          "height": 1042,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
     }
   ],
   "video": {
-    "path": "site-next/public/media/china-house-price-map/demo.mp4",
+    "path": "site/public/media/china-house-price-map/demo.mp4",
     "url": "/media/china-house-price-map/demo.mp4",
     "bytes": 1363373,
     "sha256": "3e63812f8d103c794dfe814e07c69770720191ce7fd3b3bf42b3643a1eda3a98",
@@ -8056,16 +8736,16 @@
     "note": "Real map UI capture, 19.133 s, encoded 30 CFR with frame duplication; not a rendering performance claim."
   },
   "totals": {
-    "original_image_count": 141,
-    "exported_image_count": 564,
-    "source_image_bytes": 46552666,
-    "exported_image_bytes": 48143788,
+    "original_image_count": 151,
+    "exported_image_count": 614,
+    "source_image_bytes": 50264463,
+    "exported_image_bytes": 52810854,
     "video_bytes": 1363373,
     "font_bytes": 370080,
     "font_license_and_provenance_bytes": 16711,
-    "published_media_bytes": 49877241,
-    "total_public_asset_count": 570,
-    "total_public_asset_bytes": 49893952
+    "published_media_bytes": 54544307,
+    "total_public_asset_count": 620,
+    "total_public_asset_bytes": 54561018
   },
   "fonts": {
     "codec": "fontTools WOFF2 with Node native zlib Brotli (quality 11 / font mode), invoked by fontTools",
@@ -8263,7 +8943,7 @@
     },
     {
       "path": "site/media-additions.json",
-      "sha256": "48210bcdbc4f74fe6e992ae5fd8cdde42fa5b8f33e8bf2b902b675ff90f1dec4"
+      "sha256": "7044c7e1b792e8579007aaf1d91909fc4bb11085b6ad171d7847ac2fb5b9bf44"
     }
   ]
 }

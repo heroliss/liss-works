@@ -14,6 +14,7 @@ import { setupLabRoomMotion } from './lab-room-motion';
 import { setupAboutStudioMotion } from './about-studio-motion';
 import { setupCreatorRoom } from './creator-room';
 import { setupAtollWater } from './atoll-water';
+import { setupPanxuShowcase } from './panxu-showcase';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -198,6 +199,7 @@ function initializeMotion() {
   const disposeAboutStudio = setupAboutStudioMotion({ signal, preference });
   const disposeCreatorRoom = setupCreatorRoom({ signal, preference });
   const disposeAtollWater = setupAtollWater({ signal, preference });
+  const disposePanxu = setupPanxuShowcase({ signal, preference });
   if (storedPause !== undefined) {
     window.dispatchEvent(new CustomEvent('portfolio:motion-state', { detail: { paused: storedPause } }));
   }
@@ -233,6 +235,7 @@ function initializeMotion() {
     disposeAboutStudio();
     disposeCreatorRoom();
     disposeAtollWater();
+    disposePanxu();
     media.revert();
     delete root.dataset.motion;
   };

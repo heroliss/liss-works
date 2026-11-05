@@ -91,6 +91,96 @@
       "height": 900,
       "authenticity": "Real DubForge UI in the official isolated GET-only demo with self-authored silent footage and bilingual text. Pending production state; no model generation, accounts or publishing.",
       "capture_receipt": "verification/site-next/v6/dubforge-nine-step-captures.json"
+    },
+    {
+      "repo": "panxu",
+      "source": "captures/panxu/selected/01-checkup-plan.png",
+      "source_sha256": "8a6b5d32800d92a51b97cc4956a551638033daa1463eb2dfcbbeb3c493a40636",
+      "width": 1650,
+      "height": 1075,
+      "authenticity": "Real PanXu 1.1.0 interface served by tools/ui_harness.py against a generated 演练环境 (simulated computer); the model is the harness script, no real files or network. Downscaled from a 2x headless Chrome capture of a 1320x860 window.",
+      "capture_receipt": "verification/panxu-captures-20261105/01-checkup-plan@2x.png"
+    },
+    {
+      "repo": "panxu",
+      "source": "captures/panxu/selected/02-plan-scores.png",
+      "source_sha256": "6a20a41d6dbf1f6b5b9dc20d1c37265f7dc03b47dd941bf0a02392075e1818fe",
+      "width": 1650,
+      "height": 1075,
+      "authenticity": "Real PanXu 1.1.0 interface served by tools/ui_harness.py against a generated 演练环境 (simulated computer); the model is the harness script, no real files or network. Downscaled from a 2x headless Chrome capture of a 1320x860 window.",
+      "capture_receipt": "verification/panxu-captures-20261105/02-plan-scores@2x.png"
+    },
+    {
+      "repo": "panxu",
+      "source": "captures/panxu/selected/03-score-basis.png",
+      "source_sha256": "d9bac9a4426c31fb967c471ed0bd7d3c56a9a668dfb4a46d8c80f3f2614bb054",
+      "width": 1650,
+      "height": 1075,
+      "authenticity": "Real PanXu 1.1.0 interface served by tools/ui_harness.py against a generated 演练环境 (simulated computer); the model is the harness script, no real files or network. Downscaled from a 2x headless Chrome capture of a 1320x860 window.",
+      "capture_receipt": "verification/panxu-captures-20261105/03-score-basis@2x.png"
+    },
+    {
+      "repo": "panxu",
+      "source": "captures/panxu/selected/04-cleanup-confirm.png",
+      "source_sha256": "abfcc1b69d3d89d03fed95cad19bc42ccad3060cf0266429379220bb79a9a99e",
+      "width": 1650,
+      "height": 1075,
+      "authenticity": "Real PanXu 1.1.0 interface served by tools/ui_harness.py against a generated 演练环境 (simulated computer); the model is the harness script, no real files or network. Downscaled from a 2x headless Chrome capture of a 1320x860 window.",
+      "capture_receipt": "verification/panxu-captures-20261105/04-cleanup-confirm@2x.png"
+    },
+    {
+      "repo": "panxu",
+      "source": "captures/panxu/selected/05-cleanup-result.png",
+      "source_sha256": "2135a9896e50a02f2534f955aafa7d23c8cd44136006b42e6fe1caf9dfef28da",
+      "width": 1650,
+      "height": 1075,
+      "authenticity": "Real PanXu 1.1.0 interface served by tools/ui_harness.py against a generated 演练环境 (simulated computer); the model is the harness script, no real files or network. Downscaled from a 2x headless Chrome capture of a 1320x860 window.",
+      "capture_receipt": "verification/panxu-captures-20261105/05-cleanup-result@2x.png"
+    },
+    {
+      "repo": "panxu",
+      "source": "captures/panxu/selected/06-space-treemap.png",
+      "source_sha256": "9e20407e1091639e3db5a662134113a4954a37edb3f25fa423a6d1c3683c1fc1",
+      "width": 1650,
+      "height": 1075,
+      "authenticity": "Real PanXu 1.1.0 interface served by tools/ui_harness.py against a generated 演练环境 (simulated computer); the model is the harness script, no real files or network. Downscaled from a 2x headless Chrome capture of a 1320x860 window.",
+      "capture_receipt": "verification/panxu-captures-20261105/06-space-treemap@2x.png"
+    },
+    {
+      "repo": "panxu",
+      "source": "captures/panxu/selected/07-duplicate-files.png",
+      "source_sha256": "459fce4a6e0110822640bd8e6f108a74d9e44055080ce087946e91837f5b2c0c",
+      "width": 1650,
+      "height": 1075,
+      "authenticity": "Real PanXu 1.1.0 interface served by tools/ui_harness.py against a generated 演练环境 (simulated computer); the model is the harness script, no real files or network. Downscaled from a 2x headless Chrome capture of a 1320x860 window.",
+      "capture_receipt": "verification/panxu-captures-20261105/07-duplicate-files@2x.png"
+    },
+    {
+      "repo": "panxu",
+      "source": "captures/panxu/selected/08-startup-items.png",
+      "source_sha256": "e707e4626da2e1b1537bff0367828201bdfb5fdc5fb6eb99458399d5ae7aeeb3",
+      "width": 1650,
+      "height": 1075,
+      "authenticity": "Real PanXu 1.1.0 interface served by tools/ui_harness.py against a generated 演练环境 (simulated computer); the model is the harness script, no real files or network. Downscaled from a 2x headless Chrome capture of a 1320x860 window.",
+      "capture_receipt": "verification/panxu-captures-20261105/08-startup-items@2x.png"
+    },
+    {
+      "repo": "panxu",
+      "source": "captures/panxu/selected/09-junk-rules.png",
+      "source_sha256": "a908bbef08c4f967d5d8f145b1f5fb810737f29a6a1f2b3337a03aaf813d8438",
+      "width": 1650,
+      "height": 1075,
+      "authenticity": "Real PanXu 1.1.0 interface served by tools/ui_harness.py against a generated 演练环境 (simulated computer); the model is the harness script, no real files or network. Downscaled from a 2x headless Chrome capture of a 1320x860 window.",
+      "capture_receipt": "verification/panxu-captures-20261105/09-junk-rules@2x.png"
+    },
+    {
+      "repo": "panxu",
+      "source": "captures/panxu/selected/10-operation-history.png",
+      "source_sha256": "4fdb6b5f27dac0658d3f2ac08bbda98f62b8fccc98cf034c1d58271ab715dc71",
+      "width": 1650,
+      "height": 1075,
+      "authenticity": "Real PanXu 1.1.0 interface served by tools/ui_harness.py against a generated 演练环境 (simulated computer); the model is the harness script, no real files or network. Downscaled from a 2x headless Chrome capture of a 1320x860 window.",
+      "capture_receipt": "verification/panxu-captures-20261105/10-operation-history@2x.png"
     }
   ]
 }

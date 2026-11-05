@@ -6,6 +6,7 @@ const topicMedia: Record<string, (string | null)[]> = {
   nomadworkshop: ['05-resident-and-world-1080'],
   outpost: ['23-modern-battle-settings'],
   dubforge: ['07-assembly-versions', '08-production-settings', '06-project-overview'],
+  panxu: ['03-score-basis', '04-cleanup-confirm', '10-operation-history'],
   ssframework: [null, null, null, '15-hierarchy-binding-compact', '05-module-tools-center'],
   eazybuildpipeline: ['04-reverse-dependencies-three-assets'],
   'intelligence-index-cost-linear': ['08-provider-highlight-dark-live'],
