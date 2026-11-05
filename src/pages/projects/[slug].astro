@@ -7,6 +7,8 @@ import ProjectConversation from '../../components/ProjectConversation.astro';
 import ProjectContinuation from '../../components/ProjectContinuation.astro';
 import ProjectEngineering from '../../components/ProjectEngineering.astro';
 import DubForgeWorkflow from '../../components/DubForgeWorkflow.astro';
+import PanxuShowcase from '../../components/PanxuShowcase.astro';
+import FrameworkShowcase from '../../components/FrameworkShowcase.astro';
 import ProjectSignature from '../../components/ProjectSignature.astro';
 import ProjectDownload from '../../components/ProjectDownload.astro';
 import ProjectArtifact from '../../components/ProjectArtifact.astro';
@@ -42,6 +44,8 @@ const gallery = project.gallery.filter(image => (project.slug === 'glass-atoll' 
 const related = project.related.map(slug => getProject(slug)).filter((item): item is Project => Boolean(item));
 const hasLab = project.slug === 'floydshortestpath' || project.slug === 'ga-sort';
 const notes = [project.note, story.footnote].filter(Boolean);
+// Projects whose home-page showcase opens their detail page in place of the cover picture.
+const showcaseOpening = ['panxu', 'dubforge', 'ssframework'].includes(project.slug);
 const coverSizes = project.slug === 'dubforge' ? '(max-width: 760px) calc(100vw - 40px), 94vw' : '(max-width: 760px) calc(100vw - 40px), 64vw';
 ---
 <Base title={project.name} description={project.summary} active="projects" image={project.cover}>
@@ -53,14 +57,13 @@ const coverSizes = project.slug === 'dubforge' ? '(max-width: 760px) calc(100vw 
       <div class="project-intro-copy"><h1 class="project-name" aria-label={project.name}>{displayName}</h1>{displayName !== project.name && <p class="project-full-name">{project.name}</p>}<ProjectProse text={project.summary} tone="lead" class="summary" reveal/><p class="project-facts"><span class="project-facts__category">{project.category}</span> · <span class="project-facts__status">{project.status}</span></p></div>
       <div class="button-row">{!project.source && !project.demo && !project.download && <a class="button" href="#engineering">看场景与设计 <Icon size={18}/></a>}{project.demo && <a class="button" href={sitePath(project.demo)} target="_blank" rel="noreferrer">在线体验 <Icon name="play" size={17}/></a>}{hasLab && <a class="button" href={sitePath(project.slug === 'ga-sort' ? '/lab/#evolution' : '/lab/')}>打开交互实验 <Icon name="play" size={17}/></a>}{project.download && <ProjectDownload download={project.download}/>}{project.source && <a class:list={['button', {secondary: Boolean(project.demo || project.download || hasLab)}]} href={project.source} target="_blank" rel="noreferrer">查看源码 <Icon name="code" size={18}/></a>}</div>
     </header>
-    <div class:list={["project-opening", {"project-opening--atoll": project.slug === "glass-atoll"}]}>{project.slug === "glass-atoll" ? <AtollWaterScene project={project} detail/> : <figure class="project-hero" data-detail-motion={world.motion}><ProjectArtifact image={project.cover} eager group={project.slug} kind={world.motion} role="hero" shared sizes={coverSizes}/><figcaption class="project-caption">{project.cover.caption}</figcaption></figure>}<ProjectSignature signature={getProjectSignature(project.slug)}/></div>
+    <div class:list={["project-opening", {"project-opening--atoll": project.slug === "glass-atoll", "project-opening--showcase": showcaseOpening}]}>{project.slug === "glass-atoll" ? <AtollWaterScene project={project} detail/> : project.slug === "panxu" ? <PanxuShowcase detail/> : project.slug === "dubforge" ? <DubForgeWorkflow id="production-path" detail/> : project.slug === "ssframework" ? <FrameworkShowcase id="framework-gallery"/> : <figure class="project-hero" data-detail-motion={world.motion}><ProjectArtifact image={project.cover} eager group={project.slug} kind={world.motion} role="hero" shared sizes={coverSizes}/><figcaption class="project-caption">{project.cover.caption}</figcaption></figure>}<ProjectSignature signature={getProjectSignature(project.slug)}/></div>
     </div>
     <nav class="project-contents" aria-label="详情页导航"><a href="#project-origin">项目概览</a><a href="#engineering">设计与实现</a>{gallery.length > 0 && <a href="#gallery">更多画面</a>}<a href="#usage">{project.slug === 'glass-atoll' ? '如何探索' : '快速开始'}</a>{project.docs && <a href={project.docs} target="_blank" rel="noreferrer">完整文档 <Icon size={13}/></a>}</nav>
     <div class="project-overview" id="project-origin">
       <section class="story-origin" aria-labelledby="origin-title"><h2 id="origin-title" data-detail-reveal>{story.origin.title}</h2>{story.origin.paragraphs.map((paragraph,index) => <ProjectProse text={paragraph} tone={index===0 ? 'lead' : 'body'} reveal/>)}{story.flow && project.slug !== 'dubforge' && <ol class="compact-flow" aria-label={story.flow.title}>{story.flow.steps.map(step => <li>{step.name}</li>)}</ol>}</section>
       {story.stack?.length && <section class="project-technology" aria-labelledby="stack-title"><h2 id="stack-title">技术构成</h2><dl class="project-stack">{story.stack.map(item => <div><dt>{item.name}</dt><dd>{item.role}</dd></div>)}</dl></section>}
     </div>
-    {project.slug === 'dubforge' && <DubForgeWorkflow id="production-path" detail/>}
     <ProjectEngineering story={story} media={topicMedia} group={project.slug}/>
     {project.video && <figure class="project-video"><video controls playsinline preload="none" poster={sitePath(project.video.poster)} aria-label={`${displayName} 真实界面操作演示`}><source src={sitePath(project.video.src)} type="video/mp4"/>浏览器无法播放视频，请<a href={sitePath(project.video.src)}>下载演示片段</a>。</video><figcaption>{project.video.caption}</figcaption></figure>}
     {gallery.length > 0 && <section class="section project-gallery" id="gallery" aria-labelledby="gallery-title"><div class="section-heading"><h2 id="gallery-title">更多画面</h2></div><div class="gallery-grid">{gallery.map(image => <figure data-detail-motion={world.motion}><ProjectArtifact image={image} group={project.slug} kind={world.motion} role="gallery" sizes="(max-width: 760px) 100vw, 60vw"/><figcaption>{image.caption}</figcaption></figure>)}</div></section>}

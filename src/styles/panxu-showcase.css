@@ -1,154 +1,168 @@
-/* 盘序 · a disk drawn as a drawer cabinet. Pure CSS 3D: every state is a data-step on the
-   section, every movement a transform transition. Opacity and filters are avoided on 3D
-   parents (they would flatten the boxes); faces darken through --shade instead. */
-.px-lab { --px-safe:#3fd29b; --px-review:#e3a247; --px-info:#78a9ff; --W:320px; --H:380px; --D:230px; --dw:300px; --dh:58px; --dd:200px; --cube:20px;
+/* 盘序 · the real window, taken apart. The window is the screenshot; every panel that rises out of it is
+   cut from that same image (data/panxu-showcase.ts), so at rest nothing differs from the capture. A step
+   only toggles data-on and data-step; the motion is transitions of transform and opacity on leaf
+   elements, because opacity, filter or overflow on a 3D parent would flatten everything inside it. */
+@property --pose-x { syntax:'<angle>'; inherits:true; initial-value:11deg; }
+@property --pose-y { syntax:'<angle>'; inherits:true; initial-value:-9deg; }
+.px-lab { --px-safe:#3fc799; --px-review:#d99a45; --px-info:#8794f2; --tone:var(--accent);
+  /* As large as the page and the screen allow: the capture is 1320 CSS px wide, so 1240 reads at 94%. */
+  --win:min(100%, 1180px, calc((100svh - 190px) * 1650 / 1075));
+  --pose-x:11deg; --pose-y:-9deg;
   position:relative; isolation:isolate; padding-block:clamp(70px,9vw,130px) clamp(40px,6vw,90px); }
 .px-lab::before { content:""; position:absolute; inset:0 calc(50% - 50vw); z-index:-1; pointer-events:none;
-  background:radial-gradient(ellipse 46% 60% at 30% 58%,color-mix(in srgb,var(--accent) 11%,transparent),transparent 72%),radial-gradient(ellipse 30% 40% at 78% 30%,#3fd29b0b,transparent 70%); }
+  background:radial-gradient(ellipse 50% 46% at 50% 56%,color-mix(in srgb,var(--accent) 12%,transparent),transparent 72%),radial-gradient(ellipse 26% 30% at 82% 30%,#3fc7990d,transparent 70%); }
+.px-lab [data-tone=safe] { --tone:var(--px-safe); }
+.px-lab [data-tone=review] { --tone:var(--px-review); }
+.px-lab [data-tone=info] { --tone:var(--px-info); }
 .px-heading { align-items:end; }
 .px-tagline { font-size:clamp(22px,2.2vw,30px); line-height:1.5; }
 .px-introduction { display:grid; gap:14px; align-content:end; max-width:46ch; }
 .px-introduction p { margin:0; color:var(--muted); font-size:17px; line-height:1.85; }
-.px-stage { display:grid; grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr); gap:clamp(24px,4vw,64px); align-items:center; margin-top:clamp(28px,4vw,56px); }
+.px-stage { display:grid; gap:clamp(14px,2vw,22px); margin-top:clamp(28px,4vw,56px); }
 
-/* ---- the scene ------------------------------------------------------------------- */
-.px-scene { position:relative; height:540px; perspective:1500px; perspective-origin:42% 28%; touch-action:pan-y; }
-.px-world { position:absolute; left:50%; top:52%; width:var(--W); height:var(--H); margin:calc(var(--H) / -2) 0 0 calc(var(--W) / -2);
-  transform-style:preserve-3d; transform-origin:50% 50% calc(var(--D) / -2);
-  transform:rotateX(calc(-14deg + var(--tilt-x,0deg))) rotateY(calc(-32deg + var(--tilt-y,0deg))); }
-.px-cabinet, .px-cabinet .px-face { position:absolute; left:0; top:0; transform-style:preserve-3d; }
-.px-cabinet { width:var(--W); height:var(--H); }
-.px-face { display:block; transform-origin:0 0; border:1px solid color-mix(in srgb,var(--accent) 24%,#ffffff10); }
-.px-back { width:var(--W); height:var(--H); transform:translateZ(calc(var(--D) * -1)); background:#07080f; }
-.px-left { width:var(--D); height:var(--H); transform:rotateY(90deg); background:linear-gradient(90deg,#10121f,#0b0c16); }
-.px-right { width:var(--D); height:var(--H); transform:translateX(var(--W)) rotateY(90deg); background:linear-gradient(90deg,#1b1f38,#111426 70%); box-shadow:inset 0 0 0 1px #ffffff08; }
-.px-bottom { width:var(--W); height:var(--D); transform:translateY(var(--H)) rotateX(-90deg); background:#05060b; }
-.px-top { width:var(--W); height:var(--D); transform:rotateX(-90deg); background:linear-gradient(160deg,#2a2f55,#1a1d34 60%,#14172a); }
-.px-top-label { position:absolute; left:22px; bottom:20px; font-family:var(--font-display); font-size:34px; font-weight:600; color:color-mix(in srgb,var(--accent) 70%,#fff); letter-spacing:.02em; }
-.px-top-label small { display:block; font-size:13px; font-weight:500; color:#aab0d8; letter-spacing:0; }
-/* Cast shadow on the floor, under the cabinet and its open drawers. */
-.px-cabinet::after { content:""; position:absolute; left:-30px; top:0; width:calc(var(--W) + 120px); height:calc(var(--D) + 220px); transform-origin:0 0;
-  transform:translateY(var(--H)) rotateX(-90deg) translateZ(-1px) translateY(-140px); background:radial-gradient(ellipse 50% 40% at 42% 46%,#000a,transparent 72%); pointer-events:none; }
-.px-beam { position:absolute; left:-6px; top:0; width:calc(var(--W) + 12px); height:22px; transform:translateZ(3px) translateY(-30px); opacity:0; pointer-events:none;
-  background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--accent) 55%,#fff0) 45%,#e7ebff 50%,color-mix(in srgb,var(--accent) 55%,#fff0) 55%,transparent);
-  box-shadow:0 0 28px 6px color-mix(in srgb,var(--accent) 40%,transparent); }
-.px-lab[data-step=scan] .px-beam { opacity:1; animation:px-scan 2.1s cubic-bezier(.45,.05,.55,.95) infinite; }
-@keyframes px-scan { from { transform:translateZ(3px) translateY(-20px); } to { transform:translateZ(3px) translateY(calc(var(--H) - 2px)); } }
-
-/* ---- drawers --------------------------------------------------------------------- */
-.px-drawer { --pull:0px; --hot:0px; --shade:0; position:absolute; left:10px; top:calc(22px + var(--row) * 70px); width:var(--dw); height:var(--dh); padding:0; margin:0; border:0; background:none; color:inherit; font:inherit; cursor:pointer;
-  transform-style:preserve-3d; transform:translateZ(calc(var(--pull) + var(--hot))); transition:transform .95s cubic-bezier(.2,.75,.18,1); transition-delay:var(--delay,0s); -webkit-tap-highlight-color:transparent; }
-.px-drawer:focus-visible { outline:none; }
-.px-drawer:focus-visible .px-d-front { outline:2px solid var(--accent); outline-offset:3px; }
-.px-d { position:absolute; left:0; top:0; display:block; transform-origin:0 0; pointer-events:none; }
-.px-d-front { width:var(--dw); height:var(--dh); display:grid; grid-template-columns:1fr auto; grid-template-rows:1fr auto; align-items:center; gap:0 10px; padding:9px 14px 8px 18px; box-sizing:border-box; text-align:left; pointer-events:auto;
-  background:linear-gradient(rgb(5 6 12 / var(--shade)),rgb(5 6 12 / var(--shade))),linear-gradient(170deg,#2b3058,#1d2140 55%,#181b33); border:1px solid color-mix(in srgb,var(--accent) 30%,#ffffff14); border-radius:4px;
-  box-shadow:inset 4px 0 0 var(--group-tone,transparent),inset 0 1px #ffffff1c; transition:box-shadow .5s ease; }
-.px-d-handle { position:absolute; left:50%; top:7px; width:56px; height:6px; margin-left:-28px; border-radius:3px; background:linear-gradient(#aeb6ef,#6c75b8); box-shadow:0 2px 3px #0008; }
-.px-d-name { grid-column:1; grid-row:1 / span 2; align-self:center; padding-top:6px; font-size:14px; font-weight:600; color:#e8eaff; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.px-d-size { grid-column:2; grid-row:1; padding-top:8px; font-family:var(--font-display); font-size:16px; font-weight:600; color:#cfd4ff; font-variant-numeric:tabular-nums; }
-.px-d-chip { grid-column:2; grid-row:2; justify-self:end; font-size:11px; line-height:1; color:var(--group-tone,#aab0d8); opacity:0; transform:translateY(3px); transition:opacity .4s ease,transform .4s ease; }
-.px-d-right, .px-d-left { width:var(--dd); height:var(--dh); background:linear-gradient(rgb(5 6 12 / var(--shade)),rgb(5 6 12 / var(--shade))),linear-gradient(90deg,#1a1e38,#10132a); border:1px solid #ffffff10; }
-.px-d-right { transform:translateX(var(--dw)) rotateY(90deg); }
-.px-d-left { transform:rotateY(90deg); }
-.px-d-floor { width:var(--dw); height:var(--dd); transform:translateY(calc(var(--dh) - 8px)) rotateX(-90deg); background:linear-gradient(rgb(5 6 12 / var(--shade)),rgb(5 6 12 / var(--shade))),linear-gradient(180deg,#121527,#0b0d1a); border:1px solid #ffffff0d; }
-.px-d-back { width:var(--dw); height:var(--dh); transform:translateZ(calc(var(--dd) * -1)); background:#0a0c18; }
-.px-drawer[data-group=safe] { --group-tone:var(--px-safe); }
-.px-drawer[data-group=review] { --group-tone:var(--px-review); }
-.px-drawer[data-group=info] { --group-tone:var(--px-info); }
-
-/* File blocks sit on the drawer floor, in two depth lanes of four. */
-.px-file { --tone:#8a91b8; position:absolute; left:calc(22px + var(--col) * 66px); top:calc(var(--dh) - 8px - var(--cube)); width:var(--cube); height:var(--cube); transform-style:preserve-3d; pointer-events:none;
-  transform:translateZ(calc(-34px - var(--lane) * 70px)); transition:transform .9s cubic-bezier(.5,0,.75,0) calc(var(--i) * .07s), visibility 0s linear 1.4s; }
-.px-file[data-file-group=safe] { --tone:var(--px-safe); }
-.px-file[data-file-group=review] { --tone:var(--px-review); }
-.px-file[data-file-group=info] { --tone:var(--px-info); }
-.px-f { position:absolute; left:0; top:0; width:var(--cube); height:var(--cube); transform-origin:0 0; }
-.px-f-front { background:color-mix(in srgb,var(--tone) 78%,#000); }
-.px-f-top { transform:rotateX(-90deg); background:color-mix(in srgb,var(--tone) 92%,#fff); }
-.px-f-right { transform:translateX(var(--cube)) rotateY(90deg); background:color-mix(in srgb,var(--tone) 52%,#000); }
-/* Before the checkup, contents are unlabelled grey. */
-.px-lab:is([data-step=idle],[data-step=scan]) .px-file { --tone:#6d7397; }
-
-/* The score card faces the viewer: it undoes the world's rotation. */
-.px-score-card { position:absolute; left:142px; top:-118px; width:200px; display:grid; grid-template-columns:auto 1fr; gap:2px 8px; align-items:baseline; padding:12px 14px; box-sizing:border-box; pointer-events:none;
-  border-radius:8px; border:1px solid color-mix(in srgb,var(--px-safe) 45%,#ffffff22); background:linear-gradient(160deg,#16302b,#0f1d1c); box-shadow:0 18px 34px -16px #000c;
-  transform:translateZ(-60px) rotateY(32deg) rotateX(14deg) scale(.6); transform-origin:30% 100%; visibility:hidden; transition:transform .6s cubic-bezier(.2,.8,.2,1.15), visibility 0s .6s; }
-.px-score-card b { font-family:var(--font-display); font-size:34px; line-height:1; color:var(--px-safe); }
-.px-score-card span { font-size:13px; color:#cdeee2; }
-.px-score-card small { grid-column:1 / -1; font-size:11px; line-height:1.55; color:#9fc4b7; }
-.px-lab[data-step=explain] .px-score-card { visibility:visible; transform:translateZ(-60px) rotateY(32deg) rotateX(14deg) scale(1); transition-delay:.35s,0s; }
-
-/* The recycle chute on the cabinet's top right corner. */
-.px-chute { position:absolute; left:calc(var(--W) - 92px); top:0; width:76px; height:56px; transform-origin:0 0; transform:rotateX(-90deg) translateY(28px) translateZ(1px);
-  border-radius:6px; background:radial-gradient(ellipse at 50% 60%,#04050a,#0d1020 70%); border:1px solid color-mix(in srgb,var(--px-safe) 30%,#ffffff12); display:grid; place-items:center; pointer-events:none; }
-.px-chute span { font-size:11px; color:#8f96bd; transform:rotateX(0deg); }
-.px-lab[data-step=clean] .px-chute { border-color:var(--px-safe); box-shadow:0 0 26px -4px var(--px-safe); }
-
-/* ---- states ---------------------------------------------------------------------- */
-.px-lab[data-step=scan] .px-drawer { --pull:16px; --delay:calc(var(--row) * .22s); }
-.px-lab:is([data-step=sort],[data-step=explain],[data-step=clean]) .px-d-chip { opacity:1; transform:none; }
-.px-lab[data-step=sort] .px-drawer[data-group=safe] { --pull:132px; --delay:0s; }
-.px-lab[data-step=sort] .px-drawer[data-group=review] { --pull:74px; --delay:calc(.08s + var(--row) * .08s); }
-.px-lab[data-step=sort] .px-drawer[data-group=info] { --pull:26px; --delay:.4s; }
-.px-lab[data-step=explain] .px-drawer { --pull:34px; --shade:.42; }
-.px-lab[data-step=explain] .px-drawer[data-px-drawer=junk] { --pull:176px; --shade:0; }
-.px-lab[data-step=clean] .px-drawer { --pull:12px; }
-.px-lab[data-step=clean] .px-drawer[data-px-drawer=junk] { --pull:118px; }
-/* Ticked files fly up into the chute; the files you decide about stay where they are. */
-.px-lab[data-step=clean] .px-drawer[data-px-drawer=junk] .px-file[data-file-group=safe] { transform:translate3d(calc(200px - var(--col) * 66px),-176px,calc(-150px + var(--lane) * 30px)) scale(.08); visibility:hidden; }
-.px-lab[data-step=clean] .px-drawer[data-px-drawer=apps] .px-file[data-file-group=safe] { transform:translate3d(calc(200px - var(--col) * 66px),-246px,-170px) scale(.08); visibility:hidden; }
-.px-drawer[data-hot=true] { --hot:30px; --delay:0s; }
-
-/* ---- console --------------------------------------------------------------------- */
-.px-console { display:grid; gap:20px; min-width:0; }
+/* ---- steps ------------------------------------------------------------------------- */
+.px-rail { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px 24px; width:var(--win); margin-inline:auto; }
 .px-steps { display:flex; flex-wrap:wrap; gap:8px; }
-.px-steps button { display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:0 16px 0 12px; border-radius:999px; border:1px solid #ffffff1c; background:#ffffff08; color:var(--muted); font-size:14px; cursor:pointer; transition:background .25s,color .25s,border-color .25s; }
+.px-steps button { position:relative; display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:0 16px 0 12px; border-radius:999px; border:1px solid #ffffff1c; background:#ffffff08; color:var(--muted); font-size:14px; cursor:pointer; overflow:hidden; transition:background .25s,color .25s,border-color .25s; }
 .px-steps button span { font-family:var(--font-display); font-size:13px; color:color-mix(in srgb,var(--accent) 70%,#fff); }
 .px-steps button:hover { color:var(--ink); border-color:color-mix(in srgb,var(--accent) 40%,#ffffff22); }
 .px-steps button[aria-pressed=true] { color:#0b0e1c; background:var(--accent); border-color:var(--accent); }
 .px-steps button[aria-pressed=true] span { color:#1c2150; }
-.px-gauge p { margin:8px 0 0; font-size:13px; color:var(--muted); }
-.px-gauge b { font-family:var(--font-display); font-size:20px; color:var(--ink); margin-left:6px; font-variant-numeric:tabular-nums; }
-.px-gauge-bar { height:10px; border-radius:5px; background:#c9ccd61f; overflow:hidden; display:flex; justify-content:flex-end; }
-.px-gauge-bar i { display:block; width:var(--px-free); background:repeating-linear-gradient(135deg,var(--px-safe) 0 6px,color-mix(in srgb,var(--px-safe) 65%,#000) 6px 12px); transition:width 1.4s cubic-bezier(.2,.7,.2,1) .5s; }
-.px-lab[data-step=clean] .px-gauge-bar i { width:var(--px-free-after); }
-.px-readout div { display:grid; gap:8px; }
-.px-readout h3 { margin:0; font-size:clamp(22px,2vw,28px); line-height:1.35; }
-.px-readout p { margin:0; color:var(--muted); font-size:16px; line-height:1.85; max-width:46ch; }
-.px-readout .px-readout-number { display:flex; align-items:baseline; flex-wrap:wrap; gap:4px 12px; color:var(--accent); font-family:var(--font-display); font-size:clamp(34px,3.6vw,48px); font-weight:600; line-height:1.1; }
-.px-readout .px-readout-number small { font-family:var(--font-body,inherit); font-size:14px; font-weight:400; color:var(--muted); }
-.px-groups { display:flex; flex-wrap:wrap; gap:8px 18px; font-size:13px; color:var(--muted); opacity:.35; transition:opacity .4s; }
-.px-groups span { display:inline-flex; align-items:baseline; gap:6px; }
-.px-groups i { width:9px; height:9px; border-radius:2px; background:var(--px-safe); align-self:center; }
-.px-groups [data-group=review] i { background:var(--px-review); }
-.px-groups [data-group=info] i { background:var(--px-info); }
-.px-groups b { color:var(--ink); font-weight:600; }
-.px-groups small { display:none; }
-.px-lab:not([data-step=idle]):not([data-step=scan]) .px-groups { opacity:1; }
-.px-detail { margin:0; min-height:3.2em; padding:12px 14px; border-radius:8px; background:#ffffff07; border:1px solid #ffffff12; font-size:14px; line-height:1.7; color:var(--muted); }
-.px-detail b { color:var(--ink); font-weight:600; }
-.px-screen { position:relative; margin:0; aspect-ratio:1650 / 1075; border-radius:10px; overflow:hidden; border:1px solid color-mix(in srgb,var(--accent) 28%,#ffffff1a); background:#0b0d16; box-shadow:0 30px 60px -36px #000; }
-.px-shot { position:absolute; inset:0; opacity:0; transition:opacity .55s ease; }
-.px-shot[data-active=true] { opacity:1; }
-.px-shot img { display:block; width:100%; height:100%; object-fit:cover; object-position:top left; }
-.px-screen figcaption { position:absolute; right:10px; bottom:8px; padding:3px 8px; border-radius:4px; font-size:11px; color:#d7dbff; background:#0b0d16cc; }
+/* While the demo plays, the current step fills up until it hands over to the next one. */
+.px-steps button::after { content:""; position:absolute; left:14px; right:14px; bottom:6px; height:2px; border-radius:1px; background:currentColor; opacity:.45; transform:scaleX(0); transform-origin:left center; }
+.px-lab[data-playing=true] .px-steps button[aria-pressed=true]::after { animation:px-hold var(--hold,6000ms) linear forwards; }
+@keyframes px-hold { to { transform:scaleX(1); } }
+.px-hint { margin:0; font-size:13px; color:var(--muted); }
 
-@media(max-width:1000px) {
-  .px-stage { grid-template-columns:1fr; }
-  .px-scene { height:500px; }
+/* ---- the window ---------------------------------------------------------------------- */
+.px-scene { position:relative; perspective:2200px; perspective-origin:50% 20%; padding:clamp(14px,2.4vw,30px) 0 clamp(44px,5vw,72px); touch-action:pan-y; }
+.px-float { width:var(--win); margin-inline:auto; transform-style:preserve-3d; animation:px-float 12s ease-in-out infinite; }
+@keyframes px-float { 50% { transform:translateY(-7px); } }
+/* Each step looks at the window from a slightly different side; the pointer adds its own tilt. */
+.px-lab[data-step=scan] { --pose-x:13deg; --pose-y:-6deg; }
+.px-lab[data-step=sort] { --pose-x:11deg; --pose-y:-9deg; }
+.px-lab[data-step=explain] { --pose-x:8deg; --pose-y:6deg; }
+.px-lab[data-step=clean] { --pose-x:12deg; --pose-y:-3deg; }
+.px-window { position:relative; transform-style:preserve-3d; transform:rotateX(calc(var(--pose-x) + var(--tilt-x,0deg))) rotateY(calc(var(--pose-y) + var(--tilt-y,0deg)));
+  transition:--pose-x 1.4s cubic-bezier(.45,0,.2,1),--pose-y 1.4s cubic-bezier(.45,0,.2,1); }
+.px-plate { position:absolute; inset:0; border-radius:14px; transform:translateZ(-1px); pointer-events:none;
+  background:linear-gradient(180deg,#1f2328,#16191d 38px,#121417); box-shadow:0 0 0 1px #ffffff17,inset 0 1px #ffffff12; }
+/* The slab's own thickness, seen past its right and bottom edges. */
+.px-edge { position:absolute; pointer-events:none; }
+.px-edge-r { top:12px; bottom:12px; right:0; width:18px; transform-origin:100% 50%; transform:rotateY(-90deg); background:linear-gradient(90deg,#07080a,#16191d); }
+.px-edge-b { left:12px; right:12px; bottom:0; height:18px; transform-origin:50% 100%; transform:rotateX(90deg); background:linear-gradient(0deg,#07080a,#121417); }
+.px-shadow { position:absolute; left:6%; right:6%; top:78%; height:44%; transform:translateZ(-150px); pointer-events:none; background:radial-gradient(closest-side,#000c,transparent); }
+.px-titlebar { position:relative; display:flex; align-items:center; gap:10px; height:38px; padding:0 6px 0 16px; font-size:13px; color:#c7ced3; transform:translateZ(.4px); }
+.px-app { font-weight:600; letter-spacing:.02em; }
+.px-tag { padding:2px 8px; border-radius:999px; font-size:11px; line-height:1.5; color:#e9b86c; background:#e9b86c1c; }
+.px-zoom { margin-left:auto; display:inline-flex; align-items:center; gap:6px; min-height:32px; padding:0 10px; border-radius:6px; font-size:13px; color:#d6dce0; }
+.px-zoom[hidden] { display:none; }
+.px-zoom:is(:hover,:focus-visible) { color:#fff; background:#ffffff12; }
+.px-glyphs { display:flex; }
+.px-glyphs i { position:relative; width:40px; height:30px; }
+.px-glyphs i::before { content:""; position:absolute; left:50%; top:50%; width:10px; height:10px; margin:-5px; box-sizing:border-box; }
+.px-glyphs i:nth-child(1)::before { height:1px; margin-top:0; background:#9aa3a9; }
+.px-glyphs i:nth-child(2)::before { border:1px solid #9aa3a9; border-radius:2px; }
+.px-glyphs i:nth-child(3)::before { background:linear-gradient(45deg,transparent 46%,#9aa3a9 46% 54%,transparent 54%),linear-gradient(-45deg,transparent 46%,#9aa3a9 46% 54%,transparent 54%); }
+.px-screen { position:relative; margin:0 1px 1px; aspect-ratio:1650 / 1075; transform-style:preserve-3d; }
+/* The window's own screenshot. The incoming one fades in above the outgoing one, which then goes. */
+.px-base { position:absolute; inset:0; display:block; width:100%; height:100%; border-radius:0 0 12px 12px; opacity:0; transform:translateZ(0);
+  transition:opacity 0s linear calc(var(--swap,0s) + .45s),transform 0s linear calc(var(--swap,0s) + .45s); }
+.px-base[data-on] { opacity:1; transform:translateZ(.3px); transition:opacity .45s ease var(--swap,0s),transform 0s; }
+.px-lab[data-entering=true] { --swap:.45s; }
+/* Where a panel was lifted out, a recess stays behind. */
+.px-socket { position:absolute; left:var(--x); top:var(--y); width:var(--w); height:var(--h); border-radius:6px; pointer-events:none; opacity:0; transform:translateZ(.6px);
+  background:#05070a; box-shadow:inset 0 10px 22px #000d,inset 0 0 0 1px #ffffff0a; transition:opacity .3s ease; }
+.px-socket[data-on] { opacity:.86; transition:opacity .5s ease var(--in,0s); }
+.px-lab[data-entering=true] .px-socket[data-on] { --in:calc(.9s + var(--d,0ms)); }
+
+/* ---- panels cut from the screenshot ----------------------------------------------------- */
+.px-layer { position:absolute; left:var(--x); top:var(--y); width:var(--w); height:var(--h); margin:0; padding:0; border:0; border-radius:6px; background:none; color:inherit; font:inherit; cursor:zoom-in;
+  opacity:0; transform:translateZ(.8px); -webkit-tap-highlight-color:transparent;
+  transition:transform .45s cubic-bezier(.5,0,.75,0),opacity 0s linear .45s,box-shadow .3s ease; }
+.px-cut { position:absolute; inset:0; overflow:hidden; border-radius:inherit; }
+.px-cut img { position:absolute; display:block; max-width:none; height:auto; pointer-events:none; user-select:none; }
+.px-layer[data-on] { opacity:1; transform:translateZ(var(--z)); box-shadow:0 24px 46px -24px #000,0 0 0 1px #ffffff21;
+  transition:opacity 0s linear var(--in,0s),transform .9s cubic-bezier(.2,.8,.2,1) var(--in,0s),box-shadow .5s ease var(--in,0s); }
+.px-lab[data-entering=true] .px-layer[data-on] { --in:calc(.9s + var(--d,0ms)); }
+.px-layer:focus-visible { outline:none; }
+.px-layer[data-on]:is(:hover,:focus-visible,[data-hot]) { transform:translateZ(calc(var(--z) + 30px)); box-shadow:0 36px 64px -30px #000,0 0 0 2px var(--tone);
+  transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease; }
+.px-chip, .px-marker-chip { position:absolute; padding:3px 9px; border-radius:999px; font-size:12px; line-height:1.5; white-space:nowrap; color:#0b0e12; background:var(--tone); box-shadow:0 6px 16px -6px #000c; pointer-events:none; opacity:0; transform:translateY(4px) scale(.9); transition:opacity .25s ease,transform .3s ease; }
+.px-chip { top:12%; right:3%; }
+.px-layer[data-on] :is(.px-chip,.px-marker-chip) { opacity:1; transform:none; transition:opacity .4s ease calc(var(--in,0s) + .55s),transform .5s cubic-bezier(.2,.8,.2,1.3) calc(var(--in,0s) + .55s); }
+/* A ring around the bar's releasable stripes (later: the space they became). */
+.px-marker { position:absolute; left:var(--x); top:var(--y); width:var(--w); height:var(--h); border-radius:6px; box-shadow:0 0 0 2px var(--tone),0 0 18px 2px color-mix(in srgb,var(--tone) 55%,transparent); pointer-events:none; opacity:0; transition:opacity .3s ease; }
+.px-marker::after { content:""; position:absolute; inset:-3px; border-radius:8px; border:2px solid var(--tone); opacity:0; }
+.px-layer[data-on] .px-marker { opacity:1; transition:opacity .4s ease calc(var(--in,0s) + .5s); }
+.px-layer[data-on] .px-marker::after { animation:px-ring 2.4s ease-out calc(var(--in,0s) + 1s) infinite; }
+@keyframes px-ring { 0% { opacity:.8; transform:scale(1); } 70%, 100% { opacity:0; transform:scale(1.35,1.6); } }
+.px-marker-chip { right:-6px; bottom:calc(100% + 12px); }
+
+/* The note of the panel being pointed at, floating over the window right next to it (the same words as the
+   list below the window, which screen readers use; this copy is for the eye). */
+.px-callout { position:absolute; left:var(--x); width:var(--w); box-sizing:border-box; padding:10px 14px 11px; border-radius:10px; transform:translateZ(150px) translateY(6px); pointer-events:none;
+  font-size:14px; line-height:1.65; color:#d8dee2; background:#0d1013f2; border:1px solid color-mix(in srgb,var(--tone) 55%,transparent); box-shadow:0 22px 44px -18px #000,0 0 0 4px #0d101366;
+  opacity:0; transition:opacity .2s ease,transform .3s ease; }
+.px-callout[data-side=above] { transform:translateZ(150px) translateY(-6px); }
+.px-callout b { display:block; margin-bottom:2px; font-size:13px; font-weight:600; color:var(--tone); }
+.px-callout[data-hot] { opacity:1; transform:translateZ(150px); transition:opacity .3s ease .05s,transform .45s cubic-bezier(.2,.8,.2,1); }
+
+/* The glass: a soft highlight that follows the pointer, and the scan line of 一键体检. */
+.px-sheen { position:absolute; inset:0; overflow:hidden; border-radius:0 0 12px 12px; transform:translateZ(1.4px); pointer-events:none; }
+.px-sheen::before { content:""; position:absolute; inset:-50%; background:radial-gradient(circle at 50% 50%,#ffffff17,#ffffff06 18%,transparent 34%); transform:translate(var(--sheen-x,-12%),var(--sheen-y,-18%)); }
+.px-beam { position:absolute; left:-1%; right:-1%; top:0; height:3px; margin-top:-1px; transform:translateZ(1.8px); opacity:0; pointer-events:none;
+  background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--accent) 80%,#fff) 14%,#fff 50%,color-mix(in srgb,var(--accent) 80%,#fff) 86%,transparent);
+  box-shadow:0 0 24px 7px color-mix(in srgb,var(--accent) 45%,transparent); }
+.px-lab[data-step=scan][data-entering=true] .px-beam { animation:px-beam var(--sweep,2000ms) linear .9s both; }
+@keyframes px-beam { 0% { top:0; opacity:0; } 5%, 94% { opacity:1; } 100% { top:100%; opacity:0; } }
+
+/* ---- what the panels say ---------------------------------------------------------------- */
+.px-copies { display:grid; width:var(--win); margin-inline:auto; }
+/* Every step's text shares one grid cell, so the block is always as tall as the longest: switching never moves the page. */
+.px-copy { grid-area:1 / 1; display:grid; grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr); gap:16px clamp(28px,5vw,72px); align-content:start;
+  visibility:hidden; opacity:0; transform:translateY(8px); transition:opacity .3s ease,transform .4s ease,visibility 0s linear .4s; }
+.px-copy[data-on] { visibility:visible; opacity:1; transform:none; transition:opacity .5s ease .15s,transform .6s cubic-bezier(.2,.8,.2,1) .15s,visibility 0s; }
+.px-copy-lead { display:grid; gap:8px; align-content:start; }
+.px-figure { margin:0; display:flex; align-items:baseline; flex-wrap:wrap; gap:4px 12px; color:var(--accent); font-family:var(--font-display); font-size:clamp(34px,3.4vw,46px); font-weight:600; line-height:1.1; }
+.px-figure small { font-family:var(--font-body,inherit); font-size:14px; font-weight:400; color:var(--muted); }
+.px-copy h3 { margin:0; font-size:clamp(21px,1.9vw,26px); line-height:1.4; }
+.px-copy-lead > p:last-child { margin:0; color:var(--muted); font-size:16px; line-height:1.85; max-width:44ch; }
+.px-points { list-style:none; margin:0; padding:0; display:grid; gap:6px; align-content:start; }
+.px-points li { display:grid; grid-template-columns:auto minmax(0,1fr); gap:2px 12px; padding:9px 14px 10px 12px; border-radius:10px; border:1px solid transparent; transition:background .25s ease,border-color .25s ease; }
+.px-points li[data-hot] { background:#ffffff09; border-color:color-mix(in srgb,var(--tone) 45%,transparent); }
+.px-points i { grid-row:1 / 3; width:9px; height:9px; margin-top:8px; border-radius:2px; background:var(--tone); }
+.px-points b { font-size:15px; font-weight:600; color:var(--ink); }
+.px-points span { font-size:14px; line-height:1.75; color:var(--muted); }
+
+/* On the 盘序 detail page the window is the opening, under the page's own title. */
+.px-lab--detail { padding-block:clamp(10px,2vw,24px) 0; }
+.px-lab--detail::before { inset:-8% calc(50% - 50vw) 0; }
+.px-lab--detail .px-stage { margin-top:0; }
+
+@media(max-width:1100px) {
+  .px-lab { --win:100%; }
+  .px-copy { grid-template-columns:1fr; }
 }
 @media(max-width:760px) {
   .px-heading { gap:18px; }
-  .px-scene { height:420px; zoom:.66; }
-  .px-world { left:60%; }
+  .px-hint, .px-glyphs, .px-chip, .px-marker-chip, .px-edge, .px-callout { display:none; }
   .px-steps button { padding:0 12px 0 10px; font-size:13px; }
+  .px-scene { perspective:1500px; padding-block:6px 30px; }
+  .px-lab { --pose-x:0deg!important; --pose-y:0deg!important; }
+  .px-float { animation:none; }
+  .px-titlebar { height:30px; font-size:12px; }
 }
 @media(prefers-reduced-motion:reduce) {
-  .px-drawer, .px-file, .px-score-card, .px-gauge-bar i, .px-shot, .px-d-chip, .px-d-front, .px-groups { transition:none!important; }
+  .px-window, .px-base, .px-base[data-on], .px-socket, .px-socket[data-on], .px-layer, .px-layer[data-on], .px-layer[data-on]:is(:hover,:focus-visible,[data-hot]),
+  .px-chip, .px-marker-chip, .px-layer[data-on] :is(.px-chip,.px-marker-chip), .px-marker, .px-layer[data-on] .px-marker, .px-copy, .px-copy[data-on], .px-points li, .px-callout, .px-callout[data-hot] { transition:none!important; }
+  .px-float, .px-layer[data-on] .px-marker::after, .px-lab[data-playing=true] .px-steps button[aria-pressed=true]::after { animation:none; }
   .px-beam { display:none; }
 }
-:root[data-motion-paused=true] .px-beam { animation-play-state:paused; }
+:root[data-motion-paused=true] :is(.px-float,.px-beam), :root[data-motion-paused=true] .px-marker::after { animation-play-state:paused; }
 @media(forced-colors:active) {
-  .px-scene { display:none; }
+  .px-sheen, .px-beam, .px-shadow, .px-edge, .px-socket, .px-marker::after { display:none; }
+  .px-callout { border-color:CanvasText; background:Canvas; color:CanvasText; }
+  .px-layer[data-on] { outline:1px solid CanvasText; }
+  .px-points li[data-hot] { border-color:Highlight; }
 }

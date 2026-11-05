@@ -1,48 +1,78 @@
 ---
+import type { GalleryImage } from '../data/types';
 import { getProject } from '../data/projects';
 import { getProjectWorld, projectWorldStyle } from '../data/project-worlds';
-import { panxuDrawers, panxuGroups, panxuSteps, panxuDisk } from '../data/panxu-showcase';
+import { PANXU_SHOT, PANXU_SWEEP_MS, panxuLayers, panxuPoints, panxuSteps, type PanxuRect } from '../data/panxu-showcase';
 import { sitePath } from '../lib/site-path';
-import MediaImage from './MediaImage.astro';
 import Icon from './Icon.astro';
 import '../styles/panxu-showcase.css';
+/** detail: the opening of the 盘序 detail page, under its own h1 and summary (no heading of its own). */
+interface Props { detail?: boolean }
+const { detail = false } = Astro.props;
 const project = getProject('panxu')!;
 const world = getProjectWorld('panxu');
-const shot = (name: string) => project.gallery.find(image => image.src.endsWith(`/${name}.webp`))!;
-// Static first paint (and no-script reading) shows the sorted plan.
-const initial = panxuSteps.findIndex(step => step.id === 'sort');
-const used = panxuDisk.total - panxuDisk.freeBefore;
+const image = (shot: string) => project.gallery.find(item => item.src.endsWith(`/${shot}.webp`))!;
+// The same candidates and sizes everywhere: the window and every panel cut from it pick the same file.
+const srcset = (item: GalleryImage) => (item.srcset ?? [...[320, 640, 960, 1600].filter(width => width < item.width)
+  .map(width => `${item.src.replace(/\.webp$/, `-${width}.webp`)} ${width}w`), `${item.src} ${item.width}w`].join(', '))
+  .split(',').map(candidate => { const [url, ...descriptor] = candidate.trim().split(/\s+/); return [sitePath(url), ...descriptor].join(' '); }).join(', ');
+const sizes = '(max-width: 760px) 94vw, (max-width: 1340px) 90vw, 1240px';
+const percent = (value: number) => `${(value * 100).toFixed(4)}%`;
+function box([left, top, right, bottom]: PanxuRect, within: PanxuRect = [0, 0, PANXU_SHOT.width, PANXU_SHOT.height]) {
+  const width = within[2] - within[0], height = within[3] - within[1];
+  return { x: (left - within[0]) / width, y: (top - within[1]) / height, w: (right - left) / width, h: (bottom - top) / height };
+}
+const place = (rect: PanxuRect, within?: PanxuRect) => { const b = box(rect, within); return `--x:${percent(b.x)};--y:${percent(b.y)};--w:${percent(b.w)};--h:${percent(b.h)}`; };
+// The whole screenshot inside a panel, shifted so that only the panel's own rectangle shows.
+const cut = (rect: PanxuRect) => { const b = box(rect); return `width:${percent(1 / b.w)};left:${percent(-b.x / b.w)};top:${percent(-b.y / b.h)}`; };
+const initial = panxuSteps.find(step => step.id === 'sort')!;
+const shots = [...new Set(panxuSteps.map(step => step.shot))];
+const stepOf = (id: string) => panxuSteps.find(step => step.id === id)!;
+const pointOf = (group: string) => panxuPoints.find(point => point.group === group)!;
+const on = (active: boolean) => active ? '' : undefined;
+const callout = ({ x, top, bottom }: { x: [number, number]; top?: number; bottom?: number }) =>
+  `--x:${percent(x[0] / PANXU_SHOT.width)};--w:${percent((x[1] - x[0]) / PANXU_SHOT.width)};` +
+  (top !== undefined ? `top:${percent(top / PANXU_SHOT.height)}` : `bottom:${percent(1 - (bottom ?? 0) / PANXU_SHOT.height)}`);
 ---
-<section class="px-lab home-chapter" id="panxu" data-panxu data-step={panxuSteps[initial].id} aria-labelledby="panxu-title" style={`${projectWorldStyle('panxu')};--accent:${world.accent};--px-free:${(panxuDisk.freeBefore / panxuDisk.total * 100).toFixed(2)}%;--px-free-after:${(panxuDisk.freeAfter / panxuDisk.total * 100).toFixed(2)}%`}>
- <header class="work-heading px-heading">
-  <div><h2 id="panxu-title" class="project-name" data-motion="reveal">盘序</h2><p class="px-tagline" data-motion="reveal">C 盘满了，先体检。<br/>讲清楚每一层，再决定倒掉什么。</p></div>
-  <div class="px-introduction"><p>把磁盘当成一座抽屉柜：一键体检拉开每一层，分好组、写明依据，能放心清的已经勾好。下面的数字来自真实的盘序 1.1.0 在演练环境里的一次体检。</p><a class="text-link" href={sitePath('/projects/panxu/')}>走进盘序 <Icon size={18}/></a></div>
- </header>
+<section class:list={['px-lab', { 'home-chapter': !detail, 'px-lab--detail': detail }]} id={detail ? 'panxu-checkup' : 'panxu'} data-panxu data-step={initial.id} data-shot={initial.shot} aria-labelledby={detail ? undefined : 'panxu-title'} aria-label={detail ? '一键体检演示：盘序的真实窗口' : undefined} style={`${projectWorldStyle('panxu')};--accent:${world.accent};--sweep:${PANXU_SWEEP_MS}ms`}>
+ {!detail && <header class="work-heading px-heading">
+  <div><h2 id="panxu-title" class="project-name" data-motion="reveal">盘序</h2><p class="px-tagline" data-motion="reveal">C 盘满了，先体检。<br/>讲清楚每一项，再决定清掉什么。</p></div>
+  <div class="px-introduction"><p>下面就是盘序 1.1.0 的真实窗口，在演练环境里跑完一次一键体检。浮起来的每一块都是从这张截图上取下来的，悬停看它说了什么，点一下看原图。</p><a class="text-link" href={sitePath('/projects/panxu/')}>走进盘序 <Icon size={18}/></a></div>
+ </header>}
  <div class="px-stage">
-  <div class="px-scene" data-px-scene role="group" aria-label="盘序体检演示：磁盘抽屉柜">
-   <div class="px-world" data-px-world>
-    <div class="px-cabinet" aria-hidden="true">
-     <span class="px-face px-back"></span><span class="px-face px-left"></span><span class="px-face px-right"></span><span class="px-face px-bottom"></span>
-     <span class="px-face px-top"><span class="px-top-label">C:<small>{panxuDisk.total} GB</small></span></span>
-     <span class="px-beam" data-px-beam></span>
+  <div class="px-rail">
+   <div class="px-steps" role="group" aria-label="体检步骤">{panxuSteps.map((step, index) => <button type="button" data-px-step={step.id} data-shot={step.shot} aria-pressed={step.id === initial.id ? 'true' : 'false'}><span>{String(index + 1).padStart(2, '0')}</span>{step.label}</button>)}</div>
+   <p class="px-hint">{detail ? '真实窗口 · 演练环境里的一次体检 · ' : ''}悬停浮起的部分看说明 · 点一下看原图</p>
+  </div>
+  <div class="px-scene" data-px-scene>
+   <div class="px-float">
+    <div class="px-window" data-px-window>
+     <span class="px-plate" aria-hidden="true"></span>
+     <span class="px-edge px-edge-r" aria-hidden="true"></span><span class="px-edge px-edge-b" aria-hidden="true"></span>
+     <span class="px-shadow" aria-hidden="true"></span>
+     <div class="px-titlebar">
+      <span class="px-app">盘序</span><span class="px-tag">演练环境</span>
+      {shots.map(shot => { const item = image(shot); return <a class="px-zoom" href={sitePath(item.src)} data-lightbox data-gallery="panxu-home" data-title={item.alt} data-caption={item.caption} data-width={item.width} data-height={item.height} data-px-zoom={shot} hidden={shot !== initial.shot}><Icon name="expand" size={15}/>看原图</a>; })}
+      <span class="px-glyphs" aria-hidden="true"><i></i><i></i><i></i></span>
+     </div>
+     <div class="px-screen">
+      {shots.map(shot => { const item = image(shot); return <img class="px-base" data-px-base={shot} data-on={on(shot === initial.shot)} aria-hidden={shot === initial.shot ? undefined : 'true'} src={sitePath(item.src)} srcset={srcset(item)} sizes={sizes} width={item.width} height={item.height} alt={item.alt} loading="lazy" decoding="async"/>; })}
+      {panxuLayers.map(layer => <span class="px-socket" data-px-socket={layer.id} data-step={layer.step} data-on={on(layer.step === initial.id)} style={place(layer.rect)} aria-hidden="true"></span>)}
+      {panxuLayers.map(layer => { const item = image(stepOf(layer.step).shot); const point = pointOf(layer.group); return (
+       <button type="button" class="px-layer" data-px-layer={layer.id} data-step={layer.step} data-group={layer.group} data-shot={stepOf(layer.step).shot} data-tone={point.tone} data-on={on(layer.step === initial.id)} inert={layer.step !== initial.id} aria-label={`${point.label}：${point.note}点一下看原图。`} style={`${place(layer.rect)};--z:${layer.depth}px;--d:${layer.delay}ms`}>
+        <span class="px-cut" aria-hidden="true"><img src={sitePath(item.src)} srcset={srcset(item)} sizes={sizes} width={item.width} height={item.height} alt="" loading="lazy" decoding="async" style={cut(layer.rect)}/></span>
+        {layer.chip && <span class="px-chip" aria-hidden="true">{layer.chip}</span>}
+        {layer.marker && <span class="px-marker" aria-hidden="true" style={place(layer.marker.rect, layer.rect)}><span class="px-marker-chip">{layer.marker.chip}</span></span>}
+       </button>); })}
+      {panxuPoints.map(point => <span class="px-callout" data-px-callout={point.group} data-step={point.step} data-tone={point.tone} data-side={point.callout.top !== undefined ? 'below' : 'above'} style={callout(point.callout)} aria-hidden="true"><b>{point.label}</b>{point.note}</span>)}
+      <span class="px-sheen" aria-hidden="true"></span><span class="px-beam" aria-hidden="true"></span>
+     </div>
     </div>
-    {panxuDrawers.map((drawer, index) => <button type="button" class="px-drawer" data-px-drawer={drawer.id} data-group={drawer.group} style={`--row:${index}`} aria-label={`${drawer.name}，${drawer.size}，${panxuGroups[drawer.group].label}`} aria-controls="panxu-detail">
-     <span class="px-d px-d-front" aria-hidden="true"><span class="px-d-handle"></span><span class="px-d-name">{drawer.name}</span><span class="px-d-size">{drawer.size}</span><span class="px-d-chip">{panxuGroups[drawer.group].label}</span></span>
-     <span class="px-d px-d-right" aria-hidden="true"></span><span class="px-d px-d-left" aria-hidden="true"></span><span class="px-d px-d-floor" aria-hidden="true"></span><span class="px-d px-d-back" aria-hidden="true"></span>
-     {drawer.files.map((group, file) => <span class="px-file" data-file-group={group} style={`--i:${file};--col:${file % 4};--lane:${Math.floor(file / 4)}`} aria-hidden="true"><span class="px-f px-f-top"></span><span class="px-f px-f-front"></span><span class="px-f px-f-right"></span></span>)}
-     {drawer.id === 'junk' && <span class="px-score-card" aria-hidden="true"><b>10</b><span>分 · 建议清理</span><small>内置规则：公认可以重建的缓存</small><small>自动勾选：达到勾选门槛（5 分）</small></span>}
-    </button>)}
-    <span class="px-chute" aria-hidden="true"><span>回收</span></span>
    </div>
   </div>
-  <div class="px-console">
-   <div class="px-steps" role="group" aria-label="体检步骤">{panxuSteps.map((step, index) => <button type="button" data-px-step={step.id} aria-pressed={index === initial ? 'true' : 'false'}><span>{String(index + 1).padStart(2, '0')}</span>{step.label}</button>)}</div>
-   <div class="px-gauge" aria-hidden="true"><div class="px-gauge-bar"><i></i></div><p><span>C: 可用</span><b data-px-free>{panxuDisk.freeBefore.toFixed(1)}</b><span> GB / {panxuDisk.total} GB · 已用 {used.toFixed(1)} GB</span></p></div>
-   <div class="px-readout" aria-live="polite" data-px-readout>{panxuSteps.map((step, index) => <div data-px-copy={step.id} hidden={index !== initial}><p class="px-readout-number">{step.readout}<small>{step.readoutNote}</small></p><h3>{step.title}</h3><p>{step.body}</p></div>)}</div>
-   <div class="px-groups" aria-hidden="true">{Object.entries(panxuGroups).map(([id, group]) => <span data-group={id}><i></i>{group.label}<b>{group.size}</b><small>{group.count}</small></span>)}</div>
-   <p class="px-detail" id="panxu-detail" data-px-detail aria-live="polite">点一层抽屉，看看里面是什么。</p>
-   <figure class="px-screen">{panxuSteps.map((step, index) => <div class="px-shot" data-px-shot={step.id} data-active={String(index === initial)}><MediaImage image={shot(step.shot)} sizes="(max-width: 760px) 92vw, 40vw"/></div>)}<figcaption>真实界面 · 演练环境</figcaption></figure>
-  </div>
+  <div class="px-copies" data-px-copies>{panxuSteps.map((step, index) => <div class="px-copy" data-px-copy={step.id} data-on={on(step.id === initial.id)} aria-hidden={step.id === initial.id ? undefined : 'true'} inert={step.id !== initial.id}>
+   <div class="px-copy-lead"><p class="px-figure"><b>{step.figure}</b><small>{step.figureNote}</small></p><h3><span class="sr-only">{`第 ${index + 1} 步，${step.label}：`}</span>{step.title}</h3><p>{step.body}</p></div>
+   <ul class="px-points">{panxuPoints.filter(point => point.step === step.id).map(point => <li data-px-point={point.group} data-step={point.step} data-tone={point.tone}><i aria-hidden="true"></i><b>{point.label}</b><span>{point.note}</span></li>)}</ul>
+  </div>)}</div>
  </div>
- <script type="application/json" data-px-drawers set:html={JSON.stringify(Object.fromEntries(panxuDrawers.map(drawer => [drawer.id, { name: drawer.name, size: drawer.size, group: panxuGroups[drawer.group].label, example: drawer.example, note: drawer.note }])))}></script>
 </section>

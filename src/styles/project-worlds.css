@@ -14,7 +14,7 @@
 .detail-page[data-project-world="ssframework"] .project-intro .summary{grid-column:1;grid-row:2;font-size:21px;line-height:1.8;max-width:24ch;margin:0}
 .detail-page[data-project-world="ssframework"] .project-facts{grid-column:1;grid-row:3;margin:0}
 .detail-page[data-project-world="ssframework"] .project-intro .button-row{grid-column:1;grid-row:4;justify-content:start;margin:0;align-self:start}
-.detail-page[data-project-world="ssframework"] .project-hero{grid-column:2;grid-row:2/6;align-self:center}
+.detail-page[data-project-world="ssframework"] :is(.project-hero,.project-opening>.framework-showcase){grid-column:2;grid-row:2/6;align-self:center}
 .detail-page[data-project-world="ssframework"] .project-hero .media-link{padding:0;border-radius:2px}
 .detail-page[data-project-world="ssframework"] .project-signature{grid-column:1;grid-row:5;align-self:start;padding-top:18px}
 .detail-page[data-project-world="ssframework"] .project-signature dt{color:var(--accent)}

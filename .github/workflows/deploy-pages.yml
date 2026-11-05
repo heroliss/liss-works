@@ -48,6 +48,8 @@ jobs:
         run: npm run test:atlas
       - name: Check project palette consistency and contrast
         run: npm run test:palette
+      - name: Check the PanXu showcase geometry and data
+        run: npm run test:panxu
       - name: Build static site
         run: npm run build
       - name: Verify generated pages and assets

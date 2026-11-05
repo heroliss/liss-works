@@ -80,3 +80,12 @@
   .detail-page[data-project-world] .artifact-plane { transform:none!important; }
 }
 @media(forced-colors:active) { .artifact-depth,.artifact-rim,.artifact-catchlight { display:none!important; } }
+
+/* A home-page showcase that opens its project's detail page (盘序, DubForge, SSFramework) takes the full width
+   under the title; the project highlights follow in three columns, as on 玻璃海. */
+.detail-page .project-opening--showcase { display:block; }
+.detail-page[data-project-world]:not([data-project-world="ssframework"]) .project-opening--showcase .project-signature { display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.5fr) minmax(0,1fr); align-items:start;
+  gap:clamp(24px,4vw,64px); width:min(100%,1180px); max-width:none; margin:clamp(36px,5vw,64px) auto 0; padding:0; text-align:left; }
+.detail-page[data-project-world]:not([data-project-world="ssframework"]) .project-opening--showcase .project-signature > .signature-entry { margin:0; }
+@media(max-width:900px) { .detail-page[data-project-world]:not([data-project-world="ssframework"]) .project-opening--showcase .project-signature { grid-template-columns:1fr; gap:12px; } }
+.detail-page .project-opening--showcase > .dub-reel--detail { margin-block:clamp(8px,2vw,24px) 0; }

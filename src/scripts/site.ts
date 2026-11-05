@@ -14,6 +14,8 @@ if (dialog && typeof dialog.showModal === 'function' && links.length) {
    const item = items[index]; if (!item) return;
    const thumbnail = item.querySelector('img');
    if (thumbnail) { image.width = Number(thumbnail.getAttribute('width')) || thumbnail.naturalWidth; image.height = Number(thumbnail.getAttribute('height')) || thumbnail.naturalHeight; }
+   // A link without a thumbnail (盘序's 「看原图」) states its size, so the previous image's size is not kept.
+   else if (item.dataset.width && item.dataset.height) { image.width = Number(item.dataset.width); image.height = Number(item.dataset.height); }
    image.src = item.href; image.alt = item.dataset.title ?? '项目截图';
    imageSlot.replaceChildren(image);
    title.textContent = item.dataset.title ?? ''; caption.textContent = item.dataset.caption ?? '';

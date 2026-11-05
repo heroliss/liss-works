@@ -15,6 +15,7 @@
     "test:atoll-transfer": "node scripts/test-atoll-transfer.mjs",
     "test:atlas": "node --experimental-strip-types scripts/test-atlas-ring.mjs && node scripts/test-atlas-lifecycle.mjs",
     "test:palette": "node --experimental-strip-types scripts/test-project-palette.mjs",
+    "test:panxu": "node --experimental-strip-types scripts/test-panxu-showcase.mjs",
     "verify:dist": "node scripts/verify-dist.mjs"
   },
   "dependencies": {
