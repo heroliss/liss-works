@@ -1,3 +1,10 @@
+# Text files use LF in the repository and in every checkout, whatever the local
+# core.autocrlf setting; binaries are detected automatically. Later rules win,
+# so the byte-for-byte exceptions below keep their exact bytes.
+* text=auto eol=lf
+*.cmd text eol=crlf
+*.bat text eol=crlf
+
 # Vendored exports are verified byte-for-byte by tools-provenance.json.
 public/tools/** -text whitespace=cr-at-eol
 # Keep the standalone Atoll snapshot identical on Windows and Pages' Linux host.
