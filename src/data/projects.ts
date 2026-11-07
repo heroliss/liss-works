@@ -259,16 +259,16 @@ export const projects: Project[] = [
   },
   {
     slug: 'panxu', repo: 'panxu', name: '盘序 · Windows 磁盘清理助手', category: 'Windows 磁盘清理助手', group: 'games',
-    summary: '一键体检，把占空间的东西找出来、讲清楚，再安全地清理掉。',
-    intro: '面向 Windows 10 / 11 的磁盘清理助手。一键体检依次检查垃圾、系统盘空间、个人文件和重复文件，再交给 AI 复核，生成分成三组的清理方案；每一项都写明是什么、为什么列出、清理后会怎样，并给出 0–10 分的建议清理度。个人文件只会移到回收站，受保护的位置删不了，每次修改都记进操作记录，能撤销的都可以撤销。',
-    status: '1.1.0 正式版', tags: ['Python', 'AI', 'pywebview', 'WebView2', 'Windows'],
+    summary: 'AI 辅助发现清理线索，讲清文件用途与处理影响，帮你决定清什么、留什么。',
+    intro: '面向 Windows 10 / 11 的 AI 辅助磁盘清理工具。内置规则识别常见垃圾，AI 再分析陌生目录、旧文件与软件残留，补充值得查看的清理线索。每一项都解释是什么、为什么建议清理、处理后会怎样，遇到疑问还可以继续「问 AI」。一键体检覆盖所选磁盘，并将结果同步到各工具页；个人文件由你勾选后移到回收站，AI 建议不会绕过保护规则。',
+    status: '2.0.2 正式版', tags: ['Python', 'AI', 'pywebview', 'WebView2', 'Windows'],
     features: [
-      { title: '一键体检与三组方案', body: '放心清理默认勾好，建议你看看和仅供了解只给依据和入口；清理后分开显示释放的空间和回收站里的空间。' },
-      { title: '0–10 分建议清理度', body: '内置规则判断常见情况，规则不认识的交给 AI；每一项都能展开评分依据，也可以随时「问 AI」。' },
+      { title: 'AI 补充清理线索', body: '从陌生目录、旧文件到疑似软件残留，结合文件摘要与本机查到的信息辅助分析，让规则之外的内容也有机会被发现。' },
+      { title: '把能不能删讲明白', body: '解释用途、清理依据和可能影响，给出 0–10 分建议清理度；仍有疑问可以继续「问 AI」，帮助你判断该清理、保留还是归档。' },
       { title: '你的文件由你决定', body: '个人文件从不自动勾选，只移到回收站；受保护的位置、链接和云端占位文件都不会被碰。' },
     ],
     usage: [
-      { title: '下载即用', body: '在 Releases 下载 PanXu-1.1.0-win-x64.zip，解压到任意文件夹后双击 PanXu.exe，不需要安装。需要 Windows 10 / 11（64 位）和 WebView2 运行时；点「一键体检」就会生成清理方案。' },
+      { title: '下载即用', body: '在 Releases 下载最新的 PanXu Windows x64 压缩包，解压整个文件夹后双击 PanXu.exe，不需要安装。需要 Windows 10 / 11（64 位）和 WebView2 运行时；默认请求管理员权限，点「一键体检」生成清理方案。' },
       { title: '先在演练环境里试', body: '用 --sandbox 启动会生成一台模拟的「用了几年的电脑」，所有删除、禁用和卸载都只发生在里面，可以随时还原或重建。', code: 'PanXu.exe --sandbox', language: 'PowerShell' },
       { title: '从源码运行', body: '需要 Python 3.10 以上；--debug 打开 WebView 开发者工具。', code: 'python -m pip install -r requirements.txt\npython run.py --sandbox', language: 'PowerShell' },
     ],
