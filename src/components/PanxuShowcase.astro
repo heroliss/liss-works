@@ -36,8 +36,8 @@ const callout = ({ x, top, bottom }: { x: [number, number]; top?: number; bottom
 ---
 <section class:list={['px-lab', { 'home-chapter': !detail, 'px-lab--detail': detail }]} id={detail ? 'panxu-checkup' : 'panxu'} data-panxu data-step={initial.id} data-shot={initial.shot} aria-labelledby={detail ? undefined : 'panxu-title'} aria-label={detail ? '一键体检演示：盘序的真实窗口' : undefined} style={`${projectWorldStyle('panxu')};--accent:${world.accent};--sweep:${PANXU_SWEEP_MS}ms`}>
  {!detail && <header class="work-heading px-heading">
-  <div><h2 id="panxu-title" class="project-name" data-motion="reveal">盘序</h2><p class="px-tagline" data-motion="reveal">C 盘满了，先体检。<br/>讲清楚每一项，再决定清掉什么。</p></div>
-  <div class="px-introduction"><p>下面就是盘序 1.1.0 的真实窗口，在演练环境里跑完一次一键体检。浮起来的每一块都是从这张截图上取下来的，悬停看它说了什么，点一下看原图。</p><a class="text-link" href={sitePath('/projects/panxu/')}>走进盘序 <Icon size={18}/></a></div>
+  <div><h2 id="panxu-title" class="project-name" data-motion="reveal">盘序</h2><p class="px-tagline" data-motion="reveal">AI 帮你发现清理线索。<br/>把能不能删，讲得更明白。</p></div>
+  <div class="px-introduction"><p>规则先识别常见垃圾，AI 再分析陌生目录与文件用途，补充值得查看的清理线索。下方保留 1.1.0 演练环境的真实窗口，悬停看说明，点一下看原图。</p><a class="text-link" href={sitePath('/projects/panxu/')}>走进盘序 <Icon size={18}/></a></div>
  </header>}
  <div class="px-stage">
   <div class="px-rail">

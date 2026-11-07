@@ -37,8 +37,8 @@ const signatures: Record<string, ProjectSignature> = {
   },
   panxu: {
     direction: 'Windows 工具 / AI 辅助判断',
-    principle: '讲清楚每一项，再让你决定删什么。',
-    highlights: ['一键体检', '0–10 分建议清理度', '可撤销的操作记录'],
+    principle: 'AI 帮你发现清理线索，把能不能删讲得更明白。',
+    highlights: ['AI 辅助分析', '有依据的清理建议', '个人文件由你决定'],
   },
   dubforge: {
     direction: 'AI 应用 / 媒体工作流',
