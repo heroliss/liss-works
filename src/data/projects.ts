@@ -261,7 +261,7 @@ export const projects: Project[] = [
     slug: 'panxu', repo: 'panxu', name: '盘序 · Windows 磁盘清理助手', category: 'Windows 磁盘清理助手', group: 'games',
     summary: 'AI 辅助发现清理线索，讲清文件用途与处理影响，帮你决定清什么、留什么。',
     intro: '面向 Windows 10 / 11 的 AI 辅助磁盘清理工具。内置规则识别常见垃圾，AI 再分析陌生目录、旧文件与软件残留，补充值得查看的清理线索。每一项都解释是什么、为什么建议清理、处理后会怎样，遇到疑问还可以继续「问 AI」。一键体检覆盖所选磁盘，并将结果同步到各工具页；个人文件由你勾选后移到回收站，AI 建议不会绕过保护规则。',
-    status: '2.0.2 正式版', tags: ['Python', 'AI', 'pywebview', 'WebView2', 'Windows'],
+    status: '2.0.3 正式版', tags: ['Python', 'AI', 'pywebview', 'WebView2', 'Windows'],
     features: [
       { title: 'AI 补充清理线索', body: '从陌生目录、旧文件到疑似软件残留，结合文件摘要与本机查到的信息辅助分析，让规则之外的内容也有机会被发现。' },
       { title: '把能不能删讲明白', body: '解释用途、清理依据和可能影响，给出 0–10 分建议清理度；仍有疑问可以继续「问 AI」，帮助你判断该清理、保留还是归档。' },

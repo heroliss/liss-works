@@ -1,6 +1,6 @@
 {
   "schema": "showcase.website-media.v1",
-  "generated_at_utc": "2026-11-07T07:05:55.835912+00:00",
+  "generated_at_utc": "2026-11-07T07:32:04.887136+00:00",
   "source_manifest": "captures/selected-manifest.json",
   "source_manifest_sha256": "67d60c2289c031d14b180bc0b26ddcac2548fd7d425474912616c17353b85997",
   "originals_modified": false,
@@ -8741,11 +8741,11 @@
     "source_image_bytes": 50264463,
     "exported_image_bytes": 52810854,
     "video_bytes": 1363373,
-    "font_bytes": 377492,
+    "font_bytes": 378648,
     "font_license_and_provenance_bytes": 17008,
-    "published_media_bytes": 54551719,
+    "published_media_bytes": 54552875,
     "total_public_asset_count": 620,
-    "total_public_asset_bytes": 54568727
+    "total_public_asset_bytes": 54569883
   },
   "fonts": {
     "codec": "fontTools WOFF2 with Node native zlib Brotli (quality 11 / font mode), invoked by fontTools",
@@ -8915,14 +8915,14 @@
       {
         "path": "site/public/fonts/noto-sans-sc-subset.woff2",
         "url": "/fonts/noto-sans-sc-subset.woff2",
-        "bytes": 362916,
-        "sha256": "ef9307be9624329ccad6b44627abae52e488f919ef9169c677de5cdc9cc78eb5",
+        "bytes": 364072,
+        "sha256": "3f93c29a7a5678ddddca8dff2c3805387b6e827e7d9cbbb0a2d3c2586dd6e51e",
         "family": "Noto Sans SC",
         "source": "C:\\Windows\\Fonts\\NotoSansSC-VF.ttf",
         "source_sha256": "763146584cf0710223441356b4395e279021b0806c196614377a7a0174ae074a",
         "source_bytes": 17773244,
-        "requested_codepoints": 1282,
-        "included_codepoints": 1282,
+        "requested_codepoints": 1287,
+        "included_codepoints": 1288,
         "missing_cjk": [],
         "roundtrip_decode_verified": true
       }
