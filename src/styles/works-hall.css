@@ -1,10 +1,10 @@
 /* Home hero: a dark exhibition hall with all five featured works at once. The
    headline sits in the sky above it; the way on is down the page. */
 /* flow-root keeps the headline's margin inside; the hall slides up under the floating header. */
-.works-hall { position:relative; z-index:1; display:flow-root; height:clamp(860px,116svh,1240px); margin:-82px calc(50% - 50vw) 0; padding-top:82px; overflow:clip; isolation:isolate; background:#070b12; }
-/* A long, eased fade: the mirror and its reflections sink gradually into the page. */
-.works-hall::after { content:''; position:absolute; inset:auto 0 0; height:46%; z-index:1; pointer-events:none;
-  background:linear-gradient(to bottom,color-mix(in srgb,var(--bg) 0%,transparent) 0%,color-mix(in srgb,var(--bg) 8%,transparent) 18%,color-mix(in srgb,var(--bg) 24%,transparent) 36%,color-mix(in srgb,var(--bg) 48%,transparent) 54%,color-mix(in srgb,var(--bg) 74%,transparent) 72%,color-mix(in srgb,var(--bg) 92%,transparent) 88%,var(--bg) 100%); }
+.works-hall { position:relative; z-index:1; display:flow-root; height:clamp(860px,116svh,1240px); margin:-82px calc(50% - 50vw) 0; padding-top:82px; overflow:clip; isolation:isolate; background:transparent; }
+/* The hall fades by its own opacity, from 100% to 0, into whatever the page is.
+   No dark overlay, so there is no grey-to-black seam. */
+.works-hall__canvas, .works-hall__fallback { --hall-fade:linear-gradient(180deg,#000 0,#000 46%,#000000d9 58%,#0000008c 72%,#00000038 86%,transparent 100%); -webkit-mask-image:var(--hall-fade); mask-image:var(--hall-fade); }
 .works-hall__canvas { position:absolute; inset:0; z-index:0; display:block; width:100%; height:100%; cursor:grab; touch-action:pan-y; user-select:none; -webkit-user-select:none; }
 .works-hall[data-dragging=true] .works-hall__canvas { cursor:grabbing!important; }
 .works-hall__copy { position:relative; z-index:2; width:min(860px,calc(100% - 36px)); margin:clamp(22px,3.5vh,54px) auto 0; text-align:center; pointer-events:none; }
@@ -72,7 +72,7 @@
 /* Asymmetric layout: the copy column on the left, the constellation framed to the
    right and fading out beneath the text. */
 @media(min-width:761px) {
-  .works-hall__canvas { -webkit-mask-image:linear-gradient(90deg,transparent 0,#0007 18%,#000 46%); mask-image:linear-gradient(90deg,transparent 0,#0007 18%,#000 46%); }
+  .works-hall__canvas { -webkit-mask-image:linear-gradient(90deg,transparent 0,#0007 18%,#000 46%),var(--hall-fade); mask-image:linear-gradient(90deg,transparent 0,#0007 18%,#000 46%),var(--hall-fade); -webkit-mask-composite:source-in; mask-composite:intersect; }
   .works-hall__copy { position:absolute; left:max(48px,calc(50% - 680px)); top:clamp(104px,15vh,170px); width:min(500px,36%); margin:0; text-align:left; pointer-events:auto; }
   .works-hall__copy h1 { justify-content:flex-start; font-size:clamp(52px,5.4vw,92px); margin-bottom:18px; }
   .works-hall__copy > p { margin:0 0 26px; max-width:26em; }

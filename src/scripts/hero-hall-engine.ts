@@ -110,6 +110,9 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
   // the horizon instead of being cut off by the floor; the screens draw last.
   const sky = new T.Mesh(keep(new T.SphereGeometry(300, 32, 16)), keep(new T.MeshBasicMaterial({ color: SKY, side: T.BackSide, depthTest: false, depthWrite: false, fog: false })));
   sky.renderOrder = -4; scene.add(sky);
+  // The floor never hides what is behind it: the glow behind each screen used to be
+  // cut off where it met the mirror, leaving a hard line under the screens.
+  (floor.material as Three.Material).depthWrite = false;
   floor.rotation.x = -Math.PI / 2; floor.renderOrder = -3; scene.add(floor);
   const veil = new T.Mesh(keep(new T.PlaneGeometry(320, 320)), keep(new T.MeshBasicMaterial({ map: keep(floorMask(T)), blending: T.CustomBlending, blendSrc: T.SrcAlphaFactor, blendDst: T.OneMinusSrcAlphaFactor, depthWrite: false, fog: false })));
   veil.layers.set(1);
