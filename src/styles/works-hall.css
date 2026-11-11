@@ -37,7 +37,11 @@
 .works-hall__fallback { position:absolute; inset:34% 4% auto; display:flex; justify-content:center; gap:2%; perspective:1400px; }
 .works-hall__fallback span { width:18%; aspect-ratio:1.6; border-radius:10px; overflow:hidden; border:1px solid var(--tone); box-shadow:0 0 40px -12px var(--tone); transform:rotateY(calc((var(--i) - 2) * -12deg)) translateY(calc((var(--i) - 2) * (var(--i) - 2) * -6px)); background:#0a1015; }
 .works-hall__fallback img { width:100%; height:100%; object-fit:contain; }
-.works-hall[data-gl-ready] .works-hall__fallback { display:none; }
+.works-hall__fallback { display:none !important; }
+.works-hall[data-gl-failed] .works-hall__fallback { display:flex !important; }
+.works-hall__canvas { opacity:0; transition:opacity .9s ease; }
+.works-hall[data-gl-ready] .works-hall__canvas { opacity:1; }
+@media(prefers-reduced-motion:reduce) { .works-hall__canvas { transition:none; } }
 @media(max-width:760px) {
   .works-hall { height:auto; min-height:0; display:flex; flex-direction:column; margin-top:-70px; padding-top:70px; padding-bottom:30px; }
   .works-hall__copy { margin-top:30px; }

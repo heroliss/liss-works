@@ -18,7 +18,7 @@ const counts = Object.fromEntries(groups.map(group => [group.id, projects.filter
 const randomPool = ordered.map(project => sitePath(`/projects/${project.slug}/`));
 ---
 <section class="works-table" id={id} data-works-table aria-labelledby="works-table-title">
-  <div class="works-table__scene" data-table-scene aria-label="作品桌面：全部工程的截图平铺在一张倾斜的桌面上，移动指针倾斜桌面，拖动平移，悬停的作品会立起来。">
+  <div class="works-table__fade"><div class="works-table__scene" data-table-scene aria-label="作品桌面：全部工程的截图平铺在一张倾斜的桌面上，移动指针倾斜桌面，拖动平移，悬停的作品会立起来。">
     <div class="works-table__plane" data-table-plane>
       {rows.map((row, rowIndex) => <div class="works-table__row" data-table-row={rowIndex} style={`--row:${rowIndex}`}>
         {[0, 1].map(copy => <div class="works-table__run" data-table-run={copy} aria-hidden={copy === 1 ? 'true' : undefined}>
@@ -32,7 +32,7 @@ const randomPool = ordered.map(project => sitePath(`/projects/${project.slug}/`)
         </div>)}
       </div>)}
     </div>
-  </div>
+  </div></div>
   <div class="works-table__copy">
     <p class="works-table__kicker">{projects.length} 个工程 · 4 个方向</p>
     <h1 id="works-table-title"><span class="works-table__accent">{title}</span></h1>

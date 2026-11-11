@@ -66,7 +66,7 @@ export function setupHeroHall({ signal, preference }: Options): () => void {
   const request = () => { if (!frame && engine && visible && !disposed) frame = requestAnimationFrame(render); };
   const fail = () => {
     if (failed || disposed) return; failed = true; cancelAnimationFrame(frame); frame = 0;
-    engine?.dispose(); engine = undefined; delete root.dataset.glReady; canvas.hidden = true; showLabel(null);
+    engine?.dispose(); engine = undefined; delete root.dataset.glReady; root.dataset.glFailed = 'true'; canvas.hidden = true; showLabel(null);
   };
   const load = async () => {
     if (loading || engine || failed || disposed) return;

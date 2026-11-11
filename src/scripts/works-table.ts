@@ -41,7 +41,7 @@ export function setupWorksTable({ signal, preference }: Options): () => void {
     frame = 0;
     if (disposed || !visible) return;
     const dt = last ? Math.min(.05, (now - last) / 1000) : 1 / 60; last = now;
-    const slow = hovering ? .25 : 1;
+    const slow = lifted ? 0 : hovering ? .25 : 1;
     state.forEach(entry => {
       if (!drag) entry.x += (drifting() ? entry.speed * slow : 0) * dt + coast * dt;
     });
@@ -68,14 +68,41 @@ export function setupWorksTable({ signal, preference }: Options): () => void {
   window.addEventListener('portfolio:motion-state', () => { syncToggle(); request(); }, { signal: events.signal });
   preference.addEventListener('change', () => { syncToggle(); request(); }, { signal: events.signal });
 
+  // The print under the pointer is held by script with a short grace period, and
+  // while it stands the desk stops tilting and drifting, so it cannot slide out
+  // from under the pointer, drop, and lift again (the old flicker).
+  let lifted: HTMLElement | null = null, liftTimer = 0;
+  const lift = (card: HTMLElement | null) => {
+    clearTimeout(liftTimer);
+    if (card === lifted) return;
+    if (lifted) delete lifted.dataset.near;
+    lifted = card;
+    if (card) { card.dataset.near = 'true'; root.dataset.lifted = 'true'; } else delete root.dataset.lifted;
+    request();
+  };
+  scene.addEventListener('pointerover', event => {
+    if (event.pointerType === 'touch' || drag?.moved) return;
+    const card = (event.target as Element).closest<HTMLElement>('[data-table-card]');
+    if (!card) return;
+    // Prints under the faded left side or the bottom fade are invisible: they do not lift.
+    const box = root.getBoundingClientRect(), r = card.getBoundingClientRect();
+    const cx = (r.left + r.width / 2 - box.left) / Math.max(1, box.width), cy = (r.top + r.height / 2 - box.top) / Math.max(1, box.height);
+    if (cx < .3 || cy > .86) { if (lifted) { clearTimeout(liftTimer); liftTimer = window.setTimeout(() => lift(null), 160); } return; }
+    lift(card);
+  }, { signal: events.signal });
+  scene.addEventListener('pointerout', event => {
+    const next = (event.relatedTarget as Element | null)?.closest?.('[data-table-card]');
+    if (next || !lifted) return;
+    clearTimeout(liftTimer); liftTimer = window.setTimeout(() => lift(null), 160);
+  }, { signal: events.signal });
   root.addEventListener('pointermove', event => {
-    if (event.pointerType === 'touch' || !fine.matches || preference.matches) return;
+    if (event.pointerType === 'touch' || !fine.matches || preference.matches || lifted) return;
     const box = root.getBoundingClientRect();
     const x = (event.clientX - box.left) / Math.max(1, box.width) * 2 - 1, y = (event.clientY - box.top) / Math.max(1, box.height) * 2 - 1;
     // Strong but bounded: about ±7° of pitch and ±9° of turn.
     targetRx = baseRx + y * 7; targetRz = baseRz + x * 9; request();
   }, { passive: true, signal: events.signal });
-  root.addEventListener('pointerleave', () => { targetRx = baseRx; targetRz = baseRz; hovering = false; request(); }, { signal: events.signal });
+  root.addEventListener('pointerleave', () => { lift(null); targetRx = baseRx; targetRz = baseRz; hovering = false; request(); }, { signal: events.signal });
   scene.addEventListener('pointerover', event => { hovering = !!(event.target as Element).closest('[data-table-card]'); }, { signal: events.signal });
 
   scene.addEventListener('pointerdown', event => {
@@ -85,7 +112,7 @@ export function setupWorksTable({ signal, preference }: Options): () => void {
   scene.addEventListener('pointermove', event => {
     if (!drag || drag.id !== event.pointerId) return;
     const dx = event.clientX - drag.last;
-    if (!drag.moved && Math.abs(event.clientX - drag.x) > 6) { drag.moved = true; scene.setPointerCapture(event.pointerId); root.dataset.dragging = 'true'; }
+    if (!drag.moved && Math.abs(event.clientX - drag.x) > 6) { drag.moved = true; scene.setPointerCapture(event.pointerId); root.dataset.dragging = 'true'; lift(null); }
     if (!drag.moved) return;
     // Dragging moves the table under the pointer; deeper rows move a little less.
     state.forEach((entry, index) => { entry.x += dx * (1.25 - index * .12); });

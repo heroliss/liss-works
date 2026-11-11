@@ -21,6 +21,7 @@ const featured = picks.map(pick => {
 ---
 <section class="works-hall" id="start" data-works-hall aria-labelledby="home-title">
   <canvas class="works-hall__canvas" data-hall-canvas aria-hidden="true" hidden></canvas>
+  <noscript><style>.works-hall__fallback{display:flex!important}</style></noscript>
   <div class="works-hall__fallback" aria-hidden="true">
     {featured.map((item, index) => <span style={`--tone:${item.tone};--i:${index}`}><img src={item.src} alt="" width={item.width} height={item.height} loading="lazy" decoding="async"/></span>)}
   </div>

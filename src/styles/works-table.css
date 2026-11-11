@@ -2,7 +2,8 @@
    into the dark. The pointer tilts the table, a drag pans it, and the print
    under the pointer stands up toward the viewer in its own colour. */
 .works-table { --card-w:276px; --card-gap:30px; --rx:57deg; --rz:-13deg; position:relative; z-index:1; height:clamp(680px,calc(100svh - 72px),920px); margin-inline:calc(50% - 50vw); overflow:clip; isolation:isolate; }
-.works-table::after { content:''; position:absolute; inset:auto 0 0; height:180px; z-index:1; pointer-events:none; background:linear-gradient(to bottom,transparent,var(--bg)); }
+/* The desk fades by its own opacity into the page: no overlay band, no seam. */
+.works-table__fade { position:absolute; inset:0; -webkit-mask-image:linear-gradient(180deg,#000 0,#000 52%,#000000c4 66%,#00000070 80%,#00000024 92%,transparent 100%); mask-image:linear-gradient(180deg,#000 0,#000 52%,#000000c4 66%,#00000070 80%,#00000024 92%,transparent 100%); }
 .works-table__scene { position:absolute; inset:0; perspective:1500px; perspective-origin:64% -10%; cursor:grab; touch-action:pan-y; user-select:none; -webkit-user-select:none;
   -webkit-mask-image:linear-gradient(to right,transparent 0,transparent 20%,#0006 34%,#000 52%),radial-gradient(ellipse 85% 90% at 64% 52%,#000 55%,transparent 100%); mask-image:linear-gradient(to right,transparent 0,transparent 20%,#0006 34%,#000 52%),radial-gradient(ellipse 85% 90% at 64% 52%,#000 55%,transparent 100%); -webkit-mask-composite:source-in; mask-composite:intersect; }
 .works-table[data-dragging=true] .works-table__scene { cursor:grabbing; }
@@ -20,9 +21,9 @@
 .works-table__tag { display:flex; align-items:baseline; gap:10px; padding:9px 3px 0; white-space:nowrap; overflow:hidden; }
 .works-table__tag strong { font-family:Rajdhani,'Noto Sans SC',sans-serif; font-size:19px; font-weight:600; color:var(--tone); }
 .works-table__tag small { font-size:12px; color:var(--muted); overflow:hidden; text-overflow:ellipsis; }
-.works-table__card:is(:hover,:focus-visible,[data-near=true]) .works-table__lift { transform:translateZ(90px) rotateX(-38deg) scale(1.08); }
-.works-table__card:is(:hover,:focus-visible,[data-near=true]) .works-table__shot { border-color:var(--tone); box-shadow:0 0 0 1px var(--tone),0 0 60px -6px var(--tone),0 30px 50px -20px #000; }
-.works-table__card:is(:hover,:focus-visible,[data-near=true])::before { opacity:1; transform:translateZ(-1px) scale(1.05,1.15); }
+.works-table__card:is(:focus-visible,[data-near=true]) .works-table__lift { transform:translateZ(90px) rotateX(-38deg) scale(1.08); }
+.works-table__card:is(:focus-visible,[data-near=true]) .works-table__shot { border-color:var(--tone); box-shadow:0 0 0 1px var(--tone),0 0 60px -6px var(--tone),0 30px 50px -20px #000; }
+.works-table__card:is(:focus-visible,[data-near=true])::before { opacity:1; transform:translateZ(-1px) scale(1.05,1.15); }
 .works-table__card:focus-visible { outline:none; }
 .works-table__card:focus-visible .works-table__shot { outline:2px solid var(--tone); outline-offset:4px; }
 /* Lighting a direction raises its prints a little and lets the rest fall dark. */
