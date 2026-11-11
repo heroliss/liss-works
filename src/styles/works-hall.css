@@ -84,3 +84,6 @@
   .works-hall__copy .works-hall__focus { margin:-18px auto 14px; pointer-events:auto; }
   .works-hall__copy .works-hall__bottom { pointer-events:auto; }
 }
+@media(max-width:760px) {
+  .works-hall__canvas { -webkit-mask-image:linear-gradient(180deg,transparent,#000 16%,#000 80%,transparent); mask-image:linear-gradient(180deg,transparent,#000 16%,#000 80%,transparent); }
+}

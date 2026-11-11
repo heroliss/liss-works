@@ -19,10 +19,10 @@ export interface HallEngine {
   select: (index: number) => void;
   selected: () => number;
   hovered: () => number | null;
-  /** Live drag: turn the whole constellation by an angle (radians). */
-  setDrag: (angle: number) => void;
-  /** Let go with an angular velocity; it coasts, then settles home. */
-  release: (velocity: number) => void;
+  /** Live drag: turn the constellation (yaw) and raise or lower the view (pitch), in radians. */
+  setDrag: (yaw: number, pitch: number) => void;
+  /** Let go with angular velocities; it coasts, then settles home. */
+  release: (yawVelocity: number, pitchVelocity: number) => void;
   pick: (x: number, y: number) => number | null;
   draw: (time: number, dt: number) => void;
   dispose: () => void;
@@ -30,14 +30,19 @@ export interface HallEngine {
 
 type Screen = { group: Three.Group; tilt: Three.Group; face: Three.MeshBasicMaterial; rim: Three.MeshBasicMaterial; halo: Three.MeshBasicMaterial;
   pool: Three.Mesh; poolMat: Three.MeshBasicMaterial; tone: Three.Color; hover: number; focus: number; lean: Three.Vector2; phase: number; slot: number;
-  pos: Three.Vector3; turn: number; size: number; hit: Three.Mesh };
+  pos: Three.Vector3; turn: number; size: number; pitch: number; roll: number; hit: Three.Mesh };
 
 const BG = 0x070b12;
+// The sky and the far floor share one colour drawn through the same pipeline, so the
+// horizon has no seam (the clear colour skips colour conversion and would not match).
+const SKY = '#2e3b4b';
 // Slot 0 is the front: large, centred, close. The others float around it at
 // different depths, heights, sizes and turns, so the set reads as a composed
-// constellation rather than a row. [x, y, z, turn, size]
-const SLOTS = [[0, 1.8, 2.3, 0, 1.2], [-3.8, 3.45, -2.6, .38, .74], [-3.4, .95, -.6, .3, .6], [3.5, 3.25, -2.8, -.42, .72], [3.15, .9, -.9, -.34, .58]];
-const NARROW = [[0, 2.1, 2.2, 0, 1.3], [-2.9, 3.5, -2.2, .4, .66], [-2.5, .95, .2, .3, .56], [2.9, 3.3, -2, -.4, .7], [2.6, .9, .3, -.32, .56]];
+// constellation rather than a row. [x, y, z, turn, size, pitch, roll]
+const SLOTS = [[0, 1.95, 2.3, -.05, 1.2, -.02, -.012], [-3.8, 3.5, -2.6, .42, .74, .09, .05], [-3.4, 1, -.6, .26, .6, -.08, -.045],
+  [3.6, 3.85, -2.8, -.5, .72, .1, -.06], [3.25, 1.55, -.9, -.28, .58, -.07, .05]];
+const NARROW = [[0, 2.1, 2.2, -.04, 1.3, -.02, -.01], [-2.9, 3.5, -2.2, .42, .66, .08, .05], [-2.5, .95, .2, .28, .56, -.07, -.04],
+  [2.9, 3.5, -2, -.46, .7, .09, -.05], [2.6, 1.2, .3, -.3, .56, -.06, .045]];
 
 function radialTexture(T: T, inner = 'rgba(255,255,255,1)', mid = 'rgba(255,255,255,.35)') {
   const canvas = document.createElement('canvas'); canvas.width = canvas.height = 256;
@@ -51,9 +56,19 @@ function floorMask(T: T) {
   // Dims the mirror: clearer just in front of the screens, fully dark toward the edges.
   const canvas = document.createElement('canvas'); canvas.width = canvas.height = 256;
   const context = canvas.getContext('2d')!;
-  const gradient = context.createRadialGradient(128, 150, 10, 128, 140, 128);
-  gradient.addColorStop(0, 'rgba(7,11,18,.42)'); gradient.addColorStop(.55, 'rgba(7,11,18,.74)'); gradient.addColorStop(1, 'rgba(7,11,18,1)');
+  const gradient = context.createRadialGradient(128, 134, 2, 128, 130, 128);
+  gradient.addColorStop(0, 'rgba(7,11,18,.42)'); gradient.addColorStop(.14, 'rgba(7,11,18,.74)'); gradient.addColorStop(.3, 'rgba(30,40,54,.97)'); gradient.addColorStop(.42, 'rgba(46,59,75,1)');
   context.fillStyle = gradient; context.fillRect(0, 0, 256, 256);
+  const texture = new T.CanvasTexture(canvas); texture.colorSpace = T.SRGBColorSpace; return texture;
+}
+function hazeTexture(T: T) {
+  // A soft band of light that sits on the horizon and fades upward.
+  const canvas = document.createElement('canvas'); canvas.width = 8; canvas.height = 256;
+  const context = canvas.getContext('2d')!;
+  const gradient = context.createLinearGradient(0, 0, 0, 256);
+  gradient.addColorStop(0, 'rgba(255,255,255,0)'); gradient.addColorStop(.36, 'rgba(255,255,255,.1)'); gradient.addColorStop(.6, 'rgba(255,255,255,.62)');
+  gradient.addColorStop(.68, 'rgba(255,255,255,.42)'); gradient.addColorStop(.84, 'rgba(255,255,255,.08)'); gradient.addColorStop(1, 'rgba(255,255,255,0)');
+  context.fillStyle = gradient; context.fillRect(0, 0, 8, 256);
   const texture = new T.CanvasTexture(canvas); texture.colorSpace = T.SRGBColorSpace; return texture;
 }
 
@@ -77,7 +92,7 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
 
   const scene = new T.Scene();
   scene.fog = new T.FogExp2(BG, .018);
-  const camera = new T.PerspectiveCamera(32, 1, .1, 140);
+  const camera = new T.PerspectiveCamera(32, 1, .1, 400);
   const disposables: { dispose: () => void }[] = [];
   const keep = <V extends { dispose: () => void }>(value: V) => { disposables.push(value); return value; };
   let released = false;
@@ -86,17 +101,27 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
   const key = new T.DirectionalLight(0xfff0e0, 1); key.position.set(-3, 8, 8); scene.add(key);
 
   let width = 1, height = 1, narrow = false;
-  const floor = new A.Reflector(keep(new T.PlaneGeometry(90, 90)), { clipBias: .003, textureWidth: 512, textureHeight: 512, color: 0x93a1b2 });
-  floor.rotation.x = -Math.PI / 2; scene.add(floor);
-  const veil = new T.Mesh(keep(new T.PlaneGeometry(60, 60)), keep(new T.MeshBasicMaterial({ map: keep(floorMask(T)), transparent: true, depthWrite: false, fog: false })));
-  veil.rotation.x = -Math.PI / 2; veil.position.set(0, .004, -2); scene.add(veil);
+  const floor = new A.Reflector(keep(new T.PlaneGeometry(260, 260)), { clipBias: .003, textureWidth: 512, textureHeight: 512, color: 0x93a1b2 });
+  // Draw order matters for a seamless horizon: mirror floor, then its dimming veil,
+  // then the background glows without depth testing, so their light carries across
+  // the horizon instead of being cut off by the floor; the screens draw last.
+  const sky = new T.Mesh(keep(new T.SphereGeometry(300, 32, 16)), keep(new T.MeshBasicMaterial({ color: SKY, side: T.BackSide, depthTest: false, depthWrite: false, fog: false })));
+  sky.renderOrder = -4; scene.add(sky);
+  floor.rotation.x = -Math.PI / 2; floor.renderOrder = -3; scene.add(floor);
+  const veil = new T.Mesh(keep(new T.PlaneGeometry(320, 320)), keep(new T.MeshBasicMaterial({ map: keep(floorMask(T)), blending: T.CustomBlending, blendSrc: T.SrcAlphaFactor, blendDst: T.OneMinusSrcAlphaFactor, depthWrite: false, fog: false })));
+  veil.rotation.x = -Math.PI / 2; veil.position.set(0, .004, -4); veil.renderOrder = -2; scene.add(veil);
+  const background = { opacity: 1, blending: T.AdditiveBlending, depthTest: false, depthWrite: false, fog: false } as const;
+  // Drawn first, so the glows below lay their light over it and carry across the horizon.
+  // The horizon: a wide haze band instead of the floor's edge, tinted by the selection.
+  const hazeMat = keep(new T.MeshBasicMaterial({ ...background, map: keep(hazeTexture(T)), color: new T.Color(items[0]?.tone ?? '#6ee8e3').lerp(new T.Color('#9fb8d8'), .5), opacity: .3 }));
+  const haze = new T.Mesh(keep(new T.PlaneGeometry(220, 24)), hazeMat); haze.position.set(0, 2.9, -46); haze.renderOrder = -1; scene.add(haze);
 
   const glow = keep(radialTexture(T));
   // A broad coloured glow behind the constellation, tinted by the selection.
-  const backdropMat = keep(new T.MeshBasicMaterial({ map: glow, color: new T.Color(items[0]?.tone ?? '#6ee8e3'), transparent: true, opacity: .26, blending: T.AdditiveBlending, depthWrite: false, fog: false }));
-  const backdrop = new T.Mesh(keep(new T.PlaneGeometry(46, 26)), backdropMat); backdrop.position.set(0, 4.5, -14); scene.add(backdrop);
-  const backdrop2Mat = keep(new T.MeshBasicMaterial({ map: glow, color: new T.Color('#8b6cf0'), transparent: true, opacity: .14, blending: T.AdditiveBlending, depthWrite: false, fog: false }));
-  const backdrop2 = new T.Mesh(keep(new T.PlaneGeometry(30, 18)), backdrop2Mat); backdrop2.position.set(9, 6, -16); scene.add(backdrop2);
+  const backdropMat = keep(new T.MeshBasicMaterial({ ...background, map: glow, color: new T.Color(items[0]?.tone ?? '#6ee8e3'), opacity: .26 }));
+  const backdrop = new T.Mesh(keep(new T.PlaneGeometry(46, 26)), backdropMat); backdrop.position.set(0, 4.5, -14); backdrop.renderOrder = -1; scene.add(backdrop);
+  const backdrop2Mat = keep(new T.MeshBasicMaterial({ ...background, map: glow, color: new T.Color('#8b6cf0'), opacity: .14 }));
+  const backdrop2 = new T.Mesh(keep(new T.PlaneGeometry(30, 18)), backdrop2Mat); backdrop2.position.set(9, 6, -16); backdrop2.renderOrder = -1; scene.add(backdrop2);
 
   const loader = new T.TextureLoader();
   const screens: Screen[] = [];
@@ -121,7 +146,7 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
     const pool = new T.Mesh(poolGeometry, poolMat); pool.rotation.x = -Math.PI / 2; scene.add(pool);
     const slot = SLOTS[index % SLOTS.length];
     screens.push({ group, tilt, face, rim, halo, pool, poolMat, tone, hover: 0, focus: index === 0 ? 1 : 0, lean: new T.Vector2(), phase: index * 1.9 + .3, slot: index,
-      pos: new T.Vector3(slot[0], slot[1], slot[2]), turn: slot[3], size: slot[4], hit: screenMesh });
+      pos: new T.Vector3(slot[0], slot[1], slot[2]), turn: slot[3], size: slot[4], pitch: slot[5], roll: slot[6], hit: screenMesh });
     loader.load(item.src, texture => {
       if (released) { texture.dispose(); return; }
       texture.colorSpace = T.SRGBColorSpace; texture.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
@@ -146,12 +171,13 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
   composer.addPass(bloom);
   composer.addPass(new A.OutputPass());
 
-  const raycaster = new T.Raycaster(), ndc = new T.Vector2(), local = new T.Vector2(), up = new T.Vector3(0, 1, 0);
+  const raycaster = new T.Raycaster(), ndc = new T.Vector2(), local = new T.Vector2(), up = new T.Vector3(0, 1, 0), side = new T.Vector3(1, 0, 0);
   const pivot = new T.Vector3(0, 1.8, 0);
   const basePos = new T.Vector3(), lookBase = new T.Vector3(0, 2.7, 0), camPos = new T.Vector3(), camLook = new T.Vector3();
   const pointer = { x: 0, y: 0, weight: 0, tx: 0, ty: 0, tw: 0, cx: 9, cy: 9, on: false };
   const toneTarget = new T.Color(items[0]?.tone ?? '#6ee8e3');
-  let hover: number | null = null, highlight: number | null = null, selected = 0, drag = 0, dragVelocity = 0, dragging = false;
+  let hover: number | null = null, highlight: number | null = null, selected = 0, dragging = false;
+  let drag = 0, dragVelocity = 0, tilt = 0, tiltVelocity = 0;
 
   const assign = () => {
     // The selected work takes the front; the others keep their relative order
@@ -171,7 +197,7 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
     const distance = Math.max(narrow ? 9 : 11, (narrow ? 4.4 : 7.6) / Math.tan(halfWide));
     basePos.set(0, 2.6 + distance * .04, distance);
     // On wide layouts the copy sits on the left, so frame the constellation to the right.
-    if (narrow) camera.clearViewOffset(); else camera.setViewOffset(width, height, -(width * .18 + Math.max(0, width - 1440) * .12), 0, width, height);
+    if (narrow) camera.clearViewOffset(); else camera.setViewOffset(width, height, -(width * .18 + Math.max(0, width - 1440) * .12), height * .05, width, height);
     camera.updateProjectionMatrix();
     floor.getRenderTarget().setSize(Math.round(width * ratio * (quality ? .35 : .5)), Math.round(height * ratio * (quality ? .35 : .5)));
     return true;
@@ -188,7 +214,7 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
     selected = (index + count) % count; assign(); toneTarget.set(items[selected].tone);
   };
 
-  const target = new T.Vector3();
+  const target = new T.Vector3(), hazeTone = new T.Color(), hazeBase = new T.Color('#9fb8d8');
   const draw = (time: number, dt: number) => {
     if (released) return;
     const step = dt || 1 / 60, quick = 1 - Math.exp(-step * 6), glide = 1 - Math.exp(-step * 3.2);
@@ -197,13 +223,19 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
       drag += dragVelocity * step; dragVelocity *= Math.exp(-step * 2.6);
       dragVelocity -= drag * step * 3.2;
       if (Math.abs(drag) < .0005 && Math.abs(dragVelocity) < .0005) drag = dragVelocity = 0;
+      tilt += tiltVelocity * step; tiltVelocity *= Math.exp(-step * 2.8);
+      tiltVelocity -= tilt * step * 3.6;
+      if (Math.abs(tilt) < .0005 && Math.abs(tiltVelocity) < .0005) tilt = tiltVelocity = 0;
     }
-    const yaw = drag + Math.sin(time * .13) * .05 + pointer.x * .2 * pointer.weight;
+    // Soft limits keep every screen well inside the frame, never edge-on to the camera.
+    const turnBy = Math.tanh(drag / .55) * .55, pitchBy = tilt >= 0 ? Math.tanh(tilt / .34) * .34 : Math.tanh(tilt / .1) * .1;
+    const yaw = turnBy + Math.sin(time * .13) * .05 + pointer.x * .2 * pointer.weight;
     const lift = Math.sin(time * .19) * .18 - pointer.y * .8 * pointer.weight;
-    camPos.copy(basePos).sub(pivot).applyAxisAngle(up, -yaw).add(pivot); camPos.y += lift;
-    camLook.copy(lookBase).sub(pivot).applyAxisAngle(up, -yaw * .4).add(pivot);
+    camPos.copy(basePos).sub(pivot).applyAxisAngle(side, -pitchBy).applyAxisAngle(up, -yaw).add(pivot); camPos.y += lift;
+    camLook.copy(lookBase).sub(pivot).applyAxisAngle(up, -yaw * .4).add(pivot); camLook.y -= pitchBy * 2.2;
     camera.position.copy(camPos); camera.lookAt(camLook);
     backdropMat.color.lerp(toneTarget, 1 - Math.exp(-step * 2));
+    hazeMat.color.lerp(hazeTone.copy(toneTarget).lerp(hazeBase, .5), 1 - Math.exp(-step * 2));
     hover = null;
     if (pointer.on && !dragging) {
       ndc.set(pointer.cx, -pointer.cy); raycaster.setFromCamera(ndc, camera);
@@ -220,7 +252,10 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
       // Each work drifts on its own small loop around its slot.
       target.set(slot[0] + Math.sin(t * .37) * .22 * (1 - f * .6), slot[1] + Math.sin(t * .53) * .16, slot[2] + Math.cos(t * .29) * .25 * (1 - f * .6));
       screen.pos.lerp(target, glide); screen.turn += (slot[3] - screen.turn) * glide; screen.size += (slot[4] * (1 + h * .1) - screen.size) * glide;
-      screen.group.position.copy(screen.pos); screen.group.rotation.y = screen.turn; screen.group.scale.setScalar(screen.size);
+      screen.pitch += (slot[5] * (1 - h * .7) - screen.pitch) * glide; screen.roll += (slot[6] * (1 - h * .7) - screen.roll) * glide;
+      // Screens partly turn to follow the camera as it swings, so none goes edge-on.
+      screen.group.position.copy(screen.pos); screen.group.scale.setScalar(screen.size);
+      screen.group.rotation.set(screen.pitch - pitchBy * .35, screen.turn - turnBy * .6, screen.roll, 'YXZ');
       screen.pool.position.set(screen.pos.x, .006, screen.pos.z + 1.1 * screen.size); screen.pool.scale.setScalar(screen.size);
       if (screen.face.map) screen.face.color.setScalar(.78 + f * .22 + h * .12);
       screen.rim.color.copy(screen.tone).multiplyScalar(.7 + f * .5 + h * .6);
@@ -265,7 +300,7 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
     selected: () => selected,
     setHighlight: index => { highlight = index; },
     hovered: () => hover,
-    setDrag: angle => { dragging = true; drag = angle; dragVelocity = 0; },
-    release: velocity => { dragging = false; dragVelocity = velocity; },
+    setDrag: (yaw, pitch) => { dragging = true; drag = yaw; tilt = pitch; dragVelocity = tiltVelocity = 0; },
+    release: (yawVelocity, pitchVelocity) => { dragging = false; dragVelocity = yawVelocity; tiltVelocity = pitchVelocity; },
   };
 }

@@ -96,26 +96,29 @@ export function setupHeroHall({ signal, preference }: Options): () => void {
   root.addEventListener('pointerleave', () => { engine?.setPointer(0, 0, 9, 9, false); request(); }, { signal: events.signal });
 
   // Drag turns the whole hall freely; on release it coasts and settles back.
-  let drag: { id: number; x: number; lastX: number; time: number; velocity: number; moved: boolean } | null = null;
+  let drag: { id: number; x: number; y: number; lastX: number; lastY: number; time: number; velocity: number; velocityY: number; moved: boolean } | null = null;
   let suppressClick = 0;
   const unit = () => Math.max(320, canvas.clientWidth * .5);
   const angleFor = (dx: number) => {
     const raw = dx / unit() * .9, limit = .75;
     return Math.abs(raw) <= limit ? raw : Math.sign(raw) * (limit + (Math.abs(raw) - limit) * .3);
   };
+  // Dragging down raises the camera (looking down over the mirror); up lowers it.
+  const pitchFor = (dy: number) => dy / Math.max(260, canvas.clientHeight * .6) * .6;
   canvas.addEventListener('pointerdown', event => {
     if (!engine || !event.isPrimary || event.button !== 0) return;
-    drag = { id: event.pointerId, x: event.clientX, lastX: event.clientX, time: event.timeStamp, velocity: 0, moved: false };
+    drag = { id: event.pointerId, x: event.clientX, y: event.clientY, lastX: event.clientX, lastY: event.clientY, time: event.timeStamp, velocity: 0, velocityY: 0, moved: false };
   }, { signal: events.signal });
   canvas.addEventListener('pointermove', event => {
     if (!drag || drag.id !== event.pointerId || !engine) return;
-    const dx = event.clientX - drag.x;
-    if (!drag.moved && Math.abs(dx) > 6) { drag.moved = true; canvas.setPointerCapture(event.pointerId); root.dataset.dragging = 'true'; }
+    const dx = event.clientX - drag.x, dy = event.pointerType === 'touch' ? 0 : event.clientY - drag.y;
+    if (!drag.moved && Math.hypot(dx, dy) > 6) { drag.moved = true; canvas.setPointerCapture(event.pointerId); root.dataset.dragging = 'true'; }
     if (!drag.moved) return;
     const dt = Math.max(.008, (event.timeStamp - drag.time) / 1000);
     drag.velocity = drag.velocity * .6 + (event.clientX - drag.lastX) / dt * .4;
-    drag.lastX = event.clientX; drag.time = event.timeStamp;
-    engine.setDrag(angleFor(dx)); request();
+    drag.velocityY = drag.velocityY * .6 + (event.clientY - drag.lastY) / dt * .4;
+    drag.lastX = event.clientX; drag.lastY = event.clientY; drag.time = event.timeStamp;
+    engine.setDrag(angleFor(dx), pitchFor(dy)); request();
   }, { passive: true, signal: events.signal });
   const endDrag = (event: PointerEvent) => {
     if (!drag || drag.id !== event.pointerId) return;
@@ -123,8 +126,9 @@ export function setupHeroHall({ signal, preference }: Options): () => void {
     if (canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId);
     if (!state.moved || !engine) return;
     delete root.dataset.dragging; suppressClick = performance.now() + 320;
-    const velocity = event.timeStamp - state.time > 120 ? 0 : state.velocity / unit() * .9;
-    engine.release(Math.max(-2.5, Math.min(2.5, velocity))); request();
+    const stale = event.timeStamp - state.time > 120, clamp = (value: number) => Math.max(-2.5, Math.min(2.5, value));
+    const velocity = stale ? 0 : state.velocity / unit() * .9, velocityY = stale || event.pointerType === 'touch' ? 0 : pitchFor(state.velocityY);
+    engine.release(clamp(velocity), clamp(velocityY)); request();
   };
   canvas.addEventListener('pointerup', endDrag, { signal: events.signal });
   canvas.addEventListener('pointercancel', endDrag, { signal: events.signal });
