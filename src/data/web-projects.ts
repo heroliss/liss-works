@@ -36,7 +36,7 @@ export const webProjects: Project[] = [
     cover: mkfun[0], gallery: mkfun, related: ['utility-lab', 'ga-sort', 'sort-lab'],
   },
   {
-    slug: 'utility-lab', repo: 'utility-lab', name: 'Liss Utilities · 字符与文件名工具', category: '浏览器实用工具集', group: 'ai-data',
+    slug: 'utility-lab', repo: 'utility-lab', name: 'Liss Utilities · 字符与文件名工具', category: '浏览器实用工具集', group: 'tools',
     summary: '查清字符的编码，预览文件名的变化，日常小工具也可以清晰可控。',
     intro: 'Unicode 字符表与汉字数字重命名组成两个工作区：前者连接字形、码点与编码，后者先检查改名结果，再导出副本或按授权处理目录。',
     status: '浏览器中可直接体验', tags: ['JavaScript', 'Unicode 17', 'Web Worker', '本地文件 API'],

@@ -1,6 +1,6 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { advanceRing, circularOffset, gestureAxis, nearestPhase, normalizeWheel, ringCardWidth, ringPose, wrapPhase, type RingMotion } from './archive-ring-math';
+import { advanceRing, circularOffset, gestureAxis, nearestPhase, normalizeWheel, ringLayout, ringPose, wrapPhase, type RingMotion } from './archive-ring-math';
 
 type Options = { signal: AbortSignal; preference: MediaQueryList };
 type Pointer = { id:number;x:number;y:number;phase:number;lastPhase:number;time:number;axis:'pending'|'horizontal'|'vertical' };
@@ -14,7 +14,7 @@ export function setupArchiveAtlas({ signal, preference }: Options) {
   const cameraElement = atlas.querySelector<HTMLElement>('[data-atlas-ring-camera]');
   const stageElement = atlas.querySelector<HTMLElement>('[data-atlas-stage]');
   if (!viewportElement || !cameraElement || !stageElement) return () => {};
-  const viewport: HTMLElement = viewportElement, camera: HTMLElement = cameraElement, stage: HTMLElement = stageElement;
+  const viewport: HTMLElement = viewportElement, stage: HTMLElement = stageElement;
   const events = new AbortController(), media = gsap.matchMedia();
   const items = Array.from(atlas.querySelectorAll<HTMLElement>('[data-atlas-item]'));
   const cards = Array.from(atlas.querySelectorAll<HTMLAnchorElement>('[data-atlas-ring-card]'));
@@ -33,8 +33,8 @@ export function setupArchiveAtlas({ signal, preference }: Options) {
   let motion: RingMotion = { position:0, velocity:0, target:null };
   let raf = 0, previousTime = 0, wheelEnd: ReturnType<typeof setTimeout> | undefined;
   let pointer: Pointer | null = null, suppressClickUntil = 0, wheelTarget: number | null = null;
-  let hintTimer: ReturnType<typeof setTimeout> | undefined, hintReadyAt = 0;
-  let width = Math.max(1, viewport.clientWidth), cardWidth = 440;
+  let pageWheelAt = -Infinity;
+  let width = Math.max(1, viewport.clientWidth), heightBudget = Infinity, cardWidth = 440, dragUnit = 250;
   let tiltX = 0, tiltY = 0, targetX = 0, targetY = 0;
   const tileGates = new Set<() => void>();
   const shown = (item: HTMLElement) => !item.hidden && !item.closest('[hidden]');
@@ -83,21 +83,20 @@ export function setupArchiveAtlas({ signal, preference }: Options) {
     cards.forEach(card => {
       const index = indices.get(card.dataset.atlasRingCard);
       if (index === undefined) { card.hidden = true; card.tabIndex = -1; card.setAttribute('aria-hidden','true'); return; }
-      const offset = circularOffset(index, motion.position, count), pose = ringPose(offset, width, count);
+      const offset = circularOffset(index, motion.position, count), pose = ringPose(offset, width, count, heightBudget);
       card.hidden = !pose.visible;
       card.tabIndex = index === activeIndex ? 0 : -1;
       if (index === activeIndex) { card.removeAttribute('aria-hidden'); card.setAttribute('aria-current','true'); }
       else { card.setAttribute('aria-hidden','true'); card.removeAttribute('aria-current'); }
       card.dataset.ringActive = String(index === activeIndex);
       if (!pose.visible) return;
-      // The whole cylinder leans back a little, so cards further round sit higher.
-      card.style.transform = `translate(-50%,-50%) rotateX(-6deg) translate3d(${pose.x.toFixed(2)}px,${pose.y.toFixed(2)}px,${pose.z.toFixed(2)}px) rotateY(${pose.rotateY.toFixed(2)}deg)`;
+      // Seen from slightly above; the camera tilt follows the pointer on top of this.
+      card.style.transform = `translate(-50%,-50%) rotateX(${(-3 + tiltX).toFixed(3)}deg) rotateY(${tiltY.toFixed(3)}deg) translate3d(${pose.x.toFixed(2)}px,${pose.y.toFixed(2)}px,${pose.z.toFixed(2)}px) rotateY(${pose.rotateY.toFixed(2)}deg) scale(${pose.scale.toFixed(4)})`;
       card.style.opacity = pose.opacity.toFixed(3);
       card.style.setProperty('--ring-shade', pose.shade.toFixed(3));
       card.style.zIndex = String(pose.zIndex);
       if (stageVisible) loadImage(card);
     });
-    camera.style.transform = `rotateX(${tiltX.toFixed(3)}deg) rotateY(${tiltY.toFixed(3)}deg)`;
     viewport.dataset.ringIndex = String(activeIndex);
     viewport.dataset.ringPhase = wrapPhase(motion.position, count).toFixed(4);
     viewport.dataset.count = String(count);
@@ -107,23 +106,7 @@ export function setupArchiveAtlas({ signal, preference }: Options) {
 
   function helpText(count: number) {
     if (count < 2) return '点击画面进入工程';
-    if (hintTimer !== undefined) return '页面照常滚动 · 按住 Shift 再滚动可转动';
-    return matchMedia('(hover:hover) and (pointer:fine)').matches ? '拖动或 Shift + 滚轮浏览 · 方向键切换' : '左右拖动浏览';
-  }
-  // A plain vertical wheel over the ring scrolls the page; briefly say how to turn it.
-  function showWheelHint() {
-    if (!help || performance.now() < hintReadyAt) return;
-    hintReadyAt = performance.now() + 6000;
-    clearTimeout(hintTimer);
-    hintTimer = setTimeout(endWheelHint, 2400);
-    help.dataset.hint = 'true';
-    help.textContent = helpText(list.length);
-  }
-  function endWheelHint() {
-    clearTimeout(hintTimer); hintTimer = undefined;
-    if (!help) return;
-    delete help.dataset.hint;
-    help.textContent = helpText(list.length);
+    return matchMedia('(hover:hover) and (pointer:fine)').matches ? '滚轮或拖动浏览 · 方向键切换 · 点击中间画面进入' : '左右拖动浏览 · 点击中间画面进入';
   }
 
   function stopFrame() {
@@ -194,11 +177,14 @@ export function setupArchiveAtlas({ signal, preference }: Options) {
   }
   function measure() {
     width=Math.max(1, viewport!.clientWidth);
-    cardWidth=ringCardWidth(width);
+    // Leave room for the copy beneath so the focused screenshot never overflows a short window.
+    heightBudget=Math.max(300, (window.innerHeight||900)*.7);
+    const layout=ringLayout(width,heightBudget);
+    cardWidth=layout.card; dragUnit=Math.max(120,layout.lift+layout.stack);
     viewport!.style.setProperty('--ring-card-width',`${cardWidth}px`);
     // Keep the enlarged screenshot, caption and floating shadow inside the stage
     // at the wide-phone breakpoint as well as in the desktop two-column layout.
-    viewport!.style.setProperty('--ring-height',`${Math.ceil(Math.max(290,cardWidth*.625+130))}px`);
+    viewport!.style.setProperty('--ring-height',`${Math.ceil(Math.max(290,cardWidth*.625+110))}px`);
     render();
   }
   function syncControls() {
@@ -232,15 +218,15 @@ export function setupArchiveAtlas({ signal, preference }: Options) {
       }
       if(pointer.axis!=='horizontal')return;
       if(event.cancelable)event.preventDefault();
-      const phase=pointer.phase-dx/Math.max(150,cardWidth*1.06),dt=Math.max(.008,Math.min(.06,(event.timeStamp-pointer.time)/1000));
+      const phase=pointer.phase-dx/dragUnit,dt=Math.max(.008,Math.min(.06,(event.timeStamp-pointer.time)/1000));
       motion.velocity=motion.velocity*.55+(phase-pointer.lastPhase)/dt*.45;
       motion.position=phase;motion.target=null;pointer.lastPhase=phase;pointer.time=event.timeStamp;
       render();return;
     }
     if(event.pointerType==='touch'||!movingAllowed()||!matchMedia('(hover:hover) and (pointer:fine)').matches)return;
     const bounds=viewport.getBoundingClientRect();
-    targetY=((event.clientX-bounds.left)/Math.max(1,bounds.width)*2-1)*4;
-    targetX=-((event.clientY-bounds.top)/Math.max(1,bounds.height)*2-1)*2.6;
+    targetY=((event.clientX-bounds.left)/Math.max(1,bounds.width)*2-1)*5;
+    targetX=-((event.clientY-bounds.top)/Math.max(1,bounds.height)*2-1)*3.5;
     requestFrame();
   };
   viewport.addEventListener('pointermove',pointerMoved,{passive:false,signal:events.signal});
@@ -261,11 +247,12 @@ export function setupArchiveAtlas({ signal, preference }: Options) {
     if(!card||!viewport.contains(card))return;
     if(card.dataset.atlasRingCard!==selected?.dataset.atlasItem){event.preventDefault();select(itemBySlug.get(card.dataset.atlasRingCard));}
   },{capture:true,signal:events.signal});
+  // A page scroll that carries the ring under a resting pointer keeps scrolling the page;
+  // only a wheel that starts over the ring turns it.
+  window.addEventListener('wheel',event=>{if(!(event.target instanceof Node&&viewport.contains(event.target)))pageWheelAt=event.timeStamp;},{capture:true,passive:true,signal:events.signal});
   viewport.addEventListener('wheel',event=>{
     if(list.length<2||event.ctrlKey||event.metaKey||pointer)return;
-    // The ring never traps page scrolling: sideways trackpad swipes and Shift+wheel
-    // turn it, while a plain vertical wheel passes through to the page.
-    if(!event.shiftKey&&Math.abs(event.deltaX)<=Math.abs(event.deltaY)){if(event.deltaY)showWheelHint();return;}
+    if(event.timeStamp-pageWheelAt<260){pageWheelAt=event.timeStamp;return;}
     const delta=normalizeWheel(event.deltaX,event.deltaY,event.deltaMode,viewport.clientHeight);
     if(!delta)return;
     event.preventDefault();
@@ -280,10 +267,6 @@ export function setupArchiveAtlas({ signal, preference }: Options) {
     const target=event.key==='ArrowRight'?list[(index+1)%list.length]:event.key==='ArrowLeft'?list[(index-1+list.length)%list.length]:event.key==='Home'?list[0]:event.key==='End'?list.at(-1):null;
     if(target){event.preventDefault();select(target);}
   },{signal:events.signal});
-  items.forEach(item=>{
-    item.addEventListener('pointerenter',event=>{if(event.pointerType!=='touch'&&matchMedia('(hover:hover) and (pointer:fine)').matches)select(item,true,false);},{signal:events.signal});
-    item.addEventListener('focusin',()=>select(item,true,true),{signal:events.signal});
-  });
 
   const stageObserver=new IntersectionObserver(([entry])=>{stageVisible=entry.isIntersecting;if(stageVisible)render();gate();});
   stageObserver.observe(stage);
@@ -304,7 +287,7 @@ export function setupArchiveAtlas({ signal, preference }: Options) {
       const observer=new IntersectionObserver(([entry])=>{visible=entry.isIntersecting;check();});observer.observe(item);observers.push(observer);
       const measureTile=()=>{const b=item.getBoundingClientRect();bounds={left:b.left,top:b.top,width:b.width,height:b.height};};
       item.addEventListener('pointerenter',measureTile,{signal:local.signal});
-      item.addEventListener('pointermove',event=>{if(!visible||paused||document.hidden||held||event.pointerType==='touch')return;const x=Math.max(-1,Math.min(1,(event.clientX-bounds.left)/bounds.width*2-1)),y=Math.max(-1,Math.min(1,(event.clientY-bounds.top)/bounds.height*2-1));rx(rx0-y*5);ry(ry0+x*7);},{passive:true,signal:local.signal});
+      item.addEventListener('pointermove',event=>{if(!visible||paused||document.hidden||held||event.pointerType==='touch')return;const x=Math.max(-1,Math.min(1,(event.clientX-bounds.left)/bounds.width*2-1)),y=Math.max(-1,Math.min(1,(event.clientY-bounds.top)/bounds.height*2-1));rx(rx0-y*7);ry(ry0+x*10);},{passive:true,signal:local.signal});
       item.addEventListener('pointerleave',()=>{if(!held)reset(paused||document.hidden);},{signal:local.signal});
       item.addEventListener('pointerdown',event=>{if(!event.isPrimary||event.button!==0)return;held=true;rx.tween.pause();ry.tween.pause();},{signal:local.signal});
       window.addEventListener('pointerup',()=>{if(!held)return;held=false;reset(paused||document.hidden);},{signal:local.signal});
@@ -317,8 +300,8 @@ export function setupArchiveAtlas({ signal, preference }: Options) {
   atlas.dataset.ringReady='true';measure();filterChanged();syncControls();
   const dispose=()=>{
     if(disposed)return;
-    endWheel();endWheelHint();copyFade?.cancel();releasePointer(false);stopFrame();disposed=true;events.abort();stageObserver.disconnect();resize.disconnect();media.revert();tileGates.clear();
-    delete atlas.dataset.ringReady;delete viewport.dataset.ringAnimating;delete viewport.dataset.dragging;camera.style.removeProperty('transform');
+    endWheel();copyFade?.cancel();releasePointer(false);stopFrame();disposed=true;events.abort();stageObserver.disconnect();resize.disconnect();media.revert();tileGates.clear();
+    delete atlas.dataset.ringReady;delete viewport.dataset.ringAnimating;delete viewport.dataset.dragging;
     cards.forEach((card,index)=>{card.hidden=index!==0;card.tabIndex=index===0?0:-1;card.style.removeProperty('transform');card.style.removeProperty('opacity');card.style.removeProperty('z-index');card.style.removeProperty('--ring-shade');card.removeAttribute('aria-current');delete card.dataset.ringActive;if(index===0)card.removeAttribute('aria-hidden');else card.setAttribute('aria-hidden','true');});
     signal.removeEventListener('abort',dispose);
   };

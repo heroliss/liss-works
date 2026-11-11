@@ -1,13 +1,13 @@
 /* Nine existing tools, nine opening rhythms. Their real screenshots remain intact. */
-.detail-page[data-project-world="aoe4-flow"]{--accent:#fcc959;--cyan:#fcc959;--surface:#211b10;--raised:#231f15;--muted:#c6c0ad}
-.detail-page[data-project-world="eazybuildpipeline"]{--accent:#c8714f;--cyan:#c8714f;--surface:#251814;--raised:#271c18;--muted:#c9bdb1}
-.detail-page[data-project-world="utility-lab"]{--accent:#efd6fe;--cyan:#efd6fe;--surface:#1f1923;--raised:#221d26;--muted:#c0bcd1}
-.detail-page[data-project-world="text-lab"]{--accent:#a99a9f;--cyan:#a99a9f;--surface:#24181c;--raised:#271c20;--muted:#c8bdca}
-.detail-page[data-project-world="qt-labs"]{--accent:#b3ffda;--cyan:#b3ffda;--surface:#121f19;--raised:#17221d;--muted:#b9ccc2}
-.detail-page[data-project-world="systems-lab"]{--accent:#5293c4;--cyan:#5293c4;--surface:#131d25;--raised:#172028;--muted:#b6c7d0}
-.detail-page[data-project-world="nex"]{--accent:#feecd1;--cyan:#feecd1;--surface:#211b10;--raised:#241e15;--muted:#c9c1b2}
-.detail-page[data-project-world="liss-blocks"]{--accent:#9792fb;--cyan:#9792fb;--surface:#1a1a26;--raised:#1e1e28;--muted:#c4bfd7}
-.detail-page[data-project-world="liss-web"]{--accent:#f96997;--cyan:#f96997;--surface:#25171b;--raised:#271c1e;--muted:#ccbfc5}
+.detail-page[data-project-world="aoe4-flow"]{--accent:#facf4e;--cyan:#facf4e;--surface:#1d1604;--raised:#231f15;--muted:#c6c0ad}
+.detail-page[data-project-world="eazybuildpipeline"]{--accent:#fec29e;--cyan:#fec29e;--surface:#241207;--raised:#271c18;--muted:#c9bdb1}
+.detail-page[data-project-world="utility-lab"]{--accent:#fecee8;--cyan:#fecee8;--surface:#22111a;--raised:#221d26;--muted:#c0bcd1}
+.detail-page[data-project-world="text-lab"]{--accent:#cfc2b3;--cyan:#cfc2b3;--surface:#1c160f;--raised:#271c20;--muted:#c8bdca}
+.detail-page[data-project-world="qt-labs"]{--accent:#9af5c5;--cyan:#9af5c5;--surface:#071c12;--raised:#17221d;--muted:#b9ccc2}
+.detail-page[data-project-world="systems-lab"]{--accent:#87b5e9;--cyan:#87b5e9;--surface:#0b1827;--raised:#172028;--muted:#b6c7d0}
+.detail-page[data-project-world="nex"]{--accent:#f1eec0;--cyan:#f1eec0;--surface:#191809;--raised:#241e15;--muted:#c9c1b2}
+.detail-page[data-project-world="liss-blocks"]{--accent:#c28dff;--cyan:#c28dff;--surface:#1b1324;--raised:#1e1e28;--muted:#c4bfd7}
+.detail-page[data-project-world="liss-web"]{--accent:#fb7188;--cyan:#fb7188;--surface:#251013;--raised:#271c1e;--muted:#ccbfc5}
 
 /* AoE4 Flow: the node canvas is the largest plane; facts form its lower margin. */
 .detail-page[data-project-world="aoe4-flow"] .project-prologue{display:grid;grid-template-columns:minmax(0,.65fr) minmax(0,1.35fr);gap:36px 6%;align-items:center;padding-top:40px}
@@ -33,7 +33,7 @@
 .detail-page[data-project-world="eazybuildpipeline"] .project-intro .summary{max-width:42ch;font-size:19px}
 .detail-page[data-project-world="eazybuildpipeline"] .project-opening{display:block}.detail-page[data-project-world="eazybuildpipeline"] .project-hero{width:94%;margin-left:auto}
 .detail-page[data-project-world="eazybuildpipeline"] .project-hero .media-link{padding:0;border-radius:2px}.detail-page[data-project-world="eazybuildpipeline"] .project-hero img{width:100%;max-height:none}
-.detail-page[data-project-world="eazybuildpipeline"] .project-signature{display:grid;grid-template-columns:1fr 1.25fr 1fr;gap:7%;margin:40px 0 0;padding:24px 0;border-top:1px solid #c8714f35}
+.detail-page[data-project-world="eazybuildpipeline"] .project-signature{display:grid;grid-template-columns:1fr 1.25fr 1fr;gap:7%;margin:40px 0 0;padding:24px 0;border-top:1px solid #fec29e35}
 .detail-page[data-project-world="eazybuildpipeline"] .project-signature>div{margin:0}.detail-page[data-project-world="eazybuildpipeline"] .project-signature dt{color:var(--accent)}
 .detail-page[data-project-world="eazybuildpipeline"] .project-overview{grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:10%}
 .detail-page[data-project-world="eazybuildpipeline"] .engineering-topic--media{display:block;width:92%;margin-left:auto}.detail-page[data-project-world="eazybuildpipeline"] .engineering-media img{max-height:none}

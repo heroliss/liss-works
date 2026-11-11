@@ -12,7 +12,7 @@ import { setupFooterMotion } from './footer-motion';
 import { setupProjectEnding } from './project-ending';
 import { setupLabRoomMotion } from './lab-room-motion';
 import { setupAboutStudioMotion } from './about-studio-motion';
-import { setupCreatorRoom } from './creator-room';
+import { setupWorksOrbit } from './works-orbit';
 import { setupAtollWater } from './atoll-water';
 import { setupPanxuShowcase } from './panxu-showcase';
 
@@ -197,7 +197,7 @@ function initializeMotion() {
   const disposeEnding = setupProjectEnding({ signal, preference });
   const disposeLabRoom = setupLabRoomMotion({ signal, preference });
   const disposeAboutStudio = setupAboutStudioMotion({ signal, preference });
-  const disposeCreatorRoom = setupCreatorRoom({ signal, preference });
+  const disposeWorksOrbit = setupWorksOrbit({ signal, preference });
   const disposeAtollWater = setupAtollWater({ signal, preference });
   const disposePanxu = setupPanxuShowcase({ signal, preference });
   if (storedPause !== undefined) {
@@ -233,7 +233,7 @@ function initializeMotion() {
     disposeEnding();
     disposeLabRoom();
     disposeAboutStudio();
-    disposeCreatorRoom();
+    disposeWorksOrbit();
     disposeAtollWater();
     disposePanxu();
     media.revert();

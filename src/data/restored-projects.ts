@@ -47,7 +47,7 @@ export const restoredProjects: Project[] = [
   { ...textLab, cover: text[0], gallery: text },
   { ...systemsLab, cover: systems[0], gallery: systems },
   {
-    slug: 'nex', repo: 'nex', name: 'NEX · 下一件值得做的事', category: '离线计划与专注工具', group: 'games',
+    slug: 'nex', repo: 'nex', name: 'NEX · 下一件值得做的事', category: '离线计划与专注工具', group: 'tools',
     summary: '把轻重缓急、截止时间与可用分钟，变成下一件事的选择依据。',
     intro: '将早期 Python NEXT5 的时效推荐思路融入 C# NEX。手动优先级、截止余量与等待时间共同辅助选择，单一专注状态连接计划与执行，SQLite 自动保留本机事项。',
     status: 'Windows 版已发布', tags: ['C#', '.NET 10', 'SQLite', 'WinForms'],

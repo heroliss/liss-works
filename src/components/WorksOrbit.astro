@@ -1,0 +1,28 @@
+---
+import Icon from './Icon.astro';
+import { projects } from '../data/projects';
+import { prioritizeProjects } from '../data/project-priority';
+import { getProjectWorld } from '../data/project-worlds';
+import { sitePath } from '../lib/site-path';
+import '../styles/works-orbit.css';
+// A 640px variant is plenty for a slab that never fills the frame.
+const texture = (cover: { src: string; srcset?: string }) => {
+  const choice = cover.srcset?.split(',').map(entry => entry.trim().split(/\s+/)).find(([, size]) => size === '640w');
+  return sitePath(choice?.[0] ?? cover.src);
+};
+const items = prioritizeProjects(projects).map(project => ({
+  slug: project.slug, name: project.name.split(' · ')[0], category: project.category, group: project.group,
+  accent: getProjectWorld(project.slug).accent, href: sitePath(`/projects/${project.slug}/`), image: texture(project.cover),
+}));
+---
+<figure class="works-orbit" data-works-orbit data-orbit-state="waiting" aria-label={`作品星环：${items.length} 个工程，每个都以真实截图和自己的颜色环绕在中心周围。`}>
+  <div class="works-orbit__stage" data-orbit-stage>
+    <canvas class="works-orbit__canvas" data-orbit-canvas aria-hidden="true" hidden></canvas>
+    <p class="works-orbit__label" data-orbit-label aria-hidden="true"><span data-orbit-label-category></span><strong data-orbit-label-name></strong></p>
+  </div>
+  <ul class="works-orbit__list" data-orbit-list aria-label="全部工程">
+    {items.map(item => <li><a href={item.href} data-orbit-slug={item.slug} style={`--orbit-tone:${item.accent}`}><i aria-hidden="true"></i>{item.name}</a></li>)}
+  </ul>
+  <figcaption class="works-orbit__caption"><p>{items.length} 个工程，各有自己的颜色。移动指针转动视角，拖动旋转，点击进入工程。</p><button type="button" data-orbit-motion-toggle hidden disabled aria-pressed="false"><Icon name="pause" size={16}/><span data-orbit-motion-label>暂停转动</span></button></figcaption>
+  <script type="application/json" data-orbit-items set:html={JSON.stringify(items)}></script>
+</figure>

@@ -13,7 +13,7 @@
 .detail-page .project-hero { perspective:1250px; }
 .project-card { --card-tone:var(--project-tone,var(--accent)); }
 .project-card h2 a:hover,.project-card--archive[data-active=true] h2 a { color:var(--card-tone); }
-.archive-preview { --accent:var(--project-tone,#dbf48b); }
+.archive-preview { --accent:var(--project-tone,#c8ec60); }
 .archive-preview .text-link,.archive-preview h2 { color:var(--accent); }
 .home-next .explore-index article[data-selected=true]>a { color:var(--project-tone,var(--accent)); }
 .home-next .explore-preview h3 { color:var(--project-tone,var(--accent)); }

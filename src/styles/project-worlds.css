@@ -6,7 +6,7 @@
 .detail-page:is([data-project-world="ssframework"],[data-project-world="dubforge"],[data-project-world="outpost"],[data-project-world="nomadworkshop"],[data-project-world="gomoku"]) .project-prologue .project-hero img{max-height:none}
 
 /* SSFramework: the large name is a masthead over a technical atlas. */
-.detail-page[data-project-world="ssframework"]{--accent:#dbf48b;--cyan:#dbf48b;--surface:#1a1d12;--raised:#1e2117;--muted:#b6c4b4}
+.detail-page[data-project-world="ssframework"]{--accent:#c8ec60;--cyan:#c8ec60;--surface:#141a07;--raised:#1e2117;--muted:#b6c4b4}
 .detail-page[data-project-world="ssframework"] .project-prologue{display:grid;grid-template-columns:minmax(0,.68fr) minmax(0,1.32fr);gap:24px 7%;padding-top:42px}
 .detail-page[data-project-world="ssframework"] .project-prologue::before{left:27%;right:0;top:175px;bottom:35px;background:#132018}
 .detail-page[data-project-world="ssframework"] :is(.project-intro,.project-intro-copy,.project-opening){display:contents}
@@ -31,7 +31,7 @@
 .detail-page[data-project-world="ssframework"] .gallery-grid figure:nth-child(3n+3){width:100%}
 
 /* DubForge: one large editing surface, then information arranged as tracks. */
-.detail-page[data-project-world="dubforge"]{--accent:#32bcf7;--cyan:#32bcf7;--surface:#111e24;--raised:#162127;--muted:#b0c5ce}
+.detail-page[data-project-world="dubforge"]{--accent:#30aff8;--cyan:#30aff8;--surface:#061925;--raised:#162127;--muted:#b0c5ce}
 .detail-page[data-project-world="dubforge"] .project-prologue{padding-top:25px}
 .detail-page[data-project-world="dubforge"] .project-prologue::before{left:15%;right:0;top:195px;bottom:130px;background:#121b2c;transform:skewY(2deg)}
 .detail-page[data-project-world="dubforge"] .project-intro{grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);margin:15px 0 48px;gap:8%}
@@ -42,7 +42,7 @@
 .detail-page[data-project-world="dubforge"] .project-hero{width:92%;margin-left:auto}
 .detail-page[data-project-world="dubforge"] .project-hero .media-link{padding:0;border-radius:6px;box-shadow:0 35px 80px -42px #000c}
 .detail-page[data-project-world="dubforge"] .project-hero img{width:100%}
-.detail-page[data-project-world="dubforge"] .project-signature{display:grid;grid-template-columns:1fr 1.25fr 1fr;gap:5%;margin-top:45px;padding-block:25px 10px;border-top:1px solid #32bcf73b}
+.detail-page[data-project-world="dubforge"] .project-signature{display:grid;grid-template-columns:1fr 1.25fr 1fr;gap:5%;margin-top:45px;padding-block:25px 10px;border-top:1px solid #30aff83b}
 .detail-page[data-project-world="dubforge"] .project-signature>div{margin:0}
 .detail-page[data-project-world="dubforge"] .project-signature dt{color:var(--accent)}
 .detail-page[data-project-world="dubforge"] .project-overview{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14%}
@@ -63,7 +63,7 @@
 .detail-page[data-project-world="dubforge"] .gallery-grid .media-link{padding:0;border-radius:4px}
 
 /* Outpost: the real battlefield leads from the left; warm light follows it. */
-.detail-page[data-project-world="outpost"]{--accent:#ff9c82;--cyan:#ff9c82;--surface:#251815;--raised:#281c19;--muted:#cbb9b4}
+.detail-page[data-project-world="outpost"]{--accent:#fd8358;--cyan:#fd8358;--surface:#25110b;--raised:#281c19;--muted:#cbb9b4}
 .detail-page[data-project-world="outpost"] .project-prologue{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:7%;align-items:center;padding-top:60px}
 .detail-page[data-project-world="outpost"] .project-prologue::before{left:-2%;right:20%;top:18%;bottom:12%;background:radial-gradient(ellipse at 46% 45%,#5c2a234f,transparent 71%)}
 .detail-page[data-project-world="outpost"] .project-intro{grid-column:2;grid-row:1;display:block;margin:0}
@@ -89,7 +89,7 @@
 .detail-page[data-project-world="outpost"] .gallery-grid figure:nth-child(3n+3){width:100%;grid-column:1/-1;max-width:82%;justify-self:center}
 
 /* NomadWorkshop: a wide, level world image and a pine-coloured field. */
-.detail-page[data-project-world="nomadworkshop"]{--accent:#8ed77f;--cyan:#8ed77f;--surface:#161e15;--raised:#1b2219;--muted:#bdc8bb}
+.detail-page[data-project-world="nomadworkshop"]{--accent:#6ce182;--cyan:#6ce182;--surface:#0b1b0e;--raised:#1b2219;--muted:#bdc8bb}
 .detail-page[data-project-world="nomadworkshop"] .project-prologue{padding-top:30px}
 .detail-page[data-project-world="nomadworkshop"] .project-prologue::before{left:16%;right:0;top:165px;bottom:-25px;background:#17251d;transform:skewY(-2deg)}
 .detail-page[data-project-world="nomadworkshop"] .project-intro{grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:6%;margin:15px 0 45px}
@@ -107,7 +107,7 @@
 .detail-page[data-project-world="nomadworkshop"] .gallery-grid figure:nth-child(3n+3){grid-column:1/-1;width:73%;margin-left:auto}
 
 /* Gomoku: the supplied board provides the geometry; cream type meets plum. */
-.detail-page[data-project-world="gomoku"]{--accent:#ea99d1;--cyan:#ea99d1;--surface:#23181f;--raised:#261c22;--ink:#eee7d5;--text:#eee7d5;--muted:#c4bdca}
+.detail-page[data-project-world="gomoku"]{--accent:#fd9ac6;--cyan:#fd9ac6;--surface:#231019;--raised:#261c22;--ink:#eee7d5;--text:#eee7d5;--muted:#c4bdca}
 .detail-page[data-project-world="gomoku"] .project-prologue{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:38px 7%;align-items:center;padding-top:50px}
 .detail-page[data-project-world="gomoku"] .project-prologue::before{left:36%;right:0;top:15px;bottom:100px;background:#241c30}
 .detail-page[data-project-world="gomoku"] .project-intro{grid-column:1;grid-row:1;display:block;margin:0}

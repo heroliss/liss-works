@@ -5,9 +5,10 @@ import { webProjects } from './web-projects.ts';
 import { frameworkArchitecture } from './framework-showcase.ts';
 
 export const groups: { id: ProjectGroup; label: string; description: string }[] = [
-  { id: 'games', label: '游戏与工具', description: '游戏、桌面工具，以及背后的框架和编辑器。' },
-  { id: 'ai-data', label: 'AI 与数据', description: '视频译制、文字处理、自动化与数据探索。' },
-  { id: 'graphics', label: '图形与代码实验', description: '渲染、系统模拟与算法实验，记录代码带来的不同可能。' },
+  { id: 'games', label: '游戏与实时场景', description: '可以直接上手的游戏、棋类对弈，以及实时渲染的海岛场景。' },
+  { id: 'tools', label: '框架与效率工具', description: 'Unity 框架与构建管线，以及日常在用的桌面和网页工具。' },
+  { id: 'ai-data', label: 'AI 与数据', description: '视频译制、中文处理、图像识别自动化与交互式数据图表。' },
+  { id: 'graphics', label: '图形与算法实验', description: '渲染、排序、寻路与系统模拟，把算法过程变成看得见的实验。' },
 ];
 
 const glassAtoll = [
@@ -258,7 +259,7 @@ export const projects: Project[] = [
     cover: dubforge[0], gallery: dubforge, related: ['intelligence-index-cost-linear', 'aoe4-flow'],
   },
   {
-    slug: 'panxu', repo: 'panxu', name: '盘序 · Windows 磁盘清理助手', category: 'Windows 磁盘清理助手', group: 'games',
+    slug: 'panxu', repo: 'panxu', name: '盘序 · Windows 磁盘清理助手', category: 'Windows 磁盘清理助手', group: 'tools',
     summary: 'AI 辅助发现清理线索，讲清文件用途与处理影响，帮你决定清什么、留什么。',
     intro: '面向 Windows 10 / 11 的 AI 辅助磁盘清理工具。内置规则识别常见垃圾，AI 再分析陌生目录、旧文件与软件残留，补充值得查看的清理线索。每一项都解释是什么、为什么建议清理、处理后会怎样，遇到疑问还可以继续「问 AI」。一键体检覆盖所选磁盘，并将结果同步到各工具页；个人文件由你勾选后移到回收站，AI 建议不会绕过保护规则。',
     status: '正式版', tags: ['Python', 'AI', 'pywebview', 'WebView2', 'Windows'],
@@ -278,7 +279,7 @@ export const projects: Project[] = [
     cover: panxu[0], gallery: panxu, related: ['nex', 'dubforge', 'utility-lab'],
   },
   {
-    slug: 'ssframework', repo: 'SSFramework', name: 'SSFramework', category: 'Unity 模块化框架', group: 'games',
+    slug: 'ssframework', repo: 'SSFramework', name: 'SSFramework', category: 'Unity 模块化框架', group: 'tools',
     summary: '多年 Unity 实践的集中整理，用清晰的分层与生命周期连接游戏和工具。',
     intro: '面向 Unity 项目的模块化运行时与编辑器基础设施。Context 管理依赖和作用域，Model / System / View 组织状态、规则与表现，Command、Event 和响应式状态连接数据流；资源、UI、配置与构建通过独立模块接入。',
     status: '持续维护', tags: ['Unity', 'C#', 'R3', 'UniTask', 'YooAsset'],
@@ -296,7 +297,7 @@ export const projects: Project[] = [
     cover: frameworkArchitecture, gallery: framework, related: ['outpost', 'nomadworkshop', 'eazybuildpipeline'],
   },
   {
-    slug: 'eazybuildpipeline', repo: 'EazyBuildPipeline', name: 'EazyBuildPipeline', category: 'Unity 资源与构建工具', group: 'games',
+    slug: 'eazybuildpipeline', repo: 'EazyBuildPipeline', name: 'EazyBuildPipeline', category: 'Unity 资源与构建工具', group: 'tools',
     summary: '第一份工作里的用心之作，把真实资源与构建需求整理为实用工具。',
     intro: '第一份工作期间，结合实际项目需求独立开发的 Unity 编辑器工具集。初入行时投入心血，把资源预处理、引用检查、Bundle、分包和 Player 构建整理为可组合模块；如今通用部分已完成 Unity 6 兼容整理。',
     status: 'Unity 6 兼容', tags: ['Unity Editor', 'C#', 'AssetBundle', 'IMGUI'],
@@ -468,7 +469,7 @@ export const projects: Project[] = [
     cover: floyd[0], gallery: floyd, related: ['ga-sort', 'ssframework'],
   },
   {
-    slug: 'liss-web', repo: 'liss-community', name: 'Liss Community · 记录与交流', category: 'Flask 写作与交流', group: 'graphics',
+    slug: 'liss-web', repo: 'liss-community', name: 'Liss Community · 记录与交流', category: 'Flask 写作与交流', group: 'tools',
     summary: '自学 Flask 与前端 Web 技术的完整实践，把账户、文字和互动串起来。',
     intro: '自学 Flask 后端与前端 Web 技术时独立完成的社交博客，最初部署于 Heroku。如今以深色界面连接 Markdown 写作、可选邮箱、真实互动与管理后台，让身份与内容长期保留。',
     status: '在线可体验', tags: ['Flask', 'Jinja2', 'JavaScript', 'SQLAlchemy', 'EasyMDE'],

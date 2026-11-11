@@ -16,43 +16,56 @@ export function nearestPhase(index: number, phase: number, count: number): numbe
   return count > 1 ? phase + circularOffset(index, phase, count) : 0;
 }
 
-/**
- * Degrees between neighbouring cards. Long lists use an open 19° arc rather than a
- * full cylinder: cards past the visible side wrap round the back while invisible.
- */
+/** Kept for callers that still ask for a spacing angle; the cover flow uses a fixed turn. */
 export function ringStep(count: number): number {
-  return count < 2 ? 0 : clamp(360 / count, 19, 26);
-}
-
-/** Card width used by the cylinder; the controller and the pose share one rule. */
-export function ringCardWidth(width: number): number {
-  return clamp(width < 700 ? width * .56 : width * .205, 200, 320);
+  return count < 2 ? 0 : 55;
 }
 
 /**
- * A cylinder carousel seen slightly from above: the front card faces the viewer and
- * three neighbours on each side stay legible while they turn and recede around the
- * same axis; a fourth fades in at each edge. Cards fade before they turn edge-on; short filtered lists also fade
- * at their index seam so nothing pops when the phase wraps.
+ * Width of the focused screenshot. It takes a large share of the row so the image
+ * itself is readable; an optional height budget keeps it inside short windows.
  */
-export function ringPose(offset: number, width: number, count: number) {
-  const distance = Math.abs(offset), step = ringStep(count), degrees = offset * step;
-  const angle = degrees * Math.PI / 180;
-  // Front arc spacing is slightly wider than a card, so neighbours never overlap.
-  const radius = count < 2 ? 0 : ringCardWidth(width) * 1.06 / (step * Math.PI / 180);
-  const side = clamp((86 - Math.abs(degrees)) / 36, 0, 1);
+export function ringCardWidth(width: number, maxHeight = Infinity): number {
+  const byWidth = width < 700 ? width * .74 : width * .44;
+  const byHeight = Number.isFinite(maxHeight) ? (maxHeight - 70) / .625 : Infinity;
+  return clamp(Math.min(byWidth, byHeight), 220, 720);
+}
+
+/** Layout constants shared by the pose and the drag controller, in card widths. */
+export function ringLayout(width: number, maxHeight = Infinity) {
+  const card = ringCardWidth(width, maxHeight), narrow = width < 700;
+  // The first neighbour slides most of the way out from behind the focus; the rest
+  // stack in tight slivers so many projects stay faintly visible on each side.
+  const lift = card * (narrow ? .5 : .56), stack = card * (narrow ? .07 : .08);
+  const reach = Math.max(card * .7, width / 2 - card * .04);
+  const perSide = Math.max(1, Math.min(9, Math.floor((reach - lift) / stack)));
+  return { card, lift, stack, perSide, turn: narrow ? 58 : 55, depth: card * .55 };
+}
+
+/**
+ * A cover flow: the focused screenshot faces the viewer at full size; neighbours
+ * swing inward around their own axis, recede and stack as slim slivers that grow
+ * darker the further they are. Movement is C1-continuous through the first slot,
+ * so dragging never jerks, and short filtered lists fade at their index seam.
+ */
+export function ringPose(offset: number, width: number, count: number, maxHeight = Infinity) {
+  const distance = Math.abs(offset), sign = Math.sign(offset);
+  const { lift, stack, perSide, turn, depth } = ringLayout(width, maxHeight);
+  const t = Math.min(distance, 1), ease = t * (2 - t);
   const seam = count / 2;
-  const seamFade = clamp((seam - distance) / Math.min(.6, seam * .4), 0, 1);
-  const opacity = count < 2 ? 1 : Math.min(side * side * (3 - 2 * side), seamFade);
+  const seamFade = count < 2 ? 1 : clamp((seam - distance) / Math.min(.6, seam * .4), 0, 1);
+  const edge = clamp(perSide + 1 - distance, 0, 1);
+  const opacity = count < 2 ? 1 : Math.min(seamFade, edge * edge * (3 - 2 * edge));
   return {
-    x: Math.sin(angle) * radius,
+    x: count < 2 ? 0 : sign * (lift * ease + stack * distance),
     y: 0,
-    z: (Math.cos(angle) - 1) * radius,
-    rotateY: degrees,
+    z: count < 2 ? 0 : -(depth * ease + stack * .35 * distance),
+    rotateY: count < 2 ? 0 : -sign * turn * ease,
+    scale: count < 2 ? 1 : 1 - .13 * ease,
     opacity,
-    shade: count < 2 ? 0 : clamp((1 - Math.cos(angle)) * 1.2, 0, .6),
+    shade: count < 2 ? 0 : clamp(.42 * ease + .05 * Math.max(0, distance - 1), 0, .78),
     visible: count > 0 && opacity > .003 && (count < 2 || distance < seam),
-    zIndex: Math.round(1000 - distance * 100),
+    zIndex: Math.round(1000 - distance * 20),
   };
 }
 

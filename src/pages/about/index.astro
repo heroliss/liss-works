@@ -1,35 +1,68 @@
 ---
-import { communityUrl } from '../../lib/site-path';
+import { communityUrl, sitePath } from '../../lib/site-path';
 import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
-import CreatorRoom from '../../components/CreatorRoom.astro';
-import '../../styles/about-creator.css';
+import WorksOrbit from '../../components/WorksOrbit.astro';
+import { projects, groups } from '../../data/projects';
+import { prioritizeProjects } from '../../data/project-priority';
+import { getProjectWorld } from '../../data/project-worlds';
+import '../../styles/about-page.css';
+const ordered = prioritizeProjects(projects);
+const areas = groups.map(group => {
+  const members = ordered.filter(project => project.group === group.id);
+  return { ...group, members, tone: getProjectWorld(members[0]?.slug ?? '').accent };
+});
+const withSource = projects.filter(project => project.source).length;
+const principles = [
+  { title: '先做出能试的版本', body: '想法先变成可以运行、可以操作的东西，再根据实际使用一点点打磨。' },
+  { title: '从具体的问题出发', body: '有些来自工作和日常需求，有些出于好奇；每个工程都从一个说得清的问题开始。' },
+  { title: '把过程摊开来看', body: `工程页附上实机截图与实现说明，${projects.length} 个工程里有 ${withSource} 个的源码公开在 GitHub。` },
+];
 ---
 <Base title="关于" active="about" description="我是 Liss，独立开发游戏、Unity 工具、AI 应用与交互实验。把想法做成可以一试的东西，也欢迎来聊聊。">
- <div class="about-creator" data-about-creator>
-  <header class="creator-about__opening">
-   <h1 id="about-title" aria-label="我是 Liss"><span>我是</span> <strong>Liss</strong></h1>
-   <div class="creator-about__intro">
-    <p class="creator-about__lead">我喜欢把想法做成<span>可以运行</span>、<span>可以操作</span>、<span>可以看见</span>的东西。</p>
+ <div class="about-page">
+  <header class="about-opening">
+   <div class="about-opening__name">
+    <p class="about-kicker">关于</p>
+    <h1 aria-label="我是 Liss"><span>我是</span> <strong>Liss</strong></h1>
+   </div>
+   <div class="about-opening__intro">
+    <p class="about-lead">我喜欢把想法做成<em>可以运行</em>、<em>可以操作</em>、<em>可以看见</em>的东西。</p>
+    <p class="about-scope">独立开发游戏、Unity 工具、AI 应用与交互实验。下面这一圈，就是目前做过的全部工程。</p>
    </div>
   </header>
 
-  <div class="creator-about__scene"><CreatorRoom/></div>
+  <section class="about-orbit" aria-label="全部工程一览"><WorksOrbit/></section>
 
-  <section class="creator-about__afterword" aria-labelledby="creator-afterword-title">
-   <h2 id="creator-afterword-title">从想法，<br/>到可以一试。</h2>
-   <div class="creator-about__practice">
-    <p class="creator-about__scope">独立开发游戏、Unity 工具、AI 应用与交互实验。</p>
-    <p>有些来自工作和日常需求，有些出于好奇；先做一个可以试的版本，再慢慢打磨。</p>
-    <p>一个问题、一点使用心得，或一个还没成形的想法，都可以成为下一段对话。</p>
-    <div class="creator-about__contact">
-     <a class="creator-about__talk" href={communityUrl}><Icon name="chat" size={20}/>来聊聊 <Icon size={20}/></a>
-     <div class="creator-about__destinations">
-      <p>Liss Community · 想法、问题与分享</p>
-      <a class="creator-about__github" href="https://github.com/heroliss" target="_blank" rel="noreferrer" aria-label="在 GitHub 找到 Liss（新窗口）"><Icon name="github" size={18}/>在 GitHub 找到我 <Icon size={16}/></a>
-     </div>
-    </div>
+  <section class="about-areas" aria-labelledby="about-areas-title">
+   <header class="about-section-head"><p class="about-kicker">在做什么</p><h2 id="about-areas-title">四个方向，{projects.length} 个工程</h2></header>
+   <div class="about-areas__grid">
+    {areas.map(area => <a class="about-area" href={sitePath(`/projects/?group=${area.id}`)} style={`--area-tone:${area.tone}`}>
+     <span class="about-area__count">{area.members.length}<small>个工程</small></span>
+     <h3>{area.label}</h3>
+     <p>{area.description}</p>
+     <span class="about-area__dots" aria-hidden="true">{area.members.map(member => <i style={`--dot:${getProjectWorld(member.slug).accent}`} title={member.name.split(' · ')[0]}></i>)}</span>
+     <span class="about-area__names">{area.members.slice(0, 4).map(member => member.name.split(' · ')[0]).join(' · ')}{area.members.length > 4 ? ' …' : ''}</span>
+     <span class="about-area__go">查看这一类 <Icon size={17}/></span>
+    </a>)}
    </div>
+  </section>
+
+  <section class="about-ways" aria-labelledby="about-ways-title">
+   <header class="about-section-head"><p class="about-kicker">怎么做</p><h2 id="about-ways-title">从想法，到可以一试。</h2></header>
+   <ol class="about-ways__list">
+    {principles.map((item, index) => <li><span class="about-ways__index">{String(index + 1).padStart(2, '0')}</span><h3>{item.title}</h3><p>{item.body}</p></li>)}
+   </ol>
+  </section>
+
+  <section class="about-contact" aria-labelledby="about-contact-title">
+   <h2 id="about-contact-title">一个问题、一点使用心得，<br/>或一个还没成形的想法。</h2>
+   <p>都可以成为下一段对话。</p>
+   <div class="about-contact__actions">
+    <a class="about-contact__talk" href={communityUrl}><Icon name="chat" size={20}/>来聊聊 <Icon size={20}/></a>
+    <a class="about-contact__github" href="https://github.com/heroliss" target="_blank" rel="noreferrer" aria-label="在 GitHub 找到 Liss（新窗口）"><Icon name="github" size={18}/>在 GitHub 找到我 <Icon size={16}/></a>
+   </div>
+   <p class="about-contact__note">Liss Community · 想法、问题与分享</p>
   </section>
  </div>
 </Base>

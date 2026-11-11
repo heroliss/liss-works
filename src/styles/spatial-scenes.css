@@ -79,6 +79,6 @@ html[data-motion] .dub-reel[data-reel-enhanced=true] .dub-controls{right:1.5%;to
 }
 html:not([data-motion]) .dub-controls,html:not([data-motion]) .framework-scene-summary,html:not([data-motion]) .factory-foreground-geometry,html:not([data-motion]) .factory-mobile-conveyor{display:none}
 /* The interlude belongs to the project currently on the main screen. */
-.home-next .process-band .kinetic-strip{--banner-tone:var(--showcase-tone,#ff9c82);color:var(--banner-tone);background:color-mix(in srgb,var(--banner-tone) 8%,#0b0e10);border-color:color-mix(in srgb,var(--banner-tone) 28%,transparent);transition:color .5s,background-color .5s,border-color .5s}
-.home-next .process-band .kinetic-strip i{color:color-mix(in srgb,var(--showcase-tone,#ff9c82) 65%,#b6beba);transition:color .5s}
+.home-next .process-band .kinetic-strip{--banner-tone:var(--showcase-tone,#fd8358);color:var(--banner-tone);background:color-mix(in srgb,var(--banner-tone) 8%,#0b0e10);border-color:color-mix(in srgb,var(--banner-tone) 28%,transparent);transition:color .5s,background-color .5s,border-color .5s}
+.home-next .process-band .kinetic-strip i{color:color-mix(in srgb,var(--showcase-tone,#fd8358) 65%,#b6beba);transition:color .5s}
 @media(prefers-reduced-motion:reduce){.home-next .process-band .kinetic-strip,.home-next .process-band .kinetic-strip i{transition:none}}

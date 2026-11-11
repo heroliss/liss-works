@@ -1,5 +1,5 @@
 /* A drawn island and optical water share an open, unframed stage. */
-.atoll-showcase { --atoll-tone:#7bdcd1; position:relative; padding-block:clamp(36px,5vw,80px); }
+.atoll-showcase { --atoll-tone:#6ee8e3; position:relative; padding-block:clamp(36px,5vw,80px); }
 .atoll-showcase__heading { display:flex; align-items:end; justify-content:space-between; gap:40px; margin-bottom:8px; position:relative; z-index:1; }
 .atoll-showcase__heading h2 { margin:0; color:var(--atoll-tone); font-size:clamp(64px,8vw,116px); line-height:1.05; letter-spacing:-.05em; font-weight:500; }
 .atoll-showcase__name { margin:20px 0 0; color:var(--muted); font-size:17px; }

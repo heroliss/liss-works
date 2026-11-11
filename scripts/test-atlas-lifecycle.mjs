@@ -155,36 +155,38 @@ check('aborting mid-animation removes ownership and stale current-card semantics
   app.dispose(); assert.deepEqual(app.observations(), { disconnected: 2, reverted: 1 });
 });
 
-check('a plain vertical wheel scrolls the page and only shows a short hint', () => {
+check('a plain vertical wheel over the ring turns it without any modifier', () => {
   const app = fixture();
-  const wheel = event('wheel', { deltaX: 0, deltaY: 140, deltaMode: 0 });
+  const wheel = event('wheel', { deltaX: 0, deltaY: 140, deltaMode: 0, timeStamp: 1000 });
   app.viewport.dispatchEvent(wheel);
-  assert.equal(wheel.defaultPrevented, false); assert.equal(app.frames.size, 0);
-  assert.equal(app.help.dataset.hint, 'true'); assert.match(app.help.textContent, /Shift/); assert.equal(app.timers.size, 1);
-  [...app.timers.values()][0](); app.timers.clear();
-  assert.equal(app.help.dataset.hint, undefined); assert.doesNotMatch(app.help.textContent, /照常滚动/);
-  const again = event('wheel', { deltaX: 0, deltaY: 140, deltaMode: 0 });
-  app.viewport.dispatchEvent(again);
-  assert.equal(again.defaultPrevented, false); assert.equal(app.timers.size, 0, 'the hint is rate-limited');
+  assert.equal(wheel.defaultPrevented, true); assert.equal(app.timers.size, 1); assert.ok(app.frames.size);
+  assert.doesNotMatch(app.help.textContent, /Shift/);
   app.dispose();
 });
 
-check('sideways and Shift wheels turn the ring; aborting clears the snap, frame and hint', () => {
-  for (const properties of [{ deltaX: 140, deltaY: 6 }, { deltaX: 0, deltaY: 140, shiftKey: true }]) {
+check('a page scroll that carries the ring under the pointer keeps scrolling the page', () => {
+  const app = fixture();
+  app.window.dispatchEvent(event('wheel', { deltaY: 100, timeStamp: 5000 }));
+  const carried = event('wheel', { deltaX: 0, deltaY: 100, deltaMode: 0, timeStamp: 5100 });
+  app.viewport.dispatchEvent(carried);
+  assert.equal(carried.defaultPrevented, false); assert.equal(app.frames.size, 0);
+  const fresh = event('wheel', { deltaX: 0, deltaY: 100, deltaMode: 0, timeStamp: 6000 });
+  app.viewport.dispatchEvent(fresh);
+  assert.equal(fresh.defaultPrevented, true, 'a new wheel gesture over the ring turns it');
+  app.dispose();
+});
+
+check('sideways and vertical wheels turn the ring; aborting clears the snap and frame', () => {
+  for (const properties of [{ deltaX: 140, deltaY: 6 }, { deltaX: 0, deltaY: 140 }]) {
     const app = fixture();
-    const wheel = event('wheel', { deltaMode: 0, ...properties });
+    const wheel = event('wheel', { deltaMode: 0, timeStamp: 1000, ...properties });
     app.viewport.dispatchEvent(wheel);
     assert.equal(wheel.defaultPrevented, true); assert.equal(app.timers.size, 1); assert.ok(app.frames.size);
-    assert.equal(app.help.dataset.hint, undefined);
     app.signal.abort();
     assert.equal(app.timers.size, 0); assert.equal(app.frames.size, 0);
-    app.viewport.dispatchEvent(event('wheel', { deltaMode: 0, ...properties }));
+    app.viewport.dispatchEvent(event('wheel', { deltaMode: 0, timeStamp: 2000, ...properties }));
     assert.equal(app.timers.size, 0); assert.equal(app.frames.size, 0);
   }
-  const hinted = fixture();
-  hinted.viewport.dispatchEvent(event('wheel', { deltaX: 0, deltaY: 140, deltaMode: 0 }));
-  hinted.signal.abort();
-  assert.equal(hinted.timers.size, 0); assert.equal(hinted.help.dataset.hint, undefined);
 });
 
 console.log(JSON.stringify({ passed: true, groups: checks.length, checks,

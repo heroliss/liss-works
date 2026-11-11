@@ -6,7 +6,7 @@
 }
 
 .home-atmosphere {
-  --atmosphere-tone: var(--showcase-tone, #ff9c82);
+  --atmosphere-tone: var(--showcase-tone, #fd8358);
   position: absolute;
   top: -90px;
   bottom: -90px;
@@ -139,7 +139,7 @@
   overflow: hidden;
 }
 
-.home-atmosphere--framework { --atmosphere-tone: #dbf48b; }
+.home-atmosphere--framework { --atmosphere-tone: #c8ec60; }
 .home-atmosphere--games { --atmosphere-tone: #efb17d; }
 .home-atmosphere--explore { --atmosphere-tone: #b9abef; }
 .home-atmosphere--closing { --atmosphere-tone: #c7dca1; }

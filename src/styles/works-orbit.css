@@ -1,0 +1,32 @@
+/* The works orbit: a live WebGL scene with a plain list of the same projects
+   underneath. The list is the fallback and the keyboard route; once the scene
+   runs it collapses to a quiet colour index. */
+.works-orbit { position:relative; margin:0; color:var(--text); }
+.works-orbit__stage { position:relative; height:clamp(460px,64vh,700px); touch-action:pan-y; cursor:grab; user-select:none; -webkit-user-select:none; }
+.works-orbit__stage[data-hovering=true] { cursor:pointer; }
+.works-orbit__stage[data-dragging=true] { cursor:grabbing; }
+.works-orbit:not([data-orbit-ready]) .works-orbit__stage { display:none; }
+.works-orbit__canvas { position:absolute; inset:0; display:block; width:100%; height:100%; mask-image:radial-gradient(ellipse 72% 70% at 50% 50%,#000 64%,transparent 100%); }
+.works-orbit__label { position:absolute; left:50%; bottom:clamp(14px,4%,34px); display:grid; justify-items:center; gap:2px; margin:0; padding:10px 18px 12px; transform:translate(-50%,8px); opacity:0; pointer-events:none; text-align:center; border-radius:12px; background:color-mix(in srgb,#0b1118 72%,transparent); border:1px solid color-mix(in srgb,var(--orbit-tone,#9cdef1) 38%,transparent); box-shadow:0 18px 40px -22px #000,0 0 30px -14px var(--orbit-tone,#9cdef1); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); transition:opacity .22s ease,transform .22s ease; }
+.works-orbit__label[data-visible=true] { opacity:1; transform:translate(-50%,0); }
+.works-orbit__label span { font-size:13px; color:var(--muted); line-height:1.6; }
+.works-orbit__label strong { font-family:Rajdhani,'Noto Sans SC',sans-serif; font-size:24px; font-weight:600; line-height:1.15; color:var(--orbit-tone,#9cdef1); }
+.works-orbit__list { display:flex; flex-wrap:wrap; justify-content:center; gap:8px 10px; margin:18px auto 0; padding:0; list-style:none; max-width:980px; }
+.works-orbit__list a { display:inline-flex; align-items:center; gap:8px; min-height:38px; padding:6px 13px; border-radius:20px; border:1px solid color-mix(in srgb,var(--orbit-tone) 30%,transparent); background:color-mix(in srgb,var(--orbit-tone) 7%,transparent); color:var(--text); font-size:14px; line-height:1.4; transition:border-color .2s ease,background .2s ease,color .2s ease; }
+.works-orbit__list a:is(:hover,:focus-visible) { border-color:var(--orbit-tone); background:color-mix(in srgb,var(--orbit-tone) 16%,transparent); color:var(--orbit-tone); }
+.works-orbit__list i { width:8px; height:8px; border-radius:50%; background:var(--orbit-tone); box-shadow:0 0 10px -1px var(--orbit-tone); }
+/* With the scene running, the list becomes a compact row of colour dots that
+   still names every project to assistive technology and keyboard focus. */
+.works-orbit[data-orbit-ready] .works-orbit__list { gap:6px; margin-top:8px; }
+.works-orbit[data-orbit-ready] .works-orbit__list a { min-height:24px; min-width:24px; padding:0; justify-content:center; border:0; background:none; font-size:0; }
+.works-orbit[data-orbit-ready] .works-orbit__list a:focus-visible { font-size:13px; padding:3px 10px; background:color-mix(in srgb,var(--orbit-tone) 14%,transparent); }
+.works-orbit[data-orbit-ready] .works-orbit__list i { width:9px; height:9px; }
+.works-orbit__caption { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:6px 22px; padding:12px 0 0; text-align:center; }
+.works-orbit__caption p { margin:0; color:var(--muted); font-size:14px; line-height:1.7; }
+.works-orbit__caption button { display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:6px 0; background:none; border-bottom:1px solid #4d6478; border-radius:0; color:var(--text); font-size:14px; }
+@media(max-width:760px) {
+  .works-orbit__stage { height:clamp(300px,80vw,420px); }
+  .works-orbit__label strong { font-size:20px; }
+  .works-orbit__caption p { font-size:13px; max-width:24em; }
+}
+@media(forced-colors:active) { .works-orbit__list a { border:1px solid LinkText; } }

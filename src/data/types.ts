@@ -1,4 +1,4 @@
-export type ProjectGroup = 'games' | 'ai-data' | 'graphics';
+export type ProjectGroup = 'games' | 'tools' | 'ai-data' | 'graphics';
 
 export interface GalleryImage {
   src: string;

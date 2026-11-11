@@ -54,6 +54,11 @@
   --shelf-bounce:#8ea9b9;
   --shelf-contour:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1800 1200' fill='none'%3E%3Cg stroke='white' stroke-width='2'%3E%3Cpath d='M-120 870C190 352 505 330 782 571S1370 1064 1870 602M-111 908C199 390 505 371 762 600S1370 1104 1890 642'/%3E%3Cpath d='M1384 112C1542 28 1711 112 1736 288S1563 560 1431 465S1259 229 1384 112ZM1416 151C1544 87 1660 151 1672 294S1553 497 1454 423S1320 247 1416 151Z'/%3E%3C/g%3E%3C/svg%3E");
 }
+.archive-atlas .atlas-shelf[data-atlas-group=tools] {
+  --shelf-tone:#c9b98f;
+  --shelf-bounce:#93a9c4;
+  --shelf-contour:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1800 1200' fill='none'%3E%3Cg stroke='white' stroke-width='2'%3E%3Cpath d='M1180 140H1640V420H1180ZM1220 180H1600V380H1220ZM1410 420V560M1260 560H1560'/%3E%3Cpath d='M-110 860C210 610 470 700 700 820S1180 980 1880 700M-100 900C220 650 470 740 700 860S1180 1020 1890 740'/%3E%3C/g%3E%3C/svg%3E");
+}
 .archive-atlas .atlas-shelf[data-atlas-group=ai-data] {
   --shelf-tone:#9cbcc6;
   --shelf-bounce:#b7a4a3;

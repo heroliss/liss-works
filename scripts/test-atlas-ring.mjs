@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {
   wrapPhase, circularOffset, nearestPhase, ringPose, ringCardWidth, ringStep, advanceRing,
-  normalizeWheel, gestureAxis,
+  normalizeWheel, gestureAxis, ringLayout,
 } from '../src/scripts/archive-ring-math.ts';
 
 const checks = [];
@@ -87,28 +87,37 @@ check('depth and falloff stay symmetric and monotone while cards turn away', () 
   }
 });
 
-check('the full catalogue keeps seven cards readable and fades the rest before they turn edge-on', () => {
+check('the focused screenshot dominates while many neighbours stay faintly visible', () => {
   for (const width of [1440, 1100, 375]) {
+    const card = ringCardWidth(width), { perSide } = ringLayout(width);
+    assert.ok(card >= Math.min(width * .4, 720) - 1e-9 || width < 700, `focus is large at ${width}px`);
     const poses = Array.from({ length: 23 }, (_, index) => ringPose(circularOffset(index, 0, 23), width, 23));
-    assert.equal(poses.filter(pose => pose.opacity > .5).length, 7, `readable cards at ${width}px`);
-    for (const pose of poses.filter(pose => pose.visible)) assert.ok(Math.abs(pose.rotateY) < 86, 'no visible card turns edge-on');
-    for (const offset of [0, .5, 1, 1.5]) near(ringPose(offset, width, 23).opacity, 1);
+    const shown = poses.filter(pose => pose.opacity > .5).length;
+    assert.ok(shown >= (width < 700 ? 5 : 9), `at least a handful of neighbours remain visible at ${width}px (${shown})`);
+    assert.equal(shown, 1 + 2 * perSide);
+    for (const pose of poses.filter(pose => pose.visible)) assert.ok(Math.abs(pose.rotateY) < 90, 'no visible card turns edge-on');
+    const front = ringPose(0, width, 23), first = ringPose(1, width, 23);
+    assert.ok(first.scale < front.scale && first.shade > front.shade, 'neighbours are smaller and darker than the focus');
+    assert.ok(first.x >= card * .5, 'the first neighbour slides out from behind the focus');
   }
 });
 
-check('front neighbours do not overlap and side cards darken gradually', () => {
-  for (const width of [1440, 900, 375]) {
-    const card = ringCardWidth(width);
-    assert.ok(ringPose(1, width, 23).x - ringPose(0, width, 23).x >= card, 'arc spacing is wider than a card');
+check('cover flow motion is continuous through the first slot and stacks the rest evenly', () => {
+  for (const width of [1440, 375]) {
+    const step = 1e-4, slope = offset => (ringPose(offset + step, width, 23).x - ringPose(offset - step, width, 23).x) / (2 * step);
+    near(slope(1 - 3 * step), slope(1 + 3 * step), 1);
+    const gaps = [2, 3, 4].map(offset => ringPose(offset + 1, width, 23).x - ringPose(offset, width, 23).x);
+    gaps.forEach(gap => near(gap, gaps[0], 1e-9));
     let previous = -1;
-    for (let offset = 0; offset <= 4; offset += .25) {
+    for (let offset = 0; offset <= 6; offset += .25) {
       const shade = ringPose(offset, width, 23).shade;
-      assert.ok(shade >= previous - 1e-12 && shade <= .6);
+      assert.ok(shade >= previous - 1e-12 && shade <= .78);
       previous = shade;
     }
     near(ringPose(0, width, 23).shade, 0);
   }
-  assert.equal(ringStep(1), 0); assert.equal(ringStep(23), 19); assert.equal(ringStep(3), 26);
+  assert.equal(ringStep(1), 0); assert.equal(ringStep(23), 55);
+  assert.ok(ringCardWidth(1440, 400) < ringCardWidth(1440), 'a short window caps the focused card');
 });
 
 check('short filtered lists are already invisible at the seam before they wrap', () => {
