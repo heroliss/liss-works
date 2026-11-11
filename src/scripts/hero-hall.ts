@@ -11,6 +11,7 @@ export function setupHeroHall({ signal, preference }: Options): () => void {
   const label = root.querySelector<HTMLElement>('[data-hall-label]');
   const labelName = root.querySelector<HTMLElement>('[data-hall-label-name]');
   const labelCategory = root.querySelector<HTMLElement>('[data-hall-label-category]');
+  const labelAction = root.querySelector<HTMLElement>('[data-hall-label-action]');
   const focus = root.querySelector<HTMLElement>('[data-hall-focus]');
   const focusHook = root.querySelector<HTMLElement>('[data-hall-focus-hook]');
   const focusName = root.querySelector<HTMLElement>('[data-hall-focus-name]');
@@ -29,6 +30,9 @@ export function setupHeroHall({ signal, preference }: Options): () => void {
     if (index === null) { delete label.dataset.visible; return; }
     if (labelName) labelName.textContent = items[index].name;
     if (labelCategory) labelCategory.textContent = chips[index].dataset.category ?? '';
+    // Say what a click will do: a side work comes forward, the front one opens its chapter.
+    if (labelAction) labelAction.textContent = engine && index !== engine.selected() ? '点击放到前面' : '点击查看介绍 ↓';
+    label.dataset.front = String(!!engine && index === engine.selected());
     label.style.setProperty('--tone', items[index].tone); label.dataset.visible = 'true';
   };
   // Bring a work to the front of the constellation and update its caption.
@@ -42,6 +46,7 @@ export function setupHeroHall({ signal, preference }: Options): () => void {
       if (focusLink) focusLink.href = items[index].href;
       if (!preference.matches) { delete focus.dataset.changing; void focus.offsetWidth; focus.dataset.changing = 'true'; }
     }
+    if (shownHover !== null) showLabel(shownHover);
     request();
   };
   const render = (now: number) => {
@@ -87,7 +92,7 @@ export function setupHeroHall({ signal, preference }: Options): () => void {
     return { x: (event.clientX - box.left) / Math.max(1, box.width) * 2 - 1, y: (event.clientY - box.top) / Math.max(1, box.height) * 2 - 1 };
   };
   root.addEventListener('pointermove', event => {
-    if (!engine || event.pointerType === 'touch' || !fine.matches) return;
+    if (!engine || event.pointerType === 'touch' || !fine.matches || drag?.moved) return;
     pointerAt = { x: event.clientX, y: event.clientY };
     const box = root.getBoundingClientRect(), point = local(event), overCanvas = event.target === canvas;
     engine.setPointer((event.clientX - box.left) / box.width * 2 - 1, (event.clientY - box.top) / box.height * 2 - 1, overCanvas ? point.x : 9, overCanvas ? point.y : 9, !preference.matches);
@@ -99,20 +104,21 @@ export function setupHeroHall({ signal, preference }: Options): () => void {
   let drag: { id: number; x: number; y: number; lastX: number; lastY: number; time: number; velocity: number; velocityY: number; moved: boolean } | null = null;
   let suppressClick = 0;
   const unit = () => Math.max(320, canvas.clientWidth * .5);
-  const angleFor = (dx: number) => {
-    const raw = dx / unit() * .9, limit = .75;
-    return Math.abs(raw) <= limit ? raw : Math.sign(raw) * (limit + (Math.abs(raw) - limit) * .3);
-  };
+  const angleFor = (dx: number) => dx / unit() * 1.2;
   // Dragging down raises the camera (looking down over the mirror); up lowers it.
-  const pitchFor = (dy: number) => dy / Math.max(260, canvas.clientHeight * .6) * .6;
+  const pitchFor = (dy: number) => dy / Math.max(260, canvas.clientHeight * .6) * .8;
   canvas.addEventListener('pointerdown', event => {
     if (!engine || !event.isPrimary || event.button !== 0) return;
     drag = { id: event.pointerId, x: event.clientX, y: event.clientY, lastX: event.clientX, lastY: event.clientY, time: event.timeStamp, velocity: 0, velocityY: 0, moved: false };
   }, { signal: events.signal });
   canvas.addEventListener('pointermove', event => {
     if (!drag || drag.id !== event.pointerId || !engine) return;
-    const dx = event.clientX - drag.x, dy = event.pointerType === 'touch' ? 0 : event.clientY - drag.y;
-    if (!drag.moved && Math.hypot(dx, dy) > 6) { drag.moved = true; canvas.setPointerCapture(event.pointerId); root.dataset.dragging = 'true'; }
+    let dx = event.clientX - drag.x, dy = event.pointerType === 'touch' ? 0 : event.clientY - drag.y;
+    if (!drag.moved && Math.hypot(dx, dy) > 6) {
+      // Measure from here, so crossing the threshold does not jump the view.
+      drag.moved = true; drag.x = event.clientX; drag.y = event.clientY; dx = dy = 0;
+      canvas.setPointerCapture(event.pointerId); root.dataset.dragging = 'true'; engine.beginDrag(); showLabel(null);
+    }
     if (!drag.moved) return;
     const dt = Math.max(.008, (event.timeStamp - drag.time) / 1000);
     drag.velocity = drag.velocity * .6 + (event.clientX - drag.lastX) / dt * .4;

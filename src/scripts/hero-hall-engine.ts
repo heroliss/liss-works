@@ -19,7 +19,9 @@ export interface HallEngine {
   select: (index: number) => void;
   selected: () => number;
   hovered: () => number | null;
-  /** Live drag: turn the constellation (yaw) and raise or lower the view (pitch), in radians. */
+  /** A drag starts from wherever the view is now, so it never jumps. */
+  beginDrag: () => void;
+  /** Live drag offsets since beginDrag: turn (yaw) and raise or lower the view (pitch), in radians. */
   setDrag: (yaw: number, pitch: number) => void;
   /** Let go with angular velocities; it coasts, then settles home. */
   release: (yawVelocity: number, pitchVelocity: number) => void;
@@ -93,6 +95,7 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
   const scene = new T.Scene();
   scene.fog = new T.FogExp2(BG, .018);
   const camera = new T.PerspectiveCamera(32, 1, .1, 400);
+  camera.layers.enable(1);
   const disposables: { dispose: () => void }[] = [];
   const keep = <V extends { dispose: () => void }>(value: V) => { disposables.push(value); return value; };
   let released = false;
@@ -101,7 +104,7 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
   const key = new T.DirectionalLight(0xfff0e0, 1); key.position.set(-3, 8, 8); scene.add(key);
 
   let width = 1, height = 1, narrow = false;
-  const floor = new A.Reflector(keep(new T.PlaneGeometry(260, 260)), { clipBias: .003, textureWidth: 512, textureHeight: 512, color: 0x93a1b2 });
+  const floor = new A.Reflector(keep(new T.PlaneGeometry(260, 260)), { clipBias: .003, textureWidth: 512, textureHeight: 512, color: 0x7f8c9b });
   // Draw order matters for a seamless horizon: mirror floor, then its dimming veil,
   // then the background glows without depth testing, so their light carries across
   // the horizon instead of being cut off by the floor; the screens draw last.
@@ -109,12 +112,14 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
   sky.renderOrder = -4; scene.add(sky);
   floor.rotation.x = -Math.PI / 2; floor.renderOrder = -3; scene.add(floor);
   const veil = new T.Mesh(keep(new T.PlaneGeometry(320, 320)), keep(new T.MeshBasicMaterial({ map: keep(floorMask(T)), blending: T.CustomBlending, blendSrc: T.SrcAlphaFactor, blendDst: T.OneMinusSrcAlphaFactor, depthWrite: false, fog: false })));
+  veil.layers.set(1);
   veil.rotation.x = -Math.PI / 2; veil.position.set(0, .004, -4); veil.renderOrder = -2; scene.add(veil);
   const background = { opacity: 1, blending: T.AdditiveBlending, depthTest: false, depthWrite: false, fog: false } as const;
   // Drawn first, so the glows below lay their light over it and carry across the horizon.
   // The horizon: a wide haze band instead of the floor's edge, tinted by the selection.
   const hazeMat = keep(new T.MeshBasicMaterial({ ...background, map: keep(hazeTexture(T)), color: new T.Color(items[0]?.tone ?? '#6ee8e3').lerp(new T.Color('#9fb8d8'), .5), opacity: .3 }));
-  const haze = new T.Mesh(keep(new T.PlaneGeometry(220, 24)), hazeMat); haze.position.set(0, 2.9, -46); haze.renderOrder = -1; scene.add(haze);
+  hazeMat.side = T.BackSide;
+  const haze = new T.Mesh(keep(new T.CylinderGeometry(64, 64, 24, 72, 1, true)), hazeMat); haze.position.set(0, 2.9, 0); haze.renderOrder = -1; scene.add(haze);
 
   const glow = keep(radialTexture(T));
   // A broad coloured glow behind the constellation, tinted by the selection.
@@ -134,16 +139,17 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
     const group = new T.Group(); scene.add(group);
     const tilt = new T.Group(); group.add(tilt);
     const tone = new T.Color(item.tone);
-    tilt.add(new T.Mesh(frameGeometry, frameMaterial));
+    const frame = new T.Mesh(frameGeometry, frameMaterial); frame.layers.set(1); tilt.add(frame);
     const face = keep(new T.MeshBasicMaterial({ color: 0x1a2630, toneMapped: false }));
     const screenMesh = new T.Mesh(screenGeometry, face); screenMesh.position.z = .055; tilt.add(screenMesh);
     const rim = keep(new T.MeshBasicMaterial({ color: tone.clone(), toneMapped: false }));
-    const bar = (bw: number, bh: number, x: number, y: number) => { const m = new T.Mesh(keep(new T.BoxGeometry(bw, bh, .05)), rim); m.position.set(x, y, .06); tilt.add(m); };
-    bar(baseW + .2, .035, 0, baseH / 2 + .1); bar(baseW + .2, .035, 0, -baseH / 2 - .1); bar(.035, baseH + .2, -baseW / 2 - .1, 0); bar(.035, baseH + .2, baseW / 2 + .1, 0);
+    // Rims a little wider and calmer: thin, very bright bars shimmered under bloom.
+    const bar = (bw: number, bh: number, x: number, y: number) => { const m = new T.Mesh(keep(new T.BoxGeometry(bw, bh, .05)), rim); m.position.set(x, y, .06); m.layers.set(1); tilt.add(m); };
+    bar(baseW + .24, .06, 0, baseH / 2 + .11); bar(baseW + .24, .06, 0, -baseH / 2 - .11); bar(.06, baseH + .28, -baseW / 2 - .11, 0); bar(.06, baseH + .28, baseW / 2 + .11, 0);
     const halo = keep(new T.MeshBasicMaterial({ map: glow, color: tone, transparent: true, opacity: .2, blending: T.AdditiveBlending, depthWrite: false }));
     const haloMesh = new T.Mesh(haloGeometry, halo); haloMesh.position.z = -.12; tilt.add(haloMesh);
     const poolMat = keep(new T.MeshBasicMaterial({ map: glow, color: tone, transparent: true, opacity: .2, blending: T.AdditiveBlending, depthWrite: false }));
-    const pool = new T.Mesh(poolGeometry, poolMat); pool.rotation.x = -Math.PI / 2; scene.add(pool);
+    const pool = new T.Mesh(poolGeometry, poolMat); pool.rotation.x = -Math.PI / 2; pool.layers.set(1); scene.add(pool);
     const slot = SLOTS[index % SLOTS.length];
     screens.push({ group, tilt, face, rim, halo, pool, poolMat, tone, hover: 0, focus: index === 0 ? 1 : 0, lean: new T.Vector2(), phase: index * 1.9 + .3, slot: index,
       pos: new T.Vector3(slot[0], slot[1], slot[2]), turn: slot[3], size: slot[4], pitch: slot[5], roll: slot[6], hit: screenMesh });
@@ -165,9 +171,10 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
   const dustGeometry = keep(new T.BufferGeometry()); dustGeometry.setAttribute('position', new T.BufferAttribute(dust, 3));
   scene.add(new T.Points(dustGeometry, keep(new T.PointsMaterial({ map: glow, color: 0xcfe6ff, size: .07, transparent: true, opacity: .5, blending: T.AdditiveBlending, depthWrite: false }))));
 
-  const composer = new A.EffectComposer(renderer);
+  const msTarget = new T.WebGLRenderTarget(1, 1, { type: T.HalfFloatType, samples: 4 });
+  const composer = new A.EffectComposer(renderer, msTarget);
   composer.addPass(new A.RenderPass(scene, camera));
-  const bloom = new A.UnrealBloomPass(new T.Vector2(256, 256), .5, .5, .86);
+  const bloom = new A.UnrealBloomPass(new T.Vector2(256, 256), .36, .45, .9);
   composer.addPass(bloom);
   composer.addPass(new A.OutputPass());
 
@@ -177,7 +184,8 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
   const pointer = { x: 0, y: 0, weight: 0, tx: 0, ty: 0, tw: 0, cx: 9, cy: 9, on: false };
   const toneTarget = new T.Color(items[0]?.tone ?? '#6ee8e3');
   let hover: number | null = null, highlight: number | null = null, selected = 0, dragging = false;
-  let drag = 0, dragVelocity = 0, tilt = 0, tiltVelocity = 0;
+  let drag = 0, dragVelocity = 0, tilt = 0, tiltVelocity = 0, dragBase = 0, tiltBase = 0, idle = 0;
+  const TILT_MIN = -.12, TILT_MAX = 1.2; // from just above the mirror to looking down from high
 
   const assign = () => {
     // The selected work takes the front; the others keep their relative order
@@ -192,12 +200,14 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
     bloom.resolution.set(width * ratio * (quality ? .35 : .5), height * ratio * (quality ? .35 : .5));
     camera.aspect = width / height;
     camera.fov = narrow ? 44 : 32;
-    // Step back until the constellation (about 15 units wide) fits the frame.
-    const halfWide = Math.atan(Math.tan(camera.fov * Math.PI / 360) * camera.aspect);
-    const distance = Math.max(narrow ? 9 : 11, (narrow ? 4.4 : 7.6) / Math.tan(halfWide));
+    const tanHigh = Math.tan(camera.fov * Math.PI / 360), tanWide = tanHigh * camera.aspect;
+    // The copy column (see works-hall.css) and the page's content edge on the right.
+    const copyRight = Math.max(48, width / 2 - 680) + Math.min(500, width * .36), contentRight = Math.min(width - 32, width / 2 + 700);
+    const span = narrow ? width : Math.max(width * .42, contentRight - copyRight);
+    const distance = narrow ? Math.max(9, 4.4 / tanWide) : Math.max(11, 4.45 / (tanWide * span / width), 4.6 / tanHigh);
     basePos.set(0, 2.6 + distance * .04, distance);
-    // On wide layouts the copy sits on the left, so frame the constellation to the right.
-    if (narrow) camera.clearViewOffset(); else camera.setViewOffset(width, height, -(width * .18 + Math.max(0, width - 1440) * .12), height * .05, width, height);
+    if (narrow) camera.clearViewOffset();
+    else camera.setViewOffset(width, height, -((copyRight + contentRight) / 2 - width / 2), height * .1, width, height);
     camera.updateProjectionMatrix();
     floor.getRenderTarget().setSize(Math.round(width * ratio * (quality ? .35 : .5)), Math.round(height * ratio * (quality ? .35 : .5)));
     return true;
@@ -220,18 +230,24 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
     const step = dt || 1 / 60, quick = 1 - Math.exp(-step * 6), glide = 1 - Math.exp(-step * 3.2);
     pointer.x += (pointer.tx - pointer.x) * quick; pointer.y += (pointer.ty - pointer.y) * quick; pointer.weight += (pointer.tw - pointer.weight) * quick;
     if (!dragging) {
-      drag += dragVelocity * step; dragVelocity *= Math.exp(-step * 2.6);
-      dragVelocity -= drag * step * 3.2;
-      if (Math.abs(drag) < .0005 && Math.abs(dragVelocity) < .0005) drag = dragVelocity = 0;
-      tilt += tiltVelocity * step; tiltVelocity *= Math.exp(-step * 2.8);
-      tiltVelocity -= tilt * step * 3.6;
-      if (Math.abs(tilt) < .0005 && Math.abs(tiltVelocity) < .0005) tilt = tiltVelocity = 0;
+      // Free inertia after a release; the view stays where it was left, and only
+      // after a few quiet seconds drifts slowly home along the shortest way.
+      drag += dragVelocity * step; dragVelocity *= Math.exp(-step * 2.2);
+      tilt += tiltVelocity * step; tiltVelocity *= Math.exp(-step * 2.4);
+      if (tilt < TILT_MIN || tilt > TILT_MAX) { tilt = Math.min(TILT_MAX, Math.max(TILT_MIN, tilt)); tiltVelocity = 0; }
+      if (Math.abs(dragVelocity) + Math.abs(tiltVelocity) < .02) idle += step; else idle = 0;
+      if (idle > 4) {
+        drag = Math.atan2(Math.sin(drag), Math.cos(drag));
+        const home = 1 - Math.exp(-step * .6);
+        drag -= drag * home; tilt -= tilt * home;
+      }
     }
-    // Soft limits keep every screen well inside the frame, never edge-on to the camera.
-    const turnBy = Math.tanh(drag / .55) * .55, pitchBy = tilt >= 0 ? Math.tanh(tilt / .34) * .34 : Math.tanh(tilt / .1) * .1;
-    const yaw = turnBy + Math.sin(time * .13) * .05 + pointer.x * .2 * pointer.weight;
-    const lift = Math.sin(time * .19) * .18 - pointer.y * .8 * pointer.weight;
-    camPos.copy(basePos).sub(pivot).applyAxisAngle(side, -pitchBy).applyAxisAngle(up, -yaw).add(pivot); camPos.y += lift;
+    const turnBy = drag, pitchBy = tilt;
+    const yaw = turnBy + Math.sin(time * .13) * .05 + pointer.x * .16 * pointer.weight;
+    const lift = Math.sin(time * .19) * .18 - pointer.y * .5 * pointer.weight;
+    camPos.copy(basePos).sub(pivot).applyAxisAngle(side, -pitchBy).applyAxisAngle(up, -yaw).add(pivot); camPos.y = Math.max(1.9, camPos.y + lift);
+    // Floor glows fade as the view gets low, before they flatten into long strips.
+    const grazing = Math.min(1, Math.max(0, (camPos.y - 1.9) / 2.2));
     camLook.copy(lookBase).sub(pivot).applyAxisAngle(up, -yaw * .4).add(pivot); camLook.y -= pitchBy * 2.2;
     camera.position.copy(camPos); camera.lookAt(camLook);
     backdropMat.color.lerp(toneTarget, 1 - Math.exp(-step * 2));
@@ -251,16 +267,16 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
       const f = screen.focus, h = screen.hover, t = time + screen.phase;
       // Each work drifts on its own small loop around its slot.
       target.set(slot[0] + Math.sin(t * .37) * .22 * (1 - f * .6), slot[1] + Math.sin(t * .53) * .16, slot[2] + Math.cos(t * .29) * .25 * (1 - f * .6));
-      screen.pos.lerp(target, glide); screen.turn += (slot[3] - screen.turn) * glide; screen.size += (slot[4] * (1 + h * .1) - screen.size) * glide;
+      screen.pos.lerp(target, glide); screen.turn += (slot[3] - screen.turn) * glide; screen.size += (slot[4] * (1 + h * .14) - screen.size) * glide;
       screen.pitch += (slot[5] * (1 - h * .7) - screen.pitch) * glide; screen.roll += (slot[6] * (1 - h * .7) - screen.roll) * glide;
       // Screens partly turn to follow the camera as it swings, so none goes edge-on.
       screen.group.position.copy(screen.pos); screen.group.scale.setScalar(screen.size);
-      screen.group.rotation.set(screen.pitch - pitchBy * .35, screen.turn - turnBy * .6, screen.roll, 'YXZ');
+      screen.group.rotation.set(screen.pitch - pitchBy * .45, screen.turn - turnBy * .88, screen.roll, 'YXZ');
       screen.pool.position.set(screen.pos.x, .006, screen.pos.z + 1.1 * screen.size); screen.pool.scale.setScalar(screen.size);
       if (screen.face.map) screen.face.color.setScalar(.78 + f * .22 + h * .12);
-      screen.rim.color.copy(screen.tone).multiplyScalar(.7 + f * .5 + h * .6);
-      screen.halo.opacity = .14 + f * .2 + h * .16;
-      screen.poolMat.opacity = .14 + f * .22 + h * .14;
+      screen.rim.color.copy(screen.tone).multiplyScalar(.62 + f * .28 + h * .36);
+      screen.halo.opacity = .14 + f * .2 + h * .3;
+      screen.poolMat.opacity = (.12 + f * .18 + h * .12) * grazing;
       const own = index === hover;
       const leanX = own ? -local.y * .2 : -pointer.y * .06 * pointer.weight;
       const leanY = own ? local.x * .28 : pointer.x * .14 * pointer.weight;
@@ -300,7 +316,8 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
     selected: () => selected,
     setHighlight: index => { highlight = index; },
     hovered: () => hover,
-    setDrag: (yaw, pitch) => { dragging = true; drag = yaw; tilt = pitch; dragVelocity = tiltVelocity = 0; },
-    release: (yawVelocity, pitchVelocity) => { dragging = false; dragVelocity = yawVelocity; tiltVelocity = pitchVelocity; },
+    beginDrag: () => { dragging = true; dragBase = drag; tiltBase = tilt; dragVelocity = tiltVelocity = 0; idle = 0; pointer.tw = 0; },
+    setDrag: (yaw, pitch) => { dragging = true; drag = dragBase + yaw; tilt = Math.min(TILT_MAX, Math.max(TILT_MIN, tiltBase + pitch)); idle = 0; },
+    release: (yawVelocity, pitchVelocity) => { dragging = false; dragVelocity = yawVelocity; tiltVelocity = pitchVelocity; idle = 0; },
   };
 }
