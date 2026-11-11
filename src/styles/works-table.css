@@ -1,0 +1,77 @@
+/* Home hero: every project as a print on a tilted light table that recedes
+   into the dark. The pointer tilts the table, a drag pans it, and the print
+   under the pointer stands up toward the viewer in its own colour. */
+.works-table { --card-w:276px; --card-gap:30px; --rx:57deg; --rz:-13deg; position:relative; z-index:1; height:clamp(680px,calc(100svh - 72px),920px); margin-inline:calc(50% - 50vw); overflow:clip; isolation:isolate; }
+.works-table::after { content:''; position:absolute; inset:auto 0 0; height:180px; z-index:1; pointer-events:none; background:linear-gradient(to bottom,transparent,var(--bg)); }
+.works-table__scene { position:absolute; inset:0; perspective:1500px; perspective-origin:64% -10%; cursor:grab; touch-action:pan-y; user-select:none; -webkit-user-select:none;
+  -webkit-mask-image:linear-gradient(to right,transparent 0,transparent 20%,#0006 34%,#000 52%),radial-gradient(ellipse 85% 90% at 64% 52%,#000 55%,transparent 100%); mask-image:linear-gradient(to right,transparent 0,transparent 20%,#0006 34%,#000 52%),radial-gradient(ellipse 85% 90% at 64% 52%,#000 55%,transparent 100%); -webkit-mask-composite:source-in; mask-composite:intersect; }
+.works-table[data-dragging=true] .works-table__scene { cursor:grabbing; }
+.works-table__plane { position:absolute; left:63%; top:57%; width:0; height:0; transform-style:preserve-3d; transform:rotateX(var(--rx)) rotateZ(var(--rz)); }
+.works-table__row { position:absolute; left:0; top:calc((var(--row) - 1.5) * (var(--card-w) * .625 + 64px)); display:flex; gap:var(--card-gap); transform-style:preserve-3d; will-change:transform; }
+.works-table__run { display:flex; gap:var(--card-gap); transform-style:preserve-3d; }
+.works-table__card { position:relative; flex:none; display:block; width:var(--card-w); color:var(--text); transform-style:preserve-3d; -webkit-user-drag:none; }
+/* A soft contact shadow stays on the table when the print stands up. */
+.works-table__card::before { content:''; position:absolute; inset:6% 4% -4%; border-radius:12px; background:radial-gradient(ellipse at 50% 60%,#000c,transparent 70%); filter:blur(10px); opacity:.75; transform:translateZ(-1px); transition:opacity .45s ease,transform .45s ease; }
+.works-table__lift { position:relative; display:block; transform-origin:50% 100%; transform-style:preserve-3d; transition:transform .55s cubic-bezier(.2,.9,.25,1.15),filter .35s ease,opacity .35s ease; }
+.works-table__shot { display:block; aspect-ratio:1.6; overflow:hidden; border-radius:9px; background:#0b1217; border:1px solid color-mix(in srgb,var(--tone) 45%,transparent); box-shadow:0 0 0 1px #0006,0 0 26px -10px var(--tone),inset 0 1px #ffffff20; }
+.works-table__shot { position:relative; isolation:isolate; }
+.works-table__shot::before { content:''; position:absolute; inset:-20px; z-index:-1; background:var(--shot) center/cover no-repeat; filter:blur(16px) brightness(.4); }
+.works-table__shot img { display:block; width:100%; height:100%; object-fit:contain; pointer-events:none; }
+.works-table__tag { display:flex; align-items:baseline; gap:10px; padding:9px 3px 0; white-space:nowrap; overflow:hidden; }
+.works-table__tag strong { font-family:Rajdhani,'Noto Sans SC',sans-serif; font-size:19px; font-weight:600; color:var(--tone); }
+.works-table__tag small { font-size:12px; color:var(--muted); overflow:hidden; text-overflow:ellipsis; }
+.works-table__card:is(:hover,:focus-visible,[data-near=true]) .works-table__lift { transform:translateZ(90px) rotateX(-38deg) scale(1.08); }
+.works-table__card:is(:hover,:focus-visible,[data-near=true]) .works-table__shot { border-color:var(--tone); box-shadow:0 0 0 1px var(--tone),0 0 60px -6px var(--tone),0 30px 50px -20px #000; }
+.works-table__card:is(:hover,:focus-visible,[data-near=true])::before { opacity:1; transform:translateZ(-1px) scale(1.05,1.15); }
+.works-table__card:focus-visible { outline:none; }
+.works-table__card:focus-visible .works-table__shot { outline:2px solid var(--tone); outline-offset:4px; }
+/* Lighting a direction raises its prints a little and lets the rest fall dark. */
+.works-table[data-highlight] .works-table__card .works-table__lift { filter:saturate(.25) brightness(.45); opacity:.55; }
+.works-table[data-highlight=games] .works-table__card[data-group=games] .works-table__lift,
+.works-table[data-highlight=tools] .works-table__card[data-group=tools] .works-table__lift,
+.works-table[data-highlight=ai-data] .works-table__card[data-group=ai-data] .works-table__lift,
+.works-table[data-highlight=graphics] .works-table__card[data-group=graphics] .works-table__lift { filter:none; opacity:1; transform:translateZ(36px) rotateX(-14deg); }
+
+.works-table__copy { position:absolute; z-index:2; left:max(48px,calc(50% - 680px)); top:clamp(70px,11vh,120px); width:min(560px,42%); }
+.works-table__kicker { margin:0 0 10px; color:var(--muted); font-size:15px; letter-spacing:.08em; }
+.works-table__copy h1 { display:grid; margin:0 0 22px; font-size:clamp(66px,7.4vw,118px); font-weight:700; line-height:1.04; letter-spacing:-.045em; }
+.works-table__accent { background:linear-gradient(100deg,#fd8358,#facf4e 26%,#c8ec60 44%,#6ee8e3 62%,#30aff8 78%,#e27ee8); -webkit-background-clip:text; background-clip:text; color:transparent; background-size:200% 100%; animation:works-table-sheen 14s linear infinite; }
+@keyframes works-table-sheen { to { background-position:-200% 0; } }
+.works-table__intro { max-width:27em; margin:0 0 26px; font-size:18px; line-height:1.85; color:#d5dde6; }
+.works-table__groups { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 30px; }
+.works-table__groups a { display:inline-flex; align-items:center; gap:8px; min-height:40px; padding:6px 14px 6px 12px; border-radius:22px; border:1px solid color-mix(in srgb,var(--tone) 34%,transparent); background:color-mix(in srgb,var(--tone) 8%,#0b1118b0); color:var(--text); font-size:15px; -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); transition:border-color .2s ease,background .2s ease,color .2s ease,transform .2s ease; }
+.works-table__groups a small { font-family:Rajdhani,'Noto Sans SC',sans-serif; font-size:15px; color:var(--tone); }
+.works-table__groups a i { width:9px; height:9px; border-radius:50%; background:var(--tone); box-shadow:0 0 12px var(--tone); }
+.works-table__groups a:is(:hover,:focus-visible,[data-active=true],[data-selected=true]) { border-color:var(--tone); background:color-mix(in srgb,var(--tone) 20%,#0b1118c0); color:#fff; transform:translateY(-2px); }
+.works-table__actions { display:flex; flex-wrap:wrap; align-items:center; gap:12px 22px; }
+.works-table__primary { display:inline-flex; align-items:center; gap:12px; min-height:52px; padding:12px 22px; border-radius:6px 18px 6px 6px; background:#eef2ec; color:#0b1015; font-size:17px; font-weight:600; transition:transform .2s ease,background .2s ease; }
+.works-table__primary:is(:hover,:focus-visible) { background:#fff; transform:translateY(-2px); }
+.works-table__dice,.works-table__motion { display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:6px 2px; background:none; border-bottom:1px solid #4b5f72; border-radius:0; color:var(--text); font-size:15px; }
+.works-table__dice:hover { color:#facf4e; border-color:#facf4e; }
+.works-table__motion { color:var(--muted); font-size:13px; border:0; }
+.works-table__hint { position:absolute; z-index:2; right:max(48px,calc(50% - 680px)); bottom:30px; margin:0; color:var(--muted); font-size:13px; letter-spacing:.06em; }
+.works-table__down { position:absolute; z-index:2; left:50%; bottom:28px; display:inline-flex; align-items:center; gap:10px; transform:translateX(-50%); color:var(--muted); font-size:14px; }
+.works-table__down:hover { color:var(--text); }
+html:not([data-motion]) .works-table__motion { display:none; }
+@media(max-width:1100px) { .works-table { --card-w:250px; } .works-table__copy { width:min(520px,52%); } }
+@media(max-width:760px) {
+  .works-table { --card-w:168px; --card-gap:18px; --rx:54deg; --rz:-16deg; height:auto; min-height:0; padding:30px 18px 0; display:flex; flex-direction:column; }
+  .works-table__copy { position:relative; left:auto; top:auto; width:auto; order:0; }
+  .works-table__copy h1 { font-size:clamp(46px,13vw,64px); margin-bottom:16px; }
+  .works-table__intro { font-size:16px; margin-bottom:18px; }
+  .works-table__groups { margin-bottom:20px; }
+  .works-table__groups a { font-size:14px; min-height:38px; }
+  .works-table__scene { position:relative; inset:auto; order:1; height:420px; margin:6px -18px 0; perspective:900px; perspective-origin:50% -20%; -webkit-mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,#000 55%,transparent 100%); mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,#000 55%,transparent 100%); }
+  .works-table__plane { left:50%; top:50%; }
+  .works-table__row { top:calc((var(--row) - 1.5) * (var(--card-w) * .625 + 44px)); }
+  .works-table__tag strong { font-size:15px; } .works-table__tag small { display:none; }
+  .works-table__hint { position:relative; right:auto; top:auto; order:2; text-align:center; margin:-10px 0 0; }
+  .works-table__down { position:relative; left:auto; bottom:auto; transform:none; order:3; justify-content:center; margin:14px 0 36px; }
+  .works-table::after { display:none; }
+}
+@media(prefers-reduced-motion:reduce) { .works-table__accent { animation:none; } .works-table__lift { transition:none; } }
+@media(forced-colors:active) { .works-table__accent { color:CanvasText; background:none; } }
+
+/* Filtering in the library lights the prints that match and lets the rest fall dark. */
+.works-table[data-filtering] .works-table__card[data-match=false] .works-table__lift { filter:saturate(.2) brightness(.4); opacity:.45; }
+.works-table[data-filtering] .works-table__card[data-match=true] .works-table__lift { transform:translateZ(30px) rotateX(-12deg); }

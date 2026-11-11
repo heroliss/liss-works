@@ -19,9 +19,11 @@ if (project.tags.some(tag => tag.includes('算法'))) filterTags.add('算法');
 if (project.tags.some(tag => /^qt(?:\s|\d|$)/i.test(tag))) filterTags.add('Qt');
 if (project.tags.some(tag => tag.startsWith('.NET'))) filterTags.add('.NET');
 
-const poses = [[5,-6,-1.3], [7,5,.8], [4,-4,-.6], [6,7,1.2], [5,-7,-1], [7,4,.6]] as const;
+// Cards rest almost flat with a slight, varied lean; the pointer does the rest.
+const poses = [[1.6,-2.2,-.4], [2.2,1.8,.3], [1.2,-1.4,-.2], [2,2.4,.4], [1.6,-2.6,-.3], [2.4,1.4,.2]] as const;
 const [restX, restY, restZ] = poses[index % poses.length] ?? poses[0];
 const href = sitePath(`/projects/${project.slug}/`);
+const backdrop = sitePath((project.cover.srcset?.split(',').map(entry => entry.trim().split(/\s+/)).find(([, size]) => size === '320w')?.[0]) ?? project.cover.src);
 const style = `${projectWorldStyle(project.slug)};--atlas-image-ratio:${project.cover.width}/${project.cover.height};--atlas-rest-x:${restX}deg;--atlas-rest-y:${restY}deg;--atlas-rest-z:${restZ}deg`;
 ---
 <article class="atlas-item" style={style} data-atlas-item={project.slug} data-project-card
@@ -37,13 +39,15 @@ const style = `${projectWorldStyle(project.slug)};--atlas-image-ratio:${project.
     <a class="atlas-tile-link" data-atlas-project-link href={href} aria-label={project.name}>
       <div class="atlas-tile-camera">
         <div class="atlas-tile-plane" data-atlas-tilt>
-          <MediaImage image={project.cover} sizes="(max-width: 760px) calc(100vw - 56px), (max-width: 1100px) 75vw, 58vw"/>
+          <div class="atlas-tile-shot" style={`--shot:url("${backdrop}")`}><MediaImage image={project.cover} sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1100px) 45vw, 30vw"/></div>
+          <div class="atlas-tile-copy">
+            <p class="atlas-tile-meta"><span>{project.category}</span><span>{project.status}</span></p>
+            <h2 class="atlas-tile-title">{displayName}</h2>
+            <p class="atlas-tile-summary">{project.summary}</p>
+            <ul class="atlas-tile-tags" aria-label="技术">{project.tags.slice(0, 3).map(tag => <li>{tag}</li>)}</ul>
+          </div>
+          <span class="atlas-tile-shine" aria-hidden="true"></span>
         </div>
-      </div>
-      <div class="atlas-tile-copy">
-        <h2 class="atlas-tile-title">{displayName}</h2>
-        <p class="atlas-tile-summary">{project.summary}</p>
-        <p class="atlas-tile-meta"><span>{project.category}</span><span>{project.status}</span></p>
       </div>
     </a>
   </div>

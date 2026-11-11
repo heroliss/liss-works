@@ -4,6 +4,7 @@ import { sitePath } from '../lib/site-path';
 import { getProjectWorld, projectWorldStyle } from '../data/project-worlds';
 import MediaImage from './MediaImage.astro';
 import Icon from './Icon.astro';
+import ChapterPoints from './ChapterPoints.astro';
 import '../styles/dubforge-workflow.css';
 import '../styles/factory-sequence.css';
 interface Props { id?: string; detail?: boolean }
@@ -13,9 +14,14 @@ const stationPositions = dubforgeWorkflow.map((_, index) => 100 + index * 104);
 ---
 <section class:list={['dub-reel', {'home-chapter': !detail, 'dub-reel--detail': detail}]} id={id} data-dub-reel aria-labelledby={detail ? undefined : `${id}-title`} aria-label={detail ? 'DubForge 制作现场：九个真实工作区' : undefined} style={`${projectWorldStyle('dubforge')};--accent:${getProjectWorld('dubforge').accent}`}>
  {!detail && <header class="dub-reel-heading">
-  <div><h2 id={`${id}-title`} class="project-name" data-motion="reveal">DubForge</h2><p class="dub-reel-title">一条视频的制作现场。</p></div>
-  <div class="dub-reel-introduction"><p>素材变成文字，文字找到声音。九个真实工作区，让同一条视频留下不同的成片版本。</p><a class="text-link" href={sitePath('/projects/dubforge/')}>走进制作工作台 <Icon size={18}/></a></div>
+  <div><h2 id={`${id}-title`} class="project-name" data-motion="reveal">DubForge</h2><p class="dub-reel-title">把外语视频做成中文版的本地工作台。</p></div>
+  <div class="dub-reel-introduction"><p>下载、转写、翻译、配音、合成，原本要在好几个工具之间来回的事，在这里排成一条线，每一步都能停下来改。下面就是它的九个工作区。</p><a class="text-link" href={sitePath('/projects/dubforge/')}>看 DubForge 详情 <Icon size={18}/></a></div>
  </header>}
+ {!detail && <ChapterPoints points={[
+  { term: '逐句精修', text: '画面、原文和译文在同一屏，对着视频调时间、改措辞。' },
+  { term: '一个项目，多个成片', text: '原声字幕版和中文配音版可以并存，分别导出。' },
+  { term: '改哪里，只重做哪里', text: '修改后只更新受影响的步骤；中途停下，下次接着做。' },
+ ]}/>}
  <div class="dub-factory" id={`${id}-machine`}>
   <div class="dub-scene-world" data-scene-world>
   <svg class="dub-factory-geometry" viewBox="0 0 1320 820" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false">

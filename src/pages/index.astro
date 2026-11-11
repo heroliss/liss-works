@@ -9,6 +9,8 @@ import GlassAtollFeature from '../components/GlassAtollFeature.astro';
 import HomeAtmosphere from '../components/HomeAtmosphere.astro';
 import ExplorationInvitation from '../components/ExplorationInvitation.astro';
 import PanxuShowcase from '../components/PanxuShowcase.astro';
+import WorksSpotlight from '../components/WorksSpotlight.astro';
+import ChapterPoints from '../components/ChapterPoints.astro';
 import { projects, getProject } from '../data/projects';
 import { sitePath, communityUrl } from '../lib/site-path';
 import '../styles/home-next.css';
@@ -19,42 +21,29 @@ import '../styles/spatial-scenes.css';
 import '../styles/atmosphere-polish.css';
 import '../styles/background-depth.css';
 import '../styles/spatial-materials.css';
+import '../styles/home-chapters.css';
 const framework = getProject('ssframework')!;
 const dubforge = getProject('dubforge')!;
 const outpost = getProject('outpost')!;
-const panxu = getProject('panxu')!;
 const blocks = getProject('liss-blocks')!;
 const atoll = getProject('glass-atoll')!;
 const gomoku = getProject('gomoku')!;
-const stage = [panxu,dubforge,framework,atoll,gomoku];
-const stageCaptions = stage.map(project => project.summary);
 
 ---
 <Base title="Liss · 把想法做成作品">
  <div class="shell home-next">
   <HomeAtmosphere/>
-  <section class="kinetic-hero" id="start" data-active="0" data-ambient-region aria-labelledby="home-title">
-   <HomeAtmosphere variant="hero"/>
-   <div class="hero-light-clip" aria-hidden="true"><div class="pointer-light" data-pointer-light></div></div>
-   <div class="hero-copy"><h1 id="home-title" data-motion="hero"><span>把想法，</span><br/><span class="hero-accent">做成作品。</span></h1><p class="hero-introduction" data-motion="hero">我是 Liss，独立开发游戏、工具与交互实验。</p><div class="hero-actions" data-motion="hero"><a class="hero-continue" href="#selected">继续向下探索 <Icon name="down" size={17}/></a><a class="hero-library" href={sitePath('/projects/')}>浏览全部 {projects.length} 个工程</a></div></div>
-   <div class="work-stage" data-work-stage data-active="0" data-ui>
-    <div class="stage-objects" data-stage-objects>
-     {stage.map((project,index)=><article class="stage-piece" data-stage-piece={index} data-stage-offset={index} data-project={project.slug}><button type="button" class="stage-card" data-stage-card={index} data-href={sitePath(`/projects/${project.slug}/`)} aria-pressed={index===0} aria-controls="stage-overview" aria-label={index===0 ? `打开 ${project.name} 项目` : `将 ${project.name} 切到前景`} disabled><span class="stage-surface" data-stage-image><span class="screen-chrome" aria-hidden="true"><span></span><span></span><span></span><strong>{project.name.split(' · ')[0]}</strong></span><MediaImage image={project.cover} eager={index===0} sizes="(max-width: 760px) 90vw, 55vw"/><span class="screen-caption"><span>{project.category}</span></span></span></button></article>)}
-    </div>
-    <div class="stage-bottom"><div class="stage-controls" role="group" aria-label="选择主画面中的工程">{stage.map((project,index)=><button type="button" data-stage-select={index} data-name={project.name} data-tone={getProjectWorld(project.slug).accent} data-category={project.category} data-caption={stageCaptions[index]} data-href={sitePath(`/projects/${project.slug}/`)} aria-pressed={index===0}>{project.name}</button>)}</div><div class="stage-description" id="stage-overview"><p class="stage-category" data-stage-category>{stage[0].category}</p><h2 class="project-name" data-stage-name>{stage[0].name}</h2><p class="stage-summary" data-stage-caption aria-live="polite">{stageCaptions[0]}</p><a class="button stage-detail-link" data-stage-link data-project-enter href={sitePath(`/projects/${stage[0].slug}/`)}>查看项目 <Icon size={20}/></a></div><noscript><div class="stage-fallback-links">{stage.map(project=><a href={sitePath(`/projects/${project.slug}/`)}>{project.name} <Icon size={15}/></a>)}</div></noscript></div>
-   </div>
-   <a class="hero-scroll" href="#selected"><span>向下，看作品如何运转</span><svg width="19" height="30" viewBox="0 0 19 30" aria-hidden="true"><path d="M9.5 1v26M2 19l7.5 8 7.5-8" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a>
-  </section>
-
-  <section class="process-band" data-marquee aria-label="创作过程与动态控制">
-   <div class="marquee-tilt" data-marquee-plane><div class="kinetic-strip" aria-hidden="true"><div data-kinetic-strip>{[0,1].map(()=><div class="marquee-group" data-marquee-group>{['PLAY','BUILD','EXPERIMENT','REPEAT'].map(word=><><span>{word}</span><i>↗</i></>)}</div>)}</div></div></div>
-   <button type="button" class="motion-toggle" data-motion-toggle aria-pressed="false" aria-label="暂停页面动态"><span class="motion-symbol-pause"><Icon name="pause" size={15}/></span><span class="motion-symbol-play"><Icon name="play" size={15}/></span><span data-motion-toggle-label>暂停动态</span></button>
-  </section>
+  <WorksSpotlight/>
 
   <section class="framework-chapter home-chapter" id="selected" aria-labelledby="framework-title">
    <HomeAtmosphere variant="framework"/>
-   <header class="work-heading"><h2 id="framework-title" class="project-name" data-motion="reveal">SSFramework</h2><p data-motion="reveal">游戏背后，<br/>是不断生长的工具。</p></header>
-   <div class="framework-composition"><div class="framework-notes"><p class="work-description">{framework.summary}</p><p class="framework-core-note">从职责分层与数据流，看到运行现场，再进入日常工具。</p><a class="text-link" href={sitePath('/projects/ssframework/')}>走进框架 <Icon size={18}/></a></div><FrameworkShowcase/></div>
+   <header class="work-heading"><div><h2 id="framework-title" class="project-name" data-motion="reveal">SSFramework</h2><p class="framework-tagline">我写 Unity 游戏和工具时用的底层框架。</p></div><div class="framework-introduction"><p>把多年 Unity 项目里反复用到的做法整理成一套框架：状态、规则和界面各管一层，资源、配置、UI 这些模块按需接进来。Outpost 就是建在它上面的完整游戏。下面可以切换着看它的结构、运行现场和配套工具。</p><a class="text-link" href={sitePath('/projects/ssframework/')}>看 SSFramework 详情 <Icon size={18}/></a></div></header>
+   <ChapterPoints points={[
+    { term: '分层清楚', text: '界面发出命令，系统修改数据，数据变化再自动反映到界面上。' },
+    { term: '模块按需装配', text: '资源、UI、存储、配置、网络各自独立，第三方库通过适配器接入。' },
+    { term: '运行时看得见', text: '可以直接查看作用域、订阅和命令轨迹，排查问题不用靠猜。' },
+   ]}/>
+   <div class="framework-composition framework-composition--solo"><FrameworkShowcase/></div>
   </section>
 
   <DubForgeWorkflow/>
@@ -63,15 +52,15 @@ const stageCaptions = stage.map(project => project.summary);
 
   <GlassAtollFeature project={atoll}/>
 
-  <section class="games-chapter home-chapter" id="games" aria-labelledby="games-title"><HomeAtmosphere variant="games"/><header class="work-heading"><h2 id="games-title" data-motion="reveal">规则有了形状，<br/>世界开始运转。</h2><p data-motion="reveal">从方块的预判与消行，<br/>到敌群与炮火，再到落子间的搜索。</p></header><div class="games-landscape">
-   <article class="game-scene game-scene--blocks" data-scroll-layer style={`--game-tone:${getProjectWorld(blocks.slug).accent};--accent:${getProjectWorld(blocks.slug).accent}`}><div class="game-art game-art--blocks" data-project-atmosphere="blocks" style={`--media-ratio:${blocks.cover.width} / ${blocks.cover.height}`}><a href={sitePath('/projects/liss-blocks/')} class="game-scene__image" data-motion="reveal"><MediaImage image={blocks.cover} sizes="(max-width: 760px) 100vw, 57vw"/></a><canvas aria-hidden="true"></canvas></div><div class="game-scene__copy"><h3 class="project-name"><a href={sitePath('/projects/liss-blocks/')}>Liss Blocks</a></h3><p>{blocks.summary}</p><a class="game-scene__entry" href={sitePath('/projects/liss-blocks/')}>{blocks.status}<Icon size={17}/></a></div></article>
-   <article class="game-scene game-scene--outpost" data-scroll-layer style={`--game-tone:${getProjectWorld(outpost.slug).accent};--accent:${getProjectWorld(outpost.slug).accent}`}><div class="game-art game-art--outpost" data-project-atmosphere="outpost" style={`--media-ratio:${outpost.cover.width} / ${outpost.cover.height}`}><a href={sitePath('/projects/outpost/')} class="game-scene__image" data-motion="reveal"><MediaImage image={outpost.cover} sizes="(max-width: 760px) 100vw, 46vw"/></a><canvas aria-hidden="true"></canvas></div><div class="game-scene__copy"><h3 class="project-name"><a href={sitePath('/projects/outpost/')}>Outpost</a></h3><p>{outpost.summary}</p></div></article>
-   <article class="game-scene game-scene--gomoku" style={`--game-tone:${getProjectWorld(gomoku.slug).accent};--accent:${getProjectWorld(gomoku.slug).accent}`}><div class="game-art game-art--gomoku" data-project-atmosphere="gomoku" style={`--media-ratio:${gomoku.cover.width} / ${gomoku.cover.height}`}><a href={sitePath('/projects/gomoku/')} class="game-scene__image" data-motion="reveal"><MediaImage image={gomoku.cover} sizes="(max-width: 760px) 100vw, 40vw"/></a><canvas aria-hidden="true"></canvas></div><div class="game-scene__copy"><h3 class="project-name"><a href={sitePath('/projects/gomoku/')}>Liss Gomoku</a></h3><p>{gomoku.summary}</p></div></article>
+  <section class="games-chapter home-chapter" id="games" aria-labelledby="games-title"><HomeAtmosphere variant="games"/><header class="work-heading"><h2 id="games-title" data-motion="reveal">三个能直接上手的游戏</h2><p data-motion="reveal">方块、塔防和五子棋，都有 Windows 版可以下载。每个都从标题画面到结算完整可玩。</p></header><div class="games-landscape">
+   <article class="game-scene game-scene--blocks" data-scroll-layer style={`--game-tone:${getProjectWorld(blocks.slug).accent};--accent:${getProjectWorld(blocks.slug).accent}`}><div class="game-art game-art--blocks" data-project-atmosphere="blocks" style={`--media-ratio:${blocks.cover.width} / ${blocks.cover.height}`}><a href={sitePath('/projects/liss-blocks/')} class="game-scene__image" data-motion="reveal"><MediaImage image={blocks.cover} sizes="(max-width: 760px) 100vw, 57vw"/></a><canvas aria-hidden="true"></canvas></div><div class="game-scene__copy"><h3 class="project-name"><a href={sitePath('/projects/liss-blocks/')}>Liss Blocks</a></h3><p>经典的方块玩法，随机袋、暂存、五块预告和落点预览都有。最早的版本是我 2015 年写的。</p><a class="game-scene__entry" href={sitePath('/projects/liss-blocks/')}>{blocks.status}<Icon size={17}/></a></div></article>
+   <article class="game-scene game-scene--outpost" data-scroll-layer style={`--game-tone:${getProjectWorld(outpost.slug).accent};--accent:${getProjectWorld(outpost.slug).accent}`}><div class="game-art game-art--outpost" data-project-atmosphere="outpost" style={`--media-ratio:${outpost.cover.width} / ${outpost.cover.height}`}><a href={sitePath('/projects/outpost/')} class="game-scene__image" data-motion="reveal"><MediaImage image={outpost.cover} sizes="(max-width: 760px) 100vw, 46vw"/></a><canvas aria-hidden="true"></canvas></div><div class="game-scene__copy"><h3 class="project-name"><a href={sitePath('/projects/outpost/')}>Outpost</a></h3><p>用炮台守住一波波越来越密的敌群，靠强化卡改变战局。它也是 SSFramework 的完整示例。</p></div></article>
+   <article class="game-scene game-scene--gomoku" style={`--game-tone:${getProjectWorld(gomoku.slug).accent};--accent:${getProjectWorld(gomoku.slug).accent}`}><div class="game-art game-art--gomoku" data-project-atmosphere="gomoku" style={`--media-ratio:${gomoku.cover.width} / ${gomoku.cover.height}`}><a href={sitePath('/projects/gomoku/')} class="game-scene__image" data-motion="reveal"><MediaImage image={gomoku.cover} sizes="(max-width: 760px) 100vw, 40vw"/></a><canvas aria-hidden="true"></canvas></div><div class="game-scene__copy"><h3 class="project-name"><a href={sitePath('/projects/gomoku/')}>Liss Gomoku</a></h3><p>11 种 AI 引擎，黑白可以分别设置；能联机，也能逐手回看 AI 每一步想了多久。</p></div></article>
   </div></section>
 
   <ExplorationInvitation/>
 
-  <section class="closing-chapter home-chapter" aria-labelledby="closing-title"><HomeAtmosphere variant="closing"/><h2 id="closing-title">下一次尝试，<br/>从一个想法开始。</h2><div><p>一个使用心得、一个问题，或一个还没成形的想法，都欢迎带到 Liss Community。简单说几句，也可能成为下一次改进的起点。</p><div class="closing-actions"><a class="button" href={communityUrl} data-magnetic><span data-magnet-body><Icon name="chat" size={21}/> 来聊聊 <Icon size={18}/></span></a><a class="text-link" href={sitePath('/lab/')}>亲手试试 <Icon name="play" size={17}/></a><a class="text-link" href={sitePath('/about/')}>关于 Liss <Icon size={18}/></a></div></div></section>
+  <section class="closing-chapter home-chapter" aria-labelledby="closing-title"><HomeAtmosphere variant="closing"/><h2 id="closing-title">用过、想到了，<br/>都可以来聊聊。</h2><div><p>哪个工具好用或不好用、遇到了什么问题，或者只是一个还没想清楚的念头，都欢迎到 Liss Community 说一说。</p><div class="closing-actions"><a class="button" href={communityUrl} data-magnetic><span data-magnet-body><Icon name="chat" size={21}/> 来聊聊 <Icon size={18}/></span></a><a class="text-link" href={sitePath('/lab/')}>亲手试试 <Icon name="play" size={17}/></a><a class="text-link" href={sitePath('/about/')}>关于 Liss <Icon size={18}/></a></div></div></section>
  </div>
  <nav class="chapter-nav" data-chapter-nav aria-label="本页章节"><span class="chapter-progress" data-page-progress aria-hidden="true"></span><a href="#start" data-active="true" aria-current="location"><span>开场</span></a><a href="#selected"><span>框架</span></a><a href="#workflow"><span>工具</span></a><a href="#panxu"><span>盘序</span></a><a href="#atoll"><span>玻璃海</span></a><a href="#games"><span>游戏</span></a><a href="#explore"><span>探索</span></a></nav>
 </Base>

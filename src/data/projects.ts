@@ -4,11 +4,11 @@ import { restoredProjects } from './restored-projects.ts';
 import { webProjects } from './web-projects.ts';
 import { frameworkArchitecture } from './framework-showcase.ts';
 
-export const groups: { id: ProjectGroup; label: string; description: string }[] = [
-  { id: 'games', label: '游戏与实时场景', description: '可以直接上手的游戏、棋类对弈，以及实时渲染的海岛场景。' },
-  { id: 'tools', label: '框架与效率工具', description: 'Unity 框架与构建管线，以及日常在用的桌面和网页工具。' },
-  { id: 'ai-data', label: 'AI 与数据', description: '视频译制、中文处理、图像识别自动化与交互式数据图表。' },
-  { id: 'graphics', label: '图形与算法实验', description: '渲染、排序、寻路与系统模拟，把算法过程变成看得见的实验。' },
+export const groups: { id: ProjectGroup; label: string; short: string; tone: string; description: string }[] = [
+  { id: 'games', label: '游戏与实时场景', short: '游戏', tone: '#fd8358', description: '可以直接上手的游戏、棋类对弈，以及实时渲染的海岛场景。' },
+  { id: 'tools', label: '框架与效率工具', short: '工具', tone: '#c8ec60', description: 'Unity 框架与构建管线，以及日常在用的桌面和网页工具。' },
+  { id: 'ai-data', label: 'AI 与数据', short: 'AI 与数据', tone: '#30aff8', description: '视频译制、中文处理、图像识别自动化与交互式数据图表。' },
+  { id: 'graphics', label: '图形与算法实验', short: '图形与算法', tone: '#e27ee8', description: '渲染、排序、寻路与系统模拟，把算法过程变成看得见的实验。' },
 ];
 
 const glassAtoll = [

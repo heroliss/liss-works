@@ -2,6 +2,7 @@
 import type { Project } from '../data/types';
 import { sitePath } from '../lib/site-path';
 import Icon from './Icon.astro';
+import ChapterPoints from './ChapterPoints.astro';
 import AtollWaterScene from './AtollWaterScene.astro';
 import '../styles/glass-atoll-feature.css';
 
@@ -11,8 +12,13 @@ const { project } = Astro.props;
 
 <section class="atoll-showcase home-chapter" id="atoll" aria-labelledby="atoll-title">
   <header class="atoll-showcase__heading">
-    <div><h2 id="atoll-title" data-motion="reveal">玻璃海</h2><p class="atoll-showcase__name">Atoll · 一座实时生成的离岛</p></div>
-    <div class="atoll-showcase__introduction"><p data-motion="reveal">一座岛，一片慢慢流动的海。<br/>让目光，跟着波纹慢下来。</p><a class="text-link" href={sitePath('/projects/glass-atoll/')}>走近这座岛 <Icon size={20}/></a></div>
+    <div><h2 id="atoll-title" data-motion="reveal">玻璃海</h2><p class="atoll-showcase__name">一座可以在浏览器里逛的热带小岛。</p></div>
+    <div class="atoll-showcase__introduction"><p data-motion="reveal">白沙、椰树和一片透明的浅海，全部实时渲染。下面的小岛就在运行，打开完整版还能换时间和天气、往水里投石、看夜里的烟花。</p><a class="text-link" href={sitePath('/projects/glass-atoll/')}>看玻璃海详情 <Icon size={20}/></a></div>
   </header>
+  <ChapterPoints points={[
+    { term: '看得见海底', text: '近岸的水是透明的，海床上能看到随光晃动的焦散。' },
+    { term: '同一座岛，不同的光', text: '切换昼夜、天气和机位，画面会完全换一种气氛。' },
+    { term: '可以动手', text: '投石激起水花，放下漂浮的叶子；夜里的烟花会倒映在海面上。' },
+  ]}/>
   <AtollWaterScene project={project}/>
 </section>

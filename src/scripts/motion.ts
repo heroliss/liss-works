@@ -6,13 +6,16 @@ import { setupProjectMotion } from './project-motion';
 import { setupProjectAtmosphere } from './project-atmosphere';
 import { setupDetailWorldMotion } from './detail-world-motion';
 import { setupShowcaseNarratives } from './showcase-narratives';
-import { setupArchiveAtlas } from './archive-atlas';
+import { setupAtlasLibrary } from './atlas-library';
 import { setupExplorationInvitation } from './exploration-invitation';
 import { setupFooterMotion } from './footer-motion';
 import { setupProjectEnding } from './project-ending';
 import { setupLabRoomMotion } from './lab-room-motion';
 import { setupAboutStudioMotion } from './about-studio-motion';
 import { setupWorksOrbit } from './works-orbit';
+import { setupWorksTable } from './works-table';
+import { setupWorksSpotlight } from './works-spotlight';
+import { setupHeroHall } from './hero-hall';
 import { setupAtollWater } from './atoll-water';
 import { setupPanxuShowcase } from './panxu-showcase';
 
@@ -191,13 +194,16 @@ function initializeMotion() {
   const disposeAtmosphere = setupProjectAtmosphere({ signal, preference });
   const disposeDetails = setupDetailWorldMotion({ signal, preference });
   const disposeNarratives = setupShowcaseNarratives({ signal, preference });
-  const disposeAtlas = setupArchiveAtlas({ signal, preference });
+  const disposeAtlas = setupAtlasLibrary({ signal, preference });
   const disposeInvitation = setupExplorationInvitation({ signal, preference });
   const disposeFooter = setupFooterMotion({ signal, preference });
   const disposeEnding = setupProjectEnding({ signal, preference });
   const disposeLabRoom = setupLabRoomMotion({ signal, preference });
   const disposeAboutStudio = setupAboutStudioMotion({ signal, preference });
   const disposeWorksOrbit = setupWorksOrbit({ signal, preference });
+  const disposeWorksTable = setupWorksTable({ signal, preference });
+  const disposeWorksSpotlight = setupWorksSpotlight({ signal, preference });
+  const disposeHeroHall = setupHeroHall({ signal, preference });
   const disposeAtollWater = setupAtollWater({ signal, preference });
   const disposePanxu = setupPanxuShowcase({ signal, preference });
   if (storedPause !== undefined) {
@@ -234,6 +240,9 @@ function initializeMotion() {
     disposeLabRoom();
     disposeAboutStudio();
     disposeWorksOrbit();
+    disposeWorksTable();
+    disposeWorksSpotlight();
+    disposeHeroHall();
     disposeAtollWater();
     disposePanxu();
     media.revert();

@@ -1,44 +1,47 @@
 ---
 import { sitePath, communityUrl } from '../lib/site-path';
 import Icon from './Icon.astro';
+import { projects, groups } from '../data/projects';
+import { prioritizeProjects } from '../data/project-priority';
+import { getProjectWorld } from '../data/project-worlds';
 import '../styles/site-footer.css';
+const ordered = prioritizeProjects(projects);
+// Grouped by direction so the spectrum reads as four colour families.
+const spectrum = groups.flatMap(group => ordered.filter(project => project.group === group.id));
+const pool = ordered.map(project => sitePath(`/projects/${project.slug}/`));
 ---
-
-<footer class="site-footer site-footer--colophon" data-site-footer aria-label="开发者落款与资源导航">
-  <div class="colophon-field" aria-hidden="true">
-    <div class="colophon-light" data-footer-light></div>
-    <svg class="colophon-crease" viewBox="0 0 1800 240" fill="none" preserveAspectRatio="xMidYMid meet" focusable="false">
-      <path d="M-120 169C211 234 483 66 798 74S1434 236 1930 75"/>
-      <path d="M-120 181C211 246 483 78 798 86S1434 248 1930 87"/>
-    </svg>
-  </div>
-  <div class="colophon-inner shell">
-  <div class="colophon-layout">
-    <div class="colophon-authorship">
-      <a class="colophon-signature" href={sitePath('/')} aria-label="返回 Liss Works 首页">
-        <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="m16 2 14 14-14 14L2 16Z" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="m16 9 7 7-7 7-7-7Z" fill="currentColor"/></svg>
-        <span>Liss <span class="colophon-signature__works">Works</span></span>
+<footer class="site-footer" data-site-footer aria-label="页尾：联系方式与全部工程">
+  <div class="footer-light" data-footer-light aria-hidden="true"></div>
+  <nav class="footer-spectrum" aria-label="全部工程色谱">
+    {spectrum.map(project => <a href={sitePath(`/projects/${project.slug}/`)} style={`--tone:${getProjectWorld(project.slug).accent}`}><span>{project.name.split(' · ')[0]}</span></a>)}
+  </nav>
+  <div class="footer-inner shell">
+    <div class="footer-statement">
+      <a class="footer-brand" href={sitePath('/')} aria-label="返回 Liss Works 首页">
+        <svg width="34" height="34" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2 30 16H16Z" fill="#fd8358"/><path d="M30 16 16 30V16Z" fill="#30aff8"/><path d="M16 30 2 16h14Z" fill="#e27ee8"/><path d="M2 16 16 2v14Z" fill="#c8ec60"/><path d="m16 10 6 6-6 6-6-6Z" fill="#080c14"/></svg>
+        <span>Liss Works</span>
       </a>
-      <p class="colophon-note">让画面、功能和使用过程说话。</p>
-      <p class="colophon-context">游戏、工具与交互实验。</p>
-      <a class="colophon-about" href={sitePath('/about/')}><span>关于 Liss</span><Icon size={15}/></a>
+      <p class="footer-line">把想法做成可以运行、可以操作、可以看见的东西。</p>
+      <div class="footer-cta">
+        <a class="footer-talk" href={communityUrl}><Icon name="chat" size={19}/>来聊聊 <Icon size={17}/></a>
+        <button type="button" class="footer-random" data-footer-random data-pool={JSON.stringify(pool)}><Icon name="play" size={15}/>随便看一个工程</button>
+      </div>
     </div>
-    <nav class="colophon-navigation" aria-label="页尾资源">
-      <div class="colophon-group">
-        <p class="colophon-group-title">作品</p>
-        <a class="colophon-link" href={sitePath('/projects/')}><span class="colophon-link__name">全部工程</span><span class="colophon-link__note">浏览项目图册</span><Icon size={17}/></a>
-        <a class="colophon-link" href={sitePath('/lab/')}><span class="colophon-link__name">交互实验</span><span class="colophon-link__note">在浏览器里试试</span><Icon size={17}/></a>
-      </div>
-      <div class="colophon-group">
-        <p class="colophon-group-title">记录与讨论</p>
-        <a class="colophon-link" href="https://github.com/heroliss" target="_blank" rel="noreferrer"><span class="colophon-link__name">GitHub</span><span class="colophon-link__note">代码与仓库</span><Icon size={17}/></a>
-        <a class="colophon-link colophon-link--forum" href={communityUrl}><span class="colophon-link__name">交流</span><span class="colophon-link__note">Liss Community · 提问与分享</span><Icon name="chat" size={19}/></a>
-      </div>
+    <nav class="footer-columns" aria-label="页尾导航">
+      <div><p>作品</p><a href={sitePath('/projects/')}>工程库 <small>{projects.length}</small></a><a href={sitePath('/lab/')}>交互实验</a><a href={sitePath('/about/')}>关于 Liss</a></div>
+      <div><p>方向</p>{groups.map(group => <a href={sitePath(`/projects/?group=${group.id}`)} style={`--tone:${group.tone}`}><i aria-hidden="true"></i>{group.label}</a>)}</div>
+      <div><p>交流</p><a href={communityUrl}>Liss Community</a><a href="https://github.com/heroliss" target="_blank" rel="noreferrer">GitHub <Icon size={14}/></a></div>
     </nav>
   </div>
-  <div class="colophon-baseline">
-    <small>© 2026 Liss</small>
-    <a class="colophon-return" href="#main"><span>回到页首</span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20V4M6 10l6-6 6 6"/></svg></a>
+  <div class="footer-baseline shell">
+    <small>© 2026 Liss · 独立开发的游戏、工具与交互实验</small>
+    <a class="footer-top" href="#main">回到页首 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20V4M6 10l6-6 6 6"/></svg></a>
   </div>
-  </div>
+  <script>
+    document.querySelectorAll<HTMLButtonElement>('[data-footer-random]').forEach(button => button.addEventListener('click', () => {
+      let pool: string[] = []; try { pool = JSON.parse(button.dataset.pool ?? '[]'); } catch { pool = []; }
+      const others = pool.filter(href => !location.pathname.endsWith(href.replace(/^.*?(\/projects\/)/, '$1')));
+      if (others.length) location.assign(others[Math.floor(Math.random() * others.length)]);
+    }));
+  </script>
 </footer>

@@ -12,16 +12,16 @@ const nomad = getProject('nomadworkshop')!;
 const resident = nomad.gallery.find(image => image.src.includes('05-resident-and-world-1080'));
 if (!resident) throw new Error('Exploration invitation needs the genuine Nomad resident-state capture');
 const questions = [
-  { question: '光，怎样给平面以深度？', lens: '看光影', route: '图形切口', path: '图形与代码实验 / OpenGL', action: '去工程库看图形',
-    detail: '在同一只木盒上，观察法线与高度贴图怎样改变表面。',
+  { question: '一张平面贴图，怎么看起来有凹凸？', lens: '图形', route: 'OpenGL', path: '图形与算法实验 / OpenGL', action: '看图形类工程',
+    detail: '同一只木箱，换上法线和高度贴图后，表面就有了深浅。',
     work: 'LearnOpenGL', image: light.cover, tone: getProjectWorld(light.slug).accent,
     href: '/projects/?group=graphics&tag=OpenGL' },
-  { question: '更聪明，也一定更贵吗？', lens: '看取舍', route: 'AI 切口', path: 'AI 与数据 / AI', action: '去工程库看 AI',
-    detail: '把公开模型的能力指数与线性任务成本放进同一张图。',
+  { question: '模型越聪明，就一定越贵吗？', lens: 'AI 与数据', route: '交互图表', path: 'AI 与数据 / AI', action: '看 AI 与数据类工程',
+    detail: '把公开模型的能力分数和使用成本画在同一张图上，一眼看出性价比。',
     work: 'Intelligence × Cost', image: intelligence.cover, tone: getProjectWorld(intelligence.slug).accent,
     href: '/projects/?group=ai-data&tag=AI' },
-  { question: '居民的一次选择，从哪来？', lens: '看行为', route: '游戏切口', path: '游戏与工具 / Unity', action: '去工程库看游戏',
-    detail: '需求、工作价值与路径成本，共同参与居民的下一步行动。',
+  { question: '游戏里的居民，怎么决定下一步做什么？', lens: '游戏', route: 'Unity', path: '游戏与实时场景 / Unity', action: '看游戏类工程',
+    detail: '居民自己的需求、工作的价值和走过去的距离，一起决定它接下来去哪。',
     work: 'NomadWorkshop', image: resident, tone: getProjectWorld(nomad.slug).accent,
     href: '/projects/?group=games&tag=Unity' },
 ];
@@ -30,18 +30,18 @@ const questions = [
   data-exploration-invitation data-invite-active="0" style={`--invite-tone:${questions[0].tone};--invite-ambience:${questions[0].tone}`}>
   <div class="invitation-darkroom" aria-hidden="true"><div class="invitation-light" data-invite-light></div></div>
   <header class="invitation-heading">
-    <h2 id="explore-title">{projects.length} 个工程，<br/>不止一种走法。</h2>
+    <h2 id="explore-title">还有 {projects.length - 5} 个工程，<br/>换个问题接着逛。</h2>
     <div class="invitation-opening">
-      <p>下面只是三个探索切口。<br/>工具、社区、系统与代码实验，也都在完整工程库里。</p>
-      <a href={sitePath('/projects/')} class="invitation-complete-link">进入完整工程库<Icon size={27}/></a>
+      <p>从一个具体的问题出发，也许更容易找到感兴趣的那一个。<br/>全部工程都按方向整理在工程库里。</p>
+      <a href={sitePath('/projects/')} class="invitation-complete-link">打开工程库<Icon size={27}/></a>
     </div>
   </header>
   <div class="invitation-composition">
     <div class="invitation-camera" data-invite-camera>
       <div class="invitation-motion" data-invite-plane>
         <div class="invitation-fold">
-          <nav class="invitation-topics" aria-label={`${projects.length} 个工程中的三个探索切口`}>
-            <p class="invitation-cuts-note">三个切口，点击进入对应工程库。</p>
+          <nav class="invitation-topics" aria-label="三个问题，三类工程">
+            <p class="invitation-cuts-note">选一个问题，看看对应的工程。</p>
             <div class="invitation-cuts">
               {questions.map((question, index) => <a class={`invitation-question invitation-question--${index}`}
                 data-invite-cue={index} data-active={index === 0 ? 'true' : undefined}
@@ -58,7 +58,7 @@ const questions = [
             {questions.map((question, index) => <figure class="invitation-picture" data-invite-picture={index}
               data-invite-tone={question.tone} hidden={index !== 0} inert={index !== 0}>
               <figcaption class="invitation-current-question">
-                <p class="invitation-topic-path">探索切口<span aria-hidden="true"> / </span>{question.path}</p>
+                <p class="invitation-topic-path">{question.path}</p>
                 <h3>{question.question}</h3>
               </figcaption>
               <div class="invitation-viewfinder">

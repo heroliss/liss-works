@@ -34,7 +34,6 @@ npm run test:paths
 npm run test:releases
 npm run test:atoll
 npm run test:atoll-transfer
-npm run test:atlas
 npm run test:palette
 $env:SITE_BASE = '/liss-works/'
 $env:SITE_URL = 'https://heroliss.github.io'
@@ -43,7 +42,7 @@ npm run verify:dist
 Remove-Item Env:SITE_BASE, Env:SITE_URL
 ```
 
-`.github/workflows/deploy-pages.yml` 在 `main` 推送时运行同一组检查并发布 `dist/`。`test:atlas` 包含环形坐标/惯性检查以及实际控制器的键盘、手势取消、减少动态、销毁测试；`test:palette` 检查 23 个项目的身份配色和实色对比，`test:atoll-transfer` 检查压缩星空加载在网络或解码失败时回退原始资源。正式 URL 与旧链接保持不变；旧 `lihou-web` 和 `aoe4-autovillager-tool` 详情地址继续重定向。发布不改变论坛数据库、用户身份或邮件配置。
+`.github/workflows/deploy-pages.yml` 在 `main` 推送时运行同一组检查并发布 `dist/`。`test:palette` 检查 24 个项目的身份配色和实色对比，`test:atoll-transfer` 检查压缩星空加载在网络或解码失败时回退原始资源。正式 URL 与旧链接保持不变；旧 `lihou-web` 和 `aoe4-autovillager-tool` 详情地址继续重定向。发布不改变论坛数据库、用户身份或邮件配置。
 
 本地预览使用根路径，生产使用 `/liss-works/`。站内链接、媒体、字体、canonical、Open Graph 与 404 返回入口都应在生产路径构建后验证。浏览器验收覆盖桌面 Chromium、响应式视口、键盘、减少动态效果和无脚本阅读；不能据此推断真实手机、Safari 或所有设备性能。
 

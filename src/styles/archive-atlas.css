@@ -58,3 +58,27 @@ body:has(.archive-atlas) .site-header { position:relative;z-index:20; }
  .atlas-gallery { padding-top:40px; } .atlas-shelf-heading { gap:20px;margin-bottom:35px;align-items:start; } .atlas-shelf-heading h2 { font-size:33px;margin-bottom:15px; } .atlas-shelf-heading p { font-size:16px; } .atlas-shelf-heading>span { font-size:13px;padding-top:8px; } .atlas-wall { display:block;padding:0 6px; } .atlas-wall>.atlas-item:nth-child(n),.archive-atlas[data-filtered=true] .atlas-wall>.atlas-item { width:100%;margin:0 0 48px; } .atlas-edge-veil { height:1400px; } .atlas-shelf { margin-bottom:65px; }
 }
 @media(prefers-reduced-motion:reduce) { .atlas-ring-camera { transform:none!important; } .atlas-field,.atlas-field-scroll { transform:none!important; } }
+/* 2.2: compact glass-card grid replaces the staggered editorial wall; each
+   shelf and filter carries its direction's colour. */
+.archive-atlas .atlas-wall { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:26px; padding:0; align-items:stretch; }
+.archive-atlas .atlas-shelf .atlas-wall>.atlas-item:nth-child(n):nth-child(n),.archive-atlas[data-filtered=true] .atlas-shelf .atlas-wall>.atlas-item:nth-child(n):nth-child(n) { grid-column:auto; width:auto; margin:0; }
+.archive-atlas .atlas-shelf { margin:0 0 clamp(70px,7vw,110px); }
+.archive-atlas .atlas-shelf-heading { margin:0 0 30px; align-items:center; }
+.archive-atlas .atlas-shelf-heading h2 { display:flex; align-items:center; gap:16px; margin:0 0 10px; font-size:clamp(30px,3vw,44px); }
+.archive-atlas .atlas-shelf-heading h2::before { content:''; width:14px; height:14px; border-radius:50%; background:var(--group-tone); box-shadow:0 0 18px var(--group-tone); }
+.archive-atlas .atlas-shelf-heading>span { padding:6px 14px; border-radius:20px; color:var(--group-tone); border:1px solid color-mix(in srgb,var(--group-tone) 35%,transparent); background:color-mix(in srgb,var(--group-tone) 8%,transparent); font-size:14px; }
+.archive-atlas .atlas-shelf-dots { display:flex; flex-wrap:wrap; gap:6px; margin-top:14px; }
+.archive-atlas .atlas-shelf-dots i { width:9px; height:9px; border-radius:50%; background:var(--dot); box-shadow:0 0 8px -1px var(--dot); }
+.archive-atlas .filter-buttons button[data-group-filter] { border:1px solid color-mix(in srgb,var(--tone,#9cdef1) 30%,transparent); }
+.archive-atlas .filter-buttons button[data-group-filter]:not([data-group-filter=all])::before { content:''; display:inline-block; width:8px; height:8px; margin-right:8px; border-radius:50%; background:var(--tone); vertical-align:1px; }
+.archive-atlas .filter-buttons button[aria-pressed=true] { color:#0b1015; background:var(--tone,var(--atlas-tone)); border-color:transparent; }
+.archive-atlas .filter-buttons button[aria-pressed=true]::before { background:#0b1015!important; }
+.atlas-random { display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:8px 16px; border-radius:24px; background:linear-gradient(100deg,#fd835822,#facf4e22,#6ee8e322,#e27ee822); border:1px solid #ffffff22; color:var(--text); font-size:15px; transition:transform .2s ease,border-color .2s ease; }
+.atlas-random:hover { transform:translateY(-2px) rotate(-1deg); border-color:#facf4e; }
+@media(max-width:1100px) { .archive-atlas .atlas-wall { grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; } }
+@media(max-width:700px) { .archive-atlas .atlas-wall { display:grid; grid-template-columns:1fr; gap:18px; } .archive-atlas .atlas-wall>.atlas-item:nth-child(n),.archive-atlas[data-filtered=true] .atlas-wall>.atlas-item:nth-child(n) { margin:0; } }
+/* The light table is the library's header now; it runs full-bleed above the filters. */
+.archive-atlas .works-table { margin-top:-8px; margin-bottom:24px; }
+.archive-atlas .atlas-filters { scroll-margin-top:20px; }
+.atlas-item[data-pulse=true] .atlas-tile-plane { animation:atlas-pulse 1.6s ease; }
+@keyframes atlas-pulse { 0%,100% { box-shadow:0 30px 50px -34px #000; } 30% { box-shadow:0 0 0 2px var(--atlas-tone),0 0 70px -6px var(--atlas-tone); transform:translateY(-8px) scale(1.02); } }

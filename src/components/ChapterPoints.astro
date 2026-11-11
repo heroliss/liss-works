@@ -1,0 +1,8 @@
+---
+// Three short, concrete points under a home chapter heading: a term, then one plain line.
+interface Props { points: { term: string; text: string }[]; label?: string }
+const { points, label = '要点' } = Astro.props;
+---
+<ul class="chapter-points" aria-label={label}>
+  {points.map((point, index) => <li style={`--i:${index}`}><b>{point.term}</b><span>{point.text}</span></li>)}
+</ul>

@@ -44,8 +44,6 @@ jobs:
         run: npm run test:atoll
       - name: Check Atoll packed asset fallback
         run: npm run test:atoll-transfer
-      - name: Check project ring behavior and lifecycle
-        run: npm run test:atlas
       - name: Check project palette consistency and contrast
         run: npm run test:palette
       - name: Check the PanXu showcase geometry and data

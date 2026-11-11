@@ -1,0 +1,51 @@
+---
+import Icon from './Icon.astro';
+import { projects, groups } from '../data/projects';
+import { prioritizeProjects } from '../data/project-priority';
+import { getProjectWorld } from '../data/project-worlds';
+import { sitePath } from '../lib/site-path';
+import '../styles/works-table.css';
+interface Props { id?: string; title?: string; intro?: string; down?: { href: string; label: string } }
+const { id = 'start', title = '工程库', intro, down = { href: '#atlas-gallery', label: '向下，按方向浏览每个工程' } } = Astro.props;
+const ordered = prioritizeProjects(projects);
+const variant = (cover: { src: string; srcset?: string }) => {
+  const entry = cover.srcset?.split(',').map(value => value.trim().split(/\s+/)).find(([, size]) => size === '640w');
+  return sitePath(entry?.[0] ?? cover.src);
+};
+// Three staggered rows; the second copy makes the endless drift seamless.
+const rows = [0, 1, 2].map(row => ordered.filter((_, index) => index % 3 === row));
+const counts = Object.fromEntries(groups.map(group => [group.id, projects.filter(project => project.group === group.id).length]));
+const randomPool = ordered.map(project => sitePath(`/projects/${project.slug}/`));
+---
+<section class="works-table" id={id} data-works-table aria-labelledby="works-table-title">
+  <div class="works-table__scene" data-table-scene aria-label="作品桌面：全部工程的截图平铺在一张倾斜的桌面上，移动指针倾斜桌面，拖动平移，悬停的作品会立起来。">
+    <div class="works-table__plane" data-table-plane>
+      {rows.map((row, rowIndex) => <div class="works-table__row" data-table-row={rowIndex} style={`--row:${rowIndex}`}>
+        {[0, 1].map(copy => <div class="works-table__run" data-table-run={copy} aria-hidden={copy === 1 ? 'true' : undefined}>
+          {row.map(project => { const world = getProjectWorld(project.slug); return (
+            <a class="works-table__card" href={sitePath(`/projects/${project.slug}/`)} data-table-card={project.slug} data-group={project.group} tabindex={copy === 1 ? -1 : undefined} style={`--tone:${world.accent}`} data-project-enter>
+              <span class="works-table__lift">
+                <span class="works-table__shot" style={`--shot:url("${variant(project.cover)}")`}><img src={variant(project.cover)} width={project.cover.width} height={project.cover.height} alt="" loading={rowIndex === 0 && copy === 0 ? 'eager' : 'lazy'} decoding="async" draggable="false"/></span>
+                <span class="works-table__tag"><strong>{project.name.split(' · ')[0]}</strong><small>{project.category}</small></span>
+              </span>
+            </a>); })}
+        </div>)}
+      </div>)}
+    </div>
+  </div>
+  <div class="works-table__copy">
+    <p class="works-table__kicker">{projects.length} 个工程 · 4 个方向</p>
+    <h1 id="works-table-title"><span class="works-table__accent">{title}</span></h1>
+    <p class="works-table__intro">{intro ?? `游戏、工具、AI 与图形实验，完整作品和正在生长的原型都摊在这张桌上。拖一拖桌面，悬停让作品立起来，点亮一个方向只看那一类。`}</p>
+    <div class="works-table__groups" role="group" aria-label="按方向筛选并点亮作品">
+      {groups.map(group => <a href={sitePath(`/projects/?group=${group.id}`)} data-table-group={group.id} style={`--tone:${group.tone}`}><i aria-hidden="true"></i>{group.short}<small>{counts[group.id]}</small></a>)}
+    </div>
+    <div class="works-table__actions">
+      <a class="works-table__primary" href="#atlas-gallery">逐个浏览 <Icon name="down" size={18}/></a>
+      <button type="button" class="works-table__dice" data-table-random data-pool={JSON.stringify(randomPool)}><Icon name="play" size={16}/>随便看一个</button>
+      <button type="button" class="works-table__motion" data-table-motion aria-pressed="false"><Icon name="pause" size={15}/><span data-table-motion-label>暂停漂移</span></button>
+    </div>
+  </div>
+  <p class="works-table__hint" data-table-hint aria-hidden="true">拖动桌面 · 悬停立起 · 点击进入</p>
+  <a class="works-table__down" href={down.href}><span>{down.label}</span><Icon name="down" size={17}/></a>
+</section>

@@ -1,0 +1,48 @@
+/* One chapter system for the home showcases: a numbered kicker in the work's
+   colour over a light rule, the title, then its line right beneath it, with the
+   introduction and entry link in the second column. */
+.home-next #selected { --chapter-tone:#c8ec60; --chapter-label:'01 · Unity 框架'; }
+.home-next #workflow { --chapter-tone:#30aff8; --chapter-label:'02 · AI 视频译制'; }
+.home-next #panxu { --chapter-tone:#778ffa; --chapter-label:'03 · AI 磁盘清理'; }
+.home-next #atoll { --chapter-tone:#6ee8e3; --chapter-label:'04 · 实时渲染'; }
+.home-next #games { --chapter-tone:#fd8358; --chapter-label:'05 · 游戏'; }
+.home-next :is(#selected .work-heading,#workflow .dub-reel-heading,#panxu .px-heading,#atoll .atoll-showcase__heading,#games .work-heading) {
+  position:relative; display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr); align-items:end; gap:20px 6%;
+  margin:0 0 clamp(36px,4vw,56px); padding-top:58px;
+}
+.home-next :is(#selected .work-heading,#workflow .dub-reel-heading,#panxu .px-heading,#atoll .atoll-showcase__heading,#games .work-heading)::before {
+  content:var(--chapter-label); position:absolute; left:0; top:0; display:flex; align-items:center; gap:12px; padding-top:18px; width:100%;
+  border-top:1px solid transparent; border-image:linear-gradient(90deg,var(--chapter-tone),color-mix(in srgb,var(--chapter-tone) 20%,transparent) 40%,transparent 75%) 1;
+  color:var(--chapter-tone); font-size:14px; letter-spacing:.12em; line-height:1;
+}
+.home-next :is(#selected,#workflow,#panxu,#atoll) :is(.work-heading,.dub-reel-heading,.px-heading,.atoll-showcase__heading) h2 {
+  margin:0; color:var(--chapter-tone); font-family:Rajdhani,'Noto Sans SC',sans-serif; font-size:clamp(56px,6.6vw,100px); font-weight:600; line-height:.98; letter-spacing:-.03em;
+  text-shadow:0 0 60px color-mix(in srgb,var(--chapter-tone) 30%,transparent);
+}
+.home-next #games .work-heading h2 { margin:0; font-size:clamp(40px,4.4vw,64px); font-weight:600; line-height:1.2; letter-spacing:-.03em; }
+/* Taglines sit right under the title instead of drifting to the far edge. */
+.home-next :is(#selected .framework-tagline,#workflow .dub-reel-title,#panxu .px-tagline,#atoll .atoll-showcase__name) {
+  grid-column:1; max-width:none; margin:14px 0 0; color:#e6ecf2; font-size:clamp(20px,1.8vw,26px); line-height:1.5; letter-spacing:-.01em;
+}
+.home-next :is(#selected .framework-introduction,#workflow .dub-reel-introduction,#panxu .px-introduction,#atoll .atoll-showcase__introduction) { display:grid; gap:14px; align-content:end; max-width:34em; justify-self:end; }
+.home-next :is(#selected .framework-introduction,#workflow .dub-reel-introduction,#panxu .px-introduction,#atoll .atoll-showcase__introduction) p { margin:0; color:#c3ccd5; font-size:17px; line-height:1.85; }
+.home-next #games .work-heading>p { margin:0; justify-self:end; max-width:30em; color:#c3ccd5; font-size:17px; line-height:1.85; }
+.home-next :is(#selected,#workflow,#panxu,#atoll,#games) .text-link { color:var(--chapter-tone); }
+@media(max-width:860px) {
+  .home-next :is(#selected .work-heading,#workflow .dub-reel-heading,#panxu .px-heading,#atoll .atoll-showcase__heading,#games .work-heading) { grid-template-columns:1fr; display:grid; padding-top:50px; }
+  .home-next :is(#selected .framework-introduction,#workflow .dub-reel-introduction,#panxu .px-introduction,#atoll .atoll-showcase__introduction,#games .work-heading>p) { justify-self:start; }
+  .home-next :is(#selected,#workflow,#panxu,#atoll) :is(.work-heading,.dub-reel-heading,.px-heading,.atoll-showcase__heading) h2 { font-size:clamp(50px,14vw,72px); }
+}
+.home-next #games .work-heading { width:auto; margin:0 0 clamp(36px,4vw,56px); }
+.home-next #games .work-heading h2 br { display:none; }
+/* The heading now spans the row, so the first game no longer tucks up beside it. */
+.home-next #games .game-scene--blocks { margin-top:0; }
+
+/* Key points: three short facts between the heading and the demo. */
+.home-next .chapter-points { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin:0 0 clamp(34px,4vw,54px); padding:0; list-style:none; }
+.home-next .chapter-points li { position:relative; display:grid; gap:6px; padding:16px 18px 18px; border-radius:14px; border:1px solid color-mix(in srgb,var(--chapter-tone,#9cdef1) 18%,#ffffff0d); background:linear-gradient(160deg,color-mix(in srgb,var(--chapter-tone,#9cdef1) 7%,#0f161e),#0c1218); }
+.home-next .chapter-points b { color:var(--chapter-tone,#9cdef1); font-size:16px; font-weight:600; }
+.home-next .chapter-points span { color:#c5ced7; font-size:15px; line-height:1.75; }
+.home-next #selected .framework-composition--solo { display:block; }
+.home-next #atoll .chapter-points { position:relative; z-index:1; }
+@media(max-width:860px) { .home-next .chapter-points { grid-template-columns:1fr; gap:10px; } }
