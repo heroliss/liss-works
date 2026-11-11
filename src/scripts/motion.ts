@@ -14,7 +14,6 @@ import { setupLabRoomMotion } from './lab-room-motion';
 import { setupAboutStudioMotion } from './about-studio-motion';
 import { setupWorksOrbit } from './works-orbit';
 import { setupWorksTable } from './works-table';
-import { setupWorksSpotlight } from './works-spotlight';
 import { setupHeroHall } from './hero-hall';
 import { setupAtollWater } from './atoll-water';
 import { setupPanxuShowcase } from './panxu-showcase';
@@ -202,7 +201,6 @@ function initializeMotion() {
   const disposeAboutStudio = setupAboutStudioMotion({ signal, preference });
   const disposeWorksOrbit = setupWorksOrbit({ signal, preference });
   const disposeWorksTable = setupWorksTable({ signal, preference });
-  const disposeWorksSpotlight = setupWorksSpotlight({ signal, preference });
   const disposeHeroHall = setupHeroHall({ signal, preference });
   const disposeAtollWater = setupAtollWater({ signal, preference });
   const disposePanxu = setupPanxuShowcase({ signal, preference });
@@ -241,7 +239,6 @@ function initializeMotion() {
     disposeAboutStudio();
     disposeWorksOrbit();
     disposeWorksTable();
-    disposeWorksSpotlight();
     disposeHeroHall();
     disposeAtollWater();
     disposePanxu();

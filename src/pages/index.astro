@@ -9,7 +9,7 @@ import GlassAtollFeature from '../components/GlassAtollFeature.astro';
 import HomeAtmosphere from '../components/HomeAtmosphere.astro';
 import ExplorationInvitation from '../components/ExplorationInvitation.astro';
 import PanxuShowcase from '../components/PanxuShowcase.astro';
-import WorksSpotlight from '../components/WorksSpotlight.astro';
+import WorksHall from '../components/WorksHall.astro';
 import ChapterPoints from '../components/ChapterPoints.astro';
 import { projects, getProject } from '../data/projects';
 import { sitePath, communityUrl } from '../lib/site-path';
@@ -33,7 +33,7 @@ const gomoku = getProject('gomoku')!;
 <Base title="Liss · 把想法做成作品">
  <div class="shell home-next">
   <HomeAtmosphere/>
-  <WorksSpotlight/>
+  <WorksHall/>
 
   <section class="framework-chapter home-chapter" id="selected" aria-labelledby="framework-title">
    <HomeAtmosphere variant="framework"/>

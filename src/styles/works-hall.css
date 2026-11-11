@@ -1,0 +1,86 @@
+/* Home hero: a dark exhibition hall with all five featured works at once. The
+   headline sits in the sky above it; the way on is down the page. */
+/* flow-root keeps the headline's margin inside; the hall slides up under the floating header. */
+.works-hall { position:relative; z-index:1; display:flow-root; height:clamp(760px,100svh,1060px); margin:-82px calc(50% - 50vw) 0; padding-top:82px; overflow:clip; isolation:isolate; background:#070b12; }
+.works-hall::after { content:''; position:absolute; inset:auto 0 0; height:140px; z-index:1; pointer-events:none; background:linear-gradient(to bottom,transparent,var(--bg)); }
+.works-hall__canvas { position:absolute; inset:0; z-index:0; display:block; width:100%; height:100%; cursor:grab; touch-action:pan-y; user-select:none; -webkit-user-select:none; }
+.works-hall[data-dragging=true] .works-hall__canvas { cursor:grabbing!important; }
+.works-hall__copy { position:relative; z-index:2; width:min(860px,calc(100% - 36px)); margin:clamp(22px,3.5vh,54px) auto 0; text-align:center; pointer-events:none; }
+.works-hall__copy h1 { display:flex; flex-wrap:wrap; justify-content:center; gap:0 .2em; margin:0 0 16px; font-size:clamp(50px,6.2vw,100px); font-weight:700; line-height:1.06; letter-spacing:-.045em; text-shadow:0 4px 40px #070b12; }
+.works-hall__accent { background:linear-gradient(100deg,#fd8358,#facf4e 26%,#c8ec60 44%,#6ee8e3 62%,#30aff8 78%,#e27ee8); -webkit-background-clip:text; background-clip:text; color:transparent; background-size:200% 100%; animation:works-hall-sheen 14s linear infinite; text-shadow:none; }
+@keyframes works-hall-sheen { to { background-position:-200% 0; } }
+.works-hall__copy p { margin:0 auto; max-width:30em; color:#d5dde6; font-size:clamp(16px,1.3vw,19px); line-height:1.8; text-shadow:0 2px 24px #070b12; }
+.works-hall__label { position:fixed; z-index:5; left:0; top:0; display:flex; align-items:center; gap:8px; margin:0; padding:7px 12px; border-radius:10px; border:1px solid color-mix(in srgb,var(--tone,#9cdef1) 45%,transparent); background:#0b1118e6; -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); color:var(--text); font-size:14px; white-space:nowrap; pointer-events:none; opacity:0; transform:translate3d(var(--lx,0),var(--ly,0),0); transition:opacity .2s ease; }
+.works-hall__label[data-visible=true] { opacity:1; }
+.works-hall__label i { width:8px; height:8px; border-radius:50%; background:var(--tone); }
+.works-hall__label strong { color:var(--tone); font-family:Rajdhani,'Noto Sans SC',sans-serif; font-size:17px; }
+.works-hall__label span { color:var(--muted); font-size:12px; }
+.works-hall__bottom { position:absolute; z-index:2; left:0; right:0; bottom:clamp(30px,5vh,56px); display:grid; justify-items:center; gap:18px; pointer-events:none; }
+.works-hall__chips { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; pointer-events:auto; }
+.works-hall__chips a { display:inline-flex; align-items:center; gap:8px; min-height:38px; padding:6px 14px; border-radius:20px; border:1px solid color-mix(in srgb,var(--tone) 30%,transparent); background:#0b1118b8; -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); color:#d7dfe7; font-size:14px; transition:border-color .2s ease,color .2s ease,transform .2s ease,background .2s ease; }
+.works-hall__chips a:is(:hover,:focus-visible,[data-active=true]) { border-color:var(--tone); color:#fff; background:color-mix(in srgb,var(--tone) 16%,#0b1118d0); transform:translateY(-2px); }
+.works-hall__chips i { width:8px; height:8px; border-radius:50%; background:var(--tone); box-shadow:0 0 10px var(--tone); }
+.works-hall__actions { display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:12px 24px; pointer-events:auto; }
+.works-hall__primary { display:inline-flex; align-items:center; gap:10px; min-height:50px; padding:12px 22px; border-radius:6px 18px 6px 6px; background:#eef2ec; color:#0b1015; font-size:16px; font-weight:600; transition:transform .2s ease,background .2s ease; }
+.works-hall__primary:hover { background:#fff; transform:translateY(-2px); }
+.works-hall__primary svg { animation:works-hall-nudge 2.4s ease-in-out infinite; }
+@keyframes works-hall-nudge { 0%,100% { transform:none; } 50% { transform:translateY(3px); } }
+.works-hall__library { display:inline-flex; align-items:center; gap:8px; min-height:44px; color:#c8d1da; font-size:15px; border-bottom:1px solid #4b5f72; }
+.works-hall__library:hover { color:#fff; }
+.works-hall__hint { position:absolute; z-index:2; right:max(32px,calc(50% - 680px)); bottom:24px; margin:0; color:var(--muted); font-size:12px; letter-spacing:.08em; display:none; }
+.works-hall[data-gl-ready] .works-hall__hint { display:block; }
+/* No WebGL: a still row of the same five works, slightly turned. */
+.works-hall__fallback { position:absolute; inset:34% 4% auto; display:flex; justify-content:center; gap:2%; perspective:1400px; }
+.works-hall__fallback span { width:18%; aspect-ratio:1.6; border-radius:10px; overflow:hidden; border:1px solid var(--tone); box-shadow:0 0 40px -12px var(--tone); transform:rotateY(calc((var(--i) - 2) * -12deg)) translateY(calc((var(--i) - 2) * (var(--i) - 2) * -6px)); background:#0a1015; }
+.works-hall__fallback img { width:100%; height:100%; object-fit:contain; }
+.works-hall[data-gl-ready] .works-hall__fallback { display:none; }
+@media(max-width:760px) {
+  .works-hall { height:auto; min-height:0; display:flex; flex-direction:column; margin-top:-70px; padding-top:70px; padding-bottom:30px; }
+  .works-hall__copy { margin-top:30px; }
+  .works-hall__copy h1 { font-size:clamp(42px,12vw,60px); }
+  .works-hall__copy { order:0; }
+  .works-hall__canvas { position:relative; inset:auto; order:1; height:340px; margin-top:4px; }
+  .works-hall__fallback { order:1; }
+  .works-hall__label { display:none; }
+  .works-hall__fallback { position:relative; inset:auto; margin:30px 0; flex-wrap:wrap; }
+  .works-hall__fallback span { width:44%; transform:none; }
+  .works-hall__bottom { position:relative; bottom:auto; order:2; margin-top:6px; padding:0 18px; }
+  .works-hall__chips a { font-size:13px; padding:5px 11px; }
+  .works-hall__hint { position:relative; right:auto; bottom:auto; order:3; text-align:center; margin-top:14px; }
+  .works-hall::after { display:none; }
+}
+@media(prefers-reduced-motion:reduce) { .works-hall__accent,.works-hall__primary svg { animation:none; } }
+@media(forced-colors:active) { .works-hall__accent { color:CanvasText; background:none; } }
+
+/* Focus caption: names the work at the front of the constellation. */
+.works-hall__focus { position:absolute; z-index:2; left:50%; bottom:calc(clamp(30px,5vh,56px) + 112px); transform:translateX(-50%); display:grid; justify-items:center; gap:2px; text-align:center; pointer-events:none; }
+.works-hall__focus span { color:color-mix(in srgb,var(--tone) 70%,#e6eef3); font-size:14px; letter-spacing:.04em; text-shadow:0 2px 16px #070b12; }
+.works-hall__focus strong { font-family:Rajdhani,'Noto Sans SC',sans-serif; font-size:clamp(30px,3vw,44px); font-weight:600; line-height:1.1; color:var(--tone); text-shadow:0 4px 30px #070b12,0 0 40px color-mix(in srgb,var(--tone) 40%,transparent); }
+.works-hall__focus a { pointer-events:auto; display:inline-flex; align-items:center; gap:6px; margin-top:4px; color:#dfe7ee; font-size:14px; border-bottom:1px solid color-mix(in srgb,var(--tone) 55%,transparent); }
+.works-hall__focus a:hover { color:var(--tone); }
+.works-hall__focus[data-changing=true] > * { animation:works-hall-focus .55s cubic-bezier(.2,.7,.2,1); }
+@keyframes works-hall-focus { from { opacity:0; transform:translateY(8px); } }
+.works-hall:not([data-gl-ready]) .works-hall__focus { display:none; }
+.works-hall__chips a[aria-current=true] { border-color:var(--tone); color:#fff; background:color-mix(in srgb,var(--tone) 18%,#0b1118d0); }
+@media(max-width:760px) { .works-hall__focus { position:relative; left:auto; bottom:auto; transform:none; order:2; margin:-18px auto 14px; } }
+@media(prefers-reduced-motion:reduce) { .works-hall__focus[data-changing=true] > * { animation:none; } }
+
+/* Asymmetric layout: the copy column on the left, the constellation framed to the
+   right and fading out beneath the text. */
+@media(min-width:761px) {
+  .works-hall__canvas { -webkit-mask-image:linear-gradient(90deg,transparent 0,#0007 18%,#000 46%); mask-image:linear-gradient(90deg,transparent 0,#0007 18%,#000 46%); }
+  .works-hall__copy { position:absolute; left:max(48px,calc(50% - 680px)); top:clamp(104px,15vh,170px); width:min(500px,36%); margin:0; text-align:left; pointer-events:auto; }
+  .works-hall__copy h1 { justify-content:flex-start; font-size:clamp(52px,5.4vw,92px); margin-bottom:18px; }
+  .works-hall__copy > p { margin:0 0 26px; max-width:26em; }
+  .works-hall__copy .works-hall__focus { position:relative; left:auto; bottom:auto; transform:none; justify-items:start; text-align:left; margin:0 0 20px; padding:16px 20px 16px 18px; border-left:3px solid var(--tone); border-radius:4px 14px 14px 4px; background:linear-gradient(100deg,color-mix(in srgb,var(--tone) 12%,#0b1118b0),#0b111840); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); pointer-events:auto; }
+  .works-hall__copy .works-hall__bottom { position:relative; left:auto; right:auto; bottom:auto; justify-items:start; pointer-events:auto; }
+  .works-hall__copy .works-hall__chips,.works-hall__copy .works-hall__actions { justify-content:flex-start; }
+}
+/* Mobile: the copy column dissolves so its caption and chips can sit below the hall. */
+@media(max-width:760px) {
+  .works-hall__copy { display:contents; }
+  .works-hall__copy > h1 { order:0; margin:30px 18px 14px; }
+  .works-hall__copy > p { order:0; margin:0 18px; text-align:center; }
+  .works-hall__copy .works-hall__focus { margin:-18px auto 14px; pointer-events:auto; }
+  .works-hall__copy .works-hall__bottom { pointer-events:auto; }
+}

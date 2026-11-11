@@ -1,3 +1,4 @@
+@property --sheen { syntax:'<number>'; inherits:false; initial-value:0; }
 /* Library cards: a tinted glass slab per project. The real screenshot sits in a
    recessed window, the project's identity colour lights the rim, and the whole
    slab tilts toward the pointer with a highlight that follows it. */
@@ -8,7 +9,7 @@
 .atlas-tile-link:focus-visible { outline:none; }
 .atlas-tile-link:focus-visible .atlas-tile-plane { outline:2px solid var(--atlas-tone); outline-offset:5px; }
 .atlas-tile-camera { position:relative; height:100%; min-width:0; perspective:1100px; perspective-origin:50% 40%; }
-.atlas-tile-plane { --shine-x:30%; --shine-y:0%; position:relative; display:flex; flex-direction:column; height:100%; min-width:0; padding:10px; border-radius:18px; overflow:hidden; isolation:isolate; transform-origin:50% 50%; transform-style:preserve-3d;
+.atlas-tile-plane { position:relative; display:flex; flex-direction:column; height:100%; min-width:0; padding:10px; border-radius:18px; overflow:hidden; isolation:isolate; transform-origin:50% 50%; transform-style:preserve-3d;
   transform:rotateZ(var(--atlas-rest-z)) rotateY(var(--atlas-rest-y)) rotateX(var(--atlas-rest-x));
   background:linear-gradient(155deg,color-mix(in srgb,var(--atlas-tone) 16%,#121b24) 0%,#0e151d 46%,color-mix(in srgb,var(--atlas-tone) 7%,#0b1117) 100%);
   border:1px solid color-mix(in srgb,var(--atlas-tone) 26%,#ffffff12);
@@ -28,8 +29,14 @@
 .atlas-tile-summary { display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; margin:10px 0 0; color:#d2dae2; font-size:15px; line-height:1.75; overflow-wrap:anywhere; }
 .atlas-tile-tags { display:flex; flex-wrap:wrap; gap:6px; margin:auto 0 0; padding:16px 0 0; list-style:none; }
 .atlas-tile-tags li { padding:2px 9px; border-radius:20px; border:1px solid #ffffff16; background:#ffffff08; color:var(--muted,#b6beba); font-size:12px; line-height:1.7; }
-/* The highlight follows the pointer across the glass. */
-.atlas-tile-shine { position:absolute; inset:0; z-index:2; border-radius:inherit; pointer-events:none; opacity:0; background:radial-gradient(circle at var(--shine-x) var(--shine-y),#ffffff26,transparent 46%); mix-blend-mode:screen; transition:opacity .3s ease; }
+/* A fixed light from the upper left: a soft diagonal reflection across the glass
+   and a lit top edge. Tilting the card slides the reflection a little, as a
+   real pane would, instead of a spotlight chasing the pointer. */
+.atlas-tile-shine { --sheen:0; position:absolute; inset:0; z-index:2; border-radius:inherit; pointer-events:none; overflow:hidden;
+  background:linear-gradient(118deg,transparent calc(18% + var(--sheen) * 14%),#ffffff12 calc(30% + var(--sheen) * 14%),#ffffff2c calc(34% + var(--sheen) * 14%),#ffffff0c calc(40% + var(--sheen) * 14%),transparent calc(52% + var(--sheen) * 14%)),
+    linear-gradient(180deg,#ffffff12,transparent 18%);
+  box-shadow:inset 0 1px 0 #ffffff2a,inset 1px 0 0 #ffffff10;
+  opacity:.75; transition:opacity .35s ease,--sheen .7s cubic-bezier(.2,.7,.2,1); }
 .atlas-tile-link:is(:hover,:focus-visible) .atlas-tile-plane,.atlas-item[data-active=true] .atlas-tile-plane { border-color:color-mix(in srgb,var(--atlas-tone) 62%,transparent); box-shadow:0 1px 0 #ffffff1c inset,0 40px 60px -32px #000,0 0 46px -18px var(--atlas-tone); }
 .atlas-tile-link:is(:hover,:focus-visible) .atlas-tile-plane::before { opacity:1; }
 .atlas-tile-link:is(:hover,:focus-visible) .atlas-tile-shine { opacity:1; }

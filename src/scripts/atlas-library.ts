@@ -19,7 +19,8 @@ export function setupAtlasLibrary({ signal, preference }: Options): () => void {
     const rx = gsap.quickTo(surface, 'rotationX', { duration: .8, ease: 'power3.out' });
     const ry = gsap.quickTo(surface, 'rotationY', { duration: .8, ease: 'power3.out' });
     let bounds = { left: 0, top: 0, width: 1, height: 1 };
-    const reset = () => { rx(rx0); ry(ry0); };
+    const shine = surface.querySelector<HTMLElement>('.atlas-tile-shine');
+    const reset = () => { rx(rx0); ry(ry0); shine?.style.setProperty('--sheen', '0'); };
     resets.push(() => gsap.set(surface, { clearProps: 'transform' }));
     item.addEventListener('pointerenter', () => { const box = item.getBoundingClientRect(); bounds = { left: box.left, top: box.top, width: box.width, height: box.height }; }, { signal: events.signal });
     item.addEventListener('pointermove', event => {
@@ -27,8 +28,8 @@ export function setupAtlasLibrary({ signal, preference }: Options): () => void {
       const x = Math.max(-1, Math.min(1, (event.clientX - bounds.left) / bounds.width * 2 - 1));
       const y = Math.max(-1, Math.min(1, (event.clientY - bounds.top) / bounds.height * 2 - 1));
       rx(rx0 - y * 8); ry(ry0 + x * 11);
-      surface.style.setProperty('--shine-x', `${((x + 1) * 50).toFixed(1)}%`);
-      surface.style.setProperty('--shine-y', `${((y + 1) * 50).toFixed(1)}%`);
+      // The reflection slides opposite to the tilt, like light on a turning pane.
+      shine?.style.setProperty('--sheen', (-(x * .8 + y * .4)).toFixed(3));
     }, { passive: true, signal: events.signal });
     item.addEventListener('pointerleave', reset, { signal: events.signal });
   });

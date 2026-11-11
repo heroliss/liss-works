@@ -1,0 +1,47 @@
+---
+import Icon from './Icon.astro';
+import { projects, getProject } from '../data/projects';
+import { getProjectWorld } from '../data/project-worlds';
+import { sitePath } from '../lib/site-path';
+import '../styles/works-hall.css';
+// The hero is a hook, not a doorway: each work points to its chapter further down.
+const picks = [
+  { slug: 'glass-atoll', anchor: '#atoll', hook: '浏览器里就能逛的小岛' },
+  { slug: 'dubforge', anchor: '#workflow', hook: '把外语视频做成中文版' },
+  { slug: 'ssframework', anchor: '#selected', hook: 'Unity 游戏和工具的底层框架' },
+  { slug: 'panxu', anchor: '#panxu', hook: '让 AI 帮你判断文件能不能删' },
+  { slug: 'gomoku', anchor: '#games', hook: '11 种 AI 引擎的五子棋' },
+];
+const featured = picks.map(pick => {
+  const project = getProject(pick.slug)!;
+  const cover = project.cover;
+  const src = sitePath(cover.srcset?.split(',').map(entry => entry.trim().split(/\s+/)).find(([, size]) => size === '960w')?.[0] ?? cover.src);
+  return { ...pick, name: project.name.split(' · ')[0], tone: getProjectWorld(pick.slug).accent, src, category: project.category, width: cover.width, height: cover.height };
+});
+---
+<section class="works-hall" id="start" data-works-hall aria-labelledby="home-title">
+  <canvas class="works-hall__canvas" data-hall-canvas aria-hidden="true" hidden></canvas>
+  <div class="works-hall__fallback" aria-hidden="true">
+    {featured.map((item, index) => <span style={`--tone:${item.tone};--i:${index}`}><img src={item.src} alt="" width={item.width} height={item.height} loading="lazy" decoding="async"/></span>)}
+  </div>
+  <div class="works-hall__copy">
+    <h1 id="home-title"><span>把想法，</span><span class="works-hall__accent">做成作品。</span></h1>
+    <p>我是 Liss，独立开发游戏、工具和各种交互实验。这里是其中五件，往下慢慢看。</p>
+    <div class="works-hall__focus" data-hall-focus style={`--tone:${featured[0].tone}`}>
+      <span data-hall-focus-hook>{featured[0].hook}</span>
+      <strong data-hall-focus-name>{featured[0].name}</strong>
+      <a data-hall-focus-link href={featured[0].anchor}>往下看介绍 <Icon name="down" size={15}/></a>
+    </div>
+    <div class="works-hall__bottom">
+      <nav class="works-hall__chips" aria-label="跳到代表作介绍">
+        {featured.map((item, index) => <a href={item.anchor} data-hall-chip={index} data-name={item.name} data-category={item.category} data-hook={item.hook} data-image={item.src} aria-current={index === 0 ? 'true' : undefined} style={`--tone:${item.tone}`}><i aria-hidden="true"></i>{item.name}</a>)}
+      </nav>
+      <div class="works-hall__actions">
+        <a class="works-hall__primary" href="#selected">往下看看它们 <Icon name="down" size={18}/></a>
+        <a class="works-hall__library" href={sitePath('/projects/')}>全部 {projects.length} 个工程 <Icon size={16}/></a>
+      </div>
+    </div>
+  </div>
+  <p class="works-hall__label" data-hall-label aria-hidden="true"><i></i><strong data-hall-label-name></strong><span data-hall-label-category></span></p>
+  <p class="works-hall__hint" aria-hidden="true">点选作品 · 拖动展厅</p>
+</section>

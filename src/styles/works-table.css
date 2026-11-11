@@ -75,3 +75,9 @@ html:not([data-motion]) .works-table__motion { display:none; }
 /* Filtering in the library lights the prints that match and lets the rest fall dark. */
 .works-table[data-filtering] .works-table__card[data-match=false] .works-table__lift { filter:saturate(.2) brightness(.4); opacity:.45; }
 .works-table[data-filtering] .works-table__card[data-match=true] .works-table__lift { transform:translateZ(30px) rotateX(-12deg); }
+
+/* Hover is read from the print's flat footprint on the table, which never moves,
+   not from the part that stands up; a print lifting away from the pointer can no
+   longer drop its own hover and flicker at the edge. */
+.works-table__lift,.works-table__card::before { pointer-events:none; }
+.works-table__card::after { content:''; position:absolute; inset:-10px -8px -6px; border-radius:12px; }
