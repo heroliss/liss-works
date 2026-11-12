@@ -127,7 +127,12 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
       aim.subVectors(at, ahead).reflect(normal).negate().add(at);
       mirrorCam.position.copy(view); mirrorCam.up.set(0, 1, 0).applyMatrix4(rot).reflect(normal); mirrorCam.lookAt(aim);
       mirrorCam.far = (cam as Three.PerspectiveCamera).far; mirrorCam.updateMatrixWorld();
-      mirrorCam.projectionMatrix.copy(cam.projectionMatrix); mirrorCam.projectionMatrixInverse.copy(cam.projectionMatrixInverse);
+      // The mirror camera sees the world flipped left to right, so the sideways view
+      // offset (the scene framed right of the copy) must be flipped too; copied as is,
+      // its frustum looked at the wrong side and reflections smeared at the edge.
+      mirrorCam.projectionMatrix.copy(cam.projectionMatrix);
+      mirrorCam.projectionMatrix.elements[8] *= -1; mirrorCam.projectionMatrix.elements[9] *= -1;
+      mirrorCam.projectionMatrixInverse.copy(mirrorCam.projectionMatrix).invert();
       textureMatrix.set(.5, 0, 0, .5, 0, .5, 0, .5, 0, 0, .5, .5, 0, 0, 0, 1)
         .multiply(mirrorCam.projectionMatrix).multiply(mirrorCam.matrixWorldInverse).multiply(floor.matrixWorld);
       floor.visible = false;
