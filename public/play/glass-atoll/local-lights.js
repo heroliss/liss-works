@@ -46,7 +46,7 @@ export const localLightGLSL=/* glsl */`
 
 export function createLocalLights(THREE,{scene,terrainHeight=()=>0}={}){
   const root=new THREE.Group();root.name='Three low surface luminaires';scene.add(root);
-  const settings={mode:'night',linked:false,lamps:[0,1,2].map(()=>({enabled:true,brightness:.45,color:'#ffdfa5'})),flashlight:{enabled:false,brightness:.7}};
+  const settings={mode:'night',linked:false,lamps:[0,1,2].map(()=>({enabled:true,brightness:.18,color:'#ffdfa5'})),flashlight:{enabled:false,brightness:.7}};
   const white=new THREE.DataTexture(new Uint8Array([255,255,255,255]),1,1,THREE.RGBAFormat);white.needsUpdate=true;white.minFilter=white.magFilter=THREE.NearestFilter;
   const uniforms={uLocalPosition:{value:Array.from({length:LOCAL_LIGHT_COUNT},()=>new THREE.Vector4())},uLocalColour:{value:Array.from({length:LOCAL_LIGHT_COUNT},()=>new THREE.Vector4())},uLocalDirection:{value:Array.from({length:LOCAL_LIGHT_COUNT},()=>new THREE.Vector4())},uLocalCone:{value:Array.from({length:LOCAL_LIGHT_COUNT},()=>new THREE.Vector4(-1,1,30,0))},uLocalBurstBounds:{value:[new THREE.Vector4(),new THREE.Vector4()]},uLocalShadowMap:{value:white},uLocalShadowMatrix:{value:new THREE.Matrix4()},uLocalShadowSize:{value:new THREE.Vector2(1,1)},uLocalShadowEnabled:{value:0},uLocalShadowBias:{value:-.0002}};
   const records=[],fixtures=[],applied=new WeakSet();let lastFrame=null,lastShadowTime=-Infinity,shadowSize=1024,shadowHz=30,lastRawBound=0,lastShadowPose='';

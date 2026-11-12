@@ -9,7 +9,7 @@ const finite=(v,name)=>{if(!Number.isFinite(v))throw new TypeError(`${name} must
 export function conservativeExposureCeiling(solarAltitudeDeg,nightCeilingEV=14){
   finite(solarAltitudeDeg,'solarAltitudeDeg');finite(nightCeilingEV,'nightCeilingEV');
   if(nightCeilingEV<0||nightCeilingEV>24)throw new RangeError('nightCeilingEV must be between0 and24');
-  const knots=[[10,0],[0,Math.min(1,nightCeilingEV)],[-6,Math.min(4,nightCeilingEV)],[-12,Math.min(9,nightCeilingEV)],[-18,nightCeilingEV]];
+  const knots=[[10,0],[0,Math.min(1,nightCeilingEV)],[-6,Math.min(5,nightCeilingEV)],[-9,Math.min(9,nightCeilingEV)],[-12,Math.min(14,nightCeilingEV)],[-15,Math.min(18,nightCeilingEV)],[-16,nightCeilingEV]];
   if(solarAltitudeDeg>=10)return 0;
   for(let i=1;i<knots.length;i++){const [hi,a]=knots[i-1],[lo,b]=knots[i];if(solarAltitudeDeg>=lo)return a+(b-a)*smooth((hi-solarAltitudeDeg)/(hi-lo));}
   return nightCeilingEV;
@@ -61,22 +61,32 @@ export function adaptExposureGain(current,target,dt,{darkeningStopsPerSecond=4,b
   return target-Math.sign(difference)*remaining;
 }
 
+// Naked-eye night: a moonless pristine sky (~22 mag/arcsec^2, ~1.7e-4 cd/m^2)
+// is ~5.3 stops darker than a high full-Moon sky, yet dark adaptation keeps the
+// Milky Way plainly visible. The ceiling therefore rises with missing moonlight
+// (same sqrt shape as the night prior) instead of one cap for every night.
+export function moonAwareNightCeiling(moonIllumination=1,{fullMoonCeilingEV=14,moonlessBoostEV=5}={}){
+  finite(moonIllumination,'moonIllumination');
+  return fullMoonCeilingEV+moonlessBoostEV*(1-Math.sqrt(clamp(moonIllumination,0,1)));
+}
+
 export function createCameraExposure({nightCeilingEV=14,maximumMeterInfluenceEV=2,darkeningStopsPerSecond=4,brighteningStopsPerSecond=.75,transitionStops=1}={}){
   for(const [name,value]of Object.entries({nightCeilingEV,maximumMeterInfluenceEV,darkeningStopsPerSecond,brighteningStopsPerSecond,transitionStops}))finite(value,name);
   if(nightCeilingEV<0||nightCeilingEV>24||maximumMeterInfluenceEV<0||darkeningStopsPerSecond<=0||brighteningStopsPerSecond<=0||transitionStops<=0)throw new RangeError('Invalid camera exposure configuration');
   let initialized=false,actualBaseEV=0,targetBaseEV=0,state={mode:'automatic',cameraEV:0,targetEV:0,initialized:false,metering:'awaiting-frame'};
   return {
-    update({enabled=true,recommendedEV=0,solarAltitudeDeg=48,manualExposureEV=null,compensationEV=0,dt=0,reset=false,histogram=null}={}){
+    update({enabled=true,recommendedEV=0,solarAltitudeDeg=48,manualExposureEV=null,compensationEV=0,dt=0,reset=false,histogram=null,nightCeilingEV:frameNightCeilingEV=nightCeilingEV,darkeningStopsPerSecond:frameDarkening=darkeningStopsPerSecond}={}){
       for(const [name,value]of Object.entries({recommendedEV,solarAltitudeDeg,compensationEV,dt}))finite(value,name);
       if(typeof enabled!=='boolean'||typeof reset!=='boolean'||dt<0)throw new TypeError('Invalid camera exposure update');
       if(manualExposureEV!==null)finite(manualExposureEV,'manualExposureEV');
+      finite(frameNightCeilingEV,'nightCeilingEV');finite(frameDarkening,'darkeningStopsPerSecond');if(frameDarkening<=0)throw new RangeError('darkeningStopsPerSecond must be positive');
       const manual=manualExposureEV===null?(initialized?actualBaseEV:0):clamp(manualExposureEV,-12,24);
-      const ceiling=conservativeExposureCeiling(solarAltitudeDeg,nightCeilingEV),prior=clamp(Math.min(recommendedEV,ceiling),-12,24),meter=histogram?exposureHistogramSummary(histogram):null;
+      const ceiling=conservativeExposureCeiling(solarAltitudeDeg,clamp(frameNightCeilingEV,0,24)),prior=clamp(Math.min(recommendedEV,ceiling),-12,24),meter=histogram?exposureHistogramSummary(histogram):null;
       let target=enabled?prior:manual;
       if(enabled&&meter?.valid)target=Math.min(ceiling,clamp(meter.cameraGainEV,prior-maximumMeterInfluenceEV,prior+maximumMeterInfluenceEV));
       targetBaseEV=target;
       if(!initialized||reset||!enabled)actualBaseEV=target;
-      else actualBaseEV=adaptExposureGain(actualBaseEV,target,Math.min(dt,.25),{darkeningStopsPerSecond,brighteningStopsPerSecond,transitionStops});
+      else actualBaseEV=adaptExposureGain(actualBaseEV,target,Math.min(dt,.25),{darkeningStopsPerSecond:frameDarkening,brighteningStopsPerSecond,transitionStops});
       initialized=true;
       state={mode:enabled?'automatic':'manual',cameraEV:clamp(actualBaseEV+compensationEV,-24,24),targetEV:clamp(targetBaseEV+compensationEV,-24,24),actualBaseEV,targetBaseEV,compensationEV,manualExposureEV:manual,priorEV:prior,ceilingEV:ceiling,initialized,resetApplied:reset,metering:enabled?(meter?.valid?'actual-histogram':'bounded-celestial-prior'):'fixed-manual',histogram:meter,
         convention:'positive relative gainEV brightens; not absolute EV100',limits:['Night/twilight ceiling is authored perceptual intent, not eye physiology or absolute photometric calibration.','A histogram is used only when a host supplies actual HDR pixels; no GPU metering is implied by a missing histogram.','Storage exposureP is a separate precision variable and must cancel before display.']};

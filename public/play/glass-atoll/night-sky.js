@@ -43,9 +43,13 @@ export function nightEphemeris(settings=nightDefaults,elapsedSeconds=0){
 
 // Stops relative to this application's daytime calibration. The renderer must
 // apply preExposure before FP16 storage; OutputPass subtracts preExposureEV.
+// Fraction of a high full Moon's ground illuminance (phase x altitude), 0..1.
+export function moonIlluminationFraction(moonSourceRatio=0,moonAltitudeDegrees=-90){
+  return clamp(moonSourceRatio/FULL_MOON_SOLAR_RATIO*Math.max(0,Math.sin(moonAltitudeDegrees*RAD)),0,1);
+}
 export function recommendedNightExposure(solarElevationDegrees,moonSourceRatio=0,moonAltitudeDegrees=-90,automatic=true){
   if(!automatic)return 0;
-  const moonIllumination=clamp(moonSourceRatio/FULL_MOON_SOLAR_RATIO*Math.max(0,Math.sin(moonAltitudeDegrees*RAD)),0,1);
+  const moonIllumination=moonIlluminationFraction(moonSourceRatio,moonAltitudeDegrees);
   const darkEV=21-3.8*Math.sqrt(moonIllumination),e=solarElevationDegrees;
   if(e>=10)return 0;
   if(e>=0)return 2*(1-smooth(0,10,e));

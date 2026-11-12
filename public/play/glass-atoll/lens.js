@@ -188,6 +188,23 @@ export function createLens(renderer,camera) {
   let upscalerReady=false;
   const ready=upscaler.ready.then(value=>{upscalerReady=value;return value;});
   const smaa=new SMAAPass(),output=new OutputPass();output.renderToScreen=true;
+  // SDR output is quantized to 8 bits; large smooth sky gradients then show
+  // one-code-value bands. A static triangular-PDF dither of +-1 LSB, applied
+  // after tone mapping and sRGB encoding, removes the banding without a mean
+  // shift. Exact black stays black. The HDR float output does not use this pass.
+  {
+    const end=output.material.fragmentShader.lastIndexOf('}');
+    output.material.fragmentShader=output.material.fragmentShader.slice(0,end)+`
+      // Hash without sin() or a lattice (static IGN shows diagonal structure);
+      // one shared amplitude keeps hue, and it fades out below one code value
+      // so near-black is neither lifted nor tinted by clipped negative noise.
+      vec3 ditherP=fract(vec3(floor(gl_FragCoord.xyx))*vec3(.1031,.1030,.0973));
+      ditherP+=dot(ditherP,ditherP.yzx+33.33);
+      float ditherA=fract((ditherP.x+ditherP.y)*ditherP.z),ditherB=fract((ditherP.x+ditherP.z)*ditherP.y);
+      float ditherPeak=max(max(gl_FragColor.r,gl_FragColor.g),gl_FragColor.b);
+      gl_FragColor.rgb+=clamp(ditherPeak*255.,0.,1.)*(ditherA+ditherB-1.)/255.;
+    }`;
+  }
   const temporalTargets=[0,1].map(i=>{
     const target=new THREE.WebGLRenderTarget(1,1,{type:THREE.HalfFloatType,depthBuffer:false,count:2});
     target.texture.name='Selective vegetation HDR history '+i;

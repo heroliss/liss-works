@@ -341,9 +341,9 @@
     },
     {
       "path": "camera-exposure.js",
-      "sourceSHA256": "ac42e04cf0238ecf1b9a2d1751098a93174856e79eb74dd069e74c777d68771f",
-      "sha256": "ac42e04cf0238ecf1b9a2d1751098a93174856e79eb74dd069e74c777d68771f",
-      "bytes": 8476,
+      "sourceSHA256": "c014e8f40ee190f0e5a743c7cefca064f5e89edb5f50ae98b2394082d08e11ae",
+      "sha256": "c014e8f40ee190f0e5a743c7cefca064f5e89edb5f50ae98b2394082d08e11ae",
+      "bytes": 9345,
       "adapted": false
     },
     {
@@ -628,9 +628,9 @@
     },
     {
       "path": "index.html",
-      "sourceSHA256": "aa8e100a562ea0e402e03399151430a103e8b97f495cf7f8496e7224db4e69cf",
-      "sha256": "200841afabb97d2f904be00dd2f595461c9978fcb8c691f10989ca14175c9fb6",
-      "bytes": 48360,
+      "sourceSHA256": "1963fc440ec4db0014ee5fb2f70ca0babf2975a58cb9d27989a4716d406053ca",
+      "sha256": "fd8bbf83d4a91c0f4b88aa94ffdd77b672b6f7e0f8759f5b1a8814d514064637",
+      "bytes": 48054,
       "adapted": true
     },
     {
@@ -649,15 +649,15 @@
     },
     {
       "path": "lens.js",
-      "sourceSHA256": "97855562aa4fdcf76f85e2713137b181a2424677ffb14c1dc10682e1c4d129d2",
-      "sha256": "97855562aa4fdcf76f85e2713137b181a2424677ffb14c1dc10682e1c4d129d2",
-      "bytes": 31514,
+      "sourceSHA256": "ad551ddc9d23529ce9db49d803d81215c6425a34913d62ecd4c2f64aef07a917",
+      "sha256": "ad551ddc9d23529ce9db49d803d81215c6425a34913d62ecd4c2f64aef07a917",
+      "bytes": 32621,
       "adapted": false
     },
     {
       "path": "local-lights.js",
-      "sourceSHA256": "5c13bcea1183daf7a508f6635f839f32507fbcc14c4854d98d69be9251c67fd7",
-      "sha256": "5c13bcea1183daf7a508f6635f839f32507fbcc14c4854d98d69be9251c67fd7",
+      "sourceSHA256": "7f9eddb8f1698fe7ace9091f3045e2843447af10108469c78e056af46369615f",
+      "sha256": "7f9eddb8f1698fe7ace9091f3045e2843447af10108469c78e056af46369615f",
       "bytes": 16627,
       "adapted": false
     },
@@ -670,16 +670,16 @@
     },
     {
       "path": "main.js",
-      "sourceSHA256": "6496df535bd56b88c7fc7545fd188a6130655187050f1cb0ef1fed81c7e107fb",
-      "sha256": "9edcc19d5587faf98cf3a8c17708f6a78b37218f19dfab1f296104d033fdb619",
-      "bytes": 231229,
+      "sourceSHA256": "cc57e3fe927eda8542411840c7e10fe5cdad8fa48c5f2cf24e4b5ac994510127",
+      "sha256": "ecb258dfe691357c742b836fd19968be333e334b77510343d09585ec092e2e90",
+      "bytes": 232431,
       "adapted": true
     },
     {
       "path": "night-sky.js",
-      "sourceSHA256": "b2c813005ece4a889834ecb534a3795f3fb5b08a25424c32254e649c37a6a4c6",
-      "sha256": "b2c813005ece4a889834ecb534a3795f3fb5b08a25424c32254e649c37a6a4c6",
-      "bytes": 17523,
+      "sourceSHA256": "3125620aae40d03bcd96df025d257ed6ae99d780097ab12aabd9e242c634145e",
+      "sha256": "3125620aae40d03bcd96df025d257ed6ae99d780097ab12aabd9e242c634145e",
+      "bytes": 17761,
       "adapted": false
     },
     {
@@ -929,9 +929,9 @@
     },
     {
       "path": "sky.js",
-      "sourceSHA256": "358346c6aed9eb8495056b597296d4e6405840a5e3e926d7ff3b29b35f1e37cc",
-      "sha256": "358346c6aed9eb8495056b597296d4e6405840a5e3e926d7ff3b29b35f1e37cc",
-      "bytes": 67435,
+      "sourceSHA256": "6484d75f87099aecd6bea6bb25a99983af921c8f0c8139919b79d3e3d7aef872",
+      "sha256": "6484d75f87099aecd6bea6bb25a99983af921c8f0c8139919b79d3e3d7aef872",
+      "bytes": 67543,
       "adapted": false
     },
     {

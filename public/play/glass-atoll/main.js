@@ -12,7 +12,7 @@ import { createSand } from './sand.js';
 import { createCameraNavigation } from './camera-navigation.js';
 import { planCameraTransition } from './camera-transition.js';
 import { createFrameRateMeter } from './frame-rate-meter.js';
-import { createCameraExposure } from './camera-exposure.js';
+import { createCameraExposure,moonAwareNightCeiling } from './camera-exposure.js';
 import { checkSmokeTransmissionSupport } from './smoke-transmission-admission.js';
 import { createCameraDirector } from './camera-director.js';
 import { createStoneThrow } from './stone-throw.js';
@@ -105,6 +105,16 @@ let inspection;
 let gpuTimer,gpuMs=null,frameIndex=0,graphicsContextInterrupted=false;
 let lastShadowTime=-1;
 let effectiveWind=1.8;
+const ORBIT_DAMPING_PER_60HZ_FRAME=.065;
+// Bright nearby light prevents full dark adaptation: while a firework is queued
+// or in flight, or the hand torch is on, the night ceiling falls to the moonlit
+// level, darkening about as fast as a pupil constricts; recovery then uses the
+// normal slow brightening rate.
+const GLARE_CEILING_EV=14.5,GLARE_DARKENING_STOPS_PER_SECOND=12;
+function glareAdaptedExposure(moonIllumination,fireworkState,torchOn=false){
+  const ceiling=moonAwareNightCeiling(moonIllumination),glare=torchOn||(fireworkState?.active??0)+(fireworkState?.queued??0)>0;
+  return glare?{nightCeilingEV:Math.min(ceiling,GLARE_CEILING_EV),darkeningStopsPerSecond:GLARE_DARKENING_STOPS_PER_SECOND}:{nightCeilingEV:ceiling};
+}
 let lens,governor,aerialPerspective,renderScale=1,lastAirMieScale=null;
 let renderBenchmark,nextGpuFrame=0,frameProbe=null;
 let activeFrameProfile=null,qaFrozenWorkload=false,qaFrozenGuard=null;
@@ -215,7 +225,7 @@ async function init(){
   camera.position.fromArray(views.shore.position);
   controls=new OrbitControls(camera,renderer.domElement);
   controls.target.fromArray(views.shore.target);
-  controls.enableDamping=true;controls.dampingFactor=.065;
+  controls.enableDamping=true;controls.dampingFactor=ORBIT_DAMPING_PER_60HZ_FRAME;
   controls.minDistance=.75;controls.maxDistance=230;
   controls.minPolarAngle=.03;controls.maxPolarAngle=Math.PI-.06;
   controls.maxTargetRadius=1500;
@@ -1117,7 +1127,7 @@ function updateScenePhotometry(delta=0,force=false){
   const pstate=fireworks?.diagnostics();markPhotometryPhase(detailed,'source-diagnostics');
   const pyroMirror=water&&pstate?.active>0?fireworks.getRadianceBound({camera:water.prepareReflectionCamera(),optics:joint?.reflection.optics??{...currentOptics(),width:water.reflection.width,height:water.reflection.height,dof:false,legacyShutterSeconds:0},rawPerCandela:RAW_PER_CANDELA}):{};
   markPhotometryPhase(detailed,'mirror-source-bound');
-  const cameraState=cameraExposure.update({enabled:nightSettings.autoExposure,recommendedEV:light.recommendedExposureEV||0,solarAltitudeDeg:celestialFrame?.mode==='astronomical'?celestialFrame.sun.altitudeDeg:parameters.sun.elevation,manualExposureEV:parameters.lens.manualExposureEV??0,compensationEV:parameters.lens.exposure,dt:delta,reset:exposureResetPending});
+  const cameraState=cameraExposure.update({enabled:nightSettings.autoExposure,recommendedEV:light.recommendedExposureEV||0,...glareAdaptedExposure(light.moonIllumination??1,pstate,localLights.state.flashlight?.enabled),solarAltitudeDeg:celestialFrame?.mode==='astronomical'?celestialFrame.sun.altitudeDeg:parameters.sun.elevation,manualExposureEV:parameters.lens.manualExposureEV??0,compensationEV:parameters.lens.exposure,dt:delta,reset:exposureResetPending});
   exposureResetPending=false;adaptedCameraEV=cameraState.actualBaseEV;
   if(force||performance.now()-lastExposureUI>250){lastExposureUI=performance.now();ui.setCameraExposure(cameraState);}
   markPhotometryPhase(detailed,'camera-exposure-ui');
@@ -1864,6 +1874,10 @@ function frame(){
   const directorPose=cameraDirector.update({dt:delta,paused:parameters.paused});
   if(directorPose){camera.position.fromArray(directorPose.position);controls.target.fromArray(directorPose.target);}
   const navigationChanged=navigation.update(delta);
+  // OrbitControls applies dampingFactor once per update. Convert the 60 Hz
+  // authored value to this frame's wall time so orbit glide is refresh-rate
+  // independent (paused/frozen simulation still lets the camera settle).
+  controls.dampingFactor=1-Math.pow(1-ORBIT_DAMPING_PER_60HZ_FRAME,Math.min(wallDelta,.1)*60);
   controls.update();
   if(pendingThrow&&performance.now()>=pendingThrow.at){const p=pendingThrow;pendingThrow=null;stoneThrow.launch(camera,p.x,p.z,time);}
   if(!parameters.paused)stoneThrow.update(time);

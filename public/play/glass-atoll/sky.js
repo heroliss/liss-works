@@ -8,7 +8,7 @@
  */
 
 import { createWeatherController } from './weather.js';
-import { createNightSky,nightSkyGLSL,recommendedNightExposure,NIGHT_STAR_SCALE,NIGHT_ASSET_ELEVATION_DEGREES } from './night-sky.js';
+import { createNightSky,nightSkyGLSL,recommendedNightExposure,moonIlluminationFraction,NIGHT_STAR_SCALE,NIGHT_ASSET_ELEVATION_DEGREES } from './night-sky.js';
 
 const EARTH=6360000,TOP=6460000,HR=8000,HM=1200;
 const BR=[5.802e-6,13.558e-6,33.1e-6],BM=3.996e-6,BO=[0.650e-6,1.881e-6,0.085e-6];
@@ -702,7 +702,7 @@ export function createAtmosphere(THREE,{sunDirection,seed=7183,cloudSteps=64,clo
     uniforms.uCloudAmbientColor.value.set(skyTintPhysical.r*.65,skyTintPhysical.g*.65,skyTintPhysical.b*.65);
     return {sunColor,sunStrength:physicalSunStrength*preExposureScale,sunDirection:direction.clone(),moonDirection:moonDirection.clone(),moonColor,moonStrength:physicalMoonStrength*preExposureScale,
       physicalSunStrength,physicalMoonStrength,physicalAirSourceIrradianceRGB,physicalAirDiffuseRadianceRGB,keyDirection:keyDirection.clone(),keyColor:keyColor.clone(),keyStrength:physicalKeyStrength*preExposureScale,physicalKeyStrength,keyIsMoon,
-      skyTint,skyTintPhysical,skyIrradiance:cachedSkyIrradiance.map(v=>v*preExposureScale),physicalSkyIrradiance:cachedSkyIrradiance.slice(),moonPhase:n.moonPhase,moonAltitudeDegrees:n.moonAltitudeDegrees,
+      skyTint,skyTintPhysical,skyIrradiance:cachedSkyIrradiance.map(v=>v*preExposureScale),physicalSkyIrradiance:cachedSkyIrradiance.slice(),moonPhase:n.moonPhase,moonAltitudeDegrees:n.moonAltitudeDegrees,moonIllumination:moonIlluminationFraction(n.moonSourceRatio,n.moonAltitudeDegrees),
       nightBlend:1-smooth(-18,-2,elevation),recommendedExposureEV,preExposureEV,preExposureScale,hemisphereStrength:0,
       referenceElevationDegrees:48,units:'pre-exposed relative RGB linear lighting; physical* fields exclude2^preExposureEV; not absolute lux',solarTransmission:t,
       note:'Sun/moon strengths exclude cloud shadow. Apply cloud transmission once. Output exposure=userEV+recommendedExposureEV-preExposureEV. Sky tint is a16-ray clear-sky irradiance estimate; clouds/stellar directionality are approximated.'};
