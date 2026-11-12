@@ -4,6 +4,7 @@ import { getProject } from '../data/projects';
 import { getProjectWorld, projectWorldStyle } from '../data/project-worlds';
 import { PANXU_SHOT, PANXU_SWEEP_MS, panxuLayers, panxuPoints, panxuSteps, type PanxuRect } from '../data/panxu-showcase';
 import { sitePath } from '../lib/site-path';
+import { responsiveSrcset } from '../data/project-image';
 import Icon from './Icon.astro';
 import ChapterPoints from './ChapterPoints.astro';
 import '../styles/panxu-showcase.css';
@@ -14,8 +15,7 @@ const project = getProject('panxu')!;
 const world = getProjectWorld('panxu');
 const image = (shot: string) => project.gallery.find(item => item.src.endsWith(`/${shot}.webp`))!;
 // The same candidates and sizes everywhere: the window and every panel cut from it pick the same file.
-const srcset = (item: GalleryImage) => (item.srcset ?? [...[320, 640, 960, 1600].filter(width => width < item.width)
-  .map(width => `${item.src.replace(/\.webp$/, `-${width}.webp`)} ${width}w`), `${item.src} ${item.width}w`].join(', '))
+const srcset = (item: GalleryImage) => (item.srcset ?? responsiveSrcset(item.src, item.width))
   .split(',').map(candidate => { const [url, ...descriptor] = candidate.trim().split(/\s+/); return [sitePath(url), ...descriptor].join(' '); }).join(', ');
 const sizes = '(max-width: 760px) 94vw, (max-width: 1340px) 90vw, 1240px';
 const percent = (value: number) => `${(value * 100).toFixed(4)}%`;

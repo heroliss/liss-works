@@ -1,0 +1,505 @@
+{
+ "quality": 88,
+ "images": {
+  "/media/aoe4-flow/editor-node-parameters-native.webp": {
+   "width": 1306,
+   "has1600": false,
+   "display": "/media/aoe4-flow/editor-node-parameters-native-display.webp",
+   "bytes": 125240,
+   "originalBytes": 425134,
+   "sha256": "eac7163a73f10a779ce862aa81188ee16f10a4fbcb2bb5639fe2cf9e7f95907c"
+  },
+  "/media/aoe4-flow/editor-overview-native.webp": {
+   "width": 1306,
+   "has1600": false,
+   "display": "/media/aoe4-flow/editor-overview-native-display.webp",
+   "bytes": 112994,
+   "originalBytes": 438320,
+   "sha256": "1af985df2b5329991f4246bb7853978c4034a31f7b2956905393e54cde86d332"
+  },
+  "/media/china-house-price-map/04-dark-national.webp": {
+   "width": 1425,
+   "has1600": false,
+   "display": "/media/china-house-price-map/04-dark-national-display.webp",
+   "bytes": 120258,
+   "originalBytes": 533954,
+   "sha256": "e840b542a5073e659cc54e61bc2df4367dd10dca587d220c996c1508c301f349"
+  },
+  "/media/china-house-price-map/06-dark-shenzhen-detail-after-fix.webp": {
+   "width": 1425,
+   "has1600": false,
+   "display": "/media/china-house-price-map/06-dark-shenzhen-detail-after-fix-display.webp",
+   "bytes": 158810,
+   "originalBytes": 640912,
+   "sha256": "e0c42c9777cba323e691c0f373d3f29620a5ec2011d293c5b86e6ca2e2b862b0"
+  },
+  "/media/china-house-price-map/07-dark-jingjinji.webp": {
+   "width": 1425,
+   "has1600": false,
+   "display": "/media/china-house-price-map/07-dark-jingjinji-display.webp",
+   "bytes": 166772,
+   "originalBytes": 802956,
+   "sha256": "c71c0d44a2700afc57c9ebe2f7327356322559cb860d0c2c40f89635ae0231c7"
+  },
+  "/media/china-house-price-map/08-light-jingjinji.webp": {
+   "width": 1425,
+   "has1600": false,
+   "display": "/media/china-house-price-map/08-light-jingjinji-display.webp",
+   "bytes": 180752,
+   "originalBytes": 856878,
+   "sha256": "6c0a1386f09da17a4fe25e6da112e52bd420840d442f231e66a7356702e80112"
+  },
+  "/media/china-house-price-map/12-dark-shenzhen-ui720.webp": {
+   "width": 1265,
+   "has1600": false,
+   "display": "/media/china-house-price-map/12-dark-shenzhen-ui720-display.webp",
+   "bytes": 103036,
+   "originalBytes": 432532,
+   "sha256": "35f05c4b2f32794fbd322f62b33ff72b58acc9758a9b416d9acd60a70ba01c67"
+  },
+  "/media/dubforge/05-editor-detail.webp": {
+   "width": 1440,
+   "has1600": false,
+   "display": "/media/dubforge/05-editor-detail-display.webp",
+   "bytes": 107452,
+   "originalBytes": 392792,
+   "sha256": "e656f1a62c63f0e2a44a3deecabedbd29a91ab1d1c4584dc62913b9e844da678"
+  },
+  "/media/dubforge/07-assembly-versions.webp": {
+   "width": 1440,
+   "has1600": false,
+   "display": "/media/dubforge/07-assembly-versions-display.webp",
+   "bytes": 75912,
+   "originalBytes": 286690,
+   "sha256": "db956ea5627cd7f48eb256f20d9ebb00867745aecc6254b2b79f313ae208e0b4"
+  },
+  "/media/dubforge/09-project-space-large.webp": {
+   "width": 1440,
+   "has1600": false,
+   "display": "/media/dubforge/09-project-space-large-display.webp",
+   "bytes": 81194,
+   "originalBytes": 300540,
+   "sha256": "e5fd1f8e2771a95ee4b107a31a0f89cae4771420354776a29116e396cfce32bb"
+  },
+  "/media/dubforge/v6-03-transcribe.webp": {
+   "width": 1440,
+   "has1600": false,
+   "display": "/media/dubforge/v6-03-transcribe-display.webp",
+   "bytes": 73452,
+   "originalBytes": 295580,
+   "sha256": "aa9b8626b18eb50548396143dc0d60e7804a2fbf2c67d088d770825f0903f88c"
+  },
+  "/media/dubforge/v6-06-tts.webp": {
+   "width": 1440,
+   "has1600": false,
+   "display": "/media/dubforge/v6-06-tts-display.webp",
+   "bytes": 114184,
+   "originalBytes": 408332,
+   "sha256": "1cbbcbbb4ade83ecf7dd7ed147928569eb1e419fcf09d9c418712e3f68b6e7da"
+  },
+  "/media/dubforge/v6-08-assemble.webp": {
+   "width": 1440,
+   "has1600": false,
+   "display": "/media/dubforge/v6-08-assemble-display.webp",
+   "bytes": 71094,
+   "originalBytes": 275156,
+   "sha256": "6aa43afca49fb1b9760a57d9b13b2c132543c3146cf0e873e8450a3283452b3d"
+  },
+  "/media/dubforge/v6-09-publish.webp": {
+   "width": 1440,
+   "has1600": false,
+   "display": "/media/dubforge/v6-09-publish-display.webp",
+   "bytes": 76114,
+   "originalBytes": 291050,
+   "sha256": "0406f1d8b9761bd5d60c7c1a2ec892ce38d62fa9245857d19b5aa6772aa634ff"
+  },
+  "/media/floydshortestpath/distance-matrix-report.webp": {
+   "width": 3160,
+   "has1600": true
+  },
+  "/media/floydshortestpath/regression-checks-report.webp": {
+   "width": 3160,
+   "has1600": true
+  },
+  "/media/ga-sort/regression-checks-report.webp": {
+   "width": 3160,
+   "has1600": true,
+   "display": "/media/ga-sort/regression-checks-report-display.webp",
+   "bytes": 72324,
+   "originalBytes": 276600,
+   "sha256": "1d18dd5a385c4d967676edd417dece01d3dc7136db8e64bc8bb8d74735730110"
+  },
+  "/media/glass-atoll/40-aerial-final.webp": {
+   "width": 1440,
+   "has1600": false,
+   "display": "/media/glass-atoll/40-aerial-final-display.webp",
+   "bytes": 155566,
+   "originalBytes": 726622,
+   "sha256": "810044e50b2aa6d244bdc2859673e6a1a68e9c3baebbebee18ac06659a0804aa"
+  },
+  "/media/glass-atoll/58-final-desktop-v2.webp": {
+   "width": 1440,
+   "has1600": false,
+   "display": "/media/glass-atoll/58-final-desktop-v2-display.webp",
+   "bytes": 197752,
+   "originalBytes": 1125458,
+   "sha256": "dd301a926c2fcd5f8efda84ec60c4972d02bd9d79cd2c6b94529493841c71868"
+  },
+  "/media/glass-atoll/controls-desktop.webp": {
+   "width": 1280,
+   "has1600": false,
+   "display": "/media/glass-atoll/controls-desktop-display.webp",
+   "bytes": 141180,
+   "originalBytes": 561984,
+   "sha256": "36137117ea765901adaaaf03045b6cc9ab94da922a40045e58b6bb64d68802b7"
+  },
+  "/media/glass-atoll/sunset-island-final.webp": {
+   "width": 1209,
+   "has1600": false,
+   "display": "/media/glass-atoll/sunset-island-final-display.webp",
+   "bytes": 129130,
+   "originalBytes": 631954,
+   "sha256": "4ba963ce4011458954c40c81e2210f69fe724d2373aa678779b36dd982a46727"
+  },
+  "/media/nex/04-next-task-overview.webp": {
+   "width": 1442,
+   "has1600": false,
+   "display": "/media/nex/04-next-task-overview-display.webp",
+   "bytes": 83132,
+   "originalBytes": 308222,
+   "sha256": "3b70f540538d7a58c634fa4a377a1a9241ac330ced68989c418187bb60510967"
+  },
+  "/media/nex/05-recommendation-breakdown.webp": {
+   "width": 1442,
+   "has1600": false,
+   "display": "/media/nex/05-recommendation-breakdown-display.webp",
+   "bytes": 81778,
+   "originalBytes": 298018,
+   "sha256": "0fdc16f21c6d1be5d204d7695997a054117672eec245dfb6bb47751d4fcd2de5"
+  },
+  "/media/nex/06-thirty-minute-budget.webp": {
+   "width": 1442,
+   "has1600": false,
+   "display": "/media/nex/06-thirty-minute-budget-display.webp",
+   "bytes": 85818,
+   "originalBytes": 314860,
+   "sha256": "d24a1fb13c5895bec35b3d7628b7c2cb2f54cb1ba6a48f6d18ae0e80795f8b8a"
+  },
+  "/media/nex/07-original-priority.webp": {
+   "width": 1442,
+   "has1600": false,
+   "display": "/media/nex/07-original-priority-display.webp",
+   "bytes": 87378,
+   "originalBytes": 317602,
+   "sha256": "43caffe5efe043971b7dfc31415647f5119723aba0b08be24054193583004002"
+  },
+  "/media/outpost/15-title-stage-1080p.webp": {
+   "width": 1920,
+   "has1600": true
+  },
+  "/media/outpost/22-battle-seamless-floor-preview.webp": {
+   "width": 1920,
+   "has1600": true
+  },
+  "/media/outpost/23-modern-battle-settings.webp": {
+   "width": 1920,
+   "has1600": true
+  },
+  "/media/panxu/01-checkup-plan.webp": {
+   "width": 1650,
+   "has1600": true,
+   "display": "/media/panxu/01-checkup-plan-display.webp",
+   "bytes": 86244,
+   "originalBytes": 276188,
+   "sha256": "6fb2c2fea27fa547d990feeaf06ea38dfe6633fe1e36d52ce90db5255e4ca549"
+  },
+  "/media/panxu/02-plan-scores.webp": {
+   "width": 1650,
+   "has1600": true,
+   "display": "/media/panxu/02-plan-scores-display.webp",
+   "bytes": 99338,
+   "originalBytes": 317948,
+   "sha256": "ecf1f456a6669531907b3d23f4a4e1190ef3d2ea48e79ddf33a36a654b75aaac"
+  },
+  "/media/panxu/03-score-basis.webp": {
+   "width": 1650,
+   "has1600": true,
+   "display": "/media/panxu/03-score-basis-display.webp",
+   "bytes": 109228,
+   "originalBytes": 360760,
+   "sha256": "430ae0d27f7cfb28859cff81433c5f3206c8d5de8a24131f47e73cc29797c8b4"
+  },
+  "/media/panxu/04-cleanup-confirm.webp": {
+   "width": 1650,
+   "has1600": true,
+   "display": "/media/panxu/04-cleanup-confirm-display.webp",
+   "bytes": 81696,
+   "originalBytes": 262616,
+   "sha256": "56ea9848797a3cd3ab5e405876a3f90c7b68855399141c9393bd5b8eb5b051af"
+  },
+  "/media/panxu/05-cleanup-result.webp": {
+   "width": 1650,
+   "has1600": true
+  },
+  "/media/panxu/06-space-treemap.webp": {
+   "width": 1650,
+   "has1600": true,
+   "display": "/media/panxu/06-space-treemap-display.webp",
+   "bytes": 89820,
+   "originalBytes": 264154,
+   "sha256": "d39d271ac22d13fded9df64f1be4117da19327d76141b573d483ed9705a3b415"
+  },
+  "/media/panxu/07-duplicate-files.webp": {
+   "width": 1650,
+   "has1600": true,
+   "display": "/media/panxu/07-duplicate-files-display.webp",
+   "bytes": 86500,
+   "originalBytes": 266696,
+   "sha256": "4e113cd2641d209007816a17a072d44d9cdb6652906b4c38ac4a2d1bfda92459"
+  },
+  "/media/panxu/08-startup-items.webp": {
+   "width": 1650,
+   "has1600": true,
+   "display": "/media/panxu/08-startup-items-display.webp",
+   "bytes": 114552,
+   "originalBytes": 356184,
+   "sha256": "585a81356978029968ffa15de7e9ff7fc06143388a4669fa25227fbe4701e7ff"
+  },
+  "/media/panxu/09-junk-rules.webp": {
+   "width": 1650,
+   "has1600": true,
+   "display": "/media/panxu/09-junk-rules-display.webp",
+   "bytes": 96198,
+   "originalBytes": 311354,
+   "sha256": "9015ed3c261b668bd8cc7fa0adf7fa5bff512634cb4d587a521dcc02729136f2"
+  },
+  "/media/panxu/10-operation-history.webp": {
+   "width": 1650,
+   "has1600": true
+  },
+  "/media/qt-labs/01-os-fragmented.webp": {
+   "width": 1402,
+   "has1600": false,
+   "display": "/media/qt-labs/01-os-fragmented-display.webp",
+   "bytes": 115776,
+   "originalBytes": 438916,
+   "sha256": "3fefce5423556e8e0512c0155ef75c5ee056269129d6e2fa922eb7c066a89318"
+  },
+  "/media/qt-labs/02-os-compacted.webp": {
+   "width": 1402,
+   "has1600": false,
+   "display": "/media/qt-labs/02-os-compacted-display.webp",
+   "bytes": 116128,
+   "originalBytes": 438282,
+   "sha256": "4e7f8cd46f198bd8d23e2c028e76fa97612a5b153bf25b80b41a2b1d5fb2568d"
+  },
+  "/media/qt-labs/03-os-queues-and-events.webp": {
+   "width": 1402,
+   "has1600": false,
+   "display": "/media/qt-labs/03-os-queues-and-events-display.webp",
+   "bytes": 114582,
+   "originalBytes": 440716,
+   "sha256": "07522a70caa932198eacf1e5e944f9172004f5880c247c705355c1169da68435"
+  },
+  "/media/qt-labs/05-huffman-roundtrip.webp": {
+   "width": 1402,
+   "has1600": false,
+   "display": "/media/qt-labs/05-huffman-roundtrip-display.webp",
+   "bytes": 90398,
+   "originalBytes": 344400,
+   "sha256": "c2cdf466a1bbc901425babece1ae1b2d3d0c07600011bac7fc073b51992bf8e7"
+  },
+  "/media/qt-labs/06-huffman-process-log.webp": {
+   "width": 1402,
+   "has1600": false,
+   "display": "/media/qt-labs/06-huffman-process-log-display.webp",
+   "bytes": 90318,
+   "originalBytes": 337924,
+   "sha256": "02ec87935e27e5db67325fc16943ddc73be87e66548e9d8e5be0a974ae05f57c"
+  },
+  "/media/qt-labs/10-calculator-expression.webp": {
+   "width": 1402,
+   "has1600": false,
+   "display": "/media/qt-labs/10-calculator-expression-display.webp",
+   "bytes": 80566,
+   "originalBytes": 297096,
+   "sha256": "4dda120da0052591c50192c4b44cf3ee9e090125a8d19d0ee933324af5d5e007"
+  },
+  "/media/sort-lab/01-random-comparison.webp": {
+   "width": 1386,
+   "has1600": false,
+   "display": "/media/sort-lab/01-random-comparison-display.webp",
+   "bytes": 111882,
+   "originalBytes": 441660,
+   "sha256": "7ece817513a8d608421ae2ba894ccd941c0fef15deb3e2692e7318621f682d07"
+  },
+  "/media/sort-lab/02-implementation-and-results.webp": {
+   "width": 1386,
+   "has1600": false,
+   "display": "/media/sort-lab/02-implementation-and-results-display.webp",
+   "bytes": 182964,
+   "originalBytes": 679568,
+   "sha256": "9a2cf536975dcd5811b0f2a0f62a4a348f7f77ea741157c911b0fd2752d9675a"
+  },
+  "/media/sort-lab/03-few-unique-comparison.webp": {
+   "width": 1386,
+   "has1600": false,
+   "display": "/media/sort-lab/03-few-unique-comparison-display.webp",
+   "bytes": 113104,
+   "originalBytes": 451692,
+   "sha256": "a1d199925a8fb19f6338f2d940c96e8bf5406fd3703ca9666983e9258ba26473"
+  },
+  "/media/sort-lab/04-single-size-bars.webp": {
+   "width": 1386,
+   "has1600": false,
+   "display": "/media/sort-lab/04-single-size-bars-display.webp",
+   "bytes": 110312,
+   "originalBytes": 444022,
+   "sha256": "9ee67bdb53c6b9744cb0cbea463e8d74961b54cfaf88473aaa55c7a53291a852"
+  },
+  "/media/sort-lab/05-five-stage-comparison.webp": {
+   "width": 1386,
+   "has1600": false,
+   "display": "/media/sort-lab/05-five-stage-comparison-display.webp",
+   "bytes": 117300,
+   "originalBytes": 479510,
+   "sha256": "b68f1895aa0696226dd82109f09d30279ce52c5f7b6144adc09e6ed34aa620e2"
+  },
+  "/media/sort-lab/06-core-algorithm-editor.webp": {
+   "width": 1386,
+   "has1600": false,
+   "display": "/media/sort-lab/06-core-algorithm-editor-display.webp",
+   "bytes": 79984,
+   "originalBytes": 307928,
+   "sha256": "96e30b6f1d0b92157eb5b6989a5022ef05dbbc50d385b3e4ca32c5e5803d2005"
+  },
+  "/media/sort-lab/07-manual-skip-and-stop.webp": {
+   "width": 1386,
+   "has1600": false,
+   "display": "/media/sort-lab/07-manual-skip-and-stop-display.webp",
+   "bytes": 107140,
+   "originalBytes": 421106,
+   "sha256": "d5bf70bde9156b68447e1153dee43344c07a5c4a4cb6a192d8d7419e99068335"
+  },
+  "/media/sort-lab/08-current-task-and-bars.webp": {
+   "width": 1386,
+   "has1600": false,
+   "display": "/media/sort-lab/08-current-task-and-bars-display.webp",
+   "bytes": 115458,
+   "originalBytes": 460202,
+   "sha256": "c9b8d06f5385508a4816d5157ef668f0c05d9e4237f5842819af3b747793714b"
+  },
+  "/media/sort-lab/09-stage-status-matrix.webp": {
+   "width": 1386,
+   "has1600": false,
+   "display": "/media/sort-lab/09-stage-status-matrix-display.webp",
+   "bytes": 124670,
+   "originalBytes": 504834,
+   "sha256": "9c67aee9d8a0c7c35272d12ef6f9220afc917318a5bb4fdbbb1d768685b99b6c"
+  },
+  "/media/sort-lab/10-algorithm-guide.webp": {
+   "width": 1386,
+   "has1600": false,
+   "display": "/media/sort-lab/10-algorithm-guide-display.webp",
+   "bytes": 78204,
+   "originalBytes": 299130,
+   "sha256": "c11e98428d1fa99f44dbbe8363e102dc17cfd49fd626dcbba45211d4072327da"
+  },
+  "/media/sort-lab/11-core-code-editor.webp": {
+   "width": 1386,
+   "has1600": false,
+   "display": "/media/sort-lab/11-core-code-editor-display.webp",
+   "bytes": 80622,
+   "originalBytes": 306518,
+   "sha256": "eadbdec7fd29c3f7e1cf98e3ecb0599828e5fa8e8b9aefab970ff0c62f364c65"
+  },
+  "/media/sort-lab/12-five-stage-results.webp": {
+   "width": 1386,
+   "has1600": false,
+   "display": "/media/sort-lab/12-five-stage-results-display.webp",
+   "bytes": 118056,
+   "originalBytes": 477266,
+   "sha256": "897312fd6941f70af42daa64aa99b4d27a5ec7e02de7505cc3ffc3318e36bb50"
+  },
+  "/media/ssframework/SSFramework-architecture.webp": {
+   "width": 1448,
+   "has1600": false,
+   "display": "/media/ssframework/SSFramework-architecture-display.webp",
+   "bytes": 213982,
+   "originalBytes": 1382316,
+   "sha256": "eacf04192578ca9a683df451891fe7357be00b18a9ca3b9a3f8882957205bd23"
+  },
+  "/media/systems-lab/04-prime-density-and-results.webp": {
+   "width": 1382,
+   "has1600": false,
+   "display": "/media/systems-lab/04-prime-density-and-results-display.webp",
+   "bytes": 80920,
+   "originalBytes": 312456,
+   "sha256": "d72196ab51560001c3fabdd2a6aa448664c482e84e1a5955582dbe8162ac7cba"
+  },
+  "/media/systems-lab/08-prime-canceled-partial.webp": {
+   "width": 1382,
+   "has1600": false,
+   "display": "/media/systems-lab/08-prime-canceled-partial-display.webp",
+   "bytes": 91232,
+   "originalBytes": 360580,
+   "sha256": "f89aa408e5d551ea56d0add492b6b8cc25ec6c764f0455bb696a2bb00a7467f2"
+  },
+  "/media/text-lab/01-segmentation-overview.webp": {
+   "width": 1382,
+   "has1600": false,
+   "display": "/media/text-lab/01-segmentation-overview-display.webp",
+   "bytes": 105198,
+   "originalBytes": 416462,
+   "sha256": "dbd3b16929b5d786867baa7638f123adecd06848df2ddd75e745f86fb4788b25"
+  },
+  "/media/text-lab/02-proofreading-and-rules.webp": {
+   "width": 1382,
+   "has1600": false,
+   "display": "/media/text-lab/02-proofreading-and-rules-display.webp",
+   "bytes": 88094,
+   "originalBytes": 342886,
+   "sha256": "7a0d977a2fda7780276ed37e6f472e20d4143784eede60ed34cf5e29cd8339cf"
+  },
+  "/media/text-lab/03-mixed-encoding-search.webp": {
+   "width": 1382,
+   "has1600": false,
+   "display": "/media/text-lab/03-mixed-encoding-search-display.webp",
+   "bytes": 78772,
+   "originalBytes": 305274,
+   "sha256": "acb6611316a94b318c1f8078751e08161ae73c260e34eca9f7a402f2d165610c"
+  },
+  "/media/text-lab/04-local-imported-word2vec.webp": {
+   "width": 1382,
+   "has1600": false,
+   "display": "/media/text-lab/04-local-imported-word2vec-display.webp",
+   "bytes": 91946,
+   "originalBytes": 359964,
+   "sha256": "8f248fcc9289664a7e1d8ae822d91c57f5ede9257f9a086a57388c91ebe83f74"
+  },
+  "/media/text-lab/05-context-window-scoring.webp": {
+   "width": 1382,
+   "has1600": false,
+   "display": "/media/text-lab/05-context-window-scoring-display.webp",
+   "bytes": 93444,
+   "originalBytes": 364860,
+   "sha256": "3a4f5cc41628e69160a0466ff5d3f8c82d757390dab79c70da06e079ee3329db"
+  },
+  "/media/utility-lab/03-rename-preview.webp": {
+   "width": 1581,
+   "has1600": false,
+   "display": "/media/utility-lab/03-rename-preview-display.webp",
+   "bytes": 83772,
+   "originalBytes": 337620,
+   "sha256": "3c6254e11ab39422f875c48b3b3920d991b34da1bfcea15e6e6380259149627a"
+  },
+  "/media/utility-lab/05-rename-conflict.webp": {
+   "width": 1581,
+   "has1600": false,
+   "display": "/media/utility-lab/05-rename-conflict-display.webp",
+   "bytes": 69256,
+   "originalBytes": 278818,
+   "sha256": "814fb77a8ae11777e3f0e85323644f6f022f75afe62691a624f4d7544d89d5e0"
+  }
+ }
+}

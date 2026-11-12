@@ -1,9 +1,10 @@
 ---
 import type { GalleryImage } from '../data/types';
 import { sitePath } from '../lib/site-path';
+import { responsiveSrcset } from '../data/project-image';
 interface Props { image: GalleryImage; eager?: boolean; zoom?: boolean; group?: string; sizes?: string; class?: string; }
 const { image, eager = false, zoom = false, group = 'project', sizes = '(max-width: 760px) 100vw, 75vw', class: className = '' } = Astro.props;
-const rawSrcset = image.srcset ?? [...[320,640,960,1600].filter(w => w < image.width).map(w => `${image.src.replace(/\.webp$/, `-${w}.webp`)} ${w}w`),`${image.src} ${image.width}w`].join(', ');
+const rawSrcset = image.srcset ?? responsiveSrcset(image.src, image.width);
 const src = sitePath(image.src);
 const srcset = rawSrcset.split(',').map(candidate => {
   const [url, ...descriptor] = candidate.trim().split(/\s+/);
