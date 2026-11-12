@@ -30,7 +30,7 @@ export interface HallEngine {
   dispose: () => void;
 }
 
-type Screen = { group: Three.Group; tilt: Three.Group; face: Three.MeshBasicMaterial; rim: Three.MeshBasicMaterial; halo: Three.MeshBasicMaterial;
+type Screen = { group: Three.Group; tilt: Three.Group; face: Three.MeshBasicMaterial; rim: Three.MeshBasicMaterial; halo: Three.MeshBasicMaterial; edge: Three.MeshBasicMaterial;
   pool: Three.Mesh; poolMat: Three.MeshBasicMaterial; tone: Three.Color; hover: number; focus: number; lean: Three.Vector2; phase: number; slot: number;
   pos: Three.Vector3; turn: number; size: number; pitch: number; roll: number; hit: Three.Mesh };
 
@@ -63,6 +63,19 @@ function floorMask(T: T) {
   context.fillStyle = gradient; context.fillRect(0, 0, 256, 256);
   const texture = new T.CanvasTexture(canvas); texture.colorSpace = T.SRGBColorSpace; return texture;
 }
+// A soft light around a rounded frame, drawn once: every screen gets the same even
+// glow in its own colour, independent of bloom thresholds (which lit bright tones
+// only, needed front + hover to trigger, and flickered on thin rims).
+function edgeTexture(T: T, frameW: number, frameH: number) {
+  const canvas = document.createElement('canvas'); canvas.width = 512; canvas.height = Math.round(512 * frameH / frameW);
+  const context = canvas.getContext('2d')!, w = canvas.width * .74, h = canvas.height * .74, x = (canvas.width - w) / 2, y = (canvas.height - h) / 2;
+  context.strokeStyle = '#fff'; context.lineJoin = 'round';
+  for (const [blur, width, alpha] of [[48, 10, .55], [22, 6, .8], [6, 3, 1]] as const) {
+    context.save(); context.shadowColor = `rgba(255,255,255,${alpha})`; context.shadowBlur = blur; context.lineWidth = width; context.globalAlpha = alpha;
+    context.beginPath(); context.roundRect(x, y, w, h, 14); context.stroke(); context.restore();
+  }
+  const texture = new T.CanvasTexture(canvas); texture.colorSpace = T.SRGBColorSpace; return texture;
+}
 function hazeTexture(T: T) {
   // A soft band of light that sits on the horizon and fades upward.
   const canvas = document.createElement('canvas'); canvas.width = 8; canvas.height = 256;
@@ -89,7 +102,7 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
   renderer.setPixelRatio(ratio);
   renderer.outputColorSpace = T.SRGBColorSpace;
   renderer.toneMapping = T.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.16;
+  renderer.toneMappingExposure = 1.1;
   renderer.setClearColor(BG, 1);
 
   const scene = new T.Scene();
@@ -173,6 +186,9 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
   const baseW = 3.6, baseH = baseW / 1.6;
   const frameGeometry = keep(new T.BoxGeometry(baseW + .16, baseH + .16, .1)), screenGeometry = keep(new T.PlaneGeometry(baseW, baseH));
   const haloGeometry = keep(new T.PlaneGeometry(baseW * 2.4, baseH * 2.8)), poolGeometry = keep(new T.PlaneGeometry(baseW * 1.9, 3.2));
+  // The edge glow plane is sized so the drawn frame (74% of the texture) sits on the rim.
+  const edgeW = (baseW + .24) / .74, edgeH = (baseH + .28) / .74;
+  const edgeGeometry = keep(new T.PlaneGeometry(edgeW, edgeH)), edgeMap = keep(edgeTexture(T, edgeW, edgeH));
   const frameMaterial = keep(new T.MeshStandardMaterial({ color: 0x0d141b, metalness: .8, roughness: .3 }));
   items.forEach((item, index) => {
     const group = new T.Group(); scene.add(group);
@@ -187,10 +203,12 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
     bar(baseW + .24, .06, 0, baseH / 2 + .11); bar(baseW + .24, .06, 0, -baseH / 2 - .11); bar(.06, baseH + .28, -baseW / 2 - .11, 0); bar(.06, baseH + .28, baseW / 2 + .11, 0);
     const halo = keep(new T.MeshBasicMaterial({ map: glow, color: tone, transparent: true, opacity: .2, blending: T.AdditiveBlending, depthWrite: false }));
     const haloMesh = new T.Mesh(haloGeometry, halo); haloMesh.position.z = -.12; tilt.add(haloMesh);
+    const edge = keep(new T.MeshBasicMaterial({ map: edgeMap, color: tone, transparent: true, opacity: .4, blending: T.AdditiveBlending, depthWrite: false, toneMapped: false }));
+    const edgeMesh = new T.Mesh(edgeGeometry, edge); edgeMesh.position.z = .065; tilt.add(edgeMesh);
     const poolMat = keep(new T.MeshBasicMaterial({ map: glow, color: tone, transparent: true, opacity: .2, blending: T.AdditiveBlending, depthWrite: false }));
     const pool = new T.Mesh(poolGeometry, poolMat); pool.rotation.x = -Math.PI / 2; pool.layers.set(1); scene.add(pool);
     const slot = SLOTS[index % SLOTS.length];
-    screens.push({ group, tilt, face, rim, halo, pool, poolMat, tone, hover: 0, focus: index === 0 ? 1 : 0, lean: new T.Vector2(), phase: index * 1.9 + .3, slot: index,
+    screens.push({ group, tilt, face, rim, halo, edge, pool, poolMat, tone, hover: 0, focus: index === 0 ? 1 : 0, lean: new T.Vector2(), phase: index * 1.9 + .3, slot: index,
       pos: new T.Vector3(slot[0], slot[1], slot[2]), turn: slot[3], size: slot[4], pitch: slot[5], roll: slot[6], hit: screenMesh });
     loader.load(item.src, texture => {
       if (released) { texture.dispose(); return; }
@@ -213,7 +231,7 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
   const msTarget = new T.WebGLRenderTarget(1, 1, { type: T.HalfFloatType, samples: 4 });
   const composer = new A.EffectComposer(renderer, msTarget);
   composer.addPass(new A.RenderPass(scene, camera));
-  const bloom = new A.UnrealBloomPass(new T.Vector2(256, 256), .62, .55, .78);
+  const bloom = new A.UnrealBloomPass(new T.Vector2(256, 256), .32, .6, .86);
   composer.addPass(bloom);
   composer.addPass(new A.OutputPass());
 
@@ -305,7 +323,7 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
     screens.forEach((screen, index) => {
       const slot = layout[screen.slot], front = screen.slot === 0;
       screen.focus += ((front ? 1 : 0) - screen.focus) * glide;
-      screen.hover += ((index === lit ? 1 : 0) - screen.hover) * (1 - Math.exp(-step * 7));
+      screen.hover += ((index === lit ? 1 : 0) - screen.hover) * (1 - Math.exp(-step * 16));
       const f = screen.focus, h = screen.hover, t = time + screen.phase;
       // Each work drifts on its own small loop around its slot.
       target.set(slot[0] + Math.sin(t * .37) * .22 * (1 - f * .6), slot[1] + Math.sin(t * .53) * .16, slot[2] + Math.cos(t * .29) * .25 * (1 - f * .6));
@@ -316,8 +334,10 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
       screen.group.rotation.set(screen.pitch - pitchBy * .45, screen.turn - turnBy * .88, screen.roll, 'YXZ');
       screen.pool.position.set(screen.pos.x, .006, screen.pos.z + 1.1 * screen.size); screen.pool.scale.setScalar(screen.size);
       if (screen.face.map) screen.face.color.setScalar(.78 + f * .22 + h * .12);
-      screen.rim.color.copy(screen.tone).multiplyScalar(.72 + f * .4 + h * .45);
-      screen.halo.opacity = .14 + f * .2 + h * .3;
+      screen.rim.color.copy(screen.tone).multiplyScalar(.62 + f * .16 + h * .24);
+      screen.halo.opacity = .12 + f * .12 + h * .16;
+      // Always a little light at the edge; more for the front work, most under the pointer.
+      screen.edge.opacity = .34 + f * .2 + h * .5;
       screen.poolMat.opacity = (.12 + f * .18 + h * .12) * grazing;
       const own = index === hover;
       const leanX = own ? -local.y * .2 : -pointer.y * .06 * pointer.weight;
