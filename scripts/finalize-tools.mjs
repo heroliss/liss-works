@@ -7,6 +7,9 @@ const base = process.env.SITE_BASE || '/';
 const site = process.env.SITE_URL;
 if (!/^\/(?:[a-zA-Z0-9_-]+\/)*$/.test(base)) throw new Error('Invalid SITE_BASE');
 const escape = value => value.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;');
+// Visitor analytics served by the community; production builds only (LISS_ANALYTICS_SRC overrides for local tests).
+const analyticsSrc = process.env.LISS_ANALYTICS_SRC ?? (site ? 'https://liss.pythonanywhere.com/static/liss-analytics.js' : '');
+const analyticsTag = analyticsSrc ? `<script async src="${escape(analyticsSrc)}" data-site="works"></script>` : '';
 const provenance = JSON.parse(await readFile('tools-provenance.json', 'utf8'));
 for (const source of provenance.sources) for (const file of source.files) {
   if (!file.path.startsWith('public/tools/')) throw new Error('Tool source outside public/tools');
@@ -24,7 +27,7 @@ for (const tool of tools) {
     const canonical = escape(new URL(`${base}tools/${tool.route}/`, site).href);
     return `<link rel="canonical" href="${canonical}"><meta property="og:url" content="${canonical}"><meta property="og:title" content="${escape(tool.title)}"><meta property="og:type" content="website">`;
   })() : '';
-  html = html.replace('</head>', `${metadata}</head>`);
+  html = html.replace('</head>', `${metadata}${analyticsTag}</head>`);
   if (tool.fallback) html = html.replace('<div id="app">', '<noscript><h1>Liss Utilities</h1><p>请启用 JavaScript，以在本机检索字符或处理文件名。</p></noscript><div id="app">');
   await writeFile(destination, html);
 }
