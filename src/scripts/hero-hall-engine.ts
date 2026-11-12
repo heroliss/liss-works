@@ -104,12 +104,43 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
   const key = new T.DirectionalLight(0xfff0e0, 1); key.position.set(-3, 8, 8); scene.add(key);
 
   let width = 1, height = 1, narrow = false;
-  const floor = new A.Reflector(keep(new T.PlaneGeometry(260, 260)), { clipBias: .003, textureWidth: 512, textureHeight: 512, color: 0x7f8c9b });
+  const floor = new A.Reflector(keep(new T.PlaneGeometry(260, 260)), { textureWidth: 512, textureHeight: 512, color: 0x7f8c9b });
   // Draw order matters for a seamless horizon: mirror floor, then its dimming veil,
   // then the background glows without depth testing, so their light carries across
   // the horizon instead of being cut off by the floor; the screens draw last.
   const sky = new T.Mesh(keep(new T.SphereGeometry(300, 32, 16)), keep(new T.MeshBasicMaterial({ color: SKY, side: T.BackSide, depthTest: false, depthWrite: false, fog: false })));
   sky.renderOrder = -4; scene.add(sky);
+  // The mirror's own update, without three's oblique near-plane clipping. That trick
+  // only hides geometry below the floor (this scene has none on the reflected layer),
+  // and it bends the far plane, which sliced wedges out of nearby reflections.
+  {
+    const mirrorCam = new T.PerspectiveCamera(), at = new T.Vector3(), eye = new T.Vector3(), rot = new T.Matrix4();
+    const normal = new T.Vector3(), view = new T.Vector3(), ahead = new T.Vector3(), aim = new T.Vector3();
+    const textureMatrix = (floor.material as Three.ShaderMaterial).uniforms.textureMatrix.value as Three.Matrix4;
+    floor.onBeforeRender = (r: Three.WebGLRenderer, sc: Three.Scene, cam: Three.Camera) => {
+      at.setFromMatrixPosition(floor.matrixWorld); eye.setFromMatrixPosition(cam.matrixWorld);
+      rot.extractRotation(floor.matrixWorld); normal.set(0, 0, 1).applyMatrix4(rot);
+      view.subVectors(at, eye);
+      if (view.dot(normal) > 0) return;
+      view.reflect(normal).negate().add(at);
+      rot.extractRotation(cam.matrixWorld); ahead.set(0, 0, -1).applyMatrix4(rot).add(eye);
+      aim.subVectors(at, ahead).reflect(normal).negate().add(at);
+      mirrorCam.position.copy(view); mirrorCam.up.set(0, 1, 0).applyMatrix4(rot).reflect(normal); mirrorCam.lookAt(aim);
+      mirrorCam.far = (cam as Three.PerspectiveCamera).far; mirrorCam.updateMatrixWorld();
+      mirrorCam.projectionMatrix.copy(cam.projectionMatrix); mirrorCam.projectionMatrixInverse.copy(cam.projectionMatrixInverse);
+      textureMatrix.set(.5, 0, 0, .5, 0, .5, 0, .5, 0, 0, .5, .5, 0, 0, 0, 1)
+        .multiply(mirrorCam.projectionMatrix).multiply(mirrorCam.matrixWorldInverse).multiply(floor.matrixWorld);
+      floor.visible = false;
+      const previous = r.getRenderTarget();
+      r.setRenderTarget(floor.getRenderTarget()); r.state.buffers.depth.setMask(true);
+      if (r.autoClear === false) r.clear();
+      r.render(sc, mirrorCam);
+      r.setRenderTarget(previous);
+      const viewport = (cam as Three.Camera & { viewport?: Three.Vector4 }).viewport;
+      if (viewport) r.state.viewport(viewport);
+      floor.visible = true;
+    };
+  }
   // The floor never hides what is behind it: the glow behind each screen used to be
   // cut off where it met the mirror, leaving a hard line under the screens.
   (floor.material as Three.Material).depthWrite = false;
@@ -183,7 +214,7 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
 
   const raycaster = new T.Raycaster(), ndc = new T.Vector2(), local = new T.Vector2(), up = new T.Vector3(0, 1, 0), side = new T.Vector3(1, 0, 0);
   const pivot = new T.Vector3(0, 1.8, 0);
-  const basePos = new T.Vector3(), lookBase = new T.Vector3(0, 2.7, 0), camPos = new T.Vector3(), camLook = new T.Vector3();
+  const basePos = new T.Vector3(), lookBase = new T.Vector3(0, 1.8, 0), camPos = new T.Vector3(), camLook = new T.Vector3();
   const pointer = { x: 0, y: 0, weight: 0, tx: 0, ty: 0, tw: 0, cx: 9, cy: 9, on: false };
   const toneTarget = new T.Color(items[0]?.tone ?? '#6ee8e3');
   let hover: number | null = null, highlight: number | null = null, selected = 0, dragging = false;
@@ -209,8 +240,11 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
     const span = narrow ? width : Math.max(width * .42, contentRight - copyRight);
     const distance = narrow ? Math.max(9, 4.4 / tanWide) : Math.max(11, 4.45 / (tanWide * span / width), 4.6 / tanHigh);
     basePos.set(0, 2.6 + distance * .04, distance);
+    // Only a horizontal view offset: the mirror flips the image vertically but copies the
+    // projection unchanged, so a vertical offset left the reflection short of the floor
+    // and its edge pixels smeared into long strips. The camera aims lower instead.
     if (narrow) camera.clearViewOffset();
-    else camera.setViewOffset(width, height, -((copyRight + contentRight) / 2 - width / 2), height * .1, width, height);
+    else camera.setViewOffset(width, height, -((copyRight + contentRight) / 2 - width / 2), 0, width, height);
     camera.updateProjectionMatrix();
     floor.getRenderTarget().setSize(Math.round(width * ratio * (quality ? .35 : .5)), Math.round(height * ratio * (quality ? .35 : .5)));
     return true;
