@@ -79,3 +79,11 @@ body:has(.archive-atlas) .site-header { position:relative;z-index:20; }
 .archive-atlas .atlas-filters { scroll-margin-top:20px; }
 .atlas-item[data-pulse=true] .atlas-tile-plane { animation:atlas-pulse 1.6s ease; }
 @keyframes atlas-pulse { 0%,100% { box-shadow:0 30px 50px -34px #000; } 30% { box-shadow:0 0 0 2px var(--atlas-tone),0 0 70px -6px var(--atlas-tone); transform:translateY(-8px) scale(1.02); } }
+
+/* Behind the desk: soft coloured light only, no drawn shapes. A pale filled plane and
+   bright arcs used to compete with the prints. */
+.atlas-field { background:
+  radial-gradient(ellipse 34% 30% at 66% 30%,color-mix(in srgb,var(--atlas-tone) 24%,transparent),transparent 70%),
+  radial-gradient(ellipse 30% 26% at 86% 52%,#6ee8e322,transparent 72%),
+  radial-gradient(ellipse 36% 24% at 54% 58%,#8b6cf01f,transparent 74%);
+  -webkit-mask-image:linear-gradient(to bottom,transparent,#000 10%,#000 46%,transparent 72%); mask-image:linear-gradient(to bottom,transparent,#000 10%,#000 46%,transparent 72%); }

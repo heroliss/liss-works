@@ -89,7 +89,7 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
   renderer.setPixelRatio(ratio);
   renderer.outputColorSpace = T.SRGBColorSpace;
   renderer.toneMapping = T.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.1;
+  renderer.toneMappingExposure = 1.16;
   renderer.setClearColor(BG, 1);
 
   const scene = new T.Scene();
@@ -213,7 +213,7 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
   const msTarget = new T.WebGLRenderTarget(1, 1, { type: T.HalfFloatType, samples: 4 });
   const composer = new A.EffectComposer(renderer, msTarget);
   composer.addPass(new A.RenderPass(scene, camera));
-  const bloom = new A.UnrealBloomPass(new T.Vector2(256, 256), .36, .45, .9);
+  const bloom = new A.UnrealBloomPass(new T.Vector2(256, 256), .62, .55, .78);
   composer.addPass(bloom);
   composer.addPass(new A.OutputPass());
 
@@ -316,7 +316,7 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
       screen.group.rotation.set(screen.pitch - pitchBy * .45, screen.turn - turnBy * .88, screen.roll, 'YXZ');
       screen.pool.position.set(screen.pos.x, .006, screen.pos.z + 1.1 * screen.size); screen.pool.scale.setScalar(screen.size);
       if (screen.face.map) screen.face.color.setScalar(.78 + f * .22 + h * .12);
-      screen.rim.color.copy(screen.tone).multiplyScalar(.62 + f * .28 + h * .36);
+      screen.rim.color.copy(screen.tone).multiplyScalar(.72 + f * .4 + h * .45);
       screen.halo.opacity = .14 + f * .2 + h * .3;
       screen.poolMat.opacity = (.12 + f * .18 + h * .12) * grazing;
       const own = index === hover;
