@@ -70,9 +70,9 @@ function edgeTexture(T: T, frameW: number, frameH: number) {
   const canvas = document.createElement('canvas'); canvas.width = 512; canvas.height = Math.round(512 * frameH / frameW);
   const context = canvas.getContext('2d')!, w = canvas.width * .74, h = canvas.height * .74, x = (canvas.width - w) / 2, y = (canvas.height - h) / 2;
   context.strokeStyle = '#fff'; context.lineJoin = 'round';
-  for (const [blur, width, alpha] of [[48, 10, .55], [22, 6, .8], [6, 3, 1]] as const) {
+  for (const [blur, width, alpha] of [[48, 10, .5], [20, 6, .75], [0, 3, 1]] as const) {
     context.save(); context.shadowColor = `rgba(255,255,255,${alpha})`; context.shadowBlur = blur; context.lineWidth = width; context.globalAlpha = alpha;
-    context.beginPath(); context.roundRect(x, y, w, h, 14); context.stroke(); context.restore();
+    context.beginPath(); context.roundRect(x, y, w, h, 9); context.stroke(); context.restore();
   }
   const texture = new T.CanvasTexture(canvas); texture.colorSpace = T.SRGBColorSpace; return texture;
 }
@@ -200,11 +200,11 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
     const rim = keep(new T.MeshBasicMaterial({ color: tone.clone(), toneMapped: false }));
     // Rims a little wider and calmer: thin, very bright bars shimmered under bloom.
     const bar = (bw: number, bh: number, x: number, y: number) => { const m = new T.Mesh(keep(new T.BoxGeometry(bw, bh, .05)), rim); m.position.set(x, y, .06); m.layers.set(1); tilt.add(m); };
-    bar(baseW + .24, .06, 0, baseH / 2 + .11); bar(baseW + .24, .06, 0, -baseH / 2 - .11); bar(.06, baseH + .28, -baseW / 2 - .11, 0); bar(.06, baseH + .28, baseW / 2 + .11, 0);
+    void bar; // Square rim bars removed: the rounded edge light draws the rim.
     const halo = keep(new T.MeshBasicMaterial({ map: glow, color: tone, transparent: true, opacity: .2, blending: T.AdditiveBlending, depthWrite: false }));
     const haloMesh = new T.Mesh(haloGeometry, halo); haloMesh.position.z = -.12; tilt.add(haloMesh);
     const edge = keep(new T.MeshBasicMaterial({ map: edgeMap, color: tone, transparent: true, opacity: .4, blending: T.AdditiveBlending, depthWrite: false, toneMapped: false }));
-    const edgeMesh = new T.Mesh(edgeGeometry, edge); edgeMesh.position.z = .065; tilt.add(edgeMesh);
+    const edgeMesh = new T.Mesh(edgeGeometry, edge); edgeMesh.position.z = .065; edgeMesh.layers.set(1); tilt.add(edgeMesh);
     const poolMat = keep(new T.MeshBasicMaterial({ map: glow, color: tone, transparent: true, opacity: .2, blending: T.AdditiveBlending, depthWrite: false }));
     const pool = new T.Mesh(poolGeometry, poolMat); pool.rotation.x = -Math.PI / 2; pool.layers.set(1); scene.add(pool);
     const slot = SLOTS[index % SLOTS.length];
@@ -337,7 +337,7 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
       screen.rim.color.copy(screen.tone).multiplyScalar(.62 + f * .16 + h * .24);
       screen.halo.opacity = .12 + f * .12 + h * .16;
       // Always a little light at the edge; more for the front work, most under the pointer.
-      screen.edge.opacity = .34 + f * .2 + h * .5;
+      screen.edge.opacity = .5 + f * .2 + h * .4;
       screen.poolMat.opacity = (.12 + f * .18 + h * .12) * grazing;
       const own = index === hover;
       const leanX = own ? -local.y * .2 : -pointer.y * .06 * pointer.weight;
