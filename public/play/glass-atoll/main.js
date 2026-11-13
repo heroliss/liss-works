@@ -369,7 +369,7 @@ async function init(){
   // Fetch the night atlas/catalogue once the browser is idle after the first
   // daytime frame. Dusk, night presets/views and night diagnostics ask sooner.
   const preloadNight=()=>{atmosphere.loadNight().catch(error=>console.warn('Atoll night assets:',error));};
-  if(typeof requestIdleCallback==='function')requestIdleCallback(preloadNight,{timeout:5000});else setTimeout(preloadNight,2000);
+  if(!globalThis.ATOLL_STATIC_HOST){if(typeof requestIdleCallback==='function')requestIdleCallback(preloadNight,{timeout:5000});else setTimeout(preloadNight,2000);}
   window.__ATOLL__={
     get state(){return {ready:true,time,fps,gpuMs,renderScale,graphicsContextInterrupted,pausedRenderCached,pausedSteadyFrames,parameters:structuredClone(parameters),lens:lens.state,caustics:{quality:causticQuality,gridSegments:caustics.gridSegments,maxHz:caustics.maxHz},performance:governor.state,camera:camera.position.toArray(),target:controls.target.toArray(),ripples:water.uniforms.uRipples.value.map(v=>v.toArray()),triangles:lens.state.sceneStats.triangles,drawCalls:lens.state.sceneStats.calls,leaves:floatingLeaves.state,nightAssets:(({loaded,loadRequested,loadError})=>({loaded,loadRequested,loadError}))(atmosphere.getNightState())};},
     setMotionEnabled(value){lens.setMotionEnabled(value);},

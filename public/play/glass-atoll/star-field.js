@@ -82,11 +82,23 @@ export function createStarField(THREE,{enabled=true}={}){
   async function loadCatalogue(m){
     if(disposed)return {loaded:false,disposed:true};
     const fetchBin=async name=>{
-      // Lossless transfer compression; identical catalogue bytes on the GPU.
+      // Lossless transfer packs (.pk2): gzip of byte planes, plus dropping the RGBA16F diffuse
+      // alpha that is always 1.0. Decoding restores the identical catalogue bytes.
       if(typeof DecompressionStream==='function'){
         try{
-          const r=await fetch(new URL(name+'.pack',base));
-          if(r.ok)return await new Response(r.body.pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();
+          const r=await fetch(new URL(name+'.pk2',base));
+          if(r.ok){
+            const packed=new Uint8Array(await new Response(r.body.pipeThrough(new DecompressionStream('gzip'))).arrayBuffer());
+            const view=new DataView(packed.buffer),width=view.getUint8(0),alphaOne=view.getUint8(1)===1,original=view.getUint32(2,true);
+            const body=packed.subarray(6),count=body.length/width;
+            if(!Number.isInteger(count)||(alphaOne?count*width/6*8:count*width)!==original)throw new Error('pack size');
+            const values=new Uint8Array(body.length);
+            for(let plane=0;plane<width;plane++){const src=body.subarray(plane*count,(plane+1)*count);for(let i=0,o=plane;i<count;i++,o+=width)values[o]=src[i];}
+            if(!alphaOne)return values.buffer;
+            const out=new Uint8Array(original);
+            for(let r=0,v=0,o=0;o<original;r++,v+=6,o+=8){out[o]=values[v];out[o+1]=values[v+1];out[o+2]=values[v+2];out[o+3]=values[v+3];out[o+4]=values[v+4];out[o+5]=values[v+5];out[o+7]=0x3c;}
+            return out.buffer;
+          }
         }catch{
           // A failed transfer, unsupported codec or corrupt optional pack must
           // not prevent the intact original catalogue from loading.

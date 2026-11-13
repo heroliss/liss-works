@@ -167,6 +167,7 @@ export const projects: Project[] = [
     summary: '走近一座可漫游的热带离岛，看浅海、天光、昼夜与烟花随视角流动。',
     intro: '一座由实时 WebGL 场景构成的热带离岛。白沙、椰树、天空与透明浅海围绕同一片光运转；访客可以调整视角与时间，向水面投石、放下漂浮叶片，在夜色里欣赏烟花。',
     status: '可在线体验', demo: '/play/glass-atoll/', tags: ['WebGL 2', 'JavaScript', 'Three.js', '实时渲染'],
+    source: 'https://github.com/heroliss/glass-atoll', docs: 'https://github.com/heroliss/glass-atoll#readme',
     features: [
       { title: '看得见海底的浅海', body: '水面把透明、反射和波纹叠在一起，近岸可见海床与随光变化的焦散。' },
       { title: '同一座岛的不同光线', body: '切换昼夜与天气，调整机位和镜头，让天空、椰树与水面重新组合成画面。' },

@@ -6,7 +6,8 @@
     "Static host flag and works return link; no-JavaScript fallback.",
     "Native-only display report is explicitly unavailable; pinned ACES targets remain available.",
     "Optional server-generated ACES targets decline with a controlled reason.",
-    "Catalogue gzip transfer with byte-identical decompression; HTTP, network and decoding failures fall back to the original catalogue.",
+    "Catalogue byte-plane gzip packs (.pk2, constant diffuse alpha omitted) with byte-identical decoding; HTTP, network and decoding failures fall back to the original catalogue.",
+    "Night sky assets load on demand (sun below 12 degrees, or star/moon views) instead of an unconditional idle preload.",
     "Hosted default uses the existing low preset, with all quality options available; initial caustics allocate that preset directly.",
     "Failure guidance refers to the browser rather than a local launcher.",
     "Credits receive explicit HTML head/body for host metadata."
@@ -183,9 +184,9 @@
       "adapted": false
     },
     {
-      "path": "assets/night/catalog/diffuse-rgba16f.bin.pack",
-      "sha256": "40b1c97930871af6f7cd3d5d6d2b552114325a4c3c225db3b1fdc54b28446e30",
-      "bytes": 14202519,
+      "path": "assets/night/catalog/diffuse-rgba16f.bin.pk2",
+      "sha256": "455427ec01c88733acc318e970a5d2b1e2e88cfe9550f29944225ed26e4d58a0",
+      "bytes": 10945557,
       "losslessSource": "assets/night/catalog/diffuse-rgba16f.bin"
     },
     {
@@ -196,9 +197,9 @@
       "adapted": false
     },
     {
-      "path": "assets/night/catalog/lookup-native-float32.bin.pack",
-      "sha256": "53342b5b3aa2bea8887625093189f0311ad7fed20b77fd4baaf18fd95b39a20c",
-      "bytes": 803202,
+      "path": "assets/night/catalog/lookup-native-float32.bin.pk2",
+      "sha256": "723272905ec6d56bfe8d8b216e3bd474fadd7e57fa1df73800edf714ae6c6abe",
+      "bytes": 820132,
       "losslessSource": "assets/night/catalog/lookup-native-float32.bin"
     },
     {
@@ -209,9 +210,9 @@
       "adapted": false
     },
     {
-      "path": "assets/night/catalog/lookup-wide-float32.bin.pack",
-      "sha256": "0e2ba54d4040e60c44c893c54286ed51324aba3c347693b112df99dd5b956ae4",
-      "bytes": 3378922,
+      "path": "assets/night/catalog/lookup-wide-float32.bin.pk2",
+      "sha256": "1fca540b0c14eded8b9734253579c0518410402f1825d96ebd69abc0424a4e1d",
+      "bytes": 2860369,
       "losslessSource": "assets/night/catalog/lookup-wide-float32.bin"
     },
     {
@@ -236,9 +237,9 @@
       "adapted": false
     },
     {
-      "path": "assets/night/catalog/stars-float32.bin.pack",
-      "sha256": "c2673c0e6a72208fa496b389e819fdb20fc82c7e643dcb102ffef5af928438af",
-      "bytes": 3242047,
+      "path": "assets/night/catalog/stars-float32.bin.pk2",
+      "sha256": "31907133766fce3d5b38ebd65ae28158ace7dd47b228285d01a91d3cb3758c8c",
+      "bytes": 2926291,
       "losslessSource": "assets/night/catalog/stars-float32.bin"
     },
     {
@@ -671,8 +672,8 @@
     {
       "path": "main.js",
       "sourceSHA256": "cc57e3fe927eda8542411840c7e10fe5cdad8fa48c5f2cf24e4b5ac994510127",
-      "sha256": "ecb258dfe691357c742b836fd19968be333e334b77510343d09585ec092e2e90",
-      "bytes": 232431,
+      "sha256": "e77eba35fd75b4d9552ca4c7d7bcec51f7742fd67bfcd199eea55ea8ab8b439f",
+      "bytes": 232466,
       "adapted": true
     },
     {
@@ -986,8 +987,8 @@
     {
       "path": "star-field.js",
       "sourceSHA256": "99ef342f931fa8d6843b8a9f9f52224ecee00e14501001ff2c32b528015fffa5",
-      "sha256": "ae2c152163937ba5ecfedb2a9476fb81aa69765855df3c793c2088996de34367",
-      "bytes": 12450,
+      "sha256": "a3f03b8ef8e475a5d8de438a6986ddb864e8e1e2ea6122f34e3d1c120b39aa04",
+      "bytes": 13462,
       "adapted": true
     },
     {
