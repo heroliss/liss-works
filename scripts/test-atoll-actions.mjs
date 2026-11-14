@@ -3,7 +3,9 @@ import { initQuickExperience } from '../public/play/glass-atoll/ui-quick-experie
 
 // Check actual action routing and async locks without a GPU or scene simulation.
 class Control {
-  textContent=''; disabled=false; attributes={}; events={}; dataset={};
+  textContent=''; disabled=false; attributes={}; events={}; dataset={}; classes=new Set();
+  classList={toggle:(name,force=!this.classes.has(name))=>(force?this.classes.add(name):this.classes.delete(name),force),contains:name=>this.classes.has(name)};
+  querySelector(){return null;} // No label child: the UI falls back to the control itself.
   setAttribute(name,value){this.attributes[name]=value;}
   addEventListener(name,callback){this.events[name]=callback;}
   fire(name){return this.events[name]?.();}
@@ -32,7 +34,7 @@ assert.equal(nodes['quick-launch'].disabled,true);assert.equal(launches,2);
 resolve();await Promise.all([first,duplicate]);delay=null;assert.equal(nodes['quick-launch'].disabled,false);
 
 state.fireworks.autoLaunch=true;api.syncFireworks();
-assert.equal(nodes['quick-launch'].textContent,'停止后续');
+assert.equal(nodes['quick-launch'].textContent,'停止后续');assert.equal(nodes['quick-launch'].classList.contains('is-stopping'),true);
 await nodes['quick-launch'].fire('click');assert.equal(stops,1);assert.equal(launches,2);assert.equal(state.fireworks.active,2);
 state.fireworks.queued=8;api.syncFireworks();await nodes['quick-launch'].fire('click');
 assert.equal(stops,2);assert.equal(state.fireworks.queued,0);assert.equal(state.fireworks.active,2);
