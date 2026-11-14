@@ -1,6 +1,9 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { createWater } from './water.js';
+import { createWater,FIRE_SURFACE_LIGHTS } from './water.js';
+import {createFireworkEnvironmentProxies} from './firework-environment-proxies.js';
+import {createFireworkLightField} from './firework-light-field.js';
+import {createFireworkBurstShadow} from './firework-burst-shadow.js';
 import { createVegetation } from './vegetation.js';
 import { initUI } from './ui.js';
 import { waveGLSL, waveComponents,waveWindFactor,sanitizeSeaState } from './waves.js';
@@ -84,6 +87,7 @@ let displaySettingsApplying=false,displaySettingsPending=false,displayRefreshPen
 let nightSettings={date:'2026-10-26T22:00',autoExposure:true},lastSolarExposure=null;
 let timeChangeEpoch=0,nightAssetsArrived=false;
 const qaTransmissionLayoutReports=Object.create(null);
+let fireField,burstShadow;
 let celestialController,celestialFrame,localLights,environmentLocalLights,environmentCapture,fireworks,fireworksAudio,pyroSmoke,reflectionDepthCopy,frameSnapshot=null,qualityApplying=false,throwGesture=null,qaRenderLock=false,qaSmokeVariants=null;
 let qaSmokeTransmissionField=null,qaSmokeTransmissionAdmission=null,qaSmokeTransmissionInput=null;
 let smokeGPURequested=true,smokeGPUSupport=null;
@@ -148,7 +152,7 @@ const ui=initUI({
   onLaunchFirework(){return launchFirework();},
   onRandomFirework(){return launchFirework({randomType:true});},
   onStopFireworks(){const result=configureFireworksSettings({autoLaunch:false});fireworks?.stop();return result;},
-  onClearSmoke(){clearSmoke();},
+  onClearSmoke(){clearSmoke();},onFireworkAirGlow(value){fireworkAirGlow=Math.min(1,Math.max(0,Number(value)||0));lastPausedRenderKey=null;},
   onSmokeGPUChange(enabled){return setSmokeGPUEnabled(enabled);},
   onFocusPick(){focusPicking=true;renderer.domElement.focus({preventScroll:true});renderer.domElement.style.cursor='crosshair';ui.notify('点选希望清晰的物体；Esc 取消');},
   onRestorePivot(){navigation?.restorePivot();},
@@ -273,7 +277,9 @@ async function init(){
   sunLight.shadow.radius=2;
   scene.add(sunLight);
   scene.add(sunLight.target);
-  localLights=createLocalLights(THREE,{scene,terrainHeight});
+  fireField=createFireworkLightField(THREE,{terrainHeight});
+  burstShadow=createFireworkBurstShadow(THREE,renderer);
+  localLights=createLocalLights(THREE,{scene,terrainHeight,fireField,fireShadow:burstShadow});
   environmentLocalLights=createEnvironmentLocalLights(THREE,localLights);
   environmentCapture=createEnvironmentCapture(THREE,renderer,{atmosphere,onPublish(info){skyCubeTarget=info.cubeTarget;environmentTarget=info.environmentTarget;scene.environment=info.environmentTexture;if(water)water.uniforms.uSkyCube.value=info.cubeTexture;}});
   applySolarLighting();environmentCapture.initialize({time,utcMs:celestialFrame.utcMs,storageEV:0,physicalRevision:celestialFrame.physicalSkyRevision,sunDirection:celestialFrame.sunDirection});
@@ -689,7 +695,7 @@ async function init(){
     async runAdaptiveTrailVaryingProbe(){if(qaRenderLock||graphicsContextInterrupted)throw new Error('A live renderer with no active GPU diagnostic is required');qaRenderLock=true;try{const {runAdaptiveTrailVaryingProbe}=await import('./verification/fireworks/adaptive-tail-varying-probe.js');return await runAdaptiveTrailVaryingProbe(THREE,renderer);}finally{clock.getDelta();qaRenderLock=false;lastPausedRenderKey=null;}},
     setFireworksTrailIntegration(mode,{resetHistory=true}={}){if(!['legacy8','adaptive'].includes(mode))throw new RangeError('Unknown trail integration');fireworks.configure({trailIntegration:mode});if(resetHistory){updateScenePhotometry(0,true);lens.resetTemporalHistory('QA trail optical integration');lastPausedRenderKey=null;return fireworks.diagnostics();}return{requested:mode,historyReset:false};},
     setFireworksTailColourMode(mode){if(!['constant','cooling'].includes(mode))throw new RangeError('Unknown detached-tail colour mode');fireworks.configure({tailColourMode:mode});updateScenePhotometry(0,true);lens.resetTemporalHistory('QA detached ember colour');lastPausedRenderKey=null;return fireworks.diagnostics();},
-    setFireworksPhotometryMode(mode,{radiusMm=2}={}){fireworks.configure({photometryMode:mode,thermalEmittingRadiusMm:radiusMm});updateScenePhotometry(0,true);lens.resetTemporalHistory('QA thermal source photometry');lastPausedRenderKey=null;return fireworks.diagnostics();},
+    setFireworkHighlightResponse(value){const result=fireworks.setHighlightResponse(value);lastPausedRenderKey=null;return result;},fireworkBurstShadow(){return burstShadow.state;},setFireworkAirGlow(value){fireworkAirGlow=Math.min(1,Math.max(0,Number(value)||0));lastPausedRenderKey=null;return fireworkAirGlow;},setFireworkBurstShadow(value){const result=burstShadow.setQuality(typeof value==='object'?value:{enabled:!!value});lastPausedRenderKey=null;return result;},fireworkLightField(){const lighting=fireworks.getReceiverLighting();return {...fireField.state,dominant:lighting.dominant,nearProxies:lighting.near.length,farRows:lighting.far.length};},sampleFireworkField(position,normal){return fireField.sampleIrradiance(position,normal);},environmentFireLights(){return environmentLocalLights.state.fireworks;},waterFireLights(){return water.uniforms.uFireLightPosition.value.map((p,i)=>({position:[p.x,p.y,p.z],radius:p.w,rawRGB:water.uniforms.uFireLightColour.value[i].toArray()})).filter(l=>Math.max(...l.rawRGB)>0);},setWaterFireLight(value){water.uniforms.uFireSurface.value=Math.max(0,Number(value)||0);lastPausedRenderKey=null;return water.uniforms.uFireSurface.value;},setFireworksPhotometryMode(mode,{radiusMm=2}={}){fireworks.configure({photometryMode:mode,thermalEmittingRadiusMm:radiusMm});updateScenePhotometry(0,true);lens.resetTemporalHistory('QA thermal source photometry');lastPausedRenderKey=null;return fireworks.diagnostics();},
     setBackgroundLocalAir(enabled,{model='quadratic'}={}){if(model!=='quadratic')throw new RangeError('Support integration candidate is withdrawn pending GPU investigation');const patch={backgroundLocalScattering:enabled?1:0};aerialPerspective.configure(patch);Object.assign(parameters.air,patch);setAir();updateScenePhotometry(0,true);lens.resetTemporalHistory('QA background local scattering');lastPausedRenderKey=null;return aerialPerspective.diagnostics();},
     fireworkFramingSources(options={}){return fireworks.getFramingSources({shutterSeconds:currentOptics().shutterSeconds,...options});},
     get smokeTransmissionMode(){return qaSmokeTransmissionMode;},
@@ -1089,6 +1095,9 @@ function arrayRGB(value,fallback=[0,0,0]){return value?.toArray?value.toArray():
 function currentOptics(){const l=lens?.state;return {kernelBudgetFloat32,width:l?.width||innerWidth,height:l?.height||innerHeight,focalMm:parameters.lens.focal,aperture:parameters.lens.aperture,focusMetres:l?.focusMetres||60,sensorHeightMm:camera?.getFilmHeight()||24,firelightSigmaPixels:parameters.lens.firelightAA===false?.28:.42,dof:parameters.lens.dof,vignette:parameters.lens.vignette,shutterSeconds:l?.shutterSeconds??parameters.lens.shutterSeconds??1/120};}
 function finiteAirPayload(){const light=atmosphere.lighting(),coefficients=marineAirCoefficients({...parameters.air,humidity:atmosphere.getWeatherState().current.humidity});return {...coefficients,enabled:parameters.air.enabled,sunDirection:keyDirection.toArray(),rawSunRGB:arrayRGB(light.keyColor).map(v=>v*3.6*(light.physicalKeyStrength??0)),ambientIrradianceRGB:arrayRGB(light.physicalSkyIrradiance)};}
 function applyEnvironmentRatios(){if(!environmentCapture)return;const r=environmentCapture.setSceneExposure(radiometry.state.storageEV);scene.environmentIntensity=.8*r.environmentRatio;if(water){water.uniforms.uSkyCube.value=environmentCapture.cubeTarget.texture;water.uniforms.uSkyCubeScale.value=r.cubeRatio;}}
+let burstBoundsCache=null,burstBoundsTime=-Infinity,burstBoundsClusters=-1;
+let transientIndirectAge=0,fireworkRecordCount=0,fireworkAirGlow=.2;
+const environmentProxies=createFireworkEnvironmentProxies();
 function markPhotometryPhase(profile,name){if(profile){const now=performance.now();profile.phases[name]=now-profile.last;profile.last=now;}}
 function updateScenePhotometry(delta=0,force=false){
   if(!atmosphere||!localLights||!camera)return;
@@ -1099,11 +1108,25 @@ function updateScenePhotometry(delta=0,force=false){
   atmosphere.prepareStarView(renderer,camera,{width:lens.state.width,height:lens.state.height,storageEV:baseFrame.storageEV,frame:baseFrame,optics:currentOptics()});
   markPhotometryPhase(detailed,'star-view');
   const clusters=fireworks?.getLightClusters()||[];markPhotometryPhase(detailed,'source-clusters');
-  const receiverClusters=fireworks?.getReceiverLightClusters?.()||clusters;
-  const b=fireworks?.getBounds({shutterSeconds:parameters.lens.shutterSeconds??1/120});markPhotometryPhase(detailed,'source-world-bounds');
+  // Near stars: up to four exact proxies (slots 4..7). Far stars: probe field for surfaces,
+  // plus one aggregate proxy (slot 8) for bounce light, smoke and the exposure bound.
+  const receiverLighting=fireworks?.getReceiverLighting?.()||{near:[],far:[],farAggregate:null,dominant:null};
+  const receiverClusters=[0,1,2,3].map(i=>receiverLighting.near[i]);receiverClusters.push(receiverLighting.farAggregate??undefined);
+  fireField.update({rows:receiverLighting.far,rawPerCandela:RAW_PER_CANDELA,sceneScale:baseFrame.sceneScale});
+  // The forecast enclosure already covers every body's whole remaining flight, so it
+  // stays valid between refreshes. Resampling thousands of trajectories each frame cost
+  // ~9 ms during a continuous show; it only feeds the reflection reactive mask.
+  if(force||!burstBoundsCache||time<burstBoundsTime||time-burstBoundsTime>=.2||clusters.length!==burstBoundsClusters){burstBoundsCache=fireworks?.getBounds({shutterSeconds:parameters.lens.shutterSeconds??1/120});burstBoundsTime=time;burstBoundsClusters=clusters.length;}
+  const b=burstBoundsCache;markPhotometryPhase(detailed,'source-world-bounds');
   localLights.update({frame:baseFrame,camera,sunAltitude:celestialFrame?.mode==='astronomical'?celestialFrame.sun.altitudeDeg:parameters.sun.elevation,clusters:receiverClusters,burstBounds:b?.active?[{center:b.centre,radius:b.radius}]:[]});
-  environmentLocalLights.update({frame:baseFrame,clusters});
-  atmosphere.setTransientLights(clusters,{rawPerCandela:RAW_PER_CANDELA,enabled:fireworksSettings.cloudIllumination});
+  // Air, cloud and foam paths keep two proxies, now smooth in time instead of re-paired per frame.
+  const environmentClusters=environmentProxies.update(fireworks?.getEventLightClusters?.()||[],parameters.paused?0:delta);
+  // The stars themselves are shown through a display-referred shoulder (their cores would
+  // otherwise clip), while light scattered by the air stays linear. Unscaled, the forward-
+  // scatter halo then reads far brighter relative to the burst than it would to an eye, so the
+  // air path receives a reduced share. This is a display choice, not a physical quantity.
+  environmentLocalLights.update({frame:baseFrame,clusters:fireworkAirGlow>=1?environmentClusters:environmentClusters.map(c=>({...c,referenceCandela:c.referenceCandela*fireworkAirGlow,intensity:c.intensity*fireworkAirGlow}))});if(water){water.uniforms.uFireDisplayGain.value=renderer.toneMappingExposure;water.uniforms.uFireLightScale.value=baseFrame.sceneScale;const surfaceLights=(fireworks?.getEventLightClusters?.()||[]).slice().sort((a,b)=>b.referenceCandela-a.referenceCandela);for(let i=0;i<FIRE_SURFACE_LIGHTS;i++){const c=surfaceLights[i],I=c?c.referenceCandela*RAW_PER_CANDELA:0;water.uniforms.uFireLightPosition.value[i].set(c?c.position[0]:0,c?c.position[1]:0,c?c.position[2]:0,c?Math.max(2,c.radius):2);water.uniforms.uFireLightColour.value[i].set(c?c.color[0]*I:0,c?c.color[1]*I:0,c?c.color[2]*I:0);}}
+  atmosphere.setTransientLights(environmentClusters,{rawPerCandela:RAW_PER_CANDELA,enabled:fireworksSettings.cloudIllumination});
   markPhotometryPhase(detailed,'local-and-cloud-setup');
   const fieldRequested=fireworksSettings.resolvedSmokeLighting,fieldVisible=fieldRequested&&fireworksSettings.persistentSmoke&&pyroSmoke?.packetCount>0;
   let joint=null;
@@ -1119,12 +1142,14 @@ function updateScenePhotometry(delta=0,force=false){
   // Prepare all raw irradiance before selecting FP16 storage exposure. Local
   // flashes bypass the solar cache blend and share the one final P conversion.
   cloudShadowCache?.update(time,force);updateIndirect(force,delta);
-  indirectLighting?.prepareTransient({sources:localLights.records,enabled:transientIndirectEnabled&&parameters.graphics.indirect!=='off',physicalTime:time});
+  // Bounce light from fireworks is low-frequency. While many stars burn, its spatial
+  // solve (one per moving proxy) runs every third frame; direct ground light stays per-frame.
+  if(force||fireworkRecordCount<=900||++transientIndirectAge>=3){transientIndirectAge=0;indirectLighting?.prepareTransient({sources:localLights.records,enabled:transientIndirectEnabled&&parameters.graphics.indirect!=='off',physicalTime:time});}
   const indirectBound=indirectLighting?.getRadianceBound();
   markPhotometryPhase(detailed,'indirect-and-cloud-shadow');
   const local=localLights.getRadianceBound(),skyBound=atmosphere.getRadianceBound();markPhotometryPhase(detailed,'local-and-sky-bounds');
   const pyro=fireworks?.getRadianceBound({camera,optics:joint?.main.optics??currentOptics(),rawPerCandela:RAW_PER_CANDELA})||{};markPhotometryPhase(detailed,'main-source-bound');
-  const pstate=fireworks?.diagnostics();markPhotometryPhase(detailed,'source-diagnostics');
+  const pstate=fireworks?.diagnostics();fireworkRecordCount=Array.isArray(pstate?.records)?pstate.records.length:pstate?.records??0;markPhotometryPhase(detailed,'source-diagnostics');
   const pyroMirror=water&&pstate?.active>0?fireworks.getRadianceBound({camera:water.prepareReflectionCamera(),optics:joint?.reflection.optics??{...currentOptics(),width:water.reflection.width,height:water.reflection.height,dof:false,legacyShutterSeconds:0},rawPerCandela:RAW_PER_CANDELA}):{};
   markPhotometryPhase(detailed,'mirror-source-bound');
   const cameraState=cameraExposure.update({enabled:nightSettings.autoExposure,recommendedEV:light.recommendedExposureEV||0,...glareAdaptedExposure(light.moonIllumination??1,pstate,localLights.state.flashlight?.enabled),solarAltitudeDeg:celestialFrame?.mode==='astronomical'?celestialFrame.sun.altitudeDeg:parameters.sun.elevation,manualExposureEV:parameters.lens.manualExposureEV??0,compensationEV:parameters.lens.exposure,dt:delta,reset:exposureResetPending});
@@ -1136,7 +1161,7 @@ function updateScenePhotometry(delta=0,force=false){
   markPhotometryPhase(detailed,'medium-and-air-bounds');
   const night=(light.nightBlend||0)>.5,photometry=radiometry.update({recommendedEV:night?21:0,cameraExposureEV:qaCameraExposureEV===null?cameraState.cameraEV:qaCameraExposureEV,dt:delta,force,bounds:{sky:skyBound,locals:local,indirect:indirectBound,fireworks:Math.max(pyro.maximumRawRadiance||0,pyroMirror.maximumRawRadiance||0),medium:(local.maxRGB||0)*.25+(smokeBound?.maxRGB||0)+(backgroundAirBound?.maxRGB||0)}});
   markPhotometryPhase(detailed,'storage-exposure-selection');
-  atmosphere.setStorageExposureEV(photometry.storageEV);localLights.setSceneExposure(photometry.storageEV);environmentLocalLights.setSceneExposure(photometry.storageEV);applySolarLighting();applyEnvironmentRatios();indirectLighting?.setSceneExposure(photometry.storageEV);
+  atmosphere.setStorageExposureEV(photometry.storageEV);localLights.setSceneExposure(photometry.storageEV);fireField.setSceneExposure(photometry.storageEV);environmentLocalLights.setSceneExposure(photometry.storageEV);if(water)water.uniforms.uFireLightScale.value=2**photometry.storageEV;applySolarLighting();applyEnvironmentRatios();indirectLighting?.setSceneExposure(photometry.storageEV);
   lens?.setFrameExposure(photometry.storageEV,{dynamic:!parameters.paused&&!!(pstate?.active>0||celestialFrame?.running)});
   frameSnapshot={...baseFrame,...photometry,dt:parameters.paused?0:delta,adaptationDelta:delta,utcMs:celestialFrame?.utcMs,observer:celestialFrame?.observer,windVector:[effectiveWind*.936,0,effectiveWind*.352],weather:atmosphere.getWeatherState().current};
   markPhotometryPhase(detailed,'storage-and-shared-lighting');
@@ -1305,6 +1330,7 @@ async function applyQualityPreset(id=DEFAULT_QUALITY){
   try{parameters.quality=q.msaaSamples>=8?'high':'balanced';parameters.graphics.waveResolution=q.waveResolution;parameters.graphics.shadows=({2048:'soft',4096:'recommended',6144:'fine',8192:'ultra'})[q.shadowSize]||'recommended';parameters.graphics.indirect=q.indirect;Object.assign(parameters.lens,{antialias:q.antialias,temporal:q.temporal,glintAA:q.glintAA,opticalBloom:q.opticalBloom});
     shadowQuality?.setSampling({size:q.shadowSize,hz:q.shadowHz});waveSpectrum?.setResolution(q.waveResolution);waveSpectrum?.update(time,true);caustics?.setSampling({grid:q.causticsGrid,size:q.causticsSize,hz:q.causticsHz});atmosphere?.setSampling?.({cloudSteps:q.cloudSteps,atmosphereSteps:q.atmosphereSteps});aerialPerspective?.setSampling?.({steps:q.airSteps,shadowTaps:q.airShadowTaps});water?.setSampling(q);indirectLighting?.setQuality(q.indirect);localLights?.setQuality({flashShadowSize:id==='low'?512:id==='ultra'?2048:1024,flashShadowHz:q.shadowHz});setLens();resize();caustics?.update(time,true);ui.syncGraphics(parameters.graphics);ui.syncLens(parameters.lens);ui.setQualityState({requested:id,effective:q,custom:false,limits:result.limits});lastPausedRenderKey=null;
     fireworks?.setQuality({trailSegments:({low:6,balanced:6,medium:8,high:12,ultra:16})[id]});
+    burstShadow?.setQuality(({low:{enabled:false},balanced:{enabled:false},medium:{enabled:true,size:1024,hz:12},high:{enabled:true,size:1536,hz:20},ultra:{enabled:true,size:2048,hz:30}})[id]);
   }finally{qualityApplying=false;}return result;
 }
 function markCustomQuality(){
@@ -1334,7 +1360,7 @@ function configureFireworksSettings(value={}){
   Object.assign(fireworksSettings,value);
   if(smokeChanged)restartSmokeEpoch();
   if(illuminationChanged){lens?.resetTemporalHistory('firework illumination');if(atmosphere&&localLights)updateScenePhotometry(0,true);}
-  if(geometryChanged&&['fireworks-close','fireworks'].includes(ui.state.view)&&camera)moveTo(ui.state.view);
+  if(geometryChanged&&ui.state.view.startsWith('fireworks')&&camera)moveTo(ui.state.view);
   ui.syncFireworks({...fireworksSettings,maxActive:fireworks?.diagnostics().maxActive??32});lastPausedRenderKey=null;return result;
 }
 function stopDirector(reason='manual takeover'){
@@ -1506,15 +1532,29 @@ function moveTo(name){
     if(name==='sun'&&celestialFrame.mode==='artistic')direction.copy(sunDirection);
     view=islandCelestialView(direction.toArray());
   }
-  if(name==='fireworks-close'||name==='fireworks'){
+  const fireworkView=name.startsWith('fireworks');
+  if(fireworkView){
     const base=fireworks.rig.position,azimuth=fireworksSettings.autoDirection?Math.atan2(base.x,-base.z)*180/Math.PI:fireworksSettings.azimuth;
     const types=name==='fireworks'&&fireworksSettings.autoLaunch?fireworks.types:fireworks.types.filter(type=>type.id===fireworksSettings.type);
     const envelopes=types.map(type=>getFireworkShowEnvelope({type:type.id,settings:fireworksSettings,origin:[base.x,base.y+.17,base.z],muzzleOffsetMetres:.66,azimuth,shutterSeconds:currentOptics().shutterSeconds}));
     const envelope={min:[0,1,2].map(c=>Math.min(...envelopes.map(e=>e.min[c]))),max:[0,1,2].map(c=>Math.max(...envelopes.map(e=>e.max[c])))};
     view=islandFireworksView(THREE,camera,{azimuth,envelope,automaticFan:fireworksSettings.autoLaunch&&fireworksSettings.randomLaunchTilt});
+    if(name!=='fireworks'&&name!=='fireworks-close'){
+      // Three authored vantage points, all placed on the line from the bursts back across the cay
+      // so the island stays between the viewer and the show.
+      const cx=(envelope.min[0]+envelope.max[0])/2,cz=(envelope.min[2]+envelope.max[2])/2,top=envelope.max[1],bearing=azimuth*Math.PI/180;
+      let ax=-1.5-cx,az=-1-cz;const reach=Math.hypot(ax,az);
+      if(reach<8){ax=-Math.sin(bearing);az=Math.cos(bearing);}else{ax/=reach;az/=reach;}
+      const ground=(x,z)=>Math.max(0,terrainHeight(x,z));
+      if(name==='fireworks-beach'){const x=-1.5+ax*17,z=-1+az*10;view={position:[x,ground(x,z)+1.65,z],target:[cx,top*.6,cz]};}
+      // Palms: back off until the horizon sits near the bottom edge and the envelope's top near the
+      // upper edge (about 42 degrees of the 28 mm frame), so the grove stays in view as a silhouette.
+      else if(name==='fireworks-palms'){const distance=Math.max(52,top/.9-reach),x=-1.5+ax*distance,z=-1+az*distance;view={position:[x,ground(x,z)+1.4,z],target:[cx,.384*(distance+reach),cz]};}
+      else{const x=-1.5+ax*150,z=-1+az*150;view={position:[x,top*.75+60,z],target:[cx*.4,top*.15,cz*.4]};}
+    }
   }
   if(!view)return;
-  view=keepIslandInPreset(THREE,camera,view,{witness:[0,terrainHeight(0,0)+.02,0]});
+  if(!fireworkView||name==='fireworks'||name==='fireworks-close')view=keepIslandInPreset(THREE,camera,view,{witness:[0,terrainHeight(0,0)+.02,0]});
   if(fireworksSettings.autoFrame){fireworksSettings.autoFrame=false;ui.syncFireworks(fireworksSettings);}
   navigation?.stop();pendingThrow=null;
   beginCameraTransition(new THREE.Vector3(...view.position),new THREE.Vector3(...view.target));
@@ -1908,6 +1948,7 @@ function frame(){
   setAir();
   water.setSubmergedObjects([...stoneThrow.underwaterState,...stoneThrow.restingState.filter(stone=>stone.kind==='water')]);
   caustics.update(time);
+  burstShadow.update({scene,dominant:fireworks?.getReceiverLighting?.().dominant??null,time});
   sand.update(time);
   mark('shadow-caustics-sand');
   // Once a paused view has settled, retain its presented canvas. Camera,

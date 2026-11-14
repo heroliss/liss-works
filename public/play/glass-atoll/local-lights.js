@@ -1,4 +1,6 @@
-import {FIREWORK_RECEIVER_LIGHT_COUNT} from './firework-receiver-lighting.js';
+import {FIREWORK_RECEIVER_LIGHT_COUNT,FIREWORK_NEAR_LIGHT_COUNT} from './firework-receiver-lighting.js';
+import {fireworkLightFieldGLSL} from './firework-light-field.js';
+import {fireworkBurstShadowGLSL,fireworkBurstShadowDisabledGLSL} from './firework-burst-shadow.js';
 import {RAW_PER_CANDELA,finiteSourceRadiance} from './scene-radiometry.js';
 const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
 export const LOCAL_LIGHT_COUNT=4+FIREWORK_RECEIVER_LIGHT_COUNT;
@@ -44,7 +46,7 @@ export const localLightGLSL=/* glsl */`
   float localReflectionReactive(vec3 p,vec3 ray){float r=0.;for(int i=0;i<2;i++){vec3 d=uLocalBurstBounds[i].xyz-p;float along=dot(d,ray),radius=uLocalBurstBounds[i].w;r=max(r,step(.01,radius)*step(0.,along)*step(max(0.,dot(d,d)-along*along),(radius*1.5+3.)*(radius*1.5+3.)));}return r;}
 `;
 
-export function createLocalLights(THREE,{scene,terrainHeight=()=>0}={}){
+export function createLocalLights(THREE,{scene,terrainHeight=()=>0,fireField=null,fireShadow=null}={}){
   const root=new THREE.Group();root.name='Three low surface luminaires';scene.add(root);
   const settings={mode:'night',linked:false,lamps:[0,1,2].map(()=>({enabled:true,brightness:.18,color:'#ffdfa5'})),flashlight:{enabled:false,brightness:.7}};
   const white=new THREE.DataTexture(new Uint8Array([255,255,255,255]),1,1,THREE.RGBAFormat);white.needsUpdate=true;white.minFilter=white.magFilter=THREE.NearestFilter;
@@ -84,7 +86,7 @@ export function createLocalLights(THREE,{scene,terrainHeight=()=>0}={}){
     lastRawBound=(1+1e-12)*records.reduce((sum,r,i)=>sum+Math.max(...r.rawRGB)*(i<3?Math.max(1/(Math.PI*r.radius*r.radius),1/(Math.PI*.02**2)):i===3?1/(Math.PI*.04**2):1/Math.max(.01,r.radius*r.radius)),0);
     return settings;
   }
-  function apply(material){if(!material?.isMeshStandardMaterial||applied.has(material))return;applied.add(material);const previous=material.onBeforeCompile.bind(material),key=material.customProgramCacheKey.bind(material);material.onBeforeCompile=(shader,renderer)=>{previous(shader,renderer);Object.assign(shader.uniforms,uniforms);shader.vertexShader=shader.vertexShader.replace('#include <common>','#include <common>\nvarying vec3 vLocalWorld;').replace('#include <worldpos_vertex>',`#include <worldpos_vertex>
+  function apply(material){if(!material?.isMeshStandardMaterial||applied.has(material))return;applied.add(material);const previous=material.onBeforeCompile.bind(material),key=material.customProgramCacheKey.bind(material);material.onBeforeCompile=(shader,renderer)=>{previous(shader,renderer);Object.assign(shader.uniforms,uniforms,fireField?.uniforms,fireShadow?.uniforms);shader.vertexShader=shader.vertexShader.replace('#include <common>','#include <common>\nvarying vec3 vLocalWorld;').replace('#include <worldpos_vertex>',`#include <worldpos_vertex>
         vec4 localWorld=vec4(transformed,1.);
         #ifdef USE_BATCHING
           localWorld=batchingMatrix*localWorld;
@@ -92,21 +94,24 @@ export function createLocalLights(THREE,{scene,terrainHeight=()=>0}={}){
         #ifdef USE_INSTANCING
           localWorld=instanceMatrix*localWorld;
         #endif
-        vLocalWorld=(modelMatrix*localWorld).xyz;`);const thin=shader.fragmentShader.includes('uGroveTransmissionBudget');shader.fragmentShader=shader.fragmentShader.replace('#include <common>','#include <common>\nvarying vec3 vLocalWorld;\n'+localLightGLSL).replace('#include <dithering_fragment>','#include <dithering_fragment>\n#ifdef SCENE_REACTIVE_OUTPUT\nsceneReactiveMask=max(sceneReactiveMask,localReceiverReactive(vLocalWorld));\n#endif');shader.fragmentShader=shader.fragmentShader.replace('#include <lights_fragment_end>',`#include <lights_fragment_end>
+        vLocalWorld=(modelMatrix*localWorld).xyz;`);const thin=shader.fragmentShader.includes('uGroveTransmissionBudget');shader.fragmentShader=shader.fragmentShader.replace('#include <common>','#include <common>\nvarying vec3 vLocalWorld;\n'+localLightGLSL+(fireField?fireworkLightFieldGLSL:'vec3 fireFieldIrradiance(vec3 p,vec3 n){return vec3(0.);}')+(fireShadow?fireworkBurstShadowGLSL:fireworkBurstShadowDisabledGLSL)).replace('#include <dithering_fragment>','#include <dithering_fragment>\n#ifdef SCENE_REACTIVE_OUTPUT\nsceneReactiveMask=max(sceneReactiveMask,localReceiverReactive(vLocalWorld));\n#endif');shader.fragmentShader=shader.fragmentShader.replace('#include <lights_fragment_end>',`#include <lights_fragment_end>
       // Firework receiver records are diffuse-only; ground lamps and torch
       // remain native PBR lights, including their specular response.
       vec3 fireworkDiffuseNormal=inverseTransformDirection(normal,viewMatrix);
       vec3 fireworkDiffuseIncident=vec3(0.);
-      for(int fireworkId=4;fireworkId<${LOCAL_LIGHT_COUNT};fireworkId++){
+      // Slots 4..${3+FIREWORK_NEAR_LIGHT_COUNT} are exact proxies for stars near the cay; the far light is the probe field.
+      for(int fireworkId=4;fireworkId<${4+FIREWORK_NEAR_LIGHT_COUNT};fireworkId++){
         if(max(max(uLocalColour[fireworkId].r,uLocalColour[fireworkId].g),uLocalColour[fireworkId].b)<1e-12)continue;
         vec3 fireworkL;
         vec3 fireworkE=localIncident(vLocalWorld,fireworkId,fireworkL);
         fireworkDiffuseIncident+=fireworkE*max(0.,dot(fireworkDiffuseNormal,fireworkL));
       }
+      fireworkDiffuseIncident+=fireFieldIrradiance(vLocalWorld,fireworkDiffuseNormal)*fireBurstVisibility(vLocalWorld,fireworkDiffuseNormal);
       reflectedLight.directDiffuse+=fireworkDiffuseIncident*BRDF_Lambert(material.diffuseColor);
 `);if(thin)shader.fragmentShader=shader.fragmentShader.replace('#include <opaque_fragment>',`vec3 localThinNormal=inverseTransformDirection(nonPerturbedNormal,viewMatrix);
-      for(int localId=0;localId<${LOCAL_LIGHT_COUNT};localId++){vec3 localL;vec3 localE=localIncident(vLocalWorld,localId,localL);float back=max(0.,-dot(localThinNormal,localL));outgoingLight+=localE*groveNormalTransmission*back*.31830988618;}
-      #include <opaque_fragment>`);};material.customProgramCacheKey=()=>key()+'-local-receiver-diffuse-only-v3-lights-chunk';material.needsUpdate=true;}
+      for(int localId=0;localId<${4+FIREWORK_NEAR_LIGHT_COUNT};localId++){vec3 localL;vec3 localE=localIncident(vLocalWorld,localId,localL);float back=max(0.,-dot(localThinNormal,localL));outgoingLight+=localE*groveNormalTransmission*back*.31830988618;}
+      outgoingLight+=fireFieldIrradiance(vLocalWorld,-localThinNormal)*fireBurstVisibility(vLocalWorld,localThinNormal)*groveNormalTransmission*.31830988618;
+      #include <opaque_fragment>`);};material.customProgramCacheKey=()=>key()+'-local-receiver-near-proxies-probe-field-burst-shadow-v5';material.needsUpdate=true;}
   return {root,uniforms,glsl:localLightGLSL,records,configure,update,apply,
     setSceneExposure(P){const scale=2**P;for(let i=0;i<LOCAL_LIGHT_COUNT;i++){records[i].light.intensity=scale;uniforms.uLocalColour.value[i].set(...records[i].rawRGB.map(v=>v*scale),records[i].candela);if(i<3)fixtures[i].emitterMaterial.emissive.setRGB(...records[i].rawRGB.map(v=>v*scale/(Math.PI*records[i].radius**2)));}if(lastFrame)lastFrame={...lastFrame,storageEV:P,sceneScale:scale};},
     setQuality({flashShadowSize=1024,flashShadowHz=30}={}){shadowHz=flashShadowHz;if(shadowSize!==flashShadowSize){shadowSize=flashShadowSize;flash.shadow.map?.dispose();flash.shadow.map=null;flash.shadow.mapSize.set(shadowSize,shadowSize);}flash.shadow.needsUpdate=true;},

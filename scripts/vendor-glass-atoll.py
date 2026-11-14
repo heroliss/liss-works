@@ -74,7 +74,7 @@ def replace_once(text, before, after):
     return text.replace(before, after, 1)
 
 def adapt(name, data):
-    if name not in ('index.html', 'style.css', 'main.js', 'quality-presets.js', 'hdr-output.js', 'aces2-output.js', 'star-field.js', 'assets/credits.html', 'assets/audio/credits.html'):
+    if name not in ('index.html', 'style.css', 'main.js', 'hdr-output.js', 'aces2-output.js', 'star-field.js', 'assets/credits.html', 'assets/audio/credits.html'):
         return data
     text = data.decode('utf-8')
     if name == 'index.html':
@@ -83,8 +83,6 @@ def adapt(name, data):
         text = replace_once(text, '<script type="module" src="./main.js"></script>', '<noscript><p class="static-notice">请启用 JavaScript 来探索这座岛。<a href="../../projects/glass-atoll/#gallery">查看实机画面</a></p></noscript>\n    <script type="module" src="./main.js"></script>')
     elif name == 'style.css':
         text += '\n/* Portfolio-host navigation, without a loading dependency. */\n.portfolio-return{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;color:inherit;text-decoration:none;font-size:24px;border-radius:50%;background:rgba(255,255,255,.2)}\n.portfolio-return:hover{background:rgba(255,255,255,.45)}\n.portfolio-return:focus-visible{outline:2px solid currentColor;outline-offset:3px}\n.static-notice{position:fixed;z-index:100;inset:40% 20% auto;background:#f4faf7;padding:24px;color:#234747}\n'
-    elif name == 'quality-presets.js':
-        text = replace_once(text, "export const DEFAULT_QUALITY = 'medium';", "export const DEFAULT_QUALITY = 'low'; // Hosted default; all quality options remain available.")
     elif name == 'main.js':
         text = replace_once(text, '请用“启动网页.cmd”打开，并使用支持 WebGL 2 的浏览器。', '请刷新页面，或使用支持 WebGL 2 的浏览器。')
         # Allocate the selected preset immediately instead of creating an unused
@@ -150,7 +148,7 @@ for name in sorted(files):
             stale.unlink()
 
 manifest = {'schema': 'liss.atoll-static.v1', 'source': '../glass-atoll (local runtime snapshot)', 'originalsModified': False,
-    'adapters': ['Static host flag and works return link; no-JavaScript fallback.', 'Native-only display report is explicitly unavailable; pinned ACES targets remain available.', 'Optional server-generated ACES targets decline with a controlled reason.', 'Catalogue byte-plane gzip packs (.pk2, constant diffuse alpha omitted) with byte-identical decoding; HTTP, network and decoding failures fall back to the original catalogue.', 'Night sky assets load on demand (sun below 12 degrees, or star/moon views) instead of an unconditional idle preload.', 'Hosted default uses the existing low preset, with all quality options available; initial caustics allocate that preset directly.', 'Failure guidance refers to the browser rather than a local launcher.', 'Credits receive explicit HTML head/body for host metadata.'],
+    'adapters': ['Static host flag and works return link; no-JavaScript fallback.', 'Native-only display report is explicitly unavailable; pinned ACES targets remain available.', 'Optional server-generated ACES targets decline with a controlled reason.', 'Catalogue byte-plane gzip packs (.pk2, constant diffuse alpha omitted) with byte-identical decoding; HTTP, network and decoding failures fall back to the original catalogue.', 'Night sky assets load on demand (sun below 12 degrees, or star/moon views) instead of an unconditional idle preload.', 'Initial caustics allocate the selected quality preset directly (upstream default: medium).', 'Failure guidance refers to the browser rather than a local launcher.', 'Credits receive explicit HTML head/body for host metadata.'],
     'excluded': ['server.mjs', 'verification/', 'tools/', 'original recordings', 'reference downloads', 'native probes', 'workspace history'],
     'files': records}
 (SITE / 'glass-atoll-provenance.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')

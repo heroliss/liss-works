@@ -269,7 +269,16 @@ export function createIndirectLighting(THREE,{terrainHeight=()=>0,grove=null,sun
     pendingSH.fill(0);const nextIncident=[0,0,0],nextReflected=[0,0,0];let solves=0,hits=0,queries=0;
     for(let l=0;l<LOCAL_LIGHT_COUNT;l++){
       const s=parsed[l];if(!s.rawRGB.some(v=>v>0))continue;const cache=unitCache[l];
-      if(cache.key!==s.key||cache.epoch!==transientEpoch){const result=transientDiffuseResponse(surfels,probeWeights,s,visibility,{out:cache.response,scratch:transientScratch});cache.incidentPower=result.incidentPower;cache.reflectedPower=result.reflectedPower;cache.safetyScale=result.safetyScale;if(result.safetyScale<1)cache.capCount++;cache.unscaledIncidentPower=result.unscaledIncidentPower;cache.sourceSolidAngle=result.sourceSolidAngle;cache.minimumReceiverDistance=Number.isFinite(result.minimumReceiverDistance)?result.minimumReceiverDistance:null;cache.maxUnscaledPatchIncident=result.maxUnscaledPatchIncident;cache.key=s.key;cache.epoch=transientEpoch;queries+=result.visibilityQueries;solves++;}else hits++;
+      // Firework receiver proxies drift a little every frame. Their unit response
+      // depends on source position only, so a proxy that has moved by a few percent
+      // of its distance to the nearest receiver (and is far outside its own radius)
+      // reuses the last spatial solve; its current raw RGB still scales it exactly.
+      let reuse=cache.epoch===transientEpoch&&cache.key===s.key;
+      if(!reuse&&l>=4&&cache.epoch===transientEpoch&&cache.anchor&&cache.minimumReceiverDistance>0&&cache.anchorRange===s.range){
+        const reach=cache.minimumReceiverDistance,dx=s.position[0]-cache.anchor[0],dy=s.position[1]-cache.anchor[1],dz=s.position[2]-cache.anchor[2],limit=.04*reach;
+        reuse=dx*dx+dy*dy+dz*dz<=limit*limit&&Math.max(s.radius,cache.anchorRadius)<=.5*reach;
+      }
+      if(!reuse){cache.anchor=s.position;cache.anchorRadius=s.radius;cache.anchorRange=s.range;const result=transientDiffuseResponse(surfels,probeWeights,s,visibility,{out:cache.response,scratch:transientScratch});cache.incidentPower=result.incidentPower;cache.reflectedPower=result.reflectedPower;cache.safetyScale=result.safetyScale;if(result.safetyScale<1)cache.capCount++;cache.unscaledIncidentPower=result.unscaledIncidentPower;cache.sourceSolidAngle=result.sourceSolidAngle;cache.minimumReceiverDistance=Number.isFinite(result.minimumReceiverDistance)?result.minimumReceiverDistance:null;cache.maxUnscaledPatchIncident=result.maxUnscaledPatchIncident;cache.key=s.key;cache.epoch=transientEpoch;queries+=result.visibilityQueries;solves++;}else hits++;
       for(let p=0;p<18;p++)for(let c=0;c<3;c++)for(let k=0;k<4;k++)pendingSH[p*12+c*4+k]+=cache.response[p*12+c*4+k]*s.rawRGB[c];
       for(let c=0;c<3;c++){nextIncident[c]+=cache.incidentPower*s.rawRGB[c];nextReflected[c]+=cache.reflectedPower[c]*s.rawRGB[c];}
     }

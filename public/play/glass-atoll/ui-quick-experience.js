@@ -44,6 +44,7 @@ export function initQuickExperience({state,callbacks,submitFireworks,invoke,togg
     }
     const value=profile==='legacy'?`type:${SOURCE_TO_TYPE[f.type]||''}`:`profile:${profile}`;
     const represented=[...selection.options].some(option=>option.value===value);
+    for(const chip of document.querySelectorAll('[data-firework-option]'))chip.setAttribute('aria-pressed',String(chip.dataset.fireworkOption===value));
     if(represented)selection.value=value;
     else selection.selectedIndex=-1;
     const option=[...selection.options].find(option=>option.value===value);
@@ -53,7 +54,7 @@ export function initQuickExperience({state,callbacks,submitFireworks,invoke,togg
     if(current)current.textContent=f.autoLaunch?'随机燃放中':styleName;
     const toggle=document.getElementById('fireworks-toggle');
     toggle?.setAttribute('aria-label',`烟花样式：${styleName}，展开选择`);
-    launch.textContent=scheduled?'停止后续':'放烟花';
+    (launch.querySelector('span')||launch).textContent=scheduled?'停止后续':'放烟花';launch.classList.toggle('is-stopping',scheduled);
     launch.title=scheduled?'停止后续发射，保留空中烟花与烟尘':`发射${styleName}；暂停时会继续播放`;
     launch.setAttribute('aria-label',scheduled?'停止后续发射':`发射${styleName}`);
     selection.title=represented?'选择下一发的样式':'当前为详细设置中的其他实验样式；选择此处的样式可切换';
@@ -62,7 +63,7 @@ export function initQuickExperience({state,callbacks,submitFireworks,invoke,togg
     random.disabled=busy.has(random)||!hasCallback('onRandomFirework');
     auto.disabled=busy.has(auto)||!hasCallback('onFireworksChange')||!hasCallback('onStopFireworks');
     auto.setAttribute('aria-pressed',String(!!f.autoLaunch));
-    auto.textContent=f.autoLaunch?'持续随机中':'持续随机';
+    (auto.querySelector('span')||auto).textContent=f.autoLaunch?'燃放中':'持续随机';
     auto.title=f.autoLaunch?'停止后续发射，保留空中烟花与烟尘':`持续随机使用全部${FIREWORK_TYPES.length}种样式（含大型编排）；开始时恢复场景播放`;
     stop.disabled=busy.has(stop)||!hasCallback('onStopFireworks')||(!f.autoLaunch&&!queued);
     settings.disabled=typeof openSettings!=='function';

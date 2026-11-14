@@ -9,6 +9,10 @@ import {ENVIRONMENT_LIGHT_COUNT} from './environment-local-lights.js';
 import {oceanGridCoordinate,oceanDatumGLSL,OCEAN_EARTH_RADIUS,OCEAN_NEAR_EXTENT,OCEAN_FAR_EXTENT,OCEAN_REQUIRED_CAMERA_FAR} from './ocean-geometry.js';
 
 export const MAX_SUBMERGED_OBJECTS=36;
+// One surface light per burning firework. The two merged environment proxies
+// jump whenever a shell is added, expires or is re-paired, which made the
+// glitter and water glow teleport; per-event lights only move with their own stars.
+export const FIRE_SURFACE_LIGHTS=8;
 export function normaliseSubmergedObjects(objects=[]){
   if(!Array.isArray(objects)||objects.length>MAX_SUBMERGED_OBJECTS)throw new RangeError('Submerged object snapshots must contain at most36 bounds.');
   return Object.freeze(objects.map((object,index)=>{
@@ -48,7 +52,7 @@ export function createWater(renderer, scene, camera, sun, {terrainHeight,skyCube
     uRipples:{value:impulses}, uWind:{value:1},uHeightMap:{value:heightTexture},uSkyCube:{value:skyCube},
     uViewProjection:{value:new THREE.Matrix4()},uSandTexture:{value:sandTexture},uSandColor:{value:sandTexture},uSandMacroColor:{value:sandTexture},uSandFineTile:{value:2},uSandMacroTile:{value:30},uSandAlbedoGain:{value:1},uCaustic:{value:white},uSunIrradiance:{value:3.6},uCausticExtent:{value:64},
     uMeanCurrent:{value:new THREE.Vector2()},uCurrentOffset:{value:new THREE.Vector2()},uRippleOffsets:{value:Array.from({length:8},()=>new THREE.Vector2())},uHydroState:{value:zero},uHydroExtent:{value:72},uHydroResolution:{value:384},uHydroEnabled:{value:0},uDebugMode:{value:0},
-    uSkyCubeScale:{value:1},uGlintAA:{value:1},uGlintTemporalVariance:{value:waveStatistics.temporalSlopeVariance||0},
+    uSkyCubeScale:{value:1},uGlintAA:{value:1},uFireSurface:{value:1},uFireLightScale:{value:1},uFireLightPosition:{value:Array.from({length:FIRE_SURFACE_LIGHTS},()=>new THREE.Vector4())},uFireLightColour:{value:Array.from({length:FIRE_SURFACE_LIGHTS},()=>new THREE.Vector3())},uFireDisplayGain:{value:1},uGlintTemporalVariance:{value:waveStatistics.temporalSlopeVariance||0},
     uWaterAbsorption:{value:new THREE.Vector3(...opticsState.absorption)},uWaterScattering:{value:new THREE.Vector3(...opticsState.scattering)},
     uSubmergedCount:{value:0},uSubmergedBounds:{value:Array.from({length:MAX_SUBMERGED_OBJECTS},()=>new THREE.Vector4())}
   };
@@ -105,6 +109,9 @@ export function createWater(renderer, scene, camera, sun, {terrainHeight,skyCube
       uniform float uDebugMode;
       uniform float uGlintAA,uGlintTemporalVariance;
       uniform float uSkyCubeScale;
+      uniform float uFireSurface,uFireDisplayGain,uFireLightScale;
+      uniform vec4 uFireLightPosition[${FIRE_SURFACE_LIGHTS}];
+      uniform vec3 uFireLightColour[${FIRE_SURFACE_LIGHTS}];
       uniform vec2 uResolution;
       uniform mat4 uInverseProjection;
       uniform mat4 uCameraWorld;
@@ -214,7 +221,7 @@ export function createWater(renderer, scene, camera, sun, {terrainHeight,skyCube
         vec3 diffuseTransmission=exp(-extinction*(max(0.,oceanDatum(bottom.xz)-bottom.y)*1.3))*(1.-fresnelDielectric(1.));
         vec3 bedBounce=albedo*getIndirectIrradiance(bottom,bn)/3.14159265;
         vec3 bedLocal=vec3(0.);
-        ${localLights?`for(int i=0;i<${ENVIRONMENT_LIGHT_COUNT};i++){
+        ${localLights?`for(int i=0;i<4;i++){
           if(max(max(uLocalColour[i].r,uLocalColour[i].g),uLocalColour[i].b)<1e-12)continue;
           vec3 source=uLocalPosition[i].xyz;float depth=max(.001,oceanDatum(bottom.xz)-bottom.y),height=max(.02,source.y-oceanDatum(source.xz));vec2 horizontal=source.xz-bottom.xz;float span=length(horizontal);vec2 axis=horizontal/max(span,1e-6);
           // Planar Snell connection, three safeguarded Newton steps.
@@ -222,6 +229,19 @@ export function createWater(renderer, scene, camera, sun, {terrainHeight,skyCube
           for(int k=0;k<3;k++){float a=max(1e-6,1.-1.776889*sw*sw),b=max(1e-6,1.-sw*sw);float f=height*1.333*sw/sqrt(a)+depth*sw/sqrt(b)-span;float df=height*1.333/pow(a,1.5)+depth/pow(b,1.5);sw=clamp(sw-f/max(df,1e-6),0.,.7499);}
           float waterLength=depth/sqrt(max(1e-5,1.-sw*sw));vec2 entryXZ=bottom.xz+axis*(waterLength*sw);vec3 entry=vec3(entryXZ.x,oceanDatum(entryXZ),entryXZ.y);
           vec3 L;vec3 E=localIncident(entry,i,L);float airLength=max(.02,length(source-entry));vec3 toward=normalize(entry-bottom);float F=1.-fresnelDielectric(max(0.,L.y));
+          float spreading=1.776889*airLength*airLength/pow(1.333*airLength+waterLength,2.);
+          bedLocal+=albedo*E*max(0.,dot(bn,toward))*(F*spreading)*exp(-extinction*waterLength)/3.14159265;
+        }
+        // Fireworks light the seabed through one stable light per burning shell (see
+        // FIRE_SURFACE_LIGHTS), with the same planar Snell connection as the lamps.
+        for(int i=0;i<${FIRE_SURFACE_LIGHTS};i++){
+          if(uFireSurface<=0.||max(max(uFireLightColour[i].r,uFireLightColour[i].g),uFireLightColour[i].b)<1e-12)continue;
+          vec3 source=uFireLightPosition[i].xyz;float depth=max(.001,oceanDatum(bottom.xz)-bottom.y),height=max(.02,source.y-oceanDatum(source.xz));vec2 horizontal=source.xz-bottom.xz;float span=length(horizontal);vec2 axis=horizontal/max(span,1e-6);
+          // Planar Snell connection, three safeguarded Newton steps.
+          float sw=clamp(span/sqrt(span*span+pow(1.333*height+depth,2.)),0.,.749);
+          for(int k=0;k<3;k++){float a=max(1e-6,1.-1.776889*sw*sw),b=max(1e-6,1.-sw*sw);float f=height*1.333*sw/sqrt(a)+depth*sw/sqrt(b)-span;float df=height*1.333/pow(a,1.5)+depth/pow(b,1.5);sw=clamp(sw-f/max(df,1e-6),0.,.7499);}
+          float waterLength=depth/sqrt(max(1e-5,1.-sw*sw));vec2 entryXZ=bottom.xz+axis*(waterLength*sw);vec3 entry=vec3(entryXZ.x,oceanDatum(entryXZ),entryXZ.y);
+          vec3 fireBedTo=source-entry;float fireBedD2=dot(fireBedTo,fireBedTo);vec3 L=fireBedTo*inversesqrt(max(fireBedD2,1e-10)),E=uFireLightColour[i]*(uFireLightScale/max(fireBedD2,uFireLightPosition[i].w*uFireLightPosition[i].w));float airLength=max(.02,length(source-entry));vec3 toward=normalize(entry-bottom);float F=1.-fresnelDielectric(max(0.,L.y));
           float spreading=1.776889*airLength*airLength/pow(1.333*airLength+waterLength,2.);
           bedLocal+=albedo*E*max(0.,dot(bn,toward))*(F*spreading)*exp(-extinction*waterLength)/3.14159265;
         }`:''}
@@ -292,6 +312,36 @@ export function createWater(renderer, scene, camera, sun, {terrainHeight,skyCube
         float foam=(1.-smoothstep(.018,.16,vertical))*smoothstep(.4,.88,swash)*smoothstep(.35,.72,noise(p*3.+uTime*.1));
         vec3 foamLight=vec3(.94,.96,.9)*(uSunColor*uSunIrradiance*solarCloud*surfaceTreeVisibility*.25+uSkyColor*.20*uIntensity+localIrradiance(vWorld,vec3(0,1,0))*.25);
         ${localLights?`vec3 flashL;vec3 flashE=localIncident(vWorld,3,flashL);vec3 flashH=normalize(V+flashL);float flashA=max(.003,unresolvedSlopeVariance+.001),flashNH=max(0.,dot(n,flashH));float flashD=flashA/(3.14159265*pow(flashNH*flashNH*(flashA-1.)+1.,2.));float flashF=.02037+.97963*pow(1.-max(0.,dot(V,flashH)),5.);colour+=flashE*flashD*flashF*max(0.,dot(n,flashL))*.25/max(.05,facing);`:''}
+        ${localLights?`if(uFireSurface>0.){
+          // Firework light on open water. A smooth sea has no diffuse lobe, so
+          // what the eye reads as "lit water" is (1) glitter: wave facets that
+          // mirror the burst toward the camera, spread by the same slope
+          // statistics as the solar glint plus the burst's angular size, and
+          // (2) light that enters the water and is scattered back by the volume.
+          // The planar reflection keeps the sharp mirror image; this lobe adds
+          // the wave-stretched sheen it cannot represent (approximate overlap).
+          vec3 fireGlitter=vec3(0.),fireDown=vec3(0.);
+          for(int i=0;i<${FIRE_SURFACE_LIGHTS};i++){
+            if(max(max(uFireLightColour[i].r,uFireLightColour[i].g),uFireLightColour[i].b)<1e-12)continue;
+            vec3 fireTo=uFireLightPosition[i].xyz-vWorld;float fireD2=dot(fireTo,fireTo),fireR=uFireLightPosition[i].w;
+            vec3 fireL=fireTo*inversesqrt(max(fireD2,1e-10)),fireE=uFireLightColour[i]*(uFireLightScale/max(fireD2,fireR*fireR));
+            float fireUp=max(dot(fireL,macroNormal),0.);
+            fireDown+=fireE*fireUp*(1.-fresnelDielectric(fireUp));
+            float fireNoL=dot(n,fireL);if(fireNoL<=0.)continue;
+            vec3 fireH=normalize(V+fireL);float fireNoH=max(dot(n,fireH),0.),fireNH2=max(.0001,fireNoH*fireNoH);
+            float fireAngle=fireR/max(1.,sqrt(fireD2));
+            float fireA=aa+.125*fireAngle*fireAngle;
+            float fireD=exp((fireNH2-1.)/(fireA*fireNH2))/(3.14159265*fireA*fireNH2*fireNH2);
+            float fireAl=fireNoL/max(.0001,sqrt(fireA*(1.-fireNoL*fireNoL)));
+            float fireGl=fireAl>=1.6?1.:(3.535*fireAl+2.181*fireAl*fireAl)/(1.+2.276*fireAl+2.577*fireAl*fireAl);
+            fireGlitter+=fireE*(fireD*Gv*fireGl*fresnelDielectric(max(dot(V,fireH),0.))/(4.*NoV));
+          }
+          // Same display-referred shoulder as the firework sources themselves,
+          // so the sheen keeps its colour instead of clipping to white.
+          fireGlitter*=.4;float firePeak=max(max(fireGlitter.r,fireGlitter.g),fireGlitter.b)*uFireDisplayGain;
+          if(firePeak>1.2)fireGlitter*=inversesqrt(firePeak/1.2);
+          colour+=uFireSurface*(fireGlitter+(1.-fresnel)*(scattering/extinction)*fireDown*.079577*(1.-transmission));
+        }`:''}
         colour=mix(colour,foamLight,foam*.45);
         // Atmospheric perspective matches the pale, humid tropical horizon.
         // The shared HDR aerial pass handles the camera-to-water air segment.

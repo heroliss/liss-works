@@ -1,174 +1,20 @@
-/* The scene is the main surface. Controls share a small translucent edge. */
-:root {
-  --corner:20px;
-  --panel-surface:rgba(240,249,245,.72);
-  --panel-active:rgba(207,231,220,.66);
-  --panel-muted:#3f5e59;
-  --panel-edge:rgba(255,255,255,.5);
-  --ink:#193e3b;
-  --paper:rgba(240,249,245,.88);
+/* Fallbacks for the glass surfaces defined in style.css. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  :root { --glass: rgba(240, 249, 246, .93); --glass-solid: rgba(240, 249, 246, .97); }
+  body.night-view { --glass: rgba(16, 30, 35, .93); --glass-solid: rgba(16, 30, 35, .97); }
 }
-body.night-view {
-  --panel-surface:rgba(17,31,35,.72);
-  --panel-active:rgba(104,149,138,.23);
-  --panel-muted:#b7cdc4;
-  --panel-edge:rgba(201,231,219,.2);
-  --ink:#e5f0e9;
-  --paper:rgba(17,31,35,.88);
-}
-.time-panel,.control-panel,.view-drawer,.experience-dock,.performance-hud {
-  background:var(--panel-surface);
-  border:1px solid var(--panel-edge);
-  border-radius:10px;
-  box-shadow:0 4px 18px #102b2a0a;
-  -webkit-backdrop-filter:blur(14px);
-  backdrop-filter:blur(14px);
-}
-.control-panel:not(.collapsed),.view-drawer:not(.collapsed) { background:var(--paper); }
-.identity { gap:12px; }
-.wordmark { font-size:28px; }
-.identity-divider { height:18px; }
-.identity h1 { font-size:14px; letter-spacing:2px; }
-.identity .portfolio-return { pointer-events:auto; }
-.utilities { gap:4px; }
-.icon-button,.icon-button[aria-pressed=true] {
-  width:36px; height:36px; border:1px solid var(--panel-edge);
-  background:var(--panel-surface); color:var(--ink);
-  -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
-}
-.icon-button:hover { background:var(--paper); transform:none; }
-.panel-toggle,.drawer-heading,.control-panel .panel-toggle {
-  min-height:40px; padding:0 12px; font-size:12px; gap:8px;
-}
-.panel-heading { font-size:12px; }
-.panel-heading svg,.drawer-heading>svg:first-child { width:16px; height:16px; }
-.time-panel { top:84px; left:var(--corner); width:216px; }
-#quick-time-content { padding:0 10px 10px; }
-.time-panel .panel-caption,.quick-time-options small { display:none; }
-.quick-time-options { grid-template-columns:repeat(4,minmax(0,1fr)); gap:4px; }
-.quick-time-options button { min-height:40px; padding:5px 3px; text-align:center; }
-.quick-time-options button>span { font-size:12px; }
-#quick-time-status { min-height:0; margin:7px 1px 0; font-size:11px; line-height:1.55; }
-.view-drawer,.view-drawer.collapsed { top:220px; width:216px; max-height:calc(100svh - 240px); }
-body.time-panel-collapsed .view-drawer { top:134px; max-height:calc(100svh - 154px); }
-.view-drawer:not(.collapsed) { width:272px; }
-#views-content { max-height:calc(100svh - 280px); padding:0 10px 12px; }
-body.time-panel-collapsed #views-content { max-height:calc(100svh - 194px); }
-.view-gallery { grid-template-columns:repeat(2,minmax(0,1fr)); gap:6px; }
-.view-card { padding:4px; gap:2px; }
-.view-card-caption { display:none; }
-.view-card-name { font-size:12px; padding:3px 1px; }
-.view-card[aria-pressed=true] .view-card-name::after { font-size:10px; margin-left:4px; }
-.view-card-compact { min-height:40px; margin-top:4px; }
-.drawer-caption { margin-bottom:8px; }
-.view-extras { margin-top:10px; padding-top:8px; }
-.control-panel { top:84px; width:308px; max-height:calc(100svh - 104px); }
-.control-panel.collapsed { width:132px; }
-.settings-tabs { margin-inline:10px; padding-bottom:6px; }
-.settings-tabs button { min-height:34px; }
-.settings-scroll { max-height:calc(100svh - 214px); padding:0 14px 14px; }
-.settings-title { margin-block:12px; font-size:14px; }
-.settings-pane .range-row+.range-row { margin-top:0; }
-.settings-pane input[type=range] { height:34px; }
-.settings-pane .flow-hint { font-size:11px; line-height:1.65; }
-.experience-dock,.experience-dock.collapsed {
-  left:50%; right:auto; bottom:max(16px,env(safe-area-inset-bottom));
-  transform:translateX(-50%); width:min(680px,calc(100% - 48px)); padding:0 10px 10px;
-}
-.experience-dock.collapsed { width:360px; padding-bottom:0; }
-.experience-heading { gap:8px; }
-.experience-heading>.drawer-heading { min-height:42px; padding:0; }
-.experience-heading>.drawer-heading span { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-.experience-heading>.quick-launch-now { flex:0 0 auto; min-width:76px; min-height:34px; margin:0; font-size:12px; }
-.inline-diagnostic { min-height:36px; padding:0 10px; border:1px solid var(--line); border-radius:5px; background:transparent; color:var(--ink); font-size:12px; }
-.inline-diagnostic[aria-pressed=true] { background:var(--panel-active); }
-.control-guide { margin:14px 0; font-size:12px; line-height:1.7; }
-.control-guide>div { display:grid; grid-template-columns:80px minmax(0,1fr); gap:12px; padding:8px 0; border-bottom:1px solid var(--line); }
-.control-guide dt { color:var(--panel-muted); }
-.control-guide dd { margin:0; }
-.control-guide kbd { font:inherit; white-space:nowrap; }
-.touch-guide { display:none; font-size:12px; line-height:1.7; }
-@media(pointer:coarse) { .touch-guide { display:block; }.control-guide>div:nth-child(-n+3) { display:none; } }
-.playback-actions { gap:2px; }
-.playback-actions .small-icon { width:34px; height:36px; min-height:36px; }
-.quick-heading { justify-content:space-between; gap:10px; margin:0 0 6px; }
-.quick-firework-controls { gap:5px; }
-.quick-firework-controls select { width:164px; height:36px; background:transparent; }
-.quick-primary,.quick-secondary { min-height:36px; padding-inline:10px; }
-.quick-secondary { background:transparent; }
-#quick-firework-status { margin-top:6px; min-height:0; }
-.experience-dock .control-hint { display:none; }
-.place-note,body.fireworks-collapsed .place-note { bottom:var(--corner); max-width:240px; }
-.place-name { font-size:12px; }
-.place-note p { display:none; }
-.performance-hud,body.fireworks-collapsed .performance-hud { bottom:var(--corner); padding:6px 9px; }
-#toast,body.fireworks-collapsed #toast { bottom:82px; }
-body:not(.fireworks-collapsed) #toast { bottom:180px; }
-@supports not (backdrop-filter:blur(1px)) {
-  :root { --panel-surface:#edf6f0ed; }
-  body.night-view { --panel-surface:#132629ed; }
-}
-@media(max-width:600px) {
-  :root { --corner:12px; }
-  .masthead { top:max(12px,env(safe-area-inset-top)); align-items:center; }
-  .identity { gap:6px; }
-  .identity .wordmark,.identity-divider { display:none; }
-  .identity h1 { display:block; font-size:13px; letter-spacing:1px; white-space:nowrap; }
-  .identity .portfolio-return { width:32px; height:36px; font-size:21px; }
-  .utilities { gap:3px; }
-  .icon-button,.icon-button[aria-pressed=true] { width:36px; height:40px; border-radius:8px; }
-  .icon-button svg { width:17px; height:17px; }
-  .time-panel,.view-drawer,.view-drawer.collapsed,body.time-panel-collapsed .view-drawer,
-  .control-panel,.control-panel.collapsed {
-    top:max(72px,calc(env(safe-area-inset-top) + 60px));
-    width:calc(50% - 18px); min-width:0; max-height:none;
+@media (prefers-reduced-transparency: reduce) {
+  :root { --glass: #eef7f3; --glass-solid: #eef7f3; --sheen: transparent; }
+  body.night-view { --glass: #13262b; --glass-solid: #13262b; }
+  .utilities, .time-panel, .control-panel, .tray, .experience-dock, .performance-hud, .coach, #restore-ui, #toast, #throw-charge {
+    -webkit-backdrop-filter: none; backdrop-filter: none;
   }
-  .time-panel { left:12px; }
-  .view-drawer,.view-drawer.collapsed,body.time-panel-collapsed .view-drawer { left:auto; right:12px; }
-  .control-panel,.control-panel.collapsed { top:max(126px,calc(env(safe-area-inset-top) + 114px)); right:12px; width:132px; }
-  .panel-toggle,.drawer-heading,.control-panel .panel-toggle { min-height:44px; padding-inline:12px; }
-  .time-panel:not(.collapsed) { width:calc(100% - 24px); }
-  body:not(.time-panel-collapsed) .view-drawer,body:not(.time-panel-collapsed) .control-panel { visibility:hidden; pointer-events:none; }
-  .quick-time-options button { min-height:44px; }
-  body.views-expanded .view-drawer,body.panel-expanded .control-panel {
-    top:max(72px,calc(env(safe-area-inset-top) + 60px)); left:12px; right:12px;
-    width:auto; max-height:calc(100svh - 96px); min-width:0;
+}
+@media (forced-colors: active) {
+  .utilities, .time-panel, .control-panel, .tray, .experience-dock, .performance-hud, .coach, #restore-ui {
+    background: Canvas; color: CanvasText; border: 1px solid CanvasText; -webkit-backdrop-filter: none; backdrop-filter: none;
   }
-  #views-content,body.time-panel-collapsed #views-content,body.views-expanded #views-content { max-height:calc(100svh - 160px); }
-  .settings-scroll,body.panel-expanded .settings-scroll { max-height:calc(100svh - 224px); }
-  .settings-pane input[type=range] { height:40px; }
-  .experience-dock,.experience-dock.collapsed {
-    left:50%; right:auto; transform:translateX(-50%); width:calc(100% - 24px);
-    bottom:max(12px,env(safe-area-inset-bottom)); padding:0 10px 10px;
-  }
-  .experience-dock.collapsed { width:min(360px,calc(100% - 24px)); padding-bottom:0; }
-  .experience-heading>.drawer-heading { min-height:44px; }
-  .experience-heading>#quick-launch { min-width:72px; width:auto; min-height:40px; padding-inline:8px; }
-  .playback-actions .small-icon { width:40px; height:42px; min-height:42px; }
-  .quick-firework-controls select { flex:1 1 calc(100% - 110px); width:0; height:40px; }
-  #quick-launch { width:104px; min-height:40px; }
-  .quick-firework-controls .quick-secondary { flex:1; min-height:40px; padding-inline:4px; }
-  .quick-heading { display:flex; flex-wrap:wrap; }
-  #quick-firework-status { display:block; font-size:11px; }
-  .performance-hud,body.fireworks-collapsed .performance-hud { top:max(180px,calc(env(safe-area-inset-top) + 168px)); bottom:auto; left:auto; right:12px; }
-  body:not(.time-panel-collapsed) .performance-hud { visibility:hidden; pointer-events:none; }
-  .place-note { display:none; }
-}
-@media(max-height:560px) and (min-width:601px) {
-  :root { --corner:12px; }
-  .time-panel,.control-panel { top:64px; }
-  .view-drawer,.view-drawer.collapsed { top:200px; }
-  body.time-panel-collapsed .view-drawer { top:114px; }
-  .control-panel { max-height:calc(100svh - 80px); }
-  .settings-scroll { max-height:calc(100svh - 184px); }
-  .place-note { display:none; }
-}
-@media(prefers-reduced-transparency:reduce) {
-  :root { --panel-surface:#edf6f0; --paper:#edf6f0; }
-  body.night-view { --panel-surface:#132629; --paper:#132629; }
-}
-@media(forced-colors:active) {
-  .time-panel,.control-panel,.view-drawer,.experience-dock,.performance-hud,.icon-button {
-    background:Canvas; color:CanvasText; border:1px solid CanvasText; backdrop-filter:none;
+  .quick-primary, .chip[aria-pressed="true"], .dock-toggle[aria-pressed="true"], .quick-time-options button[aria-pressed="true"], .settings-tabs button[aria-selected="true"] {
+    forced-color-adjust: none; background: Highlight; color: HighlightText;
   }
 }

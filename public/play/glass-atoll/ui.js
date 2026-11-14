@@ -2,7 +2,7 @@ import {deriveWeather} from './weather.js';
 import {DEFAULT_QUALITY, QUALITY_PRESETS} from './quality-presets.js';
 import {FIREWORK_TYPES} from './fireworks-physics.js';
 import {initQuickExperience} from './ui-quick-experience.js';
-const viewLabels = {shore:'沙滩视角',lagoon:'浅海视角',aerial:'俯瞰视角',sandbar:'沙舌尽头',palm:'椰林树下',reef:'珊瑚浅滩',waterline:'贴近水面',island:'离岛全景',sun:'朝向太阳',moon:'朝向月亮',stars:'星河视角',fireworks:'烟花与离岛','fireworks-close':'岛边观烟花'};
+const viewLabels = {shore:'白沙岸边',lagoon:'玻璃浅海',aerial:'高空俯瞰',sandbar:'沙舌尽头',palm:'椰林树下',reef:'珊瑚浅滩',waterline:'贴近水面',island:'离岛全景',sun:'朝向太阳',moon:'朝向月亮',stars:'星河视角',fireworks:'海上远景','fireworks-close':'岛边近景','fireworks-beach':'沙滩仰望','fireworks-palms':'椰林剪影','fireworks-aerial':'高空俯瞰烟花'};
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
 // Explicit civil offset; never parse datetime-local in the browser's own zone.
@@ -173,7 +173,7 @@ export function initUI(callbacks = {}) {
   function updateFireworksUI() {
     const f=state.fireworks;$('#firework-type').value=f.type;
     const profile=f.effectProfile||'legacy';$('#firework-profile').value=profile;
-    $('#firework-profile-hint').textContent=profile==='three-heart-radiant120-v1'?'金色长尾，蓝外层、绿中层、红内芯分别燃尽；使用更强的参考发光，未按实物测光。120米为参考展开，低角度碰水会裁切花形。仅限单次燃放。':profile==='three-heart-scale120-v1'?'蓝外层、绿中层、红内芯。外层在爆开后2.5秒参考展开120米；这是创作标定，低角度碰水会裁切花形。仅限单次燃放。':profile==='three-heart-v1'?'蓝外层、绿中层、红内芯，分别燃尽。仅限单次燃放。':profile==='two-colour-v1'?'由红转绿，金色尾迹独立燃尽。仅限单次燃放。':`共${FIREWORK_TYPES.length}种烟花；随机燃放包含常用样式与大型编排。`;
+    $('#firework-profile-hint').textContent=profile==='three-heart-radiant120-v1'?'金色长尾，蓝外层、绿中层、红内芯分别燃尽。120 米为参考展开，低角度碰水会裁切花形。仅限单次燃放。':profile==='three-heart-scale120-v1'?'蓝外层、绿中层、红内芯。外层在爆开后2.5秒参考展开120米；这是创作标定，低角度碰水会裁切花形。仅限单次燃放。':profile==='three-heart-v1'?'蓝外层、绿中层、红内芯，分别燃尽。仅限单次燃放。':profile==='two-colour-v1'?'由红转绿，金色尾迹独立燃尽。仅限单次燃放。':`共${FIREWORK_TYPES.length}种烟花；随机燃放包含常用样式与大型编排。`;
     const type=FIREWORK_TYPES.find(t=>t.id===f.type)||FIREWORK_TYPES[0];
     const complex=profile==='legacy'&&type.collection==='large-choreographed',description=$('#firework-complex-description');
     description.hidden=!complex;description.textContent=complex?`编排约${type.burn}秒。${type.description}`:'';
@@ -286,6 +286,7 @@ export function initUI(callbacks = {}) {
     for(const [ids,keys]of [[['firework-interval-min','firework-interval-max'],['intervalMinSeconds','intervalMaxSeconds']],[['firework-auto-tilt-min','firework-auto-tilt-max'],['automaticTiltMinDegrees','automaticTiltMaxDegrees']]])for(const id of ids)$('#'+id).addEventListener('change',()=>submitFireworks(Object.fromEntries(keys.map((key,index)=>[key,$('#'+ids[index]).value===''?NaN:Number($('#'+ids[index]).value)]))));
     for(const [id,key]of [['firework-auto','autoLaunch'],['firework-direction','autoDirection'],['firework-frame','autoFrame'],['persistent-smoke','persistentSmoke'],['firework-cloud-light','cloudIllumination'],['smoke-resolved-light','resolvedSmokeLighting']])$('#'+id).addEventListener('change',event=>submitFireworks({[key]:event.target.checked}));
     $('#clear-smoke').addEventListener('click',()=>invoke('onClearSmoke'));
+    $('#firework-air-glow').addEventListener('input',event=>{const value=Number(event.target.value);$('#firework-air-glow-output').textContent=`${value}%`;fillRange('firework-air-glow');invoke('onFireworkAirGlow',value/100);});fillRange('firework-air-glow');
     $('#smoke-gpu').addEventListener('change',async event=>{const result=await invoke('onSmokeGPUChange',event.target.checked);if(result)state.fireworks.gpuTransmission={requested:result.requested,available:result.support?.passed??true,effective:result.enabled};updateFireworksUI();});
     $('#firework-brightness').addEventListener('input',event=>submitFireworks({intensityScale:Number(event.target.value)}));
     $('#firework-blackout').addEventListener('change',event=>submitFireworks({intensityScale:event.target.checked?0:lastNonZeroFireworkIntensity}));
@@ -300,7 +301,7 @@ export function initUI(callbacks = {}) {
   const compactLayout=()=>window.matchMedia('(max-width: 600px)').matches;
   function setPanel(open) {
     open=!!open;
-    if(open&&compactLayout()){setViews(false);setTimePanel(false);}
+    if(open){setViews(false);setFireworksPanel(false);}
     if(!open&&$('#panel-content').contains(document.activeElement))$('#panel-toggle').focus({preventScroll:true});
     state.panelOpen = open;
     $('#panel-toggle').setAttribute('aria-expanded', String(open));
@@ -310,7 +311,7 @@ export function initUI(callbacks = {}) {
   }
   function setViews(open) {
     open=!!open;
-    if(open&&compactLayout()){setPanel(false);setTimePanel(false);}
+    if(open){setPanel(false);setFireworksPanel(false);}
     if(!open&&$('#views-content').contains(document.activeElement))$('#views-toggle').focus({preventScroll:true});
     state.viewsOpen=open;
     $('#views-toggle').setAttribute('aria-expanded',String(open));
@@ -321,18 +322,15 @@ export function initUI(callbacks = {}) {
   const compactLowQuery=window.matchMedia('(max-width: 600px) and (max-height: 600px)');
   const compactLowLayout=()=>compactLowQuery.matches;
   function setTimePanel(open){
-    open=!!open;
-    if(open&&compactLayout()){setPanel(false);setViews(false);setTimePanel(false);setFireworksPanel(false);}
-    if(open&&compactLowLayout())setFireworksPanel(false);
-    if(!open&&$('#quick-time-content').contains(document.activeElement))$('#time-panel-toggle').focus({preventScroll:true});
-    state.timePanelOpen=open;
-    $('#time-panel-toggle').setAttribute('aria-expanded',String(open));
-    $('#quick-time-content').hidden=!open;$('#time-panel').classList.toggle('collapsed',!open);
-    document.body.classList.toggle('time-panel-collapsed',!open);
+    // The four time presets are a permanent top-centre control; the former
+    // collapsible drawer is kept only as a compatible no-op entry point.
+    state.timePanelOpen=true;
+    $('#quick-time-content').hidden=false;$('#time-panel').classList.remove('collapsed');
+    document.body.classList.remove('time-panel-collapsed');
   }
   function setFireworksPanel(open){
     open=!!open;
-    if(open&&compactLowLayout())setTimePanel(false);
+    if(open){setPanel(false);setViews(false);}
     if(!open&&$('#fireworks-content').contains(document.activeElement))$('#fireworks-toggle').focus({preventScroll:true});
     state.fireworksOpen=open;
     $('#fireworks-toggle').setAttribute('aria-expanded',String(open));
@@ -380,6 +378,8 @@ export function initUI(callbacks = {}) {
     state.view = name;
     document.querySelectorAll('[data-view]').forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.view === name)));
     $('#view-label').textContent = viewLabels[name];
+    const thumbnail=document.querySelector(`.view-card[data-view="${name}"] img`),dockThumb=$('#dock-view-thumb');
+    if(dockThumb){dockThumb.hidden=!thumbnail||thumbnail.hidden;if(thumbnail&&!thumbnail.hidden)dockThumb.src=thumbnail.src;}
     $('#view-preset').value = name;
   }
   function updateSunUI() {
@@ -441,7 +441,6 @@ export function initUI(callbacks = {}) {
 
   $('#panel-toggle').addEventListener('click', () => setPanel(!state.panelOpen));
   $('#views-toggle').addEventListener('click',()=>setViews(!state.viewsOpen));
-  $('#time-panel-toggle').addEventListener('click',()=>setTimePanel(!state.timePanelOpen));
   $('#fireworks-toggle').addEventListener('click',()=>setFireworksPanel(!state.fireworksOpen));
   $('#stats-toggle').addEventListener('click',()=>{state.statsVisible=!state.statsVisible;updatePerformanceUI();});
   for(const tab of document.querySelectorAll('[data-category]'))tab.addEventListener('click',()=>setCategory(tab.dataset.category));
@@ -457,7 +456,9 @@ export function initUI(callbacks = {}) {
   compactLowQuery.addEventListener?.('change',event=>{
     if(event.matches){setTimePanel(false);setFireworksPanel(false);}
   });
-  const openHelp=()=>{setCategory('navigation');setPanel(true);$('#tab-navigation').focus({preventScroll:true});};
+  const coach=$('#coach');let coachTimer=0;
+  const showCoach=(seconds=16)=>{coach.classList.remove('seen');clearTimeout(coachTimer);coachTimer=setTimeout(()=>coach.classList.add('seen'),seconds*1000);};
+  const openHelp=()=>{setCategory('navigation');setPanel(true);$('#tab-navigation').focus({preventScroll:true});showCoach();};
   $('#help-toggle').addEventListener('click',openHelp);
   document.addEventListener('keydown',event=>{if(event.key==='?'&&!/^(INPUT|TEXTAREA|SELECT)$/.test(event.target.tagName)&&!event.target.isContentEditable){event.preventDefault();openHelp();}});
   $('#hide-ui').addEventListener('click', () => setHidden(true));
@@ -655,6 +656,28 @@ export function initUI(callbacks = {}) {
   $('#quality').disabled=typeof callbacks.onQualityPreset!=='function'&&typeof callbacks.onQuality!=='function';
   $('#lamp-select').disabled=$('#lamp-linked').disabled=typeof callbacks.onLampChange!=='function';
   quickExperience=initQuickExperience({state,callbacks,submitFireworks,invoke,togglePause,notify,openSettings(category){setCategory(category);setPanel(true);$('#tab-'+category).focus({preventScroll:true});}});
+  // Shell wiring: sheet/tray dismissal, style chips, filmstrip wheel, first-run hints.
+  $('#panel-close').addEventListener('click',()=>setPanel(false));
+  $('#time-more').addEventListener('click',()=>{setCategory('time');setPanel(true);$('#tab-time').focus({preventScroll:true});});
+  for(const button of document.querySelectorAll('[data-close-tray]'))button.addEventListener('click',()=>button.dataset.closeTray==='views'?setViews(false):setFireworksPanel(false));
+  $('#scene').addEventListener('pointerdown',()=>{setViews(false);setFireworksPanel(false);if(ready&&!coach.classList.contains('seen'))showCoach(1.6);},{passive:true});
+  $('.view-gallery').addEventListener('wheel',event=>{const strip=event.currentTarget;if(strip.scrollWidth<=strip.clientWidth||Math.abs(event.deltaY)<=Math.abs(event.deltaX))return;event.preventDefault();strip.scrollLeft+=event.deltaY;},{passive:false});
+  {
+    const quickSelect=$('#quick-firework-type'),host=$('#firework-chips');
+    for(const group of quickSelect.querySelectorAll('optgroup')){
+      const section=document.createElement('div'),title=document.createElement('span');
+      section.className='chip-group';section.setAttribute('role','group');section.setAttribute('aria-label',group.label);
+      title.className='chip-group-label';title.textContent=group.label.replace('单发','');section.append(title);
+      for(const option of group.querySelectorAll('option')){
+        const chip=document.createElement('button');chip.type='button';chip.className='chip';chip.dataset.fireworkOption=option.value;
+        chip.textContent=option.textContent.replace('（实验）','').trim();chip.setAttribute('aria-pressed','false');
+        chip.addEventListener('click',()=>{if(quickSelect.disabled)return;quickSelect.value=option.value;quickSelect.dispatchEvent(new Event('change',{bubbles:true}));});
+        section.append(chip);
+      }
+      host.append(section);
+    }
+    quickSelect.hidden=true;quickExperience.syncFireworks();
+  }
   updateQualityUI();updateTimeUI();updateLampUI();updateFlashlightUI();updateFireworksUI();
   updateGraphicsUI();updateSeaUI();
   setPanel(state.panelOpen);setViews(state.viewsOpen);setCategory(state.activeCategory);updatePerformanceUI();
@@ -677,7 +700,7 @@ export function initUI(callbacks = {}) {
       ready = true;
       const loading = $('#loading');
       if (loading) { loading.classList.add('leaving'); setTimeout(() => loading.remove(), 850); }
-      document.body.classList.add('is-ready');
+      document.body.classList.add('is-ready');showCoach();
     },
     syncGraphics(value){Object.assign(state.graphics,value);updateGraphicsUI();},
     syncSea(value={}){for(const [key,max]of [['swellHeight',.32],['windSea',1.5],['clarity',1]])if(Number.isFinite(value[key]))state.sea[key]=clamp(value[key],0,max);updateSeaUI();},

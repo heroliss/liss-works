@@ -9,7 +9,7 @@ import {validatePoweredOpticalShutter,partitionPoweredOpticalIntervals} from './
 import {getFireworkShowEnvelope,getScaledFireworkLiveEnvelope} from './firework-show-envelope.js';
 import {sampleComplexStyle,sampleComplexTailStyle} from './complex-fireworks-style.js';
 import {isComplexFirework} from './complex-fireworks.js';
-import {createReceiverLightClusterBuilder} from './firework-receiver-lighting.js';
+import {createReceiverLightClusterBuilder,createReceiverLighting} from './firework-receiver-lighting.js';
 // A charge flash primarily illuminates its surroundings. Its tiny visible
 // core is a separate authored camera representation; the light ledger is full.
 export const OPTICAL_FLASH_CORE_VISIBILITY=.0025;
@@ -424,7 +424,7 @@ export function createFireworks(THREE,{terrainHeight=()=>0,origin=[29,0,7],seed=
   geometry.instanceCount=0;
   const uniforms={uViewProjection:{value:new THREE.Matrix4()},uProjection:{value:new THREE.Matrix4()},uEye:{value:new THREE.Vector3()},uSize:{value:new THREE.Vector2(1,1)},uDepth:{value:dummy},
     uSourceTransmission:{value:dummy},uSourceTransmissionSize:{value:new THREE.Vector2(1,1)},uSourceTransmissionEnabled:{value:0},
-    uTrailAdaptive:{value:trailIntegration==='adaptive'?1:0},uFirelightSigmaPixels:{value:.28},uStorageScale:{value:1},uRawPerCandela:{value:3.6e-5},uPlaneY:{value:0},uNear:{value:.1},uFar:{value:30000},
+    uTrailAdaptive:{value:trailIntegration==='adaptive'?1:0},uFirelightSigmaPixels:{value:.28},uStorageScale:{value:1},uRawPerCandela:{value:3.6e-5},uDisplayGain:{value:1},uHighlightKnee:{value:6},uHighlightPower:{value:.5},uPlaneY:{value:0},uNear:{value:.1},uFar:{value:30000},
     uFocalMm:{value:28},uAperture:{value:8},uFocus:{value:60},uSensorHeightMm:{value:24},uDof:{value:0},uShutter:{value:1/120},uLegacyShutter:{value:1/120},uVignette:{value:0},
     uAirEnabled:{value:0},uBetaR:{value:new THREE.Vector3()},uBetaME:{value:new THREE.Vector3()},uBetaMS:{value:new THREE.Vector3()},uHeights:{value:new THREE.Vector2(8000,1200)},uG:{value:.76},uSunDirection:{value:new THREE.Vector3(0,1,0)},uRawSunRGB:{value:new THREE.Vector3()},
   };
@@ -504,7 +504,7 @@ export function createFireworks(THREE,{terrainHeight=()=>0,origin=[29,0,7],seed=
     }`;
   const fragment=/* glsl */`precision highp float;precision highp int;
     uniform vec3 uEye,uBetaR,uBetaME,uBetaMS,uSunDirection,uRawSunRGB;uniform vec2 uSize,uHeights;
-    uniform float uStorageScale,uRawPerCandela,uPlaneY,uAirEnabled,uG,uVignette,uFocalMm,uSensorHeightMm;
+    uniform float uStorageScale,uRawPerCandela,uPlaneY,uAirEnabled,uG,uVignette,uFocalMm,uSensorHeightMm,uDisplayGain,uHighlightKnee,uHighlightPower;
     #ifndef REFLECTION_PASS
       uniform highp sampler2D uDepth;
     #endif
@@ -624,6 +624,13 @@ export function createFireworks(THREE,{terrainHeight=()=>0,origin=[29,0,7],seed=
         }
         rgb=T*vColour*(vShape.z*uRawPerCandela/max(vDistance*vDistance*vOmega,1e-12))*kernel;
         }
+        // Camera highlight response (display-referred, emitters only). A star's
+        // pixel radiance can exceed display white by several orders; a linear
+        // sensor plus the shared PSF then turns a whole burst into one clipped
+        // ball. Above the knee the per-source radiance follows a power shoulder,
+        // keeping hue and a hot core. Receiver lighting, smoke lighting and the
+        // radiance bound still use the uncompressed reference candela.
+        if(uHighlightKnee>0.){float peak=max(max(rgb.r,rgb.g),rgb.b)*uStorageScale*uDisplayGain;if(peak>uHighlightKnee)rgb*=pow(peak/uHighlightKnee,uHighlightPower-1.);}
       }else{float r2=dot(vOffset,vOffset)/(vSigma*vSigma);if(r2>13.4)discard;float tau=vShape.w*exp(-.5*r2)*vOriginalSigma*vOriginalSigma/(vSigma*vSigma);alpha=1.-exp(-tau);rgb=T*(vSmokeLight*alpha)+S*alpha;}
       // ONE / ONE_MINUS_SRC_ALPHA: source RGB already premultiplied; a pure
       // emitter alpha=0 must retain its energy and the sky behind it.
@@ -634,8 +641,8 @@ export function createFireworks(THREE,{terrainHeight=()=>0,origin=[29,0,7],seed=
     }`;
   function material(reflection){return new THREE.RawShaderMaterial({name:reflection?'Finite reflected effects, water-hit air':'Finite direct effects, manual opaque depth',glslVersion:THREE.GLSL3,defines:reflection?{REFLECTION_PASS:1}:{},uniforms,vertexShader:vertex,fragmentShader:fragment,transparent:true,depthTest:reflection,depthWrite:false,toneMapped:false,blending:THREE.CustomBlending,blendEquation:THREE.AddEquation,blendSrc:THREE.OneFactor,blendDst:THREE.OneMinusSrcAlphaFactor,blendEquationAlpha:THREE.AddEquation,blendSrcAlpha:THREE.OneFactor,blendDstAlpha:THREE.OneMinusSrcAlphaFactor});}
   const mainMaterial=material(false),reflectionMaterial=material(true),mesh=new THREE.Mesh(geometry,mainMaterial);mesh.name='Depth-sorted finite particles, sparks, grey smoke';mesh.frustumCulled=false;effectsScene.add(mesh);
-  const receiverClusterBuilder=createReceiverLightClusterBuilder();
-  let records=[],recordsGeneration=0,quality={trailSegments:10},disposed=false,lastRender={instances:0},lastTrailSampling=null,trailIntegrationRequested=trailIntegration!=='legacy8',warnings=[],boundCache=null,boundsCache=null,boundsKey='',clusterCache=null,receiverClusterCache=null;
+  const receiverClusterBuilder=createReceiverLightClusterBuilder(),receiverLighting=createReceiverLighting();let receiverLightingCache=null;
+  let eventClusterCache=[],records=[],recordsGeneration=0,quality={trailSegments:10},disposed=false,lastRender={instances:0},lastTrailSampling=null,trailIntegrationRequested=trailIntegration!=='legacy8',warnings=[],boundCache=null,boundsCache=null,boundsKey='',clusterCache=null,receiverClusterCache=null;
   const lastRenderByView={main:null,reflection:null};
   function recordViewRender(info){lastRender=info;lastRenderByView[info.reflection?'reflection':'main']=info;}
   const sourceProjectionCache=new WeakMap(),uploadProjectionCache=new WeakMap(),sourceBoundScratch=sourceBoundOutput(),radianceBins=new Float64Array(32*32);
@@ -745,9 +752,10 @@ export function createFireworks(THREE,{terrainHeight=()=>0,origin=[29,0,7],seed=
       for(let j=0;j<tail.length;j++){const first=body.burnProfile&&tail[j].sourceAge<=life?Math.max(0,currentTailStart):0,airIndex=currentAirTail?.indexOf(tail[j])??-1,before=airIndex>=0?currentAirTail[Math.max(0,airIndex-1)]:tail[Math.max(first,j-1)],after=airIndex>=0?currentAirTail[Math.min(currentAirTail.length-1,airIndex+1)]:tail[Math.min(tail.length-1,j+1)],one=before.position,two=after.position,weight=airIndex>=0?(airIndex===0||airIndex===currentAirTail.length-1?1:.5):(j===first||j===tail.length-1?1:.5);tail[j].stretch=two.map((v,i)=>(v-one[i])*weight);if(body.burnProfile){tail[j].stretchBodies=[before.emberBody,after.emberBody];tail[j].stretchFieldNodes=[before.tailFieldNode,after.tailFieldNode];tail[j].stretchWeight=weight;}records.push(tail[j]);}
     }
     if(recordsGeneration>=Number.MAX_SAFE_INTEGER)throw new RangeError('Firework record generation exhausted');recordsGeneration++;
-    boundCache=null;clusterCache=null;receiverClusterCache=null;
+    boundCache=null;clusterCache=null;receiverClusterCache=null;receiverLightingCache=null;
   }
-  function getLightClusters(){if(clusterCache)return clusterCache;const headsByEvent=new Map();for(const p of records)if(p.kind==='star'){let heads=headsByEvent.get(p.eventId);if(!heads){heads=[];headsByEvent.set(p.eventId,heads);}heads.push(p);}return clusterCache=reduceFireworkLightClusters(simulation.active.map(event=>{
+  function getEventLightClusters(){getLightClusters();return eventClusterCache;}
+  function getLightClusters(){if(clusterCache)return clusterCache;const headsByEvent=new Map();for(const p of records)if(p.kind==='star'){let heads=headsByEvent.get(p.eventId);if(!heads){heads=[];headsByEvent.set(p.eventId,heads);}heads.push(p);}return clusterCache=reduceFireworkLightClusters(eventClusterCache=simulation.active.map(event=>{
     const heads=headsByEvent.get(event.id)||[];
     let I=0,centre=[0,0,0],rgb=[0,0,0];for(const p of heads){I+=p.intensity;for(let c=0;c<3;c++){centre[c]+=p.position[c]*p.intensity;rgb[c]+=referenceRGB(p,c);}}
     if(I>1e-8){centre=centre.map(x=>x/I);rgb=rgb.map(x=>x/I);}else{centre=[...event.burstPosition];rgb=[1,1,1];}
@@ -894,18 +902,22 @@ export function createFireworks(THREE,{terrainHeight=()=>0,origin=[29,0,7],seed=
   function fillRecords(camera,air,rawPerCandela,shutter,medium=null,legacySmoke=true,reflection=false,planeY=0,optics={},transmissionBatch=null,target=null,prepared=null){
     const batchRequested=!!transmissionBatch&&!!medium;
     const {ordered,stats,eye,clusters,vectorSources,activeRayCount,rays}=prepared??prepareSourceRows(camera,rawPerCandela,shutter,legacySmoke,reflection,planeY,optics,batchRequested);
+    const temporal=[arrays.temporal0,arrays.temporal1,arrays.temporal2,arrays.temporal3,arrays.temporal4,arrays.temporal5],zero3=[0,0,0],colourArray=arrays.colour,shapeArray=arrays.shape;
     uniforms.uSourceTransmissionEnabled.value=0;uniforms.uSourceTransmission.value=dummy;uniforms.uSourceTransmissionSize.value.set(1,1);
     for(let i=0;i<ordered.length;i++){
-      const p=ordered[i].p,smoke=p.kind==='smoke',light=smoke?smokeLighting(p,eye,air,rawPerCandela,clusters):[0,0,0];
-      arrays.centre.set(p.position,i*3);arrays.velocity.set(p.rasterVelocity??p.velocity??[0,0,0],i*3);arrays.stretch.set(p.stretch||[0,0,0],i*3);arrays.colour.set(p.vectorEmission?[1,1,1]:p.colour,i*3);arrays.smokeLight.set(light,i*3);arrays.shape.set([smoke?1:0,p.radius,p.unmodulatedIntensity??p.intensity??0,p.vectorEmission?-1:p.opticalDepth||0],i*4);
+      // Same values as before, written without per-record temporary arrays.
+      const p=ordered[i].p,smoke=p.kind==='smoke',light=smoke?smokeLighting(p,eye,air,rawPerCandela,clusters):zero3,i3=i*3,i4=i*4;
+      arrays.centre.set(p.position,i3);arrays.velocity.set(p.rasterVelocity??p.velocity??zero3,i3);arrays.stretch.set(p.stretch||zero3,i3);
+      if(p.vectorEmission)colourArray[i3]=colourArray[i3+1]=colourArray[i3+2]=1;else colourArray.set(p.colour,i3);
+      arrays.smokeLight.set(light,i3);shapeArray[i4]=smoke?1:0;shapeArray[i4+1]=p.radius;shapeArray[i4+2]=p.unmodulatedIntensity??p.intensity??0;shapeArray[i4+3]=p.vectorEmission?-1:p.opticalDepth||0;
       if(medium&&!smoke&&!batchRequested){stats.mediumQueries++;const T=typeof medium.writeTransmission==='function'?medium.writeTransmission(eye,p.position,sourceTransmissionScratch,{reflection,planeY}):medium.transmission(eye,p.position,{reflection,planeY});for(let c=0;c<3;c++)arrays.colour[i*3+c]*=T[c];}
-      if(p.vectorEmission){for(let k=0;k<24;k++)arrays['temporal'+Math.floor(k/4)][i*4+k%4]=p.rgbTaps[k];}
+      if(p.vectorEmission){for(let k=0;k<24;k++)temporal[k>>2][i4+(k&3)]=p.rgbTaps[k];}
       else{const legacyShutter=optics.legacyShutterSeconds??shutter;
         // A zero-duration exposure samples one physical instant in every bin.
         // Reflections use it for scalar sources; retain all eight shader inputs.
-        if(legacyShutter===0){const weight=!p.sourceBody?1:bodyEmissionEnvelope(p.sourceBody,p.sourceAge);arrays.temporal0.fill(weight,i*4,i*4+4);arrays.temporal1.fill(weight,i*4,i*4+4);}
-        else for(let k=0;k<8;k++){const age=p.sourceAge+((k+.5)/8-.5)*legacyShutter,body=p.sourceBody;const weight=!body?1:bodyEmissionEnvelope(body,age);arrays[k<4?'temporal0':'temporal1'][i*4+(k%4)]=weight;}
-        for(let k=2;k<6;k++)arrays['temporal'+k].fill(0,i*4,i*4+4);}
+        if(legacyShutter===0){const weight=!p.sourceBody?1:bodyEmissionEnvelope(p.sourceBody,p.sourceAge);temporal[0].fill(weight,i4,i4+4);temporal[1].fill(weight,i4,i4+4);}
+        else{const body=p.sourceBody;for(let k=0;k<8;k++)temporal[k>>2][i4+(k&3)]=!body?1:bodyEmissionEnvelope(body,p.sourceAge+((k+.5)/8-.5)*legacyShutter);}
+        for(let k=2;k<6;k++)temporal[k].fill(0,i4,i4+4);}
     }
     let batchResult=null,batchFailure=null,snapshot=null,requestVersion=null;
     const cameraKey=eye.map(v=>Object.is(v,-0)?'-0':String(v)).join(',');
@@ -993,7 +1005,7 @@ export function createFireworks(THREE,{terrainHeight=()=>0,origin=[29,0,7],seed=
     get sourceVisibility(){return sourceVisibility;},
     setSourceVisibility(value){const next=validateSourceVisibility(value);if(next!==sourceVisibility)invalidatePreparedSourceViews('source-visibility-change');sourceVisibility=next;return sourceVisibility;},
     get tailColourMode(){return tailColourMode;},
-    get photometryMode(){return photometryMode;},
+    get photometryMode(){return photometryMode;},setHighlightResponse({knee=6,power=.5}={}){if(!Number.isFinite(knee)||knee<0||!Number.isFinite(power)||power<=0||power>1)throw new RangeError('Highlight response requires knee>=0 and 0<power<=1');uniforms.uHighlightKnee.value=knee;uniforms.uHighlightPower.value=power;return{knee,power};},get highlightResponse(){return{knee:uniforms.uHighlightKnee.value,power:uniforms.uHighlightPower.value};},
     get thermalEmittingRadiusMm(){return thermalEmittingRadiusMm;},
     configure(patch={}){if(patch.automaticDirection!==undefined)patch={...patch,autoDirection:patch.automaticDirection};const nextClusterModel=patch.clusterModel===undefined?clusterModel:validateClusterModel(patch.clusterModel),nextTrailIntegration=patch.trailIntegration===undefined?trailIntegration:validateTrailIntegration(patch.trailIntegration),nextTailColourMode=patch.tailColourMode===undefined?tailColourMode:validateTailColourMode(patch.tailColourMode),nextPhotometryMode=patch.photometryMode===undefined?photometryMode:validatePhotometryMode(patch.photometryMode),nextThermalRadius=patch.thermalEmittingRadiusMm===undefined?thermalEmittingRadiusMm:validateThermalRadius(patch.thermalEmittingRadiusMm),{clusterModel:ignoredClusterModel,trailIntegration:ignoredTrailIntegration,tailColourMode:ignoredTailColourMode,photometryMode:ignoredPhotometryMode,thermalEmittingRadiusMm:ignoredThermalRadius,...physicsPatch}=patch;if(nextPhotometryMode!=='reference'&&((physicsPatch.effectProfile??simulation.settings.effectProfile??'legacy')!=='legacy'||simulation.active.some(e=>e.effectProfile)))throw new RangeError('Layer profiles require reference photometry; greybody is a separate experiment');const state=simulation.configure(physicsPatch);invalidatePreparedSourceViews('configure');if(patch.tailColourMode!==undefined)tailColourModeRequested=true;if(patch.photometryMode!==undefined||patch.thermalEmittingRadiusMm!==undefined)photometryRequested=true;const colourChanged=nextTailColourMode!==tailColourMode,photometryChanged=nextPhotometryMode!==photometryMode||nextThermalRadius!==thermalEmittingRadiusMm;tailColourMode=nextTailColourMode;photometryMode=nextPhotometryMode;thermalEmittingRadiusMm=nextThermalRadius;if(photometryChanged)thermalBodyScale=photometryMode==='thermal-greybody'?thermalGreybodyCandela(thermalEmittingRadiusMm)/THERMAL_GREYBODY_PROFILE.referenceAreaCandela:1;if(colourChanged||photometryChanged)updateRecords();if(nextTrailIntegration!==trailIntegration)lastTrailSampling=null;if(patch.trailIntegration!==undefined)trailIntegrationRequested=true;trailIntegration=nextTrailIntegration;uniforms.uTrailAdaptive.value=trailIntegration==='adaptive'?1:0;if(nextClusterModel!==clusterModel){clusterModel=nextClusterModel;clusterCache=null;boundCache=null;}const az=state.autoDirection?Math.atan2(base[0],-base[2]):state.azimuth*Math.PI/180,axis=new THREE.Vector3(Math.sin(az)*Math.cos(state.elevation*Math.PI/180),Math.sin(state.elevation*Math.PI/180),-Math.cos(az)*Math.cos(state.elevation*Math.PI/180));aim.rotation.set(0,0,0);aim.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),axis);launchOrigin[0]=base[0]+axis.x*.66;launchOrigin[1]=base[1]+.17+axis.y*.66;launchOrigin[2]=base[2]+axis.z*.66;return{...state,clusterModel,...(trailIntegration==='adaptive'?{trailIntegration}: {}),...(tailColourMode==='cooling'?{tailColourMode}: {}),...(photometryMode==='thermal-greybody'?{photometryMode,thermalEmittingRadiusMm}: {})};},
     launch(options={}){if(photometryMode!=='reference'&&(options.effectProfile??simulation.settings.effectProfile??'legacy')!=='legacy')throw new RangeError('Layer profiles require reference photometry');const result=simulation.launch(options);updateLauncherAim();updateRecords();return result;},
@@ -1055,7 +1067,7 @@ export function createFireworks(THREE,{terrainHeight=()=>0,origin=[29,0,7],seed=
       if(complexEvents.length){const signature=[complexShutter,...complexWind.min,...complexWind.max];for(const event of complexEvents){const mode=event.heightInfo.inputMode,admitted=mode==='definition-rise'||event.definition.ground&&mode==='fixed-ground-kinematics';if(!admitted){complexAnalytic.push({eventId:event.id,type:event.type,covered:false,reason:'explicit-height/timed display flight retains sampled forecast only'});continue;}let cached=complexEnvelopeCache.get(event);if(!cached||!sameSourceViewKey(cached.signature,signature)){const envelope=getFireworkShowEnvelope({type:event.type,origin:event.origin,muzzleOffsetMetres:0,azimuth:event.azimuth,elevation:event.elevation,launchSpreadDegrees:0,burstTiltDegrees:0,burstRollDegrees:0,starDragModel:'bounded-descent',wind:complexWind,shutterSeconds:complexShutter});cached={signature,envelope};complexEnvelopeCache.set(event,cached);}const envelope=cached.envelope;for(let c=0;c<3;c++){min[c]=Math.min(min[c],envelope.min[c]);max[c]=Math.max(max[c],envelope.max[c]);}complexAnalytic.push({eventId:event.id,type:event.type,covered:true,min:envelope.min,max:envelope.max,limits:envelope.limits});}}
       min[1]=Math.max(0,min[1]);boundsKey=key;const centre=min.map((v,c)=>(v+max[c])*.5);return boundsCache={min,max,centre,center:centre,radius:Math.hypot(...max.map((v,c)=>(v-min[c])*.5)),active:true,predicted:true,model:complexAnalytic.some(e=>e.covered)?'Native sampled/smoke forecast union authored complex-family source, motor, tail and shutter enclosure; full committed wind ranges':scaledEvents.length?'Native sampled/smoke forecast union continuous scaled actual-launch/fuse/source/tail/stretch/shutter enclosure; full committed wind ranges and compiled19*alpha relation':poweredEvents.length?'Native sampled/smoke forecast union admitted powered analytic source/tail/stretch/shutter enclosure; full committed wind ranges; maximum1/60s shutter':'16-point analytic trajectory forecast at current wind +8m margin; 2Hz cache; smoke envelope',...(poweredEvents.length?{poweredAnalytic}: {}),...(scaledEvents.length?{scaledAnalytic}: {}),...(complexEvents.length?{complexAnalytic}: {})};
     },
-    getLightClusters,getReceiverLightClusters,getEmissionLedger,
+    getLightClusters,getEventLightClusters,getReceiverLightClusters,getReceiverLighting(){return receiverLightingCache??(receiverLightingCache=receiverLighting.build(records));},getEmissionLedger,
     getFramingSources({shutterSeconds=1/120}={}){if(disposed)throw new Error('Cannot query disposed framing sources');const result=[];for(const p of opticalRows(shutterSeconds,false)){let intensity=p.intensity,colour=p.colour;if(p.vectorEmission){const rgb=[0,0,0];for(let k=0;k<8;k++)for(let c=0;c<3;c++)rgb[c]+=p.rgbTaps[k*3+c]/8;intensity=Y(rgb);colour=intensity>0?rgb.map(v=>v/intensity):[0,0,0];}if(!(intensity>0&&maximumRGB(colour)>0))continue;result.push(Object.freeze({eventId:p.eventId,position:Object.freeze([...p.position]),intensity,colour:Object.freeze([...colour]),radius:p.radius,stretch:Object.freeze([...(p.stretch||[0,0,0])]),...(p.vectorEmission?{viewExposure:p.viewExposure,...(p.rasterVelocity?{velocity:Object.freeze([...p.velocity]),rasterVelocity:Object.freeze([...p.rasterVelocity]),rasterExposureSeconds:p.rasterExposureSeconds,contactSupport:p.contactSupport}:{})}: {})}));}return Object.freeze(result);},
     getRadianceBound({camera,optics={},rawPerCandela=3.6e-5,onSourceBound=null}={}){return withWindResponseMemo(simulation.windTimeline,()=>{
       if(onSourceBound!==null&&typeof onSourceBound!=='function')throw new TypeError('onSourceBound must be a function or null');
@@ -1096,7 +1108,7 @@ export function createFireworks(THREE,{terrainHeight=()=>0,origin=[29,0,7],seed=
       const width=target?.width||optics.width||1,height=target?.height||optics.height||1;
       const scale=frame.sceneScale??2**(frame.storageEV||0),rawPerCandela=frame.rawPerCandela??3.6e-5;
       camera.updateMatrixWorld();uniforms.uViewProjection.value.multiplyMatrices(camera.projectionMatrix,camera.matrixWorldInverse);uniforms.uProjection.value.copy(camera.projectionMatrix);uniforms.uEye.value.setFromMatrixPosition(camera.matrixWorld);uniforms.uSize.value.set(width,height);
-      uniforms.uDepth.value=reflection?dummy:opaqueDepth||dummy;uniforms.uPlaneY.value=planeY;uniforms.uStorageScale.value=scale;uniforms.uRawPerCandela.value=rawPerCandela;
+      uniforms.uDepth.value=reflection?dummy:opaqueDepth||dummy;uniforms.uPlaneY.value=planeY;uniforms.uStorageScale.value=scale;uniforms.uRawPerCandela.value=rawPerCandela;uniforms.uDisplayGain.value=renderer.toneMappingExposure;
       const requestedShutter=optics.shutterSeconds??1/120,vectorExposure=resolveFireworkExposure({physicalNow:simulation.time,shutterSeconds:requestedShutter}),legacyShutter=reflection?0:requestedShutter;
       uniforms.uFocalMm.value=optics.focalMm??28;uniforms.uAperture.value=optics.aperture??8;uniforms.uFocus.value=optics.focusMetres??60;uniforms.uSensorHeightMm.value=optics.sensorHeightMm??24;uniforms.uDof.value=!reflection&&optics.dof?1:0;uniforms.uShutter.value=vectorExposure.durationSeconds;uniforms.uLegacyShutter.value=legacyShutter;uniforms.uVignette.value=!reflection&&optics.vignette?1:0;uniforms.uFirelightSigmaPixels.value=firelightSigmaPixels;
       uniforms.uAirEnabled.value=air.enabled?1:0;for(const [name,field]of [['uBetaR','betaRayleighRGB'],['uBetaME','betaMieExtinctionRGB'],['uBetaMS','betaMieScatteringRGB'],['uSunDirection','sunDirection'],['uRawSunRGB','rawSunRGB']])uniforms[name].value.fromArray(rgbArray(air[field]));

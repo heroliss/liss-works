@@ -4,7 +4,7 @@ import {environmentLightGLSL,ENVIRONMENT_LIGHT_COUNT} from './environment-local-
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const finite=(v,f)=>Number.isFinite(v)?v:f;
 const RAYLEIGH=[5.802e-6,13.558e-6,33.1e-6];
-export const AERIAL_DEFAULTS={enabled:true,shadows:true,quality:'high',backgroundLocalScattering:0,globalSourceModel:'atmosphere',aerosolScale:8,dryMie550:3.996e-6,humidity:.68,kappa:.6,
+export const AERIAL_DEFAULTS={enabled:true,shadows:true,quality:'high',backgroundLocalScattering:1,globalSourceModel:'atmosphere',aerosolScale:8,dryMie550:3.996e-6,humidity:.68,kappa:.6,
   singleScatteringAlbedo:.9,asymmetry:.76,rayleighScale:1,aerosolHeight:1200,rayleighHeight:8000,maxDistance:12000,halfResolution:.5};
 
 // Bulk kappa-Kohler radius growth (Kelvin term neglected), followed by an

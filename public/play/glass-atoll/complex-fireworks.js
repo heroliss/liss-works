@@ -11,13 +11,19 @@ export const COMPLEX_FIREWORK_TYPES=freeze([
   {id:'display-vortex',label:'旋翼·群星',height:270,burn:5.7,count:192,description:'主球爆开后，一组带有限旋转推进的星体继续弯卷散开。'},
   {id:'display-waterfall',label:'星河·横空银瀑',height:240,burn:11.1,count:193,description:'银白彗星横穿夜空，沿途洒下长留空中的银金火星帘幕，缓慢渐暗为金色余烬；低空燃烧提前收束。'},
   {id:'display-double',label:'双响·花中花',height:290,burn:5.2,count:180,description:'主爆后十二组子花依次绽放，青蓝背景衬托红金双层花心。'},
-  {id:'display-brocade',label:'锦冠·三幕',height:300,burn:7.2,count:256,description:'蓝紫内芯、金冠长尾、迟亮暖色碎星先后接续，主爆带强闪。'}
-].map(d=>({...d,smokePuffs:({'display-saturn':14,'display-heart':14,'display-flower':20,'display-chase':8,'display-vfan':24,'display-helix':22,'display-vortex':16,'display-waterfall':24,'display-double':22,'display-brocade':24})[d.id],collection:'large-choreographed',pattern:d.id,trail:true,calibreMm:null,heightMeaning:d.ground?'authored-visible-apex':'authored-reference-rise-at80deg',heightReference:null,reference:'authored choreography informed by professional display examples; not measured shell dimensions'})));
+  {id:'display-brocade',label:'锦冠·三幕',height:300,burn:7.2,count:256,description:'蓝紫内芯、金冠长尾、迟亮暖色碎星先后接续，主爆带强闪。'},
+  {id:'display-orbit',label:'星轨·三环',height:280,burn:5.4,count:204,description:'三道互相倾斜的星环绕着蓝紫内核同时展开，像一枚原子；内核先灭，星环由银转金再化粉。'},
+  {id:'display-palmgrove',label:'椰影·流金',height:270,burn:5.6,count:108,description:'十二条粗壮金色彗尾像椰叶一样垂落，叶尖各自迸开一簇青绿与银白的“椰果”。'},
+  {id:'display-duet',label:'双色·对换',height:280,burn:5.2,count:208,description:'球体一半青蓝、一半金红，中途两半同时互换颜色，腰间一圈银环始终不变。'},
+  {id:'display-phantom',label:'幻影·流转',height:285,burn:5.6,count:200,description:'星点不同时点亮，而是沿球面依次亮起再依次熄灭，光带绕球体流转一周半。'},
+  {id:'display-wish',label:'星愿·五角星',height:270,burn:5.2,count:200,description:'深蓝外球里亮起一枚金色五角星，星角最后炸出一圈闪烁的银屑。'},
+  {id:'display-myriad',label:'千轮·万花',height:295,burn:5.6,count:260,description:'主爆只抛出二十枚暗淡的子弹，片刻之后它们在夜空各处同时绽成二十朵小菊。'}
+].map(d=>({...d,smokePuffs:({'display-saturn':14,'display-heart':14,'display-flower':20,'display-chase':8,'display-vfan':24,'display-helix':22,'display-vortex':16,'display-waterfall':24,'display-double':22,'display-brocade':24,'display-orbit':14,'display-palmgrove':18,'display-duet':14,'display-phantom':12,'display-wish':16,'display-myriad':24})[d.id],collection:'large-choreographed',pattern:d.id,trail:true,calibreMm:null,heightMeaning:d.ground?'authored-visible-apex':'authored-reference-rise-at80deg',heightReference:null,reference:'authored choreography informed by professional display examples; not measured shell dimensions'})));
 export const isComplexFirework=type=>COMPLEX_FIREWORK_TYPES.some(d=>d.id===type);
 export const COMPLEX_TYPE_LIMITS=freeze(Object.fromEntries(COMPLEX_FIREWORK_TYPES.map(d=>[d.id,{intrinsicSpeed:80,maximumBodySeconds:d.id==='display-brocade'?7.2:d.id==='display-waterfall'?11.1:d.ground?4.1:5.8,maximumBirthDelaySeconds:d.ground?12.7:0,minimumBodyDragPerSecond:d.ground?.18:d.id==='display-waterfall'?.45:.55,maximumBodyDragPerSecond:1.2,tailDurationSeconds:d.id==='display-waterfall'?2.2:1.2,maximumMotorDisplacementMetres:d.id==='display-helix'||d.id==='display-vortex'?120:0,maximumTrailCarriers:192,maximumHeads:288}])));
 
 const add=(a,b)=>a.map((v,c)=>v+b[c]),scale=(a,s)=>a.map(v=>v*s),cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]],unit=v=>scale(v,1/Math.hypot(...v)),TAU=Math.PI*2;
-function contourPoint(shape,a){let x=Math.cos(a),y=Math.sin(a);if(shape==='heart'){x=16*Math.sin(a)**3/18;y=(13*Math.cos(a)-5*Math.cos(2*a)-2*Math.cos(3*a)-Math.cos(4*a))/18+.1;}if(shape==='flower'){const r=.72+.28*Math.cos(a*8);x*=r;y*=r;}return[x,y];}
+function contourPoint(shape,a){let x=Math.cos(a),y=Math.sin(a);if(shape==='heart'){x=16*Math.sin(a)**3/18;y=(13*Math.cos(a)-5*Math.cos(2*a)-2*Math.cos(3*a)-Math.cos(4*a))/18+.1;}if(shape==='flower'){const r=.72+.28*Math.cos(a*8);x*=r;y*=r;}if(shape==='star'){const sector=TAU/10,k=Math.floor(a/sector),t=a/sector-k,r0=k%2?.42:1,r1=k%2?1:.42,a0=k*sector,a1=a0+sector;x=(r0*Math.sin(a0))*(1-t)+(r1*Math.sin(a1))*t;y=(r0*Math.cos(a0))*(1-t)+(r1*Math.cos(a1))*t;}return[x,y];}
 // Arc-length strata avoid the clumps that equal parameter steps create near
 // the heart's cusp. Jitter is chosen once at construction, never per frame.
 function contourSamples(shape,count,rng){
@@ -69,6 +75,39 @@ export function buildComplexFirework(type,{eventId,origin,time,burstTime,burstSt
     sphere(160,65,7.2,makeStyle(7.2,[[0,'silver'],[1.8,'gold'],[5.3,'amber'],[7.2,'amber']],.88,.42,'gold'),'brocade-crown');
     sphere(64,30,2.8,makeStyle(2.8,[[0,'blue'],[1.5,'violet'],[2.8,'violet']]),'inner-sphere');
     sphere(32,42,6.5,makeStyle(6.5,[[0,'gold'],[6.5,'amber']],.22,.2,'gold',3.1,2.3),'late-glitter');flash(15000);
+  }else if(type==='display-orbit'){
+    // Three great circles tilted 60 degrees apart around the burst axis.
+    for(let ring=0;ring<3;ring++){const tilt=ring*Math.PI/3,life=5.2,style=makeStyle(life,[[0,'silver'],[1.9,'gold'],[3.9,'pink'],[life,'pink']],.3,.18,'source');
+      for(let i=0;i<52;i++){const a=(i+rng()*.3)/52*TAU,x=Math.cos(a),y=Math.sin(a),n=point(x,y*Math.cos(tilt),y*Math.sin(tilt)),duration=life*(.95+rng()*.08);body(burstState.position,add(rotateBurst(scale(n,60*(.985+rng()*.03))),burstState.velocity),duration,styleAtLife(style,duration),{patternPart:'orbit-ring-'+ring,intensity:11*(.8+rng()*.3)});}}
+    sphere(48,24,2.6,makeStyle(2.6,[[0,'blue'],[1.4,'violet'],[2.6,'violet']]),'inner-sphere',2);flash(9000);
+  }else if(type==='display-palmgrove'){
+    for(let i=0;i<12;i++){
+      const a=i/12*TAU+(rng()-.5)*.18,lift=.52+rng()*.2,n=unit(point(Math.cos(a),lift,Math.sin(a))),life=2.9+rng()*.25;
+      const frond=body(burstState.position,add(rotateBurst(scale(n,58*(.94+rng()*.1))),burstState.velocity),life,makeStyle(life,[[0,'silver'],[.5,'gold'],[life,'amber']],.8,.42,'gold'),{intensity:46*(.9+rng()*.2),radius:.02,patternPart:'palm-frond',split:true});
+      for(let j=0;j<8;j++){const v=rotateBurst(scale(direction(j,8),19)),nut=2.3+rng()*.3;body(burstState.position,[0,0,0],nut,makeStyle(nut,[[0,j%2?'silver':'green'],[nut*.7,'green'],[nut,'gold']],0,0),{birth:frond.birth+frond.life,parent:frond.id,parentBody:frond,velocityDelta:v,intensity:7+rng()*2,patternPart:'palm-coconut'});}
+      audioEvents.push({kind:'burst',time:frond.birth+frond.life,position:[...burstState.position],type,seed:(seed+i+1)>>>0,energy:.08,audioOnly:true,anchorBody:frond});
+    }
+    flash(8000);
+  }else if(type==='display-duet'){
+    const life=4.9,swap=life*.46,cool=makeStyle(life,[[0,'blue'],[swap-.25,'blue'],[swap+.25,'gold'],[life*.86,'red'],[life,'red']],.42,.22,'source'),warm=makeStyle(life,[[0,'gold'],[swap-.25,'red'],[swap+.25,'blue'],[life*.86,'green'],[life,'green']],.42,.22,'source'),plain=style=>createComplexStyle({...style,colours:style.colourKnots.map(k=>({age:k.age,rgb:k.rgb})),envelopeKnots:style.envelopeKnots,tailSeconds:0,tailFraction:0}),coolPlain=plain(cool),warmPlain=plain(warm);
+    for(let i=0;i<160;i++){const n=direction(i,160),duration=life*(.96+rng()*.07);body(burstState.position,add(rotateBurst(scale(n,64*(.97+rng()*.06))),burstState.velocity),duration,styleAtLife(n[1]>=0?(i%2?coolPlain:cool):(i%2?warmPlain:warm),duration),{patternPart:n[1]>=0?'duet-upper':'duet-lower'});}
+    planar(48,66,5.2,makeStyle(5.2,[[0,'silver'],[5.2,'silver']],.15,.1,'silver'),'ring');
+  }else if(type==='display-phantom'){
+    // Light sweeps round the shell: each star's onset follows its azimuth.
+    for(let i=0;i<168;i++){const n=direction(i,168),phase=(Math.atan2(n[2],n[0])/TAU+1)%1,onset=phase*1.5,duration=3.2+onset;
+      body(burstState.position,add(rotateBurst(scale(n,62*(.97+rng()*.06))),burstState.velocity),duration,makeStyle(duration,[[0,'green'],[onset+.9,'blue'],[onset+2.1,'violet'],[duration,'pink']],i%2?0:.15,i%2?0:.1,'source',onset),{patternPart:'phantom-shell',intensity:11*(.85+rng()*.3)});}
+    sphere(32,22,2.2,makeStyle(2.2,[[0,'silver'],[2.2,'gold']]),'inner-sphere');
+  }else if(type==='display-wish'){
+    sphere(104,66,4.4,makeStyle(4.4,[[0,'blue'],[2.6,'blue'],[4.4,'violet']],.15,.1,'source'),'outer-sphere',2);
+    planar(64,50,5,makeStyle(5,[[0,'gold'],[3.2,'gold'],[5,'amber']],.3,.2,'gold'),'star');
+    sphere(32,40,5.2,makeStyle(5.2,[[0,'silver'],[5.2,'silver']],.15,.12,'silver',3,2.6),'late-glitter');flash(7000);
+  }else if(type==='display-myriad'){
+    for(let i=0;i<20;i++){
+      const n=rotateBurst(direction(i,20)),wait=1.05+rng()*.12,carrier=body(burstState.position,add(scale(n,44*(.9+rng()*.2)),burstState.velocity),wait,makeStyle(wait,[[0,'amber'],[wait,'amber']],0,0),{intensity:1.5,patternPart:'subshell-carrier',split:true});
+      const hue=['red','green','blue','pink','gold'][i%5];
+      for(let j=0;j<12;j++){const v=rotateBurst(scale(direction(j,12),24)),life=3.3+rng()*.3;body(burstState.position,[0,0,0],life,makeStyle(life,[[0,hue],[life*.6,hue],[life,'gold']],j%3===0?.3:0,j%3===0?.24:0,'source'),{birth:carrier.birth+carrier.life,parent:carrier.id,parentBody:carrier,velocityDelta:v,patternPart:'subshell-star'});}
+      audioEvents.push({kind:'burst',time:carrier.birth+carrier.life,position:[...burstState.position],type,seed:(seed+i+1)>>>0,energy:.07,audioOnly:true,anchorBody:carrier});flash(1400,carrier.birth+carrier.life,carrier);
+    }
   }
   for(const b of heads)if(b.displayMotor&&displayMotorDisplacementBound(b.displayMotor,b.drag,b.life)>limits.maximumMotorDisplacementMetres)throw new RangeError('Display motor exceeds its authored spatial limit');
   if(rocket.displayMotor&&displayMotorDisplacementBound(rocket.displayMotor,rocket.drag,rocket.life)>limits.maximumMotorDisplacementMetres)throw new RangeError('Display ascent motor exceeds its authored spatial limit');

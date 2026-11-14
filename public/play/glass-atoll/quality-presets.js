@@ -1,6 +1,6 @@
 // Candidate requests, not benchmark results. Main owns resource allocation and
 // must report its actually committed values back to UI.setQualityState().
-export const DEFAULT_QUALITY = 'low'; // Hosted default; all quality options remain available.
+export const DEFAULT_QUALITY = 'medium';
 export const QUALITY_IDS = Object.freeze(['low', 'balanced', 'medium', 'high', 'ultra']);
 export const QUALITY_KEYS = Object.freeze([
   'dprCap', 'msaaSamples', 'shadowSize', 'shadowHz', 'waveResolution',

@@ -8,7 +8,7 @@
     "Optional server-generated ACES targets decline with a controlled reason.",
     "Catalogue byte-plane gzip packs (.pk2, constant diffuse alpha omitted) with byte-identical decoding; HTTP, network and decoding failures fall back to the original catalogue.",
     "Night sky assets load on demand (sun below 12 degrees, or star/moon views) instead of an unconditional idle preload.",
-    "Hosted default uses the existing low preset, with all quality options available; initial caustics allocate that preset directly.",
+    "Initial caustics allocate the selected quality preset directly (upstream default: medium).",
     "Failure guidance refers to the browser rather than a local launcher.",
     "Credits receive explicit HTML head/body for host metadata."
   ],
@@ -31,8 +31,8 @@
     },
     {
       "path": "aerial-perspective.js",
-      "sourceSHA256": "0a4cb9f6c256454248c8d6181aa012ca3e99f880aeeb0d56cf47550bf1a81bcc",
-      "sha256": "0a4cb9f6c256454248c8d6181aa012ca3e99f880aeeb0d56cf47550bf1a81bcc",
+      "sourceSHA256": "ace3cb7482278dc092f6e7840bece49869165e2ba0e50bc29d98869ef3a3d62f",
+      "sha256": "ace3cb7482278dc092f6e7840bece49869165e2ba0e50bc29d98869ef3a3d62f",
       "bytes": 32324,
       "adapted": false
     },
@@ -405,9 +405,9 @@
     },
     {
       "path": "complex-fireworks.js",
-      "sourceSHA256": "de7aa3e517c6d416f3fe6fbbe96d0b7b2a00e2518969c5d820f534ff205f96d4",
-      "sha256": "de7aa3e517c6d416f3fe6fbbe96d0b7b2a00e2518969c5d820f534ff205f96d4",
-      "bytes": 14598,
+      "sourceSHA256": "d60a30a749299bac71fb02a91b2bf45a73840d330760be1fe563f9671058310e",
+      "sha256": "d60a30a749299bac71fb02a91b2bf45a73840d330760be1fe563f9671058310e",
+      "bytes": 20669,
       "adapted": false
     },
     {
@@ -460,6 +460,13 @@
       "adapted": false
     },
     {
+      "path": "firework-burst-shadow.js",
+      "sourceSHA256": "33ebd632faa0b07a1457ce719147b893e0ac0a5c3876b4eabdb9d251cd37c446",
+      "sha256": "33ebd632faa0b07a1457ce719147b893e0ac0a5c3876b4eabdb9d251cd37c446",
+      "bytes": 7774,
+      "adapted": false
+    },
+    {
       "path": "firework-contact-optics.js",
       "sourceSHA256": "789ed0bfbe1fb81ddcfa8385a297576ebf334211ab3a34ef569ceb7b85f7a8fb",
       "sha256": "789ed0bfbe1fb81ddcfa8385a297576ebf334211ab3a34ef569ceb7b85f7a8fb",
@@ -474,6 +481,13 @@
       "adapted": false
     },
     {
+      "path": "firework-environment-proxies.js",
+      "sourceSHA256": "0a614951e8617d404da81a1e27bfc38a0fabb2f5d04b7df1a8df3f26ae24e0bb",
+      "sha256": "0a614951e8617d404da81a1e27bfc38a0fabb2f5d04b7df1a8df3f26ae24e0bb",
+      "bytes": 4160,
+      "adapted": false
+    },
+    {
       "path": "firework-exposure-window.js",
       "sourceSHA256": "61d4279bd0c6cb66524ba6a2fc657d851a29588f4fcb1ec5cd9c6f229c43d987",
       "sha256": "61d4279bd0c6cb66524ba6a2fc657d851a29588f4fcb1ec5cd9c6f229c43d987",
@@ -485,6 +499,13 @@
       "sourceSHA256": "411242962dc8681e2eb487acc7f03937ebe32331ec06414f9e78a5674778c537",
       "sha256": "411242962dc8681e2eb487acc7f03937ebe32331ec06414f9e78a5674778c537",
       "bytes": 16634,
+      "adapted": false
+    },
+    {
+      "path": "firework-light-field.js",
+      "sourceSHA256": "32a525bc3f3fa21d6ec2364dc6e8d4dae339b62ec246c2b6f75dde7a993d339f",
+      "sha256": "32a525bc3f3fa21d6ec2364dc6e8d4dae339b62ec246c2b6f75dde7a993d339f",
+      "bytes": 7083,
       "adapted": false
     },
     {
@@ -503,9 +524,9 @@
     },
     {
       "path": "firework-receiver-lighting.js",
-      "sourceSHA256": "e0ae63d237b522d0a2a93a0b41d382e9a2b41b286c8f83b007e51a809cb1d251",
-      "sha256": "e0ae63d237b522d0a2a93a0b41d382e9a2b41b286c8f83b007e51a809cb1d251",
-      "bytes": 4939,
+      "sourceSHA256": "050d7b4c119e06a9206a8110a2754b19646167ab696f923045b75a22bfd5e4a8",
+      "sha256": "050d7b4c119e06a9206a8110a2754b19646167ab696f923045b75a22bfd5e4a8",
+      "bytes": 10125,
       "adapted": false
     },
     {
@@ -587,9 +608,9 @@
     },
     {
       "path": "fireworks.js",
-      "sourceSHA256": "1d6508b6039efd5afab6217e3aeba4c587e7a5bd61126b5454941af854e07e18",
-      "sha256": "1d6508b6039efd5afab6217e3aeba4c587e7a5bd61126b5454941af854e07e18",
-      "bytes": 135390,
+      "sourceSHA256": "a26ba8c052c50a84ac6f912e4efba3c405a1788f0496172373f2494deb71ea9d",
+      "sha256": "a26ba8c052c50a84ac6f912e4efba3c405a1788f0496172373f2494deb71ea9d",
+      "bytes": 137274,
       "adapted": false
     },
     {
@@ -629,16 +650,16 @@
     },
     {
       "path": "index.html",
-      "sourceSHA256": "1963fc440ec4db0014ee5fb2f70ca0babf2975a58cb9d27989a4716d406053ca",
-      "sha256": "fd8bbf83d4a91c0f4b88aa94ffdd77b672b6f7e0f8759f5b1a8814d514064637",
-      "bytes": 48054,
+      "sourceSHA256": "9244c6ad0ebbf785548c4ace0a7a7dde8ec8bd27c4e1167080a95beabc1564a1",
+      "sha256": "3da0f0e7261531ad0bd60bf4193885a1cfc18c0aad0e2d5a46b7e4cfe47a26ea",
+      "bytes": 55511,
       "adapted": true
     },
     {
       "path": "indirect-lighting.js",
-      "sourceSHA256": "4ec4e09ff429323003ea41f55b0ccbdc5446c8b0734342ecfcfb6a1370d09faa",
-      "sha256": "4ec4e09ff429323003ea41f55b0ccbdc5446c8b0734342ecfcfb6a1370d09faa",
-      "bytes": 36111,
+      "sourceSHA256": "fe06340c80400921f484610bd00231f08466bf3da83285e044af120cf4f2d348",
+      "sha256": "fe06340c80400921f484610bd00231f08466bf3da83285e044af120cf4f2d348",
+      "bytes": 36950,
       "adapted": false
     },
     {
@@ -657,9 +678,9 @@
     },
     {
       "path": "local-lights.js",
-      "sourceSHA256": "7f9eddb8f1698fe7ace9091f3045e2843447af10108469c78e056af46369615f",
-      "sha256": "7f9eddb8f1698fe7ace9091f3045e2843447af10108469c78e056af46369615f",
-      "bytes": 16627,
+      "sourceSHA256": "137c3436c3acc1b163d003e409feccdbc93eb0883c06c17c1fd859224be2dc77",
+      "sha256": "137c3436c3acc1b163d003e409feccdbc93eb0883c06c17c1fd859224be2dc77",
+      "bytes": 17513,
       "adapted": false
     },
     {
@@ -671,9 +692,9 @@
     },
     {
       "path": "main.js",
-      "sourceSHA256": "cc57e3fe927eda8542411840c7e10fe5cdad8fa48c5f2cf24e4b5ac994510127",
-      "sha256": "e77eba35fd75b4d9552ca4c7d7bcec51f7742fd67bfcd199eea55ea8ab8b439f",
-      "bytes": 232466,
+      "sourceSHA256": "aaab73b2267ed1a07c4bbeced0a2adc450ac3a572ec4e607a91294872c5e5d5e",
+      "sha256": "a097a2c048b4352974157c1c9ff5be1db6617dd22207eee979cee99db47e63e5",
+      "bytes": 238732,
       "adapted": true
     },
     {
@@ -875,9 +896,9 @@
     {
       "path": "quality-presets.js",
       "sourceSHA256": "697f85e3f1e54c7b866bd44c801e0125e753c38176e4725b3296874caed1692a",
-      "sha256": "a4c22fa0291009d89e0cf2fb2ed20836e9d42bb3b2042f5f684ff65ade1b92c7",
-      "bytes": 4792,
-      "adapted": true
+      "sha256": "697f85e3f1e54c7b866bd44c801e0125e753c38176e4725b3296874caed1692a",
+      "bytes": 4738,
+      "adapted": false
     },
     {
       "path": "radiative-transfer.js",
@@ -1000,9 +1021,9 @@
     },
     {
       "path": "style.css",
-      "sourceSHA256": "8e4fbfbddd4ca4c1fcad48e1cba2c32ee04234970a3e6449f61ba47c6b5f4e6a",
-      "sha256": "93355b3b052ce38d775ed68239a9ab62614c62af491fdf8eebc2a9b12fc07e6f",
-      "bytes": 42293,
+      "sourceSHA256": "13c97e1c5893ade6296f52d526205cef41c00a0965920b761103aa334e913cc8",
+      "sha256": "34365fdc936b93c3bd8e7833c555744ea5cfb24ae9c09985d81da44e2dfc489a",
+      "bytes": 35590,
       "adapted": true
     },
     {
@@ -1014,16 +1035,16 @@
     },
     {
       "path": "ui-quick-experience.js",
-      "sourceSHA256": "31cf6365d253853786461576290a2ea73d042a9fb88f2dee348bbf9a01c3a016",
-      "sha256": "31cf6365d253853786461576290a2ea73d042a9fb88f2dee348bbf9a01c3a016",
-      "bytes": 9280,
+      "sourceSHA256": "1d277fbc12d1450b3e2f24eb6c131511f3f09cd63e4ae607560e01785d6ae302",
+      "sha256": "1d277fbc12d1450b3e2f24eb6c131511f3f09cd63e4ae607560e01785d6ae302",
+      "bytes": 9539,
       "adapted": false
     },
     {
       "path": "ui.js",
-      "sourceSHA256": "447696c4a3e97aefa653f9b391c9e176932eb424fd28b736602c40231ff6bbbc",
-      "sha256": "447696c4a3e97aefa653f9b391c9e176932eb424fd28b736602c40231ff6bbbc",
-      "bytes": 66756,
+      "sourceSHA256": "b079e51fa50cd7d7c54e1c6f039782c9062d61bdd1966f6c713f804c9ea5d369",
+      "sha256": "b079e51fa50cd7d7c54e1c6f039782c9062d61bdd1966f6c713f804c9ea5d369",
+      "bytes": 69179,
       "adapted": false
     },
     {
@@ -1322,9 +1343,9 @@
     },
     {
       "path": "viewer-ui.css",
-      "sourceSHA256": "148636f3c378a53f45b0f304260150babe58664beb8a8ff7d6f58fd0e6ef8c24",
-      "sha256": "148636f3c378a53f45b0f304260150babe58664beb8a8ff7d6f58fd0e6ef8c24",
-      "bytes": 9637,
+      "sourceSHA256": "1c56f7fd6170650af6bd02d22363e9b06ba6c22a71fe996f02b3152708eb92d1",
+      "sha256": "1c56f7fd6170650af6bd02d22363e9b06ba6c22a71fe996f02b3152708eb92d1",
+      "bytes": 1243,
       "adapted": false
     },
     {
@@ -1350,9 +1371,9 @@
     },
     {
       "path": "water.js",
-      "sourceSHA256": "872c60cd379d46c861faeb052c850c4e4fbd05fce616a37b3086601262dee926",
-      "sha256": "872c60cd379d46c861faeb052c850c4e4fbd05fce616a37b3086601262dee926",
-      "bytes": 34890,
+      "sourceSHA256": "83c629ddce6cc8fbcebccaa3de243591476104b772332286306fa95ea221d65f",
+      "sha256": "83c629ddce6cc8fbcebccaa3de243591476104b772332286306fa95ea221d65f",
+      "bytes": 39641,
       "adapted": false
     },
     {
