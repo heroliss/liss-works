@@ -16,11 +16,8 @@
 .px-lab [data-tone=info] { --tone:var(--px-info); }
 .px-heading { align-items:end; }
 .px-tagline { font-size:clamp(22px,2.2vw,30px); line-height:1.5; }
-.px-introduction { display:grid; gap:16px; align-content:end; max-width:46ch; }
+.px-introduction { display:grid; gap:14px; align-content:end; max-width:46ch; }
 .px-introduction p { margin:0; color:var(--muted); font-size:17px; line-height:1.85; }
-.px-intro-actions { display:flex; flex-wrap:wrap; align-items:flex-start; gap:14px 22px; }
-.px-intro-actions .button.secondary { border-radius:999px; min-height:44px; padding:0 18px; border:1px solid color-mix(in srgb,var(--accent) 45%,#ffffff22); background:color-mix(in srgb,var(--accent) 16%,#131829); color:var(--ink); }
-.px-intro-actions .button.secondary:hover { background:var(--accent); color:#0b0e1c; border-color:var(--accent); }
 .px-stage { display:grid; gap:clamp(14px,2vw,22px); margin-top:clamp(28px,4vw,56px); }
 
 /* ---- steps ------------------------------------------------------------------------- */
