@@ -325,6 +325,78 @@
       "height": 1280,
       "authenticity": "Real 960x1280 (3:4) Douyin profile portrait cover generated locally by DubForge with headline constrained to the [148, 812] 9:16 full-screen safe band.",
       "capture_receipt": "verification/dubforge-captures-20261119/v7-cover-douyin-portrait.png"
+    },
+    {
+      "repo": "intelligence-index-cost-linear",
+      "source": "captures/intelligence-index-cost-linear/selected-20261119/v2-01-overview-pareto-dark.png",
+      "source_sha256": "d0a10843e4518ceb60e01922fc7ddc9c26e25e94a9eafc8c778ea0f2a00eb8aa",
+      "width": 1680,
+      "height": 1050,
+      "authenticity": "Real Intelligence vs. Cost live benchmark explorer (commit f017689) at https://heroliss.github.io/intelligence-index-cost-linear/ with genuine Artificial Analysis, LMArena, and Design Arena snapshot data. Downscaled via Lanczos from a 2x headless Chrome capture of a 1440x900 desktop viewport.",
+      "capture_receipt": "verification/intelligence-index-cost-linear-captures-20261119/v2-01-overview-pareto-dark@2x.png"
+    },
+    {
+      "repo": "intelligence-index-cost-linear",
+      "source": "captures/intelligence-index-cost-linear/selected-20261119/v2-02-human-arena-scenario.png",
+      "source_sha256": "4320fe898a1f2dc80329107a463c69cbfba9d7e6d58eac85bc803f2779e7e9f2",
+      "width": 1680,
+      "height": 1050,
+      "authenticity": "Real Intelligence vs. Cost live benchmark explorer (commit f017689) showing the Human & Taste blind-vote channel with the 5-pillar custom Scenario Recipe popover active. Downscaled via Lanczos from a 2x headless Chrome capture of a 1440x900 desktop viewport.",
+      "capture_receipt": "verification/intelligence-index-cost-linear-captures-20261119/v2-02-human-arena-scenario@2x.png"
+    },
+    {
+      "repo": "intelligence-index-cost-linear",
+      "source": "captures/intelligence-index-cost-linear/selected-20261119/v2-03-compare-zoomed-radar.png",
+      "source_sha256": "ef0162b7bcf6cc776b9d5576ae5184d4a29a456b7dc01e0ab620681900022c53",
+      "width": 1680,
+      "height": 1050,
+      "authenticity": "Real Intelligence vs. Cost live benchmark explorer (commit f017689) showing the Compare workbench with zoomed 6D radar, ranked subscore cards, 5-segment cache-aware bill breakdown, and multi-cloud API price comparison. Downscaled via Lanczos from a 2x headless Chrome capture of a 1440x900 desktop viewport.",
+      "capture_receipt": "verification/intelligence-index-cost-linear-captures-20261119/v2-03-compare-zoomed-radar@2x.png"
+    },
+    {
+      "repo": "intelligence-index-cost-linear",
+      "source": "captures/intelligence-index-cost-linear/selected-20261119/v2-04-subscription-router.png",
+      "source_sha256": "4babf5d23899bc92701fcc6d7f17e33d8127b6d8a8eae0befc425cc7934d7a49",
+      "width": 1680,
+      "height": 1050,
+      "authenticity": "Real Intelligence vs. Cost live benchmark explorer (commit f017689) showing the Monthly Subscription vs. Pay-as-you-go API break-even calculator with color-coded verdict pills. Downscaled via Lanczos from a 2x headless Chrome capture of a 1440x900 desktop viewport.",
+      "capture_receipt": "verification/intelligence-index-cost-linear-captures-20261119/v2-04-subscription-router@2x.png"
+    },
+    {
+      "repo": "intelligence-index-cost-linear",
+      "source": "captures/intelligence-index-cost-linear/selected-20261119/v2-05-frontier-hard-index.png",
+      "source_sha256": "10859a8b078c90bb99b308110b6adbd365d4dcd1e1dc2b97858802fdfa5d77ef",
+      "width": 1680,
+      "height": 1050,
+      "authenticity": "Real Intelligence vs. Cost live benchmark explorer (commit f017689) showing the unsaturated Frontier Hard channel stripping 90%+ saturated legacy exams. Downscaled via Lanczos from a 2x headless Chrome capture of a 1440x900 desktop viewport.",
+      "capture_receipt": "verification/intelligence-index-cost-linear-captures-20261119/v2-05-frontier-hard-index@2x.png"
+    },
+    {
+      "repo": "intelligence-index-cost-linear",
+      "source": "captures/intelligence-index-cost-linear/selected-20261119/v2-06-compare-strip-track.png",
+      "source_sha256": "7b077e3015fbd2ccf47df166424ad605f7f75b0dfa9efcaec5672febb7c01d96",
+      "width": 1680,
+      "height": 1050,
+      "authenticity": "Real Intelligence vs. Cost live benchmark explorer (commit f017689) showing horizontal zoomed dot-strip tracks and LMArena / Design Arena / GDPval Elo bars in Human & Taste Compare view. Downscaled via Lanczos from a 2x headless Chrome capture of a 1440x900 desktop viewport.",
+      "capture_receipt": "verification/intelligence-index-cost-linear-captures-20261119/v2-06-compare-strip-track@2x.png"
+    },
+    {
+      "repo": "intelligence-index-cost-linear",
+      "source": "captures/intelligence-index-cost-linear/selected-20261119/v2-07-multimodal-media-arena.png",
+      "source_sha256": "c568a2ba217d4447a60e9d7854ffca8718bbeb8a18691a30ee4ce4a6f2aa099f",
+      "width": 1680,
+      "height": 1050,
+      "authenticity": "Real Intelligence vs. Cost live benchmark explorer (commit f017689) showing 253 Image, Video, and Speech TTS generators plotted against per-output linear USD cost. Downscaled via Lanczos from a 2x headless Chrome capture of a 1440x900 desktop viewport.",
+      "capture_receipt": "verification/intelligence-index-cost-linear-captures-20261119/v2-07-multimodal-media-arena@2x.png"
+    },
+    {
+      "repo": "intelligence-index-cost-linear",
+      "source": "captures/intelligence-index-cost-linear/selected-20261119/v2-08-coding-agents-light.png",
+      "source_sha256": "46a774660792bef92193313da07bce8e83adb73e02199edb90246680e1ddd61a",
+      "width": 1680,
+      "height": 1050,
+      "authenticity": "Real Intelligence vs. Cost live benchmark explorer (commit f017689) in WCAG AA Light theme showing Coding Agents with multi-level effort trajectories. Downscaled via Lanczos from a 2x headless Chrome capture of a 1440x900 desktop viewport.",
+      "capture_receipt": "verification/intelligence-index-cost-linear-captures-20261119/v2-08-coding-agents-light@2x.png"
     }
   ]
 }

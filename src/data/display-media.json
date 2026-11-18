@@ -241,6 +241,70 @@
    "originalBytes": 631954,
    "sha256": "4ba963ce4011458954c40c81e2210f69fe724d2373aa678779b36dd982a46727"
   },
+  "/media/intelligence-index-cost-linear/v2-01-overview-pareto-dark.webp": {
+   "width": 1680,
+   "has1600": true,
+   "display": "/media/intelligence-index-cost-linear/v2-01-overview-pareto-dark-display.webp",
+   "bytes": 184046,
+   "originalBytes": 572554,
+   "sha256": "b8af401a818921995d62cf477586c499a96d07b5d1e2a972388dd24500c1cff2"
+  },
+  "/media/intelligence-index-cost-linear/v2-02-human-arena-scenario.webp": {
+   "width": 1680,
+   "has1600": true,
+   "display": "/media/intelligence-index-cost-linear/v2-02-human-arena-scenario-display.webp",
+   "bytes": 151130,
+   "originalBytes": 464210,
+   "sha256": "ccbf7949687993b8bfbf578c7b20edce2c44fae1bb0a2a758fe94b3ff9f8ba6b"
+  },
+  "/media/intelligence-index-cost-linear/v2-03-compare-zoomed-radar.webp": {
+   "width": 1680,
+   "has1600": true,
+   "display": "/media/intelligence-index-cost-linear/v2-03-compare-zoomed-radar-display.webp",
+   "bytes": 152404,
+   "originalBytes": 417770,
+   "sha256": "d30e537c8163ff39c89402cd3b6892e6e53a6d838bd34b861372bb06df97de2c"
+  },
+  "/media/intelligence-index-cost-linear/v2-04-subscription-router.webp": {
+   "width": 1680,
+   "has1600": true,
+   "display": "/media/intelligence-index-cost-linear/v2-04-subscription-router-display.webp",
+   "bytes": 142118,
+   "originalBytes": 373020,
+   "sha256": "a29eeee227adb1f32160c8ec22f3ceb114ea5ad0df6961b0c3de51d4f41da492"
+  },
+  "/media/intelligence-index-cost-linear/v2-05-frontier-hard-index.webp": {
+   "width": 1680,
+   "has1600": true,
+   "display": "/media/intelligence-index-cost-linear/v2-05-frontier-hard-index-display.webp",
+   "bytes": 143838,
+   "originalBytes": 451358,
+   "sha256": "83d8f9990cd1a4b43ddfdb355e535952a66ee62ca9fdb41eabd3cbe6adc05613"
+  },
+  "/media/intelligence-index-cost-linear/v2-06-compare-strip-track.webp": {
+   "width": 1680,
+   "has1600": true,
+   "display": "/media/intelligence-index-cost-linear/v2-06-compare-strip-track-display.webp",
+   "bytes": 182224,
+   "originalBytes": 485100,
+   "sha256": "b430d1290ef12b2e83211402c63f3016d777eefbf13713e07342b45c7a3ec606"
+  },
+  "/media/intelligence-index-cost-linear/v2-07-multimodal-media-arena.webp": {
+   "width": 1680,
+   "has1600": true,
+   "display": "/media/intelligence-index-cost-linear/v2-07-multimodal-media-arena-display.webp",
+   "bytes": 156682,
+   "originalBytes": 501364,
+   "sha256": "13532f5feffe00c6a64c5d2adcb84a47c7bfe637a990630dd1ab92c6bf782836"
+  },
+  "/media/intelligence-index-cost-linear/v2-08-coding-agents-light.webp": {
+   "width": 1680,
+   "has1600": true,
+   "display": "/media/intelligence-index-cost-linear/v2-08-coding-agents-light-display.webp",
+   "bytes": 101718,
+   "originalBytes": 263346,
+   "sha256": "c8fc6ac1ea921368b069f8b7508d8cb407c82d5c844afaab2549c87d79a2c0e8"
+  },
   "/media/nex/04-next-task-overview.webp": {
    "width": 1442,
    "has1600": false,

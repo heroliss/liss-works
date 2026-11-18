@@ -1,0 +1,105 @@
+---
+import type { GalleryImage } from '../data/types';
+import { getProject } from '../data/projects';
+import { getProjectWorld, projectWorldStyle } from '../data/project-worlds';
+import { COST_SHOT, COST_SWEEP_MS, costLayers, costPoints, costSteps, type CostRect } from '../data/cost-chart-showcase';
+import { sitePath } from '../lib/site-path';
+import { responsiveSrcset } from '../data/project-image';
+import Icon from './Icon.astro';
+import '../styles/cost-chart-showcase.css';
+
+interface Props { detail?: boolean }
+const { detail = false } = Astro.props;
+const project = getProject('intelligence-index-cost-linear')!;
+const world = getProjectWorld('intelligence-index-cost-linear');
+const image = (shot: string) => project.gallery.find(item => item.src.endsWith(`/${shot}.webp`))!;
+const srcset = (item: GalleryImage) => (item.srcset ?? responsiveSrcset(item.src, item.width))
+  .split(',').map(candidate => { const [url, ...descriptor] = candidate.trim().split(/\s+/); return [sitePath(url), ...descriptor].join(' '); }).join(', ');
+const sizes = '(max-width: 760px) 94vw, (max-width: 1340px) 90vw, 1240px';
+const percent = (value: number) => `${(value * 100).toFixed(4)}%`;
+
+function box([left, top, right, bottom]: CostRect, within: CostRect = [0, 0, COST_SHOT.width, COST_SHOT.height]) {
+  const width = within[2] - within[0], height = within[3] - within[1];
+  return { x: (left - within[0]) / width, y: (top - within[1]) / height, w: (right - left) / width, h: (bottom - top) / height };
+}
+const place = (rect: CostRect, within?: CostRect) => {
+  const b = box(rect, within);
+  return `--x:${percent(b.x)};--y:${percent(b.y)};--w:${percent(b.w)};--h:${percent(b.h)}`;
+};
+const cut = (rect: CostRect) => {
+  const b = box(rect);
+  return `width:${percent(1 / b.w)};left:${percent(-b.x / b.w)};top:${percent(-b.y / b.h)}`;
+};
+
+const initial = costSteps.find(step => step.id === 'overview')!;
+const shots = [...new Set(costSteps.map(step => step.shot))];
+const stepOf = (id: string) => costSteps.find(step => step.id === id)!;
+const pointOf = (group: string) => costPoints.find(point => point.group === group)!;
+const on = (active: boolean) => active ? '' : undefined;
+const callout = ({ x, top, bottom }: { x: [number, number]; top?: number; bottom?: number }) =>
+  `--x:${percent(x[0] / COST_SHOT.width)};--w:${percent((x[1] - x[0]) / COST_SHOT.width)};` +
+  (top !== undefined ? `top:${percent(top / COST_SHOT.height)}` : `bottom:${percent(1 - (bottom ?? 0) / COST_SHOT.height)}`);
+---
+<section class:list={['cc-lab', { 'home-chapter': !detail, 'cc-lab--detail': detail }]} id={detail ? 'cost-workbench' : 'cost-chart'} data-cost-showcase data-step={initial.id} data-shot={initial.shot} aria-labelledby={detail ? 'cost-detail-heading' : undefined} aria-label={detail ? undefined : '四步选型演示：AI 智能与真实花费交互图表'} style={`${projectWorldStyle('intelligence-index-cost-linear')};--accent:${world.accent};--sweep:${COST_SWEEP_MS}ms`}>
+  {detail && <h2 id="cost-detail-heading" class="sr-only">四步 AI 选型与算账实景演示</h2>}
+  <div class="cc-stage">
+    <div class="cc-rail">
+      <div class="cc-steps" role="group" aria-label="AI 选型上手步骤">
+        {costSteps.map((step, index) => <button type="button" data-cc-step={step.id} data-shot={step.shot} aria-pressed={step.id === initial.id ? 'true' : 'false'}><span>{String(index + 1).padStart(2, '0')}</span>{step.label}</button>)}
+      </div>
+      <div class="cc-rail-tools">
+        <p class="cc-hint">四步上手演示 · 悬停浮层看解读 · 点击放大看原图</p>
+        {shots.map(shot => {
+          const item = image(shot);
+          return <a class="cc-zoom" href={sitePath(item.src)} data-lightbox data-gallery={detail ? 'cost-detail-hero' : 'cost-home'} data-title={item.alt} data-caption={item.caption} data-width={item.width} data-height={item.height} data-cc-zoom={shot} hidden={shot !== initial.shot}><Icon name="expand" size={15}/>看原图</a>;
+        })}
+      </div>
+    </div>
+
+    <div class="cc-scene" data-cc-scene>
+      <div class="cc-float">
+        <div class="cc-window" data-cc-window>
+          <span class="cc-plate" aria-hidden="true"></span>
+          <span class="cc-edge cc-edge-r" aria-hidden="true"></span><span class="cc-edge cc-edge-b" aria-hidden="true"></span>
+          <span class="cc-shadow" aria-hidden="true"></span>
+          <div class="cc-screen">
+            {shots.map(shot => {
+              const item = image(shot);
+              return <img class="cc-base" data-cc-base={shot} data-on={on(shot === initial.shot)} aria-hidden={shot === initial.shot ? undefined : 'true'} src={sitePath(item.src)} srcset={srcset(item)} sizes={sizes} width={item.width} height={item.height} alt={item.alt} loading={shot === initial.shot ? 'eager' : 'lazy'} decoding="async"/>;
+            })}
+            {costLayers.map(layer => <span class="cc-socket" data-cc-socket={layer.id} data-step={layer.step} data-on={on(layer.step === initial.id)} style={place(layer.rect)} aria-hidden="true"></span>)}
+            {costLayers.map(layer => {
+              const item = image(stepOf(layer.step).shot);
+              const point = pointOf(layer.group);
+              return (
+                <button type="button" class="cc-layer" data-cc-layer={layer.id} data-step={layer.step} data-group={layer.group} data-shot={stepOf(layer.step).shot} data-tone={point.tone} data-on={on(layer.step === initial.id)} inert={layer.step !== initial.id} aria-label={`${point.label}：${point.note}点一下看原图。`} style={`${place(layer.rect)};--z:${layer.depth}px;--d:${layer.delay}ms`}>
+                  <span class="cc-cut" aria-hidden="true"><img src={sitePath(item.src)} srcset={srcset(item)} sizes={sizes} width={item.width} height={item.height} alt="" loading="lazy" decoding="async" style={cut(layer.rect)}/></span>
+                  {layer.chip && <span class="cc-chip" aria-hidden="true">{layer.chip}</span>}
+                </button>
+              );
+            })}
+            {costPoints.map(point => <span class="cc-callout" data-cc-callout={point.group} data-step={point.step} data-tone={point.tone} data-side={point.callout.top !== undefined ? 'below' : 'above'} style={callout(point.callout)} aria-hidden="true"><b>{point.label}</b>{point.note}</span>)}
+            <span class="cc-sheen" aria-hidden="true"></span><span class="cc-beam" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cc-copies" data-cc-copies>
+      {costSteps.map((step, index) => (
+        <div class="cc-copy" data-cc-copy={step.id} data-on={on(step.id === initial.id)} aria-hidden={step.id === initial.id ? undefined : 'true'} inert={step.id !== initial.id}>
+          <div class="cc-copy-lead">
+            <p class="cc-figure"><b>{step.figure}</b><small>{step.figureNote}</small></p>
+            <h3><span class="sr-only">{`第 ${index + 1} 步，${step.label}：`}</span>{step.title}</h3>
+            <p>{step.body}</p>
+          </div>
+          <ul class="cc-points">
+            {costPoints.filter(point => point.step === step.id).map(point => (
+              <li data-cc-point={point.group} data-step={point.step} data-tone={point.tone}><i aria-hidden="true"></i><b>{point.label}</b><span>{point.note}</span></li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

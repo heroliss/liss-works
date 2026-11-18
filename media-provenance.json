@@ -1,6 +1,6 @@
 {
   "schema": "showcase.website-media.v1",
-  "generated_at_utc": "2026-11-18T19:48:50.241567+00:00",
+  "generated_at_utc": "2026-11-18T20:37:26.020817+00:00",
   "source_manifest": "captures/selected-manifest.json",
   "source_manifest_sha256": "67d60c2289c031d14b180bc0b26ddcac2548fd7d425474912616c17353b85997",
   "originals_modified": false,
@@ -9710,6 +9710,550 @@
           "lossless": false
         }
       ]
+    },
+    {
+      "repo": "intelligence-index-cost-linear",
+      "source": "captures/intelligence-index-cost-linear/selected-20261119/v2-01-overview-pareto-dark.png",
+      "source_sha256": "d0a10843e4518ceb60e01922fc7ddc9c26e25e94a9eafc8c778ea0f2a00eb8aa",
+      "source_bytes": 703271,
+      "source_width": 1680,
+      "source_height": 1050,
+      "source_authenticity": "Real Intelligence vs. Cost live benchmark explorer (commit f017689) at https://heroliss.github.io/intelligence-index-cost-linear/ with genuine Artificial Analysis, LMArena, and Design Arena snapshot data. Downscaled via Lanczos from a 2x headless Chrome capture of a 1440x900 desktop viewport.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/intelligence-index-cost-linear/v2-01-overview-pareto-dark.webp",
+        "url": "/media/intelligence-index-cost-linear/v2-01-overview-pareto-dark.webp",
+        "bytes": 572554,
+        "sha256": "bf921b2f91b085a4b6a4ac3f2932ce24fac80ca2cc2393bdc2b6bdfa548115be",
+        "width": 1680,
+        "height": 1050,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/v2-01-overview-pareto-dark-320.webp",
+          "url": "/media/intelligence-index-cost-linear/v2-01-overview-pareto-dark-320.webp",
+          "bytes": 16576,
+          "sha256": "84989a6b88f2a3650aafb276a425e7312ad4eb6e2557aa82e1eacb230c6bf70c",
+          "width": 320,
+          "height": 200,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/v2-01-overview-pareto-dark-640.webp",
+          "url": "/media/intelligence-index-cost-linear/v2-01-overview-pareto-dark-640.webp",
+          "bytes": 49722,
+          "sha256": "5a487702a6ac9b46cf019b78c0baba10aa27efe089de498f48c45477385810b2",
+          "width": 640,
+          "height": 400,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/v2-01-overview-pareto-dark-960.webp",
+          "url": "/media/intelligence-index-cost-linear/v2-01-overview-pareto-dark-960.webp",
+          "bytes": 94406,
+          "sha256": "5fff94d47dc6d8fe62f304908b4fce62cff23558ba2e8314ed9c99352cb81520",
+          "width": 960,
+          "height": 600,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/v2-01-overview-pareto-dark-1600.webp",
+          "url": "/media/intelligence-index-cost-linear/v2-01-overview-pareto-dark-1600.webp",
+          "bytes": 201044,
+          "sha256": "e716e31d2247b9840b08c1f31b91e228600fbc89ff18da8ab73c2c57a9cedac0",
+          "width": 1600,
+          "height": 1000,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "intelligence-index-cost-linear",
+      "source": "captures/intelligence-index-cost-linear/selected-20261119/v2-02-human-arena-scenario.png",
+      "source_sha256": "4320fe898a1f2dc80329107a463c69cbfba9d7e6d58eac85bc803f2779e7e9f2",
+      "source_bytes": 579416,
+      "source_width": 1680,
+      "source_height": 1050,
+      "source_authenticity": "Real Intelligence vs. Cost live benchmark explorer (commit f017689) showing the Human & Taste blind-vote channel with the 5-pillar custom Scenario Recipe popover active. Downscaled via Lanczos from a 2x headless Chrome capture of a 1440x900 desktop viewport.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/intelligence-index-cost-linear/v2-02-human-arena-scenario.webp",
+        "url": "/media/intelligence-index-cost-linear/v2-02-human-arena-scenario.webp",
+        "bytes": 464210,
+        "sha256": "998deabd5d4b5f0c2a6f89425e93da1214475640f4279e9a76a0975dbd25a6bd",
+        "width": 1680,
+        "height": 1050,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/v2-02-human-arena-scenario-320.webp",
+          "url": "/media/intelligence-index-cost-linear/v2-02-human-arena-scenario-320.webp",
+          "bytes": 13994,
+          "sha256": "c01514c61b293c0852fedac240aa155a817a97d75894be4f4bc7096f944bbd7c",
+          "width": 320,
+          "height": 200,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/v2-02-human-arena-scenario-640.webp",
+          "url": "/media/intelligence-index-cost-linear/v2-02-human-arena-scenario-640.webp",
+          "bytes": 41572,
+          "sha256": "78c9d0a0809301dfc72ec6648b21a0f9dac585bf52337563dfc3157717f4d64f",
+          "width": 640,
+          "height": 400,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/v2-02-human-arena-scenario-960.webp",
+          "url": "/media/intelligence-index-cost-linear/v2-02-human-arena-scenario-960.webp",
+          "bytes": 75788,
+          "sha256": "99b82c44b880b6203c0f3ef425bd281a37bb1a17ccf70e2fbff0205853e622db",
+          "width": 960,
+          "height": 600,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/v2-02-human-arena-scenario-1600.webp",
+          "url": "/media/intelligence-index-cost-linear/v2-02-human-arena-scenario-1600.webp",
+          "bytes": 167174,
+          "sha256": "83fa8e75af37218ecd074adbb06a97f58cc91c031a028b41a28f9f56915eafcc",
+          "width": 1600,
+          "height": 1000,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "intelligence-index-cost-linear",
+      "source": "captures/intelligence-index-cost-linear/selected-20261119/v2-03-compare-zoomed-radar.png",
+      "source_sha256": "ef0162b7bcf6cc776b9d5576ae5184d4a29a456b7dc01e0ab620681900022c53",
+      "source_bytes": 603405,
+      "source_width": 1680,
+      "source_height": 1050,
+      "source_authenticity": "Real Intelligence vs. Cost live benchmark explorer (commit f017689) showing the Compare workbench with zoomed 6D radar, ranked subscore cards, 5-segment cache-aware bill breakdown, and multi-cloud API price comparison. Downscaled via Lanczos from a 2x headless Chrome capture of a 1440x900 desktop viewport.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/intelligence-index-cost-linear/v2-03-compare-zoomed-radar.webp",
+        "url": "/media/intelligence-index-cost-linear/v2-03-compare-zoomed-radar.webp",
+        "bytes": 417770,
+        "sha256": "60322b5de75c8f68f08310e0f59b7c896defddaaefbcfb100a60b96a501578a2",
+        "width": 1680,
+        "height": 1050,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/v2-03-compare-zoomed-radar-320.webp",
+          "url": "/media/intelligence-index-cost-linear/v2-03-compare-zoomed-radar-320.webp",
+          "bytes": 14626,
+          "sha256": "cc525c3a46856c0d90d75b9fddc10f31727ae3563f522a59766b2b9ef10988cd",
+          "width": 320,
+          "height": 200,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/v2-03-compare-zoomed-radar-640.webp",
+          "url": "/media/intelligence-index-cost-linear/v2-03-compare-zoomed-radar-640.webp",
+          "bytes": 42042,
+          "sha256": "fb372802ae57d989f9bf67d605ba232b5a413692ab7c99db2a97f08398903f36",
+          "width": 640,
+          "height": 400,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/v2-03-compare-zoomed-radar-960.webp",
+          "url": "/media/intelligence-index-cost-linear/v2-03-compare-zoomed-radar-960.webp",
+          "bytes": 78908,
+          "sha256": "49ecc86c66495e83e589295451063823ed830913ceaa88bd8646347cb017d9ab",
+          "width": 960,
+          "height": 600,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/v2-03-compare-zoomed-radar-1600.webp",
+          "url": "/media/intelligence-index-cost-linear/v2-03-compare-zoomed-radar-1600.webp",
+          "bytes": 169012,
+          "sha256": "4274bac8d46c4ebfde6550524f09ba1e61c6427af95e37284ea9c64d90347134",
+          "width": 1600,
+          "height": 1000,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "intelligence-index-cost-linear",
+      "source": "captures/intelligence-index-cost-linear/selected-20261119/v2-04-subscription-router.png",
+      "source_sha256": "4babf5d23899bc92701fcc6d7f17e33d8127b6d8a8eae0befc425cc7934d7a49",
+      "source_bytes": 532227,
+      "source_width": 1680,
+      "source_height": 1050,
+      "source_authenticity": "Real Intelligence vs. Cost live benchmark explorer (commit f017689) showing the Monthly Subscription vs. Pay-as-you-go API break-even calculator with color-coded verdict pills. Downscaled via Lanczos from a 2x headless Chrome capture of a 1440x900 desktop viewport.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/intelligence-index-cost-linear/v2-04-subscription-router.webp",
+        "url": "/media/intelligence-index-cost-linear/v2-04-subscription-router.webp",
+        "bytes": 373020,
+        "sha256": "84d27fefc47561ea6ce43522bf8fece197cb4e479b4c6ba0dc08a66e6b7eec51",
+        "width": 1680,
+        "height": 1050,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/v2-04-subscription-router-320.webp",
+          "url": "/media/intelligence-index-cost-linear/v2-04-subscription-router-320.webp",
+          "bytes": 14248,
+          "sha256": "c93ee3695af4207ee3c54fbfae59dbdc5123fc716e71f50e49cf0a10784e9677",
+          "width": 320,
+          "height": 200,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/v2-04-subscription-router-640.webp",
+          "url": "/media/intelligence-index-cost-linear/v2-04-subscription-router-640.webp",
+          "bytes": 39990,
+          "sha256": "446120f44e4c31a49bf91555e57c5f78995c158ed21a68206ccadd8af546fe75",
+          "width": 640,
+          "height": 400,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/v2-04-subscription-router-960.webp",
+          "url": "/media/intelligence-index-cost-linear/v2-04-subscription-router-960.webp",
+          "bytes": 73364,
+          "sha256": "1da3d030291e4ca047ec1752262c2b0340be3bd46af5dc65bfde37f09182e45f",
+          "width": 960,
+          "height": 600,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/v2-04-subscription-router-1600.webp",
+          "url": "/media/intelligence-index-cost-linear/v2-04-subscription-router-1600.webp",
+          "bytes": 155680,
+          "sha256": "a6db0a177fae9d15306bcb2f24eaceb7ccc78d937e62c5c6fedbc13a238379b0",
+          "width": 1600,
+          "height": 1000,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "intelligence-index-cost-linear",
+      "source": "captures/intelligence-index-cost-linear/selected-20261119/v2-05-frontier-hard-index.png",
+      "source_sha256": "10859a8b078c90bb99b308110b6adbd365d4dcd1e1dc2b97858802fdfa5d77ef",
+      "source_bytes": 548438,
+      "source_width": 1680,
+      "source_height": 1050,
+      "source_authenticity": "Real Intelligence vs. Cost live benchmark explorer (commit f017689) showing the unsaturated Frontier Hard channel stripping 90%+ saturated legacy exams. Downscaled via Lanczos from a 2x headless Chrome capture of a 1440x900 desktop viewport.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/intelligence-index-cost-linear/v2-05-frontier-hard-index.webp",
+        "url": "/media/intelligence-index-cost-linear/v2-05-frontier-hard-index.webp",
+        "bytes": 451358,
+        "sha256": "e1966553e060d4f0cbbb62565a8ef03cd6005a86f3e25f23c2f0db3bcf3e8b76",
+        "width": 1680,
+        "height": 1050,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/v2-05-frontier-hard-index-320.webp",
+          "url": "/media/intelligence-index-cost-linear/v2-05-frontier-hard-index-320.webp",
+          "bytes": 11750,
+          "sha256": "9b9cce077013227ebd937a5dc821ed6d7b9e0074a6dc6d2451f474b436abb687",
+          "width": 320,
+          "height": 200,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/v2-05-frontier-hard-index-640.webp",
+          "url": "/media/intelligence-index-cost-linear/v2-05-frontier-hard-index-640.webp",
+          "bytes": 34942,
+          "sha256": "9e9c190da700e33e1ba7bb6410829a79303ae7180983c9b097226f87b1d22792",
+          "width": 640,
+          "height": 400,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/v2-05-frontier-hard-index-960.webp",
+          "url": "/media/intelligence-index-cost-linear/v2-05-frontier-hard-index-960.webp",
+          "bytes": 69590,
+          "sha256": "9b435f98d66098267c5a90c8de6f2485e6918ae0afe24b34bbe9813f18cdc837",
+          "width": 960,
+          "height": 600,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/v2-05-frontier-hard-index-1600.webp",
+          "url": "/media/intelligence-index-cost-linear/v2-05-frontier-hard-index-1600.webp",
+          "bytes": 158860,
+          "sha256": "21766bd6d2435ef298e5d5a04e02f9915b3f3774d70a0dfffd701aa7200296a4",
+          "width": 1600,
+          "height": 1000,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "intelligence-index-cost-linear",
+      "source": "captures/intelligence-index-cost-linear/selected-20261119/v2-06-compare-strip-track.png",
+      "source_sha256": "7b077e3015fbd2ccf47df166424ad605f7f75b0dfa9efcaec5672febb7c01d96",
+      "source_bytes": 724392,
+      "source_width": 1680,
+      "source_height": 1050,
+      "source_authenticity": "Real Intelligence vs. Cost live benchmark explorer (commit f017689) showing horizontal zoomed dot-strip tracks and LMArena / Design Arena / GDPval Elo bars in Human & Taste Compare view. Downscaled via Lanczos from a 2x headless Chrome capture of a 1440x900 desktop viewport.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/intelligence-index-cost-linear/v2-06-compare-strip-track.webp",
+        "url": "/media/intelligence-index-cost-linear/v2-06-compare-strip-track.webp",
+        "bytes": 485100,
+        "sha256": "87c17235bd4facce40d4de48a0099fc7feeb1a25777ee172f4e8fa2420103848",
+        "width": 1680,
+        "height": 1050,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/v2-06-compare-strip-track-320.webp",
+          "url": "/media/intelligence-index-cost-linear/v2-06-compare-strip-track-320.webp",
+          "bytes": 18116,
+          "sha256": "978f60b7acc8e3d70a8f4d2d116a7b96d9351922134d1910ca4c4928f351997b",
+          "width": 320,
+          "height": 200,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/v2-06-compare-strip-track-640.webp",
+          "url": "/media/intelligence-index-cost-linear/v2-06-compare-strip-track-640.webp",
+          "bytes": 52472,
+          "sha256": "efa1b0f02c32b2ab1773809c996d235844bd33c1e1bf3e983903a05f4f48a481",
+          "width": 640,
+          "height": 400,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/v2-06-compare-strip-track-960.webp",
+          "url": "/media/intelligence-index-cost-linear/v2-06-compare-strip-track-960.webp",
+          "bytes": 95578,
+          "sha256": "367b5d7c4bed571810dddf3b23fa426a6b27b50387074007b649fd4cb80b6119",
+          "width": 960,
+          "height": 600,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/v2-06-compare-strip-track-1600.webp",
+          "url": "/media/intelligence-index-cost-linear/v2-06-compare-strip-track-1600.webp",
+          "bytes": 201412,
+          "sha256": "93eb54f8fadf60d563ef7af4f29730909d63d9aaea2c553075abc8c286859376",
+          "width": 1600,
+          "height": 1000,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "intelligence-index-cost-linear",
+      "source": "captures/intelligence-index-cost-linear/selected-20261119/v2-07-multimodal-media-arena.png",
+      "source_sha256": "c568a2ba217d4447a60e9d7854ffca8718bbeb8a18691a30ee4ce4a6f2aa099f",
+      "source_bytes": 589037,
+      "source_width": 1680,
+      "source_height": 1050,
+      "source_authenticity": "Real Intelligence vs. Cost live benchmark explorer (commit f017689) showing 253 Image, Video, and Speech TTS generators plotted against per-output linear USD cost. Downscaled via Lanczos from a 2x headless Chrome capture of a 1440x900 desktop viewport.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/intelligence-index-cost-linear/v2-07-multimodal-media-arena.webp",
+        "url": "/media/intelligence-index-cost-linear/v2-07-multimodal-media-arena.webp",
+        "bytes": 501364,
+        "sha256": "b81a0ce60a89ef4e861ab4d5ecffac90b328b37fd2bf658613936e8e0aff07bd",
+        "width": 1680,
+        "height": 1050,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/v2-07-multimodal-media-arena-320.webp",
+          "url": "/media/intelligence-index-cost-linear/v2-07-multimodal-media-arena-320.webp",
+          "bytes": 12432,
+          "sha256": "fae3d505a2b40d0f5b583c3ef9632fbac2b2c50408c1c08ffc18a585789f6800",
+          "width": 320,
+          "height": 200,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/v2-07-multimodal-media-arena-640.webp",
+          "url": "/media/intelligence-index-cost-linear/v2-07-multimodal-media-arena-640.webp",
+          "bytes": 37916,
+          "sha256": "da86068432837c60956368f034b003b3fbc4a6f20d785120c2f8d5ab0f2a29b2",
+          "width": 640,
+          "height": 400,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/v2-07-multimodal-media-arena-960.webp",
+          "url": "/media/intelligence-index-cost-linear/v2-07-multimodal-media-arena-960.webp",
+          "bytes": 75522,
+          "sha256": "81f64efe7147adf13ae7805b7f8a7a3a4cb11adef67f1628cf7f4a95a059adad",
+          "width": 960,
+          "height": 600,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/v2-07-multimodal-media-arena-1600.webp",
+          "url": "/media/intelligence-index-cost-linear/v2-07-multimodal-media-arena-1600.webp",
+          "bytes": 168440,
+          "sha256": "a667aad054e6e07062444e3e3675a6e39c010c13f04b91ce8247f943a23ad0f7",
+          "width": 1600,
+          "height": 1000,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "intelligence-index-cost-linear",
+      "source": "captures/intelligence-index-cost-linear/selected-20261119/v2-08-coding-agents-light.png",
+      "source_sha256": "46a774660792bef92193313da07bce8e83adb73e02199edb90246680e1ddd61a",
+      "source_bytes": 361681,
+      "source_width": 1680,
+      "source_height": 1050,
+      "source_authenticity": "Real Intelligence vs. Cost live benchmark explorer (commit f017689) in WCAG AA Light theme showing Coding Agents with multi-level effort trajectories. Downscaled via Lanczos from a 2x headless Chrome capture of a 1440x900 desktop viewport.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/intelligence-index-cost-linear/v2-08-coding-agents-light.webp",
+        "url": "/media/intelligence-index-cost-linear/v2-08-coding-agents-light.webp",
+        "bytes": 263346,
+        "sha256": "32c9d0fd655e0dd501b2b59fad726b25765ed8a96cd29df1b2d7448ea7d0e5ce",
+        "width": 1680,
+        "height": 1050,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/v2-08-coding-agents-light-320.webp",
+          "url": "/media/intelligence-index-cost-linear/v2-08-coding-agents-light-320.webp",
+          "bytes": 8268,
+          "sha256": "c667e132466165ddc04a676b45ad06bf3dbde2bdd0bdc52d0f20fd950c79a675",
+          "width": 320,
+          "height": 200,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/v2-08-coding-agents-light-640.webp",
+          "url": "/media/intelligence-index-cost-linear/v2-08-coding-agents-light-640.webp",
+          "bytes": 25160,
+          "sha256": "92fd6dfe24efecf864942e13c9f06e42cedb33fd36884a399e5ed59ed5dc0b09",
+          "width": 640,
+          "height": 400,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/v2-08-coding-agents-light-960.webp",
+          "url": "/media/intelligence-index-cost-linear/v2-08-coding-agents-light-960.webp",
+          "bytes": 48526,
+          "sha256": "dba3e1765df05d52fcf57aba1d6d5da2d65ccba45c7731c1f021ab3426091563",
+          "width": 960,
+          "height": 600,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/intelligence-index-cost-linear/v2-08-coding-agents-light-1600.webp",
+          "url": "/media/intelligence-index-cost-linear/v2-08-coding-agents-light-1600.webp",
+          "bytes": 112360,
+          "sha256": "8c592f0585d771d6f4a5b1df0f423fa2da5fa7a8cd2f317cc9b847faf566af47",
+          "width": 1600,
+          "height": 1000,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
     }
   ],
   "video": {
@@ -9725,16 +10269,16 @@
     "note": "Real map UI capture, 19.133 s, encoded 30 CFR with frame duplication; not a rendering performance claim."
   },
   "totals": {
-    "original_image_count": 167,
-    "exported_image_count": 685,
-    "source_image_bytes": 63773730,
-    "exported_image_bytes": 67513746,
+    "original_image_count": 175,
+    "exported_image_count": 725,
+    "source_image_bytes": 68415597,
+    "exported_image_bytes": 73421958,
     "video_bytes": 1363373,
-    "font_bytes": 411940,
-    "font_license_and_provenance_bytes": 17585,
-    "published_media_bytes": 69289059,
-    "total_public_asset_count": 691,
-    "total_public_asset_bytes": 69306644
+    "font_bytes": 423080,
+    "font_license_and_provenance_bytes": 17842,
+    "published_media_bytes": 75208411,
+    "total_public_asset_count": 731,
+    "total_public_asset_bytes": 75226253
   },
   "fonts": {
     "codec": "fontTools WOFF2 with Node native zlib Brotli (quality 11 / font mode), invoked by fontTools",
@@ -9745,6 +10289,7 @@
       "site/src/components/AtlasShowcase.astro",
       "site/src/components/AtollWaterScene.astro",
       "site/src/components/ChapterPoints.astro",
+      "site/src/components/CostChartShowcase.astro",
       "site/src/components/DubForgeWorkflow.astro",
       "site/src/components/ExplorationInvitation.astro",
       "site/src/components/FrameworkDiagram.astro",
@@ -9770,6 +10315,7 @@
       "site/src/components/WorksOrbit.astro",
       "site/src/components/WorksTable.astro",
       "site/src/data/atlas-showcase.ts",
+      "site/src/data/cost-chart-showcase.ts",
       "site/src/data/display-media.json",
       "site/src/data/dubforge-workflow.ts",
       "site/src/data/framework-showcase.ts",
@@ -9788,6 +10334,7 @@
       "site/src/data/stories/china-house-price-map.ts",
       "site/src/data/stories/dubforge.ts",
       "site/src/data/stories/glass-atoll.ts",
+      "site/src/data/stories/intelligence-index-cost-linear.ts",
       "site/src/data/stories/other-projects.ts",
       "site/src/data/stories/panxu.ts",
       "site/src/data/stories/restored-projects.ts",
@@ -9816,6 +10363,7 @@
       "site/src/scripts/atoll-water-engine.ts",
       "site/src/scripts/atoll-water-shaders.ts",
       "site/src/scripts/atoll-water.ts",
+      "site/src/scripts/cost-chart-showcase.ts",
       "site/src/scripts/detail-world-motion.ts",
       "site/src/scripts/downloads.ts",
       "site/src/scripts/exploration-invitation.ts",
@@ -9845,6 +10393,7 @@
       "site/src/styles/atlas-showcase.css",
       "site/src/styles/atmosphere-polish.css",
       "site/src/styles/background-depth.css",
+      "site/src/styles/cost-chart-showcase.css",
       "site/src/styles/detail-artifacts.css",
       "site/src/styles/detail-atmosphere.css",
       "site/src/styles/detail-editorial.css",
@@ -9918,14 +10467,14 @@
       {
         "path": "site/public/fonts/noto-sans-sc-subset.woff2",
         "url": "/fonts/noto-sans-sc-subset.woff2",
-        "bytes": 397364,
-        "sha256": "8408b36fe04329e23528415708530495d460a8c8a860f0cecba9d851cc0a0018",
+        "bytes": 408504,
+        "sha256": "34b8e442e7377cd8bbcdd183ae48cfb006ff88eca4aa32bbf6cbf34eace1385d",
         "family": "Noto Sans SC",
         "source": "C:\\Windows\\Fonts\\NotoSansSC-VF.ttf",
         "source_sha256": "763146584cf0710223441356b4395e279021b0806c196614377a7a0174ae074a",
         "source_bytes": 17773244,
-        "requested_codepoints": 1404,
-        "included_codepoints": 1406,
+        "requested_codepoints": 1454,
+        "included_codepoints": 1456,
         "missing_cjk": [],
         "roundtrip_decode_verified": true
       }
@@ -9953,7 +10502,7 @@
     },
     {
       "path": "site/media-additions.json",
-      "sha256": "79fb21a7e410ca3166b7d1cf93c3436ada3e43d2854add694bf53b89e0da8ee8"
+      "sha256": "985736b7ba1c270626eabe336185f2e088426c3327814f5da1a39cc1cf0b7c81"
     }
   ]
 }

@@ -26,23 +26,44 @@
 .detail-page[data-project-world="learnopengl"] .gallery-grid figure:nth-child(3n+2){margin-top:72px}
 .detail-page[data-project-world="learnopengl"] .gallery-grid figure:nth-child(3n+3){grid-column:1/-1;width:76%;justify-self:end}
 
-/* Model research: a wide real plot, with reading notes kept off its axes. */
+/* Model research: a full-width masthead opens into the 4-stage interactive AI benchmark workbench. */
 .detail-page[data-project-world="intelligence-index-cost-linear"]{--accent:#c6ecfb;--cyan:#c6ecfb;--surface:#0c191f;--raised:#172128;--muted:#b7c4d6}
-.detail-page[data-project-world="intelligence-index-cost-linear"] .project-prologue{padding-top:25px}
-.detail-page[data-project-world="intelligence-index-cost-linear"] .project-prologue::before{left:8%;right:0;top:180px;bottom:130px;background:#131d2e}
-.detail-page[data-project-world="intelligence-index-cost-linear"] .project-intro{grid-template-columns:minmax(0,1.5fr) minmax(0,.65fr);gap:7%;margin:20px 0 45px}
-.detail-page[data-project-world="intelligence-index-cost-linear"] .project-intro h1{font-size:clamp(58px,7.6vw,112px);line-height:.96;max-width:14ch}
-.detail-page[data-project-world="intelligence-index-cost-linear"] .project-intro .summary{max-width:36ch}
-.detail-page[data-project-world="intelligence-index-cost-linear"] .project-opening{display:block}
-.detail-page[data-project-world="intelligence-index-cost-linear"] .project-signature{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5%;margin:34px 0 0;padding-left:8%}
-.detail-page[data-project-world="intelligence-index-cost-linear"] .project-overview{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:12%}
-.detail-page[data-project-world="intelligence-index-cost-linear"] .project-stack{grid-template-columns:repeat(3,minmax(0,1fr))}
-.detail-page[data-project-world="intelligence-index-cost-linear"] .engineering-topic--media{display:block}
-.detail-page[data-project-world="intelligence-index-cost-linear"] .engineering-topic--media .engineering-media{width:88%;margin:0 0 42px auto}
-.detail-page[data-project-world="intelligence-index-cost-linear"] .engineering-topic--media .engineering-copy{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:8%}
-.detail-page[data-project-world="intelligence-index-cost-linear"] .engineering-copy h3{font-size:clamp(30px,3.7vw,54px)}
-.detail-page[data-project-world="intelligence-index-cost-linear"] .gallery-grid{display:block}
-.detail-page[data-project-world="intelligence-index-cost-linear"] .gallery-grid figure:nth-child(n){width:88%;margin:0 0 45px auto}
+.detail-page[data-project-world="intelligence-index-cost-linear"] .project-prologue{padding-top:28px}
+.detail-page[data-project-world="intelligence-index-cost-linear"] .project-prologue::before{left:6%;right:4%;top:170px;bottom:110px;background:radial-gradient(ellipse at 50% 42%,#13253399,transparent 74%)}
+.detail-page[data-project-world="intelligence-index-cost-linear"] .project-intro{display:grid;grid-template-columns:minmax(0,1.34fr) minmax(0,.66fr);gap:24px 7%;align-items:end;margin:14px 0 34px}
+.detail-page[data-project-world="intelligence-index-cost-linear"] .project-intro h1{font-size:clamp(46px,5.8vw,86px);max-width:none;line-height:1.05;margin-bottom:16px}
+.detail-page[data-project-world="intelligence-index-cost-linear"] .project-full-name{margin:0 0 16px;color:var(--muted);font-size:16px}
+.detail-page[data-project-world="intelligence-index-cost-linear"] .project-intro .summary{font-size:clamp(18px,1.5vw,21px);max-width:40ch;margin-bottom:18px}
+.detail-page[data-project-world="intelligence-index-cost-linear"] .project-intro .button-row{justify-content:end;padding-bottom:6px}
+.detail-page[data-project-world="intelligence-index-cost-linear"] .project-overview{grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:8%;align-items:start}
+.detail-page[data-project-world="intelligence-index-cost-linear"] .compact-flow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 12px;list-style:none;padding:6px 0 0;counter-reset:cost-flow}
+.detail-page[data-project-world="intelligence-index-cost-linear"] .compact-flow li{counter-increment:cost-flow;display:flex;align-items:center;gap:9px;padding:9px 13px;border-radius:999px;background:#ffffff06;border:1px solid #ffffff12;font-size:15px;color:#e7f0f6}
+.detail-page[data-project-world="intelligence-index-cost-linear"] .compact-flow li::before{content:counter(cost-flow);display:inline-grid;place-items:center;width:21px;height:21px;border-radius:50%;background:color-mix(in srgb,var(--accent) 24%,#10202b);color:var(--accent);font-size:12px;font-weight:600;flex:none}
+.detail-page[data-project-world="intelligence-index-cost-linear"] .project-stack{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 16px}
+.detail-page[data-project-world="intelligence-index-cost-linear"] .project-stack>div{padding:16px 18px 17px 22px;border-radius:12px;background:#ffffff06;border:1px solid #ffffff12}
+.detail-page[data-project-world="intelligence-index-cost-linear"] .project-stack>div::before{left:10px;top:18px;height:20px;border-radius:2px;background:var(--accent)}
+.detail-page[data-project-world="intelligence-index-cost-linear"] .project-stack dt{color:#edf4f9;font-weight:600;font-size:16px;margin-bottom:6px}
+.detail-page[data-project-world="intelligence-index-cost-linear"] .project-stack dd{font-size:14.5px;line-height:1.68;color:var(--muted)}
+.detail-page[data-project-world="intelligence-index-cost-linear"] .engineering-topic--media{grid-template-columns:minmax(0,1.28fr) minmax(0,.78fr);gap:6%;align-items:center}
+.detail-page[data-project-world="intelligence-index-cost-linear"] .engineering-topic--beat-1.engineering-topic--media{grid-template-columns:minmax(0,.78fr) minmax(0,1.28fr);width:96%;margin-left:auto}
+.detail-page[data-project-world="intelligence-index-cost-linear"] .engineering-topic--beat-1.engineering-topic--media .engineering-media{order:1}
+.detail-page[data-project-world="intelligence-index-cost-linear"] .engineering-topic--beat-1.engineering-topic--media .engineering-copy{order:0}
+.detail-page[data-project-world="intelligence-index-cost-linear"] .engineering-topic--beat-2.engineering-topic--media{display:block}
+.detail-page[data-project-world="intelligence-index-cost-linear"] .engineering-topic--beat-2.engineering-topic--media .engineering-media{width:92%;margin:0 auto 36px}
+.detail-page[data-project-world="intelligence-index-cost-linear"] .engineering-topic--beat-2.engineering-topic--media .engineering-copy{display:grid;grid-template-columns:minmax(0,.68fr) minmax(0,1.32fr);gap:0 8%}
+.detail-page[data-project-world="intelligence-index-cost-linear"] .engineering-topic--beat-2.engineering-topic--media .engineering-copy h3{grid-column:1;grid-row:1/5}
+.detail-page[data-project-world="intelligence-index-cost-linear"] .engineering-topic--beat-2.engineering-topic--media .engineering-copy :is(p,dl){grid-column:2}
+.detail-page[data-project-world="intelligence-index-cost-linear"] #cost-tech-brief{margin-top:16px;padding-top:38px;border-top:1px solid #ffffff14}
+.detail-page[data-project-world="intelligence-index-cost-linear"] #cost-tech-brief .engineering-title{font-size:clamp(19px,1.55vw,23px);color:var(--muted);margin-bottom:22px}
+.detail-page[data-project-world="intelligence-index-cost-linear"] #cost-tech-brief .engineering-point{padding:15px 17px 16px 19px;border-radius:10px;background:#ffffff04;border:1px solid #ffffff0d}
+.detail-page[data-project-world="intelligence-index-cost-linear"] #cost-tech-brief .engineering-point::before{left:8px;top:17px;height:18px;width:3px;opacity:.65}
+.detail-page[data-project-world="intelligence-index-cost-linear"] #cost-tech-brief .engineering-point dt{font-size:16px;margin-bottom:7px}
+.detail-page[data-project-world="intelligence-index-cost-linear"] #cost-tech-brief .engineering-point .project-prose{font-size:14.5px;line-height:1.72;color:var(--muted)}
+.detail-page[data-project-world="intelligence-index-cost-linear"] .gallery-grid{grid-template-columns:1fr 1fr;gap:48px 5%}
+.detail-page[data-project-world="intelligence-index-cost-linear"] .gallery-grid figure:nth-child(n){width:100%;margin:0}
+.detail-page[data-project-world="intelligence-index-cost-linear"] .gallery-grid figure:only-child{grid-column:1/-1;width:90%;justify-self:center}
+.detail-page[data-project-world="intelligence-index-cost-linear"] .usage-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
+.detail-page[data-project-world="intelligence-index-cost-linear"] .usage-grid>.usage:last-child h3{color:var(--muted);font-size:20px}
 
 /* Geography: a full-width cartographic masthead opens into the 4-stage interactive atlas table. */
 .detail-page[data-project-world="china-house-price-map"]{--accent:#8cc36d;--cyan:#8cc36d;--surface:#101b0a;--raised:#1d2117;--muted:#b8c9c1}
@@ -181,8 +202,9 @@
 @media(min-width:761px) and (max-width:1050px){
  .detail-page[data-project-world="learnopengl"] .project-prologue{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:5%}
  .detail-page[data-project-world="learnopengl"] .project-intro h1{font-size:clamp(43px,5.3vw,58px)}
- .detail-page[data-project-world="intelligence-index-cost-linear"] .project-intro{grid-template-columns:1fr;gap:25px}
+ .detail-page[data-project-world="intelligence-index-cost-linear"] .project-intro{grid-template-columns:1fr;gap:22px}
  .detail-page[data-project-world="intelligence-index-cost-linear"] .project-intro .button-row{justify-content:start;max-width:none}
+ .detail-page[data-project-world="intelligence-index-cost-linear"] .usage-grid{grid-template-columns:1fr 1fr}
  .detail-page[data-project-world="china-house-price-map"] .project-intro{grid-template-columns:1fr;gap:22px}
  .detail-page[data-project-world="china-house-price-map"] .project-intro .button-row{justify-content:start}
  .detail-page[data-project-world="china-house-price-map"] .usage-grid{grid-template-columns:1fr 1fr}
@@ -220,6 +242,8 @@
  .detail-page:is([data-project-world="learnopengl"],[data-project-world="intelligence-index-cost-linear"],[data-project-world="china-house-price-map"],[data-project-world="sort-lab"],[data-project-world="route-lab"],[data-project-world="ga-sort"],[data-project-world="floydshortestpath"],[data-project-world="mkfun"]) .gallery-grid figure:nth-child(n){width:100%;margin:0 0 38px;grid-column:auto;justify-self:auto}
  .detail-page:is([data-project-world="learnopengl"],[data-project-world="intelligence-index-cost-linear"],[data-project-world="china-house-price-map"],[data-project-world="sort-lab"],[data-project-world="route-lab"],[data-project-world="ga-sort"],[data-project-world="floydshortestpath"],[data-project-world="mkfun"]) :is(.project-technology,.project-stack>div,.engineering-points>div,.usage){margin-top:30px}
  .detail-page[data-project-world="china-house-price-map"] .project-video{width:100%;margin:60px 0}
- .detail-page[data-project-world="china-house-price-map"] .compact-flow{grid-template-columns:1fr;gap:8px}
- .detail-page[data-project-world="china-house-price-map"] .project-stack>div{margin-top:14px}
+ .detail-page[data-project-world="china-house-price-map"] .compact-flow,
+ .detail-page[data-project-world="intelligence-index-cost-linear"] .compact-flow{grid-template-columns:1fr;gap:8px}
+ .detail-page[data-project-world="china-house-price-map"] .project-stack>div,
+ .detail-page[data-project-world="intelligence-index-cost-linear"] .project-stack>div{margin-top:14px}
 }

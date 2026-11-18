@@ -87,9 +87,14 @@ const panxu = [
 ];
 
 const chart = [
-  image('intelligence-index-cost-linear', '07-default-dark-live.png', 1280, 720, '默认深色主题：在线性任务成本轴上比较公开模型能力指数，结合图例与 Pareto 线观察取舍。', '默认深色主题'),
-  image('intelligence-index-cost-linear', '08-provider-highlight-dark-live.png', 1280, 720, '点击 Anthropic 图例高亮对应模型，其余供应商淡化；深色视图保持点位与标签对应。', '供应商筛选'),
-  image('intelligence-index-cost-linear', '09-clean-dots-dark-live.png', 1280, 720, '隐藏文字标签，保留 Anthropic 高亮与 Pareto 线，更清楚地观察点位分布。', '图表交互'),
+  image('intelligence-index-cost-linear', 'v2-01-overview-pareto-dark.png', 1680, 1050, '综合智能总览：在线性美元横轴上直观呈现 133 款主流模型的真实价差、左上角甜点区与帕累托前沿线。', '综合智能与真实价差'),
+  image('intelligence-index-cost-linear', 'v2-02-human-arena-scenario.png', 1680, 1050, '人类与审美频道：展开「⚡ 场景配方」选定审美设计与前端预设，实时重算专属于你的性价比榜单。', '真人盲测与场景配方'),
+  image('intelligence-index-cost-linear', 'v2-03-compare-zoomed-radar.png', 1680, 1050, '剖析对比工作台：微距去底雷达放大细微差距，右侧同步拆解五段缓存与思考账单及多云平台比价。', '微距雷达与账单拆解'),
+  image('intelligence-index-cost-linear', 'v2-04-subscription-router.png', 1680, 1050, '订阅回本测算：对照 $20 月卡与日常使用频次，绿标「已回本」与黄标「API 省」一眼算清买不买会员。', '月卡回本与按次算账'),
+  image('intelligence-index-cost-linear', 'v2-05-frontier-hard-index.png', 1680, 1050, '前沿极限频道：剔除已被刷到 90% 以上的旧题集，只保留未饱和硬核测试拉开第一梯队真实差距。', '未饱和硬核极限'),
+  image('intelligence-index-cost-linear', 'v2-06-compare-strip-track.png', 1680, 1050, '分轴微距跑道：把聊天人味、网页 UI 审美与专业交付的 1% 胜负差距水平对齐放大，附三平台原始盲测胜率。', '分轴微距跑道对决'),
+  image('intelligence-index-cost-linear', 'v2-07-multimodal-media-arena.png', 1680, 1050, '多模态生成频道：同屏比较 253 款文生图、视频生成与语音配音引擎的真人盲测表现与单次生成花费。', '生图 · 视频 · 配音比价'),
+  image('intelligence-index-cost-linear', 'v2-08-coding-agents-light.png', 1680, 1050, '浅色护眼主题下查看编程智能体：虚线串联同一家族从轻量到重度思考档位的实力提升与花费增幅。', '浅色主题与思考档位轨迹'),
 ];
 
 const housing = [
@@ -324,21 +329,22 @@ export const projects: Project[] = [
     cover: eazy[5], gallery: eazy, related: ['ssframework', 'outpost'],
   },
   {
-    slug: 'intelligence-index-cost-linear', repo: 'intelligence-index-cost-linear', name: 'Intelligence × Cost', category: '模型能力与成本图表', group: 'ai-data',
-    summary: '把 AI 的能力与费用画在一起，为购买和选择模型提供直观参照。',
-    intro: '为了直观理解 AI 能力水平与使用费用的关系而制作的交互图表。以线性横轴呈现任务成本、纵轴呈现公开能力指数，结合供应商高亮、标签控制与独立轴缩放，帮助比较不同模型的取舍。',
-    status: '在线可用', tags: ['JavaScript', 'SVG', 'GitHub Actions', '数据可视化'],
+    slug: 'intelligence-index-cost-linear', repo: 'intelligence-index-cost-linear', name: 'Intelligence × Cost · AI 选型与真实花费指南', category: 'AI 模型选型与花费指南', group: 'ai-data',
+    summary: '大模型那么多，怎么挑好用又不花冤枉钱？按真实用途筛甜点模型，顺手算清 20 美元月卡值不值得买。',
+    intro: '面向日常用户与开发者的 AI 选型参考工具。用等比例的美元横轴还原真实价差，串联综合能力、未饱和硬核极限、真人盲测审美、编程智能体、网络安全与生图/视频/配音六大频道；支持一键套用工作流场景配方、最多 8 款微距同台剖析，以及包月会员与按量付费回本测算。',
+    status: '在线可用 · 每 2 小时自动同步', tags: ['AI', '选型工具', 'JavaScript', 'SVG', '数据可视化'],
     features: [
-      { title: '能力与成本同屏', body: '按供应商着色模型点位，结合任务成本、能力指数与 Pareto 线观察分布。' },
-      { title: '按需聚焦', body: '悬浮查看模型，点击图例高亮供应商，隐藏标签或单独缩放横纵轴。' },
-      { title: '静态站与自动更新', body: '网页读取仓库 JSON，GitHub Actions 定时获取公开页面数据并重新部署。' },
+      { title: '按日常用途一键筛模型', body: '内置写代码、做前端审美、自然聊天、写报告等五维场景配方，沿着左上角甜点线直接挑出最好用划算的一款。' },
+      { title: '最多 8 款微距同台细比', body: '微距雷达与分轴跑道把 1% 的毫厘胜负清晰拉开，同步拆解隐性思考账单与多家云服务商差价。' },
+      { title: '算清包月会员与多模态花费', body: '对照使用次数标出买 $20 月卡划算还是按次充值更省；250+ 生图、视频与配音引擎同屏比单价。' },
     ],
     usage: [
-      { title: '直接浏览', body: '打开在线演示；滚轮缩放横轴，Shift + 滚轮缩放纵轴，拖动画布平移，Reset view 恢复。' },
-      { title: '本地预览', body: '在仓库根目录启动静态服务，浏览器打开 http://localhost:8765。', code: 'python -m http.server 8765', language: 'shell' },
+      { title: '日常聊天、写稿与做设计怎么挑', body: '打开在线工具切到「人类与审美」，点开「⚡ 场景配方」选高人味或前端审美预设，优先挑左上角虚线上的模型。' },
+      { title: '纠结买不买 $20 / $100 月卡', body: '切到顶部「订阅回本」视图，选好你常用的月度次数，看目标模型标的是绿标「已回本」还是黄标「API 省」。' },
+      { title: '开发者本地运行（可选）', body: '普通用户直接点顶部「在线体验」即可；如需在本地预览或跑单元测试，可在站点目录运行：', code: 'python -m http.server 8765', language: 'shell' },
     ],
-    note: '数据来自 Artificial Analysis 的公开页面快照；截图保留采集时的数据状态，最新日期与具体口径以在线页面为准。',
-    source: 'https://github.com/heroliss/intelligence-index-cost-linear', demo: 'https://heroliss.github.io/intelligence-index-cost-linear/',
+    note: '截图采自在线版真实运行画面；评测数据每 2 小时自动同步自 Artificial Analysis、LMArena 与 Design Arena 公开榜单，实时排名与价格以在线页面为准。',
+    source: 'https://github.com/heroliss/intelligence-index-cost-linear', docs: 'https://github.com/heroliss/intelligence-index-cost-linear#readme', demo: 'https://heroliss.github.io/intelligence-index-cost-linear/',
     cover: chart[0], gallery: chart, related: ['china-house-price-map', 'dubforge'],
   },
   {

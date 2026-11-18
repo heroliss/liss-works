@@ -51,9 +51,9 @@ const signatures: Record<string, ProjectSignature> = {
     highlights: ['标签驱动规则', '反向依赖检查', '模块化构建'],
   },
   'intelligence-index-cost-linear': {
-    direction: '数据可视化 / 模型比较',
-    principle: '用线性距离，直观看清能力与费用。',
-    highlights: ['线性成本轴', '标签避让', 'Pareto 边界'],
+    direction: 'AI 模型选型与花费指南',
+    principle: '少被虚高考分和折算价格绕晕，按日常用途挑对模型、算清真实账单。',
+    highlights: ['6 大频道 + 场景配方', '最多 8 款微距同台对比', '包月会员 vs 按次算账'],
   },
   'china-house-price-map': {
     direction: '买房与租房找房工具',
