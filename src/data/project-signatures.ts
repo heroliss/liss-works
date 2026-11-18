@@ -56,9 +56,9 @@ const signatures: Record<string, ProjectSignature> = {
     highlights: ['线性成本轴', '标签避让', 'Pareto 边界'],
   },
   'china-house-price-map': {
-    direction: '地理可视化 / 数据探索',
-    principle: '先看全国，再按需加载局部细节。',
-    highlights: ['分省渐进加载', '地图列表联动', '数据口径标记'],
+    direction: '买房与租房找房工具',
+    principle: '少翻零散房源帖，先在地图上把通勤、预算和周边底细一次看清。',
+    highlights: ['3 步向导跨城筛片区', '任意公司门口画通勤圈', '买房 / 四户型租房一键切'],
   },
   learnopengl: {
     direction: '图形渲染 / GPU 编程',

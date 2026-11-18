@@ -4,6 +4,10 @@ export interface StoryCode {
   caption?: string;
 }
 export interface ProjectStory {
+  originNavLabel?: string;
+  stackTitle?: string;
+  engineeringTitle?: string;
+  usageTitle?: string;
   origin: { title: string; paragraphs: string[] };
   stack?: { name: string; role: string }[];
   flow?: { title: string; steps: { name: string; description: string }[] };

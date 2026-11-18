@@ -1,0 +1,105 @@
+---
+import type { GalleryImage } from '../data/types';
+import { getProject } from '../data/projects';
+import { getProjectWorld, projectWorldStyle } from '../data/project-worlds';
+import { ATLAS_SHOT, ATLAS_SWEEP_MS, atlasLayers, atlasPoints, atlasSteps, type AtlasRect } from '../data/atlas-showcase';
+import { sitePath } from '../lib/site-path';
+import { responsiveSrcset } from '../data/project-image';
+import Icon from './Icon.astro';
+import '../styles/atlas-showcase.css';
+
+interface Props { detail?: boolean }
+const { detail = false } = Astro.props;
+const project = getProject('china-house-price-map')!;
+const world = getProjectWorld('china-house-price-map');
+const image = (shot: string) => project.gallery.find(item => item.src.endsWith(`/${shot}.webp`))!;
+const srcset = (item: GalleryImage) => (item.srcset ?? responsiveSrcset(item.src, item.width))
+  .split(',').map(candidate => { const [url, ...descriptor] = candidate.trim().split(/\s+/); return [sitePath(url), ...descriptor].join(' '); }).join(', ');
+const sizes = '(max-width: 760px) 94vw, (max-width: 1340px) 90vw, 1240px';
+const percent = (value: number) => `${(value * 100).toFixed(4)}%`;
+
+function box([left, top, right, bottom]: AtlasRect, within: AtlasRect = [0, 0, ATLAS_SHOT.width, ATLAS_SHOT.height]) {
+  const width = within[2] - within[0], height = within[3] - within[1];
+  return { x: (left - within[0]) / width, y: (top - within[1]) / height, w: (right - left) / width, h: (bottom - top) / height };
+}
+const place = (rect: AtlasRect, within?: AtlasRect) => {
+  const b = box(rect, within);
+  return `--x:${percent(b.x)};--y:${percent(b.y)};--w:${percent(b.w)};--h:${percent(b.h)}`;
+};
+const cut = (rect: AtlasRect) => {
+  const b = box(rect);
+  return `width:${percent(1 / b.w)};left:${percent(-b.x / b.w)};top:${percent(-b.y / b.h)}`;
+};
+
+const initial = atlasSteps.find(step => step.id === 'overview')!;
+const shots = [...new Set(atlasSteps.map(step => step.shot))];
+const stepOf = (id: string) => atlasSteps.find(step => step.id === id)!;
+const pointOf = (group: string) => atlasPoints.find(point => point.group === group)!;
+const on = (active: boolean) => active ? '' : undefined;
+const callout = ({ x, top, bottom }: { x: [number, number]; top?: number; bottom?: number }) =>
+  `--x:${percent(x[0] / ATLAS_SHOT.width)};--w:${percent((x[1] - x[0]) / ATLAS_SHOT.width)};` +
+  (top !== undefined ? `top:${percent(top / ATLAS_SHOT.height)}` : `bottom:${percent(1 - (bottom ?? 0) / ATLAS_SHOT.height)}`);
+---
+<section class:list={['at-lab', { 'home-chapter': !detail, 'at-lab--detail': detail }]} id={detail ? 'atlas-workbench' : 'atlas'} data-atlas-showcase data-step={initial.id} data-shot={initial.shot} aria-labelledby={detail ? 'atlas-detail-heading' : undefined} aria-label={detail ? undefined : '四步找房演示：全国房价交互舆图的真实窗口'} style={`${projectWorldStyle('china-house-price-map')};--accent:${world.accent};--sweep:${ATLAS_SWEEP_MS}ms`}>
+  {detail && <h2 id="atlas-detail-heading" class="sr-only">四步空间找房实景演示</h2>}
+  <div class="at-stage">
+    <div class="at-rail">
+      <div class="at-steps" role="group" aria-label="空间探索步骤">
+        {atlasSteps.map((step, index) => <button type="button" data-at-step={step.id} data-shot={step.shot} aria-pressed={step.id === initial.id ? 'true' : 'false'}><span>{String(index + 1).padStart(2, '0')}</span>{step.label}</button>)}
+      </div>
+      <div class="at-rail-tools">
+        <p class="at-hint">四步上手演示 · 悬停浮层看说明 · 点击放大看原图</p>
+        {shots.map(shot => {
+          const item = image(shot);
+          return <a class="at-zoom" href={sitePath(item.src)} data-lightbox data-gallery={detail ? 'atlas-detail-hero' : 'atlas-home'} data-title={item.alt} data-caption={item.caption} data-width={item.width} data-height={item.height} data-at-zoom={shot} hidden={shot !== initial.shot}><Icon name="expand" size={15}/>看原图</a>;
+        })}
+      </div>
+    </div>
+
+    <div class="at-scene" data-at-scene>
+      <div class="at-float">
+        <div class="at-window" data-at-window>
+          <span class="at-plate" aria-hidden="true"></span>
+          <span class="at-edge at-edge-r" aria-hidden="true"></span><span class="at-edge at-edge-b" aria-hidden="true"></span>
+          <span class="at-shadow" aria-hidden="true"></span>
+          <div class="at-screen">
+            {shots.map(shot => {
+              const item = image(shot);
+              return <img class="at-base" data-at-base={shot} data-on={on(shot === initial.shot)} aria-hidden={shot === initial.shot ? undefined : 'true'} src={sitePath(item.src)} srcset={srcset(item)} sizes={sizes} width={item.width} height={item.height} alt={item.alt} loading={shot === initial.shot ? 'eager' : 'lazy'} decoding="async"/>;
+            })}
+            {atlasLayers.map(layer => <span class="at-socket" data-at-socket={layer.id} data-step={layer.step} data-on={on(layer.step === initial.id)} style={place(layer.rect)} aria-hidden="true"></span>)}
+            {atlasLayers.map(layer => {
+              const item = image(stepOf(layer.step).shot);
+              const point = pointOf(layer.group);
+              return (
+                <button type="button" class="at-layer" data-at-layer={layer.id} data-step={layer.step} data-group={layer.group} data-shot={stepOf(layer.step).shot} data-tone={point.tone} data-on={on(layer.step === initial.id)} inert={layer.step !== initial.id} aria-label={`${point.label}：${point.note}点一下看原图。`} style={`${place(layer.rect)};--z:${layer.depth}px;--d:${layer.delay}ms`}>
+                  <span class="at-cut" aria-hidden="true"><img src={sitePath(item.src)} srcset={srcset(item)} sizes={sizes} width={item.width} height={item.height} alt="" loading="lazy" decoding="async" style={cut(layer.rect)}/></span>
+                  {layer.chip && <span class="at-chip" aria-hidden="true">{layer.chip}</span>}
+                </button>
+              );
+            })}
+            {atlasPoints.map(point => <span class="at-callout" data-at-callout={point.group} data-step={point.step} data-tone={point.tone} data-side={point.callout.top !== undefined ? 'below' : 'above'} style={callout(point.callout)} aria-hidden="true"><b>{point.label}</b>{point.note}</span>)}
+            <span class="at-sheen" aria-hidden="true"></span><span class="at-beam" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="at-copies" data-at-copies>
+      {atlasSteps.map((step, index) => (
+        <div class="at-copy" data-at-copy={step.id} data-on={on(step.id === initial.id)} aria-hidden={step.id === initial.id ? undefined : 'true'} inert={step.id !== initial.id}>
+          <div class="at-copy-lead">
+            <p class="at-figure"><b>{step.figure}</b><small>{step.figureNote}</small></p>
+            <h3><span class="sr-only">{`第 ${index + 1} 步，${step.label}：`}</span>{step.title}</h3>
+            <p>{step.body}</p>
+          </div>
+          <ul class="at-points">
+            {atlasPoints.filter(point => point.step === step.id).map(point => (
+              <li data-at-point={point.group} data-step={point.step} data-tone={point.tone}><i aria-hidden="true"></i><b>{point.label}</b><span>{point.note}</span></li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

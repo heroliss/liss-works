@@ -8,10 +8,16 @@ import '../styles/exploration-invitation.css';
 
 const light = getProject('learnopengl')!;
 const intelligence = getProject('intelligence-index-cost-linear')!;
+const housing = getProject('china-house-price-map')!;
 const nomad = getProject('nomadworkshop')!;
+const commuteShot = housing.gallery.find(image => image.src.includes('v2-03-commute-radar-adaptive')) ?? housing.cover;
 const resident = nomad.gallery.find(image => image.src.includes('05-resident-and-world-1080'));
 if (!resident) throw new Error('Exploration invitation needs the genuine Nomad resident-state capture');
 const questions = [
+  { question: '买房还是租房，离公司半小时能住哪？', lens: '实用工具', route: '找房地图', path: 'AI 与数据 / 买房与租房地图', action: '打开全国找房舆图',
+    detail: '选好上班地点和预算，在一张图上画通勤圈、筛跨城板块、查小区底细。',
+    work: '全国房价交互舆图', image: commuteShot, tone: getProjectWorld(housing.slug).accent,
+    href: '/projects/china-house-price-map/' },
   { question: '一张平面贴图，怎么看起来有凹凸？', lens: '图形', route: 'OpenGL', path: '图形与算法实验 / OpenGL', action: '看图形类工程',
     detail: '同一只木箱，换上法线和高度贴图后，表面就有了深浅。',
     work: 'LearnOpenGL', image: light.cover, tone: getProjectWorld(light.slug).accent,
@@ -40,7 +46,7 @@ const questions = [
     <div class="invitation-camera" data-invite-camera>
       <div class="invitation-motion" data-invite-plane>
         <div class="invitation-fold">
-          <nav class="invitation-topics" aria-label="三个问题，三类工程">
+          <nav class="invitation-topics" aria-label="四个问题，四条探索切口">
             <p class="invitation-cuts-note">选一个问题，看看对应的工程。</p>
             <div class="invitation-cuts">
               {questions.map((question, index) => <a class={`invitation-question invitation-question--${index}`}

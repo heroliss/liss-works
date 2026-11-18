@@ -10,7 +10,7 @@ const topicMedia: Record<string, (string | null)[]> = {
   ssframework: [null, null, null, '15-hierarchy-binding-compact', '05-module-tools-center'],
   eazybuildpipeline: ['04-reverse-dependencies-three-assets'],
   'intelligence-index-cost-linear': ['08-provider-highlight-dark-live'],
-  'china-house-price-map': ['06-dark-shenzhen-detail-after-fix'],
+  'china-house-price-map': ['v2-05-rent-persona-four-layouts', 'v2-06-drawdown-timeline-pk', 'v2-07-watertight-gba-hk-macau', null],
   learnopengl: ['cube-inspector'],
   'aoe4-flow': ['editor-node-parameters-native'],
   'ga-sort': ['05-final-equation-convergence'],

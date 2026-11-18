@@ -4,8 +4,8 @@ import type { Project } from './types';
 // retain their source order, so adding a project never silently drops it.
 export const projectPriority = [
   'glass-atoll', 'ssframework', 'dubforge', 'panxu', 'liss-blocks', 'outpost', 'gomoku',
-  'aoe4-flow', 'eazybuildpipeline', 'liss-web', 'nomadworkshop',
-  'intelligence-index-cost-linear', 'learnopengl', 'china-house-price-map',
+  'china-house-price-map', 'aoe4-flow', 'eazybuildpipeline', 'liss-web', 'nomadworkshop',
+  'intelligence-index-cost-linear', 'learnopengl',
   'sort-lab', 'route-lab', 'qt-labs', 'systems-lab', 'text-lab', 'nex',
   'utility-lab', 'mkfun', 'floydshortestpath', 'ga-sort',
 ] as const;

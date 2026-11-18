@@ -17,6 +17,7 @@ import { setupWorksTable } from './works-table';
 import { setupHeroHall } from './hero-hall';
 import { setupAtollWater } from './atoll-water';
 import { setupPanxuShowcase } from './panxu-showcase';
+import { setupAtlasShowcase } from './atlas-showcase';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -204,6 +205,7 @@ function initializeMotion() {
   const disposeHeroHall = setupHeroHall({ signal, preference });
   const disposeAtollWater = setupAtollWater({ signal, preference });
   const disposePanxu = setupPanxuShowcase({ signal, preference });
+  const disposeAtlasShowcase = setupAtlasShowcase({ signal, preference });
   if (storedPause !== undefined) {
     window.dispatchEvent(new CustomEvent('portfolio:motion-state', { detail: { paused: storedPause } }));
   }
@@ -242,6 +244,7 @@ function initializeMotion() {
     disposeHeroHall();
     disposeAtollWater();
     disposePanxu();
+    disposeAtlasShowcase();
     media.revert();
     delete root.dataset.motion;
   };

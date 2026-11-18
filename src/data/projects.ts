@@ -89,11 +89,14 @@ const chart = [
 ];
 
 const housing = [
-  image('china-house-price-map', '04-dark-national.jpg', 1425, 1002, '暗色全国房价地图，分级设色、图例和城市数据侧栏相互配合。', '真实网页'),
-  image('china-house-price-map', '06-dark-shenzhen-detail-after-fix.jpg', 1425, 1002, '放大深圳及周边，查看区县边界与选中地区详情。', '地图交互'),
-  image('china-house-price-map', '07-dark-jingjinji.jpg', 1425, 1002, '京津冀区域的价格分布、地图标注与列表联动。', '暗色主题'),
-  image('china-house-price-map', '08-light-jingjinji.jpg', 1425, 1002, '同一京津冀视角切换浅色主题。', '浅色主题'),
-  image('china-house-price-map', '12-dark-shenzhen-ui720.jpg', 1265, 720, '低高度视口中保留地图、图例、控件与选中城市信息。', '响应式布局'),
+  image('china-house-price-map', 'v2-01-national-eight-metrics.png', 1680, 1050, '全国 372 城总览：一键切换买房或租房视角，右侧同步片区房价水位、热门商圈与代表小区。', '全局看房总览'),
+  image('china-house-price-map', 'v2-02-matchmaker-buy-wizard.png', 1680, 1050, '三步找房向导：选好上班地、通勤距离和预算，自动跨城筛出广佛莞等高匹配板块。', '三步智能找房'),
+  image('china-house-price-map', 'v2-03-commute-radar-adaptive.png', 1680, 1050, '以深圳湾科技生态园为起点开启路网与通勤圈，自动列出周边更划算的低价街区。', '上班通勤圈'),
+  image('china-house-price-map', 'v2-04-community-5d-advisor.png', 1680, 1050, '点开南山后海恒裕滨城小区：直观查看建筑年代、容积率、物业费与买租参考建议。', '小区体检与建议'),
+  image('china-house-price-map', 'v2-05-rent-persona-four-layouts.png', 1680, 1050, '切换「租房安居」看上海及长三角：四档户型实时算月租，附押一付三与买同款月供对比。', '四户型租房视角'),
+  image('china-house-price-map', 'v2-06-drawdown-timeline-pk.png', 1680, 1050, '查看近十年高点回撤幅度，并把 4 个备选片区放进对比篮同图 PK 一年走势。', '高低位与多区对比'),
+  image('china-house-price-map', 'v2-07-watertight-gba-hk-macau.png', 1680, 1050, '大湾区跨城连看：东莞中山细化到镇街，香港 18 区与澳门 8 堂区统一按元/㎡ 对比。', '跨城与港澳细分'),
+  image('china-house-price-map', 'v2-08-light-shijiazhuang-xiaoqu.png', 1680, 1050, '浅色护眼主题下浏览石家庄裕华区商圈与小区，二三四线城市同样能查到小区细节。', '浅色主题与多城覆盖'),
 ];
 
 const opengl = [
@@ -334,23 +337,23 @@ export const projects: Project[] = [
     cover: chart[0], gallery: chart, related: ['china-house-price-map', 'dubforge'],
   },
   {
-    slug: 'china-house-price-map', repo: 'china-house-price-map', name: '全国房价交互地图', category: '渐进式数据地图', group: 'ai-data',
-    summary: '把各地挂牌价格放进空间，从全国概览逐步探索到区县。',
-    intro: '将住宅挂牌价格与行政边界结合的交互地图，用空间关系帮助理解区域差异。全国视角呈现城市价格，放大后按省加载区县细节；搜索、定位、列表和来源说明联动，保留明暗主题与图层透明度控制。',
-    status: '在线可用', tags: ['JavaScript', 'SVG', '地图', '暗色主题'],
+    slug: 'china-house-price-map', repo: 'china-house-price-map', name: '全国房价交互舆图 · 买房与租房找房地图', category: '买房与租房找房地图', group: 'ai-data',
+    summary: '不知道买哪、租哪划算？按上班地点和手头预算，在一张图上筛片区、画通勤圈、看小区底细。',
+    intro: '面向买房与租房用户的全国交互找房地图。支持一键切换买房/四户型租房视角，用 3 步向导按通勤和预算跨城筛片区，把通勤圆心钉在任意写字楼门口找周边低价街区，放大即可查看具体小区的楼龄、容积率与买租参考建议。',
+    status: '在线可用 · 持续更新', tags: ['找房工具', '交互地图', 'JavaScript', 'SVG', '数据可视化'],
     features: [
-      { title: '从全国逐级细化', body: '初始加载城市级边界，放大后显示区县；部分不设县级区划的城市继续细化至镇街。' },
-      { title: '地图与数据联动', body: '通过搜索定位地区，地图选中与侧栏详情同步，标注按可见空间避让。' },
-      { title: '适合不同视口的阅读', body: '明暗主题可切换并保留偏好，窄屏重排地图与列表，图层透明度支持连续调整。' },
+      { title: '3 步向导跨城筛片区', body: '选好上班地、通勤距离和预算，自动在都市圈内推荐买得起、租得值的候选板块。' },
+      { title: '任意公司门口画通勤圈', body: '搜写字楼或点地图设起点，随放大细看真实路网，挑出顺路又省钱的周边街道。' },
+      { title: '买房租房同图看小区底细', body: '四档租房户型实时算月租与押一付三；点开小区直看楼龄、容积率与买租建议。' },
     ],
     usage: [
-      { title: '探索一个地区', body: '打开在线地图，搜索城市、点击列表或放大地图；选中后查看地区详情与价格口径。' },
-      { title: '本地运行', body: '仓库根目录启动静态服务，再打开 http://127.0.0.1:8765。', code: 'python -m http.server 8765 --bind 127.0.0.1', language: 'shell' },
+      { title: '上班族找通勤好房', body: '打开在线地图，开启顶部「通勤圈」与「底图」，搜公司或地铁站设起点，放大挑出周边划算街区。' },
+      { title: '刚需与租客筛跨城平替', body: '点击右上角「帮我找房」，填入上班区域与总价（或月租）上限，一键筛出周边高匹配板块。' },
+      { title: '开发者本地运行（可选）', body: '普通访客直接点顶部「在线体验」即可；如需在本地调试按需代理服务，可运行：', code: 'node scripts/serve-local.js 8788', language: 'shell' },
     ],
-    note: '主要口径是住宅挂牌均价；缺少独立区县价格时沿用城市均价，补充估算使用 ※ 标记，详情保留来源说明。',
-    source: 'https://github.com/heroliss/china-house-price-map', demo: 'https://heroliss.github.io/china-house-price-map/',
-    cover: housing[0], gallery: housing, related: ['intelligence-index-cost-linear', 'liss-web'],
-    video: { src: '/media/china-house-price-map/demo.mp4', poster: housing[0].src, caption: '真实网页交互片段：地图浏览、定位与显示调整，无声。' },
+    note: '截图采自在线版真实运行画面；多源统计经同城配对校准对齐标尺，具体房源价格以实际楼层、朝向与成交为准。',
+    source: 'https://github.com/heroliss/china-house-price-map', docs: 'https://github.com/heroliss/china-house-price-map#readme', demo: 'https://heroliss.github.io/china-house-price-map/',
+    cover: housing[0], gallery: housing, related: ['intelligence-index-cost-linear', 'panxu', 'liss-web'],
   },
   {
     slug: 'learnopengl', repo: 'LearnOpengl', name: 'LearnOpenGL', category: '实时图形实验', group: 'graphics',

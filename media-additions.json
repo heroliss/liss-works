@@ -181,6 +181,78 @@
       "height": 1075,
       "authenticity": "Real PanXu 2.5.0 interface running against a generated 演练环境 (simulated computer); AI review uses the scripted test model, with no real files or network access. Downscaled from a 2x headless Chrome capture of a 1320x860 window.",
       "capture_receipt": "verification/panxu-captures-20261118/10-operation-history@2x.png"
+    },
+    {
+      "repo": "china-house-price-map",
+      "source": "captures/china-house-price-map/selected-20261118/v2-01-national-eight-metrics.png",
+      "source_sha256": "c94d4a5bf499236c9b7e000c8e59bd45c6407f1b87af501a63f69e101e178585",
+      "width": 1680,
+      "height": 1050,
+      "authenticity": "Real China House Price Interactive Atlas (commit 6a0d0b5) served locally on 127.0.0.1:8788 with genuine multi-source calibrated housing and rental datasets. Downscaled via Lanczos from a 2x headless Chrome capture of a 1440x900 desktop viewport.",
+      "capture_receipt": "verification/china-house-price-map-captures-20261118/v2-01-national-eight-metrics@2x.png"
+    },
+    {
+      "repo": "china-house-price-map",
+      "source": "captures/china-house-price-map/selected-20261118/v2-02-matchmaker-buy-wizard.png",
+      "source_sha256": "228b9228e52834c777e7ccde479815127bd8a24f794c82152b693712a26629fa",
+      "width": 1680,
+      "height": 1050,
+      "authenticity": "Real China House Price Interactive Atlas (commit 6a0d0b5) served locally on 127.0.0.1:8788 with genuine multi-source calibrated housing and rental datasets. Downscaled via Lanczos from a 2x headless Chrome capture of a 1440x900 desktop viewport.",
+      "capture_receipt": "verification/china-house-price-map-captures-20261118/v2-02-matchmaker-buy-wizard@2x.png"
+    },
+    {
+      "repo": "china-house-price-map",
+      "source": "captures/china-house-price-map/selected-20261118/v2-03-commute-radar-adaptive.png",
+      "source_sha256": "ff7a122ffa429da6c3e1ef427622d16c565caacc1b641c1f54d5ad901e9d24bf",
+      "width": 1680,
+      "height": 1050,
+      "authenticity": "Real China House Price Interactive Atlas (commit 6a0d0b5) served locally on 127.0.0.1:8788 with genuine multi-source calibrated housing and rental datasets. Downscaled via Lanczos from a 2x headless Chrome capture of a 1440x900 desktop viewport.",
+      "capture_receipt": "verification/china-house-price-map-captures-20261118/v2-03-commute-radar-adaptive@2x.png"
+    },
+    {
+      "repo": "china-house-price-map",
+      "source": "captures/china-house-price-map/selected-20261118/v2-04-community-5d-advisor.png",
+      "source_sha256": "5de33791eff473b11b55f3d3e67199eb8e50e90101c85e51fe60b604a07f1714",
+      "width": 1680,
+      "height": 1050,
+      "authenticity": "Real China House Price Interactive Atlas (commit 6a0d0b5) served locally on 127.0.0.1:8788 with genuine multi-source calibrated housing and rental datasets. Downscaled via Lanczos from a 2x headless Chrome capture of a 1440x900 desktop viewport.",
+      "capture_receipt": "verification/china-house-price-map-captures-20261118/v2-04-community-5d-advisor@2x.png"
+    },
+    {
+      "repo": "china-house-price-map",
+      "source": "captures/china-house-price-map/selected-20261118/v2-05-rent-persona-four-layouts.png",
+      "source_sha256": "7ec4069b52680e41390d9c89eb02ac14ccf65108738bdb5581e18ffcf49f26ed",
+      "width": 1680,
+      "height": 1050,
+      "authenticity": "Real China House Price Interactive Atlas (commit 6a0d0b5) served locally on 127.0.0.1:8788 with genuine multi-source calibrated housing and rental datasets. Downscaled via Lanczos from a 2x headless Chrome capture of a 1440x900 desktop viewport.",
+      "capture_receipt": "verification/china-house-price-map-captures-20261118/v2-05-rent-persona-four-layouts@2x.png"
+    },
+    {
+      "repo": "china-house-price-map",
+      "source": "captures/china-house-price-map/selected-20261118/v2-06-drawdown-timeline-pk.png",
+      "source_sha256": "24daadbd142b422e704621b1d598e9899958ce3e506e514212e35baf1ca9ab0a",
+      "width": 1680,
+      "height": 1050,
+      "authenticity": "Real China House Price Interactive Atlas (commit 6a0d0b5) served locally on 127.0.0.1:8788 with genuine multi-source calibrated housing and rental datasets. Downscaled via Lanczos from a 2x headless Chrome capture of a 1440x900 desktop viewport.",
+      "capture_receipt": "verification/china-house-price-map-captures-20261118/v2-06-drawdown-timeline-pk@2x.png"
+    },
+    {
+      "repo": "china-house-price-map",
+      "source": "captures/china-house-price-map/selected-20261118/v2-07-watertight-gba-hk-macau.png",
+      "source_sha256": "f10d154af2b9bb2c5c9be3cd108e70490f85241afe043069e377fb4928a102fc",
+      "width": 1680,
+      "height": 1050,
+      "authenticity": "Real China House Price Interactive Atlas (commit 6a0d0b5) served locally on 127.0.0.1:8788 with genuine multi-source calibrated housing and rental datasets. Downscaled via Lanczos from a 2x headless Chrome capture of a 1440x900 desktop viewport.",
+      "capture_receipt": "verification/china-house-price-map-captures-20261118/v2-07-watertight-gba-hk-macau@2x.png"
+    },
+    {
+      "repo": "china-house-price-map",
+      "source": "captures/china-house-price-map/selected-20261118/v2-08-light-shijiazhuang-xiaoqu.png",
+      "source_sha256": "f59837cec20c5207a581d048a134a2d7b6518b56aee8dd4a47bc66e3a075d824",
+      "width": 1680,
+      "height": 1050,
+      "authenticity": "Real China House Price Interactive Atlas (commit 6a0d0b5) served locally on 127.0.0.1:8788 with genuine multi-source calibrated housing and rental datasets. Downscaled via Lanczos from a 2x headless Chrome capture of a 1440x900 desktop viewport.",
+      "capture_receipt": "verification/china-house-price-map-captures-20261118/v2-08-light-shijiazhuang-xiaoqu@2x.png"
     }
   ]
 }

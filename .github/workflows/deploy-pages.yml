@@ -50,6 +50,8 @@ jobs:
         run: npm run test:palette
       - name: Check the PanXu showcase geometry and data
         run: npm run test:panxu
+      - name: Check the Housing Atlas showcase geometry and data
+        run: npm run test:atlas
       - name: Refresh latest release snapshots
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

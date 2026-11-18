@@ -1,6 +1,6 @@
 {
   "schema": "showcase.website-media.v1",
-  "generated_at_utc": "2026-11-18T11:40:24.659497+00:00",
+  "generated_at_utc": "2026-11-18T17:18:01.238331+00:00",
   "source_manifest": "captures/selected-manifest.json",
   "source_manifest_sha256": "67d60c2289c031d14b180bc0b26ddcac2548fd7d425474912616c17353b85997",
   "originals_modified": false,
@@ -8721,6 +8721,550 @@
           "lossless": false
         }
       ]
+    },
+    {
+      "repo": "china-house-price-map",
+      "source": "captures/china-house-price-map/selected-20261118/v2-01-national-eight-metrics.png",
+      "source_sha256": "c94d4a5bf499236c9b7e000c8e59bd45c6407f1b87af501a63f69e101e178585",
+      "source_bytes": 1318303,
+      "source_width": 1680,
+      "source_height": 1050,
+      "source_authenticity": "Real China House Price Interactive Atlas (commit 6a0d0b5) served locally on 127.0.0.1:8788 with genuine multi-source calibrated housing and rental datasets. Downscaled via Lanczos from a 2x headless Chrome capture of a 1440x900 desktop viewport.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/china-house-price-map/v2-01-national-eight-metrics.webp",
+        "url": "/media/china-house-price-map/v2-01-national-eight-metrics.webp",
+        "bytes": 865776,
+        "sha256": "8b44dc020981d1e851517f5c984d48cdbb98cf5037a8cba7b02cc600543cd650",
+        "width": 1680,
+        "height": 1050,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/china-house-price-map/v2-01-national-eight-metrics-320.webp",
+          "url": "/media/china-house-price-map/v2-01-national-eight-metrics-320.webp",
+          "bytes": 20984,
+          "sha256": "18a30f3110fb43c10aa17f6412c36b0c05444fe048859337bf37eff5cbe472eb",
+          "width": 320,
+          "height": 200,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/china-house-price-map/v2-01-national-eight-metrics-640.webp",
+          "url": "/media/china-house-price-map/v2-01-national-eight-metrics-640.webp",
+          "bytes": 63994,
+          "sha256": "31c33eb81de478c49aa56437f1671e17e7ff80f95fb35524c6efe6257802fe5c",
+          "width": 640,
+          "height": 400,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/china-house-price-map/v2-01-national-eight-metrics-960.webp",
+          "url": "/media/china-house-price-map/v2-01-national-eight-metrics-960.webp",
+          "bytes": 126006,
+          "sha256": "b5a5aeba5fa2d822dcd0065ed16596b00fc12c653b42b810102f815f02dc0acc",
+          "width": 960,
+          "height": 600,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/china-house-price-map/v2-01-national-eight-metrics-1600.webp",
+          "url": "/media/china-house-price-map/v2-01-national-eight-metrics-1600.webp",
+          "bytes": 274050,
+          "sha256": "8cd5d6768cff51b15fe6c3e01403a159dacd61f6cf77595cd5e7df7333de6bde",
+          "width": 1600,
+          "height": 1000,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "china-house-price-map",
+      "source": "captures/china-house-price-map/selected-20261118/v2-02-matchmaker-buy-wizard.png",
+      "source_sha256": "228b9228e52834c777e7ccde479815127bd8a24f794c82152b693712a26629fa",
+      "source_bytes": 1222115,
+      "source_width": 1680,
+      "source_height": 1050,
+      "source_authenticity": "Real China House Price Interactive Atlas (commit 6a0d0b5) served locally on 127.0.0.1:8788 with genuine multi-source calibrated housing and rental datasets. Downscaled via Lanczos from a 2x headless Chrome capture of a 1440x900 desktop viewport.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/china-house-price-map/v2-02-matchmaker-buy-wizard.webp",
+        "url": "/media/china-house-price-map/v2-02-matchmaker-buy-wizard.webp",
+        "bytes": 798258,
+        "sha256": "680ced5611e54abfa9da657ab9e21e1410f78a06c725be5f59bf6debff25cab2",
+        "width": 1680,
+        "height": 1050,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/china-house-price-map/v2-02-matchmaker-buy-wizard-320.webp",
+          "url": "/media/china-house-price-map/v2-02-matchmaker-buy-wizard-320.webp",
+          "bytes": 23418,
+          "sha256": "03ed31d4ea7c065893e19a63becdf9b994939c90b8e4045796045450f26c42f4",
+          "width": 320,
+          "height": 200,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/china-house-price-map/v2-02-matchmaker-buy-wizard-640.webp",
+          "url": "/media/china-house-price-map/v2-02-matchmaker-buy-wizard-640.webp",
+          "bytes": 72426,
+          "sha256": "a8a256a045692810ca34c747362469b7020a4dbe4023c57488b165b0e1d75936",
+          "width": 640,
+          "height": 400,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/china-house-price-map/v2-02-matchmaker-buy-wizard-960.webp",
+          "url": "/media/china-house-price-map/v2-02-matchmaker-buy-wizard-960.webp",
+          "bytes": 136482,
+          "sha256": "ba1b9616efd1995e5e1808dc4677775603feb5d26f5843d59db673c6354b9e34",
+          "width": 960,
+          "height": 600,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/china-house-price-map/v2-02-matchmaker-buy-wizard-1600.webp",
+          "url": "/media/china-house-price-map/v2-02-matchmaker-buy-wizard-1600.webp",
+          "bytes": 286258,
+          "sha256": "149e3ac91a884b609e1396befc6d2c33437be02f26ab0de89cf7609c84e88aa6",
+          "width": 1600,
+          "height": 1000,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "china-house-price-map",
+      "source": "captures/china-house-price-map/selected-20261118/v2-03-commute-radar-adaptive.png",
+      "source_sha256": "ff7a122ffa429da6c3e1ef427622d16c565caacc1b641c1f54d5ad901e9d24bf",
+      "source_bytes": 1282098,
+      "source_width": 1680,
+      "source_height": 1050,
+      "source_authenticity": "Real China House Price Interactive Atlas (commit 6a0d0b5) served locally on 127.0.0.1:8788 with genuine multi-source calibrated housing and rental datasets. Downscaled via Lanczos from a 2x headless Chrome capture of a 1440x900 desktop viewport.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/china-house-price-map/v2-03-commute-radar-adaptive.webp",
+        "url": "/media/china-house-price-map/v2-03-commute-radar-adaptive.webp",
+        "bytes": 915392,
+        "sha256": "311574b2782a611501d968767cfe0d2e5afdaf9d9aad26b070e3a0a5017547bc",
+        "width": 1680,
+        "height": 1050,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/china-house-price-map/v2-03-commute-radar-adaptive-320.webp",
+          "url": "/media/china-house-price-map/v2-03-commute-radar-adaptive-320.webp",
+          "bytes": 22280,
+          "sha256": "7c690738ebc85e3e75e5e91ee091bf8f0119c6fb281a55e47c658040b891b744",
+          "width": 320,
+          "height": 200,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/china-house-price-map/v2-03-commute-radar-adaptive-640.webp",
+          "url": "/media/china-house-price-map/v2-03-commute-radar-adaptive-640.webp",
+          "bytes": 65292,
+          "sha256": "404a273a093f9eb2bc5db13d48e0ac455dd8bdc4b2138eb881ff2b5d7d914087",
+          "width": 640,
+          "height": 400,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/china-house-price-map/v2-03-commute-radar-adaptive-960.webp",
+          "url": "/media/china-house-price-map/v2-03-commute-radar-adaptive-960.webp",
+          "bytes": 122466,
+          "sha256": "d737f6be37c057122b0236cf9eecefbcf275c07cb17a657686a1ac4d5fcff93a",
+          "width": 960,
+          "height": 600,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/china-house-price-map/v2-03-commute-radar-adaptive-1600.webp",
+          "url": "/media/china-house-price-map/v2-03-commute-radar-adaptive-1600.webp",
+          "bytes": 259754,
+          "sha256": "a456a329a2c8022aa7f364e37eb8ce87cbf71af148fe266c12765735ce90d61a",
+          "width": 1600,
+          "height": 1000,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "china-house-price-map",
+      "source": "captures/china-house-price-map/selected-20261118/v2-04-community-5d-advisor.png",
+      "source_sha256": "5de33791eff473b11b55f3d3e67199eb8e50e90101c85e51fe60b604a07f1714",
+      "source_bytes": 1350203,
+      "source_width": 1680,
+      "source_height": 1050,
+      "source_authenticity": "Real China House Price Interactive Atlas (commit 6a0d0b5) served locally on 127.0.0.1:8788 with genuine multi-source calibrated housing and rental datasets. Downscaled via Lanczos from a 2x headless Chrome capture of a 1440x900 desktop viewport.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/china-house-price-map/v2-04-community-5d-advisor.webp",
+        "url": "/media/china-house-price-map/v2-04-community-5d-advisor.webp",
+        "bytes": 960778,
+        "sha256": "995f9718b2e77c904a295b777861fdfebc02be12912ec6841314aad3911279c4",
+        "width": 1680,
+        "height": 1050,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/china-house-price-map/v2-04-community-5d-advisor-320.webp",
+          "url": "/media/china-house-price-map/v2-04-community-5d-advisor-320.webp",
+          "bytes": 22582,
+          "sha256": "4d09169c30e8f5da7f6ea27e0b73359bbcf544fd93fd35b7befa180f64284483",
+          "width": 320,
+          "height": 200,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/china-house-price-map/v2-04-community-5d-advisor-640.webp",
+          "url": "/media/china-house-price-map/v2-04-community-5d-advisor-640.webp",
+          "bytes": 68624,
+          "sha256": "ab59590a650c670a821368ed7e740c2a99c99da154586b9be0b26b1fcd123e2b",
+          "width": 640,
+          "height": 400,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/china-house-price-map/v2-04-community-5d-advisor-960.webp",
+          "url": "/media/china-house-price-map/v2-04-community-5d-advisor-960.webp",
+          "bytes": 128286,
+          "sha256": "e840c613c17c7e94d27aa3bfc6dc5e2b5114a394303f4461a8361028d5ff7a92",
+          "width": 960,
+          "height": 600,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/china-house-price-map/v2-04-community-5d-advisor-1600.webp",
+          "url": "/media/china-house-price-map/v2-04-community-5d-advisor-1600.webp",
+          "bytes": 267138,
+          "sha256": "0ef1e752e2cdab28947b14175ff8bfcedeb66891444feda47d5782eb671025a6",
+          "width": 1600,
+          "height": 1000,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "china-house-price-map",
+      "source": "captures/china-house-price-map/selected-20261118/v2-05-rent-persona-four-layouts.png",
+      "source_sha256": "7ec4069b52680e41390d9c89eb02ac14ccf65108738bdb5581e18ffcf49f26ed",
+      "source_bytes": 1174380,
+      "source_width": 1680,
+      "source_height": 1050,
+      "source_authenticity": "Real China House Price Interactive Atlas (commit 6a0d0b5) served locally on 127.0.0.1:8788 with genuine multi-source calibrated housing and rental datasets. Downscaled via Lanczos from a 2x headless Chrome capture of a 1440x900 desktop viewport.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/china-house-price-map/v2-05-rent-persona-four-layouts.webp",
+        "url": "/media/china-house-price-map/v2-05-rent-persona-four-layouts.webp",
+        "bytes": 749100,
+        "sha256": "8f046494e16b4aa12f4fcddd2d308719979873db96f5f653bf6eebe4df6083c2",
+        "width": 1680,
+        "height": 1050,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/china-house-price-map/v2-05-rent-persona-four-layouts-320.webp",
+          "url": "/media/china-house-price-map/v2-05-rent-persona-four-layouts-320.webp",
+          "bytes": 20282,
+          "sha256": "61b4b6c5b5922eb6516d0ee535a60d1520aba89116d02c91481eb236e0ab0681",
+          "width": 320,
+          "height": 200,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/china-house-price-map/v2-05-rent-persona-four-layouts-640.webp",
+          "url": "/media/china-house-price-map/v2-05-rent-persona-four-layouts-640.webp",
+          "bytes": 60114,
+          "sha256": "f4edb3443516ca25bf7035c4915a6d27b1512e225f06d4fb25494c821b7f5aee",
+          "width": 640,
+          "height": 400,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/china-house-price-map/v2-05-rent-persona-four-layouts-960.webp",
+          "url": "/media/china-house-price-map/v2-05-rent-persona-four-layouts-960.webp",
+          "bytes": 111288,
+          "sha256": "1211ab5bdcfb335899723e751c1ad90d4aa39065c6dd55daa50f95d2a47451c8",
+          "width": 960,
+          "height": 600,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/china-house-price-map/v2-05-rent-persona-four-layouts-1600.webp",
+          "url": "/media/china-house-price-map/v2-05-rent-persona-four-layouts-1600.webp",
+          "bytes": 235948,
+          "sha256": "421cd11777fc32ffca9c26673e5fad4c9237af8dbfa80608f09379323a952a4d",
+          "width": 1600,
+          "height": 1000,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "china-house-price-map",
+      "source": "captures/china-house-price-map/selected-20261118/v2-06-drawdown-timeline-pk.png",
+      "source_sha256": "24daadbd142b422e704621b1d598e9899958ce3e506e514212e35baf1ca9ab0a",
+      "source_bytes": 1072462,
+      "source_width": 1680,
+      "source_height": 1050,
+      "source_authenticity": "Real China House Price Interactive Atlas (commit 6a0d0b5) served locally on 127.0.0.1:8788 with genuine multi-source calibrated housing and rental datasets. Downscaled via Lanczos from a 2x headless Chrome capture of a 1440x900 desktop viewport.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/china-house-price-map/v2-06-drawdown-timeline-pk.webp",
+        "url": "/media/china-house-price-map/v2-06-drawdown-timeline-pk.webp",
+        "bytes": 723326,
+        "sha256": "b432e4a3d2b6dc0d01e9ff749053a88d49d9d038156d83ee807e608f3022841d",
+        "width": 1680,
+        "height": 1050,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/china-house-price-map/v2-06-drawdown-timeline-pk-320.webp",
+          "url": "/media/china-house-price-map/v2-06-drawdown-timeline-pk-320.webp",
+          "bytes": 22010,
+          "sha256": "d353559469f05a4e2a76bcd475e5a1735d267e2d44a8a446d412ac91c3583ab2",
+          "width": 320,
+          "height": 200,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/china-house-price-map/v2-06-drawdown-timeline-pk-640.webp",
+          "url": "/media/china-house-price-map/v2-06-drawdown-timeline-pk-640.webp",
+          "bytes": 66356,
+          "sha256": "709f7ee1f8ee827bffac80f0cf4a48b4eab27c000037148feede220849f55bc7",
+          "width": 640,
+          "height": 400,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/china-house-price-map/v2-06-drawdown-timeline-pk-960.webp",
+          "url": "/media/china-house-price-map/v2-06-drawdown-timeline-pk-960.webp",
+          "bytes": 124930,
+          "sha256": "781c167413aa2353c0e9ea029589d7b2ed2b7adaacc3dfff625d76dea3dbc286",
+          "width": 960,
+          "height": 600,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/china-house-price-map/v2-06-drawdown-timeline-pk-1600.webp",
+          "url": "/media/china-house-price-map/v2-06-drawdown-timeline-pk-1600.webp",
+          "bytes": 265196,
+          "sha256": "6f750e88c4650590e174c2f0ac4b97c563f3af9235f8469abc25d0abc2dcfb7b",
+          "width": 1600,
+          "height": 1000,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "china-house-price-map",
+      "source": "captures/china-house-price-map/selected-20261118/v2-07-watertight-gba-hk-macau.png",
+      "source_sha256": "f10d154af2b9bb2c5c9be3cd108e70490f85241afe043069e377fb4928a102fc",
+      "source_bytes": 1126458,
+      "source_width": 1680,
+      "source_height": 1050,
+      "source_authenticity": "Real China House Price Interactive Atlas (commit 6a0d0b5) served locally on 127.0.0.1:8788 with genuine multi-source calibrated housing and rental datasets. Downscaled via Lanczos from a 2x headless Chrome capture of a 1440x900 desktop viewport.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/china-house-price-map/v2-07-watertight-gba-hk-macau.webp",
+        "url": "/media/china-house-price-map/v2-07-watertight-gba-hk-macau.webp",
+        "bytes": 746204,
+        "sha256": "cebe9cd5820cfc916091e543817975eab15c065f7023a4f120a0440560eda7f7",
+        "width": 1680,
+        "height": 1050,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/china-house-price-map/v2-07-watertight-gba-hk-macau-320.webp",
+          "url": "/media/china-house-price-map/v2-07-watertight-gba-hk-macau-320.webp",
+          "bytes": 20404,
+          "sha256": "9e99f2ba049e8a73cc275350a11fc1aaf24ae55d7a676008c891c798d83f1c32",
+          "width": 320,
+          "height": 200,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/china-house-price-map/v2-07-watertight-gba-hk-macau-640.webp",
+          "url": "/media/china-house-price-map/v2-07-watertight-gba-hk-macau-640.webp",
+          "bytes": 59750,
+          "sha256": "3ba7d1cb9c4955a129cf618a0cad817d5f87923eee89f30dad4a89f9560ed573",
+          "width": 640,
+          "height": 400,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/china-house-price-map/v2-07-watertight-gba-hk-macau-960.webp",
+          "url": "/media/china-house-price-map/v2-07-watertight-gba-hk-macau-960.webp",
+          "bytes": 111458,
+          "sha256": "ac28e761afef418587b79834040fc2072cee186f43d1fcef3fabdec4d1d27285",
+          "width": 960,
+          "height": 600,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/china-house-price-map/v2-07-watertight-gba-hk-macau-1600.webp",
+          "url": "/media/china-house-price-map/v2-07-watertight-gba-hk-macau-1600.webp",
+          "bytes": 236384,
+          "sha256": "28f859cb82d31853b661fa007766f4aea6cb3f5f745220443eff7dc6ead4582b",
+          "width": 1600,
+          "height": 1000,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "china-house-price-map",
+      "source": "captures/china-house-price-map/selected-20261118/v2-08-light-shijiazhuang-xiaoqu.png",
+      "source_sha256": "f59837cec20c5207a581d048a134a2d7b6518b56aee8dd4a47bc66e3a075d824",
+      "source_bytes": 967586,
+      "source_width": 1680,
+      "source_height": 1050,
+      "source_authenticity": "Real China House Price Interactive Atlas (commit 6a0d0b5) served locally on 127.0.0.1:8788 with genuine multi-source calibrated housing and rental datasets. Downscaled via Lanczos from a 2x headless Chrome capture of a 1440x900 desktop viewport.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/china-house-price-map/v2-08-light-shijiazhuang-xiaoqu.webp",
+        "url": "/media/china-house-price-map/v2-08-light-shijiazhuang-xiaoqu.webp",
+        "bytes": 630890,
+        "sha256": "a40884be2d221ddc8979dfa6b7c1f9178eb3ced93114e4665d17a56684b27a3f",
+        "width": 1680,
+        "height": 1050,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/china-house-price-map/v2-08-light-shijiazhuang-xiaoqu-320.webp",
+          "url": "/media/china-house-price-map/v2-08-light-shijiazhuang-xiaoqu-320.webp",
+          "bytes": 22726,
+          "sha256": "e9b44220d8fb9f94cb928bea0eaa346ca2466048bd6b78c07583c2f252d3f403",
+          "width": 320,
+          "height": 200,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/china-house-price-map/v2-08-light-shijiazhuang-xiaoqu-640.webp",
+          "url": "/media/china-house-price-map/v2-08-light-shijiazhuang-xiaoqu-640.webp",
+          "bytes": 68486,
+          "sha256": "c248772d9c025ffefdeee11e3348c768c09912a64e072e7c105667a83b41e343",
+          "width": 640,
+          "height": 400,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/china-house-price-map/v2-08-light-shijiazhuang-xiaoqu-960.webp",
+          "url": "/media/china-house-price-map/v2-08-light-shijiazhuang-xiaoqu-960.webp",
+          "bytes": 126586,
+          "sha256": "54d4a2cf9ab4177fbd6aaa8e2cf24db9b5d2860bf3ced160ce9bb481404eaffa",
+          "width": 960,
+          "height": 600,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/china-house-price-map/v2-08-light-shijiazhuang-xiaoqu-1600.webp",
+          "url": "/media/china-house-price-map/v2-08-light-shijiazhuang-xiaoqu-1600.webp",
+          "bytes": 266366,
+          "sha256": "b06a9602e39d31e2573a42dfc584e340fa2362e810661320257a887d61dfd7be",
+          "width": 1600,
+          "height": 1000,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
     }
   ],
   "video": {
@@ -8736,16 +9280,16 @@
     "note": "Real map UI capture, 19.133 s, encoded 30 CFR with frame duplication; not a rendering performance claim."
   },
   "totals": {
-    "original_image_count": 151,
-    "exported_image_count": 614,
-    "source_image_bytes": 50460854,
-    "exported_image_bytes": 53155090,
+    "original_image_count": 159,
+    "exported_image_count": 654,
+    "source_image_bytes": 59974459,
+    "exported_image_bytes": 63323138,
     "video_bytes": 1363373,
-    "font_bytes": 384268,
-    "font_license_and_provenance_bytes": 17356,
-    "published_media_bytes": 54902731,
-    "total_public_asset_count": 620,
-    "total_public_asset_bytes": 54920087
+    "font_bytes": 405516,
+    "font_license_and_provenance_bytes": 17585,
+    "published_media_bytes": 65092027,
+    "total_public_asset_count": 660,
+    "total_public_asset_bytes": 65109612
   },
   "fonts": {
     "codec": "fontTools WOFF2 with Node native zlib Brotli (quality 11 / font mode), invoked by fontTools",
@@ -8753,6 +9297,7 @@
       "captures/selected-manifest.json",
       "design/v3/index.html",
       "site/src/components/ArchiveTile.astro",
+      "site/src/components/AtlasShowcase.astro",
       "site/src/components/AtollWaterScene.astro",
       "site/src/components/ChapterPoints.astro",
       "site/src/components/DubForgeWorkflow.astro",
@@ -8779,6 +9324,7 @@
       "site/src/components/WorksHall.astro",
       "site/src/components/WorksOrbit.astro",
       "site/src/components/WorksTable.astro",
+      "site/src/data/atlas-showcase.ts",
       "site/src/data/display-media.json",
       "site/src/data/dubforge-workflow.ts",
       "site/src/data/framework-showcase.ts",
@@ -8794,6 +9340,7 @@
       "site/src/data/release-snapshots.json",
       "site/src/data/restored-bundles.ts",
       "site/src/data/restored-projects.ts",
+      "site/src/data/stories/china-house-price-map.ts",
       "site/src/data/stories/dubforge.ts",
       "site/src/data/stories/glass-atoll.ts",
       "site/src/data/stories/other-projects.ts",
@@ -8819,6 +9366,7 @@
       "site/src/pages/sitemap.xml.ts",
       "site/src/scripts/about-studio-motion.ts",
       "site/src/scripts/atlas-library.ts",
+      "site/src/scripts/atlas-showcase.ts",
       "site/src/scripts/atoll-island-paint.ts",
       "site/src/scripts/atoll-water-engine.ts",
       "site/src/scripts/atoll-water-shaders.ts",
@@ -8849,6 +9397,7 @@
       "site/src/styles/about-studio.css",
       "site/src/styles/archive-atlas.css",
       "site/src/styles/archive-tiles.css",
+      "site/src/styles/atlas-showcase.css",
       "site/src/styles/atmosphere-polish.css",
       "site/src/styles/background-depth.css",
       "site/src/styles/detail-artifacts.css",
@@ -8924,14 +9473,14 @@
       {
         "path": "site/public/fonts/noto-sans-sc-subset.woff2",
         "url": "/fonts/noto-sans-sc-subset.woff2",
-        "bytes": 369692,
-        "sha256": "2948117c3ee63af2a25dafaeae79c9e53e687f745edf1e72e70eac5a0e47d25e",
+        "bytes": 390940,
+        "sha256": "51789950e184a8dc1daa827d92dec1128777100d301e620b95c61bd5d8b2fa24",
         "family": "Noto Sans SC",
         "source": "C:\\Windows\\Fonts\\NotoSansSC-VF.ttf",
         "source_sha256": "763146584cf0710223441356b4395e279021b0806c196614377a7a0174ae074a",
         "source_bytes": 17773244,
-        "requested_codepoints": 1306,
-        "included_codepoints": 1307,
+        "requested_codepoints": 1382,
+        "included_codepoints": 1384,
         "missing_cjk": [],
         "roundtrip_decode_verified": true
       }
@@ -8959,7 +9508,7 @@
     },
     {
       "path": "site/media-additions.json",
-      "sha256": "4ebe2f800c3367548003e994cd2a1a10738ff4deda22ac03ea70b5fbcd339780"
+      "sha256": "b9c3d6dfaac3dd7a77d21efd421724c92129a82b42da42bb9696ee485946cc14"
     }
   ]
 }

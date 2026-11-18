@@ -57,6 +57,70 @@
    "originalBytes": 432532,
    "sha256": "35f05c4b2f32794fbd322f62b33ff72b58acc9758a9b416d9acd60a70ba01c67"
   },
+  "/media/china-house-price-map/v2-01-national-eight-metrics.webp": {
+   "width": 1680,
+   "has1600": true,
+   "display": "/media/china-house-price-map/v2-01-national-eight-metrics-display.webp",
+   "bytes": 242442,
+   "originalBytes": 865776,
+   "sha256": "d0c09d69fc160cc29cdf567e9ca81553a82cad5921295447072a9e4060f026e8"
+  },
+  "/media/china-house-price-map/v2-02-matchmaker-buy-wizard.webp": {
+   "width": 1680,
+   "has1600": true,
+   "display": "/media/china-house-price-map/v2-02-matchmaker-buy-wizard-display.webp",
+   "bytes": 259478,
+   "originalBytes": 798258,
+   "sha256": "79b7db931c657d41c8f75e2bdac91a27e1e226d0c2998e141ee1a4263536d4ca"
+  },
+  "/media/china-house-price-map/v2-03-commute-radar-adaptive.webp": {
+   "width": 1680,
+   "has1600": true,
+   "display": "/media/china-house-price-map/v2-03-commute-radar-adaptive-display.webp",
+   "bytes": 220420,
+   "originalBytes": 915392,
+   "sha256": "2c7441ca826cfef511c73f55c7e9adbf6d47a9dcf3ce2b899981fb8f1f48ac80"
+  },
+  "/media/china-house-price-map/v2-04-community-5d-advisor.webp": {
+   "width": 1680,
+   "has1600": true,
+   "display": "/media/china-house-price-map/v2-04-community-5d-advisor-display.webp",
+   "bytes": 229508,
+   "originalBytes": 960778,
+   "sha256": "92ab3adbc8ad9f18c0242f9280c2b03ae02b2e14ced7c37f9b6ac53072e417d0"
+  },
+  "/media/china-house-price-map/v2-05-rent-persona-four-layouts.webp": {
+   "width": 1680,
+   "has1600": true,
+   "display": "/media/china-house-price-map/v2-05-rent-persona-four-layouts-display.webp",
+   "bytes": 207348,
+   "originalBytes": 749100,
+   "sha256": "d9943ba04895613690e99ae67b81d6d0bcb58dd82fa187684ded51792da5816d"
+  },
+  "/media/china-house-price-map/v2-06-drawdown-timeline-pk.webp": {
+   "width": 1680,
+   "has1600": true,
+   "display": "/media/china-house-price-map/v2-06-drawdown-timeline-pk-display.webp",
+   "bytes": 233220,
+   "originalBytes": 723326,
+   "sha256": "edcb0facf578407ed311d2be3b7ba292fd70491da3d1bd7e6fcd0664f5a16328"
+  },
+  "/media/china-house-price-map/v2-07-watertight-gba-hk-macau.webp": {
+   "width": 1680,
+   "has1600": true,
+   "display": "/media/china-house-price-map/v2-07-watertight-gba-hk-macau-display.webp",
+   "bytes": 208614,
+   "originalBytes": 746204,
+   "sha256": "af0d8d3a039021ae1a7dd28fc6f960712a69c9865b1c7ae339b274b2910f41a3"
+  },
+  "/media/china-house-price-map/v2-08-light-shijiazhuang-xiaoqu.webp": {
+   "width": 1680,
+   "has1600": true,
+   "display": "/media/china-house-price-map/v2-08-light-shijiazhuang-xiaoqu-display.webp",
+   "bytes": 237016,
+   "originalBytes": 630890,
+   "sha256": "cf1f4843de7e24c295c5eb83348d20e5cafbbc1d381919bdc0034842f0d28f48"
+  },
   "/media/dubforge/05-editor-detail.webp": {
    "width": 1440,
    "has1600": false,
