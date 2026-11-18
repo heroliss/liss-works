@@ -1,6 +1,6 @@
 {
   "schema": "showcase.website-media.v1",
-  "generated_at_utc": "2026-11-18T17:18:01.238331+00:00",
+  "generated_at_utc": "2026-11-18T19:48:50.241567+00:00",
   "source_manifest": "captures/selected-manifest.json",
   "source_manifest_sha256": "67d60c2289c031d14b180bc0b26ddcac2548fd7d425474912616c17353b85997",
   "originals_modified": false,
@@ -563,7 +563,7 @@
       "crop": false,
       "upscaled": false,
       "full": {
-        "path": "site-next/public/media/dubforge/05-editor-detail.webp",
+        "path": "site/public/media/dubforge/05-editor-detail.webp",
         "url": "/media/dubforge/05-editor-detail.webp",
         "bytes": 392792,
         "sha256": "a589b8e54bd5c7dad87e15236a47f7a8de187681421c00264123a542e404b62e",
@@ -575,7 +575,7 @@
       },
       "variants": [
         {
-          "path": "site-next/public/media/dubforge/05-editor-detail-320.webp",
+          "path": "site/public/media/dubforge/05-editor-detail-320.webp",
           "url": "/media/dubforge/05-editor-detail-320.webp",
           "bytes": 11564,
           "sha256": "5567a988c379d931a5ea7aacd9a4dda8c36d687cad51b97048d180ed9e00660f",
@@ -586,7 +586,7 @@
           "lossless": false
         },
         {
-          "path": "site-next/public/media/dubforge/05-editor-detail-640.webp",
+          "path": "site/public/media/dubforge/05-editor-detail-640.webp",
           "url": "/media/dubforge/05-editor-detail-640.webp",
           "bytes": 32386,
           "sha256": "2a045d6b92a26bb65f418251f3c658256f176b78f990a9bd9f9178bafd15456a",
@@ -597,7 +597,7 @@
           "lossless": false
         },
         {
-          "path": "site-next/public/media/dubforge/05-editor-detail-960.webp",
+          "path": "site/public/media/dubforge/05-editor-detail-960.webp",
           "url": "/media/dubforge/05-editor-detail-960.webp",
           "bytes": 61726,
           "sha256": "2062b2e73e201daea5e2d9d9437b4feba608ab9e2972a66b1f5dfb7d284a15ba",
@@ -620,7 +620,7 @@
       "crop": false,
       "upscaled": false,
       "full": {
-        "path": "site-next/public/media/dubforge/06-project-overview.webp",
+        "path": "site/public/media/dubforge/06-project-overview.webp",
         "url": "/media/dubforge/06-project-overview.webp",
         "bytes": 211870,
         "sha256": "251e58d4bd0132218f209772c635bc3763195e2c3077aa6d260a4a7519df4bcf",
@@ -632,7 +632,7 @@
       },
       "variants": [
         {
-          "path": "site-next/public/media/dubforge/06-project-overview-320.webp",
+          "path": "site/public/media/dubforge/06-project-overview-320.webp",
           "url": "/media/dubforge/06-project-overview-320.webp",
           "bytes": 7004,
           "sha256": "3250747b9dde0c0b627a5616e5e65b9f9e5fe6880dc6676ae1cc3b221f8e581f",
@@ -643,7 +643,7 @@
           "lossless": false
         },
         {
-          "path": "site-next/public/media/dubforge/06-project-overview-640.webp",
+          "path": "site/public/media/dubforge/06-project-overview-640.webp",
           "url": "/media/dubforge/06-project-overview-640.webp",
           "bytes": 19938,
           "sha256": "2a5ce39ba3aff8a1dd51b285df7aea427494419b5e95738af580da07b2d77539",
@@ -654,7 +654,7 @@
           "lossless": false
         },
         {
-          "path": "site-next/public/media/dubforge/06-project-overview-960.webp",
+          "path": "site/public/media/dubforge/06-project-overview-960.webp",
           "url": "/media/dubforge/06-project-overview-960.webp",
           "bytes": 37988,
           "sha256": "589a9d6478376737ef67968a77a7da31966f680b0f00014e3bb9776b715444a6",
@@ -677,7 +677,7 @@
       "crop": false,
       "upscaled": false,
       "full": {
-        "path": "site-next/public/media/dubforge/07-assembly-versions.webp",
+        "path": "site/public/media/dubforge/07-assembly-versions.webp",
         "url": "/media/dubforge/07-assembly-versions.webp",
         "bytes": 286690,
         "sha256": "4971f493f320e155f08f263313b187f9b37c4175c65813c67027b4ee7a57bc84",
@@ -689,7 +689,7 @@
       },
       "variants": [
         {
-          "path": "site-next/public/media/dubforge/07-assembly-versions-320.webp",
+          "path": "site/public/media/dubforge/07-assembly-versions-320.webp",
           "url": "/media/dubforge/07-assembly-versions-320.webp",
           "bytes": 7792,
           "sha256": "4e65c6e0a9aec256ab5277938b228df0c44e2d9985e708322c5880f46465ce74",
@@ -700,7 +700,7 @@
           "lossless": false
         },
         {
-          "path": "site-next/public/media/dubforge/07-assembly-versions-640.webp",
+          "path": "site/public/media/dubforge/07-assembly-versions-640.webp",
           "url": "/media/dubforge/07-assembly-versions-640.webp",
           "bytes": 23100,
           "sha256": "49860e7576e62a4df5073a49570a8aec2c1ee021445411f8d58d7141d416e95c",
@@ -711,7 +711,7 @@
           "lossless": false
         },
         {
-          "path": "site-next/public/media/dubforge/07-assembly-versions-960.webp",
+          "path": "site/public/media/dubforge/07-assembly-versions-960.webp",
           "url": "/media/dubforge/07-assembly-versions-960.webp",
           "bytes": 44542,
           "sha256": "9b6f86639288a9622dd65b458f75888f69355a2f09d8aca5675eb4c39a2ec06b",
@@ -734,7 +734,7 @@
       "crop": false,
       "upscaled": false,
       "full": {
-        "path": "site-next/public/media/dubforge/08-production-settings.webp",
+        "path": "site/public/media/dubforge/08-production-settings.webp",
         "url": "/media/dubforge/08-production-settings.webp",
         "bytes": 232532,
         "sha256": "d977014c749bb1612ebe8a52bb2a12984c5caee225f16621ba6dfdac9378a080",
@@ -746,7 +746,7 @@
       },
       "variants": [
         {
-          "path": "site-next/public/media/dubforge/08-production-settings-320.webp",
+          "path": "site/public/media/dubforge/08-production-settings-320.webp",
           "url": "/media/dubforge/08-production-settings-320.webp",
           "bytes": 6794,
           "sha256": "6335dc4c08ba9ddbdb966df5ceb758dcb14ac495304cdaeebe89e5f73d1edd01",
@@ -757,7 +757,7 @@
           "lossless": false
         },
         {
-          "path": "site-next/public/media/dubforge/08-production-settings-640.webp",
+          "path": "site/public/media/dubforge/08-production-settings-640.webp",
           "url": "/media/dubforge/08-production-settings-640.webp",
           "bytes": 17968,
           "sha256": "539ffe138b1e9dd7e4517057b586bf43d571d761805dcee5b2e3274e3f41902b",
@@ -768,7 +768,7 @@
           "lossless": false
         },
         {
-          "path": "site-next/public/media/dubforge/08-production-settings-960.webp",
+          "path": "site/public/media/dubforge/08-production-settings-960.webp",
           "url": "/media/dubforge/08-production-settings-960.webp",
           "bytes": 36604,
           "sha256": "0170ed1260cd2ada82f9c15e7ae52090582584d90e9f9721f74d73fc1a7e75b6",
@@ -791,7 +791,7 @@
       "crop": false,
       "upscaled": false,
       "full": {
-        "path": "site-next/public/media/dubforge/09-project-space-large.webp",
+        "path": "site/public/media/dubforge/09-project-space-large.webp",
         "url": "/media/dubforge/09-project-space-large.webp",
         "bytes": 300540,
         "sha256": "244c2bce612c1205ae17114127932ea97bd244cdf819c1ba6ae5da323391a53c",
@@ -803,7 +803,7 @@
       },
       "variants": [
         {
-          "path": "site-next/public/media/dubforge/09-project-space-large-320.webp",
+          "path": "site/public/media/dubforge/09-project-space-large-320.webp",
           "url": "/media/dubforge/09-project-space-large-320.webp",
           "bytes": 8540,
           "sha256": "48a92a722fd5722564dfdf6857d90c63f5abbcb1777ea7e2a0656dcb356d2f05",
@@ -814,7 +814,7 @@
           "lossless": false
         },
         {
-          "path": "site-next/public/media/dubforge/09-project-space-large-640.webp",
+          "path": "site/public/media/dubforge/09-project-space-large-640.webp",
           "url": "/media/dubforge/09-project-space-large-640.webp",
           "bytes": 25280,
           "sha256": "12f7f05e68ef7c50ab70c1335d21d85a9d560af78578056d03eff33c47f04828",
@@ -825,7 +825,7 @@
           "lossless": false
         },
         {
-          "path": "site-next/public/media/dubforge/09-project-space-large-960.webp",
+          "path": "site/public/media/dubforge/09-project-space-large-960.webp",
           "url": "/media/dubforge/09-project-space-large-960.webp",
           "bytes": 48572,
           "sha256": "37ed9263304ee127d4633bca151a0cb799fbbb2a327f6ce201cd84a53a8222bc",
@@ -7540,7 +7540,7 @@
       "crop": false,
       "upscaled": false,
       "full": {
-        "path": "site-next/public/media/dubforge/v6-01-download.webp",
+        "path": "site/public/media/dubforge/v6-01-download.webp",
         "url": "/media/dubforge/v6-01-download.webp",
         "bytes": 219764,
         "sha256": "01aeeb606945dc741e0c2d018c37ec3e1bce63f2ca81d502e79c01b0595842e4",
@@ -7552,7 +7552,7 @@
       },
       "variants": [
         {
-          "path": "site-next/public/media/dubforge/v6-01-download-320.webp",
+          "path": "site/public/media/dubforge/v6-01-download-320.webp",
           "url": "/media/dubforge/v6-01-download-320.webp",
           "bytes": 6008,
           "sha256": "a87fadf855b6951266294c5d53a64c58059505ae7eb95146e5fdc7efaf1c0c6b",
@@ -7563,7 +7563,7 @@
           "lossless": false
         },
         {
-          "path": "site-next/public/media/dubforge/v6-01-download-640.webp",
+          "path": "site/public/media/dubforge/v6-01-download-640.webp",
           "url": "/media/dubforge/v6-01-download-640.webp",
           "bytes": 17290,
           "sha256": "34a1932667e0d887be7b730d9cc53522891425b8d461400a41d12213d792de37",
@@ -7574,7 +7574,7 @@
           "lossless": false
         },
         {
-          "path": "site-next/public/media/dubforge/v6-01-download-960.webp",
+          "path": "site/public/media/dubforge/v6-01-download-960.webp",
           "url": "/media/dubforge/v6-01-download-960.webp",
           "bytes": 34106,
           "sha256": "3e87993837b79bf0682f838e8ba31f2d5db9a46a81fb649ed5b51032857f56ed",
@@ -7597,7 +7597,7 @@
       "crop": false,
       "upscaled": false,
       "full": {
-        "path": "site-next/public/media/dubforge/v6-02-preprocess.webp",
+        "path": "site/public/media/dubforge/v6-02-preprocess.webp",
         "url": "/media/dubforge/v6-02-preprocess.webp",
         "bytes": 219528,
         "sha256": "e4b8824514792dd9af13026a16a1f231c5955fea05a05a4a79069f0db40535ad",
@@ -7609,7 +7609,7 @@
       },
       "variants": [
         {
-          "path": "site-next/public/media/dubforge/v6-02-preprocess-320.webp",
+          "path": "site/public/media/dubforge/v6-02-preprocess-320.webp",
           "url": "/media/dubforge/v6-02-preprocess-320.webp",
           "bytes": 5610,
           "sha256": "2efbd3d143b92866e6ef58fc22b3cb4aaf486da64185e3e0aa65c298052f4f61",
@@ -7620,7 +7620,7 @@
           "lossless": false
         },
         {
-          "path": "site-next/public/media/dubforge/v6-02-preprocess-640.webp",
+          "path": "site/public/media/dubforge/v6-02-preprocess-640.webp",
           "url": "/media/dubforge/v6-02-preprocess-640.webp",
           "bytes": 16560,
           "sha256": "63af524645fb02a8a0b432bbc3b9470f7b7756b3eae24d58ad859ad060859667",
@@ -7631,7 +7631,7 @@
           "lossless": false
         },
         {
-          "path": "site-next/public/media/dubforge/v6-02-preprocess-960.webp",
+          "path": "site/public/media/dubforge/v6-02-preprocess-960.webp",
           "url": "/media/dubforge/v6-02-preprocess-960.webp",
           "bytes": 32486,
           "sha256": "4ee6d7152a999ea3091354ce11be856e0aeaeca4ddb17d4d89de5dbffffaadf3",
@@ -7654,7 +7654,7 @@
       "crop": false,
       "upscaled": false,
       "full": {
-        "path": "site-next/public/media/dubforge/v6-03-transcribe.webp",
+        "path": "site/public/media/dubforge/v6-03-transcribe.webp",
         "url": "/media/dubforge/v6-03-transcribe.webp",
         "bytes": 295580,
         "sha256": "bad6936dd8a0e4a18da34a66d0e985da6adc697a192e925e15da958aecf944cc",
@@ -7666,7 +7666,7 @@
       },
       "variants": [
         {
-          "path": "site-next/public/media/dubforge/v6-03-transcribe-320.webp",
+          "path": "site/public/media/dubforge/v6-03-transcribe-320.webp",
           "url": "/media/dubforge/v6-03-transcribe-320.webp",
           "bytes": 7508,
           "sha256": "02cc17aef2874c530aedbe48283a6c0228d73cb689db2a45fe04462232a2057f",
@@ -7677,7 +7677,7 @@
           "lossless": false
         },
         {
-          "path": "site-next/public/media/dubforge/v6-03-transcribe-640.webp",
+          "path": "site/public/media/dubforge/v6-03-transcribe-640.webp",
           "url": "/media/dubforge/v6-03-transcribe-640.webp",
           "bytes": 22266,
           "sha256": "8589a0c474494070f3ebbac7294d711020a143bd686b7bb11d25a177e5f533ac",
@@ -7688,7 +7688,7 @@
           "lossless": false
         },
         {
-          "path": "site-next/public/media/dubforge/v6-03-transcribe-960.webp",
+          "path": "site/public/media/dubforge/v6-03-transcribe-960.webp",
           "url": "/media/dubforge/v6-03-transcribe-960.webp",
           "bytes": 42970,
           "sha256": "0c3cd4334ef54bd685b7ff47a71d66b930dde483a63d1a6db281df6a6523edc5",
@@ -7711,7 +7711,7 @@
       "crop": false,
       "upscaled": false,
       "full": {
-        "path": "site-next/public/media/dubforge/v6-04-split.webp",
+        "path": "site/public/media/dubforge/v6-04-split.webp",
         "url": "/media/dubforge/v6-04-split.webp",
         "bytes": 209646,
         "sha256": "ac60612553b89a82ad4d5d2d22864a18aa061e611488d2e8a20fc3f36499c675",
@@ -7723,7 +7723,7 @@
       },
       "variants": [
         {
-          "path": "site-next/public/media/dubforge/v6-04-split-320.webp",
+          "path": "site/public/media/dubforge/v6-04-split-320.webp",
           "url": "/media/dubforge/v6-04-split-320.webp",
           "bytes": 5980,
           "sha256": "edae2be2ae1f7f91893b5b0dc059dca0615dd68c9d487f4d97a89339f33a75ad",
@@ -7734,7 +7734,7 @@
           "lossless": false
         },
         {
-          "path": "site-next/public/media/dubforge/v6-04-split-640.webp",
+          "path": "site/public/media/dubforge/v6-04-split-640.webp",
           "url": "/media/dubforge/v6-04-split-640.webp",
           "bytes": 16590,
           "sha256": "f78aa7c19b7c30620b46f59e6034a54106ca105ef8589d6448e4db4703d30f52",
@@ -7745,7 +7745,7 @@
           "lossless": false
         },
         {
-          "path": "site-next/public/media/dubforge/v6-04-split-960.webp",
+          "path": "site/public/media/dubforge/v6-04-split-960.webp",
           "url": "/media/dubforge/v6-04-split-960.webp",
           "bytes": 30736,
           "sha256": "ee57125218849740d2a155846daac897277f5700233f4524fd548beaa7f31b2b",
@@ -7768,7 +7768,7 @@
       "crop": false,
       "upscaled": false,
       "full": {
-        "path": "site-next/public/media/dubforge/v6-05-translate.webp",
+        "path": "site/public/media/dubforge/v6-05-translate.webp",
         "url": "/media/dubforge/v6-05-translate.webp",
         "bytes": 214000,
         "sha256": "4819c236dba95e37830f714250e723fba267f0810e92591bd9d3ba7017cd30ce",
@@ -7780,7 +7780,7 @@
       },
       "variants": [
         {
-          "path": "site-next/public/media/dubforge/v6-05-translate-320.webp",
+          "path": "site/public/media/dubforge/v6-05-translate-320.webp",
           "url": "/media/dubforge/v6-05-translate-320.webp",
           "bytes": 6194,
           "sha256": "68d69a3053721126466f87ea4d4e8258f15fb15a1ce793cb2cd39ca2c6d3bf49",
@@ -7791,7 +7791,7 @@
           "lossless": false
         },
         {
-          "path": "site-next/public/media/dubforge/v6-05-translate-640.webp",
+          "path": "site/public/media/dubforge/v6-05-translate-640.webp",
           "url": "/media/dubforge/v6-05-translate-640.webp",
           "bytes": 17962,
           "sha256": "5f2c56398215b7781e122e0518a97454cf72d1390ef869eb3a2acbfee2656c97",
@@ -7802,7 +7802,7 @@
           "lossless": false
         },
         {
-          "path": "site-next/public/media/dubforge/v6-05-translate-960.webp",
+          "path": "site/public/media/dubforge/v6-05-translate-960.webp",
           "url": "/media/dubforge/v6-05-translate-960.webp",
           "bytes": 35448,
           "sha256": "f3bc979906afecc83319abb0d953f663b0a38d26295f79ef1da1460010f40738",
@@ -7825,7 +7825,7 @@
       "crop": false,
       "upscaled": false,
       "full": {
-        "path": "site-next/public/media/dubforge/v6-06-tts.webp",
+        "path": "site/public/media/dubforge/v6-06-tts.webp",
         "url": "/media/dubforge/v6-06-tts.webp",
         "bytes": 408332,
         "sha256": "c8f966bd06583e91c02157b5360757c3d60d6ccfa085394b93d5991c5f2709bf",
@@ -7837,7 +7837,7 @@
       },
       "variants": [
         {
-          "path": "site-next/public/media/dubforge/v6-06-tts-320.webp",
+          "path": "site/public/media/dubforge/v6-06-tts-320.webp",
           "url": "/media/dubforge/v6-06-tts-320.webp",
           "bytes": 9534,
           "sha256": "609d1ea8e5a938e72b2ff716a1bf6a9bc38472e46d062801ea3f2659efe16f65",
@@ -7848,7 +7848,7 @@
           "lossless": false
         },
         {
-          "path": "site-next/public/media/dubforge/v6-06-tts-640.webp",
+          "path": "site/public/media/dubforge/v6-06-tts-640.webp",
           "url": "/media/dubforge/v6-06-tts-640.webp",
           "bytes": 31654,
           "sha256": "d8b6bdb159aef75e814906185b9caa6035152ce774f117bf99d1aa33a07023ba",
@@ -7859,7 +7859,7 @@
           "lossless": false
         },
         {
-          "path": "site-next/public/media/dubforge/v6-06-tts-960.webp",
+          "path": "site/public/media/dubforge/v6-06-tts-960.webp",
           "url": "/media/dubforge/v6-06-tts-960.webp",
           "bytes": 63268,
           "sha256": "0dda2dc0eed114cbb9fac12c43e6a2eee14325e827a56f72a74d5cbf94f6072e",
@@ -7882,7 +7882,7 @@
       "crop": false,
       "upscaled": false,
       "full": {
-        "path": "site-next/public/media/dubforge/v6-07-comments.webp",
+        "path": "site/public/media/dubforge/v6-07-comments.webp",
         "url": "/media/dubforge/v6-07-comments.webp",
         "bytes": 253676,
         "sha256": "c68ab8f1a5d93c8039d43db3b82c4335da9bf59d1f130e341944834ae9224849",
@@ -7894,7 +7894,7 @@
       },
       "variants": [
         {
-          "path": "site-next/public/media/dubforge/v6-07-comments-320.webp",
+          "path": "site/public/media/dubforge/v6-07-comments-320.webp",
           "url": "/media/dubforge/v6-07-comments-320.webp",
           "bytes": 6766,
           "sha256": "f3decacd23c095ea5a0f35f85b1e50bd71b07cba52fd2836ade15f69a7eab9ab",
@@ -7905,7 +7905,7 @@
           "lossless": false
         },
         {
-          "path": "site-next/public/media/dubforge/v6-07-comments-640.webp",
+          "path": "site/public/media/dubforge/v6-07-comments-640.webp",
           "url": "/media/dubforge/v6-07-comments-640.webp",
           "bytes": 20632,
           "sha256": "3774764d064ac86f9fb344edee7b080458b024f139c0daaa3bee19b0b8ae8c8b",
@@ -7916,7 +7916,7 @@
           "lossless": false
         },
         {
-          "path": "site-next/public/media/dubforge/v6-07-comments-960.webp",
+          "path": "site/public/media/dubforge/v6-07-comments-960.webp",
           "url": "/media/dubforge/v6-07-comments-960.webp",
           "bytes": 39000,
           "sha256": "e87705a3ebb11033ad778bde08335e84e0c7975b6d46c601b6cc4fec7a2336c0",
@@ -7939,7 +7939,7 @@
       "crop": false,
       "upscaled": false,
       "full": {
-        "path": "site-next/public/media/dubforge/v6-08-assemble.webp",
+        "path": "site/public/media/dubforge/v6-08-assemble.webp",
         "url": "/media/dubforge/v6-08-assemble.webp",
         "bytes": 275156,
         "sha256": "127cf686224a22571a460457de522e9a293d6a57c3c95d04dcbce94268829bd2",
@@ -7951,7 +7951,7 @@
       },
       "variants": [
         {
-          "path": "site-next/public/media/dubforge/v6-08-assemble-320.webp",
+          "path": "site/public/media/dubforge/v6-08-assemble-320.webp",
           "url": "/media/dubforge/v6-08-assemble-320.webp",
           "bytes": 7420,
           "sha256": "45cff574a8d6ef2d6f204ffd8fb9d3f5e1e4b25e093826e911040c1d10a15517",
@@ -7962,7 +7962,7 @@
           "lossless": false
         },
         {
-          "path": "site-next/public/media/dubforge/v6-08-assemble-640.webp",
+          "path": "site/public/media/dubforge/v6-08-assemble-640.webp",
           "url": "/media/dubforge/v6-08-assemble-640.webp",
           "bytes": 21498,
           "sha256": "4c9336ce968a11d4c59b73d1e1a7d3cfab14cc68d551a396260107bd4146f3a2",
@@ -7973,7 +7973,7 @@
           "lossless": false
         },
         {
-          "path": "site-next/public/media/dubforge/v6-08-assemble-960.webp",
+          "path": "site/public/media/dubforge/v6-08-assemble-960.webp",
           "url": "/media/dubforge/v6-08-assemble-960.webp",
           "bytes": 42018,
           "sha256": "17afd6358fb05b16bc30d3cc459b98b0e682b667b41f08e9d08ab67ed0cd0873",
@@ -7996,7 +7996,7 @@
       "crop": false,
       "upscaled": false,
       "full": {
-        "path": "site-next/public/media/dubforge/v6-09-publish.webp",
+        "path": "site/public/media/dubforge/v6-09-publish.webp",
         "url": "/media/dubforge/v6-09-publish.webp",
         "bytes": 291050,
         "sha256": "4c49110cc6e619c7f57c3985d78175d8d5ea84816a1c15c34bfb946fcd9e2f03",
@@ -8008,7 +8008,7 @@
       },
       "variants": [
         {
-          "path": "site-next/public/media/dubforge/v6-09-publish-320.webp",
+          "path": "site/public/media/dubforge/v6-09-publish-320.webp",
           "url": "/media/dubforge/v6-09-publish-320.webp",
           "bytes": 7690,
           "sha256": "441698aa560e2c529d5f80ab032b74d35993c5f39dc08119d3ee906a8caf2a66",
@@ -8019,7 +8019,7 @@
           "lossless": false
         },
         {
-          "path": "site-next/public/media/dubforge/v6-09-publish-640.webp",
+          "path": "site/public/media/dubforge/v6-09-publish-640.webp",
           "url": "/media/dubforge/v6-09-publish-640.webp",
           "bytes": 22406,
           "sha256": "b93bc7b507b8a859dded043bcabbf134c926ad4573961cdcf55a4e736695d14b",
@@ -8030,7 +8030,7 @@
           "lossless": false
         },
         {
-          "path": "site-next/public/media/dubforge/v6-09-publish-960.webp",
+          "path": "site/public/media/dubforge/v6-09-publish-960.webp",
           "url": "/media/dubforge/v6-09-publish-960.webp",
           "bytes": 42296,
           "sha256": "0b2c9e400083e9a093dadc706050439fc79c3b8dfdf45fb94b077237477153be",
@@ -9265,6 +9265,451 @@
           "lossless": false
         }
       ]
+    },
+    {
+      "repo": "dubforge",
+      "source": "captures/dubforge/selected-20261119/v7-06-tts.png",
+      "source_sha256": "5dfefd8d91291a4cf462537b93f1d3b1fdf61d3e69f04d434776fc60f0c53d00",
+      "source_bytes": 148527,
+      "source_width": 1024,
+      "source_height": 640,
+      "source_authenticity": "Real DubForge Studio v3 UI in the official isolated GET-only demo with self-authored silent footage and bilingual text (collapsed content review bar, dubbing parameters, and sentence list). Pending production state; no model generation, accounts or publishing.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/dubforge/v7-06-tts.webp",
+        "url": "/media/dubforge/v7-06-tts.webp",
+        "bytes": 114854,
+        "sha256": "ff34ee02c789e6ac7e58ddf91f317cdfd2e2f67cd33244cb01f086061b4c565c",
+        "width": 1024,
+        "height": 640,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/dubforge/v7-06-tts-320.webp",
+          "url": "/media/dubforge/v7-06-tts-320.webp",
+          "bytes": 9246,
+          "sha256": "fa97ad5fcdaf546bc24edb60555eacd82425f803ca9e44ca37c51342cb77768f",
+          "width": 320,
+          "height": 200,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/dubforge/v7-06-tts-640.webp",
+          "url": "/media/dubforge/v7-06-tts-640.webp",
+          "bytes": 24370,
+          "sha256": "1c60f4d7d7013ae633ff1a5d339d4b6cd03ef689e12df2b85e88d40515f768ae",
+          "width": 640,
+          "height": 400,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/dubforge/v7-06-tts-960.webp",
+          "url": "/media/dubforge/v7-06-tts-960.webp",
+          "bytes": 46430,
+          "sha256": "5d833d577ff781ac12c60a11d022c46c82b63600af52c40ce5598ef20a640256",
+          "width": 960,
+          "height": 600,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "dubforge",
+      "source": "captures/dubforge/selected-20261119/v7-09-delivery.png",
+      "source_sha256": "1f17c374559aa9f3ac099f932e7378f86e1e5e19fb9496139d7bb7c648634d63",
+      "source_bytes": 136294,
+      "source_width": 1024,
+      "source_height": 640,
+      "source_authenticity": "Real DubForge Studio v3 UI in the official isolated GET-only demo showing the unified multi-platform delivery hub (auto workflow track + manual Bilibili and Douyin studio channel cards). Pending production state; no accounts or publishing.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/dubforge/v7-09-delivery.webp",
+        "url": "/media/dubforge/v7-09-delivery.webp",
+        "bytes": 106692,
+        "sha256": "0b9587db1c1c55e6d1d85d7c84ddfd88ca565587dc3d97fed90f270b2e0c3477",
+        "width": 1024,
+        "height": 640,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/dubforge/v7-09-delivery-320.webp",
+          "url": "/media/dubforge/v7-09-delivery-320.webp",
+          "bytes": 7934,
+          "sha256": "921719cfad76502a4823e2db9238aef926a81a59f5ef978091e8773356c27362",
+          "width": 320,
+          "height": 200,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/dubforge/v7-09-delivery-640.webp",
+          "url": "/media/dubforge/v7-09-delivery-640.webp",
+          "bytes": 22070,
+          "sha256": "53897192fe5c34d278a74188329f7c4efb8352cac569d89560c760aecd38676f",
+          "width": 640,
+          "height": 400,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/dubforge/v7-09-delivery-960.webp",
+          "url": "/media/dubforge/v7-09-delivery-960.webp",
+          "bytes": 41380,
+          "sha256": "d13beb8524b8deb85e90e937b46781ced51b673b467a207b0aaece798804366c",
+          "width": 960,
+          "height": 600,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "dubforge",
+      "source": "captures/dubforge/selected-20261119/v7-overview-monitor.png",
+      "source_sha256": "5eb4a9266efbd22eba851cff2d6b0063f100f0d82c924bc3599f28e738afddc6",
+      "source_bytes": 184346,
+      "source_width": 1024,
+      "source_height": 640,
+      "source_authenticity": "Real DubForge Studio v3 two-column project overview and self-authored geometric video monitor in the official isolated GET-only demo. Pending production state; no model generation, accounts or publishing.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/dubforge/v7-overview-monitor.webp",
+        "url": "/media/dubforge/v7-overview-monitor.webp",
+        "bytes": 132032,
+        "sha256": "35aa86d8cdcc5566ef27710da650e21cedd95e9c7e3da3ebe96c1ff5243f88b8",
+        "width": 1024,
+        "height": 640,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/dubforge/v7-overview-monitor-320.webp",
+          "url": "/media/dubforge/v7-overview-monitor-320.webp",
+          "bytes": 10840,
+          "sha256": "404792048a65e98cae7d69f00bd561b10841110ab82a65edd55c9f7a118558af",
+          "width": 320,
+          "height": 200,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/dubforge/v7-overview-monitor-640.webp",
+          "url": "/media/dubforge/v7-overview-monitor-640.webp",
+          "bytes": 29018,
+          "sha256": "0b24171c2c0023146e3455eb536d6fd507cef4d04e58f9303b7c69eb99272f98",
+          "width": 640,
+          "height": 400,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/dubforge/v7-overview-monitor-960.webp",
+          "url": "/media/dubforge/v7-overview-monitor-960.webp",
+          "bytes": 53230,
+          "sha256": "f8cc983eac563e46532d59b26efc21cd30606a00c921e238fab4e1d73735d9f9",
+          "width": 960,
+          "height": 600,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "dubforge",
+      "source": "captures/dubforge/selected-20261119/v7-project-space.png",
+      "source_sha256": "ca94b32cc0605908730cced28dabe93fd7cb791953208061477f58f56d54af65",
+      "source_bytes": 149093,
+      "source_width": 1024,
+      "source_height": 640,
+      "source_authenticity": "Real DubForge Studio v3 project space showing KPI strip, batch import entry, template inheritance, and 3 synthetic demo projects in the official isolated GET-only demo.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/dubforge/v7-project-space.webp",
+        "url": "/media/dubforge/v7-project-space.webp",
+        "bytes": 109634,
+        "sha256": "53beea3a503cd9f3c0e77d90306cc27550c0b10df2467724d437547a859bbe81",
+        "width": 1024,
+        "height": 640,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/dubforge/v7-project-space-320.webp",
+          "url": "/media/dubforge/v7-project-space-320.webp",
+          "bytes": 8946,
+          "sha256": "9c9ed2688ecadd5435d2b3df2a4584aa5a13468f9ee2e50c3a858358fd582a73",
+          "width": 320,
+          "height": 200,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/dubforge/v7-project-space-640.webp",
+          "url": "/media/dubforge/v7-project-space-640.webp",
+          "bytes": 24764,
+          "sha256": "258b7c36132eaf2587563ca584aa5c9ac764cdf3f6e1c37739b6ac02c25fb78c",
+          "width": 640,
+          "height": 400,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/dubforge/v7-project-space-960.webp",
+          "url": "/media/dubforge/v7-project-space-960.webp",
+          "bytes": 45360,
+          "sha256": "da7ee3529ee8ffb21cc70b253c6a0e3ebf90dfacc598ff3bcc02abb227b9ddab",
+          "width": 960,
+          "height": 600,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "dubforge",
+      "source": "captures/dubforge/selected-20261119/v7-dubbing-workbench.png",
+      "source_sha256": "fa2e52960bd71a7390e22abe08ccf16130b479fa509a27e5f002daf5d42eebdf",
+      "source_bytes": 222705,
+      "source_width": 1024,
+      "source_height": 914,
+      "source_authenticity": "Real DubForge Studio v3 subtitle and dubbing workbench in the official isolated GET-only demo showing collapsed review bar, geometric reference video player, audio sliders, and bilingual sentence rows.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/dubforge/v7-dubbing-workbench.webp",
+        "url": "/media/dubforge/v7-dubbing-workbench.webp",
+        "bytes": 174974,
+        "sha256": "9242de9d37f8786e439e33361999d4888e93d9b4b2d0a910716a72a814b67f08",
+        "width": 1024,
+        "height": 914,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/dubforge/v7-dubbing-workbench-320.webp",
+          "url": "/media/dubforge/v7-dubbing-workbench-320.webp",
+          "bytes": 12824,
+          "sha256": "c1f31995f6afc042bd01a31f29fcf330c6deb45846bfc05cf51d599390532cc5",
+          "width": 320,
+          "height": 286,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/dubforge/v7-dubbing-workbench-640.webp",
+          "url": "/media/dubforge/v7-dubbing-workbench-640.webp",
+          "bytes": 36118,
+          "sha256": "10ecb8b39caa3892d019a83679a170f1f9948aeb7c6c8bfbe77bb491387a49ab",
+          "width": 640,
+          "height": 571,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/dubforge/v7-dubbing-workbench-960.webp",
+          "url": "/media/dubforge/v7-dubbing-workbench-960.webp",
+          "bytes": 67040,
+          "sha256": "5e567f71887db64b7dafb6e27bbd6e2155f8d60b2a57fb89e20fb9ea51d48737",
+          "width": 960,
+          "height": 857,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "dubforge",
+      "source": "captures/dubforge/selected-20261119/v7-cover-bilibili-moss.jpg",
+      "source_sha256": "8a4b345ebbf6fdde8963f1879c0e515695fb729d80b82b5846b036eb3ccf7768",
+      "source_bytes": 231070,
+      "source_width": 1280,
+      "source_height": 800,
+      "source_authenticity": "Real 1280x800 (16:10) Bilibili cover generated locally by DubForge via MOSS-Image FP16 two-stage pipeline and Pillow typography composition on an 8GB GPU.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/dubforge/v7-cover-bilibili-moss.webp",
+        "url": "/media/dubforge/v7-cover-bilibili-moss.webp",
+        "bytes": 634244,
+        "sha256": "cfeaea5957c5a14327594560d1f04b67892b66de47af1195bd5ef3272919dcfd",
+        "width": 1280,
+        "height": 800,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/dubforge/v7-cover-bilibili-moss-320.webp",
+          "url": "/media/dubforge/v7-cover-bilibili-moss-320.webp",
+          "bytes": 21256,
+          "sha256": "9ce3de1576d0b8dd9d425dd42ed498b2e863726583d1176d9ec9044fd7f25b4c",
+          "width": 320,
+          "height": 200,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/dubforge/v7-cover-bilibili-moss-640.webp",
+          "url": "/media/dubforge/v7-cover-bilibili-moss-640.webp",
+          "bytes": 54880,
+          "sha256": "882a53f85fea23d67374a721538be46c1e15a391fe29ec94a28f115dc4deb4fb",
+          "width": 640,
+          "height": 400,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/dubforge/v7-cover-bilibili-moss-960.webp",
+          "url": "/media/dubforge/v7-cover-bilibili-moss-960.webp",
+          "bytes": 95462,
+          "sha256": "82c68fef3f49d8896984238242caa08c6ae4b9b4b10b68a8a169ed78bbf7362d",
+          "width": 960,
+          "height": 600,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "dubforge",
+      "source": "captures/dubforge/selected-20261119/v7-cover-douyin-landscape.png",
+      "source_sha256": "90e967cf4e02c0daccc7e9175e890e717e145a311a8fe189287dcc58dbf12a15",
+      "source_bytes": 1340773,
+      "source_width": 1280,
+      "source_height": 960,
+      "source_authenticity": "Real 1280x960 (4:3) Douyin feed landscape cover generated locally by DubForge via MOSS-Image FP16 two-stage pipeline and Pillow typography composition.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/dubforge/v7-cover-douyin-landscape.webp",
+        "url": "/media/dubforge/v7-cover-douyin-landscape.webp",
+        "bytes": 967246,
+        "sha256": "3a7b5a8a6f6ed6a7f7d733314466564784ea7227f8bec0fd642179d0a1515d38",
+        "width": 1280,
+        "height": 960,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/dubforge/v7-cover-douyin-landscape-320.webp",
+          "url": "/media/dubforge/v7-cover-douyin-landscape-320.webp",
+          "bytes": 22876,
+          "sha256": "7a5088d2a2415d3fc36f289cea98e01bbcb66612b6bd6c4626cb714b7e7b9229",
+          "width": 320,
+          "height": 240,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/dubforge/v7-cover-douyin-landscape-640.webp",
+          "url": "/media/dubforge/v7-cover-douyin-landscape-640.webp",
+          "bytes": 58640,
+          "sha256": "544dc53eabe62b3fab706ea4ed8dec48e17ec9dabf2bd76c3aad85d2cdf21d89",
+          "width": 640,
+          "height": 480,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/dubforge/v7-cover-douyin-landscape-960.webp",
+          "url": "/media/dubforge/v7-cover-douyin-landscape-960.webp",
+          "bytes": 101464,
+          "sha256": "24f9fa4359a5daf57bd3f6fc88e2df66fcdd04342525b0cb08a2c5a7cb88c66a",
+          "width": 960,
+          "height": 720,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
+    },
+    {
+      "repo": "dubforge",
+      "source": "captures/dubforge/selected-20261119/v7-cover-douyin-portrait.png",
+      "source_sha256": "1bddd78fb40f59b38c13f3487beb3ba8f92056ee279914305d831d66d2214686",
+      "source_bytes": 1386463,
+      "source_width": 960,
+      "source_height": 1280,
+      "source_authenticity": "Real 960x1280 (3:4) Douyin profile portrait cover generated locally by DubForge with headline constrained to the [148, 812] 9:16 full-screen safe band.",
+      "crop": false,
+      "upscaled": false,
+      "full": {
+        "path": "site/public/media/dubforge/v7-cover-douyin-portrait.webp",
+        "url": "/media/dubforge/v7-cover-douyin-portrait.webp",
+        "bytes": 1009212,
+        "sha256": "5776ba70215e1d266d229a4c606ad0d0e67bf176a3e9338cd3a092331d94e88d",
+        "width": 960,
+        "height": 1280,
+        "codec": "webp",
+        "quality": 92,
+        "lossless": true
+      },
+      "variants": [
+        {
+          "path": "site/public/media/dubforge/v7-cover-douyin-portrait-320.webp",
+          "url": "/media/dubforge/v7-cover-douyin-portrait-320.webp",
+          "bytes": 44296,
+          "sha256": "8166b45e33a5464734e2b44caf48fa11cfc9c59deaf76acb9ffc09e9c5450339",
+          "width": 320,
+          "height": 427,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        },
+        {
+          "path": "site/public/media/dubforge/v7-cover-douyin-portrait-640.webp",
+          "url": "/media/dubforge/v7-cover-douyin-portrait-640.webp",
+          "bytes": 103276,
+          "sha256": "8346b9bcae71073e3dac1effc814a49bbb96ff0915610a64c76e590b0d94976f",
+          "width": 640,
+          "height": 853,
+          "codec": "webp",
+          "quality": 92,
+          "lossless": false
+        }
+      ]
     }
   ],
   "video": {
@@ -9280,16 +9725,16 @@
     "note": "Real map UI capture, 19.133 s, encoded 30 CFR with frame duplication; not a rendering performance claim."
   },
   "totals": {
-    "original_image_count": 159,
-    "exported_image_count": 654,
-    "source_image_bytes": 59974459,
-    "exported_image_bytes": 63323138,
+    "original_image_count": 167,
+    "exported_image_count": 685,
+    "source_image_bytes": 63773730,
+    "exported_image_bytes": 67513746,
     "video_bytes": 1363373,
-    "font_bytes": 405516,
+    "font_bytes": 411940,
     "font_license_and_provenance_bytes": 17585,
-    "published_media_bytes": 65092027,
-    "total_public_asset_count": 660,
-    "total_public_asset_bytes": 65109612
+    "published_media_bytes": 69289059,
+    "total_public_asset_count": 691,
+    "total_public_asset_bytes": 69306644
   },
   "fonts": {
     "codec": "fontTools WOFF2 with Node native zlib Brotli (quality 11 / font mode), invoked by fontTools",
@@ -9473,14 +9918,14 @@
       {
         "path": "site/public/fonts/noto-sans-sc-subset.woff2",
         "url": "/fonts/noto-sans-sc-subset.woff2",
-        "bytes": 390940,
-        "sha256": "51789950e184a8dc1daa827d92dec1128777100d301e620b95c61bd5d8b2fa24",
+        "bytes": 397364,
+        "sha256": "8408b36fe04329e23528415708530495d460a8c8a860f0cecba9d851cc0a0018",
         "family": "Noto Sans SC",
         "source": "C:\\Windows\\Fonts\\NotoSansSC-VF.ttf",
         "source_sha256": "763146584cf0710223441356b4395e279021b0806c196614377a7a0174ae074a",
         "source_bytes": 17773244,
-        "requested_codepoints": 1382,
-        "included_codepoints": 1384,
+        "requested_codepoints": 1404,
+        "included_codepoints": 1406,
         "missing_cjk": [],
         "roundtrip_decode_verified": true
       }
@@ -9508,7 +9953,7 @@
     },
     {
       "path": "site/media-additions.json",
-      "sha256": "b9c3d6dfaac3dd7a77d21efd421724c92129a82b42da42bb9696ee485946cc14"
+      "sha256": "79fb21a7e410ca3166b7d1cf93c3436ada3e43d2854add694bf53b89e0da8ee8"
     }
   ]
 }

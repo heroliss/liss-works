@@ -177,6 +177,22 @@
    "originalBytes": 291050,
    "sha256": "0406f1d8b9761bd5d60c7c1a2ec892ce38d62fa9245857d19b5aa6772aa634ff"
   },
+  "/media/dubforge/v7-cover-bilibili-moss.webp": {
+   "width": 1280,
+   "has1600": false,
+   "display": "/media/dubforge/v7-cover-bilibili-moss-display.webp",
+   "bytes": 106588,
+   "originalBytes": 634244,
+   "sha256": "c757c7af8083cbc407227fd47f7d1aac417a7016b7eea8aab1ce7ed21a65f3a4"
+  },
+  "/media/dubforge/v7-cover-douyin-landscape.webp": {
+   "width": 1280,
+   "has1600": false,
+   "display": "/media/dubforge/v7-cover-douyin-landscape-display.webp",
+   "bytes": 115674,
+   "originalBytes": 967246,
+   "sha256": "d1659e80ca9bcf5997f058f8fc340b2be4086ad5ece3f1e97c94612397f0e425"
+  },
   "/media/floydshortestpath/distance-matrix-report.webp": {
    "width": 3160,
    "has1600": true

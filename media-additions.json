@@ -253,6 +253,78 @@
       "height": 1050,
       "authenticity": "Real China House Price Interactive Atlas (commit 6a0d0b5) served locally on 127.0.0.1:8788 with genuine multi-source calibrated housing and rental datasets. Downscaled via Lanczos from a 2x headless Chrome capture of a 1440x900 desktop viewport.",
       "capture_receipt": "verification/china-house-price-map-captures-20261118/v2-08-light-shijiazhuang-xiaoqu@2x.png"
+    },
+    {
+      "repo": "dubforge",
+      "source": "captures/dubforge/selected-20261119/v7-06-tts.png",
+      "source_sha256": "5dfefd8d91291a4cf462537b93f1d3b1fdf61d3e69f04d434776fc60f0c53d00",
+      "width": 1024,
+      "height": 640,
+      "authenticity": "Real DubForge Studio v3 UI in the official isolated GET-only demo with self-authored silent footage and bilingual text (collapsed content review bar, dubbing parameters, and sentence list). Pending production state; no model generation, accounts or publishing.",
+      "capture_receipt": "verification/dubforge-captures-20261119/v7-06-tts.png"
+    },
+    {
+      "repo": "dubforge",
+      "source": "captures/dubforge/selected-20261119/v7-09-delivery.png",
+      "source_sha256": "1f17c374559aa9f3ac099f932e7378f86e1e5e19fb9496139d7bb7c648634d63",
+      "width": 1024,
+      "height": 640,
+      "authenticity": "Real DubForge Studio v3 UI in the official isolated GET-only demo showing the unified multi-platform delivery hub (auto workflow track + manual Bilibili and Douyin studio channel cards). Pending production state; no accounts or publishing.",
+      "capture_receipt": "verification/dubforge-captures-20261119/v7-09-delivery.png"
+    },
+    {
+      "repo": "dubforge",
+      "source": "captures/dubforge/selected-20261119/v7-overview-monitor.png",
+      "source_sha256": "5eb4a9266efbd22eba851cff2d6b0063f100f0d82c924bc3599f28e738afddc6",
+      "width": 1024,
+      "height": 640,
+      "authenticity": "Real DubForge Studio v3 two-column project overview and self-authored geometric video monitor in the official isolated GET-only demo. Pending production state; no model generation, accounts or publishing.",
+      "capture_receipt": "verification/dubforge-captures-20261119/v7-overview-monitor.png"
+    },
+    {
+      "repo": "dubforge",
+      "source": "captures/dubforge/selected-20261119/v7-project-space.png",
+      "source_sha256": "ca94b32cc0605908730cced28dabe93fd7cb791953208061477f58f56d54af65",
+      "width": 1024,
+      "height": 640,
+      "authenticity": "Real DubForge Studio v3 project space showing KPI strip, batch import entry, template inheritance, and 3 synthetic demo projects in the official isolated GET-only demo.",
+      "capture_receipt": "verification/dubforge-captures-20261119/v7-project-space.png"
+    },
+    {
+      "repo": "dubforge",
+      "source": "captures/dubforge/selected-20261119/v7-dubbing-workbench.png",
+      "source_sha256": "fa2e52960bd71a7390e22abe08ccf16130b479fa509a27e5f002daf5d42eebdf",
+      "width": 1024,
+      "height": 914,
+      "authenticity": "Real DubForge Studio v3 subtitle and dubbing workbench in the official isolated GET-only demo showing collapsed review bar, geometric reference video player, audio sliders, and bilingual sentence rows.",
+      "capture_receipt": "verification/dubforge-captures-20261119/v7-dubbing-workbench.png"
+    },
+    {
+      "repo": "dubforge",
+      "source": "captures/dubforge/selected-20261119/v7-cover-bilibili-moss.jpg",
+      "source_sha256": "8a4b345ebbf6fdde8963f1879c0e515695fb729d80b82b5846b036eb3ccf7768",
+      "width": 1280,
+      "height": 800,
+      "authenticity": "Real 1280x800 (16:10) Bilibili cover generated locally by DubForge via MOSS-Image FP16 two-stage pipeline and Pillow typography composition on an 8GB GPU.",
+      "capture_receipt": "verification/dubforge-captures-20261119/v7-cover-bilibili-moss.jpg"
+    },
+    {
+      "repo": "dubforge",
+      "source": "captures/dubforge/selected-20261119/v7-cover-douyin-landscape.png",
+      "source_sha256": "90e967cf4e02c0daccc7e9175e890e717e145a311a8fe189287dcc58dbf12a15",
+      "width": 1280,
+      "height": 960,
+      "authenticity": "Real 1280x960 (4:3) Douyin feed landscape cover generated locally by DubForge via MOSS-Image FP16 two-stage pipeline and Pillow typography composition.",
+      "capture_receipt": "verification/dubforge-captures-20261119/v7-cover-douyin-landscape.png"
+    },
+    {
+      "repo": "dubforge",
+      "source": "captures/dubforge/selected-20261119/v7-cover-douyin-portrait.png",
+      "source_sha256": "1bddd78fb40f59b38c13f3487beb3ba8f92056ee279914305d831d66d2214686",
+      "width": 960,
+      "height": 1280,
+      "authenticity": "Real 960x1280 (3:4) Douyin profile portrait cover generated locally by DubForge with headline constrained to the [148, 812] 9:16 full-screen safe band.",
+      "capture_receipt": "verification/dubforge-captures-20261119/v7-cover-douyin-portrait.png"
     }
   ]
 }

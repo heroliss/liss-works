@@ -62,11 +62,15 @@ const eazy = [
 ];
 
 const dubforge = [
-  image('dubforge', '05-editor-detail.jpg', 1440, 1000, '对照视频逐句编辑双语字幕、时间与声源；使用自建短片示例。', '示例项目'),
-  image('dubforge', '06-project-overview.jpg', 1440, 1000, '项目总览将输入视频和各制作阶段放在同一工作区。', '示例项目'),
-  image('dubforge', '07-assembly-versions.jpg', 1440, 1000, '分别配置原声双语版、中文配音版等成片版本。', '版本管理'),
-  image('dubforge', '08-production-settings.jpg', 1440, 1000, '制作设置集中配置；默认与模板可复用，已有项目主动应用更新。', '制作设置'),
-  image('dubforge', '09-project-space-large.jpg', 1440, 1000, '项目空间统一浏览视频、制作状态和项目入口。', '示例项目'),
+  image('dubforge', 'v7-overview-monitor.png', 1024, 640, 'Studio v3 项目总览：左侧查看自动进度与九道制作工序，右侧实时对照原片监视器与文件清单。', 'Studio v3 总览'),
+  image('dubforge', 'v7-dubbing-workbench.png', 1024, 914, '字幕与配音工作台：收起式审查栏、几何参考短片试听器与 6 句中英对照台词同屏联动，支持按句重配。', '字幕与配音'),
+  image('dubforge', 'v6-08-assemble.jpg', 1440, 900, '多版本成片工作台：同一项目并存「原声双语版」与「中文配音版」，各自独立管理音量、字幕与剪辑。', '多版本成片'),
+  image('dubforge', 'v7-09-delivery.png', 1024, 640, '统一发布与双轨交付中心：上方衔接全自动流程，下方一键进入 B 站与抖音专属工作台精调封面与文案。', '双轨发布中心'),
+  image('dubforge', 'v7-cover-bilibili-moss.jpg', 1280, 800, '本机 8GB 显卡通过 MOSS-Image 直出的 B 站 16:10 横版封面实样，高对比双行大字一眼清晰。', 'B 站 AI 封面实样'),
+  image('dubforge', 'v7-project-space.png', 1024, 640, '项目空间看板：集中浏览多条视频状态、套用系列模板、批量导入或一键排队运行。', '项目空间'),
+  image('dubforge', '08-production-settings.jpg', 1440, 1000, '全局默认、系列模板与单项目覆盖三级设置：配好一套方案，后续同系列视频直接复用。', '模板与设置'),
+  image('dubforge', 'v7-cover-douyin-landscape.png', 1280, 960, '抖音 4:3 信息流横版 AI 封面实样：本地半精度生图释放显存后再排版文字，兼顾质感与清晰度。', '抖音 4:3 横版封面'),
+  image('dubforge', 'v7-cover-douyin-portrait.png', 960, 1280, '抖音 3:4 个人主页竖版 AI 封面实样：大字标题严格锁定在中心 9:16 安全带内，全屏划动左右绝不裁字。', '抖音 3:4 竖版封面'),
 ];
 
 const panxu = [
@@ -245,22 +249,23 @@ export const projects: Project[] = [
     cover: gomoku[7], gallery: gomoku, related: ['sort-lab', 'route-lab', 'outpost'],
   },
   {
-    slug: 'dubforge', repo: 'dubforge', name: 'DubForge', category: '本地视频译制工作台', group: 'ai-data',
-    summary: '把值得观看的视频译成中文，连接逐句精修、多版本成片与可恢复的交付。',
-    intro: '面向本机制作的视频译制工作台。输入链接或本地视频，逐句校对原文、译文和时间，选择声音与字幕，再组合多个成片版本。制作计划、输入指纹与阶段回执，让修改后的局部更新和中断后的继续处理有据可查。',
-    status: '源码发行', tags: ['Python', 'Vue', 'TypeScript', 'LLM', 'FFmpeg'],
+    slug: 'dubforge', repo: 'dubforge', name: 'DubForge · 本地视频译制与多平台发布工作台', category: '本地视频译制与发布工作台', group: 'ai-data',
+    summary: '把喜欢的外语视频变成中文字幕和自然配音——既能一键全自动出片，也能逐句对照精修，本地生成横竖双封面并一次发往 B 站与抖音。',
+    intro: '面向视频爱好者与创作者的本地译制工作台。贴入链接或拖进本地视频，自动完成人声与背景乐分离、上下文地道翻译与中文配音；平时追更可套用模板一键跑到底，遇到重点视频随时点进单站改词调音（改哪句只重做哪句），还能用 8GB 显卡在本地直出防裁切封面，核对无误后分别发布到 B 站和抖音。',
+    status: '开源可用 · 本地运行', tags: ['AI', '视频译制', '双语配音', 'Python', 'Vue', 'FFmpeg'],
     features: [
-      { title: '逐句编辑与试听', body: '视频、句子列表和文字编辑围绕同一份校对稿组织，便于检查时间、译文与声源。' },
-      { title: '多个成片版本', body: '同一项目可保留原声字幕版、中文配音版等不同目标，各自管理呈现与输出。' },
-      { title: '稳定设置与局部更新', body: '默认与模板用于复用制作方案，已有项目主动应用新设置；输入变化按实际依赖确定哪些结果需要更新。' },
+      { title: '保留背景乐的双语与配音', body: '自动分离人声与原片音乐，结合整段语境翻译；对着画面改哪句只重配哪句，不用整片重来。' },
+      { title: '全自动与手动精修随时切换', body: '日常系列视频套用模板一键跑通；同一项目可同时保留「原声双语字幕版」与「中文配音版」。' },
+      { title: '8GB 本地画双封面 · B站抖音同发', body: '内置本地 MOSS-Image 直出 B 站 16:10 与抖音 4:3 + 3:4 安全带双封面，两平台草稿独立核对发布。' },
     ],
     usage: [
-      { title: '安装主程序', body: '准备 Git、uv、Node.js 与 FFmpeg，在仓库根目录运行安装脚本；识别与音轨分离按需选择。', code: 'powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\install.ps1 -Asr -Separation', language: 'powershell' },
-      { title: '打开本地工作台', body: '启动后访问 http://127.0.0.1:8600；LLM 与配音服务按教程连接，配音模型服务独立安装。', code: 'uv run --project backend --no-sync uvicorn app.main:app --host 127.0.0.1 --port 8600 --loop app.event_loop:create_event_loop', language: 'powershell' },
+      { title: '① 一键装好本地主程序', body: '在 Windows 上准备好 Git、uv、Node.js 与 FFmpeg，在仓库根目录执行安装脚本即可配齐前后端、语音识别与音轨分离环境：', code: 'powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\install.ps1 -Asr -Separation', language: 'powershell' },
+      { title: '② 打开工作台，拿 1 分钟短片试手', body: '启动服务后浏览器打开 http://127.0.0.1:8600，在「设置」里填好大模型 API Key，新建项目拖入一段 1 分钟短片点「运行项目」，几分钟即可跑通首条双语成片：', code: 'uv run --project backend --no-sync uvicorn app.main:app --host 127.0.0.1 --port 8600 --loop app.event_loop:create_event_loop', language: 'powershell' },
+      { title: '③ 按需接入配音、AI 封面与发布', body: '需要中文配音或本地 AI 封面时，在「设置 → 模型与服务」指向本机 IndexTTS / GPT-SoVITS 或 MOSS-Image 目录即可联动；首次在发布工作台扫码保存 B 站或抖音登录态，后续即可一键生成双封面并核对投稿。' },
     ],
-    note: '截图使用真实工作台与自建短片示例，展示编辑和配置用法；本组素材未执行实际模型译制或生成配音。',
+    note: '工作台界面采自官方隔离只读演示环境（使用自绘几何短片与自写双语稿）；三张封面实样由本机 8GB 显卡运行 MOSS-Image 真实生成，不含任何私人账号或线上连接。',
     source: 'https://github.com/heroliss/dubforge', docs: 'https://github.com/heroliss/dubforge/tree/main/docs/tutorials',
-    cover: dubforge[0], gallery: dubforge, related: ['intelligence-index-cost-linear', 'aoe4-flow'],
+    cover: dubforge[0], gallery: dubforge, related: ['panxu', 'intelligence-index-cost-linear', 'aoe4-flow'],
   },
   {
     slug: 'panxu', repo: 'panxu', name: '盘序 · Windows 磁盘清理助手', category: 'Windows 磁盘清理助手', group: 'tools',

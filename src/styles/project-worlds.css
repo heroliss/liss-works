@@ -30,14 +30,15 @@
 .detail-page[data-project-world="ssframework"] .gallery-grid figure:nth-child(3n+2){margin-top:70px}
 .detail-page[data-project-world="ssframework"] .gallery-grid figure:nth-child(3n+3){width:100%}
 
-/* DubForge: one large editing surface, then information arranged as tracks. */
+/* DubForge: one large editing surface, then user-first onboarding, three visual studio beats and a calm technical brief. */
 .detail-page[data-project-world="dubforge"]{--accent:#30aff8;--cyan:#30aff8;--surface:#061925;--raised:#162127;--muted:#b0c5ce}
 .detail-page[data-project-world="dubforge"] .project-prologue{padding-top:25px}
-.detail-page[data-project-world="dubforge"] .project-prologue::before{left:15%;right:0;top:195px;bottom:130px;background:#121b2c;transform:skewY(2deg)}
-.detail-page[data-project-world="dubforge"] .project-intro{grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);margin:15px 0 48px;gap:8%}
-.detail-page[data-project-world="dubforge"] .project-intro h1{font-size:clamp(100px,12.5vw,190px);line-height:.9;color:var(--accent);max-width:none;margin-bottom:36px}
-.detail-page[data-project-world="dubforge"] .project-intro .summary{font-size:20px;max-width:42ch}
-.detail-page[data-project-world="dubforge"] .project-intro .button-row{justify-content:end;padding-bottom:9px}
+.detail-page[data-project-world="dubforge"] .project-prologue::before{left:12%;right:2%;top:185px;bottom:120px;background:radial-gradient(ellipse at 52% 40%,#102638b3,transparent 74%);transform:skewY(1.5deg)}
+.detail-page[data-project-world="dubforge"] .project-intro{grid-template-columns:minmax(0,1.32fr) minmax(0,.68fr);align-items:end;margin:14px 0 38px;gap:24px 7%}
+.detail-page[data-project-world="dubforge"] .project-intro h1{font-size:clamp(72px,9.6vw,138px);line-height:.94;color:var(--accent);max-width:none;margin-bottom:14px}
+.detail-page[data-project-world="dubforge"] .project-full-name{margin:0 0 18px;color:var(--muted);font-size:16px}
+.detail-page[data-project-world="dubforge"] .project-intro .summary{font-size:clamp(18px,1.5vw,21px);max-width:42ch;margin-bottom:18px}
+.detail-page[data-project-world="dubforge"] .project-intro .button-row{justify-content:end;padding-bottom:6px}
 .detail-page[data-project-world="dubforge"] .project-opening{display:block}
 .detail-page[data-project-world="dubforge"] .project-hero{width:92%;margin-left:auto}
 .detail-page[data-project-world="dubforge"] .project-hero .media-link{padding:0;border-radius:6px;box-shadow:0 35px 80px -42px #000c}
@@ -45,22 +46,42 @@
 .detail-page[data-project-world="dubforge"] .project-signature{display:grid;grid-template-columns:1fr 1.25fr 1fr;gap:5%;margin-top:45px;padding-block:25px 10px;border-top:1px solid #30aff83b}
 .detail-page[data-project-world="dubforge"] .project-signature>div{margin:0}
 .detail-page[data-project-world="dubforge"] .project-signature dt{color:var(--accent)}
-.detail-page[data-project-world="dubforge"] .project-overview{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14%}
+.detail-page[data-project-world="dubforge"] .project-overview{grid-template-columns:minmax(0,.84fr) minmax(0,1.16fr);gap:8%;align-items:start}
 .detail-page[data-project-world="dubforge"] .compact-flow{display:flex;flex-wrap:wrap;gap:12px 36px;padding-left:22px}
-.detail-page[data-project-world="dubforge"] .engineering-topic--media,.detail-page[data-project-world="dubforge"] .engineering-topic--beat-1.engineering-topic--media,.detail-page[data-project-world="dubforge"] .engineering-topic--beat-2.engineering-topic--media{display:grid;grid-template-columns:minmax(0,1fr);width:100%;gap:35px;margin:0 0 var(--world-gap)}
-.detail-page[data-project-world="dubforge"] .engineering-topic--media .engineering-copy{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:0 9%;margin:0;order:0}
-.detail-page[data-project-world="dubforge"] .engineering-copy h3{grid-column:1;grid-row:1/8;font-size:clamp(32px,3.7vw,56px);color:var(--accent)}
-.detail-page[data-project-world="dubforge"] .engineering-copy :is(p,dl){grid-column:2}
-.detail-page[data-project-world="dubforge"] .engineering-copy .code-block{grid-column:1/-1}
-.detail-page[data-project-world="dubforge"] .engineering-topic--media .engineering-media{order:1;width:88%;margin-left:auto}
+.detail-page[data-project-world="dubforge"] .project-stack{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 16px}
+.detail-page[data-project-world="dubforge"] .project-stack>div{padding:16px 18px 17px 22px;border-radius:12px;background:#ffffff06;border:1px solid #ffffff12}
+.detail-page[data-project-world="dubforge"] .project-stack>div::before{left:10px;top:18px;height:20px;border-radius:2px;background:var(--accent)}
+.detail-page[data-project-world="dubforge"] .project-stack dt{color:#edf6fa;font-weight:600;font-size:16px;margin-bottom:6px}
+.detail-page[data-project-world="dubforge"] .project-stack dd{font-size:14.5px;line-height:1.68;color:var(--muted)}
+.detail-page[data-project-world="dubforge"] .engineering-topic--media{display:grid;grid-template-columns:minmax(0,1.16fr) minmax(0,.84fr);width:100%;gap:6%;align-items:center;margin:0 0 var(--world-gap)}
+.detail-page[data-project-world="dubforge"] .engineering-topic--beat-1.engineering-topic--media{grid-template-columns:minmax(0,.84fr) minmax(0,1.16fr);width:96%;margin-left:auto}
+.detail-page[data-project-world="dubforge"] .engineering-topic--beat-1.engineering-topic--media .engineering-copy{order:0}
+.detail-page[data-project-world="dubforge"] .engineering-topic--beat-1.engineering-topic--media .engineering-media{order:1}
+.detail-page[data-project-world="dubforge"] .engineering-topic--beat-2.engineering-topic--media{grid-template-columns:minmax(0,1fr);width:100%;gap:36px;align-items:start}
+.detail-page[data-project-world="dubforge"] .engineering-topic--beat-2.engineering-topic--media .engineering-copy{display:grid;grid-template-columns:minmax(0,.68fr) minmax(0,1.32fr);gap:0 8%;margin:0;order:0}
+.detail-page[data-project-world="dubforge"] .engineering-topic--beat-2.engineering-topic--media .engineering-copy h3{grid-column:1;grid-row:1/8}
+.detail-page[data-project-world="dubforge"] .engineering-topic--beat-2.engineering-topic--media .engineering-copy :is(p,dl){grid-column:2}
+.detail-page[data-project-world="dubforge"] .engineering-topic--beat-2.engineering-topic--media .engineering-media{order:1;width:88%;margin-left:auto}
+.detail-page[data-project-world="dubforge"] .engineering-copy h3{font-size:clamp(28px,2.9vw,44px);color:var(--accent)}
 .detail-page[data-project-world="dubforge"] .engineering-media img{max-height:none}
 .detail-page[data-project-world="dubforge"] .engineering-media .media-link{padding:0;border-radius:4px}
-.detail-page[data-project-world="dubforge"] .engineering-media .engineering-inset{width:53%;margin-top:-10%;margin-right:auto;margin-left:-9%;transform:rotate(-2deg);position:relative;z-index:1}
-.detail-page[data-project-world="dubforge"] .gallery-grid{grid-template-columns:1fr;gap:65px}
-.detail-page[data-project-world="dubforge"] .gallery-grid figure{width:88%;margin:0}
-.detail-page[data-project-world="dubforge"] .gallery-grid figure:nth-child(even){width:77%;margin-left:auto}
+.detail-page[data-project-world="dubforge"] .engineering-topic--inset .engineering-media>figure:first-child figcaption{max-width:52%}
+.detail-page[data-project-world="dubforge"] .engineering-media .engineering-inset{width:44%;margin-top:-8%;margin-left:auto;margin-right:-3%;transform:rotate(1.6deg);position:relative;z-index:1}
+.detail-page[data-project-world="dubforge"] #dub-tech-brief{margin-top:18px;padding-top:40px;border-top:1px solid #ffffff14}
+.detail-page[data-project-world="dubforge"] #dub-tech-brief .engineering-copy{padding:0;background:none}
+.detail-page[data-project-world="dubforge"] #dub-tech-brief .engineering-copy::before{display:none}
+.detail-page[data-project-world="dubforge"] #dub-tech-brief .engineering-title{font-size:clamp(19px,1.55vw,23px);color:var(--muted);margin-bottom:22px}
+.detail-page[data-project-world="dubforge"] #dub-tech-brief .engineering-point{padding:16px 18px 17px 20px;border-radius:10px;background:#ffffff04;border:1px solid #ffffff0e}
+.detail-page[data-project-world="dubforge"] #dub-tech-brief .engineering-point::before{left:9px;top:18px;height:18px;width:3px;opacity:.7}
+.detail-page[data-project-world="dubforge"] #dub-tech-brief .engineering-point dt{font-size:16px;margin-bottom:8px}
+.detail-page[data-project-world="dubforge"] #dub-tech-brief .engineering-point .project-prose{font-size:14.5px;line-height:1.74;color:var(--muted)}
+.detail-page[data-project-world="dubforge"] .gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:48px 5%;align-items:center}
+.detail-page[data-project-world="dubforge"] .gallery-grid figure{width:100%;margin:0}
 .detail-page[data-project-world="dubforge"] .gallery-grid img{max-height:none}
+.detail-page[data-project-world="dubforge"] .gallery-grid img[src*="portrait"]{width:auto;max-height:520px;margin-inline:auto}
 .detail-page[data-project-world="dubforge"] .gallery-grid .media-link{padding:0;border-radius:4px}
+.detail-page[data-project-world="dubforge"] .usage-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;align-items:start}
+.detail-page[data-project-world="dubforge"] .usage .code-block pre{white-space:pre-wrap;overflow-wrap:anywhere;overflow-x:hidden}
 
 /* Outpost: the real battlefield leads from the left; warm light follows it. */
 .detail-page[data-project-world="outpost"]{--accent:#fd8358;--cyan:#fd8358;--surface:#25110b;--raised:#281c19;--muted:#cbb9b4}
@@ -134,6 +155,8 @@
  .detail-page[data-project-world="ssframework"] .project-stack{grid-template-columns:repeat(2,minmax(0,1fr))}
  .detail-page[data-project-world="dubforge"] .project-intro{grid-template-columns:1fr;gap:25px}
  .detail-page[data-project-world="dubforge"] .project-intro .button-row{justify-content:start}
+ .detail-page[data-project-world="dubforge"] .project-overview{grid-template-columns:1fr;gap:36px}
+ .detail-page[data-project-world="dubforge"] .usage-grid{grid-template-columns:1fr 1fr}
  .detail-page[data-project-world="outpost"] .project-prologue{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:5%}
  .detail-page[data-project-world="outpost"] .project-intro h1{font-size:clamp(75px,9.5vw,110px)}
  .detail-page[data-project-world="outpost"] .project-intro .summary{font-size:18px}
@@ -166,12 +189,16 @@
  .detail-page:is([data-project-world="ssframework"],[data-project-world="dubforge"],[data-project-world="outpost"],[data-project-world="nomadworkshop"],[data-project-world="gomoku"]) .project-overview{grid-template-columns:1fr;gap:40px;padding-top:40px}
  .detail-page[data-project-world="ssframework"] .project-stack{grid-template-columns:1fr 1fr;gap:24px 20px}
  .detail-page[data-project-world="dubforge"] .compact-flow{display:block}
+ .detail-page[data-project-world="dubforge"] .project-stack{grid-template-columns:1fr;gap:12px}
+ .detail-page[data-project-world="dubforge"] .usage-grid{grid-template-columns:1fr;gap:32px}
  .detail-page:is([data-project-world="ssframework"],[data-project-world="dubforge"],[data-project-world="outpost"],[data-project-world="nomadworkshop"],[data-project-world="gomoku"]) .engineering-topic--media,
  .detail-page:is([data-project-world="ssframework"],[data-project-world="dubforge"],[data-project-world="outpost"],[data-project-world="nomadworkshop"],[data-project-world="gomoku"]) .engineering-topic--beat-1.engineering-topic--media,
  .detail-page:is([data-project-world="ssframework"],[data-project-world="dubforge"],[data-project-world="outpost"],[data-project-world="nomadworkshop"],[data-project-world="gomoku"]) .engineering-topic--beat-2.engineering-topic--media{display:grid;grid-template-columns:minmax(0,1fr);width:100%;gap:28px;margin:0 0 65px}
- .detail-page:is([data-project-world="ssframework"],[data-project-world="dubforge"],[data-project-world="outpost"],[data-project-world="nomadworkshop"],[data-project-world="gomoku"]) .engineering-topic--media .engineering-copy{display:block;margin:0;max-width:100%}
- .detail-page[data-project-world="dubforge"] .engineering-topic--media .engineering-media{width:100%;margin:0;order:0}
+ .detail-page:is([data-project-world="ssframework"],[data-project-world="dubforge"],[data-project-world="outpost"],[data-project-world="nomadworkshop"],[data-project-world="gomoku"]) .engineering-topic--media .engineering-copy,
+ .detail-page[data-project-world="dubforge"] .engineering-topic--beat-2.engineering-topic--media .engineering-copy{display:block;margin:0;max-width:100%}
+ .detail-page[data-project-world="dubforge"] :is(.engineering-topic--media,.engineering-topic--beat-1.engineering-topic--media,.engineering-topic--beat-2.engineering-topic--media) .engineering-media{width:100%;margin:0;order:0}
  .detail-page[data-project-world="dubforge"] .engineering-copy h3{font-size:29px}
+ .detail-page[data-project-world="dubforge"] .engineering-topic--inset .engineering-media>figure:first-child figcaption{max-width:100%}
  .detail-page[data-project-world="dubforge"] .engineering-media .engineering-inset{width:83%;margin:23px 0 0 auto;transform:none}
  .detail-page:is([data-project-world="ssframework"],[data-project-world="dubforge"],[data-project-world="outpost"],[data-project-world="nomadworkshop"],[data-project-world="gomoku"]) .gallery-grid{grid-template-columns:minmax(0,1fr);gap:38px}
  .detail-page:is([data-project-world="ssframework"],[data-project-world="dubforge"],[data-project-world="outpost"],[data-project-world="nomadworkshop"],[data-project-world="gomoku"]) .gallery-grid figure:nth-child(n){grid-column:auto;width:100%;max-width:100%;margin:0}

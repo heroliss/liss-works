@@ -5,7 +5,7 @@ const topicMedia: Record<string, (string | null)[]> = {
   'glass-atoll': ['58-final-desktop-v2', 'sunset-island-final', 'flower-final'],
   nomadworkshop: ['05-resident-and-world-1080'],
   outpost: ['23-modern-battle-settings'],
-  dubforge: ['07-assembly-versions', '08-production-settings', '06-project-overview'],
+  dubforge: ['v7-dubbing-workbench', 'v6-08-assemble', 'v7-09-delivery', null],
   panxu: ['03-score-basis', '04-cleanup-confirm', '10-operation-history'],
   ssframework: [null, null, null, '15-hierarchy-binding-compact', '05-module-tools-center'],
   eazybuildpipeline: ['04-reverse-dependencies-three-assets'],
@@ -40,6 +40,7 @@ export function getStoryMedia(project: Project): StoryMedia[] {
   return (topicMedia[project.slug] ?? []).map((name, index) => ({
     image: resolve(name),
     inset: project.slug === 'ssframework' && index === 3 ? resolve('13-node-component-popup')
-      : project.slug === 'aoe4-flow' && index === 0 ? resolve('topbar-native') : undefined,
+      : project.slug === 'aoe4-flow' && index === 0 ? resolve('topbar-native')
+      : project.slug === 'dubforge' && index === 2 ? resolve('v7-cover-bilibili-moss') : undefined,
   }));
 }

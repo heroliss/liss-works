@@ -41,9 +41,9 @@ const signatures: Record<string, ProjectSignature> = {
     highlights: ['63 项规则 + 结构识别', '0–10 分清理依据', '绿色免安装 · 可撤销'],
   },
   dubforge: {
-    direction: 'AI 应用 / 媒体工作流',
-    principle: '按依赖复用结果，让修改与恢复有据可查。',
-    highlights: ['逐句精修', '输入指纹复用', '多版本成片'],
+    direction: '本地视频译制 / 多平台发布工作台',
+    principle: '自动流程省心跑通，关键细节随时接管，改哪句只重做哪句。',
+    highlights: ['双语字幕 + 音色配音', '8GB 本地 AI 横竖双封面', 'B 站 · 抖音双轨发布'],
   },
   eazybuildpipeline: {
     direction: 'Unity 编辑器 / 构建管线',
