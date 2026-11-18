@@ -85,7 +85,11 @@ export function setupExpressiveMotion({ signal, preference }: ExpressiveMotionOp
   const chapterOriginals = chapters.map(({ link }) => ({
     link, current: link.getAttribute('aria-current'), active: link.getAttribute('data-active'),
   }));
+  const chapterNav = document.querySelector<HTMLElement>('[data-chapter-nav]');
+  const previousChapterTone = chapterNav?.style.getPropertyValue('--chapter-tone') ?? '';
   const activate = (selected: HTMLAnchorElement) => {
+    const dotTone = selected.style.getPropertyValue('--chapter-dot').trim();
+    if (chapterNav && dotTone) chapterNav.style.setProperty('--chapter-tone', dotTone);
     chapters.forEach(({ link }) => {
       const active = link === selected;
       link.dataset.active = String(active);
@@ -329,6 +333,10 @@ export function setupExpressiveMotion({ signal, preference }: ExpressiveMotionOp
       if (value) element.style.setProperty('--page-progress', value);
       else element.style.removeProperty('--page-progress');
     });
+    if (chapterNav) {
+      if (previousChapterTone) chapterNav.style.setProperty('--chapter-tone', previousChapterTone);
+      else chapterNav.style.removeProperty('--chapter-tone');
+    }
     chapterOriginals.forEach(({ link, current, active }) => {
       if (current === null) link.removeAttribute('aria-current');
       else link.setAttribute('aria-current', current);

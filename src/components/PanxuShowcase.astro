@@ -38,17 +38,20 @@ const callout = ({ x, top, bottom }: { x: [number, number]; top?: number; bottom
 <section class:list={['px-lab', { 'home-chapter': !detail, 'px-lab--detail': detail }]} id={detail ? 'panxu-checkup' : 'panxu'} data-panxu data-step={initial.id} data-shot={initial.shot} aria-labelledby={detail ? undefined : 'panxu-title'} aria-label={detail ? '一键体检演示：盘序的真实窗口' : undefined} style={`${projectWorldStyle('panxu')};--accent:${world.accent};--sweep:${PANXU_SWEEP_MS}ms`}>
  {!detail && <header class="work-heading px-heading">
   <div><h2 id="panxu-title" class="project-name" data-motion="reveal">盘序</h2><p class="px-tagline" data-motion="reveal">帮你弄清楚磁盘里的东西能不能删。</p></div>
-  <div class="px-introduction"><p>磁盘满了，难的往往不是找大文件，而是不知道它是做什么的、删了会怎样。盘序先用规则找出常见垃圾，再请 AI 看看那些陌生的目录和残留。下面是 1.1.0 演练环境里的真实窗口，悬停看说明，点一下看原图。</p><a class="text-link" href={sitePath('/projects/panxu/')}>看盘序详情 <Icon size={18}/></a></div>
+  <div class="px-introduction"><p>磁盘满了，难的往往不是找大文件，而是不知道它是做什么的、删了会怎样。盘序用 63 项规则与结构化缓存识别先找出常见垃圾，再请 AI 复核陌生目录与软件残留。下面是 2.5.0 演练环境里的真实窗口，悬停看说明，点一下看原图。</p><a class="text-link" href={sitePath('/projects/panxu/')}>看盘序详情 <Icon size={18}/></a></div>
  </header>}
  {!detail && <ChapterPoints points={[
-  { term: '规则 + AI', text: '规则认出常见垃圾，AI 补上规则覆盖不到的陌生目录和旧文件。' },
-  { term: '每一项都讲清楚', text: '是什么、为什么建议清理、清理后会怎样，再给一个 0–10 分的建议。' },
-  { term: '只动你选的', text: '个人文件从不自动勾选，删除也只是移到回收站。' },
+  { term: '63 项规则 + AI', text: '内置规则与结构识别清理常见缓存，AI 补上陌生目录、旧文件与残留。' },
+  { term: '每一项都讲清楚', text: '是什么、为什么建议清理、处理后会怎样，再给一个 0–10 分建议清理度。' },
+  { term: '绿色免安装 · 可回退', text: '解压即用，个人文件只移入回收站，开机项与服务修改可一键撤销。' },
  ]}/>}
  <div class="px-stage">
   <div class="px-rail">
    <div class="px-steps" role="group" aria-label="体检步骤">{panxuSteps.map((step, index) => <button type="button" data-px-step={step.id} data-shot={step.shot} aria-pressed={step.id === initial.id ? 'true' : 'false'}><span>{String(index + 1).padStart(2, '0')}</span>{step.label}</button>)}</div>
-   <p class="px-hint">{detail ? '真实窗口 · 演练环境里的一次体检 · ' : ''}悬停浮起的部分看说明 · 点一下看原图</p>
+   <div class="px-rail-tools">
+    <p class="px-hint">{detail ? '真实窗口 · 演练环境里的一次体检 · ' : ''}悬停浮起的部分看说明 · 点一下看原图</p>
+    {shots.map(shot => { const item = image(shot); return <a class="px-zoom" href={sitePath(item.src)} data-lightbox data-gallery={detail ? 'panxu-detail-hero' : 'panxu-home'} data-title={item.alt} data-caption={item.caption} data-width={item.width} data-height={item.height} data-px-zoom={shot} hidden={shot !== initial.shot}><Icon name="expand" size={15}/>看原图</a>; })}
+   </div>
   </div>
   <div class="px-scene" data-px-scene>
    <div class="px-float">
@@ -56,11 +59,6 @@ const callout = ({ x, top, bottom }: { x: [number, number]; top?: number; bottom
      <span class="px-plate" aria-hidden="true"></span>
      <span class="px-edge px-edge-r" aria-hidden="true"></span><span class="px-edge px-edge-b" aria-hidden="true"></span>
      <span class="px-shadow" aria-hidden="true"></span>
-     <div class="px-titlebar">
-      <span class="px-app">盘序</span><span class="px-tag">演练环境</span>
-      {shots.map(shot => { const item = image(shot); return <a class="px-zoom" href={sitePath(item.src)} data-lightbox data-gallery="panxu-home" data-title={item.alt} data-caption={item.caption} data-width={item.width} data-height={item.height} data-px-zoom={shot} hidden={shot !== initial.shot}><Icon name="expand" size={15}/>看原图</a>; })}
-      <span class="px-glyphs" aria-hidden="true"><i></i><i></i><i></i></span>
-     </div>
      <div class="px-screen">
       {shots.map(shot => { const item = image(shot); return <img class="px-base" data-px-base={shot} data-on={on(shot === initial.shot)} aria-hidden={shot === initial.shot ? undefined : 'true'} src={sitePath(item.src)} srcset={srcset(item)} sizes={sizes} width={item.width} height={item.height} alt={item.alt} loading="lazy" decoding="async"/>; })}
       {panxuLayers.map(layer => <span class="px-socket" data-px-socket={layer.id} data-step={layer.step} data-on={on(layer.step === initial.id)} style={place(layer.rect)} aria-hidden="true"></span>)}

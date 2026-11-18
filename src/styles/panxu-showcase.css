@@ -22,6 +22,7 @@
 
 /* ---- steps ------------------------------------------------------------------------- */
 .px-rail { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px 24px; width:var(--win); margin-inline:auto; }
+.px-rail-tools { display:flex; align-items:center; gap:14px; margin-left:auto; }
 .px-steps { display:flex; flex-wrap:wrap; gap:8px; }
 .px-steps button { position:relative; display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:0 16px 0 12px; border-radius:999px; border:1px solid #ffffff1c; background:#ffffff08; color:var(--muted); font-size:14px; cursor:pointer; overflow:hidden; transition:background .25s,color .25s,border-color .25s; }
 .px-steps button span { font-family:var(--font-display); font-size:13px; color:color-mix(in srgb,var(--accent) 70%,#fff); }
@@ -46,27 +47,18 @@
 .px-window { position:relative; transform-style:preserve-3d; transform:rotateX(calc(var(--pose-x) + var(--tilt-x,0deg))) rotateY(calc(var(--pose-y) + var(--tilt-y,0deg)));
   transition:--pose-x 1.4s cubic-bezier(.45,0,.2,1),--pose-y 1.4s cubic-bezier(.45,0,.2,1); }
 .px-plate { position:absolute; inset:0; border-radius:14px; transform:translateZ(-1px); pointer-events:none;
-  background:linear-gradient(180deg,#1f2328,#16191d 38px,#121417); box-shadow:0 0 0 1px #ffffff17,inset 0 1px #ffffff12; }
+  background:linear-gradient(180deg,#1b1f25,#121417); box-shadow:0 0 0 1px #ffffff1c,inset 0 1px #ffffff14; }
 /* The slab's own thickness, seen past its right and bottom edges. */
 .px-edge { position:absolute; pointer-events:none; }
 .px-edge-r { top:12px; bottom:12px; right:0; width:18px; transform-origin:100% 50%; transform:rotateY(-90deg); background:linear-gradient(90deg,#07080a,#16191d); }
 .px-edge-b { left:12px; right:12px; bottom:0; height:18px; transform-origin:50% 100%; transform:rotateX(90deg); background:linear-gradient(0deg,#07080a,#121417); }
 .px-shadow { position:absolute; left:6%; right:6%; top:78%; height:44%; transform:translateZ(-150px); pointer-events:none; background:radial-gradient(closest-side,#000c,transparent); }
-.px-titlebar { position:relative; display:flex; align-items:center; gap:10px; height:38px; padding:0 6px 0 16px; font-size:13px; color:#c7ced3; transform:translateZ(.4px); }
-.px-app { font-weight:600; letter-spacing:.02em; }
-.px-tag { padding:2px 8px; border-radius:999px; font-size:11px; line-height:1.5; color:#e9b86c; background:#e9b86c1c; }
-.px-zoom { margin-left:auto; display:inline-flex; align-items:center; gap:6px; min-height:32px; padding:0 10px; border-radius:6px; font-size:13px; color:#d6dce0; }
+.px-zoom { display:inline-flex; align-items:center; gap:6px; min-height:36px; padding:0 13px; border-radius:999px; border:1px solid #ffffff1c; background:#ffffff08; font-size:13px; color:#d6dce0; transition:background .2s ease,color .2s ease,border-color .2s ease; }
 .px-zoom[hidden] { display:none; }
-.px-zoom:is(:hover,:focus-visible) { color:#fff; background:#ffffff12; }
-.px-glyphs { display:flex; }
-.px-glyphs i { position:relative; width:40px; height:30px; }
-.px-glyphs i::before { content:""; position:absolute; left:50%; top:50%; width:10px; height:10px; margin:-5px; box-sizing:border-box; }
-.px-glyphs i:nth-child(1)::before { height:1px; margin-top:0; background:#9aa3a9; }
-.px-glyphs i:nth-child(2)::before { border:1px solid #9aa3a9; border-radius:2px; }
-.px-glyphs i:nth-child(3)::before { background:linear-gradient(45deg,transparent 46%,#9aa3a9 46% 54%,transparent 54%),linear-gradient(-45deg,transparent 46%,#9aa3a9 46% 54%,transparent 54%); }
-.px-screen { position:relative; margin:0 1px 1px; aspect-ratio:1650 / 1075; transform-style:preserve-3d; }
+.px-zoom:is(:hover,:focus-visible) { color:#fff; background:#ffffff14; border-color:color-mix(in srgb,var(--accent) 45%,#ffffff24); }
+.px-screen { position:relative; margin:1px; aspect-ratio:1650 / 1075; transform-style:preserve-3d; }
 /* The window's own screenshot. The incoming one fades in above the outgoing one, which then goes. */
-.px-base { position:absolute; inset:0; display:block; width:100%; height:100%; border-radius:0 0 12px 12px; opacity:0; transform:translateZ(0);
+.px-base { position:absolute; inset:0; display:block; width:100%; height:100%; border-radius:12px; opacity:0; transform:translateZ(0);
   transition:opacity 0s linear calc(var(--swap,0s) + .45s),transform 0s linear calc(var(--swap,0s) + .45s); }
 .px-base[data-on] { opacity:1; transform:translateZ(.3px); transition:opacity .45s ease var(--swap,0s),transform 0s; }
 .px-lab[data-entering=true] { --swap:.45s; }
@@ -109,7 +101,7 @@
 .px-callout[data-hot] { opacity:1; transform:translateZ(150px); transition:opacity .3s ease .05s,transform .45s cubic-bezier(.2,.8,.2,1); }
 
 /* The glass: a soft highlight that follows the pointer, and the scan line of 一键体检. */
-.px-sheen { position:absolute; inset:0; overflow:hidden; border-radius:0 0 12px 12px; transform:translateZ(1.4px); pointer-events:none; }
+.px-sheen { position:absolute; inset:0; overflow:hidden; border-radius:12px; transform:translateZ(1.4px); pointer-events:none; }
 .px-sheen::before { content:""; position:absolute; inset:-50%; background:radial-gradient(circle at 50% 50%,#ffffff17,#ffffff06 18%,transparent 34%); transform:translate(var(--sheen-x,-12%),var(--sheen-y,-18%)); }
 .px-beam { position:absolute; left:-1%; right:-1%; top:0; height:3px; margin-top:-1px; transform:translateZ(1.8px); opacity:0; pointer-events:none;
   background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--accent) 80%,#fff) 14%,#fff 50%,color-mix(in srgb,var(--accent) 80%,#fff) 86%,transparent);
@@ -146,12 +138,11 @@
 }
 @media(max-width:760px) {
   .px-heading { gap:18px; }
-  .px-hint, .px-glyphs, .px-chip, .px-marker-chip, .px-edge, .px-callout { display:none; }
+  .px-hint, .px-chip, .px-marker-chip, .px-edge, .px-callout { display:none; }
   .px-steps button { padding:0 12px 0 10px; font-size:13px; }
   .px-scene { perspective:1500px; padding-block:6px 30px; }
   .px-lab { --pose-x:0deg!important; --pose-y:0deg!important; }
   .px-float { animation:none; }
-  .px-titlebar { height:30px; font-size:12px; }
 }
 @media(prefers-reduced-motion:reduce) {
   .px-window, .px-base, .px-base[data-on], .px-socket, .px-socket[data-on], .px-layer, .px-layer[data-on], .px-layer[data-on]:is(:hover,:focus-visible,[data-hot]),

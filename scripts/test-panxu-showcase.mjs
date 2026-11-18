@@ -52,22 +52,24 @@ check('every explanation point has the panels it describes, and every panel is e
   for (const layer of panxuLayers) assert.ok(panxuPoints.some(point => point.step === layer.step && point.group === layer.group), layer.id);
 });
 
-check('the rows of 「空间都在哪里」 rise as the scan line passes their middle, top to bottom', () => {
-  const rows = panxuLayers.filter(layer => layer.group === 'scan-chart');
-  assert.equal(rows.length, 8);
-  rows.forEach((row, index) => {
-    const middle = (row.rect[1] + row.rect[3]) / 2;
-    assert.equal(row.delay, Math.round(middle / PANXU_SHOT.height * PANXU_SWEEP_MS), row.id);
-    if (index) assert.ok(row.delay > rows[index - 1].delay && row.rect[1] === rows[index - 1].rect[3], `${row.id} follows the row above`);
+check('the panels of 一键体检 rise as the scan line passes their middle, top to bottom', () => {
+  const scanLayers = panxuLayers.filter(layer => layer.step === 'scan');
+  assert.equal(scanLayers.length, 6);
+  const coverage = scanLayers.filter(layer => layer.group === 'scan-coverage');
+  assert.equal(coverage.length, 3);
+  scanLayers.forEach((layer, index) => {
+    const middle = (layer.rect[1] + layer.rect[3]) / 2;
+    assert.equal(layer.delay, Math.round(middle / PANXU_SHOT.height * PANXU_SWEEP_MS), layer.id);
+    if (index) assert.ok(layer.delay >= scanLayers[index - 1].delay, `${layer.id} rises in vertical sweep order`);
   });
 });
 
 check('the figures add up to the one real check-up they come from', () => {
   const figure = id => panxuSteps.find(step => step.id === id);
-  assert.match(figure('scan').figureNote, /65\.9 GB/); // 10.8 + 28.1 + 27.0
-  assert.equal(figure('scan').figure, '67 项'); // 22 + 40 + 5
-  assert.match(figure('sort').figureNote, /55\.1 GB/); // 28.1 + 27.0
-  assert.match(figure('clean').figureNote, /19\.7 → 29\.8 GB/); // 19.7 + 10.1
+  assert.match(figure('scan').figureNote, /136\.1 GB/); // 10.5 + 98.6 + 27.0
+  assert.equal(figure('scan').figure, '87 项'); // 31 + 51 + 5
+  assert.match(figure('sort').figureNote, /125\.6 GB/); // 98.6 + 27.0
+  assert.match(figure('clean').figureNote, /14\.5 → 24\.3 GB/); // 14.54 + 9.73 -> 24.27 GB
 });
 
 check('the stylesheet keeps 3D parents free of flattening properties', () => {

@@ -11,7 +11,7 @@ import ExplorationInvitation from '../components/ExplorationInvitation.astro';
 import PanxuShowcase from '../components/PanxuShowcase.astro';
 import WorksHall from '../components/WorksHall.astro';
 import ChapterPoints from '../components/ChapterPoints.astro';
-import { projects, getProject } from '../data/projects';
+import { getProject } from '../data/projects';
 import { sitePath, communityUrl } from '../lib/site-path';
 import '../styles/home-next.css';
 import '../styles/expressive-home.css';
@@ -22,8 +22,6 @@ import '../styles/atmosphere-polish.css';
 import '../styles/background-depth.css';
 import '../styles/spatial-materials.css';
 import '../styles/home-chapters.css';
-const framework = getProject('ssframework')!;
-const dubforge = getProject('dubforge')!;
 const outpost = getProject('outpost')!;
 const blocks = getProject('liss-blocks')!;
 const atoll = getProject('glass-atoll')!;
@@ -62,5 +60,5 @@ const gomoku = getProject('gomoku')!;
 
   <section class="closing-chapter home-chapter" aria-labelledby="closing-title"><HomeAtmosphere variant="closing"/><h2 id="closing-title">用过、想到了，<br/>都可以来聊聊。</h2><div><p>哪个工具好用或不好用、遇到了什么问题，或者只是一个还没想清楚的念头，都欢迎到 Liss Community 说一说。</p><div class="closing-actions"><a class="button" href={communityUrl} data-magnetic><span data-magnet-body><Icon name="chat" size={21}/> 来聊聊 <Icon size={18}/></span></a><a class="text-link" href={sitePath('/lab/')}>亲手试试 <Icon name="play" size={17}/></a><a class="text-link" href={sitePath('/about/')}>关于 Liss <Icon size={18}/></a></div></div></section>
  </div>
- <nav class="chapter-nav" data-chapter-nav aria-label="本页章节"><span class="chapter-progress" data-page-progress aria-hidden="true"></span><a href="#start" data-active="true" aria-current="location"><span>开场</span></a><a href="#selected"><span>框架</span></a><a href="#workflow"><span>工具</span></a><a href="#panxu"><span>盘序</span></a><a href="#atoll"><span>玻璃海</span></a><a href="#games"><span>游戏</span></a><a href="#explore"><span>探索</span></a></nav>
+ <nav class="chapter-nav" data-chapter-nav aria-label="本页章节" style="--chapter-tone:#fd8358"><span class="chapter-progress" data-page-progress aria-hidden="true"></span><a href="#start" data-active="true" aria-current="location" style="--chapter-dot:#fd8358"><span>开场</span></a><a href="#selected" style="--chapter-dot:#c8ec60"><span>框架</span></a><a href="#workflow" style="--chapter-dot:#30aff8"><span>工具</span></a><a href="#panxu" style="--chapter-dot:#778ffa"><span>盘序</span></a><a href="#atoll" style="--chapter-dot:#6ee8e3"><span>玻璃海</span></a><a href="#games" style="--chapter-dot:#fd8358"><span>游戏</span></a><a href="#explore" style="--chapter-dot:#facf4e"><span>探索</span></a></nav>
 </Base>

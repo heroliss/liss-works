@@ -36,9 +36,9 @@ const signatures: Record<string, ProjectSignature> = {
     highlights: ['类型化业务分层', '资源生命周期', 'Hierarchy 节点绑定'],
   },
   panxu: {
-    direction: 'Windows 工具 / AI 辅助判断',
-    principle: 'AI 帮你发现清理线索，把能不能删讲得更明白。',
-    highlights: ['AI 辅助分析', '有依据的清理建议', '个人文件由你决定'],
+    direction: 'Windows 工具 / AI 辅助磁盘清理',
+    principle: '63 项规则与 AI 各司其职，把能不能删讲得明明白白。',
+    highlights: ['63 项规则 + 结构识别', '0–10 分清理依据', '绿色免安装 · 可撤销'],
   },
   dubforge: {
     direction: 'AI 应用 / 媒体工作流',

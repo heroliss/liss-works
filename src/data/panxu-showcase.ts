@@ -1,9 +1,9 @@
 /**
- * The 盘序 home showcase: the real PanXu window, taken apart. Every panel that rises out of the
+ * The 盘序 home showcase: the real PanXu 2.5.0 window, taken apart. Every panel that rises out of the
  * window is cut from the very screenshot it sits in (a rectangle in the 1650 × 1075 export), so at
  * rest the window is exactly the capture. Every number comes from one real 一键体检 run of PanXu
- * 1.1.0 in its generated 演练环境 (verification/panxu-captures-20261105): the simulated C: drive is
- * 256 GB with 19.7 GB free; the plan holds 22 + 40 + 5 items.
+ * 2.5.0 in its generated 演练环境 (verification/panxu-captures-20261118): the simulated C: drive is
+ * 256 GB with 14.5 GB free; the plan holds 31 + 51 + 5 items (10.5 + 98.6 + 27.0 = 136.1 GB).
  */
 export const PANXU_SHOT = { width: 1650, height: 1075 } as const;
 /** How long the scan line takes from the top of the window to the bottom (CSS reads it as --sweep). */
@@ -53,60 +53,72 @@ export interface PanxuLayer {
 }
 
 export const panxuSteps: PanxuStep[] = [
-  { id: 'scan', label: '一键体检', shot: '01-checkup-plan', figure: '67 项', figureNote: '共 65.9 GB 待整理',
-    title: '先把占空间的东西找出来',
-    body: '依次检查垃圾、系统盘空间、我的文件和重复文件。内置规则先认出常见情况，规则不认识的再交给 AI 复核。' },
-  { id: 'sort', label: '分成三组', shot: '01-checkup-plan', figure: '10.8 GB', figureNote: '放心清理 · 其余 55.1 GB 由你决定',
+  { id: 'scan', label: '一键体检', shot: '01-checkup-plan', figure: '87 项', figureNote: '共 136.1 GB 待整理',
+    title: '一次体检，同步到各工具页',
+    body: '按范围检查垃圾缓存、多盘空间与大文件、个人文件、重复文件、开机启动及应用服务。63 项规则与结构化缓存识别先行，陌生的目录再交给 AI 复核。' },
+  { id: 'sort', label: '分成三组', shot: '01-checkup-plan', figure: '10.5 GB', figureNote: '放心清理 · 其余 125.6 GB 由你决定',
     title: '能放心清的，已经替你勾好',
-    body: '放心清理默认勾好；建议你看看和仅供了解只给依据和入口。你的个人文件从不自动勾选，只会移到回收站。' },
+    body: '放心清理默认勾好；建议你看看和仅供了解只给依据和入口。你的个人文件从不自动勾选，删除也只是移到回收站。' },
   { id: 'explain', label: '讲清楚', shot: '03-score-basis', figure: '10 分', figureNote: 'Windows 更新下载缓存 · 990 MB',
     title: '每一项都写明依据',
-    body: '展开任意一项：它是什么、为什么列出、清理后会怎样，以及 0–10 分的建议清理度和勾选理由。' },
-  { id: 'clean', label: '清理并记下', shot: '05-cleanup-result', figure: '+10.1 GB', figureNote: '可用 19.7 → 29.8 GB · 760 MB 在回收站',
+    body: '展开任意一项：处理方式、命中的规则或 AI 分析、为什么自动勾选或保留，以及具体目录位置，都能直接查看。' },
+  { id: 'clean', label: '清理并记下', shot: '05-cleanup-result', figure: '+9.7 GB', figureNote: '可用 14.5 → 24.3 GB · 760 MB 在回收站',
     title: '释放多少，说得清楚',
-    body: '缓存直接删除，其余移到回收站；结果分开显示释放的空间和回收站里的空间，每次修改都记进操作记录。' },
+    body: '可重建的缓存直接删除，其余移到回收站；结果分开显示真正释放的空间与仍在回收站里的空间，每次修改都记进操作记录。' },
 ];
 
 export const panxuPoints: PanxuPoint[] = [
-  { step: 'scan', group: 'scan-free', callout: { x: [1060, 1580], top: 96 }, label: '可用空间', note: '演练系统盘共 256 GB，只剩 19.7 GB。', tone: 'accent' },
-  { step: 'scan', group: 'scan-chart', callout: { x: [640, 1180], top: 812 }, label: '空间都在哪里', tone: 'accent',
-    note: '按类别列出：应用数据 14.1 GB、垃圾文件 13.8 GB、很久没动过的大文件 9.4 GB……点一行就跳到对应的项目。' },
-  { step: 'sort', group: 'sort-safe', callout: { x: [309, 735], top: 618 }, label: '放心清理', note: '22 项、10.8 GB，默认全部勾好。', tone: 'safe' },
-  { step: 'sort', group: 'sort-review', callout: { x: [745, 1171], top: 618 }, label: '建议你看看', note: '40 项、28.1 GB，写明依据，由你决定。', tone: 'review' },
-  { step: 'sort', group: 'sort-info', callout: { x: [1181, 1607], top: 618 }, label: '仅供了解', note: '5 项、27.0 GB：游戏、Docker 和系统文件，只讲清楚、给出入口。', tone: 'info' },
-  { step: 'sort', group: 'sort-bar', callout: { x: [700, 1250], top: 284 }, label: '容量条', note: '绿色斜纹是选中后能释放的 10.8 GB。', tone: 'safe' },
-  { step: 'explain', group: 'explain-row', callout: { x: [860, 1590], bottom: 252 }, label: '这一项', note: 'Windows 更新下载缓存，990 MB，由内置规则认出，10 分。', tone: 'accent' },
-  { step: 'explain', group: 'explain-basis', callout: { x: [388, 960], top: 622 }, label: '评分依据', tone: 'safe',
-    note: '永久删除、不经过回收站；公认可以重建的缓存，10 分达到勾选门槛（5 分），所以自动勾选。' },
-  { step: 'explain', group: 'explain-where', callout: { x: [1000, 1578], top: 622 }, label: '具体位置', note: 'C:\\Windows\\SoftwareDistribution\\Download，可以直接打开查看。', tone: 'accent' },
-  { step: 'clean', group: 'clean-free', callout: { x: [700, 1300], top: 286 }, label: '可用空间', tone: 'safe',
-    note: '从 19.7 GB 变成 29.8 GB：容量条上原来的绿色斜纹，现在是可用空间。' },
-  { step: 'clean', group: 'clean-done', callout: { x: [900, 1600], bottom: 408 }, label: '清理结果', note: '10.1 GB 已释放；1 项 760 MB 在回收站，需要时可以还原。', tone: 'safe' },
-  { step: 'clean', group: 'clean-left', callout: { x: [309, 900], top: 842 }, label: '剩下的', note: '还有 40 项建议你看看（28.1 GB），仍由你决定；仅供了解的 5 项只给说明。', tone: 'review' },
+  { step: 'scan', group: 'scan-free', callout: { x: [980, 1590], top: 342 }, label: '系统盘空间',
+    note: '演练系统盘共 256 GB，只剩 14.5 GB，自动标出「空间紧张」。', tone: 'accent' },
+  { step: 'scan', group: 'scan-rail', callout: { x: [276, 840], top: 205 }, label: '同步各工具页', tone: 'accent',
+    note: '垃圾 9.7 GB、我的文件 15.1 GB、重复文件 11.5 MB、应用与启动项一次就位，勾选共用同一份。' },
+  { step: 'scan', group: 'scan-plan', callout: { x: [940, 1590], bottom: 716 }, label: '87 项清理方案', tone: 'accent',
+    note: '先给三组总览结论，展开即可按分数筛选、实时搜索或逐项查看原因。' },
+  { step: 'scan', group: 'scan-coverage', callout: { x: [560, 1220], bottom: 888 }, label: '本次检查了什么', tone: 'accent',
+    note: '写明 63 条缓存规则、C:/D: 双盘扫描、大文件复用与个人文件范围，跳过项也如实说明。' },
+  { step: 'sort', group: 'sort-safe', callout: { x: [311, 820], bottom: 552 }, label: '放心清理',
+    note: '31 项、10.5 GB，达到默认 ≥ 7 分门槛，已经替你勾好。', tone: 'safe' },
+  { step: 'sort', group: 'sort-review', callout: { x: [700, 1220], bottom: 552 }, label: '建议你看看',
+    note: '51 项、98.6 GB，写明用途与依据，不自动勾选，由你决定。', tone: 'review' },
+  { step: 'sort', group: 'sort-info', callout: { x: [1080, 1605], bottom: 552 }, label: '仅供了解',
+    note: '5 项、27.0 GB：休眠文件、Docker 与系统目录，只讲清楚并给出处理入口。', tone: 'info' },
+  { step: 'sort', group: 'sort-action', callout: { x: [960, 1595], bottom: 968 }, label: '执行栏',
+    note: '底部汇总当前已选 10.5 GB（31 项），点击后还会再确认一次删除与回收站明细。', tone: 'safe' },
+  { step: 'explain', group: 'explain-row', callout: { x: [880, 1590], top: 228 }, label: '这一项',
+    note: 'Windows 更新下载缓存，990 MB，由内置规则识别，建议清理度 10 分。', tone: 'accent' },
+  { step: 'explain', group: 'explain-basis', callout: { x: [390, 980], top: 424 }, label: '评分依据', tone: 'safe',
+    note: '标明永久删除、不经过回收站；符合保留期限的可重建缓存，10 分达到 ≥ 7 分门槛，自动勾选。' },
+  { step: 'explain', group: 'explain-where', callout: { x: [980, 1574], top: 512 }, label: '清理这些位置',
+    note: 'C:\\Windows\\SoftwareDistribution\\Download，一键复制路径或在资源管理器中打开。', tone: 'accent' },
+  { step: 'clean', group: 'clean-free', callout: { x: [680, 1340], top: 342 }, label: '可用空间变化', tone: 'safe',
+    note: '系统盘可用空间从 14.5 GB 增至 24.3 GB，只把真正腾出来的 +9.7 GB 算进可用空间。' },
+  { step: 'clean', group: 'clean-done', callout: { x: [880, 1595], bottom: 508 }, label: '清理结果',
+    note: '处理了 31 项：9.7 GB 缓存直接释放；1 项 760 MB 移入回收站，需要时可随时还原。', tone: 'safe' },
+  { step: 'clean', group: 'clean-left', callout: { x: [311, 960], bottom: 734 }, label: '剩下的交给你',
+    note: '还有 51 项建议你看看（98.6 GB）仍由你决定；仅供了解的 5 项保留说明与入口。', tone: 'review' },
 ];
 
-// 「空间都在哪里」: one strip per category row; each rises as the scan line passes its middle.
-const chartRows: Array<[number, number]> = [[701, 737], [737, 771], [771, 806], [806, 841], [841, 877], [877, 912], [912, 947], [947, 982]];
 const swept = (top: number, bottom: number) => Math.round((top + bottom) / 2 / PANXU_SHOT.height * PANXU_SWEEP_MS);
-// The green stripes of the disk bar: selected and releasable in the plan, free space after cleaning.
-const releasable: PanxuRect = [1444, 191, 1510, 230];
+// 「本次检查了什么」: the three top coverage cards visible above the sticky action bar.
+const coverageCols: Array<[number, number]> = [[311, 734], [747, 1170], [1182, 1605]];
 
 export const panxuLayers: PanxuLayer[] = [
-  { id: 'scan-free', step: 'scan', group: 'scan-free', rect: [300, 86, 1030, 184], depth: 44, delay: swept(86, 184) },
-  ...chartRows.map(([top, bottom], index): PanxuLayer => ({
-    id: `scan-row-${index + 1}`, step: 'scan', group: 'scan-chart', rect: [318, top, 1598, bottom], depth: 28, delay: swept(top, bottom),
+  { id: 'scan-free', step: 'scan', group: 'scan-free', rect: [305, 156, 1608, 330], depth: 44, delay: swept(156, 330) },
+  { id: 'scan-rail', step: 'scan', group: 'scan-rail', rect: [10, 156, 250, 488], depth: 52, delay: swept(156, 488), chip: '同步各页' },
+  { id: 'scan-plan', step: 'scan', group: 'scan-plan', rect: [311, 729, 1605, 793], depth: 32, delay: swept(729, 793) },
+  ...coverageCols.map(([left, right], index): PanxuLayer => ({
+    id: `scan-cov-${index + 1}`, step: 'scan', group: 'scan-coverage', rect: [left, 901, right, 980], depth: 28, delay: swept(901, 980),
   })),
-  { id: 'sort-bar', step: 'sort', group: 'sort-bar', rect: [300, 186, 1615, 274], depth: 22, delay: 320,
-    marker: { rect: releasable, chip: '选中的 10.8 GB 可以释放' } },
-  { id: 'sort-safe', step: 'sort', group: 'sort-safe', rect: [309, 460, 735, 605], depth: 96, delay: 0, chip: '默认勾好' },
-  { id: 'sort-review', step: 'sort', group: 'sort-review', rect: [745, 460, 1171, 605], depth: 62, delay: 110, chip: '由你决定' },
-  { id: 'sort-info', step: 'sort', group: 'sort-info', rect: [1181, 460, 1607, 605], depth: 34, delay: 220, chip: '只讲清楚' },
-  { id: 'explain-row', step: 'explain', group: 'explain-row', rect: [309, 260, 1607, 341], depth: 40, delay: 0 },
-  { id: 'explain-basis', step: 'explain', group: 'explain-basis', rect: [388, 352, 1578, 532], depth: 88, delay: 160, chip: '为什么是 10 分' },
-  { id: 'explain-where', step: 'explain', group: 'explain-where', rect: [388, 540, 1578, 612], depth: 58, delay: 300 },
-  { id: 'clean-free', step: 'clean', group: 'clean-free', rect: [300, 86, 1300, 184], depth: 72, delay: 0 },
-  { id: 'clean-bar', step: 'clean', group: 'clean-free', rect: [300, 186, 1615, 274], depth: 30, delay: 120,
-    marker: { rect: releasable, chip: '+10.1 GB 变成可用' } },
-  { id: 'clean-done', step: 'clean', group: 'clean-done', rect: [309, 416, 1607, 622], depth: 54, delay: 240 },
-  { id: 'clean-left', step: 'clean', group: 'clean-left', rect: [309, 636, 1607, 830], depth: 26, delay: 360 },
+  { id: 'sort-safe', step: 'sort', group: 'sort-safe', rect: [311, 567, 733, 706], depth: 96, delay: 0, chip: '默认勾好' },
+  { id: 'sort-review', step: 'sort', group: 'sort-review', rect: [748, 567, 1169, 706], depth: 62, delay: 110, chip: '由你决定' },
+  { id: 'sort-info', step: 'sort', group: 'sort-info', rect: [1184, 567, 1605, 706], depth: 34, delay: 220, chip: '只讲清楚' },
+  { id: 'sort-action', step: 'sort', group: 'sort-action', rect: [311, 985, 1605, 1055], depth: 46, delay: 320,
+    marker: { rect: [1420, 999, 1589, 1041], chip: '默认只执行这 31 项' } },
+  { id: 'explain-row', step: 'explain', group: 'explain-row', rect: [313, 140, 1604, 219], depth: 40, delay: 0 },
+  { id: 'explain-basis', step: 'explain', group: 'explain-basis', rect: [390, 234, 1574, 412], depth: 88, delay: 160, chip: '为什么是 10 分' },
+  { id: 'explain-where', step: 'explain', group: 'explain-where', rect: [390, 422, 1574, 500], depth: 58, delay: 300 },
+  { id: 'clean-free', step: 'clean', group: 'clean-free', rect: [305, 156, 1608, 330], depth: 72, delay: 0,
+    marker: { rect: [480, 187, 572, 234], chip: '+9.7 GB 真腾出' } },
+  { id: 'clean-done', step: 'clean', group: 'clean-done', rect: [311, 523, 1605, 724], depth: 54, delay: 180, chip: '释放与回收站分开' },
+  { id: 'clean-left', step: 'clean', group: 'clean-left', rect: [311, 747, 1172, 932], depth: 26, delay: 320 },
 ];

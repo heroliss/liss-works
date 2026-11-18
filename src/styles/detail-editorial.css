@@ -40,39 +40,49 @@
 .detail-page[data-project-world] .project-facts :is(.project-facts__category, [data-fact-role='category']) { color: var(--editorial-cool); }
 .detail-page[data-project-world] .project-facts :is(.project-facts__status, [data-fact-role='status']) { color: var(--editorial-warm); }
 
-/* The existing document anchors become a calm, readable chapter index. */
+/* The existing document anchors become a calm, readable chapter index that yields smoothly to the site header. */
 .detail-page[data-project-world] .project-contents {
   position: sticky;
-  top: 12px;
+  top: 78px;
   z-index: 25;
   gap: 4px 24px;
-  margin-block: 40px 15px;
-  padding: 12px 22px;
-  border: 0;
-  background: var(--detail-ground, #0d1418);
+  margin-block: 40px 18px;
+  padding: 10px 22px;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, #ffffff14);
+  background: color-mix(in srgb, var(--detail-ground, #0d1418) 84%, #090d12cc);
+  -webkit-backdrop-filter: blur(16px) saturate(1.25);
+  backdrop-filter: blur(16px) saturate(1.25);
   color: var(--editorial-body);
-  box-shadow: 0 3px 0 color-mix(in srgb, var(--accent) 18%, #182226);
+  box-shadow: 0 18px 38px -26px #000c, inset 0 1px #ffffff10;
   font-size: 15px;
+  transition: top .42s cubic-bezier(.2, .8, .2, 1), background .3s ease, border-color .3s ease;
+}
+:root[data-header-hidden='true'] .detail-page[data-project-world] .project-contents {
+  top: 12px;
 }
 .detail-page[data-project-world] .project-contents a {
   position: relative;
-  min-height: 42px;
-  padding: 6px 0;
+  min-height: 40px;
+  padding: 6px 2px;
   color: inherit;
   text-decoration: none;
+  white-space: nowrap;
+  transition: color .2s ease;
 }
 .detail-page[data-project-world] .project-contents a:is(:hover, :focus-visible) { color: var(--editorial-cool); }
 .detail-page[data-project-world] .project-contents a[aria-current]:not([aria-current='false']) { color: var(--accent); font-weight: 600; }
 .detail-page[data-project-world] .project-contents a[aria-current]:not([aria-current='false'])::after {
   content: '';
   position: absolute;
-  bottom: 0;
+  bottom: 2px;
   left: 0;
   right: 0;
-  height: 3px;
+  height: 2px;
+  border-radius: 2px;
   background: currentColor;
 }
-.detail-page[data-project-world] :is(#project-origin, #engineering, #gallery, #usage) { scroll-margin-top: 116px; }
+.detail-page[data-project-world] :is(#project-origin, #engineering, #gallery, #usage) { scroll-margin-top: 148px; }
 
 /* Keep each world's column geometry; give facts and actions their own voice. */
 .detail-page[data-project-world] :is(.story-origin, .project-technology) > h2,
@@ -283,9 +293,11 @@
   .detail-page[data-project-world] .engineering-topic:not(.engineering-topic--media) .engineering-copy { display: block; width: 100%; max-width: 100%; }
   .detail-page[data-project-world] .engineering-topic:not(.engineering-topic--media) .engineering-points { display: block; }
   .detail-page[data-project-world] .project-facts { font-size: 14px; gap: 7px 12px; }
-  .detail-page[data-project-world] .project-contents { top: 6px; padding: 8px 13px; gap: 0 17px; margin-top: 31px; font-size: 14px; }
-  .detail-page[data-project-world] .project-contents a { min-height: 44px; }
-  .detail-page[data-project-world] :is(#project-origin, #engineering, #gallery, #usage) { scroll-margin-top: 122px; }
+  .detail-page[data-project-world] .project-contents { top: 62px; padding: 6px 14px; gap: 0 18px; margin-top: 28px; font-size: 14px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; border-radius: 12px; }
+  .detail-page[data-project-world] .project-contents::-webkit-scrollbar { display: none; }
+  :root[data-header-hidden='true'] .detail-page[data-project-world] .project-contents { top: 8px; }
+  .detail-page[data-project-world] .project-contents a { min-height: 42px; flex: none; }
+  .detail-page[data-project-world] :is(#project-origin, #engineering, #gallery, #usage) { scroll-margin-top: 132px; }
   .detail-page[data-project-world] :is(.story-origin, .project-technology) > h2,
   .detail-page[data-project-world] .project-usage > .section-heading h2 { font-size: 25px; margin-bottom: 22px; }
   .detail-page[data-project-world] .project-stack > div { padding-left: 15px; }

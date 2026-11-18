@@ -70,16 +70,16 @@ const dubforge = [
 ];
 
 const panxu = [
-  image('panxu', '01-checkup-plan.png', 1650, 1075, '一键体检后的清理方案：放心清理、建议你看看、仅供了解三组，并按类别说明空间都在哪里。', '演练环境'),
-  image('panxu', '02-plan-scores.png', 1650, 1075, '每一项写明是什么、为什么列出，并给出 0–10 分的建议清理度；可以按分数一键勾选。', '清理方案'),
-  image('panxu', '03-score-basis.png', 1650, 1075, '展开一项查看评分依据：处理方式、命中的规则、为什么自动勾选，以及具体位置。', '评分依据'),
-  image('panxu', '04-cleanup-confirm.png', 1650, 1075, '执行前分开列出永久删除的缓存和移到回收站的项目，以及各自的大小。', '执行确认'),
-  image('panxu', '05-cleanup-result.png', 1650, 1075, '清理完成后分开显示真正释放的空间和仍在回收站里的空间。', '清理结果'),
-  image('panxu', '06-space-treemap.png', 1650, 1075, '空间分析用文件夹树和占用图查看整块磁盘，已知位置会标注用途。', '空间分析'),
-  image('panxu', '07-duplicate-files.png', 1650, 1075, '重复文件逐字节比对；每组可以按最早、最新或路径最短的规则选出要保留的一份。', '重复文件'),
-  image('panxu', '08-startup-items.png', 1650, 1075, '开机启动项和任务管理器用的是同一套开关，找不到程序文件的条目会直接标出。', '开机与服务'),
-  image('panxu', '09-junk-rules.png', 1650, 1075, '垃圾清理按 39 项内置规则分组，只清理公认可以重建的缓存和临时文件。', '垃圾清理'),
-  image('panxu', '10-operation-history.png', 1650, 1075, '操作记录汇总释放了多少空间、有几次操作，以及哪些修改还能撤销。', '操作记录'),
+  image('panxu', '01-checkup-plan.png', 1650, 1075, '一键体检后的总览方案：先给放心清理、建议你看看、仅供了解三组结论，并将结果同步到各工具页。', '演练环境'),
+  image('panxu', '02-plan-scores.png', 1650, 1075, '展开清理方案：支持按建议清理度一键勾选、多种排序与实时关键词搜索，逐项写明用途与原因。', '清理方案'),
+  image('panxu', '03-score-basis.png', 1650, 1075, '展开任意一项查看依据：处理方式、命中的规则、为什么自动勾选，以及可一键打开的具体位置。', '评分依据'),
+  image('panxu', '04-cleanup-confirm.png', 1650, 1075, '执行前分开列出永久删除的可重建缓存和移入回收站的项目及各自大小。', '执行确认'),
+  image('panxu', '05-cleanup-result.png', 1650, 1075, '清理完成后分开显示真正释放的空间和仍在回收站里的空间，剩余待看项继续保留。', '清理结果'),
+  image('panxu', '06-space-treemap.png', 1650, 1075, '空间分析用文件夹树和占用图查看整块磁盘，已知位置自动标注用途与清理路径。', '空间分析'),
+  image('panxu', '07-duplicate-files.png', 1650, 1075, '重复文件逐字节比对；可按最早、最新或路径最短自动保留一份，也可请 AI 判断哪份值得留。', '重复文件'),
+  image('panxu', '08-startup-items.png', 1650, 1075, '开机启动项和任务管理器共用同一套开关，并结合程序信息与 AI 说明标注能否安全关闭。', '开机与服务'),
+  image('panxu', '09-junk-rules.png', 1650, 1075, '垃圾清理按 63 项内置规则与 Chromium 结构识别分组，只清理公认可以重建的缓存和临时文件。', '垃圾清理'),
+  image('panxu', '10-operation-history.png', 1650, 1075, '操作记录汇总释放空间、回收站空间与可撤销修改，支持按分类筛选、搜索和一键撤销。', '操作记录'),
 ];
 
 const chart = [
@@ -261,20 +261,20 @@ export const projects: Project[] = [
   },
   {
     slug: 'panxu', repo: 'panxu', name: '盘序 · Windows 磁盘清理助手', category: 'Windows 磁盘清理助手', group: 'tools',
-    summary: 'AI 辅助发现清理线索，讲清文件用途与处理影响，帮你决定清什么、留什么。',
-    intro: '面向 Windows 10 / 11 的 AI 辅助磁盘清理工具。内置规则识别常见垃圾，AI 再分析陌生目录、旧文件与软件残留，补充值得查看的清理线索。每一项都解释是什么、为什么建议清理、处理后会怎样，遇到疑问还可以继续「问 AI」。一键体检覆盖所选磁盘，并将结果同步到各工具页；个人文件由你勾选后移到回收站，AI 建议不会绕过保护规则。',
-    status: '正式版', tags: ['Python', 'AI', 'pywebview', 'WebView2', 'Windows'],
+    summary: 'AI 辅助发现清理线索，讲清文件用途与处理影响，绿色免安装、可回退。',
+    intro: '面向 Windows 10 / 11 的绿色免安装磁盘清理工具。63 项内置规则与 Chromium 结构识别先清理常见缓存，AI 再结合本机线索分析陌生目录、旧文件与软件残留。每一项都写明是什么、为什么建议清理、处理后会怎样，遇到疑问还可以继续「问 AI」。一键体检覆盖所选磁盘并同步到各工具页；个人文件只移入回收站，AI 建议绝不绕过保护边界。',
+    status: 'v2.5 绿色便携版', tags: ['Python', 'AI', 'pywebview', 'WebView2', 'Windows'],
     features: [
-      { title: 'AI 补充清理线索', body: '从陌生目录、旧文件到疑似软件残留，结合文件摘要与本机查到的信息辅助分析，让规则之外的内容也有机会被发现。' },
-      { title: '把能不能删讲明白', body: '解释用途、清理依据和可能影响，给出 0–10 分建议清理度；仍有疑问可以继续「问 AI」，帮助你判断该清理、保留还是归档。' },
-      { title: '你的文件由你决定', body: '个人文件从不自动勾选，只移到回收站；受保护的位置、链接和云端占位文件都不会被碰。' },
+      { title: '63 项规则 + AI 补充线索', body: '内置规则与 Electron / WebView2 结构化缓存识别覆盖常见垃圾；陌生目录、旧文件与疑似残留再结合本机事实交由 AI 复核。' },
+      { title: '把能不能删讲明白', body: '先给三组总览结论，展开即可查看用途、0–10 分建议清理度与勾选依据；支持全页面实时搜索、快速加入排除与「问 AI」。' },
+      { title: '绿色免安装，边界清晰', body: '解压即用、不写卸载注册表，设置里可按需生成桌面或开始菜单快捷方式并检查新版本；个人文件从不自动勾选，只移到回收站。' },
     ],
     usage: [
-      { title: '下载即用', body: '下载按钮会自动获取最新正式版的 Windows x64 压缩包，解压整个文件夹后双击 PanXu.exe，不需要安装。需要 Windows 10 / 11（64 位）和 WebView2 运行时；默认请求管理员权限，首次启动按提示配置并测试模型，随后点「一键体检」生成清理方案。' },
-      { title: '先在演练环境里试', body: '用 --sandbox 启动会生成一台模拟的「用了几年的电脑」，所有删除、禁用和卸载都只发生在里面，可以随时还原或重建。', code: 'PanXu.exe --sandbox', language: 'PowerShell' },
+      { title: '解压即用（绿色免安装）', body: '下载按钮自动获取最新正式版 Windows x64 压缩包，完整解压后双击 PanXu.exe 即可使用，无需安装。需要 Windows 10 / 11（64 位）和 WebView2 运行时；也可在「设置 → 启动与权限」中一键创建桌面或开始菜单快捷方式。' },
+      { title: '先在演练环境里试', body: '用 --sandbox 启动会生成一台模拟的「用了几年的电脑」，所有删除、禁用和卸载都只发生在演练目录里，可以随时还原或重建。', code: 'PanXu.exe --sandbox', language: 'PowerShell' },
       { title: '从源码运行', body: '需要 Python 3.10 以上；--debug 打开 WebView 开发者工具。', code: 'python -m pip install -r requirements.txt\npython run.py --sandbox', language: 'PowerShell' },
     ],
-    note: '截图来自真实的盘序 1.1.0 界面，运行在演练环境（模拟电脑）中；AI 复核使用测试脚本作答，没有连接真实模型，也没有处理真实文件。',
+    note: '截图来自真实的盘序 2.5.0 界面，运行在演练环境（模拟电脑）中；AI 复核使用测试脚本作答，没有连接真实模型，也没有处理真实文件。',
     source: 'https://github.com/heroliss/panxu', docs: 'https://github.com/heroliss/panxu/tree/main/docs',
     download: { repository: 'heroliss/panxu', assetPattern: '^PanXu(?:-v?\\d+(?:\\.\\d+)*)?-(?:Windows|win)-x64\\.zip$' },
     cover: panxu[0], gallery: panxu, related: ['nex', 'dubforge', 'utility-lab'],

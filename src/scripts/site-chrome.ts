@@ -2,6 +2,9 @@
 const header = document.querySelector<HTMLElement>('[data-site-header]');
 if (header) {
   let last = scrollY, frame = 0;
+  const syncRoot = () => {
+    document.documentElement.dataset.headerHidden = header.dataset.hidden ?? 'false';
+  };
   const update = () => {
     frame = 0;
     const y = scrollY, delta = y - last;
@@ -9,9 +12,10 @@ if (header) {
     if (header.contains(document.activeElement)) header.dataset.hidden = 'false';
     else if (y < 120 || delta < -6) header.dataset.hidden = 'false';
     else if (delta > 8) header.dataset.hidden = 'true';
+    syncRoot();
     if (Math.abs(delta) > 6) last = y;
   };
   addEventListener('scroll', () => { if (!frame) frame = requestAnimationFrame(update); }, { passive: true });
-  header.addEventListener('focusin', () => { header.dataset.hidden = 'false'; });
+  header.addEventListener('focusin', () => { header.dataset.hidden = 'false'; syncRoot(); });
   update();
 }

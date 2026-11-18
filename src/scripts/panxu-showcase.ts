@@ -126,10 +126,25 @@ export function setupPanxuShowcase({ signal, preference }: Options): () => void 
   observer.observe(root);
 
   const on = events.signal;
-  steps.forEach(button => button.addEventListener('click', () => {
-    takeOver();
-    show(button.dataset.pxStep || 'sort', true);
-  }, { signal: on }));
+  steps.forEach((button, index) => {
+    button.addEventListener('click', () => {
+      takeOver();
+      show(button.dataset.pxStep || 'sort', true);
+    }, { signal: on });
+    button.addEventListener('keydown', event => {
+      let nextIndex = index;
+      if (event.key === 'ArrowRight') nextIndex = (index + 1) % steps.length;
+      else if (event.key === 'ArrowLeft') nextIndex = (index - 1 + steps.length) % steps.length;
+      else if (event.key === 'Home') nextIndex = 0;
+      else if (event.key === 'End') nextIndex = steps.length - 1;
+      else return;
+      event.preventDefault();
+      takeOver();
+      const target = steps[nextIndex];
+      target?.focus();
+      show(target?.dataset.pxStep || 'sort', true);
+    }, { signal: on });
+  });
   layers.forEach(layer => {
     const group = layer.dataset.group ?? null;
     layer.addEventListener('pointerenter', event => { if (event.pointerType !== 'touch') setHot(group); }, { signal: on });

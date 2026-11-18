@@ -7,6 +7,7 @@ import '../styles/world-continuity.css';
 import Icon from '../components/Icon.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import '../styles/site-chrome.css';
+import '../styles/lightbox.css';
 import { getProject } from '../data/projects';
 import type { GalleryImage } from '../data/types';
 type ShareImage = Pick<GalleryImage, 'src' | 'width' | 'height' | 'alt'>;
@@ -26,7 +27,7 @@ const analyticsSrc = analyticsOverride ?? (Astro.site ? `${communityUrl}static/l
  <nav aria-label="主要导航"><a href={sitePath('/projects/')} style="--tone:#6ee8e3" aria-current={active === 'projects' ? 'page' : undefined}>工程库</a><a href={sitePath('/lab/')} style="--tone:#facf4e" aria-current={active === 'lab' ? 'page' : undefined}>交互实验</a><a class="about-nav" href={sitePath('/about/')} style="--tone:#e27ee8" aria-current={active === 'about' ? 'page' : undefined}>关于</a><a class="github-nav" href="https://github.com/heroliss" target="_blank" rel="noreferrer" aria-label="Liss 的 GitHub（新窗口）"><Icon name="github" size={19}/></a><a class="community-nav" href={communityUrl}><Icon name="chat" size={16}/><span>交流</span></a></nav></header>
  <main id="main"><slot/></main>
  <SiteFooter/>
- <dialog class="lightbox" aria-label="截图查看器"><div class="lightbox__toolbar"><p class="lightbox__title"></p><button type="button" class="icon-button lightbox__close" aria-label="关闭截图"><Icon name="close" size={24}/></button></div><div class="lightbox__stage"><button type="button" class="icon-button lightbox__prev" aria-label="上一张截图"><Icon name="back" size={25}/></button><div class="lightbox__image-slot"></div><button type="button" class="icon-button lightbox__next" aria-label="下一张截图"><Icon name="chevron" size={25}/></button></div><div class="lightbox__footer"><p class="lightbox__caption"></p><span class="lightbox__count" aria-live="polite"></span><a class="text-link lightbox__original" href={sitePath('/')} target="_blank" rel="noreferrer">打开大图 <Icon size={16}/></a></div></dialog>
+ <dialog class="lightbox" aria-label="截图查看器" data-zoomed="false"><div class="lightbox__toolbar"><p class="lightbox__title"></p><div class="lightbox__actions"><button type="button" class="lightbox__zoom" data-lightbox-zoom aria-pressed="false" aria-label="切换原尺寸缩放"><Icon name="expand" size={16}/><span data-lightbox-zoom-label>1:1 放大</span></button><button type="button" class="icon-button lightbox__close" aria-label="关闭截图"><Icon name="close" size={22}/></button></div></div><div class="lightbox__stage" data-lightbox-stage><button type="button" class="icon-button lightbox__prev" aria-label="上一张截图"><Icon name="back" size={24}/></button><div class="lightbox__image-slot" data-lightbox-slot></div><button type="button" class="icon-button lightbox__next" aria-label="下一张截图"><Icon name="chevron" size={24}/></button></div><div class="lightbox__footer"><p class="lightbox__caption"></p><span class="lightbox__hint" aria-hidden="true">← → 切换 · 双击缩放 · Esc 关闭</span><span class="lightbox__count" aria-live="polite"></span><a class="text-link lightbox__original" href={sitePath('/')} target="_blank" rel="noreferrer">打开原图 <Icon size={15}/></a></div></dialog>
  <script>import '../scripts/site'; import '../scripts/site-chrome'; import '../scripts/motion'; import '../scripts/site-continuity';</script>
 </body></html>
 
