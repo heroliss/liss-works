@@ -6,6 +6,7 @@ document.querySelectorAll<HTMLElement>('[data-release-download]').forEach(async 
   const metadata = entry.querySelector<HTMLElement>('[data-release-meta]');
   if (!link || !label || !metadata) return;
   const compact = entry.dataset.compact === 'true';
+  const hasSnapshot = entry.dataset.hasSnapshot === 'true';
   entry.setAttribute('aria-busy', 'true');
   try {
     const release = await resolveLatestRelease({
@@ -25,33 +26,37 @@ document.querySelectorAll<HTMLElement>('[data-release-download]').forEach(async 
       return;
     }
   } catch {
-    // The server-rendered link remains a working latest-release entry.
+    // Keep the pre-resolved direct download snapshot or fallback link intact.
   } finally {
     entry.setAttribute('aria-busy', 'false');
   }
+  // Never downgrade a verified build-time direct .zip link when GitHub's anonymous API is rate-limited.
+  if (hasSnapshot) return;
   link.target = '_blank';
-  label.textContent = compact ? '查看最新版本' : '查看最新版本';
+  label.textContent = '查看最新版本';
   metadata.textContent = '前往 GitHub 下载';
   entry.dataset.state = 'fallback';
 });
 
-// Lazily enrich project cards with the live latest formal version as they scroll into view.
+// Zero-network sync on /projects/: if a detail page already cached a newer version in sessionStorage, reflect it.
 const statusBadges = Array.from(document.querySelectorAll<HTMLElement>('[data-release-status]'));
-if (statusBadges.length && 'IntersectionObserver' in window) {
-  const observer = new IntersectionObserver(entries => {
-    for (const item of entries) {
-      if (!item.isIntersecting) continue;
-      const badge = item.target as HTMLElement;
-      observer.unobserve(badge);
-      void resolveLatestRelease({
-        repository: badge.dataset.repository ?? '',
-        assetPattern: badge.dataset.assetPattern ?? '',
-      }).then(release => {
-        if (!release) return;
-        const base = (badge.dataset.baseStatus ?? badge.textContent ?? '').replace(/已发布$/, '').trim();
-        badge.textContent = base ? `${base} · ${release.version}` : release.version;
-      }).catch(() => {});
+if (statusBadges.length) {
+  try {
+    for (let i = 0; i < sessionStorage.length; i++) {
+      const key = sessionStorage.key(i);
+      if (!key?.startsWith('liss:github-release:v1:')) continue;
+      const parsed = JSON.parse(sessionStorage.getItem(key) ?? '{}');
+      const repo = String(parsed?.repository ?? '').toLowerCase();
+      const version = String(parsed?.release?.version ?? '');
+      if (!repo || !version) continue;
+      for (const badge of statusBadges) {
+        if ((badge.dataset.repository ?? '').toLowerCase() === repo) {
+          const base = (badge.dataset.baseStatus ?? '').trim();
+          badge.textContent = base ? `${base} · ${version}` : version;
+        }
+      }
     }
-  }, { rootMargin: '120px 0px' });
-  statusBadges.forEach(badge => observer.observe(badge));
+  } catch {
+    // Storage access is optional.
+  }
 }

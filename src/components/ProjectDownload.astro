@@ -1,14 +1,44 @@
 ---
 import type { Project } from '../data/types';
 import Icon from './Icon.astro';
-import { latestReleaseUrl } from '../lib/github-release';
+import { latestReleaseUrl, type ResolvedRelease } from '../lib/github-release';
+import snapshotData from '../data/release-snapshots.json';
+
 interface Props { download: NonNullable<Project['download']>; compact?: boolean; }
 const { download, compact = false } = Astro.props;
+const snapshots = snapshotData.releases as Record<string, ResolvedRelease | undefined>;
+const snapshot = snapshots[download.repository.toLowerCase()];
+const assetName = snapshot ? decodeURIComponent(snapshot.url.split('/').pop() ?? '') : '';
+const href = snapshot ? snapshot.url : latestReleaseUrl(download);
+const initialLabel = snapshot
+  ? (compact ? `下载 ${snapshot.version}` : `下载 Windows 版 · ${snapshot.version}`)
+  : (compact ? 'Windows 版' : '查看最新版本');
+const initialMeta = snapshot
+  ? (!compact && assetName ? `${assetName} · ${snapshot.sizeLabel}` : `${snapshot.version} · ${snapshot.sizeLabel}`)
+  : 'Windows · 最新正式版';
+const initialAria = snapshot
+  ? `直接下载 ${assetName || 'Windows 版'}（${snapshot.version}，${snapshot.sizeLabel}）`
+  : '查看最新 Windows 版';
 ---
-<div class:list={['release-download', { 'release-download--compact': compact }]} data-release-download data-repository={download.repository} data-asset-pattern={download.assetPattern} data-compact={compact ? 'true' : 'false'} data-state="initial">
-  <a class:list={['button', {secondary: compact}]} href={latestReleaseUrl(download)} target="_blank" rel="noreferrer" data-release-link aria-label="查看最新 Windows 版">
-    <span data-release-label>{compact ? 'Windows 版' : '查看最新版本'}</span><Icon name="download" size={compact ? 17 : 18}/>
+<div
+  class:list={['release-download', { 'release-download--compact': compact }]}
+  data-release-download
+  data-repository={download.repository}
+  data-asset-pattern={download.assetPattern}
+  data-compact={compact ? 'true' : 'false'}
+  data-has-snapshot={snapshot ? 'true' : 'false'}
+  data-state={snapshot ? 'resolved' : 'initial'}
+>
+  <a
+    class:list={['button', { secondary: compact }]}
+    href={href}
+    target={snapshot ? undefined : '_blank'}
+    rel="noreferrer"
+    data-release-link
+    aria-label={initialAria}
+  >
+    <span data-release-label>{initialLabel}</span><Icon name="download" size={compact ? 17 : 18}/>
   </a>
-  <span class="release-meta" data-release-meta role="status" aria-live="polite">Windows · 最新正式版</span>
+  <span class="release-meta" data-release-meta role="status" aria-live="polite">{initialMeta}</span>
 </div>
 <script>import '../scripts/downloads';</script>

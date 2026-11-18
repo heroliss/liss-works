@@ -3,6 +3,8 @@ import type { Project } from '../data/types';
 import { getProjectWorld, projectWorldStyle } from '../data/project-worlds';
 import { getProjectSignature } from '../data/project-signatures';
 import { sitePath } from '../lib/site-path';
+import type { ResolvedRelease } from '../lib/github-release';
+import snapshotData from '../data/release-snapshots.json';
 import MediaImage from './MediaImage.astro';
 import '../styles/archive-tiles.css';
 
@@ -10,6 +12,12 @@ interface Props { project: Project; index: number; }
 const { project, index } = Astro.props;
 const signature = getProjectSignature(project.slug);
 const displayName = project.name.split(' · ')[0];
+const snapshots = snapshotData.releases as Record<string, ResolvedRelease | undefined>;
+const releaseSnapshot = project.download ? snapshots[project.download.repository.toLowerCase()] : undefined;
+const baseStatus = project.status.replace(/已发布$/, '').trim();
+const statusLabel = releaseSnapshot
+  ? (baseStatus ? `${baseStatus} · ${releaseSnapshot.version}` : releaseSnapshot.version)
+  : project.status;
 const filterTags = new Set(project.tags);
 if (project.tags.some(tag => tag.toLowerCase().includes('unity'))) filterTags.add('Unity');
 if (project.tags.some(tag => tag.toLowerCase().includes('opengl'))) filterTags.add('OpenGL');
@@ -41,7 +49,7 @@ const style = `${projectWorldStyle(project.slug)};--atlas-image-ratio:${project.
         <div class="atlas-tile-plane" data-atlas-tilt>
           <div class="atlas-tile-shot" style={`--shot:url("${backdrop}")`}><MediaImage image={project.cover} sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1100px) 45vw, 30vw"/></div>
           <div class="atlas-tile-copy">
-            <p class="atlas-tile-meta"><span>{project.category}</span><span data-release-status={project.download ? '' : undefined} data-repository={project.download?.repository} data-asset-pattern={project.download?.assetPattern} data-base-status={project.download ? project.status : undefined}>{project.status}</span></p>
+            <p class="atlas-tile-meta"><span>{project.category}</span><span data-release-status={project.download ? '' : undefined} data-repository={project.download?.repository} data-base-status={project.download ? baseStatus : undefined}>{statusLabel}</span></p>
             <h2 class="atlas-tile-title">{displayName}</h2>
             <p class="atlas-tile-summary">{project.summary}</p>
             <ul class="atlas-tile-tags" aria-label="技术">{project.tags.slice(0, 3).map(tag => <li>{tag}</li>)}</ul>

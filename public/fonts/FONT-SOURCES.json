@@ -42,6 +42,7 @@
     "site/src/data/project-worlds-tools.ts",
     "site/src/data/project-worlds.ts",
     "site/src/data/projects.ts",
+    "site/src/data/release-snapshots.json",
     "site/src/data/restored-bundles.ts",
     "site/src/data/restored-projects.ts",
     "site/src/data/stories/dubforge.ts",

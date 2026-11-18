@@ -3,6 +3,8 @@ name: Deploy Liss Works
 on:
   push:
     branches: [main]
+  schedule:
+    - cron: '17 20 * * *'
   workflow_dispatch:
 
 permissions:
@@ -48,6 +50,10 @@ jobs:
         run: npm run test:palette
       - name: Check the PanXu showcase geometry and data
         run: npm run test:panxu
+      - name: Refresh latest release snapshots
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node --experimental-strip-types scripts/refresh-releases.mjs
       - name: Build static site
         run: npm run build
       - name: Verify generated pages and assets

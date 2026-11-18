@@ -1,0 +1,88 @@
+{
+  "releases": {
+    "heroliss/aoe4-flow": {
+      "url": "https://github.com/heroliss/aoe4-flow/releases/download/v3.3.0/AoE4-Flow-v3.3.0-Windows-x64.zip",
+      "version": "v3.3.0",
+      "size": 252535968,
+      "sizeLabel": "240.8 MiB",
+      "releaseUrl": "https://github.com/heroliss/aoe4-flow/releases/tag/v3.3.0"
+    },
+    "heroliss/gomoku": {
+      "url": "https://github.com/heroliss/gomoku/releases/download/v3.2.0/liss-gomoku-v3.2.0-win-x64.zip",
+      "version": "v3.2.0",
+      "size": 51926363,
+      "sizeLabel": "49.5 MiB",
+      "releaseUrl": "https://github.com/heroliss/gomoku/releases/tag/v3.2.0"
+    },
+    "heroliss/learnopengl": {
+      "url": "https://github.com/heroliss/LearnOpengl/releases/download/v2026.10.24/LearnOpenGL-2026.10.24-win-x64.zip",
+      "version": "v2026.10.24",
+      "size": 259430794,
+      "sizeLabel": "247.4 MiB",
+      "releaseUrl": "https://github.com/heroliss/LearnOpengl/releases/tag/v2026.10.24"
+    },
+    "heroliss/liss-blocks": {
+      "url": "https://github.com/heroliss/liss-blocks/releases/download/v1.0.0/Liss-Blocks-1.0.0-win-x64.zip",
+      "version": "v1.0.0",
+      "size": 47386176,
+      "sizeLabel": "45.2 MiB",
+      "releaseUrl": "https://github.com/heroliss/liss-blocks/releases/tag/v1.0.0"
+    },
+    "heroliss/nex": {
+      "url": "https://github.com/heroliss/nex/releases/download/v2.1.0/Liss-NEX-2.1.0-win-x64.zip",
+      "version": "v2.1.0",
+      "size": 47069503,
+      "sizeLabel": "44.9 MiB",
+      "releaseUrl": "https://github.com/heroliss/nex/releases/tag/v2.1.0"
+    },
+    "heroliss/outpost": {
+      "url": "https://github.com/heroliss/Outpost/releases/download/v2026.10.30/Outpost-Windows-x64.zip",
+      "version": "v2026.10.30",
+      "size": 80538631,
+      "sizeLabel": "76.8 MiB",
+      "releaseUrl": "https://github.com/heroliss/Outpost/releases/tag/v2026.10.30"
+    },
+    "heroliss/panxu": {
+      "url": "https://github.com/heroliss/panxu/releases/download/v2.5.0/PanXu-2.5.0-win-x64.zip",
+      "version": "v2.5.0",
+      "size": 16272656,
+      "sizeLabel": "15.5 MiB",
+      "releaseUrl": "https://github.com/heroliss/panxu/releases/tag/v2.5.0"
+    },
+    "heroliss/qt-labs": {
+      "url": "https://github.com/heroliss/qt-labs/releases/download/v1.0.0/Liss-QtLabs-1.0.0-win-x64.zip",
+      "version": "v1.0.0",
+      "size": 65822443,
+      "sizeLabel": "62.8 MiB",
+      "releaseUrl": "https://github.com/heroliss/qt-labs/releases/tag/v1.0.0"
+    },
+    "heroliss/route-lab": {
+      "url": "https://github.com/heroliss/route-lab/releases/download/v1.0.0/RouteLab-1.0.0-win-x64.zip",
+      "version": "v1.0.0",
+      "size": 47397205,
+      "sizeLabel": "45.2 MiB",
+      "releaseUrl": "https://github.com/heroliss/route-lab/releases/tag/v1.0.0"
+    },
+    "heroliss/sort-lab": {
+      "url": "https://github.com/heroliss/sort-lab/releases/download/v3.1.0/Liss-SortLab-3.1.0-Windows-x64.zip",
+      "version": "v3.1.0",
+      "size": 57288779,
+      "sizeLabel": "54.6 MiB",
+      "releaseUrl": "https://github.com/heroliss/sort-lab/releases/tag/v3.1.0"
+    },
+    "heroliss/systems-lab": {
+      "url": "https://github.com/heroliss/systems-lab/releases/download/v1.0.0/SystemsLab-1.0.0-win-x64.zip",
+      "version": "v1.0.0",
+      "size": 47907138,
+      "sizeLabel": "45.7 MiB",
+      "releaseUrl": "https://github.com/heroliss/systems-lab/releases/tag/v1.0.0"
+    },
+    "heroliss/text-lab": {
+      "url": "https://github.com/heroliss/text-lab/releases/download/v1.0.0/Liss-TextLab-1.0.0-win-x64.zip",
+      "version": "v1.0.0",
+      "size": 52023217,
+      "sizeLabel": "49.6 MiB",
+      "releaseUrl": "https://github.com/heroliss/text-lab/releases/tag/v1.0.0"
+    }
+  }
+}

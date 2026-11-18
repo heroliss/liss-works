@@ -1,6 +1,6 @@
 {
   "schema": "showcase.website-media.v1",
-  "generated_at_utc": "2026-11-18T10:58:21.217154+00:00",
+  "generated_at_utc": "2026-11-18T11:40:24.659497+00:00",
   "source_manifest": "captures/selected-manifest.json",
   "source_manifest_sha256": "67d60c2289c031d14b180bc0b26ddcac2548fd7d425474912616c17353b85997",
   "originals_modified": false,
@@ -8742,10 +8742,10 @@
     "exported_image_bytes": 53155090,
     "video_bytes": 1363373,
     "font_bytes": 384268,
-    "font_license_and_provenance_bytes": 17311,
+    "font_license_and_provenance_bytes": 17356,
     "published_media_bytes": 54902731,
     "total_public_asset_count": 620,
-    "total_public_asset_bytes": 54920042
+    "total_public_asset_bytes": 54920087
   },
   "fonts": {
     "codec": "fontTools WOFF2 with Node native zlib Brotli (quality 11 / font mode), invoked by fontTools",
@@ -8791,6 +8791,7 @@
       "site/src/data/project-worlds-tools.ts",
       "site/src/data/project-worlds.ts",
       "site/src/data/projects.ts",
+      "site/src/data/release-snapshots.json",
       "site/src/data/restored-bundles.ts",
       "site/src/data/restored-projects.ts",
       "site/src/data/stories/dubforge.ts",
