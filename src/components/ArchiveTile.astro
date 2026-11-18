@@ -41,7 +41,7 @@ const style = `${projectWorldStyle(project.slug)};--atlas-image-ratio:${project.
         <div class="atlas-tile-plane" data-atlas-tilt>
           <div class="atlas-tile-shot" style={`--shot:url("${backdrop}")`}><MediaImage image={project.cover} sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1100px) 45vw, 30vw"/></div>
           <div class="atlas-tile-copy">
-            <p class="atlas-tile-meta"><span>{project.category}</span><span>{project.status}</span></p>
+            <p class="atlas-tile-meta"><span>{project.category}</span><span data-release-status={project.download ? '' : undefined} data-repository={project.download?.repository} data-asset-pattern={project.download?.assetPattern} data-base-status={project.download ? project.status : undefined}>{project.status}</span></p>
             <h2 class="atlas-tile-title">{displayName}</h2>
             <p class="atlas-tile-summary">{project.summary}</p>
             <ul class="atlas-tile-tags" aria-label="技术">{project.tags.slice(0, 3).map(tag => <li>{tag}</li>)}</ul>

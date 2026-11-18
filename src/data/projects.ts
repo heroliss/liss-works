@@ -263,7 +263,7 @@ export const projects: Project[] = [
     slug: 'panxu', repo: 'panxu', name: '盘序 · Windows 磁盘清理助手', category: 'Windows 磁盘清理助手', group: 'tools',
     summary: 'AI 辅助发现清理线索，讲清文件用途与处理影响，绿色免安装、可回退。',
     intro: '面向 Windows 10 / 11 的绿色免安装磁盘清理工具。63 项内置规则与 Chromium 结构识别先清理常见缓存，AI 再结合本机线索分析陌生目录、旧文件与软件残留。每一项都写明是什么、为什么建议清理、处理后会怎样，遇到疑问还可以继续「问 AI」。一键体检覆盖所选磁盘并同步到各工具页；个人文件只移入回收站，AI 建议绝不绕过保护边界。',
-    status: 'v2.5 绿色便携版', tags: ['Python', 'AI', 'pywebview', 'WebView2', 'Windows'],
+    status: 'Windows 绿色版', tags: ['Python', 'AI', 'pywebview', 'WebView2', 'Windows'],
     features: [
       { title: '63 项规则 + AI 补充线索', body: '内置规则与 Electron / WebView2 结构化缓存识别覆盖常见垃圾；陌生目录、旧文件与疑似残留再结合本机事实交由 AI 复核。' },
       { title: '把能不能删讲明白', body: '先给三组总览结论，展开即可查看用途、0–10 分建议清理度与勾选依据；支持全页面实时搜索、快速加入排除与「问 AI」。' },
@@ -274,7 +274,7 @@ export const projects: Project[] = [
       { title: '先在演练环境里试', body: '用 --sandbox 启动会生成一台模拟的「用了几年的电脑」，所有删除、禁用和卸载都只发生在演练目录里，可以随时还原或重建。', code: 'PanXu.exe --sandbox', language: 'PowerShell' },
       { title: '从源码运行', body: '需要 Python 3.10 以上；--debug 打开 WebView 开发者工具。', code: 'python -m pip install -r requirements.txt\npython run.py --sandbox', language: 'PowerShell' },
     ],
-    note: '截图来自真实的盘序 2.5.0 界面，运行在演练环境（模拟电脑）中；AI 复核使用测试脚本作答，没有连接真实模型，也没有处理真实文件。',
+    note: '截图来自真实的盘序界面，运行在演练环境（模拟电脑）中；AI 复核使用测试脚本作答，没有连接真实模型，也没有处理真实文件。',
     source: 'https://github.com/heroliss/panxu', docs: 'https://github.com/heroliss/panxu/tree/main/docs',
     download: { repository: 'heroliss/panxu', assetPattern: '^PanXu(?:-v?\\d+(?:\\.\\d+)*)?-(?:Windows|win)-x64\\.zip$' },
     cover: panxu[0], gallery: panxu, related: ['nex', 'dubforge', 'utility-lab'],

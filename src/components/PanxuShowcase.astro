@@ -7,6 +7,7 @@ import { sitePath } from '../lib/site-path';
 import { responsiveSrcset } from '../data/project-image';
 import Icon from './Icon.astro';
 import ChapterPoints from './ChapterPoints.astro';
+import ProjectDownload from './ProjectDownload.astro';
 import '../styles/panxu-showcase.css';
 /** detail: the opening of the 盘序 detail page, under its own h1 and summary (no heading of its own). */
 interface Props { detail?: boolean }
@@ -38,7 +39,7 @@ const callout = ({ x, top, bottom }: { x: [number, number]; top?: number; bottom
 <section class:list={['px-lab', { 'home-chapter': !detail, 'px-lab--detail': detail }]} id={detail ? 'panxu-checkup' : 'panxu'} data-panxu data-step={initial.id} data-shot={initial.shot} aria-labelledby={detail ? undefined : 'panxu-title'} aria-label={detail ? '一键体检演示：盘序的真实窗口' : undefined} style={`${projectWorldStyle('panxu')};--accent:${world.accent};--sweep:${PANXU_SWEEP_MS}ms`}>
  {!detail && <header class="work-heading px-heading">
   <div><h2 id="panxu-title" class="project-name" data-motion="reveal">盘序</h2><p class="px-tagline" data-motion="reveal">帮你弄清楚磁盘里的东西能不能删。</p></div>
-  <div class="px-introduction"><p>磁盘满了，难的往往不是找大文件，而是不知道它是做什么的、删了会怎样。盘序用 63 项规则与结构化缓存识别先找出常见垃圾，再请 AI 复核陌生目录与软件残留。下面是 2.5.0 演练环境里的真实窗口，悬停看说明，点一下看原图。</p><a class="text-link" href={sitePath('/projects/panxu/')}>看盘序详情 <Icon size={18}/></a></div>
+  <div class="px-introduction"><p>磁盘满了，难的往往不是找大文件，而是不知道它是做什么的、删了会怎样。盘序用 63 项规则与结构化缓存识别先找出常见垃圾，再请 AI 复核陌生目录与软件残留。下面是演练环境里的真实窗口，悬停看说明，点一下看原图。</p><div class="px-intro-actions">{project.download && <ProjectDownload download={project.download} compact/>}<a class="text-link" href={sitePath('/projects/panxu/')}>看盘序详情 <Icon size={18}/></a></div></div>
  </header>}
  {!detail && <ChapterPoints points={[
   { term: '63 项规则 + AI', text: '内置规则与结构识别清理常见缓存，AI 补上陌生目录、旧文件与残留。' },
