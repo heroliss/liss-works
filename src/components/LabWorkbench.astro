@@ -16,7 +16,7 @@ const ga = createEvolution(42);
   <section class="lab-route-experiment" id={compact ? undefined : 'route-lab'} aria-label="Floyd 最短路径实验" data-lab-station>
   {!compact && <header class="lab-intro">
     <div class="lab-experiment-title"><h2>Floyd 最短路径</h2></div>
-    <p>修改连接、选择节点，观察最短路径怎样变化。这里是 <a href="https://github.com/heroliss/FloydShortestPath" target="_blank" rel="noreferrer">FloydShortestPath</a> 的网页算法移植；原 C# 仓库已独立验证，以下是可操作的说明实验，并非原程序截图。</p>
+    <p>修改连接、选择节点，观察最短路径怎样变化。这里是 <a href="https://github.com/heroliss/FloydShortestPath" target="_blank" rel="noopener noreferrer">FloydShortestPath</a> 的网页算法移植；原 C# 仓库已独立验证，以下是可操作的说明实验，并非原程序截图。</p>
   </header>}
   <div class="floyd-layout">
     <div class="graph-pane">
@@ -93,7 +93,7 @@ const ga = createEvolution(42);
   </section>
 
   {!compact && <section id="evolution" class="evolution-section" aria-label="遗传算法排序实验" data-lab-station>
-    <div class="evolution-copy"><h2>遗传算法，让排列有序</h2><p>基于 <a href="https://github.com/heroliss/GA-sort" target="_blank" rel="noreferrer">GA-sort</a> 思路的网页说明实验，非原 Python 程序。48 个候选排列通过选择、交叉与变异演化，柱形展示最佳个体，适应度按顺序正确的数对计分。</p><div class="evolution-reading"><h3>把“变化”与“结果”分开看</h3><p>先演化一代，观察最佳排列；换一个随机种子，再比较到达有序状态的过程。每次显示的都是本次计算结果。</p></div></div>
+    <div class="evolution-copy"><h2>遗传算法，让排列有序</h2><p>基于 <a href="https://github.com/heroliss/GA-sort" target="_blank" rel="noopener noreferrer">GA-sort</a> 思路的网页说明实验，非原 Python 程序。48 个候选排列通过选择、交叉与变异演化，柱形展示最佳个体，适应度按顺序正确的数对计分。</p><div class="evolution-reading"><h3>把“变化”与“结果”分开看</h3><p>先演化一代，观察最佳排列；换一个随机种子，再比较到达有序状态的过程。每次显示的都是本次计算结果。</p></div></div>
     <div class="evolution-display">
       <div class="evolution-display__depth" aria-hidden="true"><span data-lab-field></span></div>
       <p class="ga-plot-caption">当前最佳排列<span>柱上是数值，横向是排列位置</span></p>

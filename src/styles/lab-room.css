@@ -28,8 +28,8 @@
 .lab-room .workbench .lab-intro > p { max-width:58ch; font-size:16px; line-height:1.85; color:var(--lab-muted); }
 .lab-room .workbench a { color:var(--lab-route); text-decoration-thickness:1px; }
 .lab-room .workbench .floyd-layout { display:grid; grid-template-columns:minmax(0,1.55fr) minmax(310px,.85fr); gap:42px; border:0; border-radius:0; overflow:visible; background:none; align-items:start; }
-.lab-room .workbench .graph-pane { position:relative; isolation:isolate; min-width:0; padding:28px 22px 18px; }
-.lab-room .workbench .graph-pane::before { content:''; position:absolute; pointer-events:none; z-index:-1; inset:0 -8px 0 -9px; background:linear-gradient(140deg,#19302e,#101e20 58%,#162b2b); clip-path:polygon(0 5%,96% 0,100% 89%,6% 100%); }
+.lab-room .workbench .graph-pane { position:relative; isolation:isolate; min-width:0; padding:30px 40px 22px 28px; }
+.lab-room .workbench .graph-pane::before { content:''; position:absolute; pointer-events:none; z-index:-1; inset:0 -8px 0 -9px; background:linear-gradient(140deg,#19302e,#101e20 58%,#162b2b); clip-path:polygon(0 4%,98.5% 0,100% 91%,5% 100%); }
 .lab-room .workbench .graph-toolbar { position:relative; align-items:center; gap:16px; }
 .lab-room .workbench .graph-kind { font-size:16px; color:#c5d8d0; }
 .lab-room .workbench .pick-control { flex-shrink:0; gap:15px; }

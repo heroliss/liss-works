@@ -60,7 +60,13 @@ export function setupHeroHall({ signal, preference }: Options): () => void {
       shownHover = hovered; showLabel(hovered); canvas.style.cursor = hovered === null ? '' : 'pointer';
       chips.forEach((chip, i) => { if (i === hovered) chip.dataset.active = 'true'; else delete chip.dataset.active; });
     }
-    if (label && hovered !== null) { label.style.setProperty('--lx', `${pointerAt.x + 16}px`); label.style.setProperty('--ly', `${pointerAt.y + 18}px`); }
+    if (label && hovered !== null) {
+      const lw = label.offsetWidth || 220;
+      const lx = Math.max(12, Math.min(window.innerWidth - lw - 16, pointerAt.x + 16));
+      const ly = Math.max(12, Math.min(window.innerHeight - 48, pointerAt.y + 18));
+      label.style.setProperty('--lx', `${lx}px`);
+      label.style.setProperty('--ly', `${ly}px`);
+    }
     if (animated()) frame = requestAnimationFrame(render); else last = 0;
   };
   const request = () => { if (!frame && engine && visible && !disposed) frame = requestAnimationFrame(render); };
@@ -153,6 +159,17 @@ export function setupHeroHall({ signal, preference }: Options): () => void {
     chip.addEventListener('focus', on, { signal: events.signal }); chip.addEventListener('blur', off, { signal: events.signal });
     // With the hall running, a chip brings its work forward; without it, the link scrolls as usual.
     chip.addEventListener('click', event => { if (!engine || engine.selected() === index) return; event.preventDefault(); choose(index); }, { signal: events.signal });
+    chip.addEventListener('keydown', event => {
+      let next = index;
+      if (event.key === 'ArrowRight' || event.key === 'ArrowDown') next = (index + 1) % chips.length;
+      else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') next = (index - 1 + chips.length) % chips.length;
+      else if (event.key === 'Home') next = 0;
+      else if (event.key === 'End') next = chips.length - 1;
+      else return;
+      event.preventDefault();
+      chips[next]?.focus();
+      if (engine) choose(next);
+    }, { signal: events.signal });
   });
   canvas.addEventListener('webglcontextlost', event => { event.preventDefault(); fail(); }, { signal: events.signal });
   const sync = () => { if (visible && !engine) void load(); request(); };

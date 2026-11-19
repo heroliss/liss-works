@@ -54,6 +54,8 @@ jobs:
         run: npm run test:atlas
       - name: Check the Intelligence vs. Cost showcase geometry and data
         run: npm run test:cost-chart
+      - name: Check featured works and security hardening
+        run: npm run test:featured
       - name: Refresh latest release snapshots
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

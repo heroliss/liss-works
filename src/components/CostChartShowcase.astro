@@ -6,6 +6,7 @@ import { COST_SHOT, COST_SWEEP_MS, costLayers, costPoints, costSteps, type CostR
 import { sitePath } from '../lib/site-path';
 import { responsiveSrcset } from '../data/project-image';
 import Icon from './Icon.astro';
+import ChapterPoints from './ChapterPoints.astro';
 import '../styles/cost-chart-showcase.css';
 
 interface Props { detail?: boolean }
@@ -40,8 +41,18 @@ const callout = ({ x, top, bottom }: { x: [number, number]; top?: number; bottom
   `--x:${percent(x[0] / COST_SHOT.width)};--w:${percent((x[1] - x[0]) / COST_SHOT.width)};` +
   (top !== undefined ? `top:${percent(top / COST_SHOT.height)}` : `bottom:${percent(1 - (bottom ?? 0) / COST_SHOT.height)}`);
 ---
-<section class:list={['cc-lab', { 'home-chapter': !detail, 'cc-lab--detail': detail }]} id={detail ? 'cost-workbench' : 'cost-chart'} data-cost-showcase data-step={initial.id} data-shot={initial.shot} aria-labelledby={detail ? 'cost-detail-heading' : undefined} aria-label={detail ? undefined : '四步选型演示：AI 智能与真实花费交互图表'} style={`${projectWorldStyle('intelligence-index-cost-linear')};--accent:${world.accent};--sweep:${COST_SWEEP_MS}ms`}>
-  {detail && <h2 id="cost-detail-heading" class="sr-only">四步 AI 选型与算账实景演示</h2>}
+<section class:list={['cc-lab', { 'home-chapter': !detail, 'cc-lab--detail': detail }]} id={detail ? 'cost-workbench' : 'cost-chart'} data-cost-showcase data-step={initial.id} data-shot={initial.shot} aria-labelledby={detail ? 'cost-detail-heading' : 'cost-chart-title'} style={`${projectWorldStyle('intelligence-index-cost-linear')};--accent:${world.accent};--sweep:${COST_SWEEP_MS}ms`}>
+  {detail ? <h2 id="cost-detail-heading" class="sr-only">四步 AI 选型与算账实景演示</h2> : <>
+    <header class="work-heading cc-heading">
+      <div><h2 id="cost-chart-title" class="project-name" data-motion="reveal">Intelligence × Cost</h2><p class="cc-tagline" data-motion="reveal">还原真实价差，按用途挑好用又不贵的 AI。</p></div>
+      <div class="cc-introduction"><p>大模型与多模态工具眼花缭乱，对数坐标常把十倍价差藏得看不出来。这里用等比例美元横轴串联六大评测频道，既能按你的日常用途一键筛甜点模型，也能直接算清包月会员和按次付费谁更省。</p><div class="chapter-heading-links"><a class="text-link" href={sitePath('/projects/intelligence-index-cost-linear/')}>看上手指南与详情 <Icon size={18}/></a>{project.demo && <a class="text-link chapter-live-link" href={project.demo} target="_blank" rel="noopener noreferrer">直接在线体验 <Icon name="play" size={16}/></a>}</div></div>
+    </header>
+    <ChapterPoints points={[
+      { term: '等比例美元横轴', text: '把 400+ 大模型与生图视频配音引擎放到真实价格刻度上，沿左上角甜点线一眼避坑。' },
+      { term: '6 大频道 + 场景配方', text: '覆盖综合、硬核极限、真人盲测审美与编程智能体，套用场景配方实时重算专属榜单。' },
+      { term: '微距同台 · 算清月卡', text: '最多 8 款微距雷达对比并拆解隐性思考账单，按月度频次直接算清买会员还是按次省。' },
+    ]}/>
+  </>}
   <div class="cc-stage">
     <div class="cc-rail">
       <div class="cc-steps" role="group" aria-label="AI 选型上手步骤">
@@ -65,7 +76,7 @@ const callout = ({ x, top, bottom }: { x: [number, number]; top?: number; bottom
           <div class="cc-screen">
             {shots.map(shot => {
               const item = image(shot);
-              return <img class="cc-base" data-cc-base={shot} data-on={on(shot === initial.shot)} aria-hidden={shot === initial.shot ? undefined : 'true'} src={sitePath(item.src)} srcset={srcset(item)} sizes={sizes} width={item.width} height={item.height} alt={item.alt} loading={shot === initial.shot ? 'eager' : 'lazy'} decoding="async"/>;
+              return <img class="cc-base" data-cc-base={shot} data-on={on(shot === initial.shot)} aria-hidden={shot === initial.shot ? undefined : 'true'} src={sitePath(item.src)} srcset={srcset(item)} sizes={sizes} width={item.width} height={item.height} alt={item.alt} loading={detail && shot === initial.shot ? 'eager' : 'lazy'} decoding="async"/>;
             })}
             {costLayers.map(layer => <span class="cc-socket" data-cc-socket={layer.id} data-step={layer.step} data-on={on(layer.step === initial.id)} style={place(layer.rect)} aria-hidden="true"></span>)}
             {costLayers.map(layer => {

@@ -4,6 +4,7 @@ import { projects } from '../data/projects';
 import { prioritizeProjects } from '../data/project-priority';
 import { getProjectWorld } from '../data/project-worlds';
 import { sitePath } from '../lib/site-path';
+import { serializeJsonForHtml } from '../lib/safe-json';
 import '../styles/works-orbit.css';
 // A 640px variant is plenty for a slab that never fills the frame.
 const texture = (cover: { src: string; srcset?: string }) => {
@@ -24,5 +25,5 @@ const items = prioritizeProjects(projects).map(project => ({
     {items.map(item => <li><a href={item.href} data-orbit-slug={item.slug} style={`--orbit-tone:${item.accent}`}><i aria-hidden="true"></i>{item.name}</a></li>)}
   </ul>
   <figcaption class="works-orbit__caption"><p>{items.length} 个工程，各有自己的颜色。移动指针转动视角，拖动旋转，点击进入工程。</p><button type="button" data-orbit-motion-toggle hidden disabled aria-pressed="false"><Icon name="pause" size={16}/><span data-orbit-motion-label>暂停转动</span></button></figcaption>
-  <script type="application/json" data-orbit-items set:html={JSON.stringify(items)}></script>
+  <script type="application/json" data-orbit-items set:html={serializeJsonForHtml(items)}></script>
 </figure>

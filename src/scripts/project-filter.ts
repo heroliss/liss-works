@@ -5,7 +5,9 @@ const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-project-c
 const counter = document.querySelector('[data-result-count]');
 const empty = document.querySelector<HTMLElement>('[data-empty]');
 const barReset = document.querySelector<HTMLButtonElement>('#atlas-filters [data-reset-filters]');
+const randomButton = document.querySelector<HTMLButtonElement>('[data-atlas-random]');
 let group = 'all';
+let lastRandomSlug = '';
 
 if (search && tag) {
   const params = new URLSearchParams(location.search);
@@ -20,14 +22,22 @@ if (search && tag) {
     const isFiltered = group !== 'all' || Boolean(tag!.value) || Boolean(query);
     let found = 0;
     cards.forEach(card => {
-      const matches = (group === 'all' || card.dataset.group === group)
+      const groupMatch = group === 'all'
+        || (group === 'featured' ? card.dataset.featured === 'true' : card.dataset.group === group);
+      const matches = groupMatch
         && (!tag!.value || (card.dataset.tags ?? '').split('|').some(value => value.toLocaleLowerCase() === tag!.value.toLocaleLowerCase()))
         && (!query || (card.dataset.search ?? '').toLocaleLowerCase().includes(query));
       card.hidden = !matches;
       if (matches) found++;
     });
     buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.groupFilter === group)));
-    if (counter) counter.textContent = isFiltered ? `显示 ${found} / ${cards.length} 个工程` : `共 ${cards.length} 个工程`;
+    if (counter) {
+      if (group === 'featured' && !tag!.value && !query) {
+        counter.textContent = `重点项目 ${found} / ${cards.length} 个工程`;
+      } else {
+        counter.textContent = isFiltered ? `显示 ${found} / ${cards.length} 个工程` : `共 ${cards.length} 个工程`;
+      }
+    }
     if (barReset) barReset.hidden = !isFiltered;
     if (empty) empty.hidden = found !== 0;
     const atlas = document.querySelector<HTMLElement>('[data-project-atlas]');
@@ -48,6 +58,28 @@ if (search && tag) {
       if (search!.value.trim()) next.set('q', search!.value.trim());
       history.replaceState(null, '', location.pathname + (next.size ? '?' + next.toString() : ''));
     }
+  }
+
+  function jumpToRandom() {
+    let visible = cards.filter(card => !card.hidden);
+    if (!visible.length) {
+      group = 'all';
+      search!.value = '';
+      tag!.value = '';
+      update();
+      visible = cards.filter(card => !card.hidden);
+    }
+    if (!visible.length) return;
+    const pool = visible.length > 1 ? visible.filter(card => card.dataset.atlasItem !== lastRandomSlug) : visible;
+    const chosen = pool[Math.floor(Math.random() * pool.length)];
+    lastRandomSlug = chosen.dataset.atlasItem ?? '';
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    chosen.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
+    delete chosen.dataset.pulse;
+    void chosen.offsetWidth;
+    chosen.dataset.pulse = 'true';
+    window.setTimeout(() => { delete chosen.dataset.pulse; }, 1800);
+    chosen.querySelector<HTMLAnchorElement>('[data-atlas-project-link]')?.focus({ preventScroll: true });
   }
 
   search.addEventListener('input', () => update());
@@ -73,6 +105,7 @@ if (search && tag) {
     group = button.dataset.groupFilter ?? 'all';
     update();
   }));
+  randomButton?.addEventListener('click', jumpToRandom);
   document.querySelectorAll('[data-reset-filters]').forEach(button => button.addEventListener('click', () => {
     group = 'all';
     search.value = '';

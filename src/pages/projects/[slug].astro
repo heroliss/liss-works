@@ -17,6 +17,7 @@ import ProjectArtifact from '../../components/ProjectArtifact.astro';
 import ProjectAtmosphere from '../../components/ProjectAtmosphere.astro';
 import ProjectProse from '../../components/ProjectProse.astro';
 import { getProjectSignature } from '../../data/project-signatures';
+import { isFeaturedProject } from '../../data/featured-projects';
 import { projects, getProject } from '../../data/projects';
 import { getProjectStory } from '../../data/project-stories';
 import { getStoryMedia } from '../../data/story-media';
@@ -48,20 +49,36 @@ const hasLab = project.slug === 'floydshortestpath' || project.slug === 'ga-sort
 const notes = [project.note, story.footnote].filter(Boolean);
 // Projects whose bespoke interactive showcase opens their detail page in place of a static cover picture.
 const showcaseOpening = ['panxu', 'dubforge', 'ssframework', 'china-house-price-map', 'intelligence-index-cost-linear'].includes(project.slug);
+const featured = isFeaturedProject(project.slug);
 const coverSizes = project.slug === 'dubforge' ? '(max-width: 760px) calc(100vw - 40px), 94vw' : '(max-width: 760px) calc(100vw - 40px), 64vw';
+const pageUrl = Astro.site ? new URL(sitePath(`/projects/${project.slug}/`), Astro.site).href : undefined;
+const projectJsonLd = pageUrl ? {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: project.name,
+  description: project.summary,
+  url: pageUrl,
+  applicationCategory: project.category,
+  inLanguage: 'zh-CN',
+  keywords: project.tags.join(', '),
+  author: { '@type': 'Person', name: 'Liss', url: 'https://github.com/heroliss' },
+  image: new URL(sitePath(project.cover.src), Astro.site!).href,
+  ...(project.source ? { sameAs: project.source } : {}),
+  ...(project.demo ? { installUrl: new URL(sitePath(project.demo), Astro.site!).href } : {}),
+} : undefined;
 ---
-<Base title={project.name} description={project.summary} active="projects" image={project.cover}>
+<Base title={project.name} description={project.summary} active="projects" image={project.cover} jsonLd={projectJsonLd}>
   <div class="shell detail-page" data-project={project.slug} data-project-world={project.slug} data-world-family={world.family} style={`${projectWorldStyle(project.slug)};--accent:${world.accent};--cyan:${world.accent};--surface:${world.surface}`}>
     <ProjectAtmosphere slug={project.slug} world={world}/>
-    <div class="detail-world-tools"><a class="back-link" href={sitePath('/projects/')}><Icon name="back" size={16}/> 全部工程</a><button class="detail-world-toggle" type="button" data-detail-motion-toggle aria-pressed="false"><Icon name="pause" size={14}/><span data-detail-motion-label>暂停动态</span></button></div>
+    <div class="detail-world-tools"><nav class="detail-breadcrumb" aria-label="页面路径"><a class="back-link" href={sitePath('/')}>首页</a><span class="detail-breadcrumb__sep" aria-hidden="true">/</span><a class="back-link" href={sitePath('/projects/')}>工程库</a><span class="detail-breadcrumb__sep" aria-hidden="true">/</span><span class="detail-breadcrumb__current" aria-current="page">{displayName}</span></nav><button class="detail-world-toggle" type="button" data-detail-motion-toggle aria-pressed="false"><Icon name="pause" size={14}/><span data-detail-motion-label>暂停动态</span></button></div>
     <div class="project-prologue">
     <header class="project-intro">
-      <div class="project-intro-copy"><h1 class="project-name" aria-label={project.name}>{displayName}</h1>{displayName !== project.name && <p class="project-full-name">{project.name}</p>}<ProjectProse text={project.summary} tone="lead" class="summary" reveal/><p class="project-facts"><span class="project-facts__category">{project.category}</span> · <span class="project-facts__status">{project.status}</span></p></div>
-      <div class="button-row">{!project.source && !project.demo && !project.download && <a class="button" href="#engineering">看场景与设计 <Icon size={18}/></a>}{project.demo && <a class="button" href={sitePath(project.demo)} target="_blank" rel="noreferrer">在线体验 <Icon name="play" size={17}/></a>}{hasLab && <a class="button" href={sitePath(project.slug === 'ga-sort' ? '/lab/#evolution' : '/lab/')}>打开交互实验 <Icon name="play" size={17}/></a>}{project.download && <ProjectDownload download={project.download}/>}{project.source && <a class:list={['button', {secondary: Boolean(project.demo || project.download || hasLab)}]} href={project.source} target="_blank" rel="noreferrer">查看源码 <Icon name="code" size={18}/></a>}</div>
+      <div class="project-intro-copy"><h1 class="project-name" aria-label={project.name}>{displayName}</h1>{displayName !== project.name && <p class="project-full-name">{project.name}</p>}<ProjectProse text={project.summary} tone="lead" class="summary" reveal/><p class="project-facts">{featured && <a class="project-facts__featured" href={sitePath('/projects/?group=featured')}><Icon name="star" size={12}/>重点项目</a>}<span class="project-facts__category">{project.category}</span> · <span class="project-facts__status">{project.status}</span></p></div>
+      <div class="button-row">{!project.source && !project.demo && !project.download && <a class="button" href="#engineering">看场景与设计 <Icon size={18}/></a>}{project.demo && <a class="button" href={sitePath(project.demo)} target="_blank" rel="noopener noreferrer">在线体验 <Icon name="play" size={17}/></a>}{hasLab && <a class="button" href={sitePath(project.slug === 'ga-sort' ? '/lab/#evolution' : '/lab/')}>打开交互实验 <Icon name="play" size={17}/></a>}{project.download && <ProjectDownload download={project.download}/>}{project.source && <a class:list={['button', {secondary: Boolean(project.demo || project.download || hasLab)}]} href={project.source} target="_blank" rel="noopener noreferrer">查看源码 <Icon name="code" size={18}/></a>}</div>
     </header>
     <div class:list={["project-opening", {"project-opening--atoll": project.slug === "glass-atoll", "project-opening--showcase": showcaseOpening}]}>{project.slug === "glass-atoll" ? <AtollWaterScene project={project} detail/> : project.slug === "panxu" ? <PanxuShowcase detail/> : project.slug === "china-house-price-map" ? <AtlasShowcase detail/> : project.slug === "intelligence-index-cost-linear" ? <CostChartShowcase detail/> : project.slug === "dubforge" ? <DubForgeWorkflow id="production-path" detail/> : project.slug === "ssframework" ? <FrameworkShowcase id="framework-gallery"/> : <figure class="project-hero" data-detail-motion={world.motion}><ProjectArtifact image={project.cover} eager group={project.slug} kind={world.motion} role="hero" shared sizes={coverSizes}/><figcaption class="project-caption">{project.cover.caption}</figcaption></figure>}<ProjectSignature signature={getProjectSignature(project.slug)}/></div>
     </div>
-    <nav class="project-contents" aria-label="详情页导航"><a href="#project-origin">{story.originNavLabel ?? '项目概览'}</a><a href="#engineering">{story.engineeringTitle ?? '设计与实现'}</a>{gallery.length > 0 && <a href="#gallery">更多画面</a>}<a href="#usage">{story.usageTitle ?? (project.slug === 'glass-atoll' ? '如何探索' : '快速开始')}</a>{project.docs && <a href={project.docs} target="_blank" rel="noreferrer">完整文档 <Icon size={13}/></a>}</nav>
+    <nav class="project-contents" aria-label="详情页导航"><a href="#project-origin">{story.originNavLabel ?? '项目概览'}</a><a href="#engineering">{story.engineeringTitle ?? '设计与实现'}</a>{gallery.length > 0 && <a href="#gallery">更多画面</a>}<a href="#usage">{story.usageTitle ?? (project.slug === 'glass-atoll' ? '如何探索' : '快速开始')}</a>{project.docs && <a href={project.docs} target="_blank" rel="noopener noreferrer">完整文档 <Icon size={13}/></a>}</nav>
     <div class="project-overview" id="project-origin">
       <section class="story-origin" aria-labelledby="origin-title"><h2 id="origin-title" data-detail-reveal>{story.origin.title}</h2>{story.origin.paragraphs.map((paragraph,index) => <ProjectProse text={paragraph} tone={index===0 ? 'lead' : 'body'} reveal/>)}{story.flow && project.slug !== 'dubforge' && <ol class="compact-flow" aria-label={story.flow.title}>{story.flow.steps.map(step => <li>{step.name}</li>)}</ol>}</section>
       {story.stack?.length && <section class="project-technology" aria-labelledby="stack-title"><h2 id="stack-title">{story.stackTitle ?? '技术构成'}</h2><dl class="project-stack">{story.stack.map(item => <div><dt>{item.name}</dt><dd>{item.role}</dd></div>)}</dl></section>}

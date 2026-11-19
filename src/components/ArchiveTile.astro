@@ -2,15 +2,18 @@
 import type { Project } from '../data/types';
 import { getProjectWorld, projectWorldStyle } from '../data/project-worlds';
 import { getProjectSignature } from '../data/project-signatures';
+import { isFeaturedProject } from '../data/featured-projects';
 import { sitePath } from '../lib/site-path';
 import type { ResolvedRelease } from '../lib/github-release';
 import snapshotData from '../data/release-snapshots.json';
+import Icon from './Icon.astro';
 import MediaImage from './MediaImage.astro';
 import '../styles/archive-tiles.css';
 
 interface Props { project: Project; index: number; }
 const { project, index } = Astro.props;
 const signature = getProjectSignature(project.slug);
+const featured = isFeaturedProject(project.slug);
 const displayName = project.name.split(' · ')[0];
 const snapshots = snapshotData.releases as Record<string, ResolvedRelease | undefined>;
 const releaseSnapshot = project.download ? snapshots[project.download.repository.toLowerCase()] : undefined;
@@ -33,10 +36,11 @@ const [restX, restY, restZ] = poses[index % poses.length] ?? poses[0];
 const href = sitePath(`/projects/${project.slug}/`);
 const backdrop = sitePath((project.cover.srcset?.split(',').map(entry => entry.trim().split(/\s+/)).find(([, size]) => size === '320w')?.[0]) ?? project.cover.src);
 const style = `${projectWorldStyle(project.slug)};--atlas-image-ratio:${project.cover.width}/${project.cover.height};--atlas-rest-x:${restX}deg;--atlas-rest-y:${restY}deg;--atlas-rest-z:${restZ}deg`;
+const searchText = `${project.name} ${project.repo} ${project.summary} ${project.category} ${project.tags.join(' ')} ${signature.direction} ${signature.principle} ${signature.highlights.join(' ')}${featured ? ' 重点项目 代表作 featured' : ''}`;
 ---
 <article class="atlas-item" style={style} data-atlas-item={project.slug} data-project-card
-  data-group={project.group} data-tags={Array.from(filterTags).join('|')}
-  data-search={`${project.name} ${project.repo} ${project.summary} ${project.category} ${project.tags.join(' ')} ${signature.direction} ${signature.principle} ${signature.highlights.join(' ')}`}
+  data-group={project.group} data-featured={featured ? 'true' : 'false'} data-tags={Array.from(filterTags).join('|')}
+  data-search={searchText}
   data-preview-src={sitePath(project.cover.src)} data-preview-alt={project.cover.alt}
   data-preview-title={displayName} data-preview-summary={project.summary} data-preview-href={href}
   data-preview-accent={getProjectWorld(project.slug).accent}
@@ -44,13 +48,16 @@ const style = `${projectWorldStyle(project.slug)};--atlas-image-ratio:${project.
   data-preview-principle={signature.principle} data-preview-direction={signature.direction}
   data-preview-highlights={signature.highlights.join('|')}>
   <div class="atlas-tile-reveal" data-atlas-reveal>
-    <a class="atlas-tile-link" data-atlas-project-link href={href} aria-label={project.name}>
+    <a class="atlas-tile-link" data-atlas-project-link href={href} aria-label={featured ? `${project.name}（重点项目）` : project.name}>
       <div class="atlas-tile-camera">
         <div class="atlas-tile-plane" data-atlas-tilt>
-          <div class="atlas-tile-shot" style={`--shot:url("${backdrop}")`}><MediaImage image={project.cover} sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1100px) 45vw, 30vw"/></div>
+          <div class="atlas-tile-shot" style={`--shot:url("${backdrop}")`}>
+            <MediaImage image={project.cover} sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1100px) 45vw, 30vw"/>
+            {featured && <span class="atlas-tile-featured" aria-hidden="true"><Icon name="star" size={12}/>重点项目</span>}
+          </div>
           <div class="atlas-tile-copy">
             <p class="atlas-tile-meta"><span>{project.category}</span><span data-release-status={project.download ? '' : undefined} data-repository={project.download?.repository} data-base-status={project.download ? baseStatus : undefined}>{statusLabel}</span></p>
-            <h2 class="atlas-tile-title">{displayName}</h2>
+            <h3 class="atlas-tile-title">{displayName}</h3>
             <p class="atlas-tile-summary">{project.summary}</p>
             <ul class="atlas-tile-tags" aria-label="技术">{project.tags.slice(0, 3).map(tag => <li>{tag}</li>)}</ul>
           </div>

@@ -10,7 +10,7 @@
 .invitation-complete-link { position:relative; display:inline-flex; align-items:center; gap:22px; min-height:52px; padding-bottom:7px; font-size:clamp(25px,2.05vw,30px); font-weight:500; color:#f0f2e7; }
 .invitation-complete-link::after { content:''; position:absolute; left:0; bottom:0; width:3.5em; height:3px; background:var(--invite-tone); pointer-events:none; }
 .invitation-complete-link > svg { color:var(--invite-tone); }
-.invitation-composition { width:min(1320px,100%); margin-inline:auto; }
+.invitation-composition { width:min(1260px,100%); margin-inline:auto; }
 .invitation-camera { position:relative; min-width:0; padding:34px 35px 40px; perspective:1900px; }
 .invitation-motion { position:relative; transform-style:preserve-3d; }
 .invitation-fold { position:relative; transform-style:preserve-3d; transform:rotateX(3deg) rotateY(-4deg) rotateZ(-1.3deg); }

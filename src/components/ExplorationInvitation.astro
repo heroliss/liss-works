@@ -6,26 +6,28 @@ import MediaImage from './MediaImage.astro';
 import Icon from './Icon.astro';
 import '../styles/exploration-invitation.css';
 
+const aoe = getProject('aoe4-flow')!;
 const light = getProject('learnopengl')!;
-const intelligence = getProject('intelligence-index-cost-linear')!;
-const housing = getProject('china-house-price-map')!;
+const routeLab = getProject('route-lab')!;
 const nomad = getProject('nomadworkshop')!;
-const commuteShot = housing.gallery.find(image => image.src.includes('v2-03-commute-radar-adaptive')) ?? housing.cover;
 const resident = nomad.gallery.find(image => image.src.includes('05-resident-and-world-1080'));
 if (!resident) throw new Error('Exploration invitation needs the genuine Nomad resident-state capture');
+
+// Nine distinct works are already presented in the seven home chapters above.
+const remainingCount = Math.max(0, projects.length - 9);
 const questions = [
-  { question: '买房还是租房，离公司半小时能住哪？', lens: '实用工具', route: '找房地图', path: 'AI 与数据 / 买房与租房地图', action: '打开全国找房舆图',
-    detail: '选好上班地点和预算，在一张图上画通勤圈、筛跨城板块、查小区底细。',
-    work: '全国房价交互舆图', image: commuteShot, tone: getProjectWorld(housing.slug).accent,
-    href: '/projects/china-house-price-map/' },
+  { question: '重复枯燥的游戏微操，怎么用节点图接管？', lens: '自动化', route: '节点编排', path: 'AI 与数据 / 图像识别自动化', action: '打开 AoE4 Flow 详情',
+    detail: '白线串起动作顺序、彩线传递图像识别结果，把帝国时代 4 的日常出农做成可调试节点图。',
+    work: 'AoE4 Flow', image: aoe.cover, tone: getProjectWorld(aoe.slug).accent,
+    href: '/projects/aoe4-flow/' },
   { question: '一张平面贴图，怎么看起来有凹凸？', lens: '图形', route: 'OpenGL', path: '图形与算法实验 / OpenGL', action: '看图形类工程',
-    detail: '同一只木箱，换上法线和高度贴图后，表面就有了深浅。',
+    detail: '同一只木箱，换上法线与视差高度贴图后，表面就有了真实起伏和自阴影。',
     work: 'LearnOpenGL', image: light.cover, tone: getProjectWorld(light.slug).accent,
     href: '/projects/?group=graphics&tag=OpenGL' },
-  { question: '大模型那么多，怎么挑才好用又不花冤枉钱？', lens: 'AI 选型', route: '能力与花费', path: 'AI 与数据 / AI 选型与花费指南', action: '打开 AI 选型与算账指南',
-    detail: '按写代码、做设计或聊天的真实用途筛甜点模型，顺手算清 20 美元月卡值不值得买。',
-    work: 'Intelligence × Cost', image: intelligence.cover, tone: getProjectWorld(intelligence.slug).accent,
-    href: '/projects/intelligence-index-cost-linear/' },
+  { question: '同一组城市，遗传算法和模拟退火谁更短？', lens: '算法', route: '路径实验', path: '图形与算法实验 / 组合优化', action: '打开 Route Lab 详情',
+    detail: '在同一张城市画布上同题对照，直观比较两条路线、实际耗时和收敛曲线。',
+    work: 'Route Lab', image: routeLab.cover, tone: getProjectWorld(routeLab.slug).accent,
+    href: '/projects/route-lab/' },
   { question: '游戏里的居民，怎么决定下一步做什么？', lens: '游戏', route: 'Unity', path: '游戏与实时场景 / Unity', action: '看游戏类工程',
     detail: '居民自己的需求、工作的价值和走过去的距离，一起决定它接下来去哪。',
     work: 'NomadWorkshop', image: resident, tone: getProjectWorld(nomad.slug).accent,
@@ -36,9 +38,9 @@ const questions = [
   data-exploration-invitation data-invite-active="0" style={`--invite-tone:${questions[0].tone};--invite-ambience:${questions[0].tone}`}>
   <div class="invitation-darkroom" aria-hidden="true"><div class="invitation-light" data-invite-light></div></div>
   <header class="invitation-heading">
-    <h2 id="explore-title">还有 {projects.length - 5} 个工程，<br/>换个问题接着逛。</h2>
+    <h2 id="explore-title">还有 {remainingCount} 个工程，<br/>换个问题接着逛。</h2>
     <div class="invitation-opening">
-      <p>从一个具体的问题出发，也许更容易找到感兴趣的那一个。<br/>全部工程都按方向整理在工程库里。</p>
+      <p>从一个具体的问题出发，也许更容易碰到刚好合胃口的那一个。<br/>全部 {projects.length} 个工程都在工程库里，按方向和重点项目整理好了。</p>
       <a href={sitePath('/projects/')} class="invitation-complete-link">打开工程库<Icon size={27}/></a>
     </div>
   </header>

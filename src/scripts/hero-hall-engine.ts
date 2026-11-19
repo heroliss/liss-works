@@ -38,13 +38,28 @@ const BG = 0x070b12;
 // The sky and the far floor share one colour drawn through the same pipeline, so the
 // horizon has no seam (the clear colour skips colour conversion and would not match).
 const SKY = '#2e3b4b';
-// Slot 0 is the front: large, centred, close. The others float around it at
-// different depths, heights, sizes and turns, so the set reads as a composed
-// constellation rather than a row. [x, y, z, turn, size, pitch, roll]
-const SLOTS = [[0, 1.95, 2.3, -.05, 1.2, -.02, -.012], [-3.8, 3.5, -2.6, .42, .74, .09, .05], [-3.4, 1, -.6, .26, .6, -.08, -.045],
-  [3.6, 3.85, -2.8, -.5, .72, .1, -.06], [3.25, 1.55, -.9, -.28, .58, -.07, .05]];
-const NARROW = [[0, 2.1, 2.2, -.04, 1.3, -.02, -.01], [-2.9, 3.5, -2.2, .42, .66, .08, .05], [-2.5, .95, .2, .28, .56, -.07, -.04],
-  [2.9, 3.5, -2, -.46, .7, .09, -.05], [2.6, 1.2, .3, -.3, .56, -.06, .045]];
+// Slot 0 is the front: large, centred, close. The other six float around it in
+// three depth tiers (midground wings, upper wings, far crown), so all seven
+// read as a composed spatial constellation rather than a flat row.
+// [x, y, z, turn, size, pitch, roll]
+const SLOTS = [
+  [0, 1.88, 2.35, -.04, 1.15, -.02, -.01],
+  [-3.45, .98, -.55, .28, .56, -.07, -.04],
+  [-4.15, 3.25, -2.55, .44, .66, .08, .045],
+  [-1.55, 4.35, -4.25, .18, .6, .12, .025],
+  [1.85, 4.45, -4.35, -.22, .58, .12, -.03],
+  [3.75, 3.1, -2.4, -.45, .64, .09, -.05],
+  [3.15, 1.1, -.6, -.3, .55, -.06, .045],
+];
+const NARROW = [
+  [0, 1.92, 2.25, -.04, 1.22, -.02, -.01],
+  [-2.6, .92, .1, .3, .52, -.06, -.04],
+  [-3, 2.95, -2, .42, .58, .08, .045],
+  [-1.25, 4.05, -3.55, .18, .54, .1, .02],
+  [1.35, 4.1, -3.65, -.2, .52, .1, -.025],
+  [2.95, 2.9, -1.9, -.42, .56, .08, -.045],
+  [2.6, 1, .15, -.3, .52, -.06, .04],
+];
 
 function radialTexture(T: T, inner = 'rgba(255,255,255,1)', mid = 'rgba(255,255,255,.35)') {
   const canvas = document.createElement('canvas'); canvas.width = canvas.height = 256;
@@ -198,9 +213,6 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
     const face = keep(new T.MeshBasicMaterial({ color: 0x1a2630, toneMapped: false }));
     const screenMesh = new T.Mesh(screenGeometry, face); screenMesh.position.z = .055; tilt.add(screenMesh);
     const rim = keep(new T.MeshBasicMaterial({ color: tone.clone(), toneMapped: false }));
-    // Rims a little wider and calmer: thin, very bright bars shimmered under bloom.
-    const bar = (bw: number, bh: number, x: number, y: number) => { const m = new T.Mesh(keep(new T.BoxGeometry(bw, bh, .05)), rim); m.position.set(x, y, .06); m.layers.set(1); tilt.add(m); };
-    void bar; // Square rim bars removed: the rounded edge light draws the rim.
     const halo = keep(new T.MeshBasicMaterial({ map: glow, color: tone, transparent: true, opacity: .2, blending: T.AdditiveBlending, depthWrite: false }));
     const haloMesh = new T.Mesh(haloGeometry, halo); haloMesh.position.z = -.12; tilt.add(haloMesh);
     const edge = keep(new T.MeshBasicMaterial({ map: edgeMap, color: tone, transparent: true, opacity: .4, blending: T.AdditiveBlending, depthWrite: false, toneMapped: false }));
@@ -236,8 +248,8 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
   composer.addPass(new A.OutputPass());
 
   const raycaster = new T.Raycaster(), ndc = new T.Vector2(), local = new T.Vector2(), up = new T.Vector3(0, 1, 0), side = new T.Vector3(1, 0, 0);
-  const pivot = new T.Vector3(0, 1.8, 0);
-  const basePos = new T.Vector3(), lookBase = new T.Vector3(0, 1.8, 0), camPos = new T.Vector3(), camLook = new T.Vector3();
+  const pivot = new T.Vector3(0, 2.0, 0);
+  const basePos = new T.Vector3(), lookBase = new T.Vector3(0, 2.0, 0), camPos = new T.Vector3(), camLook = new T.Vector3();
   const pointer = { x: 0, y: 0, weight: 0, tx: 0, ty: 0, tw: 0, cx: 9, cy: 9, on: false };
   const toneTarget = new T.Color(items[0]?.tone ?? '#6ee8e3');
   let hover: number | null = null, highlight: number | null = null, selected = 0, dragging = false;
@@ -258,11 +270,12 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
     camera.aspect = width / height;
     camera.fov = narrow ? 44 : 32;
     const tanHigh = Math.tan(camera.fov * Math.PI / 360), tanWide = tanHigh * camera.aspect;
-    // The copy column (see works-hall.css) and the page's content edge on the right.
-    const copyRight = Math.max(48, width / 2 - 680) + Math.min(500, width * .36), contentRight = Math.min(width - 32, width / 2 + 700);
+    // The copy column (see works-hall.css) and the page's content edge on the right,
+    // leaving room for the fixed right-side chapter-nav capsule.
+    const copyRight = Math.max(48, width / 2 - 680) + Math.min(510, width * .37), contentRight = Math.min(width - 68, width / 2 + 668);
     const span = narrow ? width : Math.max(width * .42, contentRight - copyRight);
-    const distance = narrow ? Math.max(9, 4.4 / tanWide) : Math.max(11, 4.45 / (tanWide * span / width), 4.6 / tanHigh);
-    basePos.set(0, 2.6 + distance * .04, distance);
+    const distance = narrow ? Math.max(9.6, 4.65 / tanWide) : Math.max(11.6, 4.85 / (tanWide * span / width), 4.95 / tanHigh);
+    basePos.set(0, 2.75 + distance * .04, distance);
     // Only a horizontal view offset: the mirror flips the image vertically but copies the
     // projection unchanged, so a vertical offset left the reflection short of the floor
     // and its edge pixels smeared into long strips. The camera aims lower instead.
@@ -310,6 +323,9 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
     const grazing = Math.min(1, Math.max(0, (camPos.y - 1.9) / 2.2));
     camLook.copy(lookBase).sub(pivot).applyAxisAngle(up, -yaw * .4).add(pivot); camLook.y -= pitchBy * 2.2;
     camera.position.copy(camPos); camera.lookAt(camLook);
+    // Keep the soft ambient backdrop positioned opposite the orbiting camera.
+    backdrop.position.set(14 * Math.sin(yaw), 4.5, -14 * Math.cos(yaw));
+    backdrop.rotation.y = -yaw;
     backdropMat.color.lerp(toneTarget, 1 - Math.exp(-step * 2));
     hazeMat.color.lerp(hazeTone.copy(toneTarget).lerp(hazeBase, .5), 1 - Math.exp(-step * 2));
     hover = null;
@@ -329,10 +345,12 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
       target.set(slot[0] + Math.sin(t * .37) * .22 * (1 - f * .6), slot[1] + Math.sin(t * .53) * .16, slot[2] + Math.cos(t * .29) * .25 * (1 - f * .6));
       screen.pos.lerp(target, glide); screen.turn += (slot[3] - screen.turn) * glide; screen.size += (slot[4] * (1 + h * .14) - screen.size) * glide;
       screen.pitch += (slot[5] * (1 - h * .7) - screen.pitch) * glide; screen.roll += (slot[6] * (1 - h * .7) - screen.roll) * glide;
-      // Screens partly turn to follow the camera as it swings, so none goes edge-on.
+      // Follow the camera's orbit 1:1 with a periodic ±9° parallax sway, so repeated
+      // dragging in one direction never accumulates phase drift or flips cards backward.
+      const facing = screen.turn - turnBy + Math.sin(turnBy) * .16;
       screen.group.position.copy(screen.pos); screen.group.scale.setScalar(screen.size);
-      screen.group.rotation.set(screen.pitch - pitchBy * .45, screen.turn - turnBy * .88, screen.roll, 'YXZ');
-      screen.pool.position.set(screen.pos.x, .006, screen.pos.z + 1.1 * screen.size); screen.pool.scale.setScalar(screen.size);
+      screen.group.rotation.set(screen.pitch - pitchBy * .45, facing, screen.roll, 'YXZ');
+      screen.pool.position.set(screen.pos.x + Math.sin(facing) * .95 * screen.size, .006, screen.pos.z + Math.cos(facing) * .95 * screen.size); screen.pool.scale.setScalar(screen.size);
       if (screen.face.map) screen.face.color.setScalar(.78 + f * .22 + h * .12);
       screen.rim.color.copy(screen.tone).multiplyScalar(.62 + f * .16 + h * .24);
       screen.halo.opacity = .12 + f * .12 + h * .16;
@@ -342,7 +360,7 @@ export function createHallEngine(T: T, A: HallAddons, canvas: HTMLCanvasElement,
       const own = index === hover;
       const leanX = own ? -local.y * .2 : -pointer.y * .06 * pointer.weight;
       const leanY = own ? local.x * .28 : pointer.x * .14 * pointer.weight;
-      const follow = 1 - Math.exp(-step * (3.5 + index * .7));
+      const follow = 1 - Math.exp(-step * (3.5 + (index % 5) * .6));
       screen.lean.x += (leanX - screen.lean.x) * follow; screen.lean.y += (leanY - screen.lean.y) * follow;
       screen.tilt.rotation.x = screen.lean.x + Math.sin(t * .6) * .03;
       screen.tilt.rotation.y = screen.lean.y + Math.sin(t * .45) * .05;

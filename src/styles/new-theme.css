@@ -32,20 +32,9 @@ input::placeholder{color:var(--muted)}
 .zoom-affordance{background:var(--bg);color:var(--ink);border-radius:0;font-size:13px}
 .media-link{background:var(--surface)}
 figcaption,.project-caption{color:var(--muted);font-size:14px;line-height:1.6}
-.project-conversation{border:0;background:var(--surface);padding:36px;gap:32px}
-.project-conversation p{font-size:16px;color:var(--ink)}
 .site-footer{margin-top:140px;border:0;padding-block:32px;display:flex;flex-direction:column;gap:28px}
-.site-footer__top{display:flex;justify-content:space-between;align-items:start;gap:28px;width:100%}
-.site-footer__top>p{margin:0;font-size:16px;color:var(--ink)}
-.site-footer .footer-links{font-size:14px;gap:16px 28px;color:var(--ink)}
-.site-footer .footer-links a{min-height:44px}
-.footer-wordmark{font-family:var(--font-display);font-size:clamp(78px,17vw,280px);font-weight:600;line-height:.88;letter-spacing:-.055em;color:var(--ink);white-space:nowrap;margin-left:-.025em}
 .site-footer small{color:var(--muted);font-size:13px}
-.lightbox{background:var(--bg);color:var(--ink);border:0;border-radius:0}
-.lightbox::backdrop{background:rgb(0 0 0 / .9)}
-.lightbox__toolbar,.lightbox__footer{border:0}
-.lightbox__image{background:var(--surface)}
-@media(max-width:760px){.site-header{min-height:76px;align-items:center;gap:12px;padding-block:14px}.brand{font-size:25px}.site-header nav{gap:15px;font-size:13px;flex-wrap:wrap;justify-content:flex-end}.site-header nav .github-nav{display:none}.site-footer{margin-top:88px}.site-footer__top{flex-direction:column;gap:18px}.site-footer .footer-links{gap:8px 22px}.section{margin-top:80px}.project-conversation{padding:24px}.site-header nav a{min-height:36px}}
+@media(max-width:760px){.site-header{min-height:76px;align-items:center;gap:12px;padding-block:14px}.brand{font-size:25px}.site-header nav{gap:15px;font-size:13px;flex-wrap:wrap;justify-content:flex-end}.site-header nav .github-nav{display:none}.site-footer{margin-top:88px}.section{margin-top:80px}.site-header nav a{min-height:36px}}
 @media(max-width:760px){.site-header{flex-direction:row;flex-wrap:nowrap}.site-header nav{width:auto;flex-wrap:nowrap}.site-header nav a{min-height:44px}}
 @media(max-width:400px){.site-header .brand svg{display:none}.site-header .about-nav{display:none}.site-header nav{gap:12px}.site-header nav a{font-size:13px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}

@@ -2,6 +2,7 @@
 import { sitePath, communityUrl } from '../lib/site-path';
 import Icon from './Icon.astro';
 import { projects, groups } from '../data/projects';
+import { featuredWorks } from '../data/featured-projects';
 import { prioritizeProjects } from '../data/project-priority';
 import { getProjectWorld } from '../data/project-worlds';
 import '../styles/site-footer.css';
@@ -28,9 +29,9 @@ const pool = ordered.map(project => sitePath(`/projects/${project.slug}/`));
       </div>
     </div>
     <nav class="footer-columns" aria-label="页尾导航">
-      <div><p>作品</p><a href={sitePath('/projects/')}>工程库 <small>{projects.length}</small></a><a href={sitePath('/lab/')}>交互实验</a><a href={sitePath('/about/')}>关于 Liss</a></div>
+      <div><p>作品</p><a href={sitePath('/')}>首页</a><a href={sitePath('/projects/')}>工程库 <small>{projects.length}</small></a><a href={sitePath('/projects/?group=featured')} style="--tone:#f5c96b">重点项目 <small>{featuredWorks.length}</small></a><a href={sitePath('/lab/')}>交互实验</a><a href={sitePath('/about/')}>关于 Liss</a></div>
       <div><p>方向</p>{groups.map(group => <a href={sitePath(`/projects/?group=${group.id}`)} style={`--tone:${group.tone}`}><i aria-hidden="true"></i>{group.label}</a>)}</div>
-      <div><p>交流</p><a href={communityUrl}>Liss Community</a><a href="https://github.com/heroliss" target="_blank" rel="noreferrer">GitHub <Icon size={14}/></a></div>
+      <div><p>交流</p><a href={communityUrl}>Liss Community</a><a href="https://github.com/heroliss" target="_blank" rel="noopener noreferrer">GitHub <Icon size={14}/></a></div>
     </nav>
   </div>
   <div class="footer-baseline shell">

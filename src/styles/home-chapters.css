@@ -5,33 +5,44 @@
 .home-next #workflow { --chapter-tone:#30aff8; --chapter-label:'02 · AI 视频译制'; }
 .home-next #panxu { --chapter-tone:#778ffa; --chapter-label:'03 · AI 磁盘清理'; }
 .home-next #atoll { --chapter-tone:#6ee8e3; --chapter-label:'04 · 实时渲染'; }
-.home-next #games { --chapter-tone:#fd8358; --chapter-label:'05 · 游戏'; }
-.home-next :is(#selected .work-heading,#workflow .dub-reel-heading,#panxu .px-heading,#atoll .atoll-showcase__heading,#games .work-heading) {
+.home-next #atlas { --chapter-tone:#8cc36d; --chapter-label:'05 · 买房与租房地图'; }
+.home-next #games { --chapter-tone:#fd8358; --chapter-label:'06 · 游戏'; }
+.home-next #cost-chart { --chapter-tone:#c6ecfb; --chapter-label:'07 · AI 选型与比价'; }
+
+.home-next :is(#selected .work-heading,#workflow .dub-reel-heading,#panxu .px-heading,#atoll .atoll-showcase__heading,#atlas .at-heading,#games .work-heading,#cost-chart .cc-heading) {
   position:relative; display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr); align-items:end; gap:20px 6%;
   margin:0 0 clamp(36px,4vw,56px); padding-top:58px;
 }
-.home-next :is(#selected .work-heading,#workflow .dub-reel-heading,#panxu .px-heading,#atoll .atoll-showcase__heading,#games .work-heading)::before {
+.home-next :is(#selected .work-heading,#workflow .dub-reel-heading,#panxu .px-heading,#atoll .atoll-showcase__heading,#atlas .at-heading,#games .work-heading,#cost-chart .cc-heading)::before {
   content:var(--chapter-label); position:absolute; left:0; top:0; display:flex; align-items:center; gap:12px; padding-top:18px; width:100%;
   border-top:1px solid transparent; border-image:linear-gradient(90deg,var(--chapter-tone),color-mix(in srgb,var(--chapter-tone) 20%,transparent) 40%,transparent 75%) 1;
   color:var(--chapter-tone); font-size:14px; letter-spacing:.12em; line-height:1;
 }
-.home-next :is(#selected,#workflow,#panxu,#atoll) :is(.work-heading,.dub-reel-heading,.px-heading,.atoll-showcase__heading) h2 {
-  margin:0; color:var(--chapter-tone); font-family:Rajdhani,'Noto Sans SC',sans-serif; font-size:clamp(56px,6.6vw,100px); font-weight:600; line-height:.98; letter-spacing:-.03em;
+.home-next :is(#selected,#workflow,#panxu,#atoll,#atlas,#cost-chart) :is(.work-heading,.dub-reel-heading,.px-heading,.atoll-showcase__heading,.at-heading,.cc-heading) h2 {
+  margin:0; color:var(--chapter-tone); font-family:Rajdhani,'Noto Sans SC',sans-serif; font-size:clamp(50px,6vw,96px); font-weight:600; line-height:1.02; letter-spacing:-.03em;
   text-shadow:0 0 60px color-mix(in srgb,var(--chapter-tone) 30%,transparent);
 }
+.home-next #atlas .at-heading h2 { font-size:clamp(42px,5vw,78px); line-height:1.1; }
+.home-next #cost-chart .cc-heading h2 { font-size:clamp(46px,5.4vw,86px); }
 .home-next #games .work-heading h2 { margin:0; font-size:clamp(40px,4.4vw,64px); font-weight:600; line-height:1.2; letter-spacing:-.03em; }
+
 /* Taglines sit right under the title instead of drifting to the far edge. */
-.home-next :is(#selected .framework-tagline,#workflow .dub-reel-title,#panxu .px-tagline,#atoll .atoll-showcase__name) {
+.home-next :is(#selected .framework-tagline,#workflow .dub-reel-title,#panxu .px-tagline,#atoll .atoll-showcase__name,#atlas .at-tagline,#cost-chart .cc-tagline) {
   grid-column:1; max-width:none; margin:14px 0 0; color:#e6ecf2; font-size:clamp(20px,1.8vw,26px); line-height:1.5; letter-spacing:-.01em;
 }
-.home-next :is(#selected .framework-introduction,#workflow .dub-reel-introduction,#panxu .px-introduction,#atoll .atoll-showcase__introduction) { display:grid; gap:14px; align-content:end; max-width:34em; justify-self:end; }
-.home-next :is(#selected .framework-introduction,#workflow .dub-reel-introduction,#panxu .px-introduction,#atoll .atoll-showcase__introduction) p { margin:0; color:#c3ccd5; font-size:17px; line-height:1.85; }
+.home-next :is(#selected .framework-introduction,#workflow .dub-reel-introduction,#panxu .px-introduction,#atoll .atoll-showcase__introduction,#atlas .at-introduction,#cost-chart .cc-introduction) { display:grid; gap:14px; align-content:end; max-width:34em; justify-self:end; }
+.home-next :is(#selected .framework-introduction,#workflow .dub-reel-introduction,#panxu .px-introduction,#atoll .atoll-showcase__introduction,#atlas .at-introduction,#cost-chart .cc-introduction) p { margin:0; color:#c3ccd5; font-size:17px; line-height:1.85; }
 .home-next #games .work-heading>p { margin:0; justify-self:end; max-width:30em; color:#c3ccd5; font-size:17px; line-height:1.85; }
-.home-next :is(#selected,#workflow,#panxu,#atoll,#games) .text-link { color:var(--chapter-tone); }
+.home-next :is(#selected,#workflow,#panxu,#atoll,#atlas,#games,#cost-chart) .text-link { color:var(--chapter-tone); }
+.home-next .chapter-heading-links { display:flex; flex-wrap:wrap; align-items:center; gap:8px 22px; }
+.home-next .chapter-live-link { color:#e8f0f6!important; padding:5px 14px; min-height:38px; border-radius:999px; border:1px solid color-mix(in srgb,var(--chapter-tone) 42%,transparent); background:color-mix(in srgb,var(--chapter-tone) 12%,#0d151d); transition:background .2s ease,border-color .2s ease,color .2s ease,transform .2s ease; }
+.home-next .chapter-live-link:is(:hover,:focus-visible) { color:#091117!important; background:var(--chapter-tone); border-color:var(--chapter-tone); text-decoration:none; transform:translateY(-1px); }
+
 @media(max-width:860px) {
-  .home-next :is(#selected .work-heading,#workflow .dub-reel-heading,#panxu .px-heading,#atoll .atoll-showcase__heading,#games .work-heading) { grid-template-columns:1fr; display:grid; padding-top:50px; }
-  .home-next :is(#selected .framework-introduction,#workflow .dub-reel-introduction,#panxu .px-introduction,#atoll .atoll-showcase__introduction,#games .work-heading>p) { justify-self:start; }
-  .home-next :is(#selected,#workflow,#panxu,#atoll) :is(.work-heading,.dub-reel-heading,.px-heading,.atoll-showcase__heading) h2 { font-size:clamp(50px,14vw,72px); }
+  .home-next :is(#selected .work-heading,#workflow .dub-reel-heading,#panxu .px-heading,#atoll .atoll-showcase__heading,#atlas .at-heading,#games .work-heading,#cost-chart .cc-heading) { grid-template-columns:1fr; display:grid; padding-top:50px; }
+  .home-next :is(#selected .framework-introduction,#workflow .dub-reel-introduction,#panxu .px-introduction,#atoll .atoll-showcase__introduction,#atlas .at-introduction,#cost-chart .cc-introduction,#games .work-heading>p) { justify-self:start; }
+  .home-next :is(#selected,#workflow,#panxu,#atoll) :is(.work-heading,.dub-reel-heading,.px-heading,.atoll-showcase__heading) h2 { font-size:clamp(46px,13vw,68px); }
+  .home-next :is(#atlas .at-heading,#cost-chart .cc-heading) h2 { font-size:clamp(36px,10.5vw,56px); }
 }
 .home-next #games .work-heading { width:auto; margin:0 0 clamp(36px,4vw,56px); }
 .home-next #games .work-heading h2 br { display:none; }

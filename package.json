@@ -17,6 +17,7 @@
     "test:panxu": "node --experimental-strip-types scripts/test-panxu-showcase.mjs",
     "test:atlas": "node --experimental-strip-types scripts/test-atlas-showcase.mjs",
     "test:cost-chart": "node --experimental-strip-types scripts/test-cost-chart-showcase.mjs",
+    "test:featured": "node --experimental-strip-types scripts/test-featured.mjs",
     "verify:dist": "node scripts/verify-dist.mjs"
   },
   "dependencies": {

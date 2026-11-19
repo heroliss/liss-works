@@ -143,12 +143,13 @@ export function setupWorksTable({ signal, preference }: Options): () => void {
       event.preventDefault();
       const already = filter.getAttribute('aria-pressed') === 'true';
       (already ? document.querySelector<HTMLButtonElement>('[data-group-filter="all"]') ?? filter : filter).click();
-      document.querySelector('#atlas-gallery')?.scrollIntoView({ behavior: preference.matches ? 'auto' : 'smooth', block: 'start' });
+      document.querySelector('#atlas-filters')?.scrollIntoView({ behavior: preference.matches ? 'auto' : 'smooth', block: 'start' });
     }, { signal: events.signal });
   });
-  // Mirror the library's current filter result onto the prints.
-  window.addEventListener('portfolio:atlas-filter', () => {
+  // Mirror the library's current filter result onto the prints (including initial URL queries).
+  const syncFilterMirror = () => {
     const items = Array.from(document.querySelectorAll<HTMLElement>('[data-atlas-item]'));
+    if (!items.length) return;
     const visible = new Set(items.filter(item => !item.hidden).map(item => item.dataset.atlasItem));
     const filtering = visible.size > 0 && visible.size < items.length;
     if (filtering) root.dataset.filtering = 'true'; else delete root.dataset.filtering;
@@ -157,16 +158,23 @@ export function setupWorksTable({ signal, preference }: Options): () => void {
       const pressed = document.querySelector(`[data-group-filter="${chip.dataset.tableGroup}"][aria-pressed="true"]`);
       if (pressed) chip.dataset.selected = 'true'; else delete chip.dataset.selected;
     });
-  }, { signal: events.signal });
+  };
+  window.addEventListener('portfolio:atlas-filter', syncFilterMirror, { signal: events.signal });
+  syncFilterMirror();
+  let lastPicked = '';
   root.querySelector<HTMLButtonElement>('[data-table-random]')?.addEventListener('click', event => {
     let pool: string[] = [];
     try { pool = JSON.parse((event.currentTarget as HTMLElement).dataset.pool ?? '[]'); } catch { pool = []; }
     // In the library, jump to a random visible card on the page; elsewhere open a random project.
     const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-atlas-item]')).filter(card => !card.hidden);
     if (cards.length) {
-      const card = cards[Math.floor(Math.random() * cards.length)];
+      const candidates = cards.length > 1 ? cards.filter(card => card.dataset.atlasItem !== lastPicked) : cards;
+      const card = candidates[Math.floor(Math.random() * candidates.length)];
+      lastPicked = card.dataset.atlasItem ?? '';
       card.scrollIntoView({ behavior: preference.matches ? 'auto' : 'smooth', block: 'center' });
+      delete card.dataset.pulse; void card.offsetWidth;
       card.dataset.pulse = 'true'; setTimeout(() => { delete card.dataset.pulse; }, 1800);
+      card.querySelector<HTMLAnchorElement>('[data-atlas-project-link]')?.focus({ preventScroll: true });
       return;
     }
     if (pool.length) window.location.assign(pool[Math.floor(Math.random() * pool.length)]);

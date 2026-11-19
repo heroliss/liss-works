@@ -1,30 +1,14 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { setupPortfolioMotion } from './portfolio-motion';
-import { setupExpressiveMotion } from './expressive-motion';
-import { setupProjectMotion } from './project-motion';
-import { setupProjectAtmosphere } from './project-atmosphere';
-import { setupDetailWorldMotion } from './detail-world-motion';
-import { setupShowcaseNarratives } from './showcase-narratives';
-import { setupAtlasLibrary } from './atlas-library';
-import { setupExplorationInvitation } from './exploration-invitation';
-import { setupFooterMotion } from './footer-motion';
-import { setupProjectEnding } from './project-ending';
-import { setupLabRoomMotion } from './lab-room-motion';
-import { setupAboutStudioMotion } from './about-studio-motion';
-import { setupWorksOrbit } from './works-orbit';
-import { setupWorksTable } from './works-table';
-import { setupHeroHall } from './hero-hall';
-import { setupAtollWater } from './atoll-water';
-import { setupPanxuShowcase } from './panxu-showcase';
-import { setupAtlasShowcase } from './atlas-showcase';
-import { setupCostChartShowcase } from './cost-chart-showcase';
 
 gsap.registerPlugin(ScrollTrigger);
 
+type MotionOptions = { signal: AbortSignal; preference: MediaQueryList };
+type Disposer = () => void;
+
 // Every page is complete before this module runs. Motion enhances that readable
 // state; no CSS class or loading gate is needed to reveal the actual content.
-let dispose: (() => void) | undefined;
+let dispose: Disposer | undefined;
 let pauseBeforePageHide: boolean | undefined;
 const pauseStorageKey = 'liss:motion-paused';
 
@@ -56,11 +40,10 @@ function initializeMotion() {
   const { signal } = abort;
   const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
   const media = gsap.matchMedia();
+  const disposers: Disposer[] = [];
   let refreshTimer: ReturnType<typeof setTimeout> | undefined;
   let disposed = false;
-  let heroPlayed = false;
   const revealed = new WeakSet<Element>();
-  const shuttered = new WeakSet<Element>();
   const refresh = () => {
     if (disposed) return;
     clearTimeout(refreshTimer);
@@ -70,28 +53,26 @@ function initializeMotion() {
     }, 100);
   };
 
+  const options: MotionOptions = { signal, preference };
+  const mount = (selector: string, load: () => Promise<(opts: MotionOptions) => Disposer>) => {
+    if (!document.querySelector(selector)) return;
+    void load().then((setup) => {
+      if (disposed || signal.aborted) return;
+      const cleanup = setup(options);
+      if (disposed || signal.aborted) cleanup();
+      else disposers.push(cleanup);
+    }).catch(() => { /* Progressive enhancement: keep page usable if a chunk fails to load. */ });
+  };
+
   media.add(
     {
       motion: '(prefers-reduced-motion: no-preference)',
       reduced: '(prefers-reduced-motion: reduce)',
-      desktop: '(min-width: 900px)',
     },
     (context) => {
-      const { motion, desktop } = context.conditions!;
+      const { motion } = context.conditions!;
       root.dataset.motion = motion ? 'ready' : 'reduced';
       if (!motion) return;
-
-      // The title remains fully opaque even on the first frame. Four parts at
-      // most are coordinated into one short load sequence.
-      const hero = Array.from(document.querySelectorAll<HTMLElement>('[data-motion="hero"]')).slice(0, 4);
-      if (hero.length && !heroPlayed) {
-        heroPlayed = true;
-        gsap.timeline({ defaults: { ease: 'expo.out', duration: 0.8 } }).fromTo(
-          hero,
-          { y: 12 },
-          { y: 0, stagger: 0.08, clearProps: 'transform' },
-        );
-      }
 
       const parts = Array.from(document.querySelectorAll<HTMLElement>('[data-motion="reveal"]'))
         .filter((element) => !revealed.has(element));
@@ -128,86 +109,29 @@ function initializeMotion() {
           },
         });
       }
-
-      // One real project image opens as a shutter. Only the picture is masked:
-      // the title and supporting copy remain readable throughout. The mask is
-      // applied when its timeline starts, never as a prerequisite for content.
-      document.querySelectorAll<HTMLElement>('[data-motion="shutter"]').forEach((container) => {
-        const pictureFrame = container.hasAttribute('data-motion-picture')
-          ? container
-          : container.querySelector<HTMLElement>('[data-motion-picture]');
-        // Mask the bitmap, keeping its link hitbox and caption available while
-        // the shutter opens. A first click must work during the entrance too.
-        const picture = pictureFrame?.querySelector<HTMLImageElement>('img') ?? pictureFrame;
-        if (!picture || shuttered.has(picture)) return;
-        const image = picture.matches('img') ? picture : picture.querySelector<HTMLImageElement>('img');
-        const opening = gsap.timeline({
-          defaults: { duration: 1.1, ease: 'expo.out' },
-          onStart: () => { shuttered.add(picture); },
-          scrollTrigger: {
-            trigger: picture,
-            start: 'top 85%',
-            once: true,
-          },
-        });
-        opening.fromTo(picture,
-          { clipPath: 'inset(0 0 100% 0)' },
-          { clipPath: 'inset(0 0 0% 0)', immediateRender: false, clearProps: 'clipPath' },
-          0,
-        );
-        if (image) {
-          opening.fromTo(image,
-            { scale: 1.06 },
-            { scale: 1, immediateRender: false, clearProps: 'transform' },
-            0,
-          );
-        }
-      });
-
-      // The native scrollbar controls one quiet movement of the real work.
-      // Travel remains under 6% of the picture height, including short sheets.
-      if (desktop) {
-        document.querySelectorAll<HTMLElement>('[data-motion="sheet"]').forEach((sheet) => {
-          const travel = () => Math.min(16, sheet.offsetHeight * 0.03);
-          gsap.fromTo(
-            sheet,
-            { y: travel },
-            {
-              y: () => -travel(),
-              ease: 'none',
-              scrollTrigger: {
-                trigger: sheet,
-                start: 'clamp(top 75%)',
-                end: 'clamp(bottom top)',
-                scrub: true,
-                invalidateOnRefresh: true,
-              },
-            },
-          );
-        });
-      }
     },
   );
 
-  const disposePortfolio = setupPortfolioMotion({ signal, preference });
-  const disposeExpressive = setupExpressiveMotion({ signal, preference });
-  const disposeProjects = setupProjectMotion({ signal, preference });
-  const disposeAtmosphere = setupProjectAtmosphere({ signal, preference });
-  const disposeDetails = setupDetailWorldMotion({ signal, preference });
-  const disposeNarratives = setupShowcaseNarratives({ signal, preference });
-  const disposeAtlas = setupAtlasLibrary({ signal, preference });
-  const disposeInvitation = setupExplorationInvitation({ signal, preference });
-  const disposeFooter = setupFooterMotion({ signal, preference });
-  const disposeEnding = setupProjectEnding({ signal, preference });
-  const disposeLabRoom = setupLabRoomMotion({ signal, preference });
-  const disposeAboutStudio = setupAboutStudioMotion({ signal, preference });
-  const disposeWorksOrbit = setupWorksOrbit({ signal, preference });
-  const disposeWorksTable = setupWorksTable({ signal, preference });
-  const disposeHeroHall = setupHeroHall({ signal, preference });
-  const disposeAtollWater = setupAtollWater({ signal, preference });
-  const disposePanxu = setupPanxuShowcase({ signal, preference });
-  const disposeAtlasShowcase = setupAtlasShowcase({ signal, preference });
-  const disposeCostChartShowcase = setupCostChartShowcase({ signal, preference });
+  // Route-scoped dynamic imports: each page only downloads the controllers its DOM needs.
+  mount('[data-chapter-nav], [data-scroll-layer], [data-page-progress], a[data-magnetic], button[data-magnetic]', () => import('./expressive-motion').then(m => m.setupExpressiveMotion));
+  mount('[data-works-hall]', () => import('./hero-hall').then(m => m.setupHeroHall));
+  mount('[data-ambient-region], .game-scene > .game-art', () => import('./project-motion').then(m => m.setupProjectMotion));
+  mount('[data-dub-reel], [data-framework-showcase]', () => import('./showcase-narratives').then(m => m.setupShowcaseNarratives));
+  mount('[data-atoll-water]', () => import('./atoll-water').then(m => m.setupAtollWater));
+  mount('[data-panxu]', () => import('./panxu-showcase').then(m => m.setupPanxuShowcase));
+  mount('[data-atlas-showcase]', () => import('./atlas-showcase').then(m => m.setupAtlasShowcase));
+  mount('[data-cost-showcase]', () => import('./cost-chart-showcase').then(m => m.setupCostChartShowcase));
+  mount('[data-exploration-invitation]', () => import('./exploration-invitation').then(m => m.setupExplorationInvitation));
+  mount('[data-works-table]', () => import('./works-table').then(m => m.setupWorksTable));
+  mount('[data-project-atlas]', () => import('./atlas-library').then(m => m.setupAtlasLibrary));
+  mount('[data-project-atmosphere]', () => import('./project-atmosphere').then(m => m.setupProjectAtmosphere));
+  mount('[data-project-world]', () => import('./detail-world-motion').then(m => m.setupDetailWorldMotion));
+  mount('[data-project-postscript], [data-project-continuation]', () => import('./project-ending').then(m => m.setupProjectEnding));
+  mount('[data-lab-room]', () => import('./lab-room-motion').then(m => m.setupLabRoomMotion));
+  mount('[data-works-orbit]', () => import('./works-orbit').then(m => m.setupWorksOrbit));
+  mount('[data-about-studio], [data-studio-lost]', () => import('./about-studio-motion').then(m => m.setupAboutStudioMotion));
+  mount('[data-site-footer]', () => import('./footer-motion').then(m => m.setupFooterMotion));
+
   if (storedPause !== undefined) {
     window.dispatchEvent(new CustomEvent('portfolio:motion-state', { detail: { paused: storedPause } }));
   }
@@ -229,25 +153,7 @@ function initializeMotion() {
     disposed = true;
     abort.abort();
     clearTimeout(refreshTimer);
-    disposePortfolio();
-    disposeExpressive();
-    disposeProjects();
-    disposeAtmosphere();
-    disposeDetails();
-    disposeNarratives();
-    disposeAtlas();
-    disposeInvitation();
-    disposeFooter();
-    disposeEnding();
-    disposeLabRoom();
-    disposeAboutStudio();
-    disposeWorksOrbit();
-    disposeWorksTable();
-    disposeHeroHall();
-    disposeAtollWater();
-    disposePanxu();
-    disposeAtlasShowcase();
-    disposeCostChartShowcase();
+    while (disposers.length) disposers.pop()?.();
     media.revert();
     delete root.dataset.motion;
   };

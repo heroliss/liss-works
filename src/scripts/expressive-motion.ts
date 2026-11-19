@@ -16,14 +16,12 @@ type ScrollSurface = {
   turn?: (value: number) => void;
 };
 
-// Navigation and picture depth support the real projects; the continuous
-// typography strip has its own visible, user-controlled playback boundary.
+// Navigation progress, chapter indicator, subtle picture depth and magnetic CTA.
 export function setupExpressiveMotion({ signal, preference }: ExpressiveMotionOptions) {
   const controller = new AbortController();
   const localSignal = controller.signal;
   const media = gsap.matchMedia();
   const root = document.documentElement;
-  const previousPause = root.getAttribute('data-motion-paused');
   const progressBars = Array.from(document.querySelectorAll<HTMLElement>('[data-page-progress]'));
   const previousProgress = [root, ...progressBars].map((element) => ({
     element, value: element.style.getPropertyValue('--page-progress'),
@@ -36,8 +34,6 @@ export function setupExpressiveMotion({ signal, preference }: ExpressiveMotionOp
   const update = () => {
     frame = 0;
     if (disposed || document.hidden) return;
-    // One read batch per scroll frame. Geometry is read only after a layout
-    // change; all transform writes happen after the final document metric.
     const scroll = window.scrollY;
     const viewport = window.innerHeight;
     const distance = Math.max(1, root.scrollHeight - viewport);
@@ -111,116 +107,16 @@ export function setupExpressiveMotion({ signal, preference }: ExpressiveMotionOp
   }, { rootMargin: '-12% 0px -55% 0px', threshold: [0, 0.15, 0.35, 0.6, 1] });
   chapters.forEach(({ section }) => chapterObserver.observe(section));
 
-  const marquees = Array.from(document.querySelectorAll<HTMLElement>('[data-kinetic-strip]')).map((track) => {
-    const boundary = track.closest<HTMLElement>('[data-marquee]') ?? track.parentElement ?? track;
-    const button = boundary.querySelector<HTMLButtonElement>('[data-motion-toggle]');
-    const originalPressed = button?.getAttribute('aria-pressed');
-    const originalLabel = button?.getAttribute('aria-label');
-    const originalDisabled = button?.disabled ?? false;
-    let paused = button?.getAttribute('aria-pressed') === 'true';
-    let sync = () => {};
-    const updateButton = () => {
-      root.dataset.motionPaused = String(paused);
-      if (button) {
-        button.setAttribute('aria-pressed', String(paused));
-        button.setAttribute('aria-label', paused ? '继续页面动效' : '暂停页面动效');
-        button.dataset.paused = String(paused);
-        const text = button.querySelector<HTMLElement>('[data-motion-toggle-label]');
-        if (text) text.textContent = paused ? '继续动效' : '暂停动效';
-      }
-    };
-    button?.addEventListener('click', () => {
-      paused = !paused;
-      updateButton();
-      sync();
-      window.dispatchEvent(new CustomEvent('portfolio:motion-state', { detail: { paused } }));
-    }, { signal: localSignal });
-    updateButton();
-    return {
-      track, boundary, button, paused: () => paused,
-      setSync: (next: () => void) => { sync = next; },
-      restore: () => {
-        if (!button) return;
-        if (originalPressed == null) button.removeAttribute('aria-pressed');
-        else button.setAttribute('aria-pressed', originalPressed);
-        if (originalLabel == null) button.removeAttribute('aria-label');
-        else button.setAttribute('aria-label', originalLabel);
-        button.disabled = originalDisabled;
-        delete button.dataset.paused;
-      },
-    };
-  });
-
   media.add({
     motion: '(prefers-reduced-motion: no-preference)',
     fine: '(hover: hover) and (pointer: fine)',
     desktop: '(min-width: 900px)',
   }, (context) => {
     const { motion, fine, desktop } = context.conditions!;
-    marquees.forEach((marquee) => {
-      marquee.track.dataset.playback = motion ? 'paused' : 'reduced';
-      if (marquee.button) marquee.button.disabled = !motion;
-    });
     if (!motion || preference.matches) return;
-
-    const marqueeEvents = new AbortController();
-    marquees.forEach((marquee) => {
-      const groups = marquee.track.querySelectorAll<HTMLElement>('[data-marquee-group]');
-      if (groups.length !== 2) return;
-      let visible = false;
-      let resetPlane = (_immediate = false) => {};
-      gsap.set(marquee.track, { x: 0, xPercent: 0 });
-      const loop = gsap.to(marquee.track, {
-        xPercent: -50, duration: Math.max(22, groups[0].scrollWidth / 52),
-        ease: 'none', repeat: -1, paused: true,
-      });
-      const sync = () => {
-        const playing = visible && !document.hidden && !marquee.paused();
-        loop.paused(!playing);
-        marquee.track.dataset.playback = playing ? 'playing' : 'paused';
-        if (!playing) resetPlane(true);
-      };
-      const observer = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; sync(); });
-      observer.observe(marquee.boundary);
-      marquee.setSync(sync);
-      document.addEventListener('visibilitychange', sync, { signal: marqueeEvents.signal });
-      if (fine) {
-        marquee.boundary.addEventListener('pointerenter', () => { loop.timeScale(1.3); }, { signal: marqueeEvents.signal });
-        marquee.boundary.addEventListener('pointerleave', () => { loop.timeScale(1); }, { signal: marqueeEvents.signal });
-      }
-      const plane = marquee.boundary.querySelector<HTMLElement>('[data-marquee-plane]');
-      if (fine && desktop && plane) {
-        const xTo = gsap.quickTo(plane, 'x', { duration: 0.6, ease: 'power3.out' });
-        const yTo = gsap.quickTo(plane, 'y', { duration: 0.6, ease: 'power3.out' });
-        let bounds = { left: 0, top: 0, width: 1, height: 1 };
-        const measurePlane = () => {
-          const box = marquee.boundary.getBoundingClientRect();
-          bounds = { left: box.left + window.scrollX, top: box.top + window.scrollY, width: box.width, height: box.height };
-        };
-        resetPlane = (immediate = false) => {
-          [xTo, yTo].forEach((to) => { to(0); if (immediate) to.tween.progress(1).pause(); });
-        };
-        measurePlane();
-        const size = new ResizeObserver(measurePlane);
-        size.observe(marquee.boundary);
-        marquee.boundary.addEventListener('pointerenter', measurePlane, { signal: marqueeEvents.signal });
-        marquee.boundary.addEventListener('pointermove', (event) => {
-          if (!visible || document.hidden || marquee.paused() || event.pointerType === 'touch') return;
-          const x = gsap.utils.clamp(-1, 1, (event.pageX - bounds.left) / Math.max(1, bounds.width) * 2 - 1);
-          const y = gsap.utils.clamp(-1, 1, (event.pageY - bounds.top) / Math.max(1, bounds.height) * 2 - 1);
-          xTo(-x * 55);
-          yTo(-y * 7);
-        }, { passive: true, signal: marqueeEvents.signal });
-        marquee.boundary.addEventListener('pointerleave', () => resetPlane(), { signal: marqueeEvents.signal });
-        context.add(() => () => size.disconnect());
-      }
-      context.add(() => () => { observer.disconnect(); marquee.setSync(() => {}); });
-    });
-    context.add(() => () => marqueeEvents.abort());
 
     const observedSurfaces: ScrollSurface[] = [];
     document.querySelectorAll<HTMLElement>('[data-scroll-layer]').forEach((element) => {
-      // Pictures keep their authored mobile crop and position.
       if (!desktop) return;
       gsap.set(element, { y: 0, rotation: 0 });
       observedSurfaces.push({
@@ -282,8 +178,6 @@ export function setupExpressiveMotion({ signal, preference }: ExpressiveMotionOp
     const dirtyMagnet = () => { magnetDirty = true; };
     window.addEventListener('scroll', dirtyMagnet, { passive: true, signal: pointer.signal });
     window.addEventListener('resize', dirtyMagnet, { passive: true, signal: pointer.signal });
-    // Only marked CTA contents react; photographs retain the native zoom cursor.
-    // Read a hitbox on entry or after native scroll, never on every pointer frame.
     document.addEventListener('pointermove', (event) => {
       if (event.pointerType === 'touch' || document.hidden || modalOpen) { release(true); return; }
       const target = event.target instanceof Element ? event.target : undefined;
@@ -343,9 +237,6 @@ export function setupExpressiveMotion({ signal, preference }: ExpressiveMotionOp
       if (active === null) link.removeAttribute('data-active');
       else link.setAttribute('data-active', active);
     });
-    marquees.forEach((marquee) => { marquee.restore(); delete marquee.track.dataset.playback; });
-    if (previousPause == null) root.removeAttribute('data-motion-paused');
-    else root.setAttribute('data-motion-paused', previousPause);
     signal.removeEventListener('abort', close);
   };
   signal.addEventListener('abort', close, { once: true });

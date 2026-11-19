@@ -4,6 +4,7 @@ import Icon from '../../components/Icon.astro';
 import ArchiveTile from '../../components/ArchiveTile.astro';
 import WorksTable from '../../components/WorksTable.astro';
 import { projects, groups } from '../../data/projects';
+import { featuredWorks } from '../../data/featured-projects';
 import { prioritizeProjects } from '../../data/project-priority';
 import { getProjectWorld } from '../../data/project-worlds';
 import '../../styles/archive-atlas.css';
@@ -12,14 +13,28 @@ import '../../styles/spatial-materials.css';
 const orderedProjects = prioritizeProjects(projects);
 const tags = ['Unity','C#','C++','AI','Python','Web','WebGL 2','Three.js','Qt','.NET','OpenGL','算法'];
 ---
-<Base title="全部工程" active="projects" description={`浏览 Liss 的${projects.length}个独立开发工程：游戏与Unity工具、AI与数据应用、图形与算法实验。`}>
+<Base title="工程库" active="projects" description={`浏览 Liss 的 ${projects.length} 个独立开发工程（含 ${featuredWorks.length} 件重点代表作）：游戏与实时场景、框架与效率工具、AI 与数据、图形与算法实验。`}>
  <div class="shell archive-page archive-atlas" data-project-atlas style="--atlas-tone:#9cdef1">
   <div class="atlas-aura" aria-hidden="true"></div>
   <div class="atlas-edge-veil" aria-hidden="true"><div class="atlas-field-scroll"><div class="atlas-field" data-atlas-field></div></div></div>
   <WorksTable/>
-  <div class="filters atlas-filters" id="atlas-filters" data-filters data-ui="true"><div class="filters-top"><label class="search-box"><span>查找工程</span><Icon name="search" size={19}/><input type="search" id="project-search" placeholder="搜索名称、用途或技术（按 / 快速定位）" autocomplete="off"/><kbd class="search-kbd" aria-hidden="true">/</kbd></label><p class="results-count" aria-live="polite" data-result-count>共 {projects.length} 个工程</p></div><div class="filter-buttons" role="group" aria-label="工程分类"><button type="button" data-group-filter="all" aria-pressed="true" style="--tone:#eef2ec">全部工程</button>{groups.map(group=><button type="button" data-group-filter={group.id} aria-pressed="false" style={`--tone:${group.tone}`}>{group.label}</button>)}</div><div class="filter-bottom"><label>技术标签<select id="tag-filter"><option value="">全部技术</option>{tags.map(tag=><option value={tag}>{tag}</option>)}</select></label><button class="atlas-random" type="button" data-atlas-random><Icon name="play" size={15}/>随机看看</button><button class="reset-filter" type="button" data-reset-filters hidden>重置筛选</button></div></div>
-  <div class="empty-state atlas-empty" data-empty hidden><h2>没有匹配的工程</h2><p>试试其他名称或技术，也可以清除筛选查看全部。</p><button class="button secondary" type="button" data-reset-filters>清除筛选</button></div>
+  <div class="filters atlas-filters" id="atlas-filters" data-filters data-ui="true">
+   <div class="filters-top">
+    <label class="search-box"><span>查找工程</span><Icon name="search" size={19}/><input type="search" id="project-search" placeholder="搜索工程名称、用途或技术" autocomplete="off"/><kbd class="search-kbd" aria-hidden="true">/</kbd></label>
+    <p class="results-count" aria-live="polite" data-result-count>共 {projects.length} 个工程</p>
+   </div>
+   <div class="filter-buttons" role="group" aria-label="工程分类">
+    <button type="button" data-group-filter="all" aria-pressed="true" style="--tone:#eef2ec">全部工程</button>
+    <button type="button" class="filter-featured-btn" data-group-filter="featured" aria-pressed="false" style="--tone:#f5c96b"><Icon name="star" size={13}/>重点项目<small>{featuredWorks.length}</small></button>
+    {groups.map(group=><button type="button" data-group-filter={group.id} aria-pressed="false" style={`--tone:${group.tone}`}>{group.label}</button>)}
+   </div>
+   <div class="filter-bottom">
+    <label>技术标签<select id="tag-filter"><option value="">全部技术</option>{tags.map(tag=><option value={tag}>{tag}</option>)}</select></label>
+    <button class="atlas-random" type="button" data-atlas-random><Icon name="play" size={15}/>随机看看</button>
+    <button class="reset-filter" type="button" data-reset-filters hidden>重置筛选</button>
+   </div>
+  </div>
+  <div class="empty-state atlas-empty" data-empty hidden><h2>没有匹配的工程</h2><p>试试换个名称或技术标签，也可以一键清除筛选查看全部。</p><button class="button secondary" type="button" data-reset-filters>清除筛选</button></div>
   <div class="atlas-gallery" id="atlas-gallery">{groups.map(group=><section class="atlas-shelf" data-atlas-group={group.id} aria-labelledby={`atlas-group-${group.id}`} style={`--group-tone:${group.tone}`}><header class="atlas-shelf-heading"><div><h2 id={`atlas-group-${group.id}`}>{group.label}</h2><p>{group.description}</p><span class="atlas-shelf-dots" aria-hidden="true">{orderedProjects.filter(project=>project.group===group.id).map(project=><i style={`--dot:${getProjectWorld(project.slug).accent}`}></i>)}</span></div><span data-atlas-group-count>{orderedProjects.filter(project=>project.group===group.id).length} 个工程</span></header><div class="atlas-wall">{orderedProjects.filter(project=>project.group===group.id).map((project,index)=><ArchiveTile project={project} index={index}/>)}</div></section>)}</div>
  </div><script>import '../../scripts/project-filter'; import '../../scripts/downloads';</script>
 </Base>
-
