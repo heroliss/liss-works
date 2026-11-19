@@ -9,7 +9,7 @@ const topicMedia: Record<string, (string | null)[]> = {
   panxu: ['03-score-basis', '04-cleanup-confirm', '10-operation-history'],
   ssframework: [null, null, null, '15-hierarchy-binding-compact', '05-module-tools-center'],
   eazybuildpipeline: ['04-reverse-dependencies-three-assets'],
-  'intelligence-index-cost-linear': ['v2-05-frontier-hard-index', 'v2-06-compare-strip-track', 'v2-07-multimodal-media-arena', null],
+  'intelligence-index-cost-linear': ['v3-05-shortlist-frontend-floor', 'v3-06-org-divergence-board', 'v3-07-multimodal-isolated-tracks', null],
   'china-house-price-map': ['v2-05-rent-persona-four-layouts', 'v2-06-drawdown-timeline-pk', 'v2-07-watertight-gba-hk-macau', null],
   learnopengl: ['cube-inspector'],
   'aoe4-flow': ['editor-node-parameters-native'],

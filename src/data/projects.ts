@@ -87,14 +87,14 @@ const panxu = [
 ];
 
 const chart = [
-  image('intelligence-index-cost-linear', 'v2-01-overview-pareto-dark.png', 1680, 1050, '综合智能总览：在线性美元横轴上直观呈现 133 款主流模型的真实价差、左上角甜点区与帕累托前沿线。', '综合智能与真实价差'),
-  image('intelligence-index-cost-linear', 'v2-02-human-arena-scenario.png', 1680, 1050, '人类与审美频道：展开「⚡ 场景配方」选定审美设计与前端预设，实时重算专属于你的性价比榜单。', '真人盲测与场景配方'),
-  image('intelligence-index-cost-linear', 'v2-03-compare-zoomed-radar.png', 1680, 1050, '剖析对比工作台：微距去底雷达放大细微差距，右侧同步拆解五段缓存与思考账单及多云平台比价。', '微距雷达与账单拆解'),
-  image('intelligence-index-cost-linear', 'v2-04-subscription-router.png', 1680, 1050, '订阅回本测算：对照 $20 月卡与日常使用频次，绿标「已回本」与黄标「API 省」一眼算清买不买会员。', '月卡回本与按次算账'),
-  image('intelligence-index-cost-linear', 'v2-05-frontier-hard-index.png', 1680, 1050, '前沿极限频道：剔除已被刷到 90% 以上的旧题集，只保留未饱和硬核测试拉开第一梯队真实差距。', '未饱和硬核极限'),
-  image('intelligence-index-cost-linear', 'v2-06-compare-strip-track.png', 1680, 1050, '分轴微距跑道：把聊天人味、网页 UI 审美与专业交付的 1% 胜负差距水平对齐放大，附三平台原始盲测胜率。', '分轴微距跑道对决'),
-  image('intelligence-index-cost-linear', 'v2-07-multimodal-media-arena.png', 1680, 1050, '多模态生成频道：同屏比较 253 款文生图、视频生成与语音配音引擎的真人盲测表现与单次生成花费。', '生图 · 视频 · 配音比价'),
-  image('intelligence-index-cost-linear', 'v2-08-coding-agents-light.png', 1680, 1050, '浅色护眼主题下查看编程智能体：虚线串联同一家族从轻量到重度思考档位的实力提升与花费增幅。', '浅色主题与思考档位轨迹'),
+  image('intelligence-index-cost-linear', 'v3-01-overview-pareto-dark.png', 1680, 1050, '综合智能总览：在线性美元横轴上呈现 137 款主流模型的真实价差、左上角甜点区与帕累托前沿线，顶栏直达「选型参考」「机构分榜」与「读懂榜单」。', '综合智能与真实价差'),
+  image('intelligence-index-cost-linear', 'v3-02-shortlist-multi-archetype.png', 1680, 1050, '反盲信单榜的「3 步缩小候选」：按用途与月卡/API 方式实时输出三类不同取向参照，并亮明跨机构证据徽章与高价、缺盲测、高幻觉风险提示。', '3 步缩小候选（多流派对照）'),
+  image('intelligence-index-cost-linear', 'v3-03-compare-zoomed-radar.png', 1680, 1050, '剖析对比工作台：微距去底雷达放大 1% 细微差距，支持切换 LiveBench 2.0 七维防污染雷达，右侧同步拆解五段账单与多云平台差价。', '微距雷达与账单拆解'),
+  image('intelligence-index-cost-linear', 'v3-04-subscription-router.png', 1680, 1050, '订阅回本测算：对照 $20 月卡与日常频次，绿标「已回本」与黄标「未回本 · API 省」一眼算清买会员还是按次更省。', '月卡回本与按次算账'),
+  image('intelligence-index-cost-linear', 'v3-05-shortlist-frontend-floor.png', 1680, 1050, '网页前端与视觉审美三流派对撞：主卡设综合能力底线推荐能真正落地的开发主力，并对单页视觉高分但综合能力偏弱的模型直接标出短板警示。', '前端选型防偏科底线'),
+  image('intelligence-index-cost-linear', 'v3-06-org-divergence-board.png', 1680, 1050, '机构分榜 · 争议分歧榜：将自动化硬考与真人盲测折算为无容量偏差百分位，一眼揪出“硬考强但体感有争议”与“低调好用”的实力派。', '6 机构原榜与争议分歧'),
+  image('intelligence-index-cost-linear', 'v3-07-multimodal-isolated-tracks.png', 1680, 1050, '多模态生成三赛道严格隔离：图像（$/张）、视频（$/5秒）与语音合成 TTS（$/千字）各自独立计算前沿与单价，绝不跨计价单位混排。', '多模态三赛道严格隔离'),
+  image('intelligence-index-cost-linear', 'v3-08-coding-pinned-light.png', 1680, 1050, '浅色护眼主题下的编程智能体与锁定详情卡：虚线串联同系列推理档位轨迹，锁定节点卡自动亮出超高单价与 P95 长尾成本风险胶囊。', '浅色主题与锁定卡风控'),
 ];
 
 const housing = [
@@ -329,21 +329,21 @@ export const projects: Project[] = [
     cover: eazy[5], gallery: eazy, related: ['ssframework', 'outpost'],
   },
   {
-    slug: 'intelligence-index-cost-linear', repo: 'intelligence-index-cost-linear', name: 'Intelligence × Cost · AI 选型与真实花费指南', category: 'AI 模型选型与花费指南', group: 'ai-data',
-    summary: '大模型那么多，怎么挑好用又不花冤枉钱？按真实用途筛甜点模型，顺手算清 20 美元月卡值不值得买。',
-    intro: '面向日常用户与开发者的 AI 选型参考工具。用等比例的美元横轴还原真实价差，串联综合能力、未饱和硬核极限、真人盲测审美、编程智能体、网络安全与生图/视频/配音六大频道；支持一键套用工作流场景配方、最多 8 款微距同台剖析，以及包月会员与按量付费回本测算。',
+    slug: 'intelligence-index-cost-linear', repo: 'intelligence-index-cost-linear', name: 'Intelligence × Cost · AI 选型参考与真实花费指南', category: 'AI 模型选型与花费指南', group: 'ai-data',
+    summary: '跑分高不一定好用，月卡与按量怎么选才不踩坑？用多流派选型参考、6 机构原榜分歧与线性美元横轴一次看清。',
+    intro: '面向日常用户与开发者的反盲信榜单 AI 选型工具。以等比例美元横轴呈现真实价差，整合综合智能、未饱和硬核极限、真人盲测审美、编程智能体、网络安全、多模态三独立赛道与 6 家权威测评机构原榜；内置科学透明的「3 步缩小候选」多流派对照与全站风险提示胶囊，联动微距剖析对比与月卡回本测算。',
     status: '在线可用 · 每 2 小时自动同步', tags: ['AI', '选型工具', 'JavaScript', 'SVG', '数据可视化'],
     features: [
-      { title: '按日常用途一键筛模型', body: '内置写代码、做前端审美、自然聊天、写报告等五维场景配方，沿着左上角甜点线直接挑出最好用划算的一款。' },
-      { title: '最多 8 款微距同台细比', body: '微距雷达与分轴跑道把 1% 的毫厘胜负清晰拉开，同步拆解隐性思考账单与多家云服务商差价。' },
-      { title: '算清包月会员与多模态花费', body: '对照使用次数标出买 $20 月卡划算还是按次充值更省；250+ 生图、视频与配音引擎同屏比单价。' },
+      { title: '反盲信单榜的「3 步缩小候选」', body: '按 9 大真实用途（区分端到端编程智能体与纯 API）与付费方式输出 3 类不同取向参照，亮明跨机构证据与缺盲测、高幻觉、月卡多不含等风险提示。' },
+      { title: '6 机构原榜并排与争议分歧榜', body: '原序呈现 AA、LiveBench 2.0、Arena.ai、Design Arena 与 GDPval，并用无容量偏差的同批百分位一眼揪出“硬考强但体感有争议”的模型。' },
+      { title: '微距同台剖析、算清月卡与多模态隔离', body: '最多 8 款微距雷达对比并拆解五段账单与多云差价；算清 $20/$100 月卡回本，生图、视频与配音按各自单价严格隔离比价。' },
     ],
     usage: [
-      { title: '日常聊天、写稿与做设计怎么挑', body: '打开在线工具切到「人类与审美」，点开「⚡ 场景配方」选高人味或前端审美预设，优先挑左上角虚线上的模型。' },
-      { title: '纠结买不买 $20 / $100 月卡', body: '切到顶部「订阅回本」视图，选好你常用的月度次数，看目标模型标的是绿标「已回本」还是黄标「API 省」。' },
-      { title: '开发者本地运行（可选）', body: '普通用户直接点顶部「在线体验」即可；如需在本地预览或跑单元测试，可在站点目录运行：', code: 'python -m http.server 8765', language: 'shell' },
+      { title: '不想研究坐标轴？3 步先缩小候选', body: '打开在线工具点击顶栏「选型参考」，按用途（如编程智能体、前端审美或日常主力）与月卡/API 方式，直接对比 3 类流派与卡面风险提示。' },
+      { title: '怀疑高分模型“高分低体感”？', body: '切到顶栏「机构分榜 → 争议分歧榜」核验硬考与真人盲测口碑差，或在散点图单击锁定圆点直接查看同源风险胶囊与跨榜排名。' },
+      { title: '算清月卡回本或开发者本地预览', body: '切到「订阅回本」填入月度次数即可看绿标/黄标结论；如需在本地预览或跑 53 项单元测试，可在站点目录运行：', code: 'python -m http.server 8765', language: 'shell' },
     ],
-    note: '截图采自在线版真实运行画面；评测数据每 2 小时自动同步自 Artificial Analysis、LMArena 与 Design Arena 公开榜单，实时排名与价格以在线页面为准。',
+    note: '截图采自在线版真实运行画面；评测数据每 2 小时自动同步自 Artificial Analysis、LiveBench 2.0、Arena.ai (LMArena) 与 Design Arena 公开榜单，实时排名与价格以在线页面为准。',
     source: 'https://github.com/heroliss/intelligence-index-cost-linear', docs: 'https://github.com/heroliss/intelligence-index-cost-linear#readme', demo: 'https://heroliss.github.io/intelligence-index-cost-linear/',
     cover: chart[0], gallery: chart, related: ['china-house-price-map', 'dubforge'],
   },

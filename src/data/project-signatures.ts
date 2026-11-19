@@ -51,9 +51,9 @@ const signatures: Record<string, ProjectSignature> = {
     highlights: ['标签驱动规则', '反向依赖检查', '模块化构建'],
   },
   'intelligence-index-cost-linear': {
-    direction: 'AI 模型选型与花费指南',
-    principle: '少被虚高考分和折算价格绕晕，按日常用途挑对模型、算清真实账单。',
-    highlights: ['6 大频道 + 场景配方', '最多 8 款微距同台对比', '包月会员 vs 按次算账'],
+    direction: 'AI 模型选型参考与花费指南',
+    principle: '不迷信单一榜单跑分，把跨机构证据、潜在风险与真实花费摊在同一张桌面上。',
+    highlights: ['3 步多流派选型参考', '6 机构原榜与争议分歧', '线性美元与月卡回本'],
   },
   'china-house-price-map': {
     direction: '买房与租房找房工具',
