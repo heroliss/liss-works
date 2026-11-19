@@ -36,15 +36,15 @@
 .px-hint { margin:0; font-size:13px; color:var(--muted); }
 
 /* ---- the window ---------------------------------------------------------------------- */
-.px-scene { position:relative; perspective:2200px; perspective-origin:50% 20%; padding:clamp(14px,2.4vw,30px) 0 clamp(44px,5vw,72px); touch-action:pan-y; }
-.px-float { width:var(--win); margin-inline:auto; transform-style:preserve-3d; animation:px-float 12s ease-in-out infinite; }
+.px-scene { position:relative; perspective:2200px; perspective-origin:50% 20%; padding:clamp(14px,2.4vw,30px) 0 clamp(44px,5vw,72px); touch-action:pan-y; pointer-events:none; }
+.px-float { width:var(--win); margin-inline:auto; transform-style:preserve-3d; pointer-events:none; animation:px-float 12s ease-in-out infinite; }
 @keyframes px-float { 50% { transform:translateY(-7px); } }
 /* Each step looks at the window from a slightly different side; the pointer adds its own tilt. */
 .px-lab[data-step=scan] { --pose-x:13deg; --pose-y:-6deg; }
 .px-lab[data-step=sort] { --pose-x:11deg; --pose-y:-9deg; }
 .px-lab[data-step=explain] { --pose-x:8deg; --pose-y:6deg; }
 .px-lab[data-step=clean] { --pose-x:12deg; --pose-y:-3deg; }
-.px-window { position:relative; transform-style:preserve-3d; transform:rotateX(calc(var(--pose-x) + var(--tilt-x,0deg))) rotateY(calc(var(--pose-y) + var(--tilt-y,0deg)));
+.px-window { position:relative; transform-style:preserve-3d; pointer-events:none; transform:rotateX(calc(var(--pose-x) + var(--tilt-x,0deg))) rotateY(calc(var(--pose-y) + var(--tilt-y,0deg)));
   transition:--pose-x 1.4s cubic-bezier(.45,0,.2,1),--pose-y 1.4s cubic-bezier(.45,0,.2,1); }
 .px-plate { position:absolute; inset:0; border-radius:14px; transform:translateZ(-1px); pointer-events:none;
   background:linear-gradient(180deg,#1b1f25,#121417); box-shadow:0 0 0 1px #ffffff1c,inset 0 1px #ffffff14; }
@@ -56,9 +56,9 @@
 .px-zoom { display:inline-flex; align-items:center; gap:6px; min-height:36px; padding:0 13px; border-radius:999px; border:1px solid #ffffff1c; background:#ffffff08; font-size:13px; color:#d6dce0; transition:background .2s ease,color .2s ease,border-color .2s ease; }
 .px-zoom[hidden] { display:none; }
 .px-zoom:is(:hover,:focus-visible) { color:#fff; background:#ffffff14; border-color:color-mix(in srgb,var(--accent) 45%,#ffffff24); }
-.px-screen { position:relative; margin:1px; aspect-ratio:1650 / 1075; transform-style:preserve-3d; }
+.px-screen { position:relative; margin:1px; aspect-ratio:1650 / 1075; transform-style:preserve-3d; pointer-events:none; }
 /* The window's own screenshot. The incoming one fades in above the outgoing one, which then goes. */
-.px-base { position:absolute; inset:0; display:block; width:100%; height:100%; border-radius:12px; opacity:0; transform:translateZ(0);
+.px-base { position:absolute; inset:0; display:block; width:100%; height:100%; border-radius:12px; opacity:0; transform:translateZ(0); pointer-events:none; user-select:none;
   transition:opacity 0s linear calc(var(--swap,0s) + .45s),transform 0s linear calc(var(--swap,0s) + .45s); }
 .px-base[data-on] { opacity:1; transform:translateZ(.3px); transition:opacity .45s ease var(--swap,0s),transform 0s; }
 .px-lab[data-entering=true] { --swap:.45s; }
@@ -69,12 +69,12 @@
 .px-lab[data-entering=true] .px-socket[data-on] { --in:calc(.9s + var(--d,0ms)); }
 
 /* ---- panels cut from the screenshot ----------------------------------------------------- */
-.px-layer { position:absolute; left:var(--x); top:var(--y); width:var(--w); height:var(--h); margin:0; padding:0; border:0; border-radius:6px; background:none; color:inherit; font:inherit; cursor:zoom-in;
+.px-layer { position:absolute; left:var(--x); top:var(--y); width:var(--w); height:var(--h); margin:0; padding:0; border:0; border-radius:6px; background:none; color:inherit; font:inherit; cursor:zoom-in; pointer-events:none;
   opacity:0; transform:translateZ(.8px); -webkit-tap-highlight-color:transparent;
   transition:transform .45s cubic-bezier(.5,0,.75,0),opacity 0s linear .45s,box-shadow .3s ease; }
-.px-cut { position:absolute; inset:0; overflow:hidden; border-radius:inherit; }
+.px-cut { position:absolute; inset:0; overflow:hidden; border-radius:inherit; pointer-events:none; }
 .px-cut img { position:absolute; display:block; max-width:none; height:auto; pointer-events:none; user-select:none; }
-.px-layer[data-on] { opacity:1; transform:translateZ(var(--z)); box-shadow:0 24px 46px -24px #000,0 0 0 1px #ffffff21;
+.px-layer[data-on] { opacity:1; pointer-events:auto; transform:translateZ(var(--z)); box-shadow:0 24px 46px -24px #000,0 0 0 1px #ffffff21;
   transition:opacity 0s linear var(--in,0s),transform .9s cubic-bezier(.2,.8,.2,1) var(--in,0s),box-shadow .5s ease var(--in,0s); }
 .px-lab[data-entering=true] .px-layer[data-on] { --in:calc(.9s + var(--d,0ms)); }
 .px-layer:focus-visible { outline:none; }

@@ -165,14 +165,26 @@ export function setupPanxuShowcase({ signal, preference }: Options): () => void 
     point.addEventListener('pointerleave', () => { hovering = false; setHot(null); play(); }, { signal: on });
   });
   // The demo waits while the visitor looks closer, and carries on when they leave.
-  scene?.addEventListener('pointerenter', event => { if (event.pointerType !== 'touch') { hovering = true; stopDemo(); setHot(null); } }, { signal: on });
-  scene?.addEventListener('pointerleave', () => { hovering = false; setHot(null); aim(0, 0); play(); }, { signal: on });
-  scene?.addEventListener('pointermove', event => {
-    if (event.pointerType === 'touch' || still() || !win || !matchMedia('(hover:hover) and (pointer:fine) and (min-width:761px)').matches) return;
-    const bounds = win.getBoundingClientRect();
-    const clamp = (value: number) => Math.max(-1, Math.min(1, value));
-    aim(clamp((event.clientX - bounds.left) / Math.max(1, bounds.width) * 2 - 1), clamp((event.clientY - bounds.top) / Math.max(1, bounds.height) * 2 - 1));
+  let inScene = false;
+  root.addEventListener('pointermove', event => {
+    if (event.pointerType === 'touch' || !scene) return;
+    const sRect = scene.getBoundingClientRect();
+    const inside = event.clientX >= sRect.left && event.clientX <= sRect.right && event.clientY >= sRect.top && event.clientY <= sRect.bottom;
+    if (inside) {
+      if (!inScene) { inScene = true; hovering = true; stopDemo(); }
+      if (!still() && win && matchMedia('(hover:hover) and (pointer:fine) and (min-width:761px)').matches) {
+        const bounds = win.getBoundingClientRect();
+        const clamp = (value: number) => Math.max(-1, Math.min(1, value));
+        aim(clamp((event.clientX - bounds.left) / Math.max(1, bounds.width) * 2 - 1), clamp((event.clientY - bounds.top) / Math.max(1, bounds.height) * 2 - 1));
+      }
+    } else if (inScene) {
+      inScene = false; aim(0, 0);
+      if (!(event.target instanceof Element && event.target.closest('[data-px-point]'))) {
+        hovering = false; setHot(null); play();
+      }
+    }
   }, { passive: true, signal: on });
+  root.addEventListener('pointerleave', () => { if (inScene) { inScene = false; hovering = false; setHot(null); aim(0, 0); play(); } }, { signal: on });
   root.addEventListener('focusin', () => { focused = true; stopDemo(); }, { signal: on });
   root.addEventListener('focusout', event => {
     if (root.contains(event.relatedTarget as Node | null)) return;

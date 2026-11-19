@@ -69,13 +69,18 @@ check('overview panels rise in west-to-east meridian sweep order', () => {
   });
 });
 
-check('the stylesheet keeps 3D parents free of flattening properties', () => {
-  const css = fs.readFileSync(path.join(site, 'src/styles/atlas-showcase.css'), 'utf8');
+check('the stylesheet keeps 3D parents free of flattening properties and Z<=0 pointer traps', () => {
+  const css = fs.readFileSync(path.join(site, 'src/styles/atlas-showcase.css'), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '');
   for (const parent of ['.at-float', '.at-window', '.at-screen']) {
     for (const rule of css.matchAll(new RegExp(`(?:^|\\})\\s*\\${parent}\\s*\\{([^}]*)\\}`, 'g'))) {
       assert.doesNotMatch(rule[1], /(?:^|;)\s*(?:opacity|filter|overflow|mask|clip-path)\s*:/, `${parent} must stay 3D`);
     }
   }
+  for (const passThrough of ['.at-scene', '.at-window', '.at-screen', '.at-base']) {
+    const match = css.match(new RegExp(`(?:^|\\})\\s*\\${passThrough}\\s*\\{([^}]*)\\}`));
+    assert.ok(match && /pointer-events\s*:\s*none/.test(match[1]), `${passThrough} must not swallow Z<=0 layer pointer events`);
+  }
+  assert.match(css, /\.at-layer\[data-on\]\s*\{[^}]*pointer-events\s*:\s*auto/, 'active layers must receive pointer events');
 });
 
 console.log(`atlas showcase: ${checks.length} checks passed`);

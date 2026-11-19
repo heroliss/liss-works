@@ -169,14 +169,25 @@ export function setupAtlasShowcase({ signal, preference }: Options): () => void 
     point.addEventListener('pointerleave', event => { if (event.pointerType !== 'touch') { hovering = false; setHot(null); play(); } }, { signal: on });
   });
 
-  scene?.addEventListener('pointerenter', event => { if (event.pointerType !== 'touch') { hovering = true; stopDemo(); } }, { signal: on });
-  scene?.addEventListener('pointermove', event => {
-    if (event.pointerType === 'touch' || still()) return;
+  let inScene = false;
+  root.addEventListener('pointermove', event => {
+    if (event.pointerType === 'touch' || !scene) return;
     const rect = scene.getBoundingClientRect();
-    aim(Math.max(-1, Math.min(1, ((event.clientX - rect.left) / Math.max(1, rect.width) - .5) * 2)),
-      Math.max(-1, Math.min(1, ((event.clientY - rect.top) / Math.max(1, rect.height) - .5) * 2)));
+    const inside = event.clientX >= rect.left && event.clientX <= rect.right && event.clientY >= rect.top && event.clientY <= rect.bottom;
+    if (inside) {
+      if (!inScene) { inScene = true; hovering = true; stopDemo(); }
+      if (!still()) {
+        aim(Math.max(-1, Math.min(1, ((event.clientX - rect.left) / Math.max(1, rect.width) - .5) * 2)),
+          Math.max(-1, Math.min(1, ((event.clientY - rect.top) / Math.max(1, rect.height) - .5) * 2)));
+      }
+    } else if (inScene) {
+      inScene = false; aim(0, 0);
+      if (!(event.target instanceof Element && event.target.closest('[data-at-point]'))) {
+        hovering = false; setHot(null); play();
+      }
+    }
   }, { passive: true, signal: on });
-  scene?.addEventListener('pointerleave', () => { hovering = false; setHot(null); aim(0, 0); play(); }, { signal: on });
+  root.addEventListener('pointerleave', () => { if (inScene) { inScene = false; hovering = false; setHot(null); aim(0, 0); play(); } }, { signal: on });
 
   root.addEventListener('focusin', () => { focused = true; stopDemo(); }, { signal: on });
   root.addEventListener('focusout', event => {

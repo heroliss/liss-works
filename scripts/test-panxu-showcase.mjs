@@ -72,13 +72,18 @@ check('the figures add up to the one real check-up they come from', () => {
   assert.match(figure('clean').figureNote, /14\.5 → 24\.3 GB/); // 14.54 + 9.73 -> 24.27 GB
 });
 
-check('the stylesheet keeps 3D parents free of flattening properties', () => {
-  const css = fs.readFileSync(path.join(site, 'src/styles/panxu-showcase.css'), 'utf8');
+check('the stylesheet keeps 3D parents free of flattening properties and Z<=0 pointer traps', () => {
+  const css = fs.readFileSync(path.join(site, 'src/styles/panxu-showcase.css'), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '');
   for (const parent of ['.px-float', '.px-window', '.px-screen']) {
     for (const rule of css.matchAll(new RegExp(`(?:^|\\})\\s*\\${parent}\\s*\\{([^}]*)\\}`, 'g'))) {
       assert.doesNotMatch(rule[1], /(?:^|;)\s*(?:opacity|filter|overflow|mask|clip-path)\s*:/, `${parent} must stay 3D`);
     }
   }
+  for (const passThrough of ['.px-scene', '.px-window', '.px-screen', '.px-base']) {
+    const match = css.match(new RegExp(`(?:^|\\})\\s*\\${passThrough}\\s*\\{([^}]*)\\}`));
+    assert.ok(match && /pointer-events\s*:\s*none/.test(match[1]), `${passThrough} must not swallow Z<=0 layer pointer events`);
+  }
+  assert.match(css, /\.px-layer\[data-on\]\s*\{[^}]*pointer-events\s*:\s*auto/, 'active layers must receive pointer events');
 });
 
 console.log(`panxu showcase: ${checks.length} checks passed`);
