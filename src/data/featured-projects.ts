@@ -54,7 +54,7 @@ export const homeFeaturedWorks: readonly HomeFeaturedWorkMeta[] = [
   },
   {
     slug: 'intelligence-index-cost-linear',
-    shortName: 'Intelligence × Cost',
+    shortName: '智能水平与任务成本',
     homeAnchor: '#cost-chart',
     hook: '反盲信单榜的 AI 选型参考与真实花费指南',
     highlight: '3 步多流派选型 · 6 机构争议分歧 · 线性美元回本',

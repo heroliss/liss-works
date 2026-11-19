@@ -329,7 +329,7 @@ export const projects: Project[] = [
     cover: eazy[5], gallery: eazy, related: ['ssframework', 'outpost'],
   },
   {
-    slug: 'intelligence-index-cost-linear', repo: 'intelligence-index-cost-linear', name: 'Intelligence × Cost · AI 选型参考与真实花费指南', category: 'AI 模型选型与花费指南', group: 'ai-data',
+    slug: 'intelligence-index-cost-linear', repo: 'intelligence-index-cost-linear', name: '智能水平与任务成本 · AI 选型参考与真实花费指南', category: 'AI 模型选型与花费指南', group: 'ai-data',
     summary: '跑分高不一定好用，月卡与按量怎么选才不踩坑？用多流派选型参考、6 机构原榜分歧与线性美元横轴一次看清。',
     intro: '面向日常用户与开发者的反盲信榜单 AI 选型工具。以等比例美元横轴呈现真实价差，整合综合智能、未饱和硬核极限、真人盲测审美、编程智能体、网络安全、多模态三独立赛道与 6 家权威测评机构原榜；内置科学透明的「3 步缩小候选」多流派对照与全站风险提示胶囊，联动微距剖析对比与月卡回本测算。',
     status: '在线可用 · 每 2 小时自动同步', tags: ['AI', '选型工具', 'JavaScript', 'SVG', '数据可视化'],
